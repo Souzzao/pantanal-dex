@@ -23,6 +23,11 @@ describe("PantanalDex catalog", () => {
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
   });
 
+  it("rejects a batch with inconsistent scientific vocabularies", () => {
+    const batch = { ...catalogBatches[0], species: [{ ...catalogSpecies[0], group: "Aves" as const, environments: ["oceano" as never], images: catalogSpecies[0].images.map((image, index) => index === 0 ? { ...image, uri: "arquivo-local" } : image) }] };
+    expect(validateCatalogBatch(batch)).toEqual(expect.arrayContaining([expect.stringContaining("grupo não corresponde"), expect.stringContaining("ambiente inválido"), expect.stringContaining("imagem sem URL HTTP válida")]));
+  });
+
   it("normalizes accents and surrounding whitespace for field search", () => {
     expect(normalizeCatalogSearch("  Onca-pintada ")).toBe("onca-pintada");
     expect(normalizeCatalogSearch("TUIUIÚ")).toBe("tuiuiu");

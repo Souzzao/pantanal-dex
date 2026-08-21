@@ -1,4 +1,7 @@
-import type { Species } from "@/shared/pantanal";
+import type { Species } from "../pantanal";
+
+const validGroups = new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]);
+const validEnvironments = new Set(["Rios e corixos", "Áreas alagadas", "Campos", "Matas", "Bordas de mata"]);
 
 export type CatalogBatch = {
   batchId: string;
@@ -26,6 +29,9 @@ export function validateCatalogBatch(batch: CatalogBatch): string[] {
       if (typeof item[field] !== "string" || !String(item[field]).trim()) errors.push(`${item.id || "sem-id"}: campo ${field} ausente`);
     }
     if (ids.has(item.id)) errors.push(`${item.id}: ID duplicado no lote`);
+    if (item.group !== batch.group) errors.push(`${item.id}: grupo não corresponde ao lote`);
+    if (!validGroups.has(item.group)) errors.push(`${item.id}: grupo inválido`);
+    if (item.environments.some((environment) => !validEnvironments.has(environment))) errors.push(`${item.id}: ambiente inválido`);
     ids.add(item.id);
     if (!item.environments.length) errors.push(`${item.id}: ambiente ausente`);
     if (item.images.length !== 3) errors.push(`${item.id}: deve ter exatamente três imagens`);
@@ -34,6 +40,7 @@ export function validateCatalogBatch(batch: CatalogBatch): string[] {
       if (!image.credit.trim() || !image.license.trim()) errors.push(`${item.id}: crédito/licença de imagem ausente`);
     }
     if (!item.sources.length || item.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${item.id}: fonte estruturada ausente ou inválida`);
+    if (batch.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${batch.batchId}: fonte do lote inválida`);
   }
   return errors;
 }
