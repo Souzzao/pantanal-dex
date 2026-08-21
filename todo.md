@@ -160,6 +160,6 @@
 
 ## Repositório público para colaboração
 
-- [ ] Alterar Souzzao/pantanal-dex de privado para público
-- [ ] Verificar acesso público às branches de trabalho
-- [ ] Atualizar as instruções para não depender de convite privado
+- [x] Alterar Souzzao/pantanal-dex de privado para público
+- [x] Verificar acesso público às branches de trabalho
+- [x] Atualizar as instruções para não depender de convite privado
