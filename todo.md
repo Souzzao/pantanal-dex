@@ -32,8 +32,8 @@
 ### Frente A — Auditoria e arquitetura
 - [x] Auditar todas as rotas existentes e eliminar telas ou botões sem ação
 - [x] Criar matriz de requisitos da especificação versus implementação atual
-- [ ] Definir contratos compartilhados para Species, Sighting, Settings, filtros e exportação
-- [ ] Separar dados, componentes visuais, serviços nativos e regras de negócio
+- [x] Definir contratos compartilhados para Species, Sighting, Settings, filtros e exportação
+- [x] Separar dados, componentes visuais, serviços nativos e regras de negócio
 - [x] Criar uma política de fallback para web, iOS, Android e uso sem conexão
 
 ### Frente B — Conteúdo científico e acervo de espécies

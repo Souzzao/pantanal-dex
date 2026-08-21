@@ -6,12 +6,12 @@ import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
 import { mergeSightings, restoreSightings, serializeSightings } from "@/shared/persistence";
+import type { Settings } from "@/shared/contracts";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
-export type Settings = { defaultLanguage: string; quickLanguages: string[] };
 type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };

@@ -143,3 +143,15 @@ Minha recomendação é B por proteção de áreas sensíveis. Nenhum dado será
 ## 13. Regra de integração final
 
 A Conta 1 é a responsável pela integração final e pelo checkpoint consolidado. Antes do checkpoint, ela deve revisar `todo.md`, confirmar que nenhum item foi marcado indevidamente, executar TypeScript, lint, testes e revisão visual, e registrar no relatório do marco o que foi concluído, o que ficou pendente e qual aprovação será necessária para o próximo ciclo.
+
+## Bloco coordenador — contratos compartilhados
+
+Estado: em implementação na branch integracao-ciclo-14.
+
+Arquivos: `shared/contracts.ts`, `shared/types.ts` e `contexts/AppContext.tsx`.
+
+Objetivo: centralizar `Settings`, filtros de catálogo e envelope de exportação sem duplicar tipos entre contexto, telas e serviços. O contrato preserva `Species` e `Sighting` e não altera dados persistidos.
+
+Validação: executar `pnpm check`, `pnpm lint`, `pnpm test`, `git diff --check` e `pnpm watchdog` antes do PR.
+
+Dependências: Agente 2 deve consumir os tipos compartilhados nos lotes/índice sem editar o contexto; Agente 3 pode usar `Settings` e `CatalogFilters` em telas e testes. Não há bloqueio real; o próximo bloco independente é cobertura de fluxos locais e fallback offline.
