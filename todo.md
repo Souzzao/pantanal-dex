@@ -154,7 +154,7 @@
 | 4–6 | Aves | [x] `catalog-birds-01` adicionado com três espécies; revisão final pendente. |
 | 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` e `catalog-amphibians-01` adicionados; revisão final pendente. |
 | 9–11 | Peixes | [x] `catalog-fish-01` adicionado com três espécies; revisão regional e conservação pendentes. |
-| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` adicionado com uma espécie; camarão e revisão final pendentes. |
+| 12–14 | Invertebrados | [x] `catalog-invertebrates-01`, `02` e `03` adicionados com quatro espécies no total; novas espécies e revisão regional pendentes. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [x] Índices derivados e helper de nomes alternativos implementados; popular sinônimos documentados continua pendente. |
 | 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [x] 15 nomes modulares validados como ACCEPTED/EXACT no GBIF; ocorrência regional e conservação ICMBio/MMA ainda pendentes. |
 | 20 | Pacote final e PR | [ ] Pendente. |
@@ -170,7 +170,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 
 ### Fila priorizada anti-repetição
 
-1. `[ ]` Completar invertebrados com novos registros apenas após confirmar três imagens exatas e licenças CC0/CC-BY/CC-BY-SA.
+1. `[x]` Completar este bloco de invertebrados: `catalog-invertebrates-03` adicionou duas espécies com seis imagens Commons verificadas; novas espécies continuam na fila.
 2. `[ ]` Auditar e substituir, em lote científico, qualquer fonte legada incompatível com a política comercial; não preencher conservação sem ICMBio/MMA.
 3. `[x]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote; contrato também exige IDs ASCII em kebab-case.
 4. `[ ]` Expandir lotes modulares de aves, peixes e invertebrados usando a vazão real, sem arquivo monolítico.

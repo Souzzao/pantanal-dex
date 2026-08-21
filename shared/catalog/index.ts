@@ -6,9 +6,10 @@ import { amphibians01 } from "./batches/amphibians-01";
 import { fish01 } from "./batches/fish-01";
 import { invertebrates01 } from "./batches/invertebrates-01";
 import { invertebrates02 } from "./batches/invertebrates-02";
+import { invertebrates03 } from "./batches/invertebrates-03";
 import { validateCatalogBatches, type CatalogBatch } from "./types";
 
-export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, fish01, invertebrates01, invertebrates02];
+export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, fish01, invertebrates01, invertebrates02, invertebrates03];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const catalogValidationErrors = validateCatalogBatches(catalogBatches);
 export const catalogSpeciesByEnvironment = catalogSpecies.reduce<Record<string, Species[]>>((index, item) => {

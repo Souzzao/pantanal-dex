@@ -161,3 +161,12 @@ A qualidade não pode ser reduzida para aumentar volume. Nenhum dado ou imagem s
 Todo bloco de conteúdo científico deve atualizar `LICENSES-credits.md`. O manifesto deve listar lote, grupo, contagem, fonte taxonômica, política de licença e localização dos créditos por arquivo. Ele cobre somente o catálogo público; não deve conter avistamentos, coordenadas, fotos pessoais ou qualquer dado do usuário.
 
 A revisão comercial precisa confirmar individualmente `uri`, `author`, `license`, `sourceUrl` e `credit` de cada imagem. A existência de uma URL não é prova de licença. O contrato deve permanecer como barreira automatizada contra `NC`, `ND`, licença ausente, fontes IUCN e domínios não aprovados.
+
+
+## 16. Bloco de invertebrados `catalog-invertebrates-03`
+
+A Conta 2 adicionou `Paraponera clavata` e `Atta sexdens` em módulo separado, totalizando duas espécies e seis imagens Commons verificadas individualmente. As licenças usadas são CC BY 2.0/3.0/4.0 e CC BY-SA 2.0/3.0/4.0; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
+
+A validação taxonômica usa consultas GBIF por espécie. O lote permanece `pending-review`: as imagens e a correspondência taxonômica não provam ocorrência no recorte do Pantanal nem situação de conservação. A alternativa executável para a próxima etapa é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação; sem confirmação, os campos continuam vazios.
+
+O bloco foi entregue com índice, teste, manifesto `LICENSES-credits.md`, TODO, check, lint, test e diff check pendentes de commit final nesta rodada.
