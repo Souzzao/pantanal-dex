@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { environments, groups, species } from "../shared/pantanal";
+import { environments, groups, normalizeCatalogSearch, species } from "../shared/pantanal";
 
 describe("PantanalDex catalog", () => {
   it("contains at least 20 species across all supported groups and environments", () => {
@@ -11,6 +11,12 @@ describe("PantanalDex catalog", () => {
     for (const environment of environments) {
       expect(species.some((item) => item.environments.includes(environment))).toBe(true);
     }
+  });
+
+  it("normalizes accents and surrounding whitespace for field search", () => {
+    expect(normalizeCatalogSearch("  Onca-pintada ")).toBe("onca-pintada");
+    expect(normalizeCatalogSearch("TUIUIÚ")).toBe("tuiuiu");
+    expect(normalizeCatalogSearch("Panthera onca")).toBe("panthera onca");
   });
 
   it("keeps the required scientific fields populated", () => {
@@ -37,7 +43,7 @@ describe("PantanalDex catalog", () => {
         expect(image.author.trim()).not.toBe("");
         expect(image.license.trim()).not.toBe("");
         expect(image.credit.trim()).not.toBe("");
-        expect(image.sourceUrl).toMatch(/^https?:\/\//);
+        expect(image.sourceUrl).toMatch(/^https?:\/\/commons\.wikimedia\.org\/wiki\/File:/);
       }
     }
   });
