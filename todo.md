@@ -121,3 +121,12 @@
 - [x] Criar ZIP específico da Conta 3 com guia de avistamentos, interface e qualidade
 - [x] Criar ZIP da Conta Coordenadora com protocolo de integração, revisão e checkpoints
 - [x] Verificar os três pacotes e entregar os links corretos
+
+## Painel temporário de desenvolvimento
+
+- [x] Ler e alinhar o protocolo do pacote de coordenação enviado
+- [x] Criar painel temporário de colaboração visível apenas em desenvolvimento
+- [x] Exibir frentes, responsáveis, estado do ciclo e últimas atividades
+- [ ] Registrar marcos e bloqueios sem misturar dados de colaboração com dados do usuário
+- [ ] Adicionar rota de manutenção para remover o painel antes da entrega final
+- [ ] Integrar e validar as contribuições das Contas 2 e 3 quando estiverem disponíveis

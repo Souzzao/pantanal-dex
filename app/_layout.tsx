@@ -9,6 +9,7 @@ import { Platform } from "react-native";
 import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider } from "@/contexts/AppContext";
+import { DevCollabPanel } from "@/components/DevCollabPanel";
 import {
   SafeAreaFrameContext,
   SafeAreaInsetsContext,
@@ -91,6 +92,7 @@ export default function RootLayout() {
             <Stack.Screen name="oauth/callback" />
           </Stack>
           <StatusBar style="auto" />
+          {__DEV__ && <DevCollabPanel />}
         </QueryClientProvider>
       </trpc.Provider>
     </GestureHandlerRootView>
