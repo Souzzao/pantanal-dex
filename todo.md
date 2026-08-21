@@ -332,3 +332,10 @@
 - [x] Adicionar lote modular de aves e peixes com licenças comerciais confirmadas
 - [x] Validar cobertura, IDs, fontes, créditos e ausência de NC/ND/IUCN
 - [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
+
+## Ciclos 5–6 — mamíferos e aves
+- [x] Auditar PRs #7 e #8 e confirmar a base atual da expansão
+- [x] Adicionar lote modular de mamíferos com fontes e licenças comerciais confirmadas
+- [x] Adicionar lote modular de aves com fontes e licenças comerciais confirmadas
+- [x] Validar IDs, créditos, fontes, conservação oficial e cobertura por grupo
+- [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
