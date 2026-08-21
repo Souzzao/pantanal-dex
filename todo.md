@@ -353,3 +353,11 @@
 - [x] Adicionar lote modular de invertebrados com fontes e licenças comerciais confirmadas
 - [x] Validar IDs, créditos, fontes, conservação oficial e cobertura por grupo
 - [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
+
+## Sistema Ultimate — produtividade, segurança e continuidade
+- [x] Definir metas mínimas por bloco e proibir respostas sem implementação verificável
+- [x] Criar watchdog de atividade: commit, PR, checks, TODO e handoff obrigatórios
+- [x] Criar mecanismo anti-repetição com fila priorizada, dependências e retomada automática
+- [x] Definir escalonamento entre agentes para bloqueios, PRs stale e branch sem atividade
+- [x] Escrever três prompts Ultimate compactos com execução em blocos de ciclos
+- [x] Criar pacote operacional com protocolo, métricas, comandos e instruções de ativação
