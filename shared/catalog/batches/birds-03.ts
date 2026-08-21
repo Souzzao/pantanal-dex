@@ -1,0 +1,78 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, license: string, sourceUrl: string, credit: string) => ({ uri, author, license, sourceUrl, credit });
+const gbif = (name: string) => ({ title: `GBIF Species Match — ${name}`, url: `https://api.gbif.org/v1/species/match?name=${encodeURIComponent(name)}` });
+
+export const birds03: CatalogBatch = {
+  batchId: "catalog-birds-03",
+  cycle: 6,
+  group: "Aves",
+  status: "pending-review",
+  sources: [gbif("Jabiru mycteria"), gbif("Anodorhynchus hyacinthinus"), gbif("Tigrisoma lineatum")],
+  pendingNotes: ["Confirmar ocorrência no recorte do Pantanal e eventual conservação em fonte ICMBio/MMA; imagens licenciadas não substituem registro regional."],
+  species: [
+    {
+      id: "jabiru-mycteria",
+      commonName: "Tuiuiú",
+      scientificName: "Jabiru mycteria",
+      group: "Aves",
+      environments: ["Áreas alagadas", "Rios e corixos"],
+      description: "Grande cegonha associada a campos inundáveis, lagoas e margens de rios, onde procura alimento em águas rasas.",
+      physicalCharacteristics: "Corpo branco, cabeça escura, pescoço com faixa vermelha e pernas longas adaptadas à caminhada em áreas rasas.",
+      habitat: "Baías, lagoas, campos alagáveis e margens abertas de rios com áreas de alimentação e árvores para pouso.",
+      behavior: "Forrageia caminhando em águas rasas, pousa em árvores altas e pode formar concentrações em áreas úmidas produtivas.",
+      diet: "Peixes, anfíbios, répteis, insetos e outros pequenos animais capturados em áreas alagadas.",
+      curiosities: ["A espécie é um símbolo visual das áreas úmidas do Pantanal.", "Ninhos grandes podem ser reutilizados ou receber manutenção por mais de uma estação."],
+      distribution: "Américas Central e do Sul, com ocorrência em grandes áreas úmidas sul-americanas.",
+      ecologicalImportance: "É predador de áreas alagadas e indica a disponibilidade de alimento e água em paisagens inundáveis.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/c/c0/Jabiru_Mato_Grosso_Pantanal_Brazil-3.jpg", "Andreas Trepte", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Jabiru_Mato_Grosso_Pantanal_Brazil-3.jpg", "Andreas Trepte / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG", "Charles J. Sharp / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/8/86/Jabirus_%28Jabiru_mycteria%29_on_nest.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Jabirus_(Jabiru_mycteria)_on_nest.JPG", "Charles J. Sharp / Wikimedia Commons"),
+      ],
+      sources: [gbif("Jabiru mycteria")],
+    },
+    {
+      id: "anodorhynchus-hyacinthinus",
+      commonName: "Arara-azul-grande",
+      scientificName: "Anodorhynchus hyacinthinus",
+      group: "Aves",
+      environments: ["Matas", "Bordas de mata", "Áreas alagadas"],
+      description: "Arara de grande porte que utiliza palmeiras, matas e áreas abertas para alimentação, abrigo e deslocamento.",
+      physicalCharacteristics: "Plumagem azul intensa, bico grande e escuro, além de áreas amarelas ao redor dos olhos e da mandíbula.",
+      habitat: "Matas ciliares, capões, áreas abertas com palmeiras e bordas de mata em paisagens sazonais.",
+      behavior: "Voa em pares ou pequenos grupos, usa ocos de árvores para nidificar e desloca-se entre áreas de alimentação.",
+      diet: "Frutos e sementes de palmeiras, especialmente recursos duros que exigem bico forte para serem abertos.",
+      curiosities: ["O bico permite quebrar sementes muito resistentes.", "A disponibilidade de ocos e palmeiras influencia sua permanência na paisagem."],
+      distribution: "Centro da América do Sul, com populações no Brasil, Bolívia e Paraguai.",
+      ecologicalImportance: "Participa da dispersão e do consumo de sementes e depende de árvores maduras para reprodução.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/7/78/Hyacinth_Macaw_%28Anodorhynchus_hyacinthinus%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw_(Anodorhynchus_hyacinthus),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/2/2a/Anodorhynchus_hyacinthinus_-Hyacinth_Macaw_-side_of_head.jpg", "Randy", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Anodorhynchus_hyacinthinus_-Hyacinth_Macaw_-side_of_head.jpg", "Randy / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/d/da/Arara_Azul_no_Pantanal.jpg", "Leonardo Ramos", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Arara_Azul_no_Pantanal.jpg", "Leonardo Ramos / Wikimedia Commons"),
+      ],
+      sources: [gbif("Anodorhynchus hyacinthinus")],
+    },
+    {
+      id: "tigrisoma-lineatum",
+      commonName: "Socó-boi",
+      scientificName: "Tigrisoma lineatum",
+      group: "Aves",
+      environments: ["Áreas alagadas", "Rios e corixos", "Bordas de mata"],
+      description: "Garça de hábitos solitários que permanece imóvel em margens e áreas alagadas para capturar presas.",
+      physicalCharacteristics: "Corpo alongado, pescoço robusto, bico forte e plumagem com tons ruivos, castanhos e cinzentos.",
+      habitat: "Margens de rios, lagoas, brejos e vegetação ripária com água rasa e cobertura vegetal.",
+      behavior: "Caça por espreita, permanecendo imóvel antes de lançar o bico contra peixes e outros animais aquáticos.",
+      diet: "Peixes, anfíbios, crustáceos, insetos aquáticos e pequenos vertebrados.",
+      curiosities: ["A postura imóvel reduz a detecção pelas presas.", "O canto grave ajuda a localizar indivíduos em vegetação fechada."],
+      distribution: "América Central e América do Sul, incluindo grande parte do Brasil.",
+      ecologicalImportance: "Controla populações de pequenos animais aquáticos e integra as cadeias alimentares de áreas úmidas.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/b/bc/Tigrisoma_lineatum_portrait.jpg", "Paolo Costa Baldi", "CC BY 3.0", "https://commons.wikimedia.org/wiki/File:Tigrisoma_lineatum_portrait.jpg", "Paolo Costa Baldi / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/f/f7/Rufescent_tiger_heron_%28Tigrisoma_lineatum%29.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Rufescent_tiger_heron_(Tigrisoma_lineatum).JPG", "Charles J. Sharp / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/c/c1/Rufescent_Tiger_Heron%2C_Berazategui%2C_Buenos_Aires%2C_Argentina_1.jpg", "matiascabezas", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Rufescent_Tiger_Heron,_Berazategui,_Buenos_Aires,_Argentina_1.jpg", "matiascabezas / iNaturalist / Wikimedia Commons"),
+      ],
+      sources: [gbif("Tigrisoma lineatum")],
+    },
+  ],
+};

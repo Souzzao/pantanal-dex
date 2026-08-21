@@ -205,3 +205,10 @@ As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote
 A Conta 2 adicionou `Caligo eurilochus` e `Danaus gilippus` em módulo separado, totalizando duas espécies e seis imagens Commons verificadas individualmente. As licenças são CC BY 2.5/3.0/4.0 e CC BY-SA 3.0/4.0; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
 
 As duas consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: imagens e taxonomia não provam ocorrência no recorte do Pantanal nem conservação oficial. A alternativa executável é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até confirmação.
+
+
+## 22. Bloco de aves `catalog-birds-03`
+
+A Conta 2 adicionou `Jabiru mycteria`, `Anodorhynchus hyacinthinus` e `Tigrisoma lineatum`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY e CC BY-SA; não há NC, ND ou licença ausente. Autores, URLs de distribuição, páginas de origem e créditos estão registrados no lote.
+
+As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: a correspondência taxonômica e as imagens não substituem a confirmação de ocorrência no Pantanal. A alternativa executável é consultar SiBBr/ICMBio por espécie e usar Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até confirmação.
