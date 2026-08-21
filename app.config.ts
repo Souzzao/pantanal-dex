@@ -87,9 +87,23 @@ const config: ExpoConfig = {
   plugins: [
     "expo-router",
     [
+      "expo-location",
+      {
+        locationWhenInUsePermission: "Permita que o PantanalDex registre o local do seu avistamento enquanto você usa o app.",
+      },
+    ],
+    [
+      "expo-image-picker",
+      {
+        cameraPermission: "Permita que o PantanalDex use a câmera para registrar avistamentos.",
+        photosPermission: "Permita que o PantanalDex acesse fotos para anexá-las aos avistamentos.",
+      },
+    ],
+    [
       "expo-audio",
       {
-        microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone.",
+        microphonePermission: "Permita que o PantanalDex use o microfone somente quando necessário.",
+        recordAudioAndroid: false,
       },
     ],
     [
