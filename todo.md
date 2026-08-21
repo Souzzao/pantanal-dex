@@ -25,7 +25,7 @@
 - [x] Melhorar o carregamento e o fallback das imagens do catálogo
 - [x] Adicionar modo mapa funcional para avistamentos com coordenadas
 - [x] Implementar edição completa de avistamentos
-- [ ] Adicionar testes determinísticos para persistência, validação e exportação
+- [x] Adicionar testes determinísticos para persistência, validação e exportação
 
 ## Quadro de trabalho — próxima consolidação
 
@@ -74,7 +74,7 @@
 ### Frente F — Qualidade e entrega
 - [x] Criar testes determinísticos para modelos, validação, persistência e exportação
 - [x] Executar TypeScript, lint e testes após cada frente concluída
-- [ ] Testar fluxos Início → ficha → avistamento → detalhe → edição/exclusão
+- [x] Testar fluxos Início → ficha → avistamento → detalhe → edição/exclusão
 - [ ] Testar fluxo sem conexão e fallback de permissões nativas
 - [x] Revisar a interface em portrait 9:16 para uso com uma mão
 - [x] Fazer revisão visual das telas Início, Animais, Avistamentos, Mapa e Configurações

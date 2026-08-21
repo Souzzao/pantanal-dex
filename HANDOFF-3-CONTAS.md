@@ -177,3 +177,9 @@ Estado: implementado na branch integracao-ciclo-14.
 Configurações agora usa o catálogo modular para contagens e nomes, bloqueia import/export/limpeza enquanto o caderno restaura, trata falhas de limpeza sem apagar dados e expõe labels/states de acessibilidade nos controles. Preview portrait 390x844 revisado sem cortes críticos; estado vazio de registros está legível.
 
 Validação: TypeScript, lint, 24 testes aprovados, 1 autenticação pulado, diff check e watchdog. Pendência real: testar câmera/GPS e permissões em aparelho físico; não é bloqueio para o fluxo web/offline local.
+
+## Bloco massivo 2 — Avistamentos no índice modular
+
+A tela de Avistamentos deixou de procurar espécies apenas no catálogo legado. Filtros, chip de espécie, nomes, imagens e busca agora usam um mapa memoizado do índice combinado, mantendo a ordenação e os estados vazios. Isso permite consultar registros criados para qualquer lote modular sem degradação por busca repetida.
+
+Validação incremental: TypeScript, lint e 24 testes aprovados; diff check e watchdog devem ser executados novamente no commit final deste bloco. Sem bloqueio real.
