@@ -18,7 +18,7 @@ describe("PantanalDex catalog", () => {
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(43);
+    expect(catalogSpecies).toHaveLength(46);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
@@ -53,6 +53,9 @@ describe("PantanalDex catalog", () => {
     expect(species.some((item) => item.id === "pseudoplatystoma-reticulatum")).toBe(true);
     expect(species.some((item) => item.id === "cichla-piquiti")).toBe(true);
     expect(species.some((item) => item.id === "piaractus-brachypomus")).toBe(true);
+    expect(species.some((item) => item.id === "heliconius-erato")).toBe(true);
+    expect(species.some((item) => item.id === "papilio-thoas")).toBe(true);
+    expect(species.some((item) => item.id === "bombus-pauloensis")).toBe(true);
   });
 
   it("rejects a batch with inconsistent scientific vocabularies", () => {

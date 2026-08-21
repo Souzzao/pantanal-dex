@@ -154,7 +154,7 @@
 | 4–6 | Aves | [x] `catalog-birds-01` a `04` adicionados com doze espécies; revisão regional e conservação pendentes. |
 | 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` e `catalog-amphibians-01` adicionados; revisão final pendente. |
 | 9–11 | Peixes | [x] `catalog-fish-01` a `05` adicionados com quinze espécies; revisão regional e conservação pendentes. |
-| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` a `05` adicionados com nove espécies no total; revisão regional e conservação pendentes. |
+| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` a `06` adicionados com doze espécies no total; revisão regional e conservação pendentes. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [x] Índices derivados e helper de nomes alternativos implementados; popular sinônimos documentados continua pendente. |
 | 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [x] 15 nomes modulares validados como ACCEPTED/EXACT no GBIF; ocorrência regional e conservação ICMBio/MMA ainda pendentes. |
 | 20 | Pacote final e PR | [ ] Pendente. |
@@ -177,7 +177,8 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 6. `[x]` Implementar `catalog-invertebrates-05` com três espécies e nove imagens Commons; corrigir o ID duplicado `morpho-helenor` detectado pelos testes, substituindo-o por `morpho-menelaus`.
 8. `[x]` Implementar `catalog-birds-04` com três espécies, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200; atualizar teste para 40 espécies modulares.
 9. `[x]` Implementar `catalog-fish-05` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200 após retentativa.
-11. `[ ]` Implementar `catalog-invertebrates-06` com três espécies novas e evidência Commons/GBIF.
+11. `[x]` Implementar `catalog-invertebrates-06` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200.
+12. `[ ]` Implementar `catalog-birds-05` ou `catalog-fish-06` com três espécies novas e evidência Commons/GBIF.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
