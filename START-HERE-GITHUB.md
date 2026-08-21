@@ -10,7 +10,7 @@ A Conta 2 trabalha na branch `conta-2-catalogo`. A Conta 3 trabalha na branch `c
 
 ## Como começar
 
-A conta colaboradora precisa estar adicionada como colaboradora do repositório privado pelo proprietário do GitHub. Depois de aceitar o convite, deve clonar o projeto:
+O repositório agora é público, então não é necessário convite para clonagem. Basta abrir a URL e clonar o projeto:
 
 ```bash
 git clone https://github.com/Souzzao/pantanal-dex.git

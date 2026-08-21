@@ -151,3 +151,15 @@
 - [ ] Iniciar a Conta 2 e a Conta 3 somente após validação do acesso ao repositório
 
 - [x] Enviar convite GitHub para FelipeSouzao no repositório privado; aceite ainda pendente
+
+## Diagnóstico final de acesso GitHub
+
+- [x] Confirmar usuário autenticado, proprietário e URL exata do repositório
+- [x] Verificar convite pendente para dark371star; convite já existe e não precisa ser reenviado
+- [ ] Confirmar acesso efetivo antes de iniciar alterações na branch conta-2-catalogo
+
+## Repositório público para colaboração
+
+- [ ] Alterar Souzzao/pantanal-dex de privado para público
+- [ ] Verificar acesso público às branches de trabalho
+- [ ] Atualizar as instruções para não depender de convite privado
