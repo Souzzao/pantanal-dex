@@ -152,7 +152,7 @@
 | 1 | Contrato e índice de lotes (`shared/catalog`) | [x] Implementado e validado. |
 | 2–3 | Mamíferos | [x] `catalog-mammals-01` adicionado com três espécies; revisão final pendente. |
 | 4–6 | Aves | [x] `catalog-birds-01` adicionado com três espécies; revisão final pendente. |
-| 7–8 | Répteis e anfíbios | [ ] Pendente. |
+| 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` adicionado com duas espécies; anfíbios e revisão final pendentes. |
 | 9–11 | Peixes | [ ] Pendente. |
 | 12–14 | Invertebrados | [ ] Pendente. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [ ] Pendente. |
