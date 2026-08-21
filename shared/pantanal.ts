@@ -158,11 +158,13 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
     }
     if (itemCuriosities.length === 0 || itemCuriosities.some((curiosity) => !curiosity?.trim())) errors.push(`${prefix}.curiosities inválido`);
     if (itemImages.length !== 3) errors.push(`${prefix}.images deve ter exatamente 3 imagens`);
+    if (new Set(itemImages.map((image) => image?.uri)).size !== itemImages.length) errors.push(`${prefix}.images não pode repetir referências`);
     itemImages.forEach((image, imageIndex) => {
       if (!image?.uri || !image?.author || !image?.license || !image?.sourceUrl || !image?.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
       if (!isHttpUrl(image?.uri ?? "") || !isHttpUrl(image?.sourceUrl ?? "")) errors.push(`${prefix}.images[${imageIndex}] uri/sourceUrl inválida`);
     });
     if (itemSources.length === 0 || itemSources.some((source) => !source?.title?.trim() || !isHttpUrl(source?.url ?? ""))) errors.push(`${prefix}.sources inválido`);
+    if (new Set(itemSources.map((source) => source?.url)).size !== itemSources.length) errors.push(`${prefix}.sources não pode repetir URLs`);
   });
   return errors;
 }

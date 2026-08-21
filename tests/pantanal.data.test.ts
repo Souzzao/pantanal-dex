@@ -48,6 +48,13 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("reports duplicate image and source references", () => {
+    const broken = [{ ...species[0], images: [species[0].images[0], species[0].images[0], species[0].images[2]], sources: [species[0].sources[0], species[0].sources[0]] }];
+    const errors = validateSpeciesCatalog(broken);
+    expect(errors).toContain("species[0](tuiuiu).images não pode repetir referências");
+    expect(errors).toContain("species[0](tuiuiu).sources não pode repetir URLs");
+  });
+
   it("reports partial runtime records without throwing", () => {
     const broken = [{ id: "broken" }] as unknown as typeof species;
     expect(() => validateSpeciesCatalog(broken)).not.toThrow();
