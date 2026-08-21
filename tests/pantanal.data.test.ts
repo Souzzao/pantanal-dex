@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createExportCsv, createExportJson } from "../shared/exports";
-import { species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
+import { normalizeCatalogSearch, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
   id: "sighting-1",
@@ -26,6 +26,12 @@ describe("PantanalDex data contracts", () => {
     expect(new Set(species.map((item) => item.group))).toEqual(
       new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]),
     );
+  });
+
+  it("normalizes accents and surrounding whitespace for catalog search", () => {
+    expect(normalizeCatalogSearch("  Onca-pintada ")).toBe("onca-pintada");
+    expect(normalizeCatalogSearch("TUIUIÚ")).toBe("tuiuiu");
+    expect(normalizeCatalogSearch("Panthera onca")).toBe("panthera onca");
   });
 
   it("reports incomplete species records", () => {
