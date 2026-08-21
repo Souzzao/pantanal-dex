@@ -166,6 +166,6 @@
 
 ## Pull Request da Conta 2
 
-- [ ] Liberar permissão de escrita para dark371star no repositório público
-- [ ] Enviar a branch conta-2-catalogo com o commit a59c3d3
-- [ ] Abrir e revisar o Pull Request contra main
+- [x] Liberar permissão de escrita para dark371star no repositório público
+- [x] Enviar a branch conta-2-catalogo com o commit a59c3d3
+- [x] Abrir, revisar, validar e integrar o Pull Request contra main
