@@ -176,3 +176,10 @@
 - [x] Criar testes para persistência e exportação de avistamentos
 - [ ] Auditar fluxos locais e botões sem ação
 - [ ] Monitorar e integrar a entrega da Conta 3 quando publicada
+
+## Ciclo de descoberta e mapa
+
+- [ ] Implementar filtros avançados por espécie, grupo, ambiente, período e texto
+- [ ] Implementar modo mapa com marcadores e navegação para detalhes
+- [ ] Melhorar fallback, erro e carregamento das imagens do catálogo
+- [ ] Executar QA integrado e abrir Pull Request da coordenação
