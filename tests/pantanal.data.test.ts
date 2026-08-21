@@ -41,6 +41,13 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("rejects malformed image and source URLs", () => {
+    const broken = [{ ...species[0], images: species[0].images.map((image, index) => index === 0 ? { ...image, uri: "not-a-url", sourceUrl: "not-a-url" } : image), sources: [{ title: "Fonte", url: "not-a-url" }] }];
+    const errors = validateSpeciesCatalog(broken);
+    expect(errors).toContain("species[0](tuiuiu).images[0] uri/sourceUrl inválida");
+    expect(errors).toContain("species[0](tuiuiu).sources inválido");
+  });
+
   it("keeps exactly three credited image references per species", () => {
     for (const item of species) {
       expect(item.images).toHaveLength(3);
