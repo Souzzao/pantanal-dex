@@ -23,7 +23,7 @@
 
 - [ ] Refinar a hierarquia visual, espaçamento e estados de interação das telas principais
 - [ ] Melhorar o carregamento e o fallback das imagens do catálogo
-- [ ] Adicionar modo mapa funcional para avistamentos com coordenadas
+- [x] Adicionar modo mapa funcional para avistamentos com coordenadas
 - [x] Implementar edição completa de avistamentos
 - [ ] Adicionar testes determinísticos para persistência, validação e exportação
 
@@ -47,7 +47,7 @@
 
 ### Frente C — Catálogo e descoberta
 - [ ] Refinar cards, estados de carregamento, estado vazio e fallback visual de imagem
-- [ ] Implementar filtros combinados e possibilidade de limpar todos os filtros
+- [x] Criar filtros combinados e possibilidade de limpar todos os filtros
 - [ ] Adicionar ordenação por nome popular e grupo
 - [ ] Criar barra rápida de idioma dentro da ficha da espécie
 - [ ] Exibir claramente quando uma tradução não estiver disponível
@@ -59,7 +59,7 @@
 - [ ] Permitir escolher a espécie pelo formulário com busca
 - [ ] Implementar captura pela câmera além da seleção da galeria
 - [x] Melhorar confirmação de salvamento, edição e exclusão
-- [ ] Criar filtros de avistamentos por espécie, grupo, ambiente, período e texto
+- [x] Criar filtros de avistamentos por espécie, grupo, ambiente, período e texto
 - [ ] Implementar modo mapa funcional com marcadores e abertura do detalhe
 - [ ] Adicionar proteção de localização exata ao compartilhar registros sensíveis
 
@@ -179,7 +179,7 @@
 
 ## Ciclo de descoberta e mapa
 
-- [ ] Implementar filtros avançados por espécie, grupo, ambiente, período e texto
-- [ ] Implementar modo mapa com marcadores e navegação para detalhes
+- [x] Implementar filtros avançados por espécie, grupo, ambiente, período e texto
+- [x] Implementar modo mapa web com cartões georreferenciados e navegação para detalhes
 - [ ] Melhorar fallback, erro e carregamento das imagens do catálogo
-- [ ] Executar QA integrado e abrir Pull Request da coordenação
+- [x] Executar QA integrado e abrir Pull Request da coordenação
