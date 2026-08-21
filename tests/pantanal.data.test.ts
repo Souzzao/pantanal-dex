@@ -99,6 +99,15 @@ describe("PantanalDex data contracts", () => {
     expect(exported.sightings).toEqual([sighting]);
   });
 
+  it("quotes every CSV field with commas, quotes, and line breaks safely", () => {
+    const complex = { ...sighting, id: "sighting,1", locationLabel: "Baía, das Garças", notes: "Linha 1\nLinha 2 com \"aspas\"" };
+    const csv = createExportCsv([complex]);
+    expect(csv.split("\n")).toHaveLength(3);
+    expect(csv).toContain('"sighting,1","tuiuiu"');
+    expect(csv).toContain('"Baía, das Garças"');
+    expect(csv).toContain('"Linha 1\nLinha 2 com ""aspas"""');
+  });
+
   it("quotes CSV fields and escapes notes safely", () => {
     const csv = createExportCsv([sighting]);
     expect(csv.split("\n")).toHaveLength(2);
