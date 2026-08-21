@@ -11,6 +11,14 @@ import { validateCatalogBatches, type CatalogBatch } from "./types";
 export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, fish01, invertebrates01, invertebrates02];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const catalogValidationErrors = validateCatalogBatches(catalogBatches);
+export const catalogSpeciesByEnvironment = catalogSpecies.reduce<Record<string, Species[]>>((index, item) => {
+  for (const environment of item.environments) (index[environment] ??= []).push(item);
+  return index;
+}, {});
+export const catalogSpeciesByGroup = catalogSpecies.reduce<Record<string, Species[]>>((index, item) => {
+  (index[item.group] ??= []).push(item);
+  return index;
+}, {});
 
 if (catalogValidationErrors.length) {
   throw new Error(`Catálogo inválido: ${catalogValidationErrors.join("; ")}`);

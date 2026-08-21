@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { environments, groups, normalizeCatalogSearch, species } from "../shared/pantanal";
+import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCatalogSearch } from "../shared/pantanal";
+import { catalogSpeciesByEnvironment, catalogSpeciesByGroup } from "../shared/catalog";
 import { catalogBatches, catalogSpecies, catalogValidationErrors } from "../shared/catalog";
 import { validateCatalogBatch } from "../shared/catalog/types";
 
@@ -37,6 +38,17 @@ describe("PantanalDex catalog", () => {
   it("rejects commercial-incompatible image licenses and unapproved sources", () => {
     const batch = { ...catalogBatches[0], sources: [{ title: "IUCN", url: "https://www.iucnredlist.org/species/123" }], species: [{ ...catalogSpecies[0], images: catalogSpecies[0].images.map((image, index) => index === 0 ? { ...image, license: "CC BY-NC 4.0" } : image) }] };
     expect(validateCatalogBatch(batch)).toEqual(expect.arrayContaining([expect.stringContaining("incompatível com uso comercial"), expect.stringContaining("fonte do lote fora da lista aprovada")]));
+  });
+
+  it("indexes modular species by environment and group", () => {
+    expect(catalogSpeciesByEnvironment["Rios e corixos"].length).toBeGreaterThan(0);
+    expect(catalogSpeciesByGroup["Peixes"].some((item) => item.scientificName === "Salminus brasiliensis")).toBe(true);
+  });
+
+  it("matches scientific and alternate names without accent sensitivity", () => {
+    const item = { ...catalogSpecies[0], searchNames: ["lobo de crina"] };
+    expect(speciesMatchesCatalogSearch(item, "LÔBO DE CRINA")).toBe(true);
+    expect(speciesMatchesCatalogSearch(item, "inexistente")).toBe(false);
   });
 
   it("normalizes accents and surrounding whitespace for field search", () => {

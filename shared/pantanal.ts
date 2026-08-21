@@ -9,6 +9,8 @@ export type Species = {
   id: string;
   commonName: string;
   scientificName: string;
+  /** Nomes históricos, regionais ou variantes aceitas somente quando documentados pela fonte taxonômica. */
+  searchNames?: string[];
   group: SpeciesGroup;
   environments: Environment[];
   description: string;
@@ -55,6 +57,12 @@ const commons = (file: string, author: string) => ({
 
 export function normalizeCatalogSearch(value: string) {
   return value.trim().toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+export function speciesMatchesCatalogSearch(item: Species, query: string) {
+  const normalizedQuery = normalizeCatalogSearch(query);
+  if (!normalizedQuery) return true;
+  return [item.commonName, item.scientificName, ...(item.searchNames ?? [])].some((value) => normalizeCatalogSearch(value).includes(normalizedQuery));
 }
 
 const legacySpecies: Species[] = [
