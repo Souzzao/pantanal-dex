@@ -198,3 +198,10 @@ As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote
 A Conta 2 adicionou `Brycon hilarii`, `Myloplus tiete` e `Gymnotus carapo` em módulo separado, totalizando três espécies e nove imagens Commons verificadas individualmente. As licenças são CC0, CC BY, CC BY-SA e domínio público; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
 
 As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: a correspondência taxonômica e as imagens não provam ocorrência no recorte do Pantanal nem conservação oficial. A alternativa executável é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo os campos vazios até confirmação.
+
+
+## 21. Bloco de invertebrados `catalog-invertebrates-04`
+
+A Conta 2 adicionou `Caligo eurilochus` e `Danaus gilippus` em módulo separado, totalizando duas espécies e seis imagens Commons verificadas individualmente. As licenças são CC BY 2.5/3.0/4.0 e CC BY-SA 3.0/4.0; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
+
+As duas consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: imagens e taxonomia não provam ocorrência no recorte do Pantanal nem conservação oficial. A alternativa executável é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até confirmação.
