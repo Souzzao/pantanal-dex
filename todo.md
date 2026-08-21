@@ -378,3 +378,11 @@
 - [x] Revisar accessibilityLabel, accessibilityState, foco e feedback dos fluxos principais
 - [x] Revisar estados vazios, loading, erro e modo offline nas telas principais
 - [x] Atualizar HANDOFF-3-CONTAS.md, validar, commitar, publicar PR e checkpoint
+
+## Próximo bloco massivo — permissões, offline e idiomas
+- [ ] Auditar watchdog, TODO, handoff, PR #10 e branches sem repetir auditorias concluídas
+- [x] Criar helpers testáveis para estados de permissão de câmera e localização
+- [x] Cobrir estados negado, serviço desativado, erro e sucesso sem quebrar o salvamento
+- [x] Garantir labels e mensagens PT/EN/ES nos fluxos de erro e ações nativas
+- [ ] Testar fallback offline, imagens indisponíveis e catálogo modular nas rotas restantes
+- [x] Atualizar documentação, validar, commitar, publicar PR e checkpoint

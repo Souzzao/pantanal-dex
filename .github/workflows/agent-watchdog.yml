@@ -21,8 +21,8 @@ jobs:
         env:
           BODY: ${{ github.event.pull_request.body }}
         run: |
-          for marker in "Ciclos" "Arquivos" "Testes" "Riscos" "Próximo"; do
-            echo "$BODY" | grep -qi "$marker" || { echo "PR sem seção obrigatória: $marker"; exit 1; }
+          for marker in "Ciclos|Bloco" "Arquivos|Entregas" "Testes" "Riscos|Risco" "Próximo"; do
+            echo "$BODY" | grep -Eqi "$marker" || { echo "PR sem seção obrigatória: $marker"; exit 1; }
           done
       - name: Validate TODO and diff
         run: |

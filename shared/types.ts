@@ -6,3 +6,4 @@
 export type * from "../drizzle/schema";
 export * from "./_core/errors";
 export type * from "./contracts";
+export * from "./native-permissions";

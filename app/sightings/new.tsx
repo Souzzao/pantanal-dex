@@ -7,13 +7,15 @@ import * as Location from "expo-location";
 import { ScreenContainer } from "@/components/screen-container";
 import { isValidSightingDate, isValidSightingTime, type Sighting, type Visibility } from "@/shared/pantanal";
 import { filterSpeciesCatalog } from "@/shared/catalog";
+import { getNativePermissionCopy, type NativeLanguage } from "@/shared/native-permissions";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
 export default function NewSightingScreen() {
   const colors = useColors();
   const { id, speciesId } = useLocalSearchParams<{ id?: string; speciesId?: string }>();
-  const { sightings, addSighting, updateSighting } = useApp();
+  const { sightings, settings, addSighting, updateSighting } = useApp();
+  const nativeLanguage = (settings.defaultLanguage === "English" || settings.defaultLanguage === "Español" ? settings.defaultLanguage : "Português") as NativeLanguage;
   const existing = id ? sightings.find((item) => item.id === id) : undefined;
   const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? filterSpeciesCatalog()[0]?.id ?? "");
   const [speciesQuery, setSpeciesQuery] = useState("");
@@ -83,7 +85,8 @@ export default function NewSightingScreen() {
     try {
       const permission = await ImagePicker.requestCameraPermissionsAsync();
       if (permission.status !== "granted") {
-        Alert.alert("Câmera não autorizada", "Autorize o acesso à câmera para registrar uma fotografia.");
+        const copy = getNativePermissionCopy(nativeLanguage, "camera", "denied");
+        Alert.alert(copy.title, copy.detail);
         return;
       }
       const result = await ImagePicker.launchCameraAsync({
@@ -94,26 +97,30 @@ export default function NewSightingScreen() {
       });
       applyPickerResult(result);
     } catch {
-      Alert.alert("Não foi possível abrir a câmera", "Você ainda pode salvar o avistamento sem fotografia.");
+      const copy = getNativePermissionCopy(nativeLanguage, "camera", "error");
+      Alert.alert(copy.title, copy.detail);
     }
   };
 
   const useLocation = async () => {
     try {
       if (!(await Location.hasServicesEnabledAsync())) {
-        Alert.alert("Localização desativada", "Ative o serviço de localização do aparelho para registrar coordenadas.");
+        const copy = getNativePermissionCopy(nativeLanguage, "location", "services-disabled");
+        Alert.alert(copy.title, copy.detail);
         return;
       }
       const permission = await Location.requestForegroundPermissionsAsync();
       if (permission.status !== "granted") {
-        Alert.alert("Localização não autorizada", "Você pode salvar o registro sem coordenadas.");
+        const copy = getNativePermissionCopy(nativeLanguage, "location", "denied");
+        Alert.alert(copy.title, copy.detail);
         return;
       }
       const current = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
       setCoords({ latitude: current.coords.latitude, longitude: current.coords.longitude });
       setLocationLabel("Localização atual");
     } catch {
-      Alert.alert("Não foi possível obter a localização", "Verifique o sinal do aparelho ou salve o registro sem coordenadas.");
+      const copy = getNativePermissionCopy(nativeLanguage, "location", "error");
+      Alert.alert(copy.title, copy.detail);
     }
   };
 
