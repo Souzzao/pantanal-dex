@@ -5,6 +5,7 @@ const validEnvironments = new Set(["Rios e corixos", "Áreas alagadas", "Campos"
 const approvedSourceHosts = ["api.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "pt.wikipedia.org", "www.wikidata.org"];
 const commercialImageLicenses = /^(CC0|CC BY(?:-SA)?(?: 2\.0| 2\.5| 3\.0| 4\.0)?|CC BY-SA(?: 2\.0| 2\.5| 3\.0| 4\.0)?|Public domain)$/i;
 const blockedImageLicenses = /\b(?:NC|ND|NON[- ]?COMMERCIAL|NO[- ]?DERIVATIVES)\b/i;
+const asciiSpeciesId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export type CatalogBatch = {
   batchId: string;
@@ -31,6 +32,7 @@ export function validateCatalogBatch(batch: CatalogBatch): string[] {
     for (const field of requiredTextFields) {
       if (typeof item[field] !== "string" || !String(item[field]).trim()) errors.push(`${item.id || "sem-id"}: campo ${field} ausente`);
     }
+    if (!asciiSpeciesId.test(item.id)) errors.push(`${item.id || "sem-id"}: ID deve ser ASCII em kebab-case`);
     if (ids.has(item.id)) errors.push(`${item.id}: ID duplicado no lote`);
     if (item.group !== batch.group) errors.push(`${item.id}: grupo não corresponde ao lote`);
     if (!validGroups.has(item.group)) errors.push(`${item.id}: grupo inválido`);

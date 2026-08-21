@@ -172,7 +172,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 
 1. `[ ]` Completar invertebrados com novos registros apenas após confirmar três imagens exatas e licenças CC0/CC-BY/CC-BY-SA.
 2. `[ ]` Auditar e substituir, em lote científico, qualquer fonte legada incompatível com a política comercial; não preencher conservação sem ICMBio/MMA.
-3. `[ ]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote.
+3. `[x]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote; contrato também exige IDs ASCII em kebab-case.
 4. `[ ]` Expandir lotes modulares de aves, peixes e invertebrados usando a vazão real, sem arquivo monolítico.
 5. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.
 
