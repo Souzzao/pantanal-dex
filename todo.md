@@ -24,7 +24,7 @@
 - [ ] Refinar a hierarquia visual, espaçamento e estados de interação das telas principais
 - [ ] Melhorar o carregamento e o fallback das imagens do catálogo
 - [ ] Adicionar modo mapa funcional para avistamentos com coordenadas
-- [ ] Implementar edição completa de avistamentos
+- [x] Implementar edição completa de avistamentos
 - [ ] Adicionar testes determinísticos para persistência, validação e exportação
 
 ## Quadro de trabalho — próxima consolidação
@@ -54,11 +54,11 @@
 - [ ] Revisar a ficha para leitura rápida em campo e acessibilidade
 
 ### Frente D — Avistamentos e caderno de campo
-- [ ] Implementar edição completa de avistamentos existentes
+- [x] Implementar edição completa de avistamentos existentes
 - [ ] Validar data, horário, quantidade, visibilidade e precisão da localização
 - [ ] Permitir escolher a espécie pelo formulário com busca
 - [ ] Implementar captura pela câmera além da seleção da galeria
-- [ ] Melhorar confirmação de salvamento, edição e exclusão
+- [x] Melhorar confirmação de salvamento, edição e exclusão
 - [ ] Criar filtros de avistamentos por espécie, grupo, ambiente, período e texto
 - [ ] Implementar modo mapa funcional com marcadores e abertura do detalhe
 - [ ] Adicionar proteção de localização exata ao compartilhar registros sensíveis
