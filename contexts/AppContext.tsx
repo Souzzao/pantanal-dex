@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
-import { createExportCsv, createExportJson } from "@/shared/exports";
+import { createExportCsv, createExportJson, parseImportJson } from "@/shared/exports";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
@@ -10,7 +10,7 @@ const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
 
 type Settings = { defaultLanguage: string; quickLanguages: string[] };
-type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; setSettings: (settings: Settings) => Promise<void> };
+type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; importSightings: (raw: string) => Promise<{ imported: number; skipped: number; duplicates: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -45,7 +45,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     })();
   }, []);
   const persistSightings = async (next: Sighting[]) => { setSightings(next); await AsyncStorage.setItem(SIGHTINGS_KEY, JSON.stringify(next)); };
-  const value = useMemo<AppContextValue>(() => ({ sightings, settings, ready, addSighting: (s) => persistSightings([s, ...sightings]), updateSighting: (s) => persistSightings(sightings.map((item) => item.id === s.id ? s : item)), deleteSighting: (id) => persistSightings(sightings.filter((item) => item.id !== id)), setSettings: async (next) => { setSettingsState(next); await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(next)); } }), [sightings, settings, ready]);
+  const value = useMemo<AppContextValue>(() => ({ sightings, settings, ready, addSighting: (s) => persistSightings([s, ...sightings]), updateSighting: (s) => persistSightings(sightings.map((item) => item.id === s.id ? s : item)), deleteSighting: (id) => persistSightings(sightings.filter((item) => item.id !== id)), importSightings: async (raw) => { const parsed = parseImportJson(raw); const existing = new Set(sightings.map((item) => item.id)); const fresh = parsed.sightings.filter((item) => !existing.has(item.id)); await persistSightings([...fresh, ...sightings]); return { imported: fresh.length, skipped: parsed.skipped, duplicates: parsed.sightings.length - fresh.length }; }, setSettings: async (next) => { setSettingsState(next); await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(next)); } }), [sightings, settings, ready]);
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 export function useApp() { const context = useContext(AppContext); if (!context) throw new Error("useApp must be used within AppProvider"); return context; }

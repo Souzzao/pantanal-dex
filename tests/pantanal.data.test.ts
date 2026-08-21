@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createExportCsv, createExportJson } from "../shared/exports";
+import { createExportCsv, createExportJson, parseImportJson } from "../shared/exports";
 import { isValidCoordinate, isValidIsoDate, isValidTime, normalizeCatalogSearch, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
@@ -122,6 +122,28 @@ describe("PantanalDex data contracts", () => {
     expect(csv).not.toContain("private");
     expect(csv).toContain('"shareable","tuiuiu"');
     expect(csv).toContain('"none"');
+  });
+
+  it("imports valid JSON sightings and skips malformed or unknown records", () => {
+    const payload = JSON.stringify({ version: "1.0", sightings: [sighting, { ...sighting, id: "unknown", speciesId: "nao-existe" }, { ...sighting, id: "bad-date", date: "2026-02-30" }] });
+    const result = parseImportJson(payload);
+    expect(result.version).toBe("1.0");
+    expect(result.sightings).toHaveLength(1);
+    expect(result.sightings[0]).toMatchObject({ id: "sighting-1", speciesId: "tuiuiu" });
+    expect(result.skipped).toBe(2);
+  });
+
+  it("rejects JSON without the versioned sightings envelope", () => {
+    expect(() => parseImportJson(JSON.stringify([{ ...sighting }]))).toThrow("lista de avistamentos");
+    expect(() => parseImportJson("not-json")).toThrow();
+  });
+
+  it("accepts privacy-safe exports without coordinates", () => {
+    const safe = JSON.parse(createExportJson([{ ...sighting, latitude: undefined, longitude: undefined, locationPrecision: "none" }], { redactLocations: true }));
+    const result = parseImportJson(JSON.stringify(safe));
+    expect(result.sightings).toHaveLength(1);
+    expect(result.sightings[0].locationPrecision).toBe("none");
+    expect(result.sightings[0].latitude).toBeUndefined();
   });
 
   it("quotes CSV fields and escapes notes safely", () => {
