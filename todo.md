@@ -139,7 +139,7 @@
 
 ## Colaboração por repositório
 
-- [ ] Habilitar o conector GitHub ou exportar o projeto pelo painel de desenvolvimento
-- [ ] Criar repositório privado compartilhado sem expor tokens ou segredos
-- [ ] Definir branches Conta 2, Conta 3 e coordenação
-- [ ] Documentar Pull Requests, revisão e integração do primeiro ciclo
+- [x] Habilitar o conector GitHub ou exportar o projeto pelo painel de desenvolvimento
+- [x] Criar repositório privado compartilhado sem expor tokens ou segredos
+- [x] Definir branches Conta 2, Conta 3 e coordenação
+- [x] Documentar Pull Requests, revisão e integração do primeiro ciclo
