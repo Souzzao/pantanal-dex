@@ -386,3 +386,11 @@
 - [x] Garantir labels e mensagens PT/EN/ES nos fluxos de erro e ações nativas
 - [ ] Testar fallback offline, imagens indisponíveis e catálogo modular nas rotas restantes
 - [x] Atualizar documentação, validar, commitar, publicar PR e checkpoint
+
+## Novo bloco massivo — offline, imagens, idiomas e acessibilidade
+- [ ] Auditar fila, watchdog, PR #10 e estado do checkpoint sem repetir trabalho concluído
+- [x] Garantir fallback determinístico para imagens indisponíveis em catálogo e avistamentos
+- [ ] Cobrir catálogo, registros e preferências em restauração offline com testes
+- [ ] Ampliar mensagens de estado vazio, erro e carregamento em PT/EN/ES
+- [ ] Revisar labels, estados disabled/busy e foco dos fluxos principais
+- [ ] Atualizar handoff, validar, commitar, publicar PR e checkpoint

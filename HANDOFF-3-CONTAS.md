@@ -197,3 +197,9 @@ Correção: workflow agora aceita variantes semânticas (`Ciclos|Bloco`, `Arquiv
 Criado `shared/native-permissions.ts` com cópias PT/EN/ES para câmera e localização nos estados negado, serviço desativado e erro. A tela de novo avistamento usa o helper conforme o idioma padrão, mantendo o salvamento sem coordenadas/foto quando a permissão falha. Adicionado teste determinístico com três idiomas e exportação pelo barrel `shared/types.ts`.
 
 Também corrigido o falso negativo do workflow Agent Watchdog no PR #10: variantes de títulos do corpo agora são aceitas sem remover a exigência de evidências. Validação local atual: 27 testes aprovados, 1 autenticação pulado, TypeScript, lint e diff check. Próximo passo: rerodar o check remoto e validar offline/permissões em aparelho físico.
+
+## Novo bloco massivo — fallback offline de imagens
+
+Corrigido `RemoteImage` para não permanecer indefinidamente em loading quando uma espécie ou avistamento não possui URI. O componente agora entra diretamente no estado de fallback, mantém a inicial do nome e deixa a ausência visual explícita; quando a fonte muda, o estado é reiniciado de forma determinística. Isso cobre catálogo local incompleto e imagens não disponíveis sem impedir navegação ou registro.
+
+Validação incremental: TypeScript, lint, 27 testes aprovados, 1 autenticação pulado e diff check. Pendências continuam sendo teste físico de permissões e revisão editorial científica.
