@@ -50,6 +50,10 @@ O GBIF retornou `ACCEPTED`/`EXACT` para `Brycon hilarii`, `Myloplus tiete` e `Gy
 
 Nenhuma licença contém NC ou ND. As referências e imagens não comprovam, sozinhas, ocorrência no recorte do Pantanal ou situação de conservação; manter `pending-review`.
 
+## Fish-05 — pesquisa Commons e GBIF
+
+O GBIF retornou `ACCEPTED`/`EXACT` para `Pseudoplatystoma reticulatum`, `Cichla piquiti` e `Piaractus brachypomus`. A API Commons identificou licenças CC BY 4.0, CC BY-SA 3.0/4.0 e domínio público nos nove arquivos. As nove URLs `Special:FilePath` retornaram HTTP 200 usando User-Agent e retentativas; uma resposta inicial 429 foi tratada como limitação temporária do serviço, não como URL inválida. Ocorrência no recorte do Pantanal e conservação oficial permanecem pendentes.
+
 ## Birds-04 — pesquisa Commons e GBIF
 
 O GBIF retornou `ACCEPTED`/`EXACT` para `Syrigma sibilatrix`, `Megaceryle torquata` e `Ardea alba`. A API do Wikimedia Commons identificou licenças CC BY 2.0/4.0 e CC BY-SA 2.0/3.0/4.0 nos nove arquivos selecionados, e as URLs `Special:FilePath` retornaram HTTP 200. A confirmação de ocorrência no recorte do Pantanal e de conservação oficial permanece pendente.

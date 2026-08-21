@@ -21,6 +21,7 @@ As imagens só podem usar `CC0`, `CC BY` ou `CC BY-SA`, em qualquer versão iden
 | `catalog-fish-02` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-fish-03` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-fish-04` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
+| `catalog-fish-05` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-invertebrates-01` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-02` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-03` | Invertebrados | 2 | GBIF Species Match | Wikimedia Commons; seis arquivos CC BY/CC BY-SA com créditos no módulo do lote |
@@ -32,6 +33,8 @@ Cada objeto `images` contém `uri`, `author`, `license`, `sourceUrl` e `credit`.
 ## Limites e pendências
 
 O manifesto não transforma uma licença permissiva em prova de ocorrência no Pantanal. Ocorrência regional, conservação e adequação da fotografia para identificação em campo permanecem pendentes quando não há confirmação SiBBr/ICMBio ou fonte oficial de conservação. Nenhum registro deve ser promovido a `verified` sem essa revisão.
+
+O lote `catalog-fish-05` usa três espécies e nove arquivos Commons selecionados a partir de metadados de licença consultados na API pública. Os autores e licenças declarados são Brancolini et al. (CC BY 4.0), Tomcather e Klaus (domínio público), CHUCAO (CC BY-SA 3.0), Douglas (CC BY 4.0), Bartolette et al. (CC BY 4.0), Cedricguppy (CC BY-SA 4.0), Хомелка (CC BY-SA 3.0) e Mahufi (CC BY-SA 3.0). As páginas individuais estão nas `sourceUrl` dos registros.
 
 O lote `catalog-birds-04` usa três espécies e nove arquivos Commons selecionados a partir de metadados de licença consultados na API pública. Os autores e licenças declarados são Jimmy Baikovicius (CC BY-SA 2.0), rodrigo_lazaro (CC BY 4.0), Charles J. Sharp (CC BY-SA 4.0), Giles Laurent (CC BY-SA 4.0), Andreas Trepte (CC BY-SA 4.0), Calibas (CC BY-SA 3.0) e Mike Baird (CC BY 2.0). As páginas individuais estão nas `sourceUrl` dos registros.
 
