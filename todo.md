@@ -136,3 +136,10 @@
 - [x] Criar novo guia da Conta 2 com ID do projeto, checkpoint 4c70b59c e instruções de permissão
 - [x] Criar novo guia da Conta 3 com ID do projeto, checkpoint 4c70b59c e instruções de permissão
 - [x] Montar novos ZIPs e orientar o usuário sobre como compartilhar o projeto no painel
+
+## Colaboração por repositório
+
+- [ ] Habilitar o conector GitHub ou exportar o projeto pelo painel de desenvolvimento
+- [ ] Criar repositório privado compartilhado sem expor tokens ou segredos
+- [ ] Definir branches Conta 2, Conta 3 e coordenação
+- [ ] Documentar Pull Requests, revisão e integração do primeiro ciclo
