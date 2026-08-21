@@ -47,9 +47,13 @@ const commons = (file: string, author: string) => ({
   uri: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=900`,
   author,
   license: "CC BY-SA 4.0",
-  sourceUrl: "https://commons.wikimedia.org/",
+  sourceUrl: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file.replaceAll(" ", "_"))}`,
   credit: `${author} / Wikimedia Commons`,
 });
+
+export function normalizeCatalogSearch(value: string) {
+  return value.trim().toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 export const species: Species[] = [
   {

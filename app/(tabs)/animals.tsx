@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
-import { environments, groups, species } from "@/shared/pantanal";
+import { environments, groups, normalizeCatalogSearch, species } from "@/shared/pantanal";
 import { useColors } from "@/hooks/use-colors";
 import { SpeciesImage } from "@/components/species-image";
 
@@ -13,7 +13,7 @@ export default function AnimalsScreen() {
   const [environment, setEnvironment] = useState("");
   const [sortMode, setSortMode] = useState<"name" | "group">("name");
   const filtered = useMemo(() => species.filter((item) => {
-    const matchesQuery = !query || `${item.commonName} ${item.scientificName}`.toLowerCase().includes(query.toLowerCase());
+    const matchesQuery = !query || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(normalizeCatalogSearch(query));
     return matchesQuery && (!group || item.group === group) && (!environment || item.environments.includes(environment as any));
   }).sort((a, b) => sortMode === "name" ? a.commonName.localeCompare(b.commonName, "pt-BR") : a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR")), [query, group, environment, sortMode]);
   const hasFilters = Boolean(query.trim() || group || environment);
