@@ -5,7 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
-import { species, type Sighting, type Visibility } from "@/shared/pantanal";
+import { normalizeCatalogSearch, species, type Sighting, type Visibility } from "@/shared/pantanal";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
@@ -15,6 +15,7 @@ export default function NewSightingScreen() {
   const { sightings, addSighting, updateSighting } = useApp();
   const existing = id ? sightings.find((item) => item.id === id) : undefined;
   const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? species[0].id);
+  const [speciesQuery, setSpeciesQuery] = useState("");
   const [date, setDate] = useState(existing?.date ?? new Date().toISOString().slice(0, 10));
   const [time, setTime] = useState(existing?.time ?? "");
   const [locationLabel, setLocationLabel] = useState(existing?.locationLabel ?? "");
@@ -59,6 +60,11 @@ export default function NewSightingScreen() {
     setLocationLabel("Localização atual");
   };
 
+  const visibleSpecies = species.filter((item) => {
+    const query = normalizeCatalogSearch(speciesQuery);
+    return !query || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(query);
+  });
+
   const save = async () => {
     if (!date.trim()) {
       Alert.alert("Data obrigatória", "Informe a data do avistamento.");
@@ -100,13 +106,15 @@ export default function NewSightingScreen() {
         <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Espécie</Text>
+        <TextInput value={speciesQuery} onChangeText={setSpeciesQuery} placeholder="Buscar por nome popular ou científico" placeholderTextColor={colors.muted} accessibilityLabel="Buscar espécie por nome popular ou científico" style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 10 }} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingBottom: 15 }}>
-          {species.map((item) => (
+          {visibleSpecies.map((item) => (
             <Pressable key={item.id} onPress={() => setSelected(item.id)} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}>
               <Text style={{ color: selected === item.id ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{item.commonName}</Text>
             </Pressable>
           ))}
         </ScrollView>
+        {visibleSpecies.length === 0 && <Text style={{ color: colors.muted, fontSize: 12, marginBottom: 15 }}>Nenhuma espécie encontrada. Tente outro nome.</Text>}
         {[
           ["Data *", date, setDate, "2026-08-21"],
           ["Horário", time, setTime, "14:30"],
