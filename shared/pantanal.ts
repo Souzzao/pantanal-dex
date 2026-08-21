@@ -152,6 +152,8 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
     const itemSources = Array.isArray(item.sources) ? item.sources : [];
     if (!item.commonName?.trim()) errors.push(`${prefix}.commonName ausente`);
     if (!item.scientificName?.trim()) errors.push(`${prefix}.scientificName ausente`);
+    const reviewedAt = item.reviewedAt ?? "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(reviewedAt) || Number.isNaN(Date.parse(`${reviewedAt}T12:00:00Z`))) errors.push(`${prefix}.reviewedAt inválido`);
     if (!groups.includes(item.group)) errors.push(`${prefix}.group inválido`);
     if (itemEnvironments.length === 0 || itemEnvironments.some((environment) => !environments.includes(environment))) errors.push(`${prefix}.environments inválido`);
     for (const field of ["description", "physicalCharacteristics", "habitat", "behavior", "diet", "distribution", "ecologicalImportance"] as const) {
