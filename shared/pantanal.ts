@@ -1,3 +1,5 @@
+import { catalogSpecies } from "./catalog";
+
 export type SpeciesGroup = "Mamíferos" | "Aves" | "Répteis" | "Anfíbios" | "Peixes" | "Invertebrados";
 export type Environment = "Rios e corixos" | "Áreas alagadas" | "Campos" | "Matas" | "Bordas de mata";
 export type LocationPrecision = "exact" | "approximate" | "municipality" | "none";
@@ -55,7 +57,7 @@ export function normalizeCatalogSearch(value: string) {
   return value.trim().toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-export const species: Species[] = [
+const legacySpecies: Species[] = [
   {
     id: "tuiuiu", commonName: "Tuiuiú", scientificName: "Jabiru mycteria", group: "Aves", environments: ["Áreas alagadas", "Rios e corixos"],
     description: "Grande ave pernalta símbolo do Pantanal, frequentemente observada em áreas abertas e alagadas.", physicalCharacteristics: "Plumagem branca, cabeça preta e papo vermelho, com pernas longas e bico robusto.", habitat: "Campos inundáveis, baías, vazantes e margens de rios.", behavior: "Constrói ninhos altos e pode ser visto forrageando em águas rasas.", diet: "Peixes, anfíbios, répteis, insetos e pequenos vertebrados.", curiosities: ["É uma das maiores aves voadoras da América do Sul.", "Seu ninho pode ser reutilizado por vários anos."], distribution: "América Central e América do Sul, incluindo todo o Pantanal.", ecologicalImportance: "Ajuda a indicar a disponibilidade de alimento e a saúde das áreas úmidas.", conservationStatus: "Pouco preocupante", images: [commons("Jabiru mycteria - Brazil.jpg", "Wikimedia Commons"), commons("Jabiru mycteria flying.jpg", "Wikimedia Commons"), commons("Jabiru mycteria nest.jpg", "Wikimedia Commons")], sources: [{ title: "IUCN Red List — Jabiru mycteria", url: "https://www.iucnredlist.org/species/22697710/93625378" }]
@@ -136,3 +138,5 @@ export const species: Species[] = [
     description: "Camarão de água doce associado a rios, lagoas e áreas alagáveis de diversas bacias brasileiras.", physicalCharacteristics: "Corpo segmentado, rostro alongado e primeiro par de quelas desenvolvido.", habitat: "Rios, lagoas, baías e áreas de vegetação aquática.", behavior: "Busca alimento no fundo e entre plantas, com atividade variável ao longo do dia.", diet: "Detritos, algas, pequenos invertebrados e matéria orgânica.", curiosities: ["O ciclo de vida pode usar águas doces e ambientes com maior salinidade em diferentes populações.", "É uma espécie relevante para cadeias alimentares e para comunidades ribeirinhas."], distribution: "Ampla distribuição na América do Sul, com registros em bacias brasileiras.", ecologicalImportance: "Transfere energia do detrito e da vegetação para peixes e aves aquáticas.", conservationStatus: "Pouco preocupante", images: [commons("Macrobrachium amazonicum.jpg", "Wikimedia Commons"), commons("Amazon river prawn.jpg", "Wikimedia Commons"), commons("Macrobrachium amazonicum closeup.jpg", "Wikimedia Commons")], sources: [{ title: "FishBase — Macrobrachium amazonicum", url: "https://www.fishbase.se/summary/Macrobrachium-amazonicum.html" }]
   },
 ];
+
+export const species: Species[] = [...legacySpecies, ...catalogSpecies];

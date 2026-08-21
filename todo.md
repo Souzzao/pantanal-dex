@@ -143,3 +143,20 @@
 - [ ] Criar repositório privado compartilhado sem expor tokens ou segredos
 - [ ] Definir branches Conta 2, Conta 3 e coordenação
 - [ ] Documentar Pull Requests, revisão e integração do primeiro ciclo
+
+
+## Agente 2 — Expansão modular para 3.000+ espécies
+
+| Ciclos | Escopo | Estado |
+|---|---|---|
+| 1 | Contrato e índice de lotes (`shared/catalog`) | [x] Implementado e validado. |
+| 2–3 | Mamíferos | [x] `catalog-mammals-01` adicionado com três espécies; revisão final pendente. |
+| 4–6 | Aves | [ ] Pendente. |
+| 7–8 | Répteis e anfíbios | [ ] Pendente. |
+| 9–11 | Peixes | [ ] Pendente. |
+| 12–14 | Invertebrados | [ ] Pendente. |
+| 15–16 | Índices por ambiente, sinônimos e busca | [ ] Pendente. |
+| 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [ ] Parcial; metadados do Commons do lote 01 registrados. |
+| 20 | Pacote final e PR | [ ] Pendente. |
+
+O lote `catalog-mammals-01` contém `Chrysocyon brachyurus`, `Tayassu pecari` e `Pecari tajacu`. Os registros têm três imagens HTTP do Wikimedia Commons por espécie, autoria, licença, origem e fonte IUCN. O lote permanece `pending-review` porque a nomenclatura aceita, o status de conservação e a ocorrência específica no Pantanal ainda precisam de revisão editorial especializada. Fotografias de zoológico ou de outras localidades não são evidência de ocorrência regional.

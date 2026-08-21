@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { environments, groups, normalizeCatalogSearch, species } from "../shared/pantanal";
+import { catalogBatches, catalogSpecies, catalogValidationErrors } from "../shared/catalog";
+import { validateCatalogBatch } from "../shared/catalog/types";
 
 describe("PantanalDex catalog", () => {
   it("contains at least 20 species across all supported groups and environments", () => {
@@ -11,6 +13,14 @@ describe("PantanalDex catalog", () => {
     for (const environment of environments) {
       expect(species.some((item) => item.environments.includes(environment))).toBe(true);
     }
+  });
+
+  it("integrates the modular catalog batches without validation errors", () => {
+    expect(catalogBatches.length).toBeGreaterThan(0);
+    expect(catalogSpecies).toHaveLength(3);
+    expect(catalogValidationErrors).toEqual([]);
+    expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
+    expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
   });
 
   it("normalizes accents and surrounding whitespace for field search", () => {
