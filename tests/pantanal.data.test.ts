@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSettings, restoreSettingsWithStatus, restoreSightings, restoreSightingsWithStatus, serializeSettings, serializeSightings } from "../shared/persistence";
-import { catalogBatches, catalogReview, catalogSpecies } from "../shared/catalog/index";
+import { catalogBatches, catalogReview, catalogReviewReport, catalogSpecies } from "../shared/catalog/index";
 import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
+import { createCatalogReviewReport } from "../shared/catalog/review";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
@@ -82,6 +83,15 @@ describe("PantanalDex data contracts", () => {
     expect(catalogReview.pendingBatches).toBe(12);
     expect(catalogReview.pendingSpecies).toBe(36);
     expect(catalogReview.verifiedBatches).toBe(0);
+    expect(catalogReviewReport.totalBatches).toBe(12);
+    expect(catalogReviewReport.pendingBatches).toBe(12);
+    expect(catalogReviewReport.invalidBatches).toBe(0);
+  });
+
+  it("marks a batch invalid in the operational report when validation errors identify it", () => {
+    const invalid = createCatalogReviewReport(catalogBatches.slice(0, 1), [`${catalogBatches[0].batchId}: licença ausente`]);
+    expect(invalid.rows[0]?.status).toBe("invalid");
+    expect(invalid.invalidBatches).toBe(1);
   });
 
   it("loads modular batches with deterministic deduplication and paging", () => {

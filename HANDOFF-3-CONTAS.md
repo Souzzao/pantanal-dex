@@ -221,3 +221,35 @@ Implementado diagnóstico de restauração offline em `shared/persistence.ts`, d
 Validação concluída: `pnpm check`, `pnpm test` (29 aprovados, 1 autenticação pulado), `pnpm lint` e `git diff --check`.
 
 Risco real: os 12 lotes modulares ainda estão `pending-review`; não devem ser promovidos a `verified` sem auditoria arquivo a arquivo das licenças e ocorrência local. Não foram inventadas novas fontes ou imagens neste bloco.
+
+## Revisão visual das rotas localizadas
+
+Em portrait 390x844, Avistamentos mantém hierarquia, filtros horizontais, estado vazio, CTA de exploração e navegação inferior sem corte crítico. Mapa mantém estado offline, fallback web, privacidade de coordenadas e estado vazio legível. A localização PT foi confirmada no preview; as strings EN/ES seguem o mesmo caminho condicional por `Settings`.
+
+## Correção pós-preview — resultado visual
+
+Após nova compilação, Avistamentos e Mapa foram recarregados em portrait 390x844. As duas rotas exibem os estados vazios, filtros, fallback offline e navegação sem corte crítico. O log recente não registrou novos `Unexpected text node`; o único registro permanece anterior à recompilação e foi tratado como histórico. A estrutura JSX não contém strings vazias ou ponto literal fora de componentes de texto nas rotas revisadas.
+
+## Revisão pós-formatação JSX
+
+Após formatar `DevCollabPanel`, layout raiz, Mapa e Avistamentos, as duas rotas foram recarregadas em portrait 390x844. O preview preservou os estados vazios, filtros, fallback offline e navegação; o output recente do servidor não registrou novo `Unexpected text node` durante o bundle e a captura. O warning anterior permanece histórico do carregamento anterior e segue monitorado antes do checkpoint.
+
+## Isolamento do warning de runtime
+
+A origem foi isolada no painel temporário `DevCollabPanel` quando renderizado no React Native Web. O painel agora permanece disponível em desenvolvimento nativo, mas não é montado no web, onde provocava `Unexpected text node`. Após a alteração, Mapa e Avistamentos foram recarregados em portrait sem novos erros no log recente; o ícone de colaboração deixa de aparecer apenas na prévia web, sem afetar o produto final nem o desenvolvimento em aparelho.
+
+## Comparação de runtime após isolamento
+
+O warning continua aparecendo de forma intermitente no render server-side mesmo com o painel de colaboração oculto no web e com o botão háptico substituído pelo padrão web. Home, Avistamentos e Mapa permanecem visualmente funcionais em portrait. A evidência indica que o aviso não impede o fluxo, mas ainda deve ser tratado como pendência de infraestrutura/renderização antes de afirmar eliminação definitiva.
+
+## Correção final do warning web
+
+O diagnóstico AST não encontrou textos JSX fora de `Text`, mas a troca do `MaterialIcons` no web por glifos explícitos dentro de `Text` eliminou o warning nas renderizações seguintes. A barra inferior continua funcional, com ícones simples e legíveis em Home, Avistamentos e Mapa; o feedback háptico e `MaterialIcons` permanecem preservados no native. TypeScript, testes, lint, diff check e watchdog continuam aprovados.
+
+## Gate SSR do painel temporário
+
+O `DevCollabPanel` agora exige ambiente client (`typeof window !== "undefined"`) além do modo native, impedindo montagem durante SSR. Após o gate, Mapa e Avistamentos foram recarregados em portrait e os logs recentes não registraram novo `Unexpected text node`; os registros anteriores continuam apenas como histórico. A barra web usa glifos em `Text`, enquanto native mantém MaterialIcons e haptics.
+
+## Correção de precisão do diagnóstico
+
+A validação final confirma que TypeScript, testes, lint, diff check e watchdog passam, e que o preview visual permanece funcional. O warning `Unexpected text node: .` ainda apareceu de forma intermitente em alguns renders server-side do preview após capturas anteriores; não há novo registro no último conjunto de validações. O código foi protegido com gate SSR do painel temporário e glifos web encapsulados em `Text`, mas a estabilidade definitiva do warning deve continuar sendo monitorada no próximo ciclo. Isso é tratado como risco de renderização do preview, não como falha funcional das rotas.

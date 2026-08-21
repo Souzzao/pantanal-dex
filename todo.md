@@ -409,3 +409,18 @@
 - [x] Ampliar testes de catálogo, estados vazios, acessibilidade e rotas modulares
 - [x] Atualizar handoff com commits, riscos, bloqueios reais e métricas do bloco
 - [ ] Executar check, lint, test, diff check e watchdog; publicar commit e PR
+
+## Retomada massiva pós-checkpoint 8182d0da
+- [x] Auditar checkpoint, PR #10, branches e fila sem repetir trabalho concluído
+- [x] Implementar recuperação explícita de falhas de leitura e gravação no AppContext
+- [x] Criar relatório operacional de lotes pendentes, verificados e bloqueados por licença
+- [ ] Ampliar estados localizados de carregamento, vazio, erro e offline nas rotas restantes
+- [x] Reforçar testes de acessibilidade, persistência e catálogo modular em escala
+- [ ] Atualizar handoff, executar validações, publicar PR e salvar checkpoint
+
+## Bloco de correção pós-preview — runtime e localização
+- [x] Corrigir o nó de texto solto reportado no preview web de Avistamentos/Mapa
+- [x] Confirmar ausência do erro no console após recarregar as rotas afetadas
+- [x] Completar mensagens localizadas e estados de erro/vazio das rotas alteradas
+- [x] Reforçar testes e labels acessíveis após a correção
+- [x] Atualizar handoff, executar validações, publicar PR e salvar checkpoint

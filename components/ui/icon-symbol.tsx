@@ -2,11 +2,12 @@
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SymbolWeight, SymbolViewProps } from "expo-symbols";
+import { Platform, Text } from "react-native";
 import { ComponentProps } from "react";
 import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
 type IconMapping = Record<SymbolViewProps["name"], ComponentProps<typeof MaterialIcons>["name"]>;
-type IconSymbolName = keyof typeof MAPPING;
+type IconSymbolName = "house.fill" | "paperplane.fill" | "chevron.left.forwardslash.chevron.right" | "chevron.right" | "pawprint.fill" | "mappin.and.ellipse" | "gearshape.fill";
 
 /**
  * Add your SF Symbols to Material Icons mappings here.
@@ -22,6 +23,16 @@ const MAPPING = {
   "mappin.and.ellipse": "location-on",
   "gearshape.fill": "settings",
 } as IconMapping;
+
+const WEB_GLYPHS: Record<IconSymbolName, string> = {
+  "house.fill": "⌂",
+  "paperplane.fill": "➤",
+  "chevron.left.forwardslash.chevron.right": "‹›",
+  "chevron.right": "›",
+  "pawprint.fill": "♣",
+  "mappin.and.ellipse": "⌖",
+  "gearshape.fill": "⚙",
+};
 
 /**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
@@ -40,5 +51,8 @@ export function IconSymbol({
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {
+  if (Platform.OS === "web") {
+    return <Text accessibilityRole="image" style={[style, { color: color as string, fontSize: size, lineHeight: size }]}>{WEB_GLYPHS[name]}</Text>;
+  }
   return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
 }

@@ -12,42 +12,49 @@ export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
-type StorageDiagnostics = { sightings: RestoreStatus; settings: RestoreStatus };
+type StorageDiagnostics = { sightings: RestoreStatus; settings: RestoreStatus; readError: boolean; writeError: boolean };
 type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; storage: StorageDiagnostics; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
-async function readRaw(key: string): Promise<string | null> {
-  try { return await AsyncStorage.getItem(key); } catch { return null; }
+type RawRead = { value: string | null; failed: boolean };
+async function readRaw(key: string): Promise<RawRead> {
+  try { return { value: await AsyncStorage.getItem(key), failed: false }; } catch { return { value: null, failed: true }; }
 }
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [sightings, setSightings] = useState<Sighting[]>([]);
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
-  const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty" });
+  const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty", readError: false, writeError: false });
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const [storedSightings, storedSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
-      const restoredSightings = restoreSightingsWithStatus(storedSightings);
-      const restoredSettings = restoreSettingsWithStatus(storedSettings, DEFAULT_SETTINGS);
-      if (storedSightings && restoredSightings.status === "legacy-migrated" && restoredSightings.value.length) {
-        try { await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value)); } catch { /* diagnóstico preservado */ }
+      const [rawSightings, rawSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
+      const restoredSightings = restoreSightingsWithStatus(rawSightings.value);
+      const restoredSettings = restoreSettingsWithStatus(rawSettings.value, DEFAULT_SETTINGS);
+      if (rawSightings.value && restoredSightings.status === "legacy-migrated" && restoredSightings.value.length) {
+        try { await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value)); } catch { /* preserva o diagnóstico de leitura/gravação */ }
       }
       if (!mounted) return;
       setSightings(restoredSightings.value);
       setSettingsState(restoredSettings.value);
-      setStorage({ sightings: restoredSightings.status, settings: restoredSettings.status });
+      setStorage({ sightings: restoredSightings.status, settings: restoredSettings.status, readError: rawSightings.failed || rawSettings.failed, writeError: false });
       setReady(true);
     })();
     return () => { mounted = false; };
   }, []);
 
   const persistSightings = async (next: Sighting[]) => {
-    await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next));
-    setSightings(next);
+    try {
+      await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next));
+      setSightings(next);
+      setStorage((current) => ({ ...current, writeError: false }));
+    } catch (error) {
+      setStorage((current) => ({ ...current, writeError: true }));
+      throw error;
+    }
   };
 
   const value = useMemo<AppContextValue>(() => ({
@@ -66,9 +73,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     },
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
-      await AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe));
-      setSettingsState(safe);
-      setStorage((current) => ({ ...current, settings: "restored" }));
+      try {
+        await AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe));
+        setSettingsState(safe);
+        setStorage((current) => ({ ...current, settings: "restored", writeError: false }));
+      } catch (error) {
+        setStorage((current) => ({ ...current, writeError: true }));
+        throw error;
+      }
     },
   }), [sightings, settings, ready, storage]);
 

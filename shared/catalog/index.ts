@@ -12,6 +12,7 @@ import { amphibians02 } from "./batches/amphibians-02";
 import { fish02 } from "./batches/fish-02";
 import { invertebrates01 } from "./batches/invertebrates-01";
 import { validateCatalogBatches, type CatalogBatch } from "./types";
+import { createCatalogReviewReport } from "./review";
 
 export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, birds02, fish01, mammals02, birds03, reptiles02, amphibians02, fish02, invertebrates01];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
@@ -23,6 +24,7 @@ export const catalogReview = {
   verifiedSpecies: catalogBatches.filter((batch) => batch.status === "verified").reduce((total, batch) => total + batch.species.length, 0),
 };
 export const catalogValidationErrors = validateCatalogBatches(catalogBatches);
+export const catalogReviewReport = createCatalogReviewReport(catalogBatches, catalogValidationErrors);
 
 if (catalogValidationErrors.length) {
   throw new Error(`Catálogo inválido: ${catalogValidationErrors.join("; ")}`);

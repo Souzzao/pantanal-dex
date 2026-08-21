@@ -12,7 +12,7 @@ export default function TabLayout() {
   const labels = settings.defaultLanguage === "English" ? { home: "Home", animals: "Animals", sightings: "Sightings", settings: "Settings" } : settings.defaultLanguage === "Español" ? { home: "Inicio", animals: "Animales", sightings: "Avistamientos", settings: "Configuración" } : { home: "Início", animals: "Animais", sightings: "Avistamentos", settings: "Configurações" };
   const insets = useSafeAreaInsets();
   const bottom = Platform.OS === "web" ? 10 : Math.max(insets.bottom, 8);
-  return <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.muted, tabBarStyle: { height: 58 + bottom, paddingBottom: bottom, paddingTop: 6, backgroundColor: colors.background, borderTopColor: colors.border }, tabBarButton: HapticTab }}>
+  return <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.muted, tabBarStyle: { height: 58 + bottom, paddingBottom: bottom, paddingTop: 6, backgroundColor: colors.background, borderTopColor: colors.border }, ...(Platform.OS === "web" ? {} : { tabBarButton: HapticTab }) }}>
     <Tabs.Screen name="index" options={{ title: labels.home, tabBarIcon: ({ color }) => <IconSymbol name="house.fill" size={24} color={color} /> }} />
     <Tabs.Screen name="animals" options={{ title: labels.animals, tabBarIcon: ({ color }) => <IconSymbol name="pawprint.fill" size={24} color={color} /> }} />
     <Tabs.Screen name="sightings" options={{ title: labels.sightings, tabBarIcon: ({ color }) => <IconSymbol name="mappin.and.ellipse" size={24} color={color} /> }} />
