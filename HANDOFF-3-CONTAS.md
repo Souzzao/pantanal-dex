@@ -212,3 +212,10 @@ As duas consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote 
 A Conta 2 adicionou `Jabiru mycteria`, `Anodorhynchus hyacinthinus` e `Tigrisoma lineatum`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY e CC BY-SA; não há NC, ND ou licença ausente. Autores, URLs de distribuição, páginas de origem e créditos estão registrados no lote.
 
 As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: a correspondência taxonômica e as imagens não substituem a confirmação de ocorrência no Pantanal. A alternativa executável é consultar SiBBr/ICMBio por espécie e usar Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até confirmação.
+
+
+## 23. Bloco de peixes `catalog-fish-04`
+
+A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras paleatus`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY, CC BY-SA e domínio público; não há NC, ND ou licença ausente. Autores, URLs de distribuição, páginas de origem e créditos estão registrados no lote.
+
+As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
