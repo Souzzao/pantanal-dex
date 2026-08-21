@@ -296,3 +296,6 @@
 
 - [x] Integrar o lote coordenado seguinte com 8 espécies sem IDs duplicados
 - [x] Validar o lote seguinte com TypeScript, lint, 16 testes e diff check
+
+- [x] Integrar lote de 8 espécies com cutia, paca, gato-mourisco, aracuã, socó-boi, jaçanã, martim-pescador e curimbatá
+- [x] Validar o lote de 45 espécies com TypeScript, lint, 16 testes e diff check
