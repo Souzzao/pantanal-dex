@@ -5,7 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
-import { species, type Sighting, type Visibility } from "@/shared/pantanal";
+import { isValidCoordinate, isValidIsoDate, isValidTime, normalizeCatalogSearch, species, type Sighting, type Visibility } from "@/shared/pantanal";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
@@ -15,6 +15,7 @@ export default function NewSightingScreen() {
   const { sightings, addSighting, updateSighting } = useApp();
   const existing = id ? sightings.find((item) => item.id === id) : undefined;
   const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? species[0].id);
+  const [speciesQuery, setSpeciesQuery] = useState("");
   const [date, setDate] = useState(existing?.date ?? new Date().toISOString().slice(0, 10));
   const [time, setTime] = useState(existing?.time ?? "");
   const [locationLabel, setLocationLabel] = useState(existing?.locationLabel ?? "");
@@ -48,6 +49,16 @@ export default function NewSightingScreen() {
     if (!result.canceled) setPhotoUri(result.assets[0].uri);
   };
 
+  const takePhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert("Câmera não autorizada", "Permita o acesso à câmera ou escolha uma fotografia da galeria.");
+      return;
+    }
+    const result = await ImagePicker.launchCameraAsync({ mediaTypes: ["images"], quality: 0.8 });
+    if (!result.canceled) setPhotoUri(result.assets[0].uri);
+  };
+
   const useLocation = async () => {
     const permission = await Location.requestForegroundPermissionsAsync();
     if (permission.status !== "granted") {
@@ -59,9 +70,28 @@ export default function NewSightingScreen() {
     setLocationLabel("Localização atual");
   };
 
+  const visibleSpecies = species.filter((item) => {
+    const query = normalizeCatalogSearch(speciesQuery);
+    return !query || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(query);
+  });
+
   const save = async () => {
-    if (!date.trim()) {
+    const normalizedDate = date.trim();
+    if (!normalizedDate) {
       Alert.alert("Data obrigatória", "Informe a data do avistamento.");
+      return;
+    }
+    if (!isValidIsoDate(normalizedDate)) {
+      Alert.alert("Data inválida", "Use uma data válida no formato AAAA-MM-DD.");
+      return;
+    }
+    const normalizedTime = time.trim();
+    if (normalizedTime && !isValidTime(normalizedTime)) {
+      Alert.alert("Horário inválido", "Use um horário válido no formato HH:MM.");
+      return;
+    }
+    if (coords && !isValidCoordinate(coords.latitude, coords.longitude)) {
+      Alert.alert("Localização inválida", "As coordenadas do registro estão fora dos limites válidos.");
       return;
     }
     const numericQuantity = quantity.trim() ? Number(quantity) : undefined;
@@ -74,8 +104,8 @@ export default function NewSightingScreen() {
       id: existing?.id ?? `sighting-${Date.now()}`,
       speciesId: selected,
       photoUri,
-      date: date.trim(),
-      time: time.trim() || undefined,
+      date: normalizedDate,
+      time: normalizedTime || undefined,
       locationLabel: locationLabel.trim() || undefined,
       latitude: coords?.latitude,
       longitude: coords?.longitude,
@@ -100,13 +130,15 @@ export default function NewSightingScreen() {
         <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Espécie</Text>
+        <TextInput value={speciesQuery} onChangeText={setSpeciesQuery} placeholder="Buscar por nome popular ou científico" placeholderTextColor={colors.muted} accessibilityLabel="Buscar espécie por nome popular ou científico" style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 10 }} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingBottom: 15 }}>
-          {species.map((item) => (
-            <Pressable key={item.id} onPress={() => setSelected(item.id)} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}>
+          {visibleSpecies.map((item) => (
+            <Pressable key={item.id} onPress={() => setSelected(item.id)} accessibilityRole="button" accessibilityLabel={`Selecionar ${item.commonName}`} accessibilityState={{ selected: selected === item.id }} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}>
               <Text style={{ color: selected === item.id ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{item.commonName}</Text>
             </Pressable>
           ))}
         </ScrollView>
+        {visibleSpecies.length === 0 && <Text style={{ color: colors.muted, fontSize: 12, marginBottom: 15 }}>Nenhuma espécie encontrada. Tente outro nome.</Text>}
         {[
           ["Data *", date, setDate, "2026-08-21"],
           ["Horário", time, setTime, "14:30"],
@@ -118,22 +150,27 @@ export default function NewSightingScreen() {
             <TextInput value={value as string} onChangeText={setter as any} placeholder={placeholder as string} placeholderTextColor={colors.muted} keyboardType={label === "Quantidade" ? "numeric" : "default"} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground }} />
           </View>
         ))}
-        <Pressable onPress={pickPhoto} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
-          <Text style={{ color: colors.primary, fontWeight: "800" }}>{photoUri ? "Fotografia selecionada" : "Adicionar fotografia (opcional)"}</Text>
-        </Pressable>
-        <Pressable onPress={useLocation} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
+        <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }}>
+          <Pressable onPress={takePhoto} accessibilityRole="button" accessibilityLabel="Tirar fotografia pela câmera" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
+            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Usar câmera</Text>
+          </Pressable>
+          <Pressable onPress={pickPhoto} accessibilityRole="button" accessibilityLabel="Escolher fotografia da galeria" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
+            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{photoUri ? "Trocar foto" : "Escolher galeria"}</Text>
+          </Pressable>
+        </View>
+        <Pressable onPress={useLocation} accessibilityRole="button" accessibilityLabel={coords ? "Localização do aparelho adicionada" : "Usar localização do aparelho"} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800" }}>{coords ? "Localização adicionada" : "Usar localização do aparelho"}</Text>
         </Pressable>
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 7 }}>Observações</Text>
         <TextInput value={notes} onChangeText={setNotes} multiline placeholder="Comportamento, ambiente e outras notas" placeholderTextColor={colors.muted} style={{ minHeight: 105, textAlignVertical: "top", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 14 }} />
         <View style={{ flexDirection: "row", gap: 8, marginBottom: 20 }}>
           {(["private", "shareable"] as Visibility[]).map((item) => (
-            <Pressable key={item} onPress={() => setVisibility(item)} style={{ flex: 1, backgroundColor: visibility === item ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 12 }}>
+            <Pressable key={item} onPress={() => setVisibility(item)} accessibilityRole="button" accessibilityLabel={item === "private" ? "Visibilidade pessoal" : "Visibilidade compartilhável"} accessibilityState={{ selected: visibility === item }} style={{ flex: 1, backgroundColor: visibility === item ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 12 }}>
               <Text style={{ textAlign: "center", color: visibility === item ? "#fff" : colors.foreground, fontWeight: "700" }}>{item === "private" ? "Pessoal" : "Compartilhável"}</Text>
             </Pressable>
           ))}
         </View>
-        <Pressable onPress={save} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
+        <Pressable onPress={save} accessibilityRole="button" accessibilityLabel={existing ? "Salvar alterações do avistamento" : "Salvar avistamento"} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
           <Text style={{ color: "#fff", fontWeight: "800", textAlign: "center", fontSize: 16 }}>{existing ? "Salvar alterações" : "Salvar avistamento"}</Text>
         </Pressable>
       </ScrollView>
