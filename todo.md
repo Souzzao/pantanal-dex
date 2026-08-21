@@ -130,3 +130,9 @@
 - [ ] Registrar marcos e bloqueios sem misturar dados de colaboração com dados do usuário
 - [ ] Adicionar rota de manutenção para remover o painel antes da entrega final
 - [ ] Integrar e validar as contribuições das Contas 2 e 3 quando estiverem disponíveis
+
+## Correção de acesso das contas colaboradoras
+
+- [x] Criar novo guia da Conta 2 com ID do projeto, checkpoint 4c70b59c e instruções de permissão
+- [x] Criar novo guia da Conta 3 com ID do projeto, checkpoint 4c70b59c e instruções de permissão
+- [x] Montar novos ZIPs e orientar o usuário sobre como compartilhar o projeto no painel
