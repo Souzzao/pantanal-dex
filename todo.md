@@ -76,8 +76,8 @@
 - [x] Executar TypeScript, lint e testes após cada frente concluída
 - [ ] Testar fluxos Início → ficha → avistamento → detalhe → edição/exclusão
 - [ ] Testar fluxo sem conexão e fallback de permissões nativas
-- [ ] Revisar a interface em portrait 9:16 para uso com uma mão
-- [ ] Fazer revisão visual das telas Início, Animais, Avistamentos, Mapa e Configurações
+- [x] Revisar a interface em portrait 9:16 para uso com uma mão
+- [x] Fazer revisão visual das telas Início, Animais, Avistamentos, Mapa e Configurações
 - [ ] Salvar checkpoint somente após todos os itens críticos estarem concluídos
 
 ## Operação coordenada — fluxo quase autônomo

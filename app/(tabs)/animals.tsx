@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
-import { environments, groups, species } from "@/shared/pantanal";
-import { filterSpeciesCatalog, sortSpeciesCatalog } from "@/shared/catalog";
+import { environments, groups } from "@/shared/pantanal";
+import { catalogCoverage, filterSpeciesCatalog, sortSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 import { RemoteImage } from "@/components/RemoteImage";
 
@@ -18,7 +18,7 @@ export default function AnimalsScreen() {
   return <ScreenContainer className="px-5">
     <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>Animais</Text>
     <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 12 }}>Explore as espécies do Pantanal</Text>
-    <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }} accessibilityRole="summary"><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{species.length}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>espécies</Text></View><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{groups.length}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>grupos</Text></View><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{environments.length}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>ambientes</Text></View></View>
+    <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }} accessibilityRole="summary"><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{catalogCoverage.species}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>espécies</Text></View><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{groups.length}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>grupos</Text></View><View style={{ flex: 1, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 12, padding: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>{environments.length}</Text><Text style={{ color: colors.muted, fontSize: 11 }}>ambientes</Text></View></View>
     <TextInput accessibilityLabel="Buscar animais por nome popular ou científico" value={query} onChangeText={setQuery} placeholder="Nome popular ou científico" placeholderTextColor={colors.muted} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 14, color: colors.foreground, marginBottom: 12 }} />
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>{["", ...groups].map((item) => <View key={`g-${item}`}>{chip(item || "Todos os grupos", group === item, () => setGroup(item))}</View>)}</View>
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>{["", ...environments].map((item) => <View key={`e-${item}`}>{chip(item || "Todos os ambientes", environment === item, () => setEnvironment(item))}</View>)}</View>

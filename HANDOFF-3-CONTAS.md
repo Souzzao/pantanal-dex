@@ -165,3 +165,7 @@ Alterações: Home e formulário de novo avistamento agora consultam o índice m
 Riscos: permissões reais de câmera/GPS continuam dependentes de aparelho; web usa fallback existente. Nenhuma alteração destrutiva em dados locais.
 
 Validação: 24 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog. Próximo bloco independente: revisão visual/portrait e cobertura offline/permissões.
+
+## Revisão visual do bloco massivo
+
+Preview portrait 390x844 revisado em Home e Animais. O contador modular mostra 102 espécies combinadas, a busca encontra lotes novos e a navegação inferior permanece acessível; não foram observados cortes críticos no viewport. A validação prática nativa de câmera/GPS continua pendente de aparelho físico.
