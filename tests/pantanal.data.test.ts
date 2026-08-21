@@ -75,8 +75,8 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("validates the modular pilot batches and reports their throughput", () => {
-    expect(catalogBatches).toHaveLength(4);
-    expect(catalogSpecies).toHaveLength(10);
+    expect(catalogBatches).toHaveLength(6);
+    expect(catalogSpecies).toHaveLength(16);
     expect(validateCatalogBatches(catalogBatches)).toEqual([]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
   });

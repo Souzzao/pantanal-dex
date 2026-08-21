@@ -325,3 +325,10 @@
 - [x] Criar pipeline de validação e relatório de lotes com licenças comerciais
 - [x] Definir lote piloto inicial da Conta 2 e métrica de vazão para recalibração no Ciclo 3
 - [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
+
+## Ciclo 4 — índice, busca e expansão licenciada
+- [x] Auditar PRs #7 e #8, branches e estado da main
+- [x] Fortalecer índice derivado com contagem, filtros e paginação dos lotes
+- [x] Adicionar lote modular de aves e peixes com licenças comerciais confirmadas
+- [x] Validar cobertura, IDs, fontes, créditos e ausência de NC/ND/IUCN
+- [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
