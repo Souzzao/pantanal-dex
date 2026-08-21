@@ -302,3 +302,6 @@
 
 - [x] Integrar lote de 8 espécies com cágado-de-barbicha, cobra-verde, perereca-cabeçuda, rã-de-quatro-olhos, piranha-vermelha, tuvira, borboleta-morfo e besouro-rola-bosta
 - [x] Validar o lote de 53 espécies com TypeScript, lint, 16 testes e diff check
+
+- [x] Integrar lote de 8 espécies com biguá, garça-moura, socó-dorminhoco, coruja-buraqueira, lambari, mandi, pitu e libélula
+- [x] Validar o lote de 61 espécies com TypeScript, lint, 16 testes e diff check
