@@ -94,3 +94,18 @@
 - [ ] Salvar checkpoint após cada marco aprovado e antes de iniciar mudanças arriscadas
 - [ ] Manter uma fila de próximos itens prontos para execução sem nova orientação detalhada
 - [ ] Avaliar futuramente uma rotina agendada de revisão do backlog, caso o usuário queira automação fora da sessão
+
+## Ciclo 1 — Catálogo científico
+
+- [ ] Selecionar as espécies adicionais do primeiro lote de expansão
+- [ ] Validar nomes científicos, grupos e ambientes das espécies selecionadas
+- [ ] Validar descrições, comportamento, alimentação, distribuição e importância ecológica
+- [ ] Registrar situação de conservação e fonte por espécie
+- [ ] Associar três imagens com crédito, licença e URL de origem por espécie
+- [ ] Implementar o catálogo expandido sem alterar o contrato das telas existentes
+- [ ] Criar validação automática para campos obrigatórios do catálogo
+- [ ] Executar TypeScript, lint, testes e revisão visual do catálogo expandido
+
+## Colaboração entre três contas Manus
+
+- [x] Criar documentação de handoff com estado atual, divisão de frentes, regras de edição e protocolo de integração
