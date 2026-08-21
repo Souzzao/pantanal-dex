@@ -2,6 +2,9 @@ import type { Species } from "../pantanal";
 
 const validGroups = new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]);
 const validEnvironments = new Set(["Rios e corixos", "Áreas alagadas", "Campos", "Matas", "Bordas de mata"]);
+const approvedSourceHosts = ["api.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "pt.wikipedia.org", "www.wikidata.org"];
+const commercialImageLicenses = /^(CC0|CC BY(?:-SA)?(?: 2\.0| 2\.5| 3\.0| 4\.0)?|CC BY-SA(?: 2\.0| 2\.5| 3\.0| 4\.0)?|Public domain)$/i;
+const blockedImageLicenses = /\b(?:NC|ND|NON[- ]?COMMERCIAL|NO[- ]?DERIVATIVES)\b/i;
 
 export type CatalogBatch = {
   batchId: string;
@@ -38,10 +41,13 @@ export function validateCatalogBatch(batch: CatalogBatch): string[] {
     for (const image of item.images) {
       if (!/^https?:\/\//i.test(image.uri) || !/^https?:\/\//i.test(image.sourceUrl)) errors.push(`${item.id}: imagem sem URL HTTP válida`);
       if (!image.credit.trim() || !image.license.trim()) errors.push(`${item.id}: crédito/licença de imagem ausente`);
+      if (!commercialImageLicenses.test(image.license) || blockedImageLicenses.test(image.license)) errors.push(`${item.id}: licença de imagem incompatível com uso comercial`);
     }
     if (!item.sources.length || item.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${item.id}: fonte estruturada ausente ou inválida`);
-    if (batch.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${batch.batchId}: fonte do lote inválida`);
+    if (item.sources.some((source) => { try { return !approvedSourceHosts.includes(new URL(source.url).hostname); } catch { return true; } })) errors.push(`${item.id}: fonte fora da lista aprovada`);
   }
+  if (batch.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${batch.batchId}: fonte do lote inválida`);
+  if (batch.sources.some((source) => { try { return !approvedSourceHosts.includes(new URL(source.url).hostname); } catch { return true; } })) errors.push(`${batch.batchId}: fonte do lote fora da lista aprovada`);
   return errors;
 }
 

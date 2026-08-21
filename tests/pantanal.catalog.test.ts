@@ -31,6 +31,11 @@ describe("PantanalDex catalog", () => {
     expect(validateCatalogBatch(batch)).toEqual(expect.arrayContaining([expect.stringContaining("grupo não corresponde"), expect.stringContaining("ambiente inválido"), expect.stringContaining("imagem sem URL HTTP válida")]));
   });
 
+  it("rejects commercial-incompatible image licenses and unapproved sources", () => {
+    const batch = { ...catalogBatches[0], sources: [{ title: "IUCN", url: "https://www.iucnredlist.org/species/123" }], species: [{ ...catalogSpecies[0], images: catalogSpecies[0].images.map((image, index) => index === 0 ? { ...image, license: "CC BY-NC 4.0" } : image) }] };
+    expect(validateCatalogBatch(batch)).toEqual(expect.arrayContaining([expect.stringContaining("incompatível com uso comercial"), expect.stringContaining("fonte do lote fora da lista aprovada")]));
+  });
+
   it("normalizes accents and surrounding whitespace for field search", () => {
     expect(normalizeCatalogSearch("  Onca-pintada ")).toBe("onca-pintada");
     expect(normalizeCatalogSearch("TUIUIÚ")).toBe("tuiuiu");

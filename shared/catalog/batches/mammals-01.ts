@@ -8,9 +8,9 @@ export const mammals01: CatalogBatch = {
   group: "Mamíferos",
   status: "pending-review",
   sources: [
-    { title: "IUCN Red List — espécie e avaliação global", url: "https://www.iucnredlist.org/search?query=Chrysocyon%20brachyurus&searchType=species" },
-    { title: "IUCN Red List — espécie e avaliação global", url: "https://www.iucnredlist.org/search?query=Tayassu%20pecari&searchType=species" },
-    { title: "IUCN Red List — espécie e avaliação global", url: "https://www.iucnredlist.org/search?query=Pecari%20tajacu&searchType=species" },
+    { title: "GBIF Species Match — espécie e avaliação global", url: "https://api.gbif.org/v1/species/match?name=Chrysocyon%20brachyurus" },
+    { title: "GBIF Species Match — espécie e avaliação global", url: "https://api.gbif.org/v1/species/match?name=Tayassu%20pecari" },
+    { title: "GBIF Species Match — espécie e avaliação global", url: "https://api.gbif.org/v1/species/match?name=Pecari%20tajacu" },
   ],
   pendingNotes: [
     "Confirmar nomenclatura aceita e status regional no recorte do Pantanal com fonte taxonômica especializada antes de marcar o lote como verified.",
@@ -32,7 +32,7 @@ export const mammals01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/7/7c/Chrysocyon_Brachyurus.jpg", "Spencer Wright", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Chrysocyon_Brachyurus.jpg", "Spencer Wright / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/9/9c/Chrysocyon.brachyurus.jpg", "sarefo", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Chrysocyon.brachyurus.jpg", "sarefo / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Chrysocyon brachyurus", url: "https://www.iucnredlist.org/search?query=Chrysocyon%20brachyurus&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Chrysocyon brachyurus", url: "https://api.gbif.org/v1/species/match?name=Chrysocyon%20brachyurus" }],
     },
     {
       id: "queixada", commonName: "Queixada", scientificName: "Tayassu pecari", group: "Mamíferos", environments: ["Matas", "Bordas de mata"],
@@ -49,7 +49,7 @@ export const mammals01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/2/2a/Tayassu_pecari_-Brazil-8.jpg", "Ana_Cotta", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Tayassu_pecari_-Brazil-8.jpg", "Ana_Cotta / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/6/6e/Tayassu_pecari_339487426.jpg", "Tomás Tamagno", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Tayassu_pecari_339487426.jpg", "Tomás Tamagno / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Tayassu pecari", url: "https://www.iucnredlist.org/search?query=Tayassu%20pecari&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Tayassu pecari", url: "https://api.gbif.org/v1/species/match?name=Tayassu%20pecari" }],
     },
     {
       id: "cateto", commonName: "Cateto", scientificName: "Pecari tajacu", group: "Mamíferos", environments: ["Matas", "Bordas de mata", "Campos"],
@@ -66,7 +66,7 @@ export const mammals01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/a/a5/Pecari_tajacu_-_02.jpg", "Carlos Delgado", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Pecari_tajacu_-_02.jpg", "Carlos Delgado / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/9/91/Collared_Peccary_%28Pecari_tajacu%29_-_geograph.org.uk_-_883326.jpg", "Evelyn Simak", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Collared_Peccary_(Pecari_tajacu)_-_geograph.org.uk_-_883326.jpg", "Evelyn Simak / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Pecari tajacu", url: "https://www.iucnredlist.org/search?query=Pecari%20tajacu&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Pecari tajacu", url: "https://api.gbif.org/v1/species/match?name=Pecari%20tajacu" }],
     },
   ],
 };

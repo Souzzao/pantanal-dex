@@ -7,7 +7,7 @@
 
 ## Fontes taxonômicas
 
-- IUCN Red List será usada para situação de conservação somente após confirmação da página da espécie.
+- GBIF Species Match será usada para situação de conservação somente após confirmação da página da espécie.
 - GBIF/Species API será usada para conferir o nome científico aceito e a autoria taxonômica antes da inclusão.
 
 ## Pendências
@@ -18,6 +18,6 @@
 
 ## Pesquisa do lote de anfíbios
 
-A API de correspondência taxonômica do GBIF retornou correspondência exata e status `ACCEPTED` para `Boana albopunctata`, `Phyllomedusa sauvagii` e `Physalaemus albonotatus`, mantendo esses nomes como candidatos para o ciclo 8. A busca global da IUCN para `Boana albopunctata` retornou zero resultados na interface consultada; portanto, nenhum status de conservação deve ser preenchido com base nessa consulta.
+A API de correspondência taxonômica do GBIF retornou correspondência exata e status `ACCEPTED` para `Boana albopunctata`, `Phyllomedusa sauvagii` e `Physalaemus albonotatus`, mantendo esses nomes como candidatos para o ciclo 8. Nenhum status de conservação foi preenchido; essa informação deve vir exclusivamente do Livro Vermelho do ICMBio ou de portarias MMA/ICMBio.
 
-O lote de anfíbios ainda não foi implementado. As imagens, licenças e fontes precisam ser consultadas e registradas individualmente antes do commit.
+O lote de anfíbios foi implementado com imagens Commons individualmente registradas; a revisão de ocorrência regional e a fonte oficial de conservação permanecem pendentes.

@@ -8,9 +8,9 @@ export const birds01: CatalogBatch = {
   group: "Aves",
   status: "pending-review",
   sources: [
-    { title: "IUCN Red List — Cariama cristata", url: "https://www.iucnredlist.org/search?query=Cariama%20cristata&searchType=species" },
-    { title: "IUCN Red List — Crax fasciolata", url: "https://www.iucnredlist.org/search?query=Crax%20fasciolata&searchType=species" },
-    { title: "IUCN Red List — Anhima cornuta", url: "https://www.iucnredlist.org/search?query=Anhima%20cornuta&searchType=species" },
+    { title: "GBIF Species Match — Cariama cristata", url: "https://api.gbif.org/v1/species/match?name=Cariama%20cristata" },
+    { title: "GBIF Species Match — Crax fasciolata", url: "https://api.gbif.org/v1/species/match?name=Crax%20fasciolata" },
+    { title: "GBIF Species Match — Anhima cornuta", url: "https://api.gbif.org/v1/species/match?name=Anhima%20cornuta" },
   ],
   pendingNotes: [
     "Confirmar nomenclatura aceita, situação de conservação e ocorrência no recorte do Pantanal antes de promover a verified.",
@@ -32,7 +32,7 @@ export const birds01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/6/64/174_Red-legged_seriema_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:174_Red-legged_seriema_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/a/a0/Red-legged_seriema_%28Cariama_cristata%29_head.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Red-legged_seriema_(Cariama_cristata)_head.JPG", "Charles J. Sharp / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Cariama cristata", url: "https://www.iucnredlist.org/search?query=Cariama%20cristata&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Cariama cristata", url: "https://api.gbif.org/v1/species/match?name=Cariama%20cristata" }],
     },
     {
       id: "mutum-de-penacho", commonName: "Mutum-de-penacho", scientificName: "Crax fasciolata", group: "Aves", environments: ["Matas", "Bordas de mata"],
@@ -49,7 +49,7 @@ export const birds01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/d/da/Bare-faced_curassow_%28Crax_fasciolata%29_male_head.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Bare-faced_curassow_(Crax_fasciolata)_male_head.JPG", "Charles J. Sharp / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/a/ac/Crax_fasciolata_-Parque_das_Aves-8.jpg", "Bruno Girin", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Crax_fasciolata_-Parque_das_Aves-8.jpg", "Bruno Girin / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Crax fasciolata", url: "https://www.iucnredlist.org/search?query=Crax%20fasciolata&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Crax fasciolata", url: "https://api.gbif.org/v1/species/match?name=Crax%20fasciolata" }],
     },
     {
       id: "anhuma", commonName: "Anhuma", scientificName: "Anhima cornuta", group: "Aves", environments: ["Áreas alagadas", "Rios e corixos"],
@@ -66,7 +66,7 @@ export const birds01: CatalogBatch = {
         image("https://upload.wikimedia.org/wikipedia/commons/6/60/Anhima_cornuta_252513408.jpg", "agujaceratops", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Anhima_cornuta_252513408.jpg", "agujaceratops / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/f/f7/Anhima_cornuta_366954418.jpg", "miguelpodas", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Anhima_cornuta_366954418.jpg", "miguelpodas / Wikimedia Commons"),
       ],
-      sources: [{ title: "IUCN Red List — Anhima cornuta", url: "https://www.iucnredlist.org/search?query=Anhima%20cornuta&searchType=species" }],
+      sources: [{ title: "GBIF Species Match — Anhima cornuta", url: "https://api.gbif.org/v1/species/match?name=Anhima%20cornuta" }],
     },
   ],
 };
