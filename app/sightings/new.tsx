@@ -5,7 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
-import { normalizeCatalogSearch, species, type Sighting, type Visibility } from "@/shared/pantanal";
+import { isValidCoordinate, isValidIsoDate, isValidTime, normalizeCatalogSearch, species, type Sighting, type Visibility } from "@/shared/pantanal";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
@@ -66,8 +66,22 @@ export default function NewSightingScreen() {
   });
 
   const save = async () => {
-    if (!date.trim()) {
+    const normalizedDate = date.trim();
+    if (!normalizedDate) {
       Alert.alert("Data obrigatória", "Informe a data do avistamento.");
+      return;
+    }
+    if (!isValidIsoDate(normalizedDate)) {
+      Alert.alert("Data inválida", "Use uma data válida no formato AAAA-MM-DD.");
+      return;
+    }
+    const normalizedTime = time.trim();
+    if (normalizedTime && !isValidTime(normalizedTime)) {
+      Alert.alert("Horário inválido", "Use um horário válido no formato HH:MM.");
+      return;
+    }
+    if (coords && !isValidCoordinate(coords.latitude, coords.longitude)) {
+      Alert.alert("Localização inválida", "As coordenadas do registro estão fora dos limites válidos.");
       return;
     }
     const numericQuantity = quantity.trim() ? Number(quantity) : undefined;
@@ -80,8 +94,8 @@ export default function NewSightingScreen() {
       id: existing?.id ?? `sighting-${Date.now()}`,
       speciesId: selected,
       photoUri,
-      date: date.trim(),
-      time: time.trim() || undefined,
+      date: normalizedDate,
+      time: normalizedTime || undefined,
       locationLabel: locationLabel.trim() || undefined,
       latitude: coords?.latitude,
       longitude: coords?.longitude,

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createExportCsv, createExportJson } from "../shared/exports";
-import { normalizeCatalogSearch, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
+import { isValidCoordinate, isValidIsoDate, isValidTime, normalizeCatalogSearch, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
   id: "sighting-1",
@@ -30,6 +30,19 @@ describe("PantanalDex data contracts", () => {
       expect(item.reviewedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(Number.isNaN(Date.parse(`${item.reviewedAt}T12:00:00Z`))).toBe(false);
     }
+  });
+
+  it("validates sighting dates, times, and coordinates", () => {
+    expect(isValidIsoDate("2026-02-28")).toBe(true);
+    expect(isValidIsoDate("2026-02-30")).toBe(false);
+    expect(isValidIsoDate("2026-2-3")).toBe(false);
+    expect(isValidTime("23:59")).toBe(true);
+    expect(isValidTime("24:00")).toBe(false);
+    expect(isValidTime("9:30")).toBe(false);
+    expect(isValidCoordinate(0, 0)).toBe(true);
+    expect(isValidCoordinate(90, 180)).toBe(true);
+    expect(isValidCoordinate(90.1, 0)).toBe(false);
+    expect(isValidCoordinate(0, -180.1)).toBe(false);
   });
 
   it("normalizes accents and surrounding whitespace for catalog search", () => {
