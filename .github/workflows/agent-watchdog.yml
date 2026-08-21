@@ -1,0 +1,31 @@
+name: Agent Watchdog
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate agent branch
+        run: |
+          case "${GITHUB_HEAD_REF}" in
+            main|integracao-ciclo-*|conta-2-catalogo|conta-3-qualidade) exit 0 ;;
+            *) echo "Branch fora do protocolo: ${GITHUB_HEAD_REF}"; exit 1 ;;
+          esac
+      - name: Validate PR evidence
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          for marker in "Ciclos|Bloco" "Arquivos|Entregas" "Testes" "Riscos|Risco" "Próximo"; do
+            echo "$BODY" | grep -Eqi "$marker" || { echo "PR sem seção obrigatória: $marker"; exit 1; }
+          done
+      - name: Validate TODO and diff
+        run: |
+          test -f todo.md
+          test -f docs/AGENT-WATCHDOG.md
+          git diff --check

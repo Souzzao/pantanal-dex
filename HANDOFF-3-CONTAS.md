@@ -111,7 +111,7 @@ A Conta 1 integra as entregas, resolve conflitos, executa a verificação comple
 
 O primeiro ciclo de colaboração deve expandir o catálogo científico e preparar os recursos para os próximos ciclos.
 
-A Conta 2 deve selecionar e validar espécies adicionais, preferencialmente cobrindo todos os grupos: mamíferos, aves, répteis, anfíbios, peixes e invertebrados. Cada espécie deve incluir campos completos, fonte de informação e três imagens com crédito, licença e URL de origem.
+A Conta 2 deve selecionar e validar espécies adicionais, preferencialmente cobrindo todos os grupos: mamíferos, aves, répteis, anfíbios, peixes e invertebrados. Cada espécie deve incluir campos completos, fonte de informação e três imagens com crédito, licença comercial confirmada e URL do arquivo específico. Para imagens, aceitar somente CC0, CC BY ou CC BY-SA; rejeitar NC, ND, licença ausente ou ambígua. Para conservação, usar somente Livro Vermelho ICMBio ou Portarias MMA/ICMBio; sem fonte oficial, deixar o status vazio.
 
 A Conta 3 pode trabalhar em paralelo em validação do catálogo, estados de carregamento, fallback de imagens, testes de exportação e revisão da experiência de descoberta, desde que não altere o contrato de espécie de forma incompatível.
 
@@ -119,7 +119,7 @@ A Conta 1 deve preparar a integração, revisar dependências, comparar os dados
 
 ## 10. Critérios de aceite do primeiro ciclo
 
-O ciclo só será concluído quando o catálogo tiver espécies adicionais distribuídas pelos grupos e ambientes definidos, cada espécie estiver com dados essenciais e fonte, as imagens tiverem crédito e licença, a busca e os filtros continuarem funcionando, o TypeScript não apresentar erros e o preview abrir sem rota crítica quebrada.
+O ciclo só será concluído quando o catálogo tiver espécies adicionais distribuídas pelos grupos e ambientes definidos, cada espécie estiver com dados essenciais e fonte aprovada, as imagens tiverem crédito e licença comercial confirmada, nenhum registro usar NC/ND ou IUCN Red List API, status de conservação estiver vazio ou apoiado por ICMBio/MMA, a busca e os filtros continuarem funcionando, o TypeScript não apresentar erros e o preview abrir sem rota crítica quebrada.
 
 Itens incompletos devem permanecer como `[ ]` no `todo.md`. Não marcar um item como concluído apenas porque o código foi escrito; ele precisa estar validado no fluxo real.
 
@@ -143,3 +143,73 @@ Minha recomendação é B por proteção de áreas sensíveis. Nenhum dado será
 ## 13. Regra de integração final
 
 A Conta 1 é a responsável pela integração final e pelo checkpoint consolidado. Antes do checkpoint, ela deve revisar `todo.md`, confirmar que nenhum item foi marcado indevidamente, executar TypeScript, lint, testes e revisão visual, e registrar no relatório do marco o que foi concluído, o que ficou pendente e qual aprovação será necessária para o próximo ciclo.
+
+## Bloco coordenador — contratos compartilhados
+
+Estado: em implementação na branch integracao-ciclo-14.
+
+Arquivos: `shared/contracts.ts`, `shared/types.ts` e `contexts/AppContext.tsx`.
+
+Objetivo: centralizar `Settings`, filtros de catálogo e envelope de exportação sem duplicar tipos entre contexto, telas e serviços. O contrato preserva `Species` e `Sighting` e não altera dados persistidos.
+
+Validação: executar `pnpm check`, `pnpm lint`, `pnpm test`, `git diff --check` e `pnpm watchdog` antes do PR.
+
+Dependências: Agente 2 deve consumir os tipos compartilhados nos lotes/índice sem editar o contexto; Agente 3 pode usar `Settings` e `CatalogFilters` em telas e testes. Não há bloqueio real; o próximo bloco independente é cobertura de fluxos locais e fallback offline.
+
+## Bloco massivo — fluxos de campo e catálogo modular
+
+Estado: implementado na branch integracao-ciclo-14.
+
+Alterações: Home e formulário de novo avistamento agora consultam o índice modular combinado; o formulário aceita espécies dos lotes escaláveis, evita duplo salvamento, mostra estado ocupado e trata falha de persistência sem perder o formulário. Adicionado teste de fluxo para descoberta modular, atualização, restauração, exportação e rejeição de importação antiga/malformada.
+
+Riscos: permissões reais de câmera/GPS continuam dependentes de aparelho; web usa fallback existente. Nenhuma alteração destrutiva em dados locais.
+
+Validação: 24 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog. Próximo bloco independente: revisão visual/portrait e cobertura offline/permissões.
+
+## Revisão visual do bloco massivo
+
+Preview portrait 390x844 revisado em Home e Animais. O contador modular mostra 102 espécies combinadas, a busca encontra lotes novos e a navegação inferior permanece acessível; não foram observados cortes críticos no viewport. A validação prática nativa de câmera/GPS continua pendente de aparelho físico.
+
+## Bloco massivo 2 — offline, import/export e acessibilidade
+
+Estado: implementado na branch integracao-ciclo-14.
+
+Configurações agora usa o catálogo modular para contagens e nomes, bloqueia import/export/limpeza enquanto o caderno restaura, trata falhas de limpeza sem apagar dados e expõe labels/states de acessibilidade nos controles. Preview portrait 390x844 revisado sem cortes críticos; estado vazio de registros está legível.
+
+Validação: TypeScript, lint, 24 testes aprovados, 1 autenticação pulado, diff check e watchdog. Pendência real: testar câmera/GPS e permissões em aparelho físico; não é bloqueio para o fluxo web/offline local.
+
+## Bloco massivo 2 — Avistamentos no índice modular
+
+A tela de Avistamentos deixou de procurar espécies apenas no catálogo legado. Filtros, chip de espécie, nomes, imagens e busca agora usam um mapa memoizado do índice combinado, mantendo a ordenação e os estados vazios. Isso permite consultar registros criados para qualquer lote modular sem degradação por busca repetida.
+
+Validação incremental: TypeScript, lint e 24 testes aprovados; diff check e watchdog devem ser executados novamente no commit final deste bloco. Sem bloqueio real.
+
+## Bloqueio corrigido — watchdog do PR #10
+
+Causa: o workflow exigia literalmente os marcadores `Arquivos` e `Riscos`, enquanto o PR atualizado usava `Entregas` e `Risco real`; o código e os checks estavam válidos, mas o check remoto falhou por falso negativo de documentação.
+
+Evidência: statusCheckRollup do PR #10 registrou watchdog FAILURE; corpo do PR continha Bloco, Entregas, Testes, Risco real e Próximo bloco.
+
+Correção: workflow agora aceita variantes semânticas (`Ciclos|Bloco`, `Arquivos|Entregas`, `Riscos|Risco`, `Próximo`) usando grep por expressão regular. Próximo passo é rerodar o check no GitHub; não há bloqueio de código.
+
+## Bloco massivo 3 — permissões nativas localizadas
+
+Criado `shared/native-permissions.ts` com cópias PT/EN/ES para câmera e localização nos estados negado, serviço desativado e erro. A tela de novo avistamento usa o helper conforme o idioma padrão, mantendo o salvamento sem coordenadas/foto quando a permissão falha. Adicionado teste determinístico com três idiomas e exportação pelo barrel `shared/types.ts`.
+
+Também corrigido o falso negativo do workflow Agent Watchdog no PR #10: variantes de títulos do corpo agora são aceitas sem remover a exigência de evidências. Validação local atual: 27 testes aprovados, 1 autenticação pulado, TypeScript, lint e diff check. Próximo passo: rerodar o check remoto e validar offline/permissões em aparelho físico.
+
+## Novo bloco massivo — fallback offline de imagens
+
+Corrigido `RemoteImage` para não permanecer indefinidamente em loading quando uma espécie ou avistamento não possui URI. O componente agora entra diretamente no estado de fallback, mantém a inicial do nome e deixa a ausência visual explícita; quando a fonte muda, o estado é reiniciado de forma determinística. Isso cobre catálogo local incompleto e imagens não disponíveis sem impedir navegação ou registro.
+
+Validação incremental: TypeScript, lint, 27 testes aprovados, 1 autenticação pulado e diff check. Pendências continuam sendo teste físico de permissões e revisão editorial científica.
+
+## Bloco massivo — persistência, ficha e mapa
+
+Settings agora usa envelope versionado compartilhado, aceita formato legado sanitizado e rejeita versões desconhecidas/corrupção com fallback seguro. A ficha de espécie e o mapa passaram a resolver nomes e registros pelo catálogo modular combinado; o mapa também trata falha ao abrir serviço externo sem perder dados e mantém a privacidade de coordenadas.
+
+Validação atual: TypeScript, lint, 28 testes aprovados, 1 autenticação pulado e diff check. Pendência real: teste físico de câmera/GPS/permissões e fluxo offline em aparelho sem rede.
+
+## Revisão visual portrait do bloco
+
+Mapa em 390x844 mostra o estado offline, cartão web e estado vazio de coordenadas sem corte crítico. Ficha de Tuiuiú resolve corretamente pelo catálogo modular, exibe fallback de imagem, idioma, tags, conteúdo e CTA em uma mão; a leitura segue clara até o início do conteúdo. Não foram encontrados botões mortos nesta revisão.
