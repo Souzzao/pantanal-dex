@@ -145,20 +145,24 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
     const prefix = `species[${index}](${item.id || "sem-id"})`;
     if (!item.id || ids.has(item.id)) errors.push(`${prefix}.id deve ser único e não vazio`);
     ids.add(item.id);
-    if (!item.commonName.trim()) errors.push(`${prefix}.commonName ausente`);
-    if (!item.scientificName.trim()) errors.push(`${prefix}.scientificName ausente`);
+    const itemEnvironments = Array.isArray(item.environments) ? item.environments : [];
+    const itemCuriosities = Array.isArray(item.curiosities) ? item.curiosities : [];
+    const itemImages = Array.isArray(item.images) ? item.images : [];
+    const itemSources = Array.isArray(item.sources) ? item.sources : [];
+    if (!item.commonName?.trim()) errors.push(`${prefix}.commonName ausente`);
+    if (!item.scientificName?.trim()) errors.push(`${prefix}.scientificName ausente`);
     if (!groups.includes(item.group)) errors.push(`${prefix}.group inválido`);
-    if (item.environments.length === 0 || item.environments.some((environment) => !environments.includes(environment))) errors.push(`${prefix}.environments inválido`);
+    if (itemEnvironments.length === 0 || itemEnvironments.some((environment) => !environments.includes(environment))) errors.push(`${prefix}.environments inválido`);
     for (const field of ["description", "physicalCharacteristics", "habitat", "behavior", "diet", "distribution", "ecologicalImportance"] as const) {
       if (!item[field]?.trim()) errors.push(`${prefix}.${field} ausente`);
     }
-    if (item.curiosities.length === 0 || item.curiosities.some((curiosity) => !curiosity.trim())) errors.push(`${prefix}.curiosities inválido`);
-    if (item.images.length !== 3) errors.push(`${prefix}.images deve ter exatamente 3 imagens`);
-    item.images.forEach((image, imageIndex) => {
-      if (!image.uri || !image.author || !image.license || !image.sourceUrl || !image.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
-      if (!isHttpUrl(image.uri) || !isHttpUrl(image.sourceUrl)) errors.push(`${prefix}.images[${imageIndex}] uri/sourceUrl inválida`);
+    if (itemCuriosities.length === 0 || itemCuriosities.some((curiosity) => !curiosity?.trim())) errors.push(`${prefix}.curiosities inválido`);
+    if (itemImages.length !== 3) errors.push(`${prefix}.images deve ter exatamente 3 imagens`);
+    itemImages.forEach((image, imageIndex) => {
+      if (!image?.uri || !image?.author || !image?.license || !image?.sourceUrl || !image?.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
+      if (!isHttpUrl(image?.uri ?? "") || !isHttpUrl(image?.sourceUrl ?? "")) errors.push(`${prefix}.images[${imageIndex}] uri/sourceUrl inválida`);
     });
-    if (item.sources.length === 0 || item.sources.some((source) => !source.title.trim() || !isHttpUrl(source.url))) errors.push(`${prefix}.sources inválido`);
+    if (itemSources.length === 0 || itemSources.some((source) => !source?.title?.trim() || !isHttpUrl(source?.url ?? ""))) errors.push(`${prefix}.sources inválido`);
   });
   return errors;
 }

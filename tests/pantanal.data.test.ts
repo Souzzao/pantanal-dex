@@ -48,6 +48,16 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("reports partial runtime records without throwing", () => {
+    const broken = [{ id: "broken" }] as unknown as typeof species;
+    expect(() => validateSpeciesCatalog(broken)).not.toThrow();
+    expect(validateSpeciesCatalog(broken)).toEqual(expect.arrayContaining([
+      "species[0](broken).commonName ausente",
+      "species[0](broken).images deve ter exatamente 3 imagens",
+      "species[0](broken).sources inválido",
+    ]));
+  });
+
   it("keeps exactly three credited image references per species", () => {
     for (const item of species) {
       expect(item.images).toHaveLength(3);
