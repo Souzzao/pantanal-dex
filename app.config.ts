@@ -87,6 +87,14 @@ const config: ExpoConfig = {
   plugins: [
     "expo-router",
     [
+      "expo-camera",
+      {
+        cameraPermission: "Permita que o PantanalDex use a câmera para registrar avistamentos.",
+        microphonePermission: "Permita que o PantanalDex use o microfone somente quando necessário.",
+        recordAudioAndroid: false,
+      },
+    ],
+    [
       "expo-audio",
       {
         microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone.",

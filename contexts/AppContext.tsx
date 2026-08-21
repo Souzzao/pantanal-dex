@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings, sanitizeStoredSightings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
+import { restoreSightings, serializeSightings } from "@/shared/persistence";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
@@ -15,10 +16,19 @@ type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boole
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
-async function readJson(key: string): Promise<unknown> {
+async function readRaw(key: string): Promise<string | null> {
   try {
-    const value = await AsyncStorage.getItem(key);
-    return value ? JSON.parse(value) : undefined;
+    return await AsyncStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+async function readJson(key: string): Promise<unknown> {
+  const value = await readRaw(key);
+  if (!value) return undefined;
+  try {
+    return JSON.parse(value);
   } catch {
     return undefined;
   }
@@ -32,9 +42,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const [storedSightings, storedSettings] = await Promise.all([readJson(SIGHTINGS_KEY), readJson(SETTINGS_KEY)]);
+      const [storedSightings, storedSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readJson(SETTINGS_KEY)]);
       if (!mounted) return;
-      setSightings(sanitizeStoredSightings(storedSightings));
+      setSightings(restoreSightings(storedSightings));
       setSettingsState(sanitizeSettings(storedSettings));
       setReady(true);
     })();
@@ -42,8 +52,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const persistSightings = async (next: Sighting[]) => {
+    await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next));
     setSightings(next);
-    await AsyncStorage.setItem(SIGHTINGS_KEY, JSON.stringify(next));
   };
 
   const value = useMemo<AppContextValue>(() => ({

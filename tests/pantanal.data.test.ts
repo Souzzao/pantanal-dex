@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { createExportCsv, createExportJson } from "../shared/exports";
-import { sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
+import { restoreSightings, serializeSightings } from "../shared/persistence";
+import { createExportCsv, createExportJson, toExportableSighting } from "../shared/exports";
+import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
   id: "sighting-1",
@@ -56,5 +57,56 @@ describe("PantanalDex data contracts", () => {
   it("repairs invalid settings and preserves only supported languages", () => {
     expect(sanitizeSettings({ defaultLanguage: "Klingon", quickLanguages: ["English", "English", "Unknown"] })).toEqual({ defaultLanguage: "English", quickLanguages: ["English"] });
     expect(sanitizeSettings({})).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português", "English"] });
+  });
+
+  it("validates field dates, times, and coordinate bounds", () => {
+    expect(isValidSightingDate("2026-02-28")).toBe(true);
+    expect(isValidSightingDate("2026-02-30")).toBe(false);
+    expect(isValidSightingDate("21/08/2026")).toBe(false);
+    expect(isValidSightingTime("")).toBe(true);
+    expect(isValidSightingTime("23:59")).toBe(true);
+    expect(isValidSightingTime("24:00")).toBe(false);
+    expect(isValidCoordinatePair(-16.25, -56.65)).toBe(true);
+    expect(isValidCoordinatePair(91, -56.65)).toBe(false);
+    expect(isValidCoordinatePair(undefined, -56.65)).toBe(false);
+  });
+
+  it("rejects corrupted sighting quantities, coordinates, dates, and times", () => {
+    const invalid = [
+      { ...sighting, quantity: 0 },
+      { ...sighting, quantity: 1.5 },
+      { ...sighting, latitude: 120 },
+      { ...sighting, date: "2026-02-30" },
+      { ...sighting, time: "25:00" },
+    ];
+    expect(sanitizeStoredSightings([...invalid, sighting])).toEqual([sighting]);
+  });
+
+  it("restores valid local JSON and safely recovers from corruption", () => {
+    const serialized = serializeSightings([sighting]);
+    expect(JSON.parse(serialized).version).toBe(1);
+    expect(restoreSightings(serialized)).toEqual([sighting]);
+    expect(restoreSightings(JSON.stringify([sighting]))).toEqual([sighting]);
+    expect(restoreSightings(JSON.stringify({ version: 99, sightings: [sighting] }))).toEqual([]);
+    expect(restoreSightings("{not-json")).toEqual([]);
+    expect(restoreSightings(null)).toEqual([]);
+    expect(restoreSightings(JSON.stringify([{ ...sighting, longitude: 250 }]))).toEqual([]);
+  });
+
+  it("exports without mutating the local sighting collection", () => {
+    const source = [{ ...sighting }];
+    createExportJson(source);
+    createExportCsv(source);
+    expect(source).toEqual([sighting]);
+  });
+
+  it("masks exact coordinates for shareable records", () => {
+    const shareable = { ...sighting, visibility: "shareable" as const, locationPrecision: "exact" as const, latitude: -16.2537, longitude: -56.6519 };
+    const exportable = toExportableSighting(shareable);
+    expect(exportable.latitude).toBe(-16.25);
+    expect(exportable.longitude).toBe(-56.65);
+    expect(exportable.locationPrecision).toBe("approximate");
+    expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.25);
+    expect(createExportCsv([shareable])).toContain('"-16.25","-56.65","approximate"');
   });
 });

@@ -158,20 +158,40 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
 }
 
 
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const TIME_PATTERN = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
+export function isValidSightingDate(value: string): boolean {
+  if (!ISO_DATE_PATTERN.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
+export function isValidSightingTime(value: string): boolean {
+  return value === "" || TIME_PATTERN.test(value);
+}
+
+export function isValidCoordinatePair(latitude: unknown, longitude: unknown): boolean {
+  if (latitude === undefined && longitude === undefined) return true;
+  return typeof latitude === "number" && Number.isFinite(latitude) && latitude >= -90 && latitude <= 90 &&
+    typeof longitude === "number" && Number.isFinite(longitude) && longitude >= -180 && longitude <= 180;
+}
+
 export function sanitizeStoredSightings(value: unknown): Sighting[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is Sighting => {
     if (!item || typeof item !== "object") return false;
     const sighting = item as Partial<Sighting>;
+    const quantityIsValid = sighting.quantity === undefined ||
+      (typeof sighting.quantity === "number" && Number.isInteger(sighting.quantity) && sighting.quantity > 0);
+    const timeIsValid = sighting.time === undefined || (typeof sighting.time === "string" && isValidSightingTime(sighting.time));
     return typeof sighting.id === "string" && sighting.id.length > 0 &&
       typeof sighting.speciesId === "string" && species.some((entry) => entry.id === sighting.speciesId) &&
-      typeof sighting.date === "string" && sighting.date.length > 0 &&
+      typeof sighting.date === "string" && isValidSightingDate(sighting.date) &&
       typeof sighting.createdAt === "string" && typeof sighting.updatedAt === "string" &&
       ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&
       ["private", "shareable"].includes(sighting.visibility ?? "") &&
-      (sighting.latitude === undefined || typeof sighting.latitude === "number") &&
-      (sighting.longitude === undefined || typeof sighting.longitude === "number") &&
-      (sighting.quantity === undefined || typeof sighting.quantity === "number");
+      timeIsValid && isValidCoordinatePair(sighting.latitude, sighting.longitude) && quantityIsValid;
   });
 }
 

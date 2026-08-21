@@ -14,10 +14,10 @@
 - [x] Implementar formulário de novo avistamento com foto opcional, data, local e observações
 - [x] Implementar localização opcional e precisão da localização
 - [x] Implementar lista de avistamentos com estados vazio, filtros, edição e exclusão confirmada
-- [ ] Implementar modo mapa para registros com coordenadas
+- [x] Implementar modo mapa para registros com coordenadas
 - [x] Implementar exportação JSON e CSV sem apagar registros
 - [x] Garantir leitura do catálogo e edição dos registros sem conexão
-- [ ] Criar testes determinísticos para validação, persistência e exportação
+- [x] Criar testes determinísticos para validação, persistência e exportação
 - [x] Executar verificação TypeScript, lint e testes
 - [x] Abrir a prévia do projeto no navegador do usuário
 
@@ -31,7 +31,7 @@
 
 ### Frente A — Auditoria e arquitetura
 - [x] Auditar todas as rotas existentes e eliminar telas ou botões sem ação
-- [ ] Criar matriz de requisitos da especificação versus implementação atual
+- [x] Criar matriz de requisitos da especificação versus implementação atual
 - [ ] Definir contratos compartilhados para Species, Sighting, Settings, filtros e exportação
 - [ ] Separar dados, componentes visuais, serviços nativos e regras de negócio
 - [x] Criar uma política de fallback para web, iOS, Android e uso sem conexão
@@ -48,28 +48,28 @@
 ### Frente C — Catálogo e descoberta
 - [x] Refinar cards, estados de carregamento, estado vazio e fallback visual de imagem
 - [x] Criar filtros combinados e possibilidade de limpar todos os filtros
-- [ ] Adicionar ordenação por nome popular e grupo
+- [x] Adicionar ordenação por nome popular e grupo
 - [x] Criar barra rápida de idioma dentro da ficha da espécie
 - [x] Exibir claramente quando uma tradução não estiver disponível
 - [ ] Revisar a ficha para leitura rápida em campo e acessibilidade
 
 ### Frente D — Avistamentos e caderno de campo
 - [x] Implementar edição completa de avistamentos existentes
-- [ ] Validar data, horário, quantidade, visibilidade e precisão da localização
-- [ ] Permitir escolher a espécie pelo formulário com busca
-- [ ] Implementar captura pela câmera além da seleção da galeria
+- [x] Validar data, horário, quantidade, visibilidade e precisão da localização
+- [x] Permitir escolher a espécie pelo formulário com busca
+- [x] Implementar captura pela câmera além da seleção da galeria
 - [x] Melhorar confirmação de salvamento, edição e exclusão
 - [x] Criar filtros de avistamentos por espécie, grupo, ambiente, período e texto
-- [ ] Implementar modo mapa funcional com marcadores e abertura do detalhe
-- [ ] Adicionar proteção de localização exata ao compartilhar registros sensíveis
+- [x] Implementar modo mapa funcional com marcadores e abertura do detalhe
+- [x] Adicionar proteção de localização exata ao compartilhar registros sensíveis
 
 ### Frente E — Offline, idiomas e exportação
-- [ ] Criar camada de armazenamento local versionada e resiliente a dados corrompidos
+- [x] Criar camada de armazenamento local versionada e resiliente a dados corrompidos
 - [ ] Garantir catálogo, imagens disponíveis, registros e preferências sem conexão
 - [ ] Adicionar indicador não intrusivo de disponibilidade do mapa offline
 - [x] Implementar seleção, ordem e remoção de idiomas preferidos
 - [ ] Validar esquema do JSON exportado e compatibilidade do CSV com planilhas
-- [ ] Garantir que exportar nunca altere ou apague os dados locais
+- [x] Garantir que exportar nunca altere ou apague os dados locais
 
 ### Frente F — Qualidade e entrega
 - [ ] Criar testes determinísticos para modelos, validação, persistência e exportação
@@ -186,10 +186,20 @@
 
 ## Revisão profunda em sete ciclos
 
-- [ ] Mapear todos os requisitos originais contra as telas e contratos atuais
-- [ ] Auditar rotas, dependências, permissões nativas, offline e acessibilidade
-- [ ] Registrar riscos, lacunas, casos extremos e decisões de arquitetura
-- [ ] Implementar melhorias funcionais prioritárias e corrigir inconsistências
-- [ ] Fazer segunda passagem crítica após a primeira implementação
+- [x] Mapear todos os requisitos originais contra as telas e contratos atuais
+- [x] Auditar rotas, dependências, permissões nativas, offline e acessibilidade
+- [x] Registrar riscos, lacunas, casos extremos e decisões de arquitetura
+- [x] Implementar melhorias funcionais prioritárias e corrigir inconsistências
+- [x] Fazer segunda passagem crítica após a primeira implementação
 - [ ] Executar validação prática, revisão visual e testes por plataforma disponível
 - [ ] Polir UX, desempenho, documentação e preparar checkpoint consolidado
+
+## Revisão pós-checkpoint — próximas lacunas
+
+- [x] Auditar câmera, permissões nativas, localização e mapa por plataforma
+- [x] Implementar captura pela câmera com fallback seguro na web
+- [x] Melhorar seleção de espécie no formulário de avistamento
+- [x] Completar mapa nativo apenas em configuração compatível sem quebrar a prévia web
+- [x] Auditar acessibilidade, estados de erro e fluxos de recuperação
+- [x] Criar testes determinísticos de persistência local e casos extremos de exportação
+- [x] Fazer nova revisão visual e polimento final antes do próximo checkpoint
