@@ -108,6 +108,22 @@ describe("PantanalDex data contracts", () => {
     expect(csv).toContain('"Linha 1\nLinha 2 com ""aspas"""');
   });
 
+  it("exports a privacy-safe copy without mutating local records", () => {
+    const shareable = { ...sighting, id: "shareable", visibility: "shareable" as const };
+    const privateRecord = { ...sighting, id: "private" };
+    const exported = JSON.parse(createExportJson([privateRecord, shareable], { shareableOnly: true, redactLocations: true }));
+    expect(exported.sightings).toHaveLength(1);
+    expect(exported.sightings[0]).toMatchObject({ id: "shareable", locationPrecision: "none" });
+    expect(exported.sightings[0]).not.toHaveProperty("latitude");
+    expect(exported.sightings[0]).not.toHaveProperty("longitude");
+    expect(privateRecord.latitude).toBe(-16.25);
+    expect(shareable.longitude).toBe(-56.65);
+    const csv = createExportCsv([privateRecord, shareable], { shareableOnly: true, redactLocations: true });
+    expect(csv).not.toContain("private");
+    expect(csv).toContain('"shareable","tuiuiu"');
+    expect(csv).toContain('"none"');
+  });
+
   it("quotes CSV fields and escapes notes safely", () => {
     const csv = createExportCsv([sighting]);
     expect(csv.split("\n")).toHaveLength(2);
