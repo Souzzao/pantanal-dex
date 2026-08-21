@@ -1,0 +1,78 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, license: string, sourceUrl: string, credit: string) => ({ uri, author, license, sourceUrl, credit });
+const gbif = (name: string) => ({ title: `GBIF Species Match — ${name}`, url: `https://api.gbif.org/v1/species/match?name=${encodeURIComponent(name)}` });
+
+export const fish03: CatalogBatch = {
+  batchId: "catalog-fish-03",
+  cycle: 11,
+  group: "Peixes",
+  status: "pending-review",
+  sources: [gbif("Brycon hilarii"), gbif("Myloplus tiete"), gbif("Gymnotus carapo")],
+  pendingNotes: ["Confirmar ocorrência no recorte do Pantanal e eventual conservação em fonte ICMBio/MMA; imagens licenciadas e match GBIF não substituem ocorrência regional."],
+  species: [
+    {
+      id: "brycon-hilarii",
+      commonName: "Piraputanga",
+      scientificName: "Brycon hilarii",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe de água doce ativo, associado a rios de correnteza e ambientes marginais com vegetação.",
+      physicalCharacteristics: "Corpo alongado, escamas prateadas, nadadeiras com tons avermelhados e dorso mais escuro.",
+      habitat: "Rios, corredeiras, remansos e trechos com vegetação marginal que oferecem abrigo e alimento.",
+      behavior: "Nada ativamente e explora diferentes níveis da coluna d’água em busca de frutos, sementes e pequenos animais.",
+      diet: "Frutos, sementes, insetos e pequenos invertebrados encontrados na água ou na vegetação ripária.",
+      curiosities: ["A disponibilidade sazonal de frutos influencia sua alimentação.", "A espécie é conhecida por saltos e deslocamentos rápidos em rios."],
+      distribution: "Bacias de água doce da América do Sul, incluindo sistemas brasileiros associados ao alto Paraguai e Paraná.",
+      ecologicalImportance: "Pode dispersar sementes e conecta a vegetação ripária às cadeias alimentares aquáticas.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/e/e1/Brycon_hilarii.jpg", "David Morimoto", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Brycon_hilarii.jpg", "David Morimoto / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/a/af/Brycon_hilarii_-_Piraputanga_no_Monumento_Natural_do_Rio_Formoso.jpg", "BRASIL AQUA", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Brycon_hilarii_-_Piraputanga_no_Monumento_Natural_do_Rio_Formoso.jpg", "BRASIL AQUA / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/9/93/Brycon_hilarii_632830884.jpg", "Nicola Crockford", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Brycon_hilarii_632830884.jpg", "Nicola Crockford / iNaturalist / Wikimedia Commons"),
+      ],
+      sources: [gbif("Brycon hilarii")],
+    },
+    {
+      id: "myloplus-tiete",
+      commonName: "Pacu-prata",
+      scientificName: "Myloplus tiete",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe serrasalmídeo de água doce que utiliza rios e áreas de inundação para alimentação e abrigo.",
+      physicalCharacteristics: "Corpo alto e comprimido lateralmente, dentição forte e coloração prateada com variações conforme idade e ambiente.",
+      habitat: "Rios, lagoas marginais e trechos inundáveis com disponibilidade de sementes e vegetação.",
+      behavior: "Forrageia sozinho ou em pequenos grupos e explora o fundo e a vegetação marginal.",
+      diet: "Frutos, sementes, folhas e pequenos invertebrados disponíveis no ambiente aquático.",
+      curiosities: ["A forma corporal é típica de muitos peixes serrasalmídeos.", "A disponibilidade de frutos durante a cheia amplia os recursos alimentares."],
+      distribution: "Bacias de água doce do Brasil, com registros associados ao sistema do alto Paraná.",
+      ecologicalImportance: "Participa da dispersão de sementes e do fluxo de energia entre áreas alagáveis e rios.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/2/2c/Myloplus_tiete.jpg", "Douglas Lopes", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Myloplus_tiete.jpg", "Douglas Lopes / iNaturalist / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/f/fb/Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_6.jpg", "Ribeiro, Chagas, Thereza e Langeani", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Fish_fauna_(10.3897-zookeys.875.31977)_Figure_6.jpg", "Ribeiro et al. / ZooKeys / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/4/44/Peixes_da_plan%C3%ADcie_de_inunda%C3%A7%C3%A3o_do_alto_rio_Paran%C3%A1_%283678425%29.png", "Ota, Deprá, Graça e Pavanelli", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Peixes_da_planície_de_inundação_do_alto_rio_Paraná_(3678425).png", "Ota et al. / Wikimedia Commons"),
+      ],
+      sources: [gbif("Myloplus tiete")],
+    },
+    {
+      id: "gymnotus-carapo",
+      commonName: "Tuvira",
+      scientificName: "Gymnotus carapo",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe elétrico de água doce que se orienta e se comunica com sinais elétricos em ambientes de pouca visibilidade.",
+      physicalCharacteristics: "Corpo alongado, nadadeira anal extensa e padrão de faixas ou manchas ao longo do tronco.",
+      habitat: "Remansos, lagoas, áreas alagadas e margens com vegetação submersa ou detritos.",
+      behavior: "Move-se por ondulações da nadadeira anal e usa descargas elétricas fracas para orientação e interação.",
+      diet: "Pequenos peixes, insetos aquáticos, crustáceos e outros invertebrados.",
+      curiosities: ["O campo elétrico auxilia a percepção do ambiente em águas turvas.", "A nadadeira anal permite deslocamento para frente e para trás."],
+      distribution: "Bacias de água doce da América do Sul, com ampla distribuição em ambientes tropicais e subtropicais.",
+      ecologicalImportance: "Integra as cadeias alimentares de áreas alagadas e contribui para o controle de pequenos organismos aquáticos.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/f/f9/Gymnotus_carapo.png", "Autor desconhecido; imagem em domínio público", "Public domain", "https://commons.wikimedia.org/wiki/File:Gymnotus_carapo.png", "Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/f/f6/Gymnotus_Carapo_en_aquarium.jpg", "aquaportail.com", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Gymnotus_Carapo_en_aquarium.jpg", "aquaportail.com / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/1/18/Gymnotus-carapo.jpg", "Francisco molas", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Gymnotus-carapo.jpg", "Francisco molas / Wikimedia Commons"),
+      ],
+      sources: [gbif("Gymnotus carapo")],
+    },
+  ],
+};

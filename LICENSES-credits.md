@@ -17,6 +17,7 @@ As imagens só podem usar `CC0`, `CC BY` ou `CC BY-SA`, em qualquer versão iden
 | `catalog-amphibians-01` | Anfíbios | 2 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-fish-01` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-fish-02` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
+| `catalog-fish-03` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-invertebrates-01` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-02` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-03` | Invertebrados | 2 | GBIF Species Match | Wikimedia Commons; seis arquivos CC BY/CC BY-SA com créditos no módulo do lote |

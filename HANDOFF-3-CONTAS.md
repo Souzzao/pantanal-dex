@@ -191,3 +191,10 @@ A taxonomia usa consultas GBIF por espécie. O lote permanece `pending-review`: 
 A Conta 2 adicionou `Hoplias malabaricus`, `Prochilodus lineatus` e `Leporinus friderici` em módulo separado, totalizando três espécies e nove imagens Commons verificadas individualmente. As licenças são CC0, CC BY, CC BY-SA e domínio público; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
 
 As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: a correspondência taxonômica não prova ocorrência no recorte do Pantanal e a conservação depende de fonte ICMBio/MMA. A alternativa executável é consultar SiBBr/ICMBio por espécie e manter o campo de conservação vazio até confirmação oficial.
+
+
+## 20. Bloco de peixes `catalog-fish-03`
+
+A Conta 2 adicionou `Brycon hilarii`, `Myloplus tiete` e `Gymnotus carapo` em módulo separado, totalizando três espécies e nove imagens Commons verificadas individualmente. As licenças são CC0, CC BY, CC BY-SA e domínio público; não há NC, ND ou licença ausente. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no lote.
+
+As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote permanece `pending-review`: a correspondência taxonômica e as imagens não provam ocorrência no recorte do Pantanal nem conservação oficial. A alternativa executável é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo os campos vazios até confirmação.
