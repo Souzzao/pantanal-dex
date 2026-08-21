@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
+import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
@@ -42,6 +43,15 @@ describe("PantanalDex data contracts", () => {
     const errors = validateSpeciesCatalog(broken);
     expect(errors).toContain("species[0](tuiuiu).images[0] sem crédito/licença/fonte completos");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
+  });
+
+  it("validates and merges scientific catalog batches deterministically", () => {
+    expect(validateCatalogBatch(currentCatalogBatch)).toEqual([]);
+    const sample = currentCatalogBatch.species.slice(0, 1);
+    const merged = mergeCatalogBatch([], { ...currentCatalogBatch, id: "test-batch", species: sample });
+    expect(merged.added).toBe(1);
+    expect(mergeCatalogBatch(merged.species, { ...currentCatalogBatch, id: "test-batch-2", species: sample }).skipped).toBe(1);
+    expect(validateCatalogBatch({ id: "", version: 0, source: "coordenacao", species: [] })).not.toEqual([]);
   });
 
   it("searches the catalog without accents and paginates deterministically", () => {

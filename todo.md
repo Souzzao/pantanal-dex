@@ -282,3 +282,14 @@
 - [x] Expandir espécies em lotes por grupos, biomas locais e ambientes
 - [x] Implementar paginação, busca indexada e filtros eficientes para catálogo em escala
 - [ ] Integrar PRs dos Agentes 2 e 3 com testes, revisão e checkpoints coordenados
+
+## Agente 1 — ciclo coordenado atual
+
+- [ ] Verificar estado de `main`, `conta-2-catalogo`, `conta-3-qualidade` e branches de integração
+- [ ] Confirmar quantidade, grupos e validação do catálogo atual
+- [ ] Implementar o próximo bloco escalável sem alterar branches dos agentes
+- [ ] Preparar checklist de PR e handoff para os Agentes 2 e 3
+- [ ] Validar e salvar checkpoint do ciclo coordenado
+
+- [x] Revisar o PR 5 do Agente 2 e bloquear integração por diff stale destrutivo
+- [ ] Solicitar novo PR do Agente 2 baseado na main atual, contendo somente lote científico
