@@ -79,3 +79,18 @@
 - [ ] Revisar a interface em portrait 9:16 para uso com uma mão
 - [ ] Fazer revisão visual das telas Início, Animais, Avistamentos, Mapa e Configurações
 - [ ] Salvar checkpoint somente após todos os itens críticos estarem concluídos
+
+## Operação coordenada — fluxo quase autônomo
+
+- [ ] Criar painel de marcos com estado: backlog, em execução, bloqueado, revisão e concluído
+- [ ] Definir ciclo padrão: planejar, implementar, verificar, revisar, checkpoint e aprovação
+- [ ] Separar frentes sem conflito: conteúdo, interface, dados locais, recursos nativos, qualidade e documentação
+- [ ] Registrar dependências entre frentes antes de iniciar cada ciclo
+- [ ] Atualizar automaticamente o TODO ao concluir cada item validado
+- [ ] Executar verificação TypeScript, lint e testes no final de cada ciclo
+- [ ] Capturar revisão visual do preview em cada marco de interface
+- [ ] Produzir relatório curto de marco com concluído, pendente, bloqueado e próxima aprovação
+- [ ] Solicitar aprovação do usuário somente para decisões de produto, dados sensíveis ou mudanças irreversíveis
+- [ ] Salvar checkpoint após cada marco aprovado e antes de iniciar mudanças arriscadas
+- [ ] Manter uma fila de próximos itens prontos para execução sem nova orientação detalhada
+- [ ] Avaliar futuramente uma rotina agendada de revisão do backlog, caso o usuário queira automação fora da sessão
