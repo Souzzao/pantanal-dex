@@ -393,4 +393,11 @@
 - [ ] Cobrir catálogo, registros e preferências em restauração offline com testes
 - [ ] Ampliar mensagens de estado vazio, erro e carregamento em PT/EN/ES
 - [ ] Revisar labels, estados disabled/busy e foco dos fluxos principais
-- [ ] Atualizar handoff, validar, commitar, publicar PR e checkpoint
+- [x] Atualizar handoff, validar, commitar, publicar PR e checkpoint
+
+## Novo bloco massivo — offline, estados e acessibilidade
+- [ ] Auditar fila, watchdog, PR #10 e estado atual sem repetir auditorias concluídas
+- [x] Criar testes de restauração offline com envelope legado, corrupção e preferências
+- [x] Validar estados de permissão e preservação do salvamento sem foto/GPS
+- [ ] Corrigir estados vazios, loading, erro e labels acessíveis nas rotas restantes
+- [x] Atualizar handoff, validar, commitar, publicar PR e checkpoint

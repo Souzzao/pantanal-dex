@@ -1,4 +1,5 @@
-import { sanitizeStoredSightings, type Sighting } from "./pantanal";
+import { sanitizeSettings, sanitizeStoredSightings, type Sighting } from "./pantanal";
+import type { Settings } from "./contracts";
 
 const STORAGE_VERSION = 1;
 
@@ -6,6 +7,28 @@ type StoredSightingsEnvelope = {
   version: number;
   sightings: unknown;
 };
+
+type StoredSettingsEnvelope = {
+  version: number;
+  settings: unknown;
+};
+
+export function serializeSettings(settings: Settings): string {
+  return JSON.stringify({ version: STORAGE_VERSION, settings: sanitizeSettings(settings) });
+}
+
+export function restoreSettings(value: string | null, fallback: Settings): Settings {
+  if (!value) return fallback;
+  try {
+    const parsed = JSON.parse(value) as unknown;
+    if (!parsed || typeof parsed !== "object") return fallback;
+    const record = parsed as Partial<StoredSettingsEnvelope>;
+    if ("version" in record) return record.version === STORAGE_VERSION ? sanitizeSettings(record.settings) : fallback;
+    return sanitizeSettings(parsed);
+  } catch {
+    return fallback;
+  }
+}
 
 export function serializeSightings(sightings: Sighting[]): string {
   return JSON.stringify({ version: STORAGE_VERSION, sightings });

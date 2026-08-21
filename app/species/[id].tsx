@@ -4,14 +4,14 @@ import { router, useLocalSearchParams } from "expo-router";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
-import { species } from "@/shared/pantanal";
+import { filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SpeciesDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const colors = useColors();
   const { settings, setSettings, sightings } = useApp();
-  const animal = species.find((item) => item.id === id);
+  const animal = filterSpeciesCatalog().find((item) => item.id === id);
   const selectedLanguage = settings.defaultLanguage;
   const personalSightings = animal ? sightings.filter((item) => item.speciesId === animal.id).length : 0;
   const openSource = async (url: string) => {

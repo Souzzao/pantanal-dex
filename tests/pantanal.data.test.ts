@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
+import { mergeSightings, restoreSettings, restoreSightings, serializeSettings, serializeSightings } from "../shared/persistence";
 import { catalogBatches, catalogSpecies } from "../shared/catalog/index";
 import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
@@ -141,6 +141,16 @@ describe("PantanalDex data contracts", () => {
       { ...sighting, time: "25:00" },
     ];
     expect(sanitizeStoredSightings([...invalid, sighting])).toEqual([sighting]);
+  });
+
+  it("restores versioned and legacy Settings without trusting corrupted values", () => {
+    const settings = { defaultLanguage: "Español" as const, quickLanguages: ["Español", "Português"] };
+    const serialized = serializeSettings(settings);
+    expect(JSON.parse(serialized).version).toBe(1);
+    expect(restoreSettings(serialized, { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual(settings);
+    expect(restoreSettings(JSON.stringify(settings), { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual(settings);
+    expect(restoreSettings(JSON.stringify({ version: 99, settings }), { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português"] });
+    expect(restoreSettings("broken", { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português"] });
   });
 
   it("restores valid local JSON and safely recovers from corruption", () => {

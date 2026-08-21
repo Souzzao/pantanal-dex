@@ -1,11 +1,11 @@
-import { Linking, Pressable, Text, View } from "react-native";
+import { Alert, Linking, Pressable, Text, View } from "react-native";
 import { router } from "expo-router";
 
 import NativeMapView from "@/components/NativeMapView";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
-import { species } from "@/shared/pantanal";
+import { filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 
 const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
@@ -13,10 +13,15 @@ const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
 export default function MapScreen() {
   const colors = useColors();
   const { sightings, ready } = useApp();
+  const catalogById = new Map(filterSpeciesCatalog().map((item) => [item.id, item.commonName]));
   const located = sightings.filter((item) => item.latitude !== undefined && item.longitude !== undefined);
 
-  const openExternalMap = (latitude: number, longitude: number) => {
-    void Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
+  const openExternalMap = async (latitude: number, longitude: number) => {
+    try {
+      await Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
+    } catch {
+      Alert.alert("Mapa externo indisponível", "Não foi possível abrir o mapa. Seus registros permanecem salvos no aparelho.");
+    }
   };
 
   return (
@@ -35,11 +40,11 @@ export default function MapScreen() {
         <Text style={{ color: colors.primary, fontWeight: "800", marginTop: 14 }}>{located.length} registro(s) com localização · catálogo e registros disponíveis offline</Text>
       </View>
       {located.length === 0 ? <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 18 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>Nenhum avistamento com coordenadas ainda.</Text><Text style={{ color: colors.muted, marginTop: 6 }}>Use a localização do aparelho ao criar um registro para vê-lo aqui.</Text></View> : located.map((item) => {
-        const animal = species.find((entry) => entry.id === item.speciesId);
+        const animalName = catalogById.get(item.speciesId) ?? "Animal";
         const isPrivateExact = item.visibility === "private" && item.locationPrecision === "exact";
         const latitude = isPrivateExact ? item.latitude! : roundCoordinate(item.latitude!);
         const longitude = isPrivateExact ? item.longitude! : roundCoordinate(item.longitude!);
-        return <View key={item.id} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12 }}><Pressable onPress={() => router.push({ pathname: "/sightings/[id]", params: { id: item.id } } as any)} accessibilityRole="button"><Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 16 }}>{animal?.commonName ?? "Animal"}</Text><Text style={{ color: colors.muted, marginTop: 4 }}>{item.locationLabel || item.date}</Text><Text style={{ color: colors.primary, marginTop: 6, fontSize: 12 }}>{latitude.toFixed(2)}, {longitude.toFixed(2)}{isPrivateExact ? "" : " · posição aproximada"}</Text></Pressable><Pressable onPress={() => openExternalMap(latitude, longitude)} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 10, padding: 9, marginTop: 12 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800", fontSize: 12 }}>Abrir no mapa externo</Text></Pressable></View>;
+        return <View key={item.id} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12 }}><Pressable onPress={() => router.push({ pathname: "/sightings/[id]", params: { id: item.id } } as any)} accessibilityRole="button"><Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 16 }}>{animalName}</Text><Text style={{ color: colors.muted, marginTop: 4 }}>{item.locationLabel || item.date}</Text><Text style={{ color: colors.primary, marginTop: 6, fontSize: 12 }}>{latitude.toFixed(2)}, {longitude.toFixed(2)}{isPrivateExact ? "" : " · posição aproximada"}</Text></Pressable><Pressable onPress={() => void openExternalMap(latitude, longitude)} accessibilityRole="button" accessibilityLabel="Abrir este registro no mapa externo" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 10, padding: 9, marginTop: 12 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800", fontSize: 12 }}>Abrir no mapa externo</Text></Pressable></View>;
       })}
     </ScreenContainer>
   );

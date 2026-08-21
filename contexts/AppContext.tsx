@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
-import { mergeSightings, restoreSightings, serializeSightings } from "@/shared/persistence";
+import { mergeSightings, restoreSettings, restoreSightings, serializeSettings, serializeSightings } from "@/shared/persistence";
 import type { Settings } from "@/shared/contracts";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
@@ -54,7 +54,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       }
       if (!mounted) return;
       setSightings(restoredSightings);
-      setSettingsState(sanitizeSettings(storedSettings));
+      const rawSettings = storedSettings === undefined ? null : JSON.stringify(storedSettings);
+      setSettingsState(restoreSettings(rawSettings, DEFAULT_SETTINGS));
       setReady(true);
     })();
     return () => { mounted = false; };
@@ -80,7 +81,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     },
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
-      await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(safe));
+      await AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe));
       setSettingsState(safe);
     },
   }), [sightings, settings, ready]);

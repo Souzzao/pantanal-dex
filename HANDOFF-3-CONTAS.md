@@ -203,3 +203,9 @@ Também corrigido o falso negativo do workflow Agent Watchdog no PR #10: variant
 Corrigido `RemoteImage` para não permanecer indefinidamente em loading quando uma espécie ou avistamento não possui URI. O componente agora entra diretamente no estado de fallback, mantém a inicial do nome e deixa a ausência visual explícita; quando a fonte muda, o estado é reiniciado de forma determinística. Isso cobre catálogo local incompleto e imagens não disponíveis sem impedir navegação ou registro.
 
 Validação incremental: TypeScript, lint, 27 testes aprovados, 1 autenticação pulado e diff check. Pendências continuam sendo teste físico de permissões e revisão editorial científica.
+
+## Bloco massivo — persistência, ficha e mapa
+
+Settings agora usa envelope versionado compartilhado, aceita formato legado sanitizado e rejeita versões desconhecidas/corrupção com fallback seguro. A ficha de espécie e o mapa passaram a resolver nomes e registros pelo catálogo modular combinado; o mapa também trata falha ao abrir serviço externo sem perder dados e mantém a privacidade de coordenadas.
+
+Validação atual: TypeScript, lint, 28 testes aprovados, 1 autenticação pulado e diff check. Pendência real: teste físico de câmera/GPS/permissões e fluxo offline em aparelho sem rede.
