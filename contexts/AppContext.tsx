@@ -2,6 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
+import { createExportCsv, createExportJson } from "@/shared/exports";
+
+export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
@@ -20,6 +23,5 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 export function useApp() { const context = useContext(AppContext); if (!context) throw new Error("useApp must be used within AppProvider"); return context; }
-export function createExportJson(sightings: Sighting[]) { return JSON.stringify({ version: "1.0", exportedAt: new Date().toISOString(), sightings }, null, 2); }
-export function createExportCsv(sightings: Sighting[]) { const header = "id,speciesId,date,time,locationLabel,latitude,longitude,locationPrecision,quantity,notes,visibility"; const rows = sightings.map((s) => [s.id, s.speciesId, s.date, s.time ?? "", s.locationLabel ?? "", s.latitude ?? "", s.longitude ?? "", s.locationPrecision, s.quantity ?? "", (s.notes ?? "").replaceAll('"', '""'), s.visibility].map((v) => `"${v}"`).join(",")); return [header, ...rows].join("\n"); }
+
 export const isWeb = Platform.OS === "web";
