@@ -17,13 +17,14 @@ describe("PantanalDex catalog", () => {
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(10);
+    expect(catalogSpecies).toHaveLength(13);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
     expect(species.some((item) => item.id === "anhuma")).toBe(true);
     expect(species.some((item) => item.id === "teiu")).toBe(true);
     expect(species.some((item) => item.id === "perereca-macaco")).toBe(true);
+    expect(species.some((item) => item.id === "pintado")).toBe(true);
   });
 
   it("rejects a batch with inconsistent scientific vocabularies", () => {
