@@ -169,3 +169,10 @@
 - [x] Liberar permissão de escrita para dark371star no repositório público
 - [x] Enviar a branch conta-2-catalogo com o commit a59c3d3
 - [x] Abrir, revisar, validar e integrar o Pull Request contra main
+
+## Ciclo técnico da coordenação
+
+- [x] Criar validações determinísticas para o catálogo expandido
+- [x] Criar testes para persistência e exportação de avistamentos
+- [ ] Auditar fluxos locais e botões sem ação
+- [ ] Monitorar e integrar a entrega da Conta 3 quando publicada

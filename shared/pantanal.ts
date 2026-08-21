@@ -132,3 +132,27 @@ export const species: Species[] = [
     description: "Camarão de água doce associado a rios, lagoas e áreas alagáveis de diversas bacias brasileiras.", physicalCharacteristics: "Corpo segmentado, rostro alongado e primeiro par de quelas desenvolvido.", habitat: "Rios, lagoas, baías e áreas de vegetação aquática.", behavior: "Busca alimento no fundo e entre plantas, com atividade variável ao longo do dia.", diet: "Detritos, algas, pequenos invertebrados e matéria orgânica.", curiosities: ["O ciclo de vida pode usar águas doces e ambientes com maior salinidade em diferentes populações.", "É uma espécie relevante para cadeias alimentares e para comunidades ribeirinhas."], distribution: "Ampla distribuição na América do Sul, com registros em bacias brasileiras.", ecologicalImportance: "Transfere energia do detrito e da vegetação para peixes e aves aquáticas.", conservationStatus: "Pouco preocupante", images: [commons("Macrobrachium amazonicum.jpg", "Wikimedia Commons"), commons("Amazon river prawn.jpg", "Wikimedia Commons"), commons("Macrobrachium amazonicum closeup.jpg", "Wikimedia Commons")], sources: [{ title: "FishBase — Macrobrachium amazonicum", url: "https://www.fishbase.se/summary/Macrobrachium-amazonicum.html" }]
   },
 ];
+
+export function validateSpeciesCatalog(items: Species[] = species): string[] {
+  const errors: string[] = [];
+  const ids = new Set<string>();
+  items.forEach((item, index) => {
+    const prefix = `species[${index}](${item.id || "sem-id"})`;
+    if (!item.id || ids.has(item.id)) errors.push(`${prefix}.id deve ser único e não vazio`);
+    ids.add(item.id);
+    if (!item.commonName.trim()) errors.push(`${prefix}.commonName ausente`);
+    if (!item.scientificName.trim()) errors.push(`${prefix}.scientificName ausente`);
+    if (!groups.includes(item.group)) errors.push(`${prefix}.group inválido`);
+    if (item.environments.length === 0 || item.environments.some((environment) => !environments.includes(environment))) errors.push(`${prefix}.environments inválido`);
+    for (const field of ["description", "physicalCharacteristics", "habitat", "behavior", "diet", "distribution", "ecologicalImportance"] as const) {
+      if (!item[field]?.trim()) errors.push(`${prefix}.${field} ausente`);
+    }
+    if (item.curiosities.length === 0 || item.curiosities.some((curiosity) => !curiosity.trim())) errors.push(`${prefix}.curiosities inválido`);
+    if (item.images.length < 3) errors.push(`${prefix}.images deve ter pelo menos 3 imagens`);
+    item.images.forEach((image, imageIndex) => {
+      if (!image.uri || !image.author || !image.license || !image.sourceUrl || !image.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
+    });
+    if (item.sources.length === 0 || item.sources.some((source) => !source.title.trim() || !source.url.trim())) errors.push(`${prefix}.sources inválido`);
+  });
+  return errors;
+}
