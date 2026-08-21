@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
-import { mergeSightings, restoreSettingsWithStatus, restoreSightingsWithStatus, serializeSettings, serializeSightings, type RestoreStatus } from "@/shared/persistence";
+import { mergeSightings, readStorageWithRetry, restoreSettingsWithStatus, restoreSightingsWithStatus, serializeSettings, serializeSightings, withStorageRetry, type RestoreStatus } from "@/shared/persistence";
 import type { Settings } from "@/shared/contracts";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
@@ -19,7 +19,7 @@ const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguag
 
 type RawRead = { value: string | null; failed: boolean };
 async function readRaw(key: string): Promise<RawRead> {
-  try { return { value: await AsyncStorage.getItem(key), failed: false }; } catch { return { value: null, failed: true }; }
+  try { return { value: await readStorageWithRetry(() => AsyncStorage.getItem(key)), failed: false }; } catch { return { value: null, failed: true }; }
 }
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -35,7 +35,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const restoredSightings = restoreSightingsWithStatus(rawSightings.value);
       const restoredSettings = restoreSettingsWithStatus(rawSettings.value, DEFAULT_SETTINGS);
       if (rawSightings.value && restoredSightings.status === "legacy-migrated" && restoredSightings.value.length) {
-        try { await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value)); } catch { /* preserva o diagnóstico de leitura/gravação */ }
+        try { await withStorageRetry(() => AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value))); } catch { /* preserva o diagnóstico de leitura/gravação */ }
       }
       if (!mounted) return;
       setSightings(restoredSightings.value);
@@ -48,7 +48,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const persistSightings = async (next: Sighting[]) => {
     try {
-      await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next));
+      await withStorageRetry(() => AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next)));
       setSightings(next);
       setStorage((current) => ({ ...current, writeError: false }));
     } catch (error) {
@@ -74,7 +74,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
       try {
-        await AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe));
+        await withStorageRetry(() => AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe)));
         setSettingsState(safe);
         setStorage((current) => ({ ...current, settings: "restored", writeError: false }));
       } catch (error) {

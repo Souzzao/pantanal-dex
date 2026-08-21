@@ -424,3 +424,11 @@
 - [x] Completar mensagens localizadas e estados de erro/vazio das rotas alteradas
 - [x] Reforçar testes e labels acessíveis após a correção
 - [x] Atualizar handoff, executar validações, publicar PR e salvar checkpoint
+
+## Bloco massivo pós-checkpoint 93ddbc55
+- [x] Auditar estado do checkpoint, branches, PRs e fila sem repetir trabalho concluído
+- [x] Estruturar relatório de licenças, fontes e bloqueios por lote
+- [ ] Expandir lote científico seguro sem inserir dados ou imagens sem licença confirmada
+- [x] Reforçar restauração offline, permissões nativas e estados acessíveis
+- [x] Adicionar testes de governança, catálogo e fluxos de campo
+- [ ] Atualizar handoff, validar, publicar PR e salvar checkpoint

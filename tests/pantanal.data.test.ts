@@ -7,6 +7,8 @@ import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
 import { createCatalogReviewReport } from "../shared/catalog/review";
+import { createLicenseAuditReport } from "../shared/catalog/license-audit";
+import { readStorageWithRetry, withStorageRetry } from "../shared/persistence";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
@@ -86,6 +88,29 @@ describe("PantanalDex data contracts", () => {
     expect(catalogReviewReport.totalBatches).toBe(12);
     expect(catalogReviewReport.pendingBatches).toBe(12);
     expect(catalogReviewReport.invalidBatches).toBe(0);
+  });
+
+  it("retries transient local writes and preserves the final error", async () => {
+    let attempts = 0;
+    await withStorageRetry(async () => {
+      attempts += 1;
+      if (attempts < 2) throw new Error("transient");
+    });
+    expect(attempts).toBe(2);
+    await expect(withStorageRetry(async () => { throw new Error("persistent"); }, 2)).rejects.toThrow("persistent");
+    let reads = 0;
+    await expect(readStorageWithRetry(async () => { reads += 1; if (reads < 2) throw new Error("read transient"); return "ok"; })).resolves.toBe("ok");
+    expect(reads).toBe(2);
+  });
+
+  it("audits commercial image licensing without promoting pending batches", () => {
+    const clean = createLicenseAuditReport([species[0]]);
+    expect(clean.images).toBe(3);
+    expect(clean.commercialImages).toBe(3);
+    expect(clean.speciesWithBlockers).toBe(0);
+    const blocked = createLicenseAuditReport([{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }]);
+    expect(blocked.speciesWithBlockers).toBe(1);
+    expect(blocked.rows[0].blockedImages).toBe(1);
   });
 
   it("marks a batch invalid in the operational report when validation errors identify it", () => {

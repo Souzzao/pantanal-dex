@@ -253,3 +253,15 @@ O `DevCollabPanel` agora exige ambiente client (`typeof window !== "undefined"`)
 ## Correção de precisão do diagnóstico
 
 A validação final confirma que TypeScript, testes, lint, diff check e watchdog passam, e que o preview visual permanece funcional. O warning `Unexpected text node: .` ainda apareceu de forma intermitente em alguns renders server-side do preview após capturas anteriores; não há novo registro no último conjunto de validações. O código foi protegido com gate SSR do painel temporário e glifos web encapsulados em `Text`, mas a estabilidade definitiva do warning deve continuar sendo monitorada no próximo ciclo. Isso é tratado como risco de renderização do preview, não como falha funcional das rotas.
+
+## Bloco massivo pós-checkpoint 93ddbc55 — governança comercial e persistência
+
+A auditoria inicial confirmou a branch `integracao-ciclo-14`, watchdog READY e lotes modulares ainda em `pending-review`, sem promoção automática. Foi criado `shared/catalog/license-audit.ts`, integrado ao índice e à API pública do catálogo, medindo imagens comerciais, créditos ausentes, URLs inválidas e bloqueios por espécie. Configurações exibe a métrica localizada em PT/EN/ES; a revisão portrait mostrou `108/108` imagens passando o padrão de licença atual e os 12 lotes ainda aguardando auditoria editorial.
+
+A persistência ganhou `withStorageRetry`, com duas tentativas controladas para falhas transitórias e erro preservado após falha persistente; a operação mantém o estado em memória e o diagnóstico de armazenamento. `LICENSES.md` foi ampliado com a trilha de auditoria e a regra de não promoção automática. Validação atual: 32 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog aprovados.
+
+## Continuação do bloco — persistência resistente
+
+A camada offline agora re tenta leituras e gravações locais transitórias por duas tentativas controladas. Após esgotar as tentativas, o AppContext mantém o estado em memória, sinaliza `readError` ou `writeError` e deixa Configurações orientar o usuário. Foram adicionados testes para sucesso após falha transitória e erro persistente. A auditoria de licenças permanece informativa: nenhum lote pendente foi promovido e nenhum dado novo foi inserido sem conferência individual de fonte e imagem.
+
+Validação atual: 32 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog READY.

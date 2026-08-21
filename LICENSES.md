@@ -43,3 +43,9 @@ Um PR de catálogo é bloqueado quando houver ID duplicado, espécie sem fonte, 
 ## Revisão e rastreabilidade
 
 Antes de cada lote, a Conta 2 informa a quantidade planejada e a Conta 1 registra a vazão real após validação. O lote piloto do Ciclo 1 deve ser pequeno o suficiente para conferir manualmente todos os arquivos e deve recalibrar o tamanho a partir do Ciclo 3. No Ciclo 20, esta política será acompanhada de uma tabela completa de créditos por espécie, arquivo, autor, licença, URL e data de revisão editorial.
+
+## Auditoria automatizada atual
+
+Além da validação de lotes, o código mantém o relatório `catalogLicenseAudit`, calculado em `shared/catalog/license-audit.ts`. Ele mede por espécie a quantidade de imagens, imagens que passam o padrão comercial, créditos ausentes, URLs inválidas e bloqueios. O relatório é informativo e **não promove automaticamente** lotes `pending-review` para `verified`.
+
+A promoção editorial exige conferência individual das imagens, fontes, nomenclatura, ocorrência no recorte do Pantanal e situação de conservação. Cada lote deve permanecer em `pending-review` até que essa conferência seja registrada no handoff e revisada por outro agente. O relatório operacional distingue `verified`, `pending-review` e `invalid`, mantendo transparência entre volume catalogado e volume editorialmente aprovado.

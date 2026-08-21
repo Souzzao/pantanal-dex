@@ -8,6 +8,31 @@ type StoredSettingsEnvelope = { version: number; settings: unknown };
 export type RestoreStatus = "empty" | "restored" | "legacy-migrated" | "corrupted" | "unsupported-version";
 export type RestoreResult<T> = { value: T; status: RestoreStatus };
 
+export async function withStorageRetry(operation: () => Promise<void>, attempts = 2): Promise<void> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < Math.max(1, attempts); attempt += 1) {
+    try {
+      await operation();
+      return;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("Falha persistente no armazenamento local");
+}
+
+export async function readStorageWithRetry<T>(operation: () => Promise<T>, attempts = 2): Promise<T> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < Math.max(1, attempts); attempt += 1) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("Falha persistente na leitura local");
+}
+
 export function serializeSettings(settings: Settings): string {
   return JSON.stringify({ version: STORAGE_VERSION, settings: sanitizeSettings(settings) });
 }
