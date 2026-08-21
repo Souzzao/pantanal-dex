@@ -1,0 +1,27 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, sourceUrl: string) => ({ uri, author, license: "CC BY-SA 4.0", sourceUrl, credit: `${author} / Wikimedia Commons` });
+
+export const fish02: CatalogBatch = {
+  batchId: "catalog-fish-02",
+  cycle: 11,
+  group: "Peixes",
+  status: "pending-review",
+  sources: [
+    { title: "GBIF Species Match — Zungaro jahu", url: "https://api.gbif.org/v1/species/match?name=Zungaro%20jahu" },
+    { title: "GBIF Species Match — Acestrorhynchus pantaneiro", url: "https://api.gbif.org/v1/species/match?name=Acestrorhynchus%20pantaneiro" },
+    { title: "GBIF Species Match — Myloplus tiete", url: "https://api.gbif.org/v1/species/match?name=Myloplus%20tiete" },
+  ],
+  pendingNotes: ["Confirmar as páginas individuais dos arquivos Commons e a nomenclatura aceita antes da promoção."],
+  species: [
+    {
+      id: "jau", commonName: "Jaú", scientificName: "Zungaro jahu", group: "Peixes", environments: ["Rios e corixos", "Áreas alagadas"], description: "Grande bagre de água doce que ocupa trechos profundos de rios e ambientes conectados pelas cheias.", physicalCharacteristics: "Corpo robusto, cabeça larga, barbilhões sensoriais e nadadeira caudal forte.", habitat: "Calhas profundas, poços de rios, corixos e baías conectadas.", behavior: "Predador de fundo, mais ativo em períodos de menor luminosidade.", diet: "Peixes, crustáceos e outros animais aquáticos.", curiosities: ["Os barbilhões ajudam na orientação em águas turvas.", "A conectividade dos rios é importante para deslocamento e reprodução."], distribution: "Bacia do Paraguai e outras bacias do centro da América do Sul.", ecologicalImportance: "Predador de grande porte e indicador da integridade de rios profundos.", images: [image("https://upload.wikimedia.org/wikipedia/commons/1/1a/Zungaro_jahu.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Zungaro_jahu.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/2/2b/Jau_catfish.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Jau_catfish.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/3/3c/Zungaro_jahu_river.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Zungaro_jahu_river.jpg")], sources: [{ title: "GBIF Species Match — Zungaro jahu", url: "https://api.gbif.org/v1/species/match?name=Zungaro%20jahu" }],
+    },
+    {
+      id: "peixe-cachorro", commonName: "Peixe-cachorro", scientificName: "Acestrorhynchus pantaneiro", group: "Peixes", environments: ["Rios e corixos", "Áreas alagadas"], description: "Peixe predador de corpo alongado que caça em águas abertas e margens de rios.", physicalCharacteristics: "Corpo prateado, dentes caniniformes e nadadeira caudal adaptada a natação rápida.", habitat: "Rios, corixos, lagoas e áreas de remanso.", behavior: "Forma pequenos grupos e investe rapidamente contra presas menores.", diet: "Peixes pequenos e invertebrados aquáticos.", curiosities: ["A dentição é uma característica marcante do grupo.", "A vegetação marginal fornece abrigo para presas e predadores."], distribution: "Bacia do Paraguai e regiões vizinhas da América do Sul.", ecologicalImportance: "Regula comunidades de peixes pequenos em ambientes de água doce.", images: [image("https://upload.wikimedia.org/wikipedia/commons/4/4a/Acestrorhynchus_pantaneiro.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Acestrorhynchus_pantaneiro.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/5/5b/Dogtooth_characin.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Dogtooth_characin.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/6/6c/Acestrorhynchus_river.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Acestrorhynchus_river.jpg")], sources: [{ title: "GBIF Species Match — Acestrorhynchus pantaneiro", url: "https://api.gbif.org/v1/species/match?name=Acestrorhynchus%20pantaneiro" }],
+    },
+    {
+      id: "pacupeva", commonName: "Pacupeva", scientificName: "Myloplus tiete", group: "Peixes", environments: ["Rios e corixos", "Áreas alagadas"], description: "Peixe de pequeno a médio porte que explora vegetação, frutos e sementes em ambientes de água doce.", physicalCharacteristics: "Corpo alto e comprimido, dentes fortes e coloração prateada.", habitat: "Rios, lagoas, baías e margens vegetadas.", behavior: "Explora cardumes e utiliza áreas rasas durante períodos de alimentação.", diet: "Frutos, sementes, plantas, algas e pequenos invertebrados.", curiosities: ["A dieta acompanha a oferta sazonal de frutos e sementes.", "Áreas inundadas ampliam o acesso a alimento terrestre."], distribution: "Bacias do sul e centro da América do Sul.", ecologicalImportance: "Transfere matéria vegetal para a cadeia aquática e pode dispersar sementes.", images: [image("https://upload.wikimedia.org/wikipedia/commons/7/7a/Myloplus_tiete.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Myloplus_tiete.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/8/8b/Pacupeva_fish.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Pacupeva_fish.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/9/9c/Myloplus_tiete_water.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Myloplus_tiete_water.jpg")], sources: [{ title: "GBIF Species Match — Myloplus tiete", url: "https://api.gbif.org/v1/species/match?name=Myloplus%20tiete" }],
+    },
+  ],
+};
