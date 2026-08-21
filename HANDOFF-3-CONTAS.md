@@ -209,3 +209,7 @@ Validação incremental: TypeScript, lint, 27 testes aprovados, 1 autenticação
 Settings agora usa envelope versionado compartilhado, aceita formato legado sanitizado e rejeita versões desconhecidas/corrupção com fallback seguro. A ficha de espécie e o mapa passaram a resolver nomes e registros pelo catálogo modular combinado; o mapa também trata falha ao abrir serviço externo sem perder dados e mantém a privacidade de coordenadas.
 
 Validação atual: TypeScript, lint, 28 testes aprovados, 1 autenticação pulado e diff check. Pendência real: teste físico de câmera/GPS/permissões e fluxo offline em aparelho sem rede.
+
+## Revisão visual portrait do bloco
+
+Mapa em 390x844 mostra o estado offline, cartão web e estado vazio de coordenadas sem corte crítico. Ficha de Tuiuiú resolve corretamente pelo catálogo modular, exibe fallback de imagem, idioma, tags, conteúdo e CTA em uma mão; a leitura segue clara até o início do conteúdo. Não foram encontrados botões mortos nesta revisão.
