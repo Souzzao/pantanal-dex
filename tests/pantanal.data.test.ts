@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
+import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
@@ -45,6 +46,11 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("keeps the catalog IDs unique and editorially valid", () => {
+    expect(new Set(species.map((item) => item.id)).size).toBe(species.length);
+    expect(validateSpeciesCatalog(species)).toEqual([]);
+  });
+
   it("validates and merges scientific catalog batches deterministically", () => {
     expect(validateCatalogBatch(currentCatalogBatch)).toEqual([]);
     const sample = currentCatalogBatch.species.slice(0, 1);
@@ -52,6 +58,14 @@ describe("PantanalDex data contracts", () => {
     expect(merged.added).toBe(1);
     expect(mergeCatalogBatch(merged.species, { ...currentCatalogBatch, id: "test-batch-2", species: sample }).skipped).toBe(1);
     expect(validateCatalogBatch({ id: "", version: 0, source: "coordenacao", species: [] })).not.toEqual([]);
+  });
+
+  it("loads modular batches with deterministic deduplication and paging", () => {
+    const loader = createCatalogLoader([[species[0], species[1]], [species[1], species[2]]]);
+    expect(loader.size).toBe(3);
+    expect(loader.search({ query: "tuiuíu" }).map((item) => item.id)).toEqual(["tuiuiu"]);
+    expect(loader.page({}, 0, 2, "name")).toHaveLength(2);
+    expect(loader.page({}, 99, 2)).toEqual([]);
   });
 
   it("searches the catalog without accents and paginates deterministically", () => {

@@ -305,3 +305,8 @@
 
 - [x] Integrar lote de 8 espécies com biguá, garça-moura, socó-dorminhoco, coruja-buraqueira, lambari, mandi, pitu e libélula
 - [x] Validar o lote de 61 espécies com TypeScript, lint, 16 testes e diff check
+
+- [x] Ciclo coordenado: adicionar oito espécies (tamanduá-mirim, irara, quati, carrapateiro, gavião-caramujeiro, pica-pau-do-campo, tesourinha) e reforçar teste de IDs únicos; catálogo validado com 68 espécies.
+- [x] Implementar carregador modular por lotes com deduplicação, busca indexada e paginação.
+- [x] Ciclo coordenado: adicionar oito espécies de répteis, anfíbios, peixes e invertebrados; corrigir IDs duplicados detectados pela validação; catálogo validado com 75 espécies.
+- [x] Validar carregador modular, TypeScript, lint, 18 testes (1 teste de autenticação pulado) e diff check.

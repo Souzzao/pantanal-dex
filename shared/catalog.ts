@@ -1,18 +1,17 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
+import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 
-export type CatalogFilters = { query?: string; group?: SpeciesGroup | ""; environment?: Environment | "" };
-export type CatalogSort = "name" | "group";
+export type CatalogFilters = CatalogLoaderFilters;
+export type CatalogSort = CatalogLoaderSort;
 
-const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
-const catalogIndex = species.map((item) => ({ item, searchText: normalize(`${item.commonName} ${item.scientificName} ${item.group} ${item.environments.join(" ")}`) }));
+const catalogLoader = createCatalogLoader([species]);
 
 export function filterSpeciesCatalog(filters: CatalogFilters = {}): Species[] {
-  const query = normalize(filters.query ?? "");
-  return catalogIndex.filter(({ item, searchText }) => (!query || searchText.includes(query)) && (!filters.group || item.group === filters.group) && (!filters.environment || item.environments.includes(filters.environment))).map(({ item }) => item);
+  return catalogLoader.search(filters);
 }
 
 export function sortSpeciesCatalog(items: Species[], sort: CatalogSort = "name"): Species[] {
-  return [...items].sort((a, b) => sort === "group" ? a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR") : a.commonName.localeCompare(b.commonName, "pt-BR") || a.scientificName.localeCompare(b.scientificName, "pt-BR"));
+  return createCatalogLoader([items]).page({}, 0, Math.max(items.length, 1), sort);
 }
 
 export function paginateSpeciesCatalog(items: Species[], page: number, pageSize = 60): Species[] {
@@ -21,4 +20,5 @@ export function paginateSpeciesCatalog(items: Species[], page: number, pageSize 
   return items.slice(safePage * safePageSize, (safePage + 1) * safePageSize);
 }
 
-export const catalogCoverage = { species: species.length, groups: groups.length, environments: environments.length };
+export const catalogCoverage = { species: catalogLoader.size, groups: groups.length, environments: environments.length };
+export { createCatalogLoader } from "./catalog-loader";
