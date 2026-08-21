@@ -285,11 +285,14 @@
 
 ## Agente 1 — ciclo coordenado atual
 
-- [ ] Verificar estado de `main`, `conta-2-catalogo`, `conta-3-qualidade` e branches de integração
-- [ ] Confirmar quantidade, grupos e validação do catálogo atual
-- [ ] Implementar o próximo bloco escalável sem alterar branches dos agentes
+- [x] Verificar estado de `main`, `conta-2-catalogo`, `conta-3-qualidade` e branches de integração
+- [x] Confirmar quantidade, grupos e validação do catálogo atual
+- [x] Implementar o próximo bloco escalável sem alterar branches dos agentes
 - [ ] Preparar checklist de PR e handoff para os Agentes 2 e 3
 - [ ] Validar e salvar checkpoint do ciclo coordenado
 
 - [x] Revisar o PR 5 do Agente 2 e bloquear integração por diff stale destrutivo
 - [ ] Solicitar novo PR do Agente 2 baseado na main atual, contendo somente lote científico
+
+- [x] Integrar o lote coordenado seguinte com 8 espécies sem IDs duplicados
+- [x] Validar o lote seguinte com TypeScript, lint, 16 testes e diff check
