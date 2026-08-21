@@ -28,3 +28,10 @@ O lote de anfíbios foi implementado com imagens Commons individualmente registr
 Em 21 de agosto de 2026, os quinze nomes científicos dos lotes modulares foram consultados individualmente no endpoint público `https://api.gbif.org/v1/species/match`. Todos retornaram `matchType=EXACT` e `status=ACCEPTED`: `Anhima cornuta`, `Boana albopunctata`, `Cariama cristata`, `Chrysocyon brachyurus`, `Crax fasciolata`, `Morpho helenor`, `Oxybelis aeneus`, `Pecari tajacu`, `Phyllomedusa sauvagii`, `Piaractus mesopotamicus`, `Pseudoplatystoma corruscans`, `Salminus brasiliensis`, `Salvator merianae`, `Tayassu pecari` e `Tetragonisca angustula`.
 
 A confirmação é taxonômica e não prova, sozinha, ocorrência no recorte do Pantanal nem situação de conservação. Esses dois atributos permanecem pendentes até fonte SiBBr/ICMBio e Livro Vermelho/portaria oficial aplicável.
+
+
+## Auditoria comercial do catálogo legado
+
+Foi executada a migração controlada de 15 referências legadas da IUCN em `shared/pantanal.ts`. Cada referência foi substituída por consulta GBIF Species Match correspondente, sem usar a API IUCN. Os 15 campos `conservationStatus` legados foram removidos porque não havia, nesta execução, confirmação individual pelo Livro Vermelho ICMBio ou por portaria MMA/ICMBio. A ausência de status é intencional e deve permanecer até revisão oficial.
+
+O script auditável `scripts/normalize-legacy-commercial.mjs` interrompe se não encontrar referências IUCN ou se alguma permanecer após a migração. O teste do catálogo também impede regressão de fontes IUCN e de status de conservação sem fonte aprovada.

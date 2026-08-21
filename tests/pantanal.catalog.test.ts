@@ -64,6 +64,13 @@ describe("PantanalDex catalog", () => {
     expect(normalizeCatalogSearch("Panthera onca")).toBe("panthera onca");
   });
 
+  it("keeps public catalog sources within the approved commercial policy", () => {
+    for (const item of species) {
+      expect(item.sources.every((source) => !/iucnredlist|IUCN/i.test(source.url + source.title))).toBe(true);
+      expect(item.conservationStatus).toBeUndefined();
+    }
+  });
+
   it("keeps the required scientific fields populated", () => {
     for (const item of species) {
       expect(item.commonName.trim()).not.toBe("");

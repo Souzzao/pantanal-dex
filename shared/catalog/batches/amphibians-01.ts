@@ -11,7 +11,7 @@ export const amphibians01: CatalogBatch = {
     { title: "GBIF Species Match — Boana albopunctata", url: "https://api.gbif.org/v1/species/match?name=Boana%20albopunctata" },
     { title: "GBIF Species Match — Phyllomedusa sauvagii", url: "https://api.gbif.org/v1/species/match?name=Phyllomedusa%20sauvagii" },
   ],
-  pendingNotes: ["A busca global da IUCN não retornou resultado para Boana albopunctata; não preencher situação de conservação sem fonte confirmada.", "Confirmar ocorrência no recorte do Pantanal e revisar nomenclatura regional antes de promover o lote."],
+  pendingNotes: ["Não preencher situação de conservação sem fonte oficial ICMBio/MMA confirmada.", "Confirmar ocorrência no recorte do Pantanal e revisar nomenclatura regional antes de promover o lote."],
   species: [
     {
       id: "perereca-do-banheiro", commonName: "Perereca", scientificName: "Boana albopunctata", group: "Anfíbios", environments: ["Áreas alagadas", "Bordas de mata"],

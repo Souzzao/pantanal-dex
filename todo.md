@@ -171,7 +171,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 ### Fila priorizada anti-repetição
 
 1. `[x]` Completar este bloco de invertebrados: `catalog-invertebrates-03` adicionou duas espécies com seis imagens Commons verificadas; novas espécies continuam na fila.
-2. `[ ]` Auditar e substituir, em lote científico, qualquer fonte legada incompatível com a política comercial; não preencher conservação sem ICMBio/MMA.
+2. `[x]` Auditar e substituir as 15 fontes IUCN legadas por consultas GBIF; status de conservação removido até confirmação ICMBio/MMA.
 3. `[x]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote; contrato também exige IDs ASCII em kebab-case.
 4. `[ ]` Expandir lotes modulares de aves, peixes e invertebrados usando a vazão real, sem arquivo monolítico.
 5. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.

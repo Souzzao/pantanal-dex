@@ -170,3 +170,10 @@ A Conta 2 adicionou `Paraponera clavata` e `Atta sexdens` em módulo separado, t
 A validação taxonômica usa consultas GBIF por espécie. O lote permanece `pending-review`: as imagens e a correspondência taxonômica não provam ocorrência no recorte do Pantanal nem situação de conservação. A alternativa executável para a próxima etapa é consultar SiBBr/ICMBio para ocorrência e Livro Vermelho/portarias MMA/ICMBio para conservação; sem confirmação, os campos continuam vazios.
 
 O bloco foi entregue com índice, teste, manifesto `LICENSES-credits.md`, TODO, check, lint, test e diff check pendentes de commit final nesta rodada.
+
+
+## 17. Auditoria comercial do catálogo legado
+
+Foi identificado que `shared/pantanal.ts` continha 15 referências IUCN e status de conservação sem fonte aprovada para o produto comercial. O script `scripts/normalize-legacy-commercial.mjs` migrou as referências para consultas GBIF Species Match e removeu os status, sem inventar substitutos. Evidência: a execução reportou 15 migrações e zero referências IUCN restantes.
+
+A regressão é protegida por teste que exige fontes públicas sem IUCN e `conservationStatus` vazio. A pendência real permanece com o responsável científico/Agente 1: consultar Livro Vermelho ICMBio ou portarias MMA/ICMBio por espécie e preencher somente os casos confirmados. Até lá, ausência de status é o comportamento correto.
