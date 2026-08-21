@@ -154,7 +154,7 @@
 | 4–6 | Aves | [x] `catalog-birds-01` adicionado com três espécies; revisão final pendente. |
 | 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` e `catalog-amphibians-01` adicionados; revisão final pendente. |
 | 9–11 | Peixes | [x] `catalog-fish-01` adicionado com três espécies; revisão regional e conservação pendentes. |
-| 12–14 | Invertebrados | [ ] Pendente. |
+| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` adicionado com uma espécie; camarão e revisão final pendentes. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [ ] Pendente. |
 | 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [ ] Parcial; metadados do Commons do lote 01 registrados. |
 | 20 | Pacote final e PR | [ ] Pendente. |
