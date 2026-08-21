@@ -26,6 +26,10 @@ describe("PantanalDex data contracts", () => {
     expect(new Set(species.map((item) => item.group))).toEqual(
       new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]),
     );
+    for (const item of species) {
+      expect(item.reviewedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(`${item.reviewedAt}T12:00:00Z`))).toBe(false);
+    }
   });
 
   it("normalizes accents and surrounding whitespace for catalog search", () => {
