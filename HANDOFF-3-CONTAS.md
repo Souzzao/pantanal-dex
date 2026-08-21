@@ -111,7 +111,7 @@ A Conta 1 integra as entregas, resolve conflitos, executa a verificação comple
 
 O primeiro ciclo de colaboração deve expandir o catálogo científico e preparar os recursos para os próximos ciclos.
 
-A Conta 2 deve selecionar e validar espécies adicionais, preferencialmente cobrindo todos os grupos: mamíferos, aves, répteis, anfíbios, peixes e invertebrados. Cada espécie deve incluir campos completos, fonte de informação e três imagens com crédito, licença e URL de origem.
+A Conta 2 deve selecionar e validar espécies adicionais, preferencialmente cobrindo todos os grupos: mamíferos, aves, répteis, anfíbios, peixes e invertebrados. Cada espécie deve incluir campos completos, fonte de informação e três imagens com crédito, licença comercial confirmada e URL do arquivo específico. Para imagens, aceitar somente CC0, CC BY ou CC BY-SA; rejeitar NC, ND, licença ausente ou ambígua. Para conservação, usar somente Livro Vermelho ICMBio ou Portarias MMA/ICMBio; sem fonte oficial, deixar o status vazio.
 
 A Conta 3 pode trabalhar em paralelo em validação do catálogo, estados de carregamento, fallback de imagens, testes de exportação e revisão da experiência de descoberta, desde que não altere o contrato de espécie de forma incompatível.
 
@@ -119,7 +119,7 @@ A Conta 1 deve preparar a integração, revisar dependências, comparar os dados
 
 ## 10. Critérios de aceite do primeiro ciclo
 
-O ciclo só será concluído quando o catálogo tiver espécies adicionais distribuídas pelos grupos e ambientes definidos, cada espécie estiver com dados essenciais e fonte, as imagens tiverem crédito e licença, a busca e os filtros continuarem funcionando, o TypeScript não apresentar erros e o preview abrir sem rota crítica quebrada.
+O ciclo só será concluído quando o catálogo tiver espécies adicionais distribuídas pelos grupos e ambientes definidos, cada espécie estiver com dados essenciais e fonte aprovada, as imagens tiverem crédito e licença comercial confirmada, nenhum registro usar NC/ND ou IUCN Red List API, status de conservação estiver vazio ou apoiado por ICMBio/MMA, a busca e os filtros continuarem funcionando, o TypeScript não apresentar erros e o preview abrir sem rota crítica quebrada.
 
 Itens incompletos devem permanecer como `[ ]` no `todo.md`. Não marcar um item como concluído apenas porque o código foi escrito; ele precisa estar validado no fluxo real.
 
