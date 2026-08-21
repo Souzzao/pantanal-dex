@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { restoreSightings, serializeSightings } from "../shared/persistence";
-import { createExportCsv, createExportJson, toExportableSighting } from "../shared/exports";
+import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
@@ -108,5 +108,13 @@ describe("PantanalDex data contracts", () => {
     expect(exportable.locationPrecision).toBe("approximate");
     expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.25);
     expect(createExportCsv([shareable])).toContain('"-16.25","-56.65","approximate"');
+  });
+
+  it("validates exported JSON and preserves the CSV header contract", () => {
+    const json = createExportJson([sighting]);
+    expect(parseExportJson(json)).toEqual([sighting]);
+    expect(parseExportJson(JSON.stringify({ version: "0.9", sightings: [sighting] }))).toEqual([]);
+    expect(parseExportJson("not-json")).toEqual([]);
+    expect(createExportCsv([sighting]).split("\n")[0]).toBe(EXPORT_CSV_HEADER);
   });
 });

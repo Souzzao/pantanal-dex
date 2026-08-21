@@ -66,9 +66,9 @@
 ### Frente E — Offline, idiomas e exportação
 - [x] Criar camada de armazenamento local versionada e resiliente a dados corrompidos
 - [ ] Garantir catálogo, imagens disponíveis, registros e preferências sem conexão
-- [ ] Adicionar indicador não intrusivo de disponibilidade do mapa offline
+- [x] Adicionar indicador não intrusivo de disponibilidade do mapa offline
 - [x] Implementar seleção, ordem e remoção de idiomas preferidos
-- [ ] Validar esquema do JSON exportado e compatibilidade do CSV com planilhas
+- [x] Validar esquema do JSON exportado e compatibilidade do CSV com planilhas
 - [x] Garantir que exportar nunca altere ou apague os dados locais
 
 ### Frente F — Qualidade e entrega
@@ -203,3 +203,12 @@
 - [x] Auditar acessibilidade, estados de erro e fluxos de recuperação
 - [x] Criar testes determinísticos de persistência local e casos extremos de exportação
 - [x] Fazer nova revisão visual e polimento final antes do próximo checkpoint
+
+## Execução contínua — blocos de implementação
+
+- [x] Implementar ordenação e descoberta refinadas nas fichas do catálogo
+- [x] Implementar indicação clara de disponibilidade offline e estado de armazenamento
+- [x] Implementar exportação com seleção de registros e confirmação de privacidade
+- [x] Implementar melhorias adicionais no caderno de campo e recuperação de erros
+- [x] Implementar acessibilidade e estados de carregamento nas telas restantes
+- [x] Executar validações pontuais após cada bloco e consolidar o avanço

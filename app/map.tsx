@@ -12,7 +12,8 @@ const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
 
 export default function MapScreen() {
   const colors = useColors();
-  const located = useApp().sightings.filter((item) => item.latitude !== undefined && item.longitude !== undefined);
+  const { sightings, ready } = useApp();
+  const located = sightings.filter((item) => item.latitude !== undefined && item.longitude !== undefined);
 
   const openExternalMap = (latitude: number, longitude: number) => {
     void Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
@@ -20,9 +21,13 @@ export default function MapScreen() {
 
   return (
     <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5">
-      <Pressable onPress={() => router.back()}><Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text></Pressable>
+      <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar para avistamentos"><Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text></Pressable>
       <Text style={{ color: colors.foreground, fontSize: 28, fontWeight: "800" }}>Mapa de avistamentos</Text>
       <Text style={{ color: colors.muted, marginTop: 5 }}>Seus registros georreferenciados do caderno de campo</Text>
+      <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginTop: 14 }} accessibilityRole="summary">
+        <Text style={{ color: colors.foreground, fontWeight: "800" }}>{ready ? "Dados do caderno disponíveis offline" : "Restaurando dados locais…"}</Text>
+        <Text style={{ color: colors.muted, marginTop: 4, lineHeight: 18 }}>Seus registros e coordenadas ficam no aparelho. A camada cartográfica pode precisar de internet; no web, os cartões continuam disponíveis sem ela.</Text>
+      </View>
       <NativeMapView />
       <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, padding: 18, marginTop: 18 }}>
         <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 17 }}>Visualização web</Text>

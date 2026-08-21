@@ -28,7 +28,7 @@ export default function SightingsScreen() {
         (!environmentFilter || animal?.environments.includes(environmentFilter as any)) &&
         (!cutoff || new Date(`${sighting.date}T${sighting.time || "00:00"}`) >= cutoff) &&
         (!onlyLocated || sighting.latitude !== undefined && sighting.longitude !== undefined);
-    });
+    }).sort((a, b) => `${b.date}T${b.time || "00:00"}`.localeCompare(`${a.date}T${a.time || "00:00"}`));
   }, [environmentFilter, groupFilter, onlyLocated, periodFilter, query, sightings]);
 
   const clearFilters = () => {
@@ -49,10 +49,10 @@ export default function SightingsScreen() {
     <ScreenContainer className="px-5">
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingTop: 18, marginBottom: 5 }}>
         <View><Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>Avistamentos</Text><Text style={{ color: colors.muted, marginTop: 4 }}>Seu caderno de campo</Text></View>
-        <Pressable onPress={() => router.push("/sightings/new" as any)} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 22, paddingHorizontal: 14, paddingVertical: 10 }, pressed && { opacity: 0.82 }]}><Text style={{ color: "#fff", fontWeight: "800" }}>+ Novo</Text></Pressable>
+        <Pressable onPress={() => router.push("/sightings/new" as any)} accessibilityRole="button" accessibilityLabel="Novo avistamento" style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 22, paddingHorizontal: 14, paddingVertical: 10 }, pressed && { opacity: 0.82 }]}><Text style={{ color: "#fff", fontWeight: "800" }}>+ Novo</Text></Pressable>
       </View>
       <TextInput value={query} onChangeText={setQuery} placeholder="Buscar espécie, local ou observação" placeholderTextColor={colors.muted} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginTop: 14 }} />
-      <Pressable onPress={() => router.push("/map" as any)} style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 12, marginTop: 10 }, pressed && { opacity: 0.78 }]}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>Ver no mapa</Text></Pressable>
+      <Pressable onPress={() => router.push("/map" as any)} accessibilityRole="button" accessibilityLabel="Ver avistamentos no mapa" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 12, marginTop: 10 }, pressed && { opacity: 0.78 }]}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>Ver no mapa</Text></Pressable>
       <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16, marginBottom: 8 }}>Grupo</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 2 }}>{["", ...groups].map((item) => <View key={item || "all-groups"}>{renderChip(item || "Todos", groupFilter === item, () => setGroupFilter(item))}</View>)}</ScrollView>
       <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 14, marginBottom: 8 }}>Ambiente</Text>
