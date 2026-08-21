@@ -1,0 +1,22 @@
+# Project TODO
+
+- [x] Ler e consolidar a especificação básica do PantanalDex
+- [x] Criar o plano de design da interface mobile em `design.md`
+- [x] Gerar identidade visual e configurar ícone, splash, favicon e branding do app
+- [x] Configurar tema PantanalDex e navegação inferior com quatro áreas
+- [x] Criar modelo `Species` e catálogo JSON local com espécies iniciais
+- [x] Implementar tela inicial com busca rápida, destaques e atalhos funcionais
+- [x] Implementar catálogo com busca por nome popular/científico
+- [x] Implementar filtros de animais por grupo e ambiente
+- [x] Implementar ficha detalhada com galeria de três imagens, créditos, licenças e fontes
+- [x] Implementar barra rápida de idioma e preferências de idiomas
+- [x] Criar modelo `Sighting` e persistência local com AsyncStorage
+- [x] Implementar formulário de novo avistamento com foto opcional, data, local e observações
+- [x] Implementar localização opcional e precisão da localização
+- [x] Implementar lista de avistamentos com estados vazio, filtros, edição e exclusão confirmada
+- [ ] Implementar modo mapa para registros com coordenadas
+- [x] Implementar exportação JSON e CSV sem apagar registros
+- [x] Garantir leitura do catálogo e edição dos registros sem conexão
+- [ ] Criar testes determinísticos para validação, persistência e exportação
+- [x] Executar verificação TypeScript, lint e testes
+- [x] Abrir a prévia do projeto no navegador do usuário

@@ -1,48 +1,20 @@
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
-
+import { useMemo, useState } from "react";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
+import { species } from "@/shared/pantanal";
+import { useColors } from "@/hooks/use-colors";
 
-/**
- * Home Screen - NativeWind Example
- *
- * This template uses NativeWind (Tailwind CSS for React Native).
- * You can use familiar Tailwind classes directly in className props.
- *
- * Key patterns:
- * - Use `className` instead of `style` for most styling
- * - Theme colors: use tokens directly (bg-background, text-foreground, bg-primary, etc.); no dark: prefix needed
- * - Responsive: standard Tailwind breakpoints work on web
- * - Custom colors defined in tailwind.config.js
- */
 export default function HomeScreen() {
-  return (
-    <ScreenContainer className="p-6">
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 gap-8">
-          {/* Hero Section */}
-          <View className="items-center gap-2">
-            <Text className="text-4xl font-bold text-foreground">Welcome</Text>
-            <Text className="text-base text-muted text-center">
-              Edit app/(tabs)/index.tsx to get started
-            </Text>
-          </View>
-
-          {/* Example Card */}
-          <View className="w-full max-w-sm self-center bg-surface rounded-2xl p-6 shadow-sm border border-border">
-            <Text className="text-lg font-semibold text-foreground mb-2">NativeWind Ready</Text>
-            <Text className="text-sm text-muted leading-relaxed">
-              Use Tailwind CSS classes directly in your React Native components.
-            </Text>
-          </View>
-
-          {/* Example Button */}
-          <View className="items-center">
-            <TouchableOpacity className="bg-primary px-6 py-3 rounded-full active:opacity-80">
-              <Text className="text-background font-semibold">Get Started</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </ScreenContainer>
-  );
+  const colors = useColors(); const [query, setQuery] = useState("");
+  const highlights = useMemo(() => species.filter((item) => !query || `${item.commonName} ${item.scientificName}`.toLowerCase().includes(query.toLowerCase())).slice(0, 4), [query]);
+  return <ScreenContainer className="px-5" containerClassName="bg-background">
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
+      <View style={{ paddingTop: 18, paddingBottom: 20 }}><Text style={{ color: colors.primary, fontSize: 15, fontWeight: "700", letterSpacing: 1.5 }}>GUIA DE CAMPO</Text><Text style={{ color: colors.foreground, fontSize: 36, fontWeight: "800", marginTop: 4 }}>Pantanal<Text style={{ color: colors.primary }}>Dex</Text></Text><Text style={{ color: colors.muted, fontSize: 16, marginTop: 6 }}>Conheça e registre os animais do Pantanal</Text></View>
+      <TextInput value={query} onChangeText={setQuery} placeholder="Buscar animal pelo nome" placeholderTextColor={colors.muted} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, paddingHorizontal: 16, paddingVertical: 14, color: colors.foreground, fontSize: 15 }} />
+      <View style={{ flexDirection: "row", gap: 10, marginTop: 16 }}><Pressable onPress={() => router.push("/(tabs)/animals" as any)} style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, padding: 16, borderRadius: 16 }, pressed && { opacity: .8 }]}><Text style={{ color: "#fff", fontWeight: "700", textAlign: "center" }}>Explorar animais</Text></Pressable><Pressable onPress={() => router.push("/(tabs)/sightings" as any)} style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, padding: 16, borderRadius: 16 }, pressed && { opacity: .8 }]}><Text style={{ color: "#fff", fontWeight: "700", textAlign: "center" }}>Meus avistamentos</Text></Pressable></View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 28, marginBottom: 12 }}><Text style={{ color: colors.foreground, fontSize: 22, fontWeight: "800" }}>Em destaque</Text><Pressable onPress={() => router.push("/(tabs)/animals" as any)}><Text style={{ color: colors.primary, fontWeight: "700" }}>Ver todos</Text></Pressable></View>
+      {highlights.map((item) => <Pressable key={item.id} onPress={() => router.push({ pathname: "/species/[id]", params: { id: item.id } } as any)} style={({ pressed }) => [{ backgroundColor: colors.surface, borderRadius: 18, marginBottom: 12, overflow: "hidden", borderWidth: 1, borderColor: colors.border }, pressed && { opacity: .8 }]}><Image source={{ uri: item.images[0].uri }} style={{ width: "100%", height: 150, backgroundColor: colors.border }} /><View style={{ padding: 14 }}><Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>{item.commonName}</Text><Text style={{ color: colors.muted, fontStyle: "italic", marginTop: 3 }}>{item.scientificName}</Text><Text style={{ color: colors.primary, marginTop: 8, fontWeight: "700" }}>{item.group} · {item.environments[0]}</Text></View></Pressable>)}
+    </ScrollView>
+  </ScreenContainer>;
 }
