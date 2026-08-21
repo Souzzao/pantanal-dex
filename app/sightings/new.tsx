@@ -49,6 +49,16 @@ export default function NewSightingScreen() {
     if (!result.canceled) setPhotoUri(result.assets[0].uri);
   };
 
+  const takePhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert("Câmera não autorizada", "Permita o acesso à câmera ou escolha uma fotografia da galeria.");
+      return;
+    }
+    const result = await ImagePicker.launchCameraAsync({ mediaTypes: ["images"], quality: 0.8 });
+    if (!result.canceled) setPhotoUri(result.assets[0].uri);
+  };
+
   const useLocation = async () => {
     const permission = await Location.requestForegroundPermissionsAsync();
     if (permission.status !== "granted") {
@@ -140,9 +150,14 @@ export default function NewSightingScreen() {
             <TextInput value={value as string} onChangeText={setter as any} placeholder={placeholder as string} placeholderTextColor={colors.muted} keyboardType={label === "Quantidade" ? "numeric" : "default"} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground }} />
           </View>
         ))}
-        <Pressable onPress={pickPhoto} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
-          <Text style={{ color: colors.primary, fontWeight: "800" }}>{photoUri ? "Fotografia selecionada" : "Adicionar fotografia (opcional)"}</Text>
-        </Pressable>
+        <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }}>
+          <Pressable onPress={takePhoto} accessibilityRole="button" accessibilityLabel="Tirar fotografia pela câmera" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
+            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Usar câmera</Text>
+          </Pressable>
+          <Pressable onPress={pickPhoto} accessibilityRole="button" accessibilityLabel="Escolher fotografia da galeria" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
+            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{photoUri ? "Trocar foto" : "Escolher galeria"}</Text>
+          </Pressable>
+        </View>
         <Pressable onPress={useLocation} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800" }}>{coords ? "Localização adicionada" : "Usar localização do aparelho"}</Text>
         </Pressable>
