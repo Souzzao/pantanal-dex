@@ -219,3 +219,9 @@ As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`. O lote
 A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras paleatus`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY, CC BY-SA e domínio público; não há NC, ND ou licença ausente. Autores, URLs de distribuição, páginas de origem e créditos estão registrados no lote.
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
+
+## 24. Bloco de invertebrados `catalog-invertebrates-05`
+
+A Conta 2 adicionou `Morpho menelaus`, `Ascalapha odorata` e `Dynastes hercules`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY 3.0 e CC BY-SA 4.0; não há NC, ND ou licença ausente. As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`, e as nove URLs `Special:FilePath` retornaram HTTP 200.
+
+Durante a validação foi encontrado um conflito global porque `morpho-helenor` já existia em `invertebrates-01`. O erro foi corrigido substituindo o registro novo por `morpho-menelaus`; os 11 testes voltaram a passar. O lote permanece `pending-review` para ocorrência específica no Pantanal e conservação oficial. Próxima tarefa desbloqueada: `birds-04` ou `fish-05`.

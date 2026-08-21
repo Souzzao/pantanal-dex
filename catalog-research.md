@@ -50,6 +50,10 @@ O GBIF retornou `ACCEPTED`/`EXACT` para `Brycon hilarii`, `Myloplus tiete` e `Gy
 
 Nenhuma licença contém NC ou ND. As referências e imagens não comprovam, sozinhas, ocorrência no recorte do Pantanal ou situação de conservação; manter `pending-review`.
 
+## Invertebrates-05 — pesquisa Commons e GBIF
+
+O GBIF retornou `ACCEPTED`/`EXACT` para `Morpho helenor`, `Ascalapha odorata` e `Dynastes hercules`. A API do Wikimedia Commons identificou licenças CC BY 3.0 ou CC BY-SA 4.0 para os nove arquivos selecionados, e todas as URLs `Special:FilePath` retornaram HTTP 200. A confirmação de ocorrência no recorte do Pantanal e de conservação oficial permanece pendente; não houve inferência desses atributos.
+
 
 ## Birds-03 — pesquisa Commons
 

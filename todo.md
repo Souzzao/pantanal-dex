@@ -154,7 +154,7 @@
 | 4–6 | Aves | [x] `catalog-birds-01` a `03` adicionados com nove espécies; revisão regional e conservação pendentes. |
 | 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` e `catalog-amphibians-01` adicionados; revisão final pendente. |
 | 9–11 | Peixes | [x] `catalog-fish-01` a `04` adicionados com doze espécies; revisão regional e conservação pendentes. |
-| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` a `04` adicionados com seis espécies no total; revisão regional e conservação pendentes. |
+| 12–14 | Invertebrados | [x] `catalog-invertebrates-01` a `05` adicionados com nove espécies no total; revisão regional e conservação pendentes. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [x] Índices derivados e helper de nomes alternativos implementados; popular sinônimos documentados continua pendente. |
 | 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [x] 15 nomes modulares validados como ACCEPTED/EXACT no GBIF; ocorrência regional e conservação ICMBio/MMA ainda pendentes. |
 | 20 | Pacote final e PR | [ ] Pendente. |
@@ -173,7 +173,9 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 1. `[x]` Completar este bloco de invertebrados: `catalog-invertebrates-03` e `04` adicionaram quatro espécies com doze imagens Commons verificadas; novas espécies continuam na fila.
 2. `[x]` Auditar e substituir as 15 fontes IUCN legadas por consultas GBIF; status de conservação removido até confirmação ICMBio/MMA.
 3. `[x]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote; contrato também exige IDs ASCII em kebab-case.
-4. `[x]` Expandir lotes modulares: `catalog-birds-02`, `03`, `catalog-fish-02` a `04` adicionaram quinze espécies; continuar novos lotes de aves, peixes e invertebrados.
+4. `[x]` Expandir lotes modulares: `catalog-birds-02`, `03`, `catalog-fish-02` a `04` e `catalog-invertebrates-05` adicionaram dezoito espécies; continuar novos lotes de aves, peixes e invertebrados.
+6. `[x]` Implementar `catalog-invertebrates-05` com três espécies e nove imagens Commons; corrigir o ID duplicado `morpho-helenor` detectado pelos testes, substituindo-o por `morpho-menelaus`.
+7. `[ ]` Implementar `catalog-birds-04` ou `catalog-fish-05` com três espécies novas e evidência Commons/GBIF.
 5. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
