@@ -143,3 +143,11 @@
 - [x] Criar repositório privado compartilhado sem expor tokens ou segredos
 - [x] Definir branches Conta 2, Conta 3 e coordenação
 - [x] Documentar Pull Requests, revisão e integração do primeiro ciclo
+
+## Acesso GitHub das contas colaboradoras
+
+- [ ] Adicionar ou confirmar o convite da conta dark371star no repositório privado Souzzao/pantanal-dex
+- [ ] Confirmar que dark371star aceitou o convite e consegue ver as branches conta-2-catalogo e conta-3-qualidade
+- [ ] Iniciar a Conta 2 e a Conta 3 somente após validação do acesso ao repositório
+
+- [x] Enviar convite GitHub para FelipeSouzao no repositório privado; aceite ainda pendente
