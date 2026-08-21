@@ -263,3 +263,22 @@
 - [x] Exibir nas configurações a integridade do catálogo local e o número de espécies válidas
 
 - [x] Migrar arrays legados para o envelope versionado sem substituir dados corrompidos por vazio
+
+## Nova expansão coordenada — 20 ciclos e catálogo amplo
+
+- [x] Criar três prompts compactos, um para cada agente, dentro do limite de caracteres da Manus
+- [x] Definir 20 ciclos compartilhados com responsáveis, dependências, branches, PRs e critérios de aceite
+- [x] Expandir o catálogo para novos lotes de fauna do Pantanal sem quebrar os contratos atuais
+- [x] Validar cada lote por grupo, ambiente, imagens, créditos, fontes e situação de conservação
+- [ ] Integrar os lotes dos Agentes 2 e 3 somente após testes e revisão da Conta 1
+- [x] Atualizar testes, matriz de requisitos, documentação e checkpoint da expansão
+
+## Meta de escala — catálogo com 3.000+ espécies e equipe de 3 agentes
+
+- [x] Atualizar os três prompts para desenvolvimento real, não apenas documentação
+- [x] Redefinir os 20 ciclos com lotes escaláveis e meta explícita de 3.000+ espécies
+- [x] Criar contrato de lote científico, validação e registro de fontes
+- [x] Preparar catálogo modular para não concentrar milhares de espécies em um único arquivo
+- [x] Expandir espécies em lotes por grupos, biomas locais e ambientes
+- [x] Implementar paginação, busca indexada e filtros eficientes para catálogo em escala
+- [ ] Integrar PRs dos Agentes 2 e 3 com testes, revisão e checkpoints coordenados

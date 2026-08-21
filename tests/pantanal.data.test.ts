@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
+import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
@@ -41,6 +42,14 @@ describe("PantanalDex data contracts", () => {
     const errors = validateSpeciesCatalog(broken);
     expect(errors).toContain("species[0](tuiuiu).images[0] sem crédito/licença/fonte completos");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
+  });
+
+  it("searches the catalog without accents and paginates deterministically", () => {
+    expect(filterSpeciesCatalog({ query: "ariranha" }).map((item) => item.id)).toContain("ariranha");
+    expect(filterSpeciesCatalog({ query: "tuiuíu" }).map((item) => item.id)).toContain("tuiuiu");
+    const sorted = sortSpeciesCatalog(species, "name");
+    expect(paginateSpeciesCatalog(sorted, 0, 5)).toHaveLength(5);
+    expect(paginateSpeciesCatalog(sorted, 999, 5)).toEqual([]);
   });
 
   it("exports sightings as versioned JSON without losing fields", () => {

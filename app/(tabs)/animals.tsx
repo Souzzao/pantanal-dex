@@ -3,6 +3,7 @@ import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups, species } from "@/shared/pantanal";
+import { filterSpeciesCatalog, sortSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 import { RemoteImage } from "@/components/RemoteImage";
 
@@ -12,10 +13,7 @@ export default function AnimalsScreen() {
   const [group, setGroup] = useState("");
   const [environment, setEnvironment] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "group">("name");
-  const filtered = useMemo(() => species.filter((item) => {
-    const matchesQuery = !query || `${item.commonName} ${item.scientificName}`.toLowerCase().includes(query.toLowerCase());
-    return matchesQuery && (!group || item.group === group) && (!environment || item.environments.includes(environment as any));
-  }).sort((a, b) => sortBy === "name" ? a.commonName.localeCompare(b.commonName, "pt-BR") : a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR")), [query, group, environment, sortBy]);
+  const filtered = useMemo(() => sortSpeciesCatalog(filterSpeciesCatalog({ query, group: group as any, environment: environment as any }), sortBy), [query, group, environment, sortBy]);
   const chip = (label: string, active: boolean, onPress: () => void) => <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ selected: active }} accessibilityLabel={label} style={{ backgroundColor: active ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 9 }}><Text style={{ color: active ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{label}</Text></Pressable>;
   return <ScreenContainer className="px-5">
     <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>Animais</Text>
