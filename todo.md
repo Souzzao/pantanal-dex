@@ -370,3 +370,11 @@
 - [ ] Revisar portrait 9:16, uso com uma mão e acessibilidade das telas principais
 - [x] Atualizar documentação e handoff com arquivos, riscos e dependências
 - [x] Executar check, lint, test, diff check e watchdog; publicar commit e PR
+
+## Bloco massivo seguinte — offline, import/export e acessibilidade
+- [ ] Auditar a fila atual, watchdog, PR #10 e estado da branch sem repetir auditorias concluídas
+- [x] Garantir feedback seguro para falhas de leitura/gravação local e ações destrutivas
+- [x] Ampliar testes de importação/exportação, corrupção e preservação de dados
+- [x] Revisar accessibilityLabel, accessibilityState, foco e feedback dos fluxos principais
+- [x] Revisar estados vazios, loading, erro e modo offline nas telas principais
+- [x] Atualizar HANDOFF-3-CONTAS.md, validar, commitar, publicar PR e checkpoint

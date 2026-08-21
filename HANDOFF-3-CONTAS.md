@@ -169,3 +169,11 @@ Validação: 24 testes aprovados, 1 teste de autenticação pulado, TypeScript, 
 ## Revisão visual do bloco massivo
 
 Preview portrait 390x844 revisado em Home e Animais. O contador modular mostra 102 espécies combinadas, a busca encontra lotes novos e a navegação inferior permanece acessível; não foram observados cortes críticos no viewport. A validação prática nativa de câmera/GPS continua pendente de aparelho físico.
+
+## Bloco massivo 2 — offline, import/export e acessibilidade
+
+Estado: implementado na branch integracao-ciclo-14.
+
+Configurações agora usa o catálogo modular para contagens e nomes, bloqueia import/export/limpeza enquanto o caderno restaura, trata falhas de limpeza sem apagar dados e expõe labels/states de acessibilidade nos controles. Preview portrait 390x844 revisado sem cortes críticos; estado vazio de registros está legível.
+
+Validação: TypeScript, lint, 24 testes aprovados, 1 autenticação pulado, diff check e watchdog. Pendência real: testar câmera/GPS e permissões em aparelho físico; não é bloqueio para o fluxo web/offline local.
