@@ -133,7 +133,7 @@ export default function NewSightingScreen() {
         <TextInput value={speciesQuery} onChangeText={setSpeciesQuery} placeholder="Buscar por nome popular ou científico" placeholderTextColor={colors.muted} accessibilityLabel="Buscar espécie por nome popular ou científico" style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 10 }} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingBottom: 15 }}>
           {visibleSpecies.map((item) => (
-            <Pressable key={item.id} onPress={() => setSelected(item.id)} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}>
+            <Pressable key={item.id} onPress={() => setSelected(item.id)} accessibilityRole="button" accessibilityLabel={`Selecionar ${item.commonName}`} accessibilityState={{ selected: selected === item.id }} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}>
               <Text style={{ color: selected === item.id ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{item.commonName}</Text>
             </Pressable>
           ))}
@@ -158,19 +158,19 @@ export default function NewSightingScreen() {
             <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{photoUri ? "Trocar foto" : "Escolher galeria"}</Text>
           </Pressable>
         </View>
-        <Pressable onPress={useLocation} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
+        <Pressable onPress={useLocation} accessibilityRole="button" accessibilityLabel={coords ? "Localização do aparelho adicionada" : "Usar localização do aparelho"} style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800" }}>{coords ? "Localização adicionada" : "Usar localização do aparelho"}</Text>
         </Pressable>
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 7 }}>Observações</Text>
         <TextInput value={notes} onChangeText={setNotes} multiline placeholder="Comportamento, ambiente e outras notas" placeholderTextColor={colors.muted} style={{ minHeight: 105, textAlignVertical: "top", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 14 }} />
         <View style={{ flexDirection: "row", gap: 8, marginBottom: 20 }}>
           {(["private", "shareable"] as Visibility[]).map((item) => (
-            <Pressable key={item} onPress={() => setVisibility(item)} style={{ flex: 1, backgroundColor: visibility === item ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 12 }}>
+            <Pressable key={item} onPress={() => setVisibility(item)} accessibilityRole="button" accessibilityLabel={item === "private" ? "Visibilidade pessoal" : "Visibilidade compartilhável"} accessibilityState={{ selected: visibility === item }} style={{ flex: 1, backgroundColor: visibility === item ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 12 }}>
               <Text style={{ textAlign: "center", color: visibility === item ? "#fff" : colors.foreground, fontWeight: "700" }}>{item === "private" ? "Pessoal" : "Compartilhável"}</Text>
             </Pressable>
           ))}
         </View>
-        <Pressable onPress={save} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
+        <Pressable onPress={save} accessibilityRole="button" accessibilityLabel={existing ? "Salvar alterações do avistamento" : "Salvar avistamento"} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
           <Text style={{ color: "#fff", fontWeight: "800", textAlign: "center", fontSize: 16 }}>{existing ? "Salvar alterações" : "Salvar avistamento"}</Text>
         </Pressable>
       </ScrollView>
