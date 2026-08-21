@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createExportCsv, createExportJson, parseImportJson } from "../shared/exports";
+import { createExportCsv, createExportJson, mergeImportedSightings, parseImportJson } from "../shared/exports";
 import { isValidCoordinate, isValidIsoDate, isValidTime, normalizeCatalogSearch, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
@@ -131,6 +131,14 @@ describe("PantanalDex data contracts", () => {
     expect(result.sightings).toHaveLength(1);
     expect(result.sightings[0]).toMatchObject({ id: "sighting-1", speciesId: "tuiuiu" });
     expect(result.skipped).toBe(2);
+  });
+
+  it("deduplicates imported IDs against local data and within the file", () => {
+    const duplicate = { ...sighting };
+    const result = mergeImportedSightings([sighting], [duplicate, { ...sighting, id: "new-record" }]);
+    expect(result.imported).toBe(1);
+    expect(result.duplicates).toBe(1);
+    expect(result.sightings.map((item) => item.id)).toEqual(["new-record", "sighting-1"]);
   });
 
   it("rejects JSON without the versioned sightings envelope", () => {

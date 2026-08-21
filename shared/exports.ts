@@ -63,6 +63,16 @@ function normalizeImportedSighting(value: unknown): Sighting | null {
   return { id: item.id, speciesId: item.speciesId, date: item.date, time: item.time as string | undefined, photoUri, locationLabel, latitude, longitude, locationPrecision: item.locationPrecision as LocationPrecision, quantity, notes, visibility: item.visibility as Visibility, createdAt, updatedAt };
 }
 
+export function mergeImportedSightings(existing: Sighting[], imported: Sighting[]) {
+  const ids = new Set(existing.map((item) => item.id));
+  const fresh = imported.filter((item) => {
+    if (ids.has(item.id)) return false;
+    ids.add(item.id);
+    return true;
+  });
+  return { sightings: [...fresh, ...existing], imported: fresh.length, duplicates: imported.length - fresh.length };
+}
+
 export function parseImportJson(raw: string): { sightings: Sighting[]; skipped: number; version: string } {
   const parsed: unknown = JSON.parse(raw);
   if (!parsed || typeof parsed !== "object" || !Array.isArray((parsed as { sightings?: unknown }).sightings)) throw new Error("Arquivo incompatível: lista de avistamentos não encontrada.");
