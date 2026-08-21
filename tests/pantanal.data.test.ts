@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { restoreSightings, serializeSightings } from "../shared/persistence";
+import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
@@ -116,5 +116,16 @@ describe("PantanalDex data contracts", () => {
     expect(parseExportJson(JSON.stringify({ version: "0.9", sightings: [sighting] }))).toEqual([]);
     expect(parseExportJson("not-json")).toEqual([]);
     expect(createExportCsv([sighting]).split("\n")[0]).toBe(EXPORT_CSV_HEADER);
+  });
+
+  it("merges imported sightings by id and keeps the newest version", () => {
+    const newer = { ...sighting, notes: "atualizado", updatedAt: "2026-08-21T10:00:00.000Z" };
+    const added = { ...sighting, id: "sighting-2", updatedAt: "2026-08-21T09:00:00.000Z" };
+    const result = mergeSightings([sighting], [newer, added, { ...sighting, id: "bad", quantity: -1 }]);
+    expect(result.added).toBe(1);
+    expect(result.updated).toBe(1);
+    expect(result.skipped).toBe(1);
+    expect(result.sightings.find((item) => item.id === sighting.id)?.notes).toBe("atualizado");
+    expect(result.sightings.some((item) => item.id === "sighting-2")).toBe(true);
   });
 });

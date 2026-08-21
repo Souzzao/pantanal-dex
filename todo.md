@@ -212,3 +212,12 @@
 - [x] Implementar melhorias adicionais no caderno de campo e recuperação de erros
 - [x] Implementar acessibilidade e estados de carregamento nas telas restantes
 - [x] Executar validações pontuais após cada bloco e consolidar o avanço
+
+## Execução contínua — próxima sequência
+
+- [x] Implementar importação controlada de JSON exportado
+- [x] Implementar confirmação, validação e merge seguro de dados importados
+- [x] Implementar indicador de catálogo/imagens offline sem prometer cache remoto inexistente
+- [x] Implementar ações avançadas no detalhe do avistamento
+- [x] Implementar acessibilidade e recuperação nos fluxos restantes
+- [x] Executar testes pontuais e consolidar os blocos implementados

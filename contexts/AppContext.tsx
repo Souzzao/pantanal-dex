@@ -3,16 +3,16 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { Platform } from "react-native";
 
 import type { Sighting } from "@/shared/pantanal";
-import { sanitizeSettings, sanitizeStoredSightings } from "@/shared/pantanal";
+import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
-import { restoreSightings, serializeSightings } from "@/shared/persistence";
+import { mergeSightings, restoreSightings, serializeSightings } from "@/shared/persistence";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
 export type Settings = { defaultLanguage: string; quickLanguages: string[] };
-type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; setSettings: (settings: Settings) => Promise<void> };
+type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
@@ -63,6 +63,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     addSighting: async (sighting) => persistSightings([sighting, ...sightings.filter((item) => item.id !== sighting.id)]),
     updateSighting: async (sighting) => persistSightings(sightings.map((item) => item.id === sighting.id ? sighting : item)),
     deleteSighting: async (id) => persistSightings(sightings.filter((item) => item.id !== id)),
+    importSightings: async (incoming) => {
+      const result = mergeSightings(sightings, incoming);
+      await persistSightings(result.sightings);
+      return { added: result.added, updated: result.updated, skipped: result.skipped };
+    },
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
       setSettingsState(safe);

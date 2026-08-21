@@ -24,3 +24,23 @@ export function restoreSightings(value: string | null): Sighting[] {
     return [];
   }
 }
+
+export function mergeSightings(current: Sighting[], incoming: Sighting[]): { sightings: Sighting[]; added: number; updated: number; skipped: number } {
+  const safeIncoming = sanitizeStoredSightings(incoming);
+  const byId = new Map(current.map((item) => [item.id, item]));
+  let added = 0;
+  let updated = 0;
+  for (const item of safeIncoming) {
+    const existing = byId.get(item.id);
+    if (!existing) {
+      byId.set(item.id, item);
+      added += 1;
+      continue;
+    }
+    if (new Date(item.updatedAt).getTime() > new Date(existing.updatedAt).getTime()) {
+      byId.set(item.id, item);
+      updated += 1;
+    }
+  }
+  return { sightings: Array.from(byId.values()).sort((a, b) => `${b.date}T${b.time || "00:00"}`.localeCompare(`${a.date}T${a.time || "00:00"}`)), added, updated, skipped: incoming.length - safeIncoming.length };
+}

@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import * as FileSystem from "expo-file-system/legacy";
+import * as Sharing from "expo-sharing";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { species } from "@/shared/pantanal";
+import { createExportJson, toExportableSighting } from "@/shared/exports";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
@@ -13,6 +17,7 @@ export default function SightingDetailScreen() {
   const colors = useColors();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { sightings, deleteSighting } = useApp();
+  const [sharing, setSharing] = useState(false);
   const sighting = sightings.find((item) => item.id === id);
   const animal = species.find((item) => item.id === sighting?.speciesId);
 
@@ -31,6 +36,26 @@ export default function SightingDetailScreen() {
   const showExactLocation = sighting.visibility === "private" && sighting.locationPrecision === "exact";
   const displayLatitude = sighting.latitude === undefined ? undefined : showExactLocation ? sighting.latitude : roundCoordinate(sighting.latitude);
   const displayLongitude = sighting.longitude === undefined ? undefined : showExactLocation ? sighting.longitude : roundCoordinate(sighting.longitude);
+
+  const shareSighting = async () => {
+    if (sharing) return;
+    const exactPrivate = showExactLocation;
+    if (exactPrivate) {
+      const confirmed = await new Promise<boolean>((resolve) => Alert.alert("Localização exata", "Este registro pessoal contém coordenadas exatas e será compartilhado dessa forma.", [{ text: "Cancelar", style: "cancel", onPress: () => resolve(false) }, { text: "Continuar", onPress: () => resolve(true) }]));
+      if (!confirmed) return;
+    }
+    setSharing(true);
+    try {
+      const uri = `${FileSystem.cacheDirectory}pantanal-dex-avistamento-${sighting.id}.json`;
+      await FileSystem.writeAsStringAsync(uri, createExportJson([toExportableSighting(sighting)]));
+      if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri);
+      else Alert.alert("Arquivo pronto", uri);
+    } catch {
+      Alert.alert("Compartilhamento não concluído", "Não foi possível gerar o arquivo, mas o registro local foi preservado.");
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const confirmDelete = () => Alert.alert("Excluir avistamento?", "Esta ação não pode ser desfeita.", [
     { text: "Cancelar", style: "cancel" },
@@ -59,6 +84,10 @@ export default function SightingDetailScreen() {
           <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16 }}>Observações</Text>
           <Text style={{ color: colors.muted, lineHeight: 21, marginTop: 6 }}>{sighting.notes || "Nenhuma observação adicionada."}</Text>
         </View>
+        {displayLatitude !== undefined && displayLongitude !== undefined && <Pressable onPress={() => router.push("/map" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 15, padding: 14, marginTop: 20 }, pressed && { opacity: 0.8 }]}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>Ver no mapa</Text></Pressable>}
+        <Pressable onPress={shareSighting} disabled={sharing} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 15, padding: 15, marginTop: displayLatitude !== undefined && displayLongitude !== undefined ? 12 : 20, opacity: sharing ? 0.6 : 1 }, pressed && { opacity: 0.75 }]}>
+          <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{sharing ? "Preparando arquivo…" : "Compartilhar registro"}</Text>
+        </Pressable>
         <Pressable onPress={() => router.push({ pathname: "/sightings/new", params: { id: sighting.id } } as any)} accessibilityRole="button" style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 15, padding: 15, marginTop: 20 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
           <Text style={{ color: "#fff", textAlign: "center", fontWeight: "800" }}>Editar registro</Text>
         </Pressable>

@@ -2,16 +2,19 @@ import { useEffect, useMemo, useState } from "react";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
+import * as DocumentPicker from "expo-document-picker";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { createExportCsv, createExportJson, useApp } from "@/contexts/AppContext";
+import { parseExportJson } from "@/shared/exports";
 import { languages, species } from "@/shared/pantanal";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SettingsScreen() {
   const colors = useColors();
-  const { sightings, settings, ready, setSettings } = useApp();
+  const { sightings, settings, ready, setSettings, importSightings } = useApp();
   const [exporting, setExporting] = useState(false);
+  const [importing, setImporting] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -51,6 +54,29 @@ export default function SettingsScreen() {
     }
   };
 
+  const importData = async () => {
+    setImporting(true);
+    try {
+      const pickResult = await DocumentPicker.getDocumentAsync({ type: "application/json", copyToCacheDirectory: true });
+      if (pickResult.canceled) return;
+      const asset = pickResult.assets[0];
+      const content = await FileSystem.readAsStringAsync(asset.uri);
+      const imported = parseExportJson(content);
+      if (!imported.length) {
+        Alert.alert("Arquivo inválido", "Escolha um JSON exportado pelo PantanalDex com registros válidos.");
+        return;
+      }
+      const confirmed = await new Promise<boolean>((resolve) => Alert.alert("Importar registros", `${imported.length} registro(s) válido(s) serão combinados com o caderno atual. Registros mais novos substituem versões antigas com o mesmo ID.`, [{ text: "Cancelar", style: "cancel", onPress: () => resolve(false) }, { text: "Importar", onPress: () => resolve(true) }]));
+      if (!confirmed) return;
+      const mergeResult = await importSightings(imported);
+      Alert.alert("Importação concluída", `${mergeResult.added} adicionado(s), ${mergeResult.updated} atualizado(s) e ${mergeResult.skipped} ignorado(s).`);
+    } catch {
+      Alert.alert("Importação não concluída", "Não foi possível ler o arquivo. Os registros locais foram preservados.");
+    } finally {
+      setImporting(false);
+    }
+  };
+
   const toggleLanguage = async (language: string) => {
     const exists = settings.quickLanguages.includes(language);
     const next = exists ? settings.quickLanguages.filter((item) => item !== language) : [...settings.quickLanguages, language];
@@ -82,7 +108,8 @@ export default function SettingsScreen() {
     <Text style={{ color: colors.muted, marginBottom: 12 }}>Selecione quais registros serão copiados. Registros compartilháveis saem com localização aproximada para proteger pontos sensíveis.</Text>
     <Pressable onPress={toggleAll} accessibilityRole="checkbox" accessibilityState={{ checked: allSelected }} style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}><View style={{ width: 22, height: 22, borderRadius: 6, borderWidth: 1, borderColor: colors.primary, backgroundColor: allSelected ? colors.primary : colors.surface, marginRight: 8, alignItems: "center", justifyContent: "center" }}>{allSelected && <Text style={{ color: "#fff", fontWeight: "800" }}>✓</Text>}</View><Text style={{ color: colors.foreground, fontWeight: "800" }}>{allSelected ? "Desmarcar todos" : "Selecionar todos"} · {selectedSightings.length}/{sightings.length}</Text></Pressable>
     {sightings.map((item) => <Pressable key={item.id} onPress={() => toggleSelection(item.id)} accessibilityRole="checkbox" accessibilityState={{ checked: selectedIds.includes(item.id) }} style={{ flexDirection: "row", alignItems: "center", paddingVertical: 8 }}><View style={{ width: 18, height: 18, borderRadius: 5, borderWidth: 1, borderColor: colors.border, backgroundColor: selectedIds.includes(item.id) ? colors.primary : colors.surface, marginRight: 9, alignItems: "center", justifyContent: "center" }}>{selectedIds.includes(item.id) && <Text style={{ color: "#fff", fontSize: 12 }}>✓</Text>}</View><Text style={{ color: colors.foreground, flex: 1 }}>{item.date} · {species.find((entry) => entry.id === item.speciesId)?.commonName ?? "Espécie não catalogada"}</Text></Pressable>)}
-    <View style={{ flexDirection: "row", gap: 10, marginTop: 8 }}><Pressable disabled={exporting || selectedSightings.length === 0} onPress={() => exportData("json")} accessibilityRole="button" style={{ flex: 1, backgroundColor: colors.primary, borderRadius: 14, padding: 14, opacity: exporting || selectedSightings.length === 0 ? 0.6 : 1 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800" }}>{exporting ? "Preparando…" : "JSON"}</Text></Pressable><Pressable disabled={exporting || selectedSightings.length === 0} onPress={() => exportData("csv")} accessibilityRole="button" style={{ flex: 1, backgroundColor: colors.primary, borderRadius: 14, padding: 14, opacity: exporting || selectedSightings.length === 0 ? 0.6 : 1 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800" }}>CSV</Text></Pressable></View>
+    <View style={{ flexDirection: "row", gap: 10, marginTop: 8 }}><Pressable disabled={exporting || importing || selectedSightings.length === 0} onPress={() => exportData("json")} accessibilityRole="button" style={{ flex: 1, backgroundColor: colors.primary, borderRadius: 14, padding: 14, opacity: exporting || selectedSightings.length === 0 ? 0.6 : 1 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800" }}>{exporting ? "Preparando…" : "JSON"}</Text></Pressable><Pressable disabled={exporting || importing || selectedSightings.length === 0} onPress={() => exportData("csv")} accessibilityRole="button" style={{ flex: 1, backgroundColor: colors.primary, borderRadius: 14, padding: 14, opacity: exporting || importing || selectedSightings.length === 0 ? 0.6 : 1 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800" }}>CSV</Text></Pressable></View>
+    <Pressable onPress={importData} disabled={importing || exporting} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting ? 0.6 : 1 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{importing ? "Lendo arquivo…" : "Importar JSON do PantanalDex"}</Text></Pressable>
     <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex 1.0</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Catálogo local e caderno de campo para conhecer e registrar os animais do Pantanal.</Text></View>
   </ScrollView></ScreenContainer>;
 }
