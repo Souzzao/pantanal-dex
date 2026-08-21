@@ -143,3 +143,14 @@ Minha recomendação é B por proteção de áreas sensíveis. Nenhum dado será
 ## 13. Regra de integração final
 
 A Conta 1 é a responsável pela integração final e pelo checkpoint consolidado. Antes do checkpoint, ela deve revisar `todo.md`, confirmar que nenhum item foi marcado indevidamente, executar TypeScript, lint, testes e revisão visual, e registrar no relatório do marco o que foi concluído, o que ficou pendente e qual aprovação será necessária para o próximo ciclo.
+
+
+## 14. Mecanismo permanente de segurança operacional
+
+A definição de pronto para qualquer bloco é: alteração verificável de código ou dados, teste ou validador correspondente, `todo.md` atualizado, este HANDOFF atualizado quando houver regra operacional, `pnpm check`, `pnpm lint`, `pnpm test`, `git diff --check`, commit pequeno e PR descritivo. Sem todos esses elementos, o status é `INCOMPLETO` e não pode ser apresentado como concluído.
+
+A Conta 1 deve verificar, a cada retomada, branches, commits, PRs, checks e TODO. Uma branch sem avanço deve receber handoff com tarefa dividida e prazo do próximo bloco. O TODO mantém uma fila priorizada; cada item concluído é marcado imediatamente e a primeira pendência desbloqueada passa a ser a próxima tarefa. Não repetir auditoria já concluída sem evidência nova.
+
+Bloqueios precisam conter causa, evidência, alternativa executável e agente responsável. Fonte indisponível deve ser substituída por pipeline, dump, fixture ou teste; PR stale deve ser rebaseado de forma coordenada; conflitos devem ser resolvidos por integração seletiva pela Conta 1; falhas devem ser corrigidas e revalidadas. Um registro apenas dizendo “aguardando” é inválido.
+
+A qualidade não pode ser reduzida para aumentar volume. Nenhum dado ou imagem sem fonte, licença comercialmente compatível, teste e ID único entra em `main`. Cada PR deve informar ciclos, commits, arquivos, contagem, fontes, riscos, pendências e próximo lote. Ao receber “continue”, cada agente deve ler o estado atual, escolher a primeira pendência desbloqueada e trabalhar até concluir o maior bloco seguro possível, sem pedir confirmação para decisões normais de implementação.

@@ -160,3 +160,24 @@
 | 20 | Pacote final e PR | [ ] Pendente. |
 
 O lote `catalog-mammals-01` contém `Chrysocyon brachyurus`, `Tayassu pecari` e `Pecari tajacu`. Os registros têm três imagens HTTP do Wikimedia Commons por espécie, autoria, licença, origem e fonte GBIF. A conservação ainda aguarda fonte oficial do ICMBio ou portaria MMA/ICMBio. O lote permanece `pending-review` porque a nomenclatura aceita, o status de conservação e a ocorrência específica no Pantanal ainda precisam de revisão editorial especializada. Fotografias de zoológico ou de outras localidades não são evidência de ocorrência regional.
+
+
+## Mecanismo permanente de segurança operacional — Agente 2
+
+### Definição de pronto por bloco
+
+Um bloco só recebe status `[x]` quando contém alteração verificável de código ou dados, teste/validador correspondente, atualização deste TODO e do HANDOFF, `pnpm check`, `pnpm lint`, `pnpm test`, `git diff --check`, commit pequeno e PR atualizado com ciclos, arquivos, contagem, fontes, licenças, riscos, pendências e próximo lote. Sem esse conjunto, o status permanece `[ ]` ou `INCOMPLETO`.
+
+### Fila priorizada anti-repetição
+
+1. `[ ]` Completar invertebrados com novos registros apenas após confirmar três imagens exatas e licenças CC0/CC-BY/CC-BY-SA.
+2. `[ ]` Auditar e substituir, em lote científico, qualquer fonte legada incompatível com a política comercial; não preencher conservação sem ICMBio/MMA.
+3. `[ ]` Criar validador automatizado de domínio/licença por arquivo e relatório `LICENSES/credits` por lote.
+4. `[ ]` Expandir lotes modulares de aves, peixes e invertebrados usando a vazão real, sem arquivo monolítico.
+5. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.
+
+Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
+
+### Política de bloqueio e escalonamento
+
+Todo bloqueio deve registrar causa, evidência, alternativa executável e agente responsável. Fonte indisponível deve gerar pipeline, fixture ou teste; PR stale deve gerar tentativa de rebase coordenada; conflito deve ser resolvido por integração seletiva pelo Agente 1; falha deve ser corrigida e validada novamente. Só bloqueios reais permanecem como `[ ]`.
