@@ -299,3 +299,6 @@
 
 - [x] Integrar lote de 8 espécies com cutia, paca, gato-mourisco, aracuã, socó-boi, jaçanã, martim-pescador e curimbatá
 - [x] Validar o lote de 45 espécies com TypeScript, lint, 16 testes e diff check
+
+- [x] Integrar lote de 8 espécies com cágado-de-barbicha, cobra-verde, perereca-cabeçuda, rã-de-quatro-olhos, piranha-vermelha, tuvira, borboleta-morfo e besouro-rola-bosta
+- [x] Validar o lote de 53 espécies com TypeScript, lint, 16 testes e diff check
