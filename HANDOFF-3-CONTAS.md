@@ -154,3 +154,10 @@ A Conta 1 deve verificar, a cada retomada, branches, commits, PRs, checks e TODO
 Bloqueios precisam conter causa, evidência, alternativa executável e agente responsável. Fonte indisponível deve ser substituída por pipeline, dump, fixture ou teste; PR stale deve ser rebaseado de forma coordenada; conflitos devem ser resolvidos por integração seletiva pela Conta 1; falhas devem ser corrigidas e revalidadas. Um registro apenas dizendo “aguardando” é inválido.
 
 A qualidade não pode ser reduzida para aumentar volume. Nenhum dado ou imagem sem fonte, licença comercialmente compatível, teste e ID único entra em `main`. Cada PR deve informar ciclos, commits, arquivos, contagem, fontes, riscos, pendências e próximo lote. Ao receber “continue”, cada agente deve ler o estado atual, escolher a primeira pendência desbloqueada e trabalhar até concluir o maior bloco seguro possível, sem pedir confirmação para decisões normais de implementação.
+
+
+## 15. Manifesto de licenças por bloco
+
+Todo bloco de conteúdo científico deve atualizar `LICENSES-credits.md`. O manifesto deve listar lote, grupo, contagem, fonte taxonômica, política de licença e localização dos créditos por arquivo. Ele cobre somente o catálogo público; não deve conter avistamentos, coordenadas, fotos pessoais ou qualquer dado do usuário.
+
+A revisão comercial precisa confirmar individualmente `uri`, `author`, `license`, `sourceUrl` e `credit` de cada imagem. A existência de uma URL não é prova de licença. O contrato deve permanecer como barreira automatizada contra `NC`, `ND`, licença ausente, fontes IUCN e domínios não aprovados.
