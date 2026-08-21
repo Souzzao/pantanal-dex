@@ -17,7 +17,33 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [sightings, setSightings] = useState<Sighting[]>([]);
   const [settings, setSettingsState] = useState<Settings>({ defaultLanguage: "Português", quickLanguages: ["Português", "English"] });
   const [ready, setReady] = useState(false);
-  useEffect(() => { (async () => { try { const [storedSightings, storedSettings] = await Promise.all([AsyncStorage.getItem(SIGHTINGS_KEY), AsyncStorage.getItem(SETTINGS_KEY)]); if (storedSightings) setSightings(JSON.parse(storedSightings)); if (storedSettings) setSettingsState(JSON.parse(storedSettings)); } finally { setReady(true); } })(); }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const [storedSightings, storedSettings] = await Promise.all([AsyncStorage.getItem(SIGHTINGS_KEY), AsyncStorage.getItem(SETTINGS_KEY)]);
+        if (storedSightings) {
+          try {
+            const parsed = JSON.parse(storedSightings);
+            if (Array.isArray(parsed)) setSightings(parsed);
+            else await AsyncStorage.removeItem(SIGHTINGS_KEY);
+          } catch {
+            await AsyncStorage.removeItem(SIGHTINGS_KEY);
+          }
+        }
+        if (storedSettings) {
+          try {
+            const parsed = JSON.parse(storedSettings);
+            if (parsed && typeof parsed === "object" && typeof parsed.defaultLanguage === "string" && Array.isArray(parsed.quickLanguages)) setSettingsState(parsed);
+            else await AsyncStorage.removeItem(SETTINGS_KEY);
+          } catch {
+            await AsyncStorage.removeItem(SETTINGS_KEY);
+          }
+        }
+      } finally {
+        setReady(true);
+      }
+    })();
+  }, []);
   const persistSightings = async (next: Sighting[]) => { setSightings(next); await AsyncStorage.setItem(SIGHTINGS_KEY, JSON.stringify(next)); };
   const value = useMemo<AppContextValue>(() => ({ sightings, settings, ready, addSighting: (s) => persistSightings([s, ...sightings]), updateSighting: (s) => persistSightings(sightings.map((item) => item.id === s.id ? s : item)), deleteSighting: (id) => persistSightings(sightings.filter((item) => item.id !== id)), setSettings: async (next) => { setSettingsState(next); await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(next)); } }), [sightings, settings, ready]);
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
