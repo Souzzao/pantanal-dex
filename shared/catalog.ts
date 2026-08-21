@@ -1,10 +1,11 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
+import { catalogSpecies } from "./catalog/index";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
 
-const catalogLoader = createCatalogLoader([species]);
+const catalogLoader = createCatalogLoader([species, catalogSpecies]);
 
 export function filterSpeciesCatalog(filters: CatalogFilters = {}): Species[] {
   return catalogLoader.search(filters);

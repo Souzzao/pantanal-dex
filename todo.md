@@ -320,8 +320,8 @@
 - [x] Validar governança com pnpm check, pnpm lint, pnpm test e git diff --check
 
 ## Ciclos 2 e 3 — arquitetura modular e pipeline licenciado
-- [ ] Auditar PR #7, estado das branches e divergências antes da integração
-- [ ] Separar o catálogo em módulos de lotes por grupo sem quebrar imports existentes
-- [ ] Criar pipeline de validação e relatório de lotes com licenças comerciais
-- [ ] Definir lote piloto inicial da Conta 2 e métrica de vazão para recalibração no Ciclo 3
-- [ ] Executar check, lint, testes e diff check; atualizar docs, commit e PR
+- [x] Auditar PR #7, estado das branches e divergências antes da integração
+- [x] Separar o catálogo em módulos de lotes por grupo sem quebrar imports existentes
+- [x] Criar pipeline de validação e relatório de lotes com licenças comerciais
+- [x] Definir lote piloto inicial da Conta 2 e métrica de vazão para recalibração no Ciclo 3
+- [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR

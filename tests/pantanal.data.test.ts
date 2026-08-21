@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSightings, serializeSightings } from "../shared/persistence";
+import { catalogBatches, catalogSpecies } from "../shared/catalog/index";
+import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
@@ -70,6 +72,13 @@ describe("PantanalDex data contracts", () => {
     expect(merged.added).toBe(1);
     expect(mergeCatalogBatch(merged.species, { ...currentCatalogBatch, id: "test-batch-2", species: sample }).skipped).toBe(1);
     expect(validateCatalogBatch({ id: "", version: 0, source: "coordenacao", species: [] })).not.toEqual([]);
+  });
+
+  it("validates the modular pilot batches and reports their throughput", () => {
+    expect(catalogBatches).toHaveLength(4);
+    expect(catalogSpecies).toHaveLength(10);
+    expect(validateCatalogBatches(catalogBatches)).toEqual([]);
+    expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
   });
 
   it("loads modular batches with deterministic deduplication and paging", () => {
