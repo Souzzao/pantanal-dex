@@ -37,8 +37,19 @@ describe("PantanalDex data contracts", () => {
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images deve ter pelo menos 3 imagens");
+    expect(errors).toContain("species[0](tuiuiu).images deve ter exatamente 3 imagens");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
+  });
+
+  it("keeps exactly three credited image references per species", () => {
+    for (const item of species) {
+      expect(item.images).toHaveLength(3);
+      for (const image of item.images) {
+        expect(image.sourceUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+        expect(image.credit.trim()).not.toBe("");
+        expect(image.license.trim()).not.toBe("");
+      }
+    }
   });
 
   it("exports sightings as versioned JSON without losing fields", () => {
