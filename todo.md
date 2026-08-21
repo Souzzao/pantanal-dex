@@ -361,3 +361,12 @@
 - [x] Definir escalonamento entre agentes para bloqueios, PRs stale e branch sem atividade
 - [x] Escrever três prompts Ultimate compactos com execução em blocos de ciclos
 - [x] Criar pacote operacional com protocolo, métricas, comandos e instruções de ativação
+
+## Bloco massivo pós-PR #10
+- [ ] Auditar watchdog, TODO, handoff, PRs e fila sem repetir auditorias concluídas
+- [x] Cobrir fluxo Início → ficha → avistamento → detalhe → edição/exclusão
+- [x] Cobrir fluxo offline, fallback de imagem e recusa de permissões nativas
+- [x] Corrigir falhas encontradas nos fluxos e melhorar feedback/estados de interação
+- [ ] Revisar portrait 9:16, uso com uma mão e acessibilidade das telas principais
+- [x] Atualizar documentação e handoff com arquivos, riscos e dependências
+- [x] Executar check, lint, test, diff check e watchdog; publicar commit e PR

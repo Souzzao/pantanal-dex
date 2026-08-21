@@ -5,7 +5,8 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
-import { species, isValidSightingDate, isValidSightingTime, type Sighting, type Visibility } from "@/shared/pantanal";
+import { isValidSightingDate, isValidSightingTime, type Sighting, type Visibility } from "@/shared/pantanal";
+import { filterSpeciesCatalog } from "@/shared/catalog";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
@@ -14,7 +15,7 @@ export default function NewSightingScreen() {
   const { id, speciesId } = useLocalSearchParams<{ id?: string; speciesId?: string }>();
   const { sightings, addSighting, updateSighting } = useApp();
   const existing = id ? sightings.find((item) => item.id === id) : undefined;
-  const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? species[0].id);
+  const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? filterSpeciesCatalog()[0]?.id ?? "");
   const [speciesQuery, setSpeciesQuery] = useState("");
   const [date, setDate] = useState(existing?.date ?? new Date().toISOString().slice(0, 10));
   const [time, setTime] = useState(existing?.time ?? "");
@@ -23,6 +24,7 @@ export default function NewSightingScreen() {
   const [quantity, setQuantity] = useState(existing?.quantity ? String(existing.quantity) : "");
   const [photoUri, setPhotoUri] = useState<string | undefined>(existing?.photoUri);
   const [visibility, setVisibility] = useState<Visibility>(existing?.visibility ?? "private");
+  const [isSaving, setIsSaving] = useState(false);
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | undefined>(
     existing?.latitude !== undefined && existing.longitude !== undefined
       ? { latitude: existing.latitude, longitude: existing.longitude }
@@ -48,10 +50,7 @@ export default function NewSightingScreen() {
 
   const visibleSpecies = useMemo(() => {
     const normalized = speciesQuery.trim().toLocaleLowerCase("pt-BR");
-    if (!normalized) return species;
-    return species.filter((item) =>
-      `${item.commonName} ${item.scientificName}`.toLocaleLowerCase("pt-BR").includes(normalized),
-    );
+    return filterSpeciesCatalog({ query: normalized });
   }, [speciesQuery]);
 
   useEffect(() => {
@@ -119,16 +118,21 @@ export default function NewSightingScreen() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     if (!isValidSightingDate(date.trim())) {
+      setIsSaving(false);
       Alert.alert("Data inválida", "Use o formato AAAA-MM-DD e informe uma data existente.");
       return;
     }
     if (!isValidSightingTime(time.trim())) {
+      setIsSaving(false);
       Alert.alert("Horário inválido", "Use o formato HH:MM, por exemplo 14:30.");
       return;
     }
     const numericQuantity = quantity.trim() ? Number(quantity) : undefined;
     if (numericQuantity !== undefined && (!Number.isInteger(numericQuantity) || numericQuantity < 1)) {
+      setIsSaving(false);
       Alert.alert("Quantidade inválida", "Informe um número inteiro maior que zero.");
       return;
     }
@@ -149,9 +153,15 @@ export default function NewSightingScreen() {
       createdAt: existing?.createdAt ?? now,
       updatedAt: now,
     };
-    if (existing) await updateSighting(sighting);
-    else await addSighting(sighting);
-    router.replace({ pathname: "/sightings/[id]", params: { id: sighting.id } } as any);
+    try {
+      if (existing) await updateSighting(sighting);
+      else await addSighting(sighting);
+      router.replace({ pathname: "/sightings/[id]", params: { id: sighting.id } } as any);
+    } catch {
+      Alert.alert("Não foi possível salvar", "O registro continua nesta tela. Verifique o armazenamento e tente novamente.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -215,8 +225,9 @@ export default function NewSightingScreen() {
             </Pressable>
           ))}
         </View>
-        <Pressable onPress={save} accessibilityRole="button" style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }, pressed && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
-          <Text style={{ color: "#fff", fontWeight: "800", textAlign: "center", fontSize: 16 }}>{existing ? "Salvar alterações" : "Salvar avistamento"}</Text>
+        <Pressable disabled={isSaving} onPress={save} accessibilityRole="button" accessibilityState={{ busy: isSaving, disabled: isSaving }} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16, opacity: isSaving ? 0.65 : 1 }, pressed && !isSaving && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
+          <Text style={{ color: "#fff", fontWeight: "800", textAlign: "center", fontSize: 16 }}>{isSaving ? "Salvando…" : existing ? "Salvar alterações" : "Salvar avistamento"}</Text>
+
         </Pressable>
       </ScrollView>
     </ScreenContainer>

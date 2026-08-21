@@ -155,3 +155,13 @@ Objetivo: centralizar `Settings`, filtros de catálogo e envelope de exportaçã
 Validação: executar `pnpm check`, `pnpm lint`, `pnpm test`, `git diff --check` e `pnpm watchdog` antes do PR.
 
 Dependências: Agente 2 deve consumir os tipos compartilhados nos lotes/índice sem editar o contexto; Agente 3 pode usar `Settings` e `CatalogFilters` em telas e testes. Não há bloqueio real; o próximo bloco independente é cobertura de fluxos locais e fallback offline.
+
+## Bloco massivo — fluxos de campo e catálogo modular
+
+Estado: implementado na branch integracao-ciclo-14.
+
+Alterações: Home e formulário de novo avistamento agora consultam o índice modular combinado; o formulário aceita espécies dos lotes escaláveis, evita duplo salvamento, mostra estado ocupado e trata falha de persistência sem perder o formulário. Adicionado teste de fluxo para descoberta modular, atualização, restauração, exportação e rejeição de importação antiga/malformada.
+
+Riscos: permissões reais de câmera/GPS continuam dependentes de aparelho; web usa fallback existente. Nenhuma alteração destrutiva em dados locais.
+
+Validação: 24 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog. Próximo bloco independente: revisão visual/portrait e cobertura offline/permissões.
