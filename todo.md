@@ -163,3 +163,9 @@
 - [x] Alterar Souzzao/pantanal-dex de privado para público
 - [x] Verificar acesso público às branches de trabalho
 - [x] Atualizar as instruções para não depender de convite privado
+
+## Pull Request da Conta 2
+
+- [ ] Liberar permissão de escrita para dark371star no repositório público
+- [ ] Enviar a branch conta-2-catalogo com o commit a59c3d3
+- [ ] Abrir e revisar o Pull Request contra main
