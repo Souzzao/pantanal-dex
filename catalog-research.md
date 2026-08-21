@@ -14,3 +14,10 @@
 
 - Confirmar individualmente os metadados dos demais arquivos de cada espécie via API/página do Commons antes de commitar o lote.
 - Não usar mapas, arquivos sem licença clara ou URLs que não tenham sido verificados.
+
+
+## Pesquisa do lote de anfíbios
+
+A API de correspondência taxonômica do GBIF retornou correspondência exata e status `ACCEPTED` para `Boana albopunctata`, `Phyllomedusa sauvagii` e `Physalaemus albonotatus`, mantendo esses nomes como candidatos para o ciclo 8. A busca global da IUCN para `Boana albopunctata` retornou zero resultados na interface consultada; portanto, nenhum status de conservação deve ser preenchido com base nessa consulta.
+
+O lote de anfíbios ainda não foi implementado. As imagens, licenças e fontes precisam ser consultadas e registradas individualmente antes do commit.

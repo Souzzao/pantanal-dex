@@ -1,0 +1,51 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, license: string, sourceUrl: string, credit: string) => ({ uri, author, license, sourceUrl, credit });
+
+export const amphibians01: CatalogBatch = {
+  batchId: "catalog-amphibians-01",
+  cycle: 8,
+  group: "Anfíbios",
+  status: "pending-review",
+  sources: [
+    { title: "GBIF Species Match — Boana albopunctata", url: "https://api.gbif.org/v1/species/match?name=Boana%20albopunctata" },
+    { title: "GBIF Species Match — Phyllomedusa sauvagii", url: "https://api.gbif.org/v1/species/match?name=Phyllomedusa%20sauvagii" },
+  ],
+  pendingNotes: ["A busca global da IUCN não retornou resultado para Boana albopunctata; não preencher situação de conservação sem fonte confirmada.", "Confirmar ocorrência no recorte do Pantanal e revisar nomenclatura regional antes de promover o lote."],
+  species: [
+    {
+      id: "perereca-do-banheiro", commonName: "Perereca", scientificName: "Boana albopunctata", group: "Anfíbios", environments: ["Áreas alagadas", "Bordas de mata"],
+      description: "Perereca de hábitos arborícolas associada a ambientes úmidos e vegetação próxima a corpos d’água.",
+      physicalCharacteristics: "Corpo compacto, discos adesivos nos dedos e coloração variável em tons amarelados e acastanhados.",
+      habitat: "Brejos, margens de lagoas, vegetação ripária e áreas úmidas com abrigo vertical.",
+      behavior: "Vocaliza principalmente durante períodos reprodutivos e utiliza a vegetação para repouso e deslocamento.",
+      diet: "Pequenos artrópodes capturados durante o forrageamento noturno.",
+      curiosities: ["Os discos adesivos auxiliam a subir em folhas e ramos.", "A reprodução depende da disponibilidade de água e microambientes úmidos."],
+      distribution: "América do Sul, com registros em diferentes áreas do Brasil e países vizinhos.",
+      ecologicalImportance: "Participa do controle de pequenos invertebrados e integra as cadeias alimentares de áreas úmidas.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/a/ae/Hypsiboas_albopunctatus01a.jpg", "Lucas Grandinetti", "CC BY-SA 2.5", "https://commons.wikimedia.org/wiki/File:Hypsiboas_albopunctatus01a.jpg", "Lucas Grandinetti / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/c/c8/Boana_albopunctata_-_Lucas_Mantelo_Cruz_-_353779982.jpeg", "Lucas Mantelo Cruz", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Boana_albopunctata_-_Lucas_Mantelo_Cruz_-_353779982.jpeg", "Lucas Mantelo Cruz / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/7/76/Boana_albopunctata_-_karla_daniel_de_faria_-_536102291.jpeg", "karla daniel de faria", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Boana_albopunctata_-_karla_daniel_de_faria_-_536102291.jpeg", "karla daniel de faria / Wikimedia Commons"),
+      ],
+      sources: [{ title: "GBIF Species Match — Boana albopunctata", url: "https://api.gbif.org/v1/species/match?name=Boana%20albopunctata" }],
+    },
+    {
+      id: "perereca-macaco", commonName: "Perereca-macaco", scientificName: "Phyllomedusa sauvagii", group: "Anfíbios", environments: ["Matas", "Bordas de mata"],
+      description: "Perereca arborícola de hábitos noturnos que ocupa ramos e folhas em ambientes tropicais sazonais.",
+      physicalCharacteristics: "Corpo verde, olhos grandes, dedos com discos adesivos e adaptações para a vida sobre a vegetação.",
+      habitat: "Matas, cerrados arborizados e bordas com arbustos e árvores adequados à vida arborícola.",
+      behavior: "Permanece sobre a vegetação e reproduz-se em folhas dobradas sobre a água, onde os girinos completam o desenvolvimento.",
+      diet: "Artrópodes e outros pequenos invertebrados capturados na vegetação.",
+      curiosities: ["A postura em folhas dobradas reduz a exposição direta dos ovos.", "A pele cerosa ajuda a reduzir a perda de água em ambientes sazonais."],
+      distribution: "Regiões secas e sazonais do centro da América do Sul, incluindo áreas do Brasil, Bolívia, Paraguai e Argentina.",
+      ecologicalImportance: "Controla pequenos invertebrados e transfere energia entre a vegetação e os predadores noturnos.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/2/26/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg", "Brocken Inaglory", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg", "Brocken Inaglory / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/4/4e/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg", "Brocken Inaglory", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg", "Brocken Inaglory / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/2/2f/Waxy.tree.frog.arp.jpg", "Adrian Pingstone", "Public domain", "https://commons.wikimedia.org/wiki/File:Waxy.tree.frog.arp.jpg", "Adrian Pingstone / Wikimedia Commons"),
+      ],
+      sources: [{ title: "GBIF Species Match — Phyllomedusa sauvagii", url: "https://api.gbif.org/v1/species/match?name=Phyllomedusa%20sauvagii" }],
+    },
+  ],
+};
