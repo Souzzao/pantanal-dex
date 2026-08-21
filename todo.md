@@ -109,3 +109,8 @@
 ## Colaboração entre três contas Manus
 
 - [x] Criar documentação de handoff com estado atual, divisão de frentes, regras de edição e protocolo de integração
+
+## Pacote de colaboração entre contas
+
+- [x] Montar ZIP com handoff, especificação, quadro de trabalho, design, workflow e links do projeto
+- [x] Verificar se o ZIP contém instruções suficientes para as duas contas começarem sem contexto adicional
