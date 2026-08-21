@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createExportCsv, createExportJson } from "../shared/exports";
-import { species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
+import { sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
 
 const sighting: Sighting = {
   id: "sighting-1",
@@ -46,5 +46,15 @@ describe("PantanalDex data contracts", () => {
     expect(csv.split("\n")).toHaveLength(2);
     expect(csv).toContain('"sighting-1","tuiuiu","2026-08-21","07:30"');
     expect(csv).toContain('"Perto do ninho; observação com ""binóculo""."');
+  });
+
+  it("drops malformed stored sightings without crashing the app", () => {
+    expect(sanitizeStoredSightings(null)).toEqual([]);
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "species-inexistente" }, sighting, { broken: true }])).toEqual([sighting]);
+  });
+
+  it("repairs invalid settings and preserves only supported languages", () => {
+    expect(sanitizeSettings({ defaultLanguage: "Klingon", quickLanguages: ["English", "English", "Unknown"] })).toEqual({ defaultLanguage: "English", quickLanguages: ["English"] });
+    expect(sanitizeSettings({})).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português", "English"] });
   });
 });

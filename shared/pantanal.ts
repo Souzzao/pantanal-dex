@@ -156,3 +156,31 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
   });
   return errors;
 }
+
+
+export function sanitizeStoredSightings(value: unknown): Sighting[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is Sighting => {
+    if (!item || typeof item !== "object") return false;
+    const sighting = item as Partial<Sighting>;
+    return typeof sighting.id === "string" && sighting.id.length > 0 &&
+      typeof sighting.speciesId === "string" && species.some((entry) => entry.id === sighting.speciesId) &&
+      typeof sighting.date === "string" && sighting.date.length > 0 &&
+      typeof sighting.createdAt === "string" && typeof sighting.updatedAt === "string" &&
+      ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&
+      ["private", "shareable"].includes(sighting.visibility ?? "") &&
+      (sighting.latitude === undefined || typeof sighting.latitude === "number") &&
+      (sighting.longitude === undefined || typeof sighting.longitude === "number") &&
+      (sighting.quantity === undefined || typeof sighting.quantity === "number");
+  });
+}
+
+export function sanitizeSettings(value: unknown): { defaultLanguage: string; quickLanguages: string[] } {
+  const fallback = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
+  if (!value || typeof value !== "object") return fallback;
+  const candidate = value as { defaultLanguage?: unknown; quickLanguages?: unknown };
+  const quickLanguages = Array.isArray(candidate.quickLanguages) ? candidate.quickLanguages.filter((item): item is string => typeof item === "string" && languages.includes(item)) : fallback.quickLanguages;
+  const safeQuickLanguages = quickLanguages.length ? Array.from(new Set(quickLanguages)) : fallback.quickLanguages;
+  const defaultLanguage = typeof candidate.defaultLanguage === "string" && languages.includes(candidate.defaultLanguage) ? candidate.defaultLanguage : safeQuickLanguages[0];
+  return { defaultLanguage, quickLanguages: safeQuickLanguages };
+}

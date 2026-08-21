@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 
+import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups, species } from "@/shared/pantanal";
 import { useApp } from "@/contexts/AppContext";
@@ -9,7 +10,7 @@ import { useColors } from "@/hooks/use-colors";
 
 export default function SightingsScreen() {
   const colors = useColors();
-  const { sightings } = useApp();
+  const { sightings, ready } = useApp();
   const [query, setQuery] = useState("");
   const [groupFilter, setGroupFilter] = useState<string>("");
   const [environmentFilter, setEnvironmentFilter] = useState<string>("");
@@ -53,24 +54,24 @@ export default function SightingsScreen() {
       <TextInput value={query} onChangeText={setQuery} placeholder="Buscar espécie, local ou observação" placeholderTextColor={colors.muted} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginTop: 14 }} />
       <Pressable onPress={() => router.push("/map" as any)} style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 12, marginTop: 10 }, pressed && { opacity: 0.78 }]}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>Ver no mapa</Text></Pressable>
       <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16, marginBottom: 8 }}>Grupo</Text>
-      <FlatList horizontal data={["", ...groups]} keyExtractor={(item) => item || "all-groups"} showsHorizontalScrollIndicator={false} renderItem={({ item }) => renderChip(item || "Todos", groupFilter === item, () => setGroupFilter(item))} />
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 2 }}>{["", ...groups].map((item) => <View key={item || "all-groups"}>{renderChip(item || "Todos", groupFilter === item, () => setGroupFilter(item))}</View>)}</ScrollView>
       <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 14, marginBottom: 8 }}>Ambiente</Text>
-      <FlatList horizontal data={["", ...environments]} keyExtractor={(item) => item || "all-environments"} showsHorizontalScrollIndicator={false} renderItem={({ item }) => renderChip(item || "Todos", environmentFilter === item, () => setEnvironmentFilter(item))} />
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 2 }}>{["", ...environments].map((item) => <View key={item || "all-environments"}>{renderChip(item || "Todos", environmentFilter === item, () => setEnvironmentFilter(item))}</View>)}</ScrollView>
       <View style={{ flexDirection: "row", alignItems: "center", marginTop: 14, marginBottom: 14 }}>
         {renderChip("Últimos 30 dias", periodFilter === "30", () => setPeriodFilter(periodFilter === "30" ? "" : "30"))}
         {renderChip("Último ano", periodFilter === "365", () => setPeriodFilter(periodFilter === "365" ? "" : "365"))}
         {renderChip("Com localização", onlyLocated, () => setOnlyLocated(!onlyLocated))}
         {(query || groupFilter || environmentFilter || periodFilter || onlyLocated) && <Pressable onPress={clearFilters}><Text style={{ color: colors.error, fontSize: 12, fontWeight: "800" }}>Limpar</Text></Pressable>}
       </View>
-      <Text style={{ color: colors.muted, fontSize: 12, marginBottom: 10 }}>{visible.length} registro(s) encontrado(s)</Text>
+      {!ready ? <View style={{ alignItems: "center", paddingVertical: 36 }}><ActivityIndicator color={colors.primary} /><Text style={{ color: colors.muted, marginTop: 10 }}>Carregando seu caderno…</Text></View> : <Text style={{ color: colors.muted, fontSize: 12, marginBottom: 10 }}>{visible.length} registro(s) encontrado(s)</Text>}
       <FlatList
-        data={visible}
+        data={ready ? visible : []}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: 30, flexGrow: 1 }}
-        ListEmptyComponent={<View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingBottom: 80 }}><Text style={{ color: colors.foreground, fontSize: 19, fontWeight: "800" }}>{sightings.length ? "Nenhum registro encontrado" : "Seu caderno ainda está vazio"}</Text><Text style={{ color: colors.muted, textAlign: "center", marginTop: 8, maxWidth: 280 }}>{sightings.length ? "Tente remover um filtro ou pesquisar por outro termo." : "Abra uma ficha de animal e registre seu primeiro encontro com a fauna pantaneira."}</Text>{sightings.length === 0 && <Pressable onPress={() => router.push("/(tabs)/animals" as any)} style={{ marginTop: 18, backgroundColor: colors.primary, borderRadius: 15, padding: 14 }}><Text style={{ color: "#fff", fontWeight: "800" }}>Explorar animais</Text></Pressable>}</View>}
+        ListEmptyComponent={ready ? <View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingBottom: 80 }}><Text style={{ color: colors.foreground, fontSize: 19, fontWeight: "800" }}>{sightings.length ? "Nenhum registro encontrado" : "Seu caderno ainda está vazio"}</Text><Text style={{ color: colors.muted, textAlign: "center", marginTop: 8, maxWidth: 280 }}>{sightings.length ? "Tente remover um filtro ou pesquisar por outro termo." : "Abra uma ficha de animal e registre seu primeiro encontro com a fauna pantaneira."}</Text>{sightings.length === 0 && <Pressable onPress={() => router.push("/(tabs)/animals" as any)} style={{ marginTop: 18, backgroundColor: colors.primary, borderRadius: 15, padding: 14 }}><Text style={{ color: "#fff", fontWeight: "800" }}>Explorar animais</Text></Pressable>}</View> : null}
         renderItem={({ item }) => {
           const animal = species.find((entry) => entry.id === item.speciesId);
-          return <Pressable onPress={() => router.push({ pathname: "/sightings/[id]", params: { id: item.id } } as any)} style={({ pressed }) => [{ flexDirection: "row", backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.border, marginBottom: 12, overflow: "hidden" }, pressed && { opacity: 0.78 }]}>{item.photoUri ? <Image source={{ uri: item.photoUri }} style={{ width: 104, height: 104 }} /> : <Image source={{ uri: animal?.images[0].uri }} style={{ width: 104, height: 104 }} />}<View style={{ flex: 1, padding: 13 }}><Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 17 }}>{animal?.commonName ?? "Animal"}</Text><Text style={{ color: colors.muted, marginTop: 5 }}>{item.date}{item.time ? ` · ${item.time}` : ""}</Text><Text style={{ color: colors.primary, marginTop: 10, fontSize: 12, fontWeight: "700" }}>{item.locationLabel || "Local não informado"}</Text></View></Pressable>;
+          return <Pressable onPress={() => router.push({ pathname: "/sightings/[id]", params: { id: item.id } } as any)} style={({ pressed }) => [{ flexDirection: "row", backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.border, marginBottom: 12, overflow: "hidden" }, pressed && { opacity: 0.78 }]}><RemoteImage source={{ uri: item.photoUri || animal?.images[0].uri }} label={animal?.commonName ?? "Animal"} style={{ width: 104, height: 104 }} /><View style={{ flex: 1, padding: 13 }}><Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 17 }}>{animal?.commonName ?? "Animal"}</Text><Text style={{ color: colors.muted, marginTop: 5 }}>{item.date}{item.time ? ` · ${item.time}` : ""}</Text><Text style={{ color: colors.primary, marginTop: 10, fontSize: 12, fontWeight: "700" }}>{item.locationLabel || "Local não informado"}</Text></View></Pressable>;
         }}
       />
     </ScreenContainer>

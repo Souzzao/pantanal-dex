@@ -22,7 +22,7 @@
 - [x] Abrir a prévia do projeto no navegador do usuário
 
 - [ ] Refinar a hierarquia visual, espaçamento e estados de interação das telas principais
-- [ ] Melhorar o carregamento e o fallback das imagens do catálogo
+- [x] Melhorar o carregamento e o fallback das imagens do catálogo
 - [x] Adicionar modo mapa funcional para avistamentos com coordenadas
 - [x] Implementar edição completa de avistamentos
 - [ ] Adicionar testes determinísticos para persistência, validação e exportação
@@ -30,11 +30,11 @@
 ## Quadro de trabalho — próxima consolidação
 
 ### Frente A — Auditoria e arquitetura
-- [ ] Auditar todas as rotas existentes e eliminar telas ou botões sem ação
+- [x] Auditar todas as rotas existentes e eliminar telas ou botões sem ação
 - [ ] Criar matriz de requisitos da especificação versus implementação atual
 - [ ] Definir contratos compartilhados para Species, Sighting, Settings, filtros e exportação
 - [ ] Separar dados, componentes visuais, serviços nativos e regras de negócio
-- [ ] Definir uma política de fallback para web, iOS, Android e uso sem conexão
+- [x] Criar uma política de fallback para web, iOS, Android e uso sem conexão
 
 ### Frente B — Conteúdo científico e acervo de espécies
 - [ ] Expandir o catálogo para pelo menos 20 espécies representativas do Pantanal
@@ -46,11 +46,11 @@
 - [ ] Adicionar fontes estruturadas por espécie e registrar a data da revisão editorial
 
 ### Frente C — Catálogo e descoberta
-- [ ] Refinar cards, estados de carregamento, estado vazio e fallback visual de imagem
+- [x] Refinar cards, estados de carregamento, estado vazio e fallback visual de imagem
 - [x] Criar filtros combinados e possibilidade de limpar todos os filtros
 - [ ] Adicionar ordenação por nome popular e grupo
-- [ ] Criar barra rápida de idioma dentro da ficha da espécie
-- [ ] Exibir claramente quando uma tradução não estiver disponível
+- [x] Criar barra rápida de idioma dentro da ficha da espécie
+- [x] Exibir claramente quando uma tradução não estiver disponível
 - [ ] Revisar a ficha para leitura rápida em campo e acessibilidade
 
 ### Frente D — Avistamentos e caderno de campo
@@ -67,7 +67,7 @@
 - [ ] Criar camada de armazenamento local versionada e resiliente a dados corrompidos
 - [ ] Garantir catálogo, imagens disponíveis, registros e preferências sem conexão
 - [ ] Adicionar indicador não intrusivo de disponibilidade do mapa offline
-- [ ] Implementar seleção, ordem e remoção de idiomas preferidos
+- [x] Implementar seleção, ordem e remoção de idiomas preferidos
 - [ ] Validar esquema do JSON exportado e compatibilidade do CSV com planilhas
 - [ ] Garantir que exportar nunca altere ou apague os dados locais
 
@@ -183,3 +183,13 @@
 - [x] Implementar modo mapa web com cartões georreferenciados e navegação para detalhes
 - [ ] Melhorar fallback, erro e carregamento das imagens do catálogo
 - [x] Executar QA integrado e abrir Pull Request da coordenação
+
+## Revisão profunda em sete ciclos
+
+- [ ] Mapear todos os requisitos originais contra as telas e contratos atuais
+- [ ] Auditar rotas, dependências, permissões nativas, offline e acessibilidade
+- [ ] Registrar riscos, lacunas, casos extremos e decisões de arquitetura
+- [ ] Implementar melhorias funcionais prioritárias e corrigir inconsistências
+- [ ] Fazer segunda passagem crítica após a primeira implementação
+- [ ] Executar validação prática, revisão visual e testes por plataforma disponível
+- [ ] Polir UX, desempenho, documentação e preparar checkpoint consolidado
