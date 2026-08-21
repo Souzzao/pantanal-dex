@@ -401,3 +401,11 @@
 - [x] Validar estados de permissão e preservação do salvamento sem foto/GPS
 - [ ] Corrigir estados vazios, loading, erro e labels acessíveis nas rotas restantes
 - [x] Atualizar handoff, validar, commitar, publicar PR e checkpoint
+
+## Bloco massivo seguinte — execução contínua
+- [x] Implementar teste determinístico de restauração offline com armazenamento corrompido e versão desconhecida
+- [x] Completar estados localizados de permissão negada e indisponibilidade nas rotas nativas
+- [ ] Adicionar novo lote licenciado de espécies com IDs, fontes e créditos verificáveis
+- [x] Ampliar testes de catálogo, estados vazios, acessibilidade e rotas modulares
+- [x] Atualizar handoff com commits, riscos, bloqueios reais e métricas do bloco
+- [ ] Executar check, lint, test, diff check e watchdog; publicar commit e PR

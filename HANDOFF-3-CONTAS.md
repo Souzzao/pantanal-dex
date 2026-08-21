@@ -213,3 +213,11 @@ Validação atual: TypeScript, lint, 28 testes aprovados, 1 autenticação pulad
 ## Revisão visual portrait do bloco
 
 Mapa em 390x844 mostra o estado offline, cartão web e estado vazio de coordenadas sem corte crítico. Ficha de Tuiuiú resolve corretamente pelo catálogo modular, exibe fallback de imagem, idioma, tags, conteúdo e CTA em uma mão; a leitura segue clara até o início do conteúdo. Não foram encontrados botões mortos nesta revisão.
+
+## Bloco massivo seguinte — diagnóstico offline e transparência editorial
+
+Implementado diagnóstico de restauração offline em `shared/persistence.ts`, distinguindo `empty`, `restored`, `legacy-migrated`, `corrupted` e `unsupported-version`. O `AppContext` expõe esses estados sem substituir silenciosamente dados corrompidos; Configurações mostra aviso localizado PT/EN/ES e recomenda exportar backup. O índice modular agora expõe `catalogReview`, com contagem de lotes e espécies pendentes/verificados, e Configurações informa quando lotes ainda aguardam auditoria comercial.
+
+Validação concluída: `pnpm check`, `pnpm test` (29 aprovados, 1 autenticação pulado), `pnpm lint` e `git diff --check`.
+
+Risco real: os 12 lotes modulares ainda estão `pending-review`; não devem ser promovidos a `verified` sem auditoria arquivo a arquivo das licenças e ocorrência local. Não foram inventadas novas fontes ou imagens neste bloco.

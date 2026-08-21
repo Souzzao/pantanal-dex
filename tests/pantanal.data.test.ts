@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { mergeSightings, restoreSettings, restoreSightings, serializeSettings, serializeSightings } from "../shared/persistence";
-import { catalogBatches, catalogSpecies } from "../shared/catalog/index";
+import { mergeSightings, restoreSettings, restoreSettingsWithStatus, restoreSightings, restoreSightingsWithStatus, serializeSettings, serializeSightings } from "../shared/persistence";
+import { catalogBatches, catalogReview, catalogSpecies } from "../shared/catalog/index";
 import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
@@ -79,6 +79,9 @@ describe("PantanalDex data contracts", () => {
     expect(catalogSpecies).toHaveLength(36);
     expect(validateCatalogBatches(catalogBatches)).toEqual([]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
+    expect(catalogReview.pendingBatches).toBe(12);
+    expect(catalogReview.pendingSpecies).toBe(36);
+    expect(catalogReview.verifiedBatches).toBe(0);
   });
 
   it("loads modular batches with deterministic deduplication and paging", () => {
@@ -151,6 +154,18 @@ describe("PantanalDex data contracts", () => {
     expect(restoreSettings(JSON.stringify(settings), { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual(settings);
     expect(restoreSettings(JSON.stringify({ version: 99, settings }), { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português"] });
     expect(restoreSettings("broken", { defaultLanguage: "Português", quickLanguages: ["Português"] })).toEqual({ defaultLanguage: "Português", quickLanguages: ["Português"] });
+  });
+
+  it("reports precise restoration status without changing the safe fallback", () => {
+    const fallback = { defaultLanguage: "Português" as const, quickLanguages: ["Português"] };
+    expect(restoreSettingsWithStatus(null, fallback).status).toBe("empty");
+    expect(restoreSettingsWithStatus(JSON.stringify({ version: 99, settings: fallback }), fallback)).toEqual({ value: fallback, status: "unsupported-version" });
+    expect(restoreSettingsWithStatus("broken", fallback).status).toBe("corrupted");
+    expect(restoreSettingsWithStatus(JSON.stringify(fallback), fallback).status).toBe("legacy-migrated");
+    expect(restoreSightingsWithStatus(null).status).toBe("empty");
+    expect(restoreSightingsWithStatus(JSON.stringify({ version: 99, sightings: [sighting] })).status).toBe("unsupported-version");
+    expect(restoreSightingsWithStatus("broken").status).toBe("corrupted");
+    expect(restoreSightingsWithStatus(JSON.stringify([sighting])).status).toBe("legacy-migrated");
   });
 
   it("restores valid local JSON and safely recovers from corruption", () => {

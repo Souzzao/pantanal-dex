@@ -3,49 +3,56 @@ import type { Settings } from "./contracts";
 
 const STORAGE_VERSION = 1;
 
-type StoredSightingsEnvelope = {
-  version: number;
-  sightings: unknown;
-};
-
-type StoredSettingsEnvelope = {
-  version: number;
-  settings: unknown;
-};
+type StoredSightingsEnvelope = { version: number; sightings: unknown };
+type StoredSettingsEnvelope = { version: number; settings: unknown };
+export type RestoreStatus = "empty" | "restored" | "legacy-migrated" | "corrupted" | "unsupported-version";
+export type RestoreResult<T> = { value: T; status: RestoreStatus };
 
 export function serializeSettings(settings: Settings): string {
   return JSON.stringify({ version: STORAGE_VERSION, settings: sanitizeSettings(settings) });
 }
 
-export function restoreSettings(value: string | null, fallback: Settings): Settings {
-  if (!value) return fallback;
+export function restoreSettingsWithStatus(value: string | null, fallback: Settings): RestoreResult<Settings> {
+  if (!value) return { value: fallback, status: "empty" };
   try {
     const parsed = JSON.parse(value) as unknown;
-    if (!parsed || typeof parsed !== "object") return fallback;
+    if (!parsed || typeof parsed !== "object") return { value: fallback, status: "corrupted" };
     const record = parsed as Partial<StoredSettingsEnvelope>;
-    if ("version" in record) return record.version === STORAGE_VERSION ? sanitizeSettings(record.settings) : fallback;
-    return sanitizeSettings(parsed);
+    if ("version" in record) {
+      return record.version === STORAGE_VERSION
+        ? { value: sanitizeSettings(record.settings), status: "restored" }
+        : { value: fallback, status: "unsupported-version" };
+    }
+    return { value: sanitizeSettings(parsed), status: "legacy-migrated" };
   } catch {
-    return fallback;
+    return { value: fallback, status: "corrupted" };
   }
+}
+
+export function restoreSettings(value: string | null, fallback: Settings): Settings {
+  return restoreSettingsWithStatus(value, fallback).value;
 }
 
 export function serializeSightings(sightings: Sighting[]): string {
   return JSON.stringify({ version: STORAGE_VERSION, sightings });
 }
 
-export function restoreSightings(value: string | null): Sighting[] {
-  if (!value) return [];
+export function restoreSightingsWithStatus(value: string | null): RestoreResult<Sighting[]> {
+  if (!value) return { value: [], status: "empty" };
   try {
     const parsed = JSON.parse(value) as unknown;
-    if (Array.isArray(parsed)) return sanitizeStoredSightings(parsed);
-    if (!parsed || typeof parsed !== "object") return [];
+    if (Array.isArray(parsed)) return { value: sanitizeStoredSightings(parsed), status: "legacy-migrated" };
+    if (!parsed || typeof parsed !== "object") return { value: [], status: "corrupted" };
     const envelope = parsed as Partial<StoredSightingsEnvelope>;
-    if (envelope.version !== STORAGE_VERSION) return [];
-    return sanitizeStoredSightings(envelope.sightings);
+    if (envelope.version !== STORAGE_VERSION) return { value: [], status: "unsupported-version" };
+    return { value: sanitizeStoredSightings(envelope.sightings), status: "restored" };
   } catch {
-    return [];
+    return { value: [], status: "corrupted" };
   }
+}
+
+export function restoreSightings(value: string | null): Sighting[] {
+  return restoreSightingsWithStatus(value).value;
 }
 
 export function mergeSightings(current: Sighting[], incoming: Sighting[]): { sightings: Sighting[]; added: number; updated: number; skipped: number } {

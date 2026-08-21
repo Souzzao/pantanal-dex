@@ -1,6 +1,6 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
-import { catalogSpecies } from "./catalog/index";
+import { catalogReview, catalogSpecies } from "./catalog/index";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
@@ -22,4 +22,5 @@ export function paginateSpeciesCatalog(items: Species[], page: number, pageSize 
 }
 
 export const catalogCoverage = { species: catalogLoader.size, groups: groups.length, environments: environments.length };
+export { catalogReview };
 export { createCatalogLoader } from "./catalog-loader";

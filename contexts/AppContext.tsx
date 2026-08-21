@@ -5,57 +5,41 @@ import { Platform } from "react-native";
 import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
-import { mergeSightings, restoreSettings, restoreSightings, serializeSettings, serializeSightings } from "@/shared/persistence";
+import { mergeSightings, restoreSettingsWithStatus, restoreSightingsWithStatus, serializeSettings, serializeSightings, type RestoreStatus } from "@/shared/persistence";
 import type { Settings } from "@/shared/contracts";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
-type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
+type StorageDiagnostics = { sightings: RestoreStatus; settings: RestoreStatus };
+type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; storage: StorageDiagnostics; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
 async function readRaw(key: string): Promise<string | null> {
-  try {
-    return await AsyncStorage.getItem(key);
-  } catch {
-    return null;
-  }
-}
-
-async function readJson(key: string): Promise<unknown> {
-  const value = await readRaw(key);
-  if (!value) return undefined;
-  try {
-    return JSON.parse(value);
-  } catch {
-    return undefined;
-  }
+  try { return await AsyncStorage.getItem(key); } catch { return null; }
 }
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [sightings, setSightings] = useState<Sighting[]>([]);
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
+  const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty" });
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const [storedSightings, storedSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readJson(SETTINGS_KEY)]);
-      const restoredSightings = restoreSightings(storedSightings);
-      if (storedSightings) {
-        try {
-          const parsed = JSON.parse(storedSightings);
-          if (Array.isArray(parsed)) await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings));
-        } catch {
-          // Preserve malformed input for diagnostics instead of silently replacing it with an empty notebook.
-        }
+      const [storedSightings, storedSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
+      const restoredSightings = restoreSightingsWithStatus(storedSightings);
+      const restoredSettings = restoreSettingsWithStatus(storedSettings, DEFAULT_SETTINGS);
+      if (storedSightings && restoredSightings.status === "legacy-migrated" && restoredSightings.value.length) {
+        try { await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value)); } catch { /* diagnóstico preservado */ }
       }
       if (!mounted) return;
-      setSightings(restoredSightings);
-      const rawSettings = storedSettings === undefined ? null : JSON.stringify(storedSettings);
-      setSettingsState(restoreSettings(rawSettings, DEFAULT_SETTINGS));
+      setSightings(restoredSightings.value);
+      setSettingsState(restoredSettings.value);
+      setStorage({ sightings: restoredSightings.status, settings: restoredSettings.status });
       setReady(true);
     })();
     return () => { mounted = false; };
@@ -70,6 +54,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     sightings,
     settings,
     ready,
+    storage,
     addSighting: async (sighting) => persistSightings([sighting, ...sightings.filter((item) => item.id !== sighting.id)]),
     updateSighting: async (sighting) => persistSightings(sightings.map((item) => item.id === sighting.id ? sighting : item)),
     deleteSighting: async (id) => persistSightings(sightings.filter((item) => item.id !== id)),
@@ -83,8 +68,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const safe = sanitizeSettings(next);
       await AsyncStorage.setItem(SETTINGS_KEY, serializeSettings(safe));
       setSettingsState(safe);
+      setStorage((current) => ({ ...current, settings: "restored" }));
     },
-  }), [sightings, settings, ready]);
+  }), [sightings, settings, ready, storage]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

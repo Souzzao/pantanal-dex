@@ -15,6 +15,13 @@ import { validateCatalogBatches, type CatalogBatch } from "./types";
 
 export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, birds02, fish01, mammals02, birds03, reptiles02, amphibians02, fish02, invertebrates01];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
+export const catalogReview = {
+  batches: catalogBatches.length,
+  pendingBatches: catalogBatches.filter((batch) => batch.status === "pending-review").length,
+  verifiedBatches: catalogBatches.filter((batch) => batch.status === "verified").length,
+  pendingSpecies: catalogBatches.filter((batch) => batch.status === "pending-review").reduce((total, batch) => total + batch.species.length, 0),
+  verifiedSpecies: catalogBatches.filter((batch) => batch.status === "verified").reduce((total, batch) => total + batch.species.length, 0),
+};
 export const catalogValidationErrors = validateCatalogBatches(catalogBatches);
 
 if (catalogValidationErrors.length) {
