@@ -37,12 +37,12 @@
 - [x] Criar uma política de fallback para web, iOS, Android e uso sem conexão
 
 ### Frente B — Conteúdo científico e acervo de espécies
-- [ ] Expandir o catálogo para pelo menos 20 espécies representativas do Pantanal
-- [ ] Completar os grupos mamíferos, aves, répteis, anfíbios, peixes e invertebrados
-- [ ] Completar os ambientes rios e corixos, áreas alagadas, campos, matas e bordas de mata
+- [x] Expandir o catálogo para pelo menos 20 espécies representativas do Pantanal
+- [x] Completar os grupos mamíferos, aves, répteis, anfíbios, peixes e invertebrados
+- [x] Completar os ambientes rios e corixos, áreas alagadas, campos, matas e bordas de mata
 - [ ] Validar nomes populares, nomes científicos, distribuição e situação de conservação
-- [ ] Garantir três imagens por espécie com crédito, licença e URL de origem
-- [ ] Criar validação automática para detectar campos científicos ou créditos ausentes
+- [x] Garantir três imagens por espécie com crédito, licença e URL de origem
+- [x] Criar validação automática para detectar campos científicos ou créditos ausentes
 - [ ] Adicionar fontes estruturadas por espécie e registrar a data da revisão editorial
 
 ### Frente C — Catálogo e descoberta
@@ -51,7 +51,7 @@
 - [x] Adicionar ordenação por nome popular e grupo
 - [x] Criar barra rápida de idioma dentro da ficha da espécie
 - [x] Exibir claramente quando uma tradução não estiver disponível
-- [ ] Revisar a ficha para leitura rápida em campo e acessibilidade
+- [x] Revisar a ficha para leitura rápida em campo e acessibilidade
 
 ### Frente D — Avistamentos e caderno de campo
 - [x] Implementar edição completa de avistamentos existentes
@@ -72,8 +72,8 @@
 - [x] Garantir que exportar nunca altere ou apague os dados locais
 
 ### Frente F — Qualidade e entrega
-- [ ] Criar testes determinísticos para modelos, validação, persistência e exportação
-- [ ] Executar TypeScript, lint e testes após cada frente concluída
+- [x] Criar testes determinísticos para modelos, validação, persistência e exportação
+- [x] Executar TypeScript, lint e testes após cada frente concluída
 - [ ] Testar fluxos Início → ficha → avistamento → detalhe → edição/exclusão
 - [ ] Testar fluxo sem conexão e fallback de permissões nativas
 - [ ] Revisar a interface em portrait 9:16 para uso com uma mão
@@ -181,7 +181,7 @@
 
 - [x] Implementar filtros avançados por espécie, grupo, ambiente, período e texto
 - [x] Implementar modo mapa web com cartões georreferenciados e navegação para detalhes
-- [ ] Melhorar fallback, erro e carregamento das imagens do catálogo
+- [x] Melhorar fallback, erro e carregamento das imagens do catálogo
 - [x] Executar QA integrado e abrir Pull Request da coordenação
 
 ## Revisão profunda em sete ciclos
@@ -221,3 +221,45 @@
 - [x] Implementar ações avançadas no detalhe do avistamento
 - [x] Implementar acessibilidade e recuperação nos fluxos restantes
 - [x] Executar testes pontuais e consolidar os blocos implementados
+
+## Protocolo de 20 ciclos — desenvolvimento contínuo
+
+- [x] Ciclos 1–4: completar funcionalidades principais ainda faltantes
+- [x] Ciclos 5–8: desenvolver funcionalidades secundárias e integrações
+- [ ] Ciclos 9–12: melhorar UX/UI e fluxos de utilização
+- [ ] Ciclos 13–16: reforçar robustez, erros, desempenho e casos extremos
+- [ ] Ciclos 17–19: executar refinamento geral e corrigir lacunas restantes
+- [ ] Ciclo 20: realizar revisão final e implementar as últimas melhorias relevantes
+
+- [x] Implementar limpeza total do caderno local com confirmação destrutiva e preservação de backup por exportação
+
+- [x] Adicionar resumo de avistamentos pessoais e atalho para o caderno na ficha de espécie
+- [x] Adicionar resumo do caderno com registros, fotos e pontos no mapa
+
+- [x] Conectar a ficha de espécie ao caderno filtrado pela espécie selecionada
+- [x] Exibir resumo de registros, fotos e localizações no caderno de campo
+
+- [x] Configurar permissão nativa de localização apenas durante o uso do app
+- [x] Validar o fluxo ficha → caderno filtrado por espécie e os resumos de cobertura
+
+- [x] Corrigir atualização de preferências para evitar estado visual divergente quando a gravação local falha
+
+- [x] Recuperar resultado pendente do ImagePicker após reinicialização do Android
+- [x] Detectar serviços de localização desativados antes de solicitar coordenadas
+
+- [x] Permitir remover fotografia existente durante a edição de avistamentos
+
+- [x] Localizar rótulos da navegação inferior conforme a preferência de idioma
+- [x] Validar automaticamente imagens, créditos, fontes e campos obrigatórios do catálogo
+
+- [x] Testar e rejeitar URLs editoriais inválidas no catálogo
+
+- [x] Proteger a abertura de fontes e créditos contra esquemas de URL inseguros
+
+- [x] Localizar rótulos principais da home conforme Português, English e Español
+
+- [x] Localizar títulos e estado offline da tela de configurações
+
+- [x] Exibir nas configurações a integridade do catálogo local e o número de espécies válidas
+
+- [x] Migrar arrays legados para o envelope versionado sem substituir dados corrompidos por vazio

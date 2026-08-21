@@ -12,7 +12,7 @@ export { createExportCsv, createExportJson } from "@/shared/exports";
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
 export type Settings = { defaultLanguage: string; quickLanguages: string[] };
-type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
+type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
@@ -43,8 +43,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     let mounted = true;
     (async () => {
       const [storedSightings, storedSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readJson(SETTINGS_KEY)]);
+      const restoredSightings = restoreSightings(storedSightings);
+      if (storedSightings) {
+        try {
+          const parsed = JSON.parse(storedSightings);
+          if (Array.isArray(parsed)) await AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings));
+        } catch {
+          // Preserve malformed input for diagnostics instead of silently replacing it with an empty notebook.
+        }
+      }
       if (!mounted) return;
-      setSightings(restoreSightings(storedSightings));
+      setSightings(restoredSightings);
       setSettingsState(sanitizeSettings(storedSettings));
       setReady(true);
     })();
@@ -63,6 +72,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     addSighting: async (sighting) => persistSightings([sighting, ...sightings.filter((item) => item.id !== sighting.id)]),
     updateSighting: async (sighting) => persistSightings(sightings.map((item) => item.id === sighting.id ? sighting : item)),
     deleteSighting: async (id) => persistSightings(sightings.filter((item) => item.id !== id)),
+    clearSightings: async () => persistSightings([]),
     importSightings: async (incoming) => {
       const result = mergeSightings(sightings, incoming);
       await persistSightings(result.sightings);
@@ -70,8 +80,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     },
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
-      setSettingsState(safe);
       await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(safe));
+      setSettingsState(safe);
     },
   }), [sightings, settings, ready]);
 

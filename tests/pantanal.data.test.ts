@@ -36,6 +36,13 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("reports invalid editorial URLs", () => {
+    const broken = [{ ...species[0], images: [{ ...species[0].images[0], sourceUrl: "javascript:alert(1)" }, ...species[0].images.slice(1)], sources: [{ title: "Fonte", url: "not-a-url" }] }];
+    const errors = validateSpeciesCatalog(broken);
+    expect(errors).toContain("species[0](tuiuiu).images[0] sem crédito/licença/fonte completos");
+    expect(errors).toContain("species[0](tuiuiu).sources inválido");
+  });
+
   it("exports sightings as versioned JSON without losing fields", () => {
     const exported = JSON.parse(createExportJson([sighting]));
     expect(exported.version).toBe("1.0");

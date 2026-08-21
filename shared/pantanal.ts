@@ -133,6 +133,8 @@ export const species: Species[] = [
   },
 ];
 
+const isHttpUrl = (value: string) => /^https?:\/\/\S+$/i.test(value);
+
 export function validateSpeciesCatalog(items: Species[] = species): string[] {
   const errors: string[] = [];
   const ids = new Set<string>();
@@ -150,9 +152,9 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
     if (item.curiosities.length === 0 || item.curiosities.some((curiosity) => !curiosity.trim())) errors.push(`${prefix}.curiosities inválido`);
     if (item.images.length < 3) errors.push(`${prefix}.images deve ter pelo menos 3 imagens`);
     item.images.forEach((image, imageIndex) => {
-      if (!image.uri || !image.author || !image.license || !image.sourceUrl || !image.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
+      if (!image.uri || !isHttpUrl(image.uri) || !image.author || !image.license || !isHttpUrl(image.sourceUrl) || !image.credit) errors.push(`${prefix}.images[${imageIndex}] sem crédito/licença/fonte completos`);
     });
-    if (item.sources.length === 0 || item.sources.some((source) => !source.title.trim() || !source.url.trim())) errors.push(`${prefix}.sources inválido`);
+    if (item.sources.length === 0 || item.sources.some((source) => !source.title.trim() || !isHttpUrl(source.url))) errors.push(`${prefix}.sources inválido`);
   });
   return errors;
 }

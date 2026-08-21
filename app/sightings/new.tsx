@@ -54,6 +54,14 @@ export default function NewSightingScreen() {
     );
   }, [speciesQuery]);
 
+  useEffect(() => {
+    let active = true;
+    ImagePicker.getPendingResultAsync().then((result) => {
+      if (active && result && "canceled" in result && !result.canceled) applyPickerResult(result);
+    }).catch(() => undefined);
+    return () => { active = false; };
+  }, []);
+
   const applyPickerResult = (result: ImagePicker.ImagePickerResult) => {
     if (!result.canceled && result.assets[0]?.uri) setPhotoUri(result.assets[0].uri);
   };
@@ -93,6 +101,10 @@ export default function NewSightingScreen() {
 
   const useLocation = async () => {
     try {
+      if (!(await Location.hasServicesEnabledAsync())) {
+        Alert.alert("Localização desativada", "Ative o serviço de localização do aparelho para registrar coordenadas.");
+        return;
+      }
       const permission = await Location.requestForegroundPermissionsAsync();
       if (permission.status !== "granted") {
         Alert.alert("Localização não autorizada", "Você pode salvar o registro sem coordenadas.");
@@ -189,7 +201,7 @@ export default function NewSightingScreen() {
             <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Tirar foto</Text>
           </Pressable>
         </View>
-        {photoUri && <Text style={{ color: colors.success, fontWeight: "700", marginBottom: 14 }}>Fotografia pronta para salvar.</Text>}
+        {photoUri && <View style={{ marginBottom: 14 }}><Text style={{ color: colors.success, fontWeight: "700" }}>Fotografia pronta para salvar.</Text><Pressable onPress={() => setPhotoUri(undefined)} accessibilityRole="button" accessibilityLabel="Remover fotografia" style={{ marginTop: 8 }}><Text style={{ color: colors.error, fontWeight: "800" }}>Remover fotografia</Text></Pressable></View>}
 
         <Pressable onPress={useLocation} accessibilityRole="button" style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{coords ? "Atualizar localização do aparelho" : "Usar localização do aparelho"}</Text>
