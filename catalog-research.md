@@ -21,3 +21,10 @@
 A API de correspondência taxonômica do GBIF retornou correspondência exata e status `ACCEPTED` para `Boana albopunctata`, `Phyllomedusa sauvagii` e `Physalaemus albonotatus`, mantendo esses nomes como candidatos para o ciclo 8. Nenhum status de conservação foi preenchido; essa informação deve vir exclusivamente do Livro Vermelho do ICMBio ou de portarias MMA/ICMBio.
 
 O lote de anfíbios foi implementado com imagens Commons individualmente registradas; a revisão de ocorrência regional e a fonte oficial de conservação permanecem pendentes.
+
+
+## Ciclo 17 — validação taxonômica GBIF
+
+Em 21 de agosto de 2026, os quinze nomes científicos dos lotes modulares foram consultados individualmente no endpoint público `https://api.gbif.org/v1/species/match`. Todos retornaram `matchType=EXACT` e `status=ACCEPTED`: `Anhima cornuta`, `Boana albopunctata`, `Cariama cristata`, `Chrysocyon brachyurus`, `Crax fasciolata`, `Morpho helenor`, `Oxybelis aeneus`, `Pecari tajacu`, `Phyllomedusa sauvagii`, `Piaractus mesopotamicus`, `Pseudoplatystoma corruscans`, `Salminus brasiliensis`, `Salvator merianae`, `Tayassu pecari` e `Tetragonisca angustula`.
+
+A confirmação é taxonômica e não prova, sozinha, ocorrência no recorte do Pantanal nem situação de conservação. Esses dois atributos permanecem pendentes até fonte SiBBr/ICMBio e Livro Vermelho/portaria oficial aplicável.

@@ -156,7 +156,7 @@
 | 9–11 | Peixes | [x] `catalog-fish-01` adicionado com três espécies; revisão regional e conservação pendentes. |
 | 12–14 | Invertebrados | [x] `catalog-invertebrates-01` adicionado com uma espécie; camarão e revisão final pendentes. |
 | 15–16 | Índices por ambiente, sinônimos e busca | [x] Índices derivados e helper de nomes alternativos implementados; popular sinônimos documentados continua pendente. |
-| 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [ ] Parcial; metadados do Commons do lote 01 registrados. |
+| 17–19 | Validação taxonômica, imagens, licenças, fontes e conservação | [x] 15 nomes modulares validados como ACCEPTED/EXACT no GBIF; ocorrência regional e conservação ICMBio/MMA ainda pendentes. |
 | 20 | Pacote final e PR | [ ] Pendente. |
 
 O lote `catalog-mammals-01` contém `Chrysocyon brachyurus`, `Tayassu pecari` e `Pecari tajacu`. Os registros têm três imagens HTTP do Wikimedia Commons por espécie, autoria, licença, origem e fonte GBIF. A conservação ainda aguarda fonte oficial do ICMBio ou portaria MMA/ICMBio. O lote permanece `pending-review` porque a nomenclatura aceita, o status de conservação e a ocorrência específica no Pantanal ainda precisam de revisão editorial especializada. Fotografias de zoológico ou de outras localidades não são evidência de ocorrência regional.
