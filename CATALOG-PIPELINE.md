@@ -2,7 +2,7 @@
 
 ## Estado do Ciclo 2
 
-O catálogo público mantém os registros legados e passa a incorporar lotes em `shared/catalog/batches/`. Após os Ciclos 9–10, o índice reúne dez lotes, incluindo os novos lotes de répteis `catalog-reptiles-02` e anfíbios `catalog-amphibians-02`, além dos lotes anteriores de mamíferos, aves e peixes. O índice em `shared/catalog/index.ts` reúne os lotes, calcula a validação agregada e expõe `catalogSpecies`. O índice de descoberta em `shared/catalog.ts` combina o catálogo legado com os lotes modulares por meio de deduplicação por `id`, preservando as funções usadas pelas telas existentes.
+O catálogo público mantém os registros legados e passa a incorporar lotes em `shared/catalog/batches/`. Após os Ciclos 11–12, o índice reúne doze lotes, incluindo os novos lotes de peixes `catalog-fish-02` e invertebrados `catalog-invertebrates-01`, além dos lotes anteriores de mamíferos, aves, répteis e anfíbios. O índice em `shared/catalog/index.ts` reúne os lotes, calcula a validação agregada e expõe `catalogSpecies`. O índice de descoberta em `shared/catalog.ts` combina o catálogo legado com os lotes modulares por meio de deduplicação por `id`, preservando as funções usadas pelas telas existentes.
 
 | Lote piloto | Grupo | Espécies | Estado |
 |---|---:|---:|---|
@@ -16,7 +16,9 @@ O catálogo público mantém os registros legados e passa a incorporar lotes em 
 | `catalog-birds-03` | Aves | 3 | `pending-review` |
 | `catalog-reptiles-02` | Répteis | 4 | `pending-review` |
 | `catalog-amphibians-02` | Anfíbios | 4 | `pending-review` |
-| **Total** | **5 grupos** | **30** | **validado automaticamente** |
+| `catalog-fish-02` | Peixes | 3 | `pending-review` |
+| `catalog-invertebrates-01` | Invertebrados | 3 | `pending-review` |
+| **Total** | **6 grupos** | **36** | **validado automaticamente** |
 
 ## Pipeline de lote
 
@@ -26,7 +28,7 @@ O estado `pending-review` é intencional: indica que o lote passou pelas valida�
 
 ## Vazão e recalibração
 
-O lote piloto entregou **30 espécies em dez módulos** e passou com 21 testes no conjunto do projeto. Essa vazão é a métrica inicial para o Ciclo 3. Após a revisão de licenças e fontes, a Conta 2 pode aumentar o lote gradualmente, sempre mantendo PRs pequenos, IDs únicos e relatório de pendências. O objetivo de 3.000+ espécies será alcançado por lotes independentes, não por um arquivo monolítico.
+O lote piloto entregou **36 espécies em doze módulos** e passou com 21 testes no conjunto do projeto. Essa vazão é a métrica inicial para o Ciclo 3. Após a revisão de licenças e fontes, a Conta 2 pode aumentar o lote gradualmente, sempre mantendo PRs pequenos, IDs únicos e relatório de pendências. O objetivo de 3.000+ espécies será alcançado por lotes independentes, não por um arquivo monolítico.
 
 ## Compatibilidade
 

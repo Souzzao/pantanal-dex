@@ -346,3 +346,10 @@
 - [x] Adicionar lote modular de anfíbios com fontes e licenças comerciais confirmadas
 - [x] Validar IDs, créditos, fontes, conservação oficial e cobertura por grupo
 - [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
+
+## Ciclos 11–12 — peixes e invertebrados
+- [x] Auditar PR #8 e confirmar a base atual da expansão
+- [x] Adicionar lote modular de peixes com fontes e licenças comerciais confirmadas
+- [x] Adicionar lote modular de invertebrados com fontes e licenças comerciais confirmadas
+- [x] Validar IDs, créditos, fontes, conservação oficial e cobertura por grupo
+- [x] Executar check, lint, testes e diff check; atualizar docs, commit e PR
