@@ -1,0 +1,78 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, license: string, sourceUrl: string, credit: string) => ({ uri, author, license, sourceUrl, credit });
+const gbif = (name: string) => ({ title: `GBIF Species Match — ${name}`, url: `https://api.gbif.org/v1/species/match?name=${encodeURIComponent(name)}` });
+
+export const fish02: CatalogBatch = {
+  batchId: "catalog-fish-02",
+  cycle: 10,
+  group: "Peixes",
+  status: "pending-review",
+  sources: [gbif("Hoplias malabaricus"), gbif("Prochilodus lineatus"), gbif("Leporinus friderici")],
+  pendingNotes: ["Confirmar ocorrência no recorte do Pantanal e eventual conservação em fonte ICMBio/MMA; fotografias e correspondência GBIF não substituem ocorrência regional."],
+  species: [
+    {
+      id: "hoplias-malabaricus",
+      commonName: "Traíra",
+      scientificName: "Hoplias malabaricus",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe predador de água doce que utiliza margens, vegetação e áreas de pouca correnteza para caçar.",
+      physicalCharacteristics: "Corpo alongado, cabeça larga, boca ampla e coloração parda ou esverdeada com manchas que ajudam na camuflagem.",
+      habitat: "Lagoas, braços de rios, corixos e trechos com vegetação submersa ou marginal.",
+      behavior: "Permanece à espreita e realiza ataques rápidos contra presas que passam próximas ao abrigo.",
+      diet: "Peixes menores, crustáceos e outros animais aquáticos adequados ao tamanho do indivíduo.",
+      curiosities: ["A camuflagem favorece a caça de emboscada.", "A espécie tolera ambientes com pouca correnteza e diferentes condições de abrigo."],
+      distribution: "Bacias de água doce da América do Sul, com ampla ocorrência em diferentes regiões brasileiras.",
+      ecologicalImportance: "Atua como predador de médio porte e ajuda a estruturar as cadeias alimentares de ambientes de água doce.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/4/4f/Hoplias_malabaricus_172871761.jpeg", "Tiago Lubiana", "CC0", "https://commons.wikimedia.org/wiki/File:Hoplias_malabaricus_172871761.jpeg", "Tiago Lubiana / Wikimedia Commons; iNaturalist"),
+        image("https://upload.wikimedia.org/wikipedia/commons/2/2c/Hoplias_malabaricus.jpg", "Cláudio D. Timm", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Hoplias_malabaricus.jpg", "Cláudio D. Timm / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Hoplias_malabaricus2.jpg", "J. F. Hennig", "Public domain", "https://commons.wikimedia.org/wiki/File:Hoplias_malabaricus2.jpg", "J. F. Hennig / Wikimedia Commons"),
+      ],
+      sources: [gbif("Hoplias malabaricus")],
+    },
+    {
+      id: "prochilodus-lineatus",
+      commonName: "Curimbatá",
+      scientificName: "Prochilodus lineatus",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe migrador de água doce que se alimenta no fundo e participa do fluxo de matéria orgânica dos rios.",
+      physicalCharacteristics: "Corpo fusiforme, escamas prateadas e boca protrátil adaptada à raspagem de substratos.",
+      habitat: "Rios, lagoas marginais e áreas alagáveis conectadas aos sistemas fluviais.",
+      behavior: "Forma cardumes e pode realizar deslocamentos reprodutivos acompanhando o pulso de cheia dos rios.",
+      diet: "Detritos, algas e matéria orgânica associada ao substrato aquático.",
+      curiosities: ["A migração conecta diferentes trechos da bacia durante o ciclo reprodutivo.", "A alimentação no fundo movimenta sedimentos e matéria orgânica."],
+      distribution: "Bacias do sul e centro da América do Sul, incluindo sistemas fluviais brasileiros.",
+      ecologicalImportance: "Transfere energia entre sedimentos, matéria orgânica e predadores, além de conectar habitats por seus deslocamentos.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/3/3a/Prochilodus_lineatus_cropped.jpg", "João D'Andretta", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Prochilodus_lineatus_cropped.jpg", "João D'Andretta / iNaturalist / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/d/d9/Prochilodus_lineatus_351939209.jpg", "dariocrosa", "CC0", "https://commons.wikimedia.org/wiki/File:Prochilodus_lineatus_351939209.jpg", "dariocrosa / iNaturalist / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/6/67/Prochilodus_lineatus_in-situ.jpg", "João D'Andretta", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Prochilodus_lineatus_in-situ.jpg", "João D'Andretta / iNaturalist / Wikimedia Commons"),
+      ],
+      sources: [gbif("Prochilodus lineatus")],
+    },
+    {
+      id: "leporinus-friderici",
+      commonName: "Piau-três-pintas",
+      scientificName: "Leporinus friderici",
+      group: "Peixes",
+      environments: ["Rios e corixos", "Áreas alagadas"],
+      description: "Peixe de água doce associado a rios e áreas marginais, reconhecido pelo padrão de manchas no corpo.",
+      physicalCharacteristics: "Corpo alongado, escamas prateadas e manchas escuras laterais características do grupo.",
+      habitat: "Rios, lagoas marginais, remansos e ambientes alagáveis com abrigo vegetal.",
+      behavior: "Forrageia entre a vegetação e o substrato, alternando deslocamentos curtos e períodos de permanência em abrigo.",
+      diet: "Frutos, sementes, matéria vegetal e pequenos invertebrados disponíveis no ambiente aquático.",
+      curiosities: ["O padrão de três manchas inspira o nome popular usado em várias regiões.", "A alimentação variada permite explorar diferentes microambientes da bacia."],
+      distribution: "Bacias hidrográficas da América do Sul, com registros em diferentes rios brasileiros.",
+      ecologicalImportance: "Participa do transporte de matéria e da dispersão de sementes associadas aos ambientes aquáticos e marginais.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/7/7e/Leporinus_friderici.jpg", "Citron", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Leporinus_friderici.jpg", "Citron / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/8/8b/Leporinus_friderici_60892985.jpg", "Gerry van Tonder", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Leporinus_friderici_60892985.jpg", "Gerry van Tonder / iNaturalist / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/a/a5/Leporinus_friderici_325924873.jpg", "Douglas Lopes", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Leporinus_friderici_325924873.jpg", "Douglas Lopes / iNaturalist / Wikimedia Commons"),
+      ],
+      sources: [gbif("Leporinus friderici")],
+    },
+  ],
+};
