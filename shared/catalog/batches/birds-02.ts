@@ -1,0 +1,78 @@
+import type { CatalogBatch } from "../types";
+
+const image = (uri: string, author: string, license: string, sourceUrl: string, credit: string) => ({ uri, author, license, sourceUrl, credit });
+const gbif = (name: string) => ({ title: `GBIF Species Match — ${name}`, url: `https://api.gbif.org/v1/species/match?name=${encodeURIComponent(name)}` });
+
+export const birds02: CatalogBatch = {
+  batchId: "catalog-birds-02",
+  cycle: 5,
+  group: "Aves",
+  status: "pending-review",
+  sources: [gbif("Cairina moschata"), gbif("Penelope superciliaris"), gbif("Aramides cajaneus")],
+  pendingNotes: ["Confirmar ocorrência no recorte do Pantanal e eventual conservação em fonte ICMBio/MMA; imagens licenciadas não provam ocorrência regional."],
+  species: [
+    {
+      id: "cairina-moschata",
+      commonName: "Pato-do-mato",
+      scientificName: "Cairina moschata",
+      group: "Aves",
+      environments: ["Rios e corixos", "Áreas alagadas", "Matas"],
+      description: "Ave aquática de grande porte que utiliza rios, lagoas e áreas florestais próximas à água.",
+      physicalCharacteristics: "Corpo robusto, pescoço relativamente curto e plumagem escura com brilho esverdeado em parte do corpo.",
+      habitat: "Rios, lagoas, baías e matas ciliares com árvores usadas para abrigo e reprodução.",
+      behavior: "Nada e forrageia na água, deslocando-se entre margens, vegetação aquática e áreas arborizadas.",
+      diet: "Sementes, frutos, plantas aquáticas e pequenos invertebrados disponíveis em áreas úmidas.",
+      curiosities: ["Pode utilizar ocos de árvores próximos à água para nidificar.", "A espécie silvestre é ancestral de variedades domésticas de pato-mudo."],
+      distribution: "Américas tropicais, incluindo grande parte do Brasil e outras áreas da América do Sul.",
+      ecologicalImportance: "Transporta sementes e participa das cadeias alimentares de rios, lagoas e matas ciliares.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/b/b6/Muskovy_duck_%28Cairina_moschata%29.JPG", "Charles J. Sharp", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Muskovy_duck_(Cairina_moschata).JPG", "Charles J. Sharp / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/a/a2/Cairina_moschata-2.jpg", "Alvesgaspar", "CC BY 2.5", "https://commons.wikimedia.org/wiki/File:Cairina_moschata-2.jpg", "Alvesgaspar / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/8/87/Cairina_Moschata_Portrait.JPG", "Francesco Canu", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Cairina_Moschata_Portrait.JPG", "Francesco Canu / Wikimedia Commons"),
+      ],
+      sources: [gbif("Cairina moschata")],
+    },
+    {
+      id: "penelope-superciliaris",
+      commonName: "Jacu-guaçu",
+      scientificName: "Penelope superciliaris",
+      group: "Aves",
+      environments: ["Matas", "Bordas de mata"],
+      description: "Cracídeo de porte médio que se alimenta principalmente na vegetação e no chão de matas e bordas.",
+      physicalCharacteristics: "Plumagem parda e estriada, cauda longa e área nua avermelhada próxima à garganta.",
+      habitat: "Matas, capões, bordas florestais e áreas com árvores frutíferas.",
+      behavior: "Move-se em pares ou pequenos grupos e pode vocalizar de poleiros altos.",
+      diet: "Frutos, sementes, folhas e pequenos invertebrados encontrados no solo e na vegetação.",
+      curiosities: ["A família dos cracídeos inclui importantes dispersores de sementes.", "Pode deslocar-se entre fragmentos florestais em busca de frutos."],
+      distribution: "América do Sul, com ampla ocorrência no Brasil em formações florestais e suas bordas.",
+      ecologicalImportance: "Dispersa sementes e contribui para a regeneração das matas onde forrageia.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/9/9a/Penelope_superciliaris-2.JPG", "Zimbres", "CC BY-SA 2.5", "https://commons.wikimedia.org/wiki/File:Penelope_superciliaris-2.JPG", "Zimbres / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/e/e5/Penelope_superciliaris_265789286.jpg", "Alix Sanchis", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Penelope_superciliaris_265789286.jpg", "Alix Sanchis / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/a/aa/Penelope_superciliaris_330630914.jpg", "Francisco V. Bezerra Neto", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Penelope_superciliaris_330630914.jpg", "Francisco V. Bezerra Neto / Wikimedia Commons"),
+      ],
+      sources: [gbif("Penelope superciliaris")],
+    },
+    {
+      id: "aramides-cajaneus",
+      commonName: "Saracura-do-mato",
+      scientificName: "Aramides cajaneus",
+      group: "Aves",
+      environments: ["Áreas alagadas", "Rios e corixos", "Bordas de mata"],
+      description: "Ave terrestre de áreas úmidas que percorre a vegetação densa próxima a rios, lagoas e matas.",
+      physicalCharacteristics: "Corpo alongado, pernas fortes, bico claro e combinação de tons cinzentos, castanhos e ruivos.",
+      habitat: "Matas ciliares, brejos, margens de rios e vegetação fechada de áreas alagadas.",
+      behavior: "Caminha entre a vegetação e costuma vocalizar antes de ser observada em áreas densas.",
+      diet: "Invertebrados, sementes, frutos e pequenos animais encontrados na serapilheira e em margens úmidas.",
+      curiosities: ["As pernas fortes ajudam na travessia de vegetação densa e terrenos úmidos.", "Sua vocalização é frequentemente mais fácil de detectar do que o indivíduo."],
+      distribution: "América Central e América do Sul, incluindo grande parte do Brasil.",
+      ecologicalImportance: "Participa do controle de invertebrados e da dispersão de sementes em ambientes ripários.",
+      images: [
+        image("https://upload.wikimedia.org/wikipedia/commons/9/95/058_Grey-cowled_wood_rail_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:058_Grey-cowled_wood_rail_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/3/34/Grey-necked_Wood_Rail_%28Aramides_cajanea%29_%2828439453400%29.jpg", "Bernard DUPONT", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Grey-necked_Wood_Rail_(Aramides_cajanea)_(28439453400).jpg", "Bernard DUPONT / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/6/62/Aramides_cajaneus_Spix.jpg", "Johann Baptist von Spix", "Public domain", "https://commons.wikimedia.org/wiki/File:Aramides_cajaneus_Spix.jpg", "Johann Baptist von Spix / Wikimedia Commons"),
+      ],
+      sources: [gbif("Aramides cajaneus")],
+    },
+  ],
+};

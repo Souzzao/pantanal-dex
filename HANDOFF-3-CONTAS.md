@@ -177,3 +177,10 @@ O bloco foi entregue com índice, teste, manifesto `LICENSES-credits.md`, TODO, 
 Foi identificado que `shared/pantanal.ts` continha 15 referências IUCN e status de conservação sem fonte aprovada para o produto comercial. O script `scripts/normalize-legacy-commercial.mjs` migrou as referências para consultas GBIF Species Match e removeu os status, sem inventar substitutos. Evidência: a execução reportou 15 migrações e zero referências IUCN restantes.
 
 A regressão é protegida por teste que exige fontes públicas sem IUCN e `conservationStatus` vazio. A pendência real permanece com o responsável científico/Agente 1: consultar Livro Vermelho ICMBio ou portarias MMA/ICMBio por espécie e preencher somente os casos confirmados. Até lá, ausência de status é o comportamento correto.
+
+
+## 18. Bloco de aves `catalog-birds-02`
+
+A Conta 2 adicionou `Cairina moschata`, `Penelope superciliaris` e `Aramides cajaneus` em módulo separado, totalizando três espécies e nove imagens Commons verificadas individualmente. As licenças são CC BY, CC BY-SA e domínio público; não foram aceitas licenças NC, ND ou ausentes. Cada imagem mantém autor, URL de distribuição, página de origem e crédito no módulo.
+
+A taxonomia usa consultas GBIF por espécie. O lote permanece `pending-review`: as imagens não provam ocorrência no recorte do Pantanal e a conservação exige consulta ao Livro Vermelho ICMBio ou portaria MMA/ICMBio. A alternativa executável é consultar SiBBr/ICMBio para ocorrência e registrar somente correspondências confirmadas.
