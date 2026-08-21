@@ -39,10 +39,22 @@ describe("PantanalDex data contracts", () => {
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
+  it("rejects non-commercial or derivative-restricted image licenses", () => {
+    const broken = [{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }];
+    expect(validateSpeciesCatalog(broken)).toContain("species[0](tuiuiu).images[0] sem licença comercial, crédito ou fonte completos");
+  });
+
+  it("requires an official conservation source when a status is supplied", () => {
+    const broken = [{ ...species[0], conservationStatus: "Vulnerável" }];
+    expect(validateSpeciesCatalog(broken)).toContain("species[0](tuiuiu).conservationSource deve ser Livro Vermelho ICMBio ou Portaria MMA/ICMBio");
+    const valid = [{ ...species[0], conservationStatus: "Vulnerável", conservationSource: { title: "Livro Vermelho ICMBio", url: "https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade" } }];
+    expect(validateSpeciesCatalog(valid)).toEqual([]);
+  });
+
   it("reports invalid editorial URLs", () => {
     const broken = [{ ...species[0], images: [{ ...species[0].images[0], sourceUrl: "javascript:alert(1)" }, ...species[0].images.slice(1)], sources: [{ title: "Fonte", url: "not-a-url" }] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images[0] sem crédito/licença/fonte completos");
+    expect(errors).toContain("species[0](tuiuiu).images[0] sem licença comercial, crédito ou fonte completos");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 

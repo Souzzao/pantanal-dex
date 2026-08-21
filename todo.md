@@ -310,3 +310,11 @@
 - [x] Implementar carregador modular por lotes com deduplicação, busca indexada e paginação.
 - [x] Ciclo coordenado: adicionar oito espécies de répteis, anfíbios, peixes e invertebrados; corrigir IDs duplicados detectados pela validação; catálogo validado com 75 espécies.
 - [x] Validar carregador modular, TypeScript, lint, 18 testes (1 teste de autenticação pulado) e diff check.
+
+## Ciclo 1 — governança comercial e fontes aprovadas
+- [x] Auditar licenças de todas as imagens e fontes das 75 espécies atuais
+- [x] Adicionar contrato de licença compatível com uso comercial e bloquear NC/ND/sem licença confirmada
+- [x] Criar LICENSES.md com créditos, URLs, licença e política de revisão por fonte
+- [x] Restringir dados de conservação a Livro Vermelho ICMBio ou Portarias MMA/ICMBio; deixar vazio quando ausente
+- [x] Registrar no HANDOFF-3-CONTAS.md a regra de aprovação de PRs e o lote piloto de espécies
+- [x] Validar governança com pnpm check, pnpm lint, pnpm test e git diff --check
