@@ -114,3 +114,10 @@
 
 - [x] Montar ZIP com handoff, especificação, quadro de trabalho, design, workflow e links do projeto
 - [x] Verificar se o ZIP contém instruções suficientes para as duas contas começarem sem contexto adicional
+
+## Pacotes complementares por função
+
+- [x] Criar ZIP específico da Conta 2 com guia de conteúdo científico e catálogo
+- [x] Criar ZIP específico da Conta 3 com guia de avistamentos, interface e qualidade
+- [x] Criar ZIP da Conta Coordenadora com protocolo de integração, revisão e checkpoints
+- [x] Verificar os três pacotes e entregar os links corretos
