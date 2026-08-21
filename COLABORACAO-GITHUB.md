@@ -2,7 +2,7 @@
 
 ## Repositório compartilhado
 
-O desenvolvimento colaborativo usa o repositório privado:
+O desenvolvimento colaborativo usa o repositório público:
 
 `https://github.com/Souzzao/pantanal-dex`
 
@@ -65,7 +65,7 @@ git rebase origin/main
 git push --force-with-lease origin NOME-DA-BRANCH
 ```
 
-Não colocar tokens, senhas, `.env`, `.project-config.json` ou credenciais no GitHub. Esses arquivos permanecem ignorados.
+Mesmo sendo público, não colocar tokens, senhas, `.env`, `.project-config.json` ou credenciais no GitHub. Esses arquivos permanecem ignorados.
 
 ## Mensagem pronta para as contas colaboradoras
 
