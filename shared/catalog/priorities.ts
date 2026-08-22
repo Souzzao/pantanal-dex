@@ -1,0 +1,72 @@
+import type { Species } from "../pantanal";
+
+export type ReviewPriority = "P1" | "P2";
+export type PriorityReviewArea = "taxonomy" | "occurrence" | "licenses" | "conservation" | "editorial";
+
+export type CatalogPriority = {
+  priority: ReviewPriority;
+  commonName: string;
+  scientificName?: string;
+  speciesId: string | null;
+  groups: Species["group"][];
+  environments: Species["environments"];
+  rationale: string;
+  reviewAreas: PriorityReviewArea[];
+};
+
+const p1 = (commonName: string, scientificName: string, speciesId: string | null, groups: Species["group"][], environments: Species["environments"], rationale: string): CatalogPriority => ({ priority: "P1", commonName, scientificName, speciesId, groups, environments, rationale, reviewAreas: ["taxonomy", "occurrence", "licenses", "conservation", "editorial"] });
+const p2 = (commonName: string, scientificName: string, speciesId: string, groups: Species["group"][], environments: Species["environments"], rationale: string): CatalogPriority => ({ priority: "P2", commonName, scientificName, speciesId, groups, environments, rationale, reviewAreas: ["taxonomy", "occurrence", "licenses", "editorial"] });
+
+/**
+ * P1 reproduz o núcleo de campo definido pelo pacote MVP. Espécies sem registro
+ * atual permanecem explícitas como speciesId=null e não podem ser promovidas.
+ */
+export const catalogP1Priorities: readonly CatalogPriority[] = [
+  p1("Onça-pintada", "Panthera onca", "onca-pintada", ["Mamíferos"], ["Matas", "Bordas de mata"], "Espécie emblemática e predador de referência do Pantanal."),
+  p1("Capivara", "Hydrochoerus hydrochaeris", "capivara", ["Mamíferos"], ["Áreas alagadas", "Rios e corixos"], "Espécie abundante e diretamente associada a ambientes aquáticos."),
+  p1("Anta", "Tapirus terrestris", "anta", ["Mamíferos"], ["Matas", "Áreas alagadas"], "Grande herbívoro e dispersor de sementes prioritário."),
+  p1("Tamanduá-bandeira", "Myrmecophaga tridactyla", "tamandua-bandeira", ["Mamíferos"], ["Campos", "Matas"], "Mamífero emblemático com necessidade de auditoria de ocorrência e conservação."),
+  p1("Queixada", "Tayassu pecari", "queixada", ["Mamíferos"], ["Matas"], "Herbívoro social e indicador de conectividade florestal."),
+  p1("Lobo-guará", "Chrysocyon brachyurus", "lobo-guara", ["Mamíferos"], ["Campos", "Bordas de mata"], "Espécie emblemática de áreas abertas."),
+  p1("Veado-campeiro", "Ozotoceros bezoarticus", null, ["Mamíferos"], ["Campos"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Tuiuiú", "Jabiru mycteria", "tuiuiu", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Símbolo do Pantanal e espécie de referência para áreas alagadas."),
+  p1("Arara-azul", "Anodorhynchus hyacinthinus", "arara-azul", ["Aves"], ["Matas", "Bordas de mata"], "Espécie emblemática e prioritária para revisão de conservação."),
+  p1("Arara-canindé", "Ara ararauna", null, ["Aves"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Tucano-toco", "Ramphastos toco", null, ["Aves"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Seriema", "Cariama cristata", "seriema", ["Aves"], ["Campos", "Bordas de mata"], "Ave terrestre emblemática de áreas abertas."),
+  p1("Anhuma", "Anhima cornuta", "anhuma", ["Aves"], ["Áreas alagadas", "Campos"], "Ave de referência para áreas úmidas e campos alagáveis."),
+  p1("Garça-branca", "Ardea alba", "garca-branca", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Indicadora visual de ambientes aquáticos rasos."),
+  p1("Colhereiro", "Platalea ajaja", "colhereiro", ["Aves"], ["Áreas alagadas"], "Ave aquática prioritária para revisão de ocorrência e imagens."),
+  p1("Jacaré-do-Pantanal", "Caiman yacare", "jacare-do-pantanal", ["Répteis"], ["Áreas alagadas", "Rios e corixos"], "Réptil emblemático e predador de ambientes aquáticos."),
+  p1("Sucuri-verde", "Eunectes murinus", "sucuri-verde", ["Répteis"], ["Áreas alagadas", "Rios e corixos"], "Grande predador associado a corpos d'água."),
+  p1("Teiú", "Salvator merianae", "teiu", ["Répteis"], ["Campos", "Bordas de mata"], "Réptil generalista de ampla interação trófica."),
+  p1("Sapo-cururu", "Rhinella diptycha", "sapo-cururu", ["Anfíbios"], ["Campos", "Matas"], "Anfíbio comum e sensível a alterações ambientais."),
+  p1("Rã-pimenta", "Leptodactylus labyrinthicus", "ra-pimenta", ["Anfíbios"], ["Áreas alagadas", "Campos"], "Anfíbio de referência para ambientes úmidos."),
+  p1("Dourado", "Salminus brasiliensis", "salminus-brasiliensis", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Predador e migrador de referência dos rios."),
+  p1("Pacu", "Piaractus mesopotamicus", "pacu", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Peixe frugívoro associado ao pulso de inundação."),
+  p1("Piraputanga", "Brycon hilarii", "piraputanga", ["Peixes"], ["Rios e corixos", "Matas"], "Peixe associado à mata ciliar e dispersão de sementes."),
+  p1("Cachara", "Pseudoplatystoma reticulatum", "pseudoplatystoma-reticulatum", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Grande bagre de importância ecológica e regional."),
+  p1("Jaú", "Zungaro jahu", null, ["Peixes"], ["Rios e corixos"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Abelha-jataí", "Tetragonisca angustula", "tetragonisca-angustula", ["Invertebrados"], ["Matas", "Bordas de mata"], "Polinizador social de relevância ecológica."),
+  p1("Formiga-cortadeira", "Atta sexdens", "atta-sexdens", ["Invertebrados"], ["Campos", "Matas"], "Engenheira de ecossistema e espécie de referência do solo."),
+  p1("Aranha-armadeira", "Phoneutria nigriventer", null, ["Invertebrados"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+];
+
+/** P2 amplia a auditoria com cobertura equilibrada dos grupos e ambientes já cadastrados. */
+export const catalogP2Priorities: readonly CatalogPriority[] = [
+  p2("Cateto", "Pecari tajacu", "cateto", ["Mamíferos"], ["Matas", "Bordas de mata"], "Mamífero modular para completar a cobertura P2 de grupos."),
+  p2("Dança-ninfas", "Heliconius erato", "heliconius-erato", ["Invertebrados"], ["Matas", "Bordas de mata"], "Invertebrado modular para balancear a auditoria de P1."),
+  p2("Garça-branca-pequena", "Egretta thula", "egretta-thula", ["Aves"], ["Áreas alagadas"], "Ave aquática modular para ampliar cobertura de áreas alagadas."),
+  p2("Tucanuçu-de-garganta-azul", "Megaceryle torquata", "megaceryle-torquata", ["Aves"], ["Rios e corixos", "Bordas de mata"], "Ave ribeirinha modular para cobertura complementar."),
+  p2("Dourado-fish06", "Salminus brasiliensis", "salminus-brasiliensis-fish06", ["Peixes"], ["Rios e corixos"], "Peixe fluvial modular para diversificar ambientes."),
+  p2("Pintado-fish06", "Pseudoplatystoma corruscans", "pseudoplatystoma-corruscans-fish06", ["Peixes"], ["Rios e corixos"], "Grande peixe fluvial modular para auditoria de rios."),
+  p2("Pintada-do-sul", "Vanessa myrinna", "vanessa-myrinna", ["Invertebrados"], ["Campos", "Bordas de mata"], "Invertebrado modular para completar a matriz."),
+  p2("Mandi", "Pimelodus maculatus", "pimelodus-maculatus", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Revisão cruzada de peixe modular com forte valor de campo."),
+  p2("Bem-te-vi", "Pitangus sulphuratus", "pitangus-sulphuratus", ["Aves"], ["Campos", "Bordas de mata"], "Revisão cruzada de ave modular em ambientes abertos."),
+  p2("Cobra-cipó", "Chironius bicarinatus", "cobra-cipo", ["Répteis"], ["Matas", "Bordas de mata"], "Revisão cruzada de réptil modular arborícola."),
+  p2("Perereca-do-banheiro", "Scinax fuscovarius", "perereca-do-banheiro", ["Anfíbios"], ["Matas", "Bordas de mata"], "Revisão cruzada de anfíbio modular em área antropizada."),
+  p2("Piava", "Leporinus obtusidens", "leporinus-obtusidens", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Revisão cruzada da relação peixe–mata ciliar."),
+  p2("Mamangava-de-chão", "Bombus pauloensis", "bombus-pauloensis", ["Invertebrados"], ["Campos", "Bordas de mata"], "Revisão cruzada de polinizador modular em borda."),
+];
+
+export const catalogPriorityMatrix: readonly CatalogPriority[] = [...catalogP1Priorities, ...catalogP2Priorities];

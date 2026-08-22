@@ -186,6 +186,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 17. `[x]` Executar passo 1/50: congelar contrato do catálogo em `shared/catalog/contract.ts`, exportar `frozenCatalogContract`, adicionar teste de superfície e validar com `pnpm mvp:report`, check, lint, test e diff check.
 18. `[x]` Executar passo 2/50: medir o catálogo real com `pnpm mvp:report`; medição de 2026-08-22: 20 espécies públicas, 55 modulares, 75 totais, 21 lotes pendentes, 0 verificados, 0 review-ready e 165 imagens modulares.
 19. `[x]` Executar passo 3/50: gerar `MVP-CATALOG-BASELINE.md` com `pnpm catalog:baseline`, consolidando grupos, ambientes, fontes, licenças, IDs, status e pendências; baseline: 75 espécies, 21 lotes, 165 imagens, 76 arrays de fontes, 0 IDs duplicados e 0 licenças NC/ND.
+20. `[x]` Executar passo 4/50: criar `shared/catalog/priorities.ts` com matriz P1/P2, critérios e cobertura por grupo/ambiente; P1 mantém espécies ausentes como `speciesId=null`, P2 usa somente IDs modulares presentes; teste específico aprovado.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.

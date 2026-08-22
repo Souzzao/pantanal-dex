@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 34. Passo 4/50 — matriz P1/P2 de espécies prioritárias
+
+A Conta 2 criou `shared/catalog/priorities.ts` e exportou a matriz pelo índice central. A matriz contém 28 prioridades P1 derivadas do núcleo de campo do pacote MVP e 13 prioridades P2, com justificativa, grupos, ambientes e áreas de revisão (`taxonomy`, `occurrence`, `licenses`, `conservation` e `editorial`).
+
+Espécies P1 ainda ausentes permanecem explicitamente com `speciesId=null` e rationale de pendência; não são consideradas presentes nem podem ser promovidas. A cobertura P2 foi restringida a IDs existentes nos lotes modulares, evitando o ciclo de importação entre `shared/pantanal.ts` e `shared/catalog/index.ts` e impedindo IDs órfãos. A matriz cobre todos os seis grupos em P1 e P2.
+
+Foi adicionado `catalogPriorityCoverage` e teste específico para quantidade, unicidade, cobertura por grupo, presença de P2 e explicitação das pendências P1. Validação: `pnpm check`, `pnpm lint`, `pnpm test` com 13 testes aprovados e 1 legado ignorado, `git diff --check` passaram. Próximo passo: 5/50, dividir o trabalho entre branches/agentes sem alterar o escopo desta branch.
+
 ## 33. Passo 3/50 — baseline científico e documental
 
 A Conta 2 criou `scripts/catalog-baseline.mjs`, adicionou `pnpm catalog:baseline` ao `package.json` e gerou `MVP-CATALOG-BASELINE.md`. O artefato consolida a fotografia atual da branch: 20 espécies públicas, 55 modulares, 75 combinadas, 21 lotes, 165 imagens conforme o contrato de três imagens por espécie, 76 arrays de fontes estruturadas, 0 IDs duplicados e 0 menções de licenças NC/ND nos lotes.

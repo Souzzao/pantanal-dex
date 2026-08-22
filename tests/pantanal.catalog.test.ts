@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCatalogSearch } from "../shared/pantanal";
-import { catalogSpeciesByEnvironment, catalogSpeciesByGroup } from "../shared/catalog";
+import { catalogSpeciesByEnvironment, catalogSpeciesByGroup, catalogP1Priorities, catalogP2Priorities, catalogPriorityCoverage } from "../shared/catalog";
 import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract } from "../shared/catalog";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch } from "../shared/catalog/types";
@@ -27,6 +27,18 @@ describe("PantanalDex catalog", () => {
     expect(frozenCatalogContract.batches).toBe(catalogBatches);
     expect(frozenCatalogContract.species).toBe(catalogSpecies);
     expect(Object.isFrozen(frozenCatalogContract)).toBe(true);
+  });
+
+  it("keeps the P1/P2 editorial priority matrix covered and explicit", () => {
+    expect(catalogP1Priorities.length).toBeGreaterThanOrEqual(20);
+    expect(catalogP2Priorities.length).toBeGreaterThanOrEqual(10);
+    expect(new Set(catalogP1Priorities.map((item) => item.commonName)).size).toBe(catalogP1Priorities.length);
+    expect(new Set(catalogP2Priorities.map((item) => item.speciesId)).size).toBe(catalogP2Priorities.length);
+    expect(new Set(catalogP1Priorities.flatMap((item) => item.groups)).size).toBe(6);
+    expect(new Set(catalogP2Priorities.flatMap((item) => item.groups)).size).toBe(6);
+    expect(catalogPriorityCoverage.filter((item) => item.priority === "P2").every((item) => item.speciesId !== null && item.present)).toBe(true);
+    expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && !item.present).length).toBeGreaterThan(0);
+    expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && item.speciesId === null).every((item) => item.rationale.includes("ainda sem registro"))).toBe(true);
   });
 
   it("integrates the modular catalog batches without validation errors", () => {
