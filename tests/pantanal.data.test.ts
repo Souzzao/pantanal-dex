@@ -134,6 +134,21 @@ describe("PantanalDex data contracts", () => {
     expect(reptileBatches.every((batch) => validateEditorialCatalogBatch(batch).length === 0)).toBe(true);
   });
 
+  it("audits the first amphibian batch and excludes prohibited conservation sources", () => {
+    const firstAmphibianBatch = catalogBatches.find((batch) => batch.batchId === "catalog-amphibians-01");
+    expect(firstAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Perereca", "Perereca-macaco"]);
+    expect(firstAmphibianBatch?.status).toBe("pending-review");
+    expect(firstAmphibianBatch?.species).toHaveLength(2);
+    expect(firstAmphibianBatch?.species.flatMap((item) => item.images)).toHaveLength(6);
+    expect(firstAmphibianBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(firstAmphibianBatch?.pendingNotes?.join(" ") ?? "").not.toMatch(/IUCN/i);
+    expect(firstAmphibianBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY-SA 2.5", "CC BY 4.0", "CC BY-SA 4.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "Public domain",
+    ]);
+    expect(validateEditorialCatalogBatch(firstAmphibianBatch!)).toEqual([]);
+    expect(isCatalogBatchReviewReady(firstAmphibianBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);

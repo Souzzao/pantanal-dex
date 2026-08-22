@@ -369,3 +369,9 @@ Todas as URLs de imagem, páginas Commons e fontes GBIF retornaram HTTP 200 na v
 A verificação do índice e do diretório de lotes confirmou que existem exatamente dois lotes de répteis: `catalog-reptiles-01` e `catalog-reptiles-02`. Não há `catalog-reptiles-03` no repositório. Os lotes já foram auditados nos passos 10 e 11, totalizando seis espécies e dezoito imagens, ambos ainda em `pending-review`.
 
 Para evitar repetição ou invenção de dados, o passo foi fechado como inventário da frente de répteis. Foi adicionado teste determinístico para os dois `batchId`, seis espécies, estado pendente e validação estrutural. Criado `docs/MVP-STEP-12-REPTILE-INVENTORY-CLOSURE.md`, atualizado `todo.md` e registrado que a próxima fila segura deve avançar para o próximo grupo com lote real. Validação: 43 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 13/50 concluído
+
+Auditado o lote `catalog-amphibians-01`, com Perereca (*Boana albopunctata*) e Perereca-macaco (*Phyllomedusa sauvagii*). As seis imagens, páginas Commons e dois endpoints GBIF retornaram HTTP 200; créditos e licenças individuais estão registrados. Foi removida uma nota que mencionava a IUCN, fonte proibida pela governança, e substituída por instrução compatível: não preencher conservação sem fonte oficial ICMBio/MMA.
+
+O lote permanece `pending-review` por ausência de checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e conservação oficial quando aplicável. Criado `docs/MVP-STEP-13-AMPHIBIAN-BATCH-AUDIT.md`, atualizado `todo.md` e adicionado teste determinístico. Validação: 44 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
