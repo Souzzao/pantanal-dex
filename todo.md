@@ -443,6 +443,7 @@
 
 ## Reorientação para MVP final
 - [x] MVP passo 1/50 — congelar contratos-base, medir estado real e registrar evidências
+- [x] MVP passo 2/50 — gerar matriz real do catálogo e fila de auditoria P1
 - [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
 - [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
 - [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3

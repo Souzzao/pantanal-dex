@@ -299,3 +299,9 @@ Validação do ciclo: 34 testes aprovados, 1 autenticação pulado, TypeScript, 
 Os contratos `Species`, `Sighting`, `Settings` e `ExportEnvelope` foram conferidos e congelados sem alteração de nomes ou semântica. O inventário foi documentado em `docs/MVP-STEP-01-CONTRACT-FREEZE.md` e medido por `pnpm mvp:report`: 102 espécies públicas, 36 modulares, 12 lotes pending-review, 0 verificados, 0 review-ready e 306 imagens públicas.
 
 O passo 2 começa pela auditoria do núcleo P1. Promoção exige fonte estruturada, ocorrência pantaneira, nomenclatura, conservação oficial quando aplicável, licença individual permitida, crédito e checklist completo. O passo 1 não promoveu espécies nem alterou dados científicos.
+
+## MVP — passo 2/50 concluído
+
+Foi criado `scripts/generate-mvp-audit-matrix.ts` e gerado `docs/MVP-STEP-02-AUDIT-MATRIX.md`. A matriz lista as **36 espécies modulares** por lote, estado, grupo, quantidade de imagens, fontes, conservação e bloqueios automáticos. Ela confirma 12 lotes `pending-review`, 0 verificados e 0 inválidos e não promove nenhum lote automaticamente.
+
+A rotina passa a ser reexecutável para a Conta 2 antes de cada PR. A validação do passo ficou verde com 34 testes aprovados, 1 autenticação pulado e TypeScript aprovado. O passo 3 deve começar pela auditoria manual do primeiro lote P1, registrando evidência individual de imagens, ocorrência, nomenclatura e conservação.
