@@ -441,6 +441,18 @@
 - [x] Adicionar testes de metadados, lote científico e fluxos nativos
 - [x] Atualizar handoff, validar, publicar PR e salvar checkpoint
 
+## Reorientação para MVP final
+- [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
+- [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
+- [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3
+- [x] Criar três pacotes ZIP individuais e um pacote coordenador com 50 passos do MVP
+- [x] Verificar integridade, conteúdo e instruções dos quatro pacotes
+- [x] Ler e comparar os ZIPs Coordenador e Agente 1 enviados pelo usuário
+- [x] Registrar no handoff a divisão correta: eu sou Agente 1/Coordenador
+- [x] Implementar primeiro ciclo de fechamento do MVP
+- [ ] Verificar rotas, imagens, fontes, idiomas, offline, câmera, GPS, mapa e exportação
+- [ ] Atualizar handoff, relatório do MVP, validações e checkpoint
+
 ## Bloco massivo pós-checkpoint fe3f6f3f
 - [x] Auditar lote candidato, checklist, fontes, branches e PRs
 - [ ] Promover somente lote com checklist editorial e licenças confirmadas

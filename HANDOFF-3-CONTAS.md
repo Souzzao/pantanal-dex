@@ -281,3 +281,15 @@ Foi consultada a página oficial do ICMBio sobre o Pantanal, que informa referê
 A auditoria confirmou que os 12 lotes atuais são `pending-review`, portanto nenhum foi promovido artificialmente. Foi exportado `isCatalogBatchReviewReady`, que só aceita um lote quando há `reviewedAt` em formato ISO `YYYY-MM-DD`, `reviewedBy` não vazio e os quatro itens do checklist editorial verdadeiros. O teste cobre o caminho positivo, ausência de checklist e data inválida.
 
 A primeira validação encontrou uma expressão regular excessivamente escapada; ela foi corrigida imediatamente e a suíte voltou ao verde. Estado final: 34 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## Confirmação dos pacotes MVP enviados pelo usuário
+
+Os arquivos `PantanalDex-Coordenador-MVP.zip` e `PantanalDex-Agente-1-Coordenador-MVP.zip` foram recebidos e testados com `unzip -tq`, sem erros.
+
+O pacote **Coordenador** é o arquivo geral: contém a matriz comum dos 50 passos e as regras de divisão, integração e definição de pronto. O pacote **Agente 1** é o pacote específico da coordenação: contém a mesma matriz e o prompt operacional do Agente 1. Nesta sessão, o papel é **Agente 1/Coordenador**. Os pacotes dos Agentes 2 e 3 devem receber a mesma matriz junto com seus READMEs específicos; nenhum pacote deve ser tratado como um agente adicional.
+
+## Primeiro ciclo de fechamento do MVP
+
+O ciclo M1 foi executado após a conferência dos pacotes enviados. O relatório `pnpm mvp:report` confirmou 102 espécies públicas, 36 modulares, 12 lotes `pending-review`, 0 verificados, 0 `review-ready`, 306 imagens públicas e a distribuição 24/26/14/12/16/10 por grupo. A rotina foi adicionada ao `package.json` como `pnpm mvp:report`.
+
+Validação do ciclo: 34 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY. O próximo trabalho seguro é M2: auditoria real de imagens, fontes e ocorrência do núcleo P1; não promover lotes apenas para aumentar a contagem.
