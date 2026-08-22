@@ -190,6 +190,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 21. `[x]` Executar passo 5/50: registrar `AGENTS-DIVISION.md` com branches, responsabilidades, limites de escopo, dependências, definição de pronto e protocolo de handoff para os Agentes 1, 2 e 3.
 22. `[x]` Executar passo 6/50: adicionar `validateSpeciesRecord`/`validateSpeciesRecords`, auditar IDs globais e campos científicos no catálogo combinado; 0 duplicidades e 0 falhas de campos. Fontes FishBase legadas permanecem pendência de migração, enquanto lotes modulares continuam sob lista aprovada.
 23. `[x]` Executar passo 7/50: migrar `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce` para URLs GBIF `EXACT`/`ACCEPTED`; remover FishBase/WoRMS do legado e registrar evidência em `catalog-research.md`.
+24. `[x]` Executar passo 8/50: criar ledger `regional-occurrence.ts` para cinco consultas oficiais SiBBr; 5/5 permanecem `pending-review` porque o ambiente não retornou resposta estruturada. Nenhuma ausência foi inferida e o status de conservação não foi alterado.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.

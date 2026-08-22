@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 38. Passo 8/50 — validação de ocorrência regional
+
+A Conta 2 criou `shared/catalog/regional-occurrence.ts` com cinco registros de auditoria para `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. Cada registro aponta para o portal oficial de regiões do SiBBr e para a consulta oficial de ocorrências do SiBBr/ALA, com data, região, evidência e status separado de conservação.
+
+O resultado foi 5/5 `pending-review`: as consultas foram iniciadas, mas o ambiente disponível não retornou resposta estruturada que permita confirmar o recorte do Pantanal. Isso não é tratado como ausência de ocorrência. Nenhum registro foi promovido a `confirmed`, `verified` ou alterado em conservação. O teste garante HTTPS, evidência textual, região Pantanal, cinco registros e compatibilidade entre pendência e evidência.
+
+Validação: `pnpm check`, `pnpm lint`, `pnpm test` com 15 testes aprovados e 1 legado ignorado, `git diff --check` passaram. Próxima alternativa executável: repetir as consultas com export/dump SiBBr ou acesso autenticado ao portal, mantendo o ledger sem inferências.
+
 ## 37. Passo 7/50 — migração das cinco fontes legadas para GBIF
 
 A Conta 2 substituiu as cinco fontes públicas fora da lista aprovada: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. As referências FishBase e WoRMS foram removidas de `shared/pantanal.ts` e substituídas por endpoints GBIF Species Match reais.
