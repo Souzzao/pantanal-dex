@@ -47,7 +47,7 @@ describe("PantanalDex catalog", () => {
     expect(regionalOccurrenceRecords.every((record) => record.region === "Pantanal")).toBe(true);
     expect(regionalOccurrenceRecords.every((record) => record.status === "pending-review")).toBe(true);
     expect(regionalOccurrenceRecords.every((record) => record.sourceUrl.startsWith("https://") && record.queryUrl.startsWith("https://"))).toBe(true);
-    expect(regionalOccurrenceRecords.every((record) => record.evidence.includes("não retornou resposta estruturada"))).toBe(true);
+    expect(regionalOccurrenceRecords.every((record) => record.sourceTitle.includes("ICMBio/SISBio") && record.evidence.includes("não confirma ocorrência"))).toBe(true);
   });
 
   it("audits required scientific fields and global IDs in the combined catalog", () => {

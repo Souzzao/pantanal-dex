@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 39. Passo 9/50 — auditoria com export/dataset ICMBio acessível
+
+A Conta 2 localizou e auditou o dataset oficial `ICMBio | Dados de ocorrência de espécies do SISBio`, recurso `dr327` no SiBBr. A página informa ocorrências em Unidades de Conservação Federais, aponta para o IPT oficial do ICMBio e registra licença CC BY 4.0. O índice público de ocorrências foi usado para consultas filtradas por nome científico.
+
+As cinco consultas foram executadas para `Pseudoplatystoma corruscans`, `Piaractus mesopotamicus`, `Brycon hilarii`, `Dilocarcinus pagei` e `Macrobrachium amazonicum`. O endpoint respondeu conteúdo, mas não entregou contagem estruturada confiável dentro do limite do ambiente para confirmar o recorte Pantanal por espécie. Resultado: 0 confirmações, 5 `pending-review`. Isso não é ausência de ocorrência e nenhum status de conservação foi alterado.
+
+Evidências e URLs foram registradas em `catalog-research.md`, e o ledger regional passou a apontar para o recurso ICMBio/SISBio acessível. Próxima alternativa executável: obter o Darwin Core Archive via export do IPT ou repetir com dump SiBBr disponibilizado pela coordenação, mantendo a regra de não inferência.
+
 ## 38. Passo 8/50 — validação de ocorrência regional
 
 A Conta 2 criou `shared/catalog/regional-occurrence.ts` com cinco registros de auditoria para `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. Cada registro aponta para o portal oficial de regiões do SiBBr e para a consulta oficial de ocorrências do SiBBr/ALA, com data, região, evidência e status separado de conservação.

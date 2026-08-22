@@ -105,3 +105,11 @@ Em 2026-08-22, as cinco fontes públicas legadas fora da lista aprovada foram su
 | `camarao-agua-doce` | `Macrobrachium amazonicum` | `https://api.gbif.org/v1/species/match?name=Macrobrachium%20amazonicum` | `EXACT` / `ACCEPTED` |
 
 A migração resolve a pendência de host não aprovado dos cinco registros. Ela não prova ocorrência específica no recorte do Pantanal nem situação de conservação; essas etapas continuam dependentes de SiBBr/ICMBio e de fontes oficiais brasileiras.
+
+## Passo 9/50 — auditoria com dataset ICMBio/SISBio acessível
+
+Foi localizado o recurso oficial `ICMBio | Dados de ocorrência de espécies do Sistema de Autorização e Informações de Biodiversidade (SISBio) do ICMBio`, publicado no SiBBr como `dr327`. A página do recurso descreve ocorrências em Unidades de Conservação Federais, aponta para o IPT oficial do ICMBio e informa licença CC BY 4.0: https://collectory.sibbr.gov.br/collectory/public/show/dr327. O índice de consulta associado é https://ala-hub.sibbr.gov.br/ala-hub/occurrence/search?q=data_resource_uid:dr327.
+
+Foram tentadas consultas filtradas para `Pseudoplatystoma corruscans`, `Piaractus mesopotamicus`, `Brycon hilarii`, `Dilocarcinus pagei` e `Macrobrachium amazonicum`. O endpoint chegou a responder dados volumosos/HTML, mas não forneceu contagem estruturada confiável dentro do limite do ambiente para esses filtros. Assim, o dataset é uma fonte oficial acessível e a consulta fica registrada, porém nenhuma das cinco espécies foi promovida a ocorrência confirmada no Pantanal. `pending-review` não significa ausência.
+
+A página oficial do ICMBio sobre o bioma Pantanal também foi registrada como contexto de delimitação, sem ser usada para afirmar presença de espécie individual: https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal.
