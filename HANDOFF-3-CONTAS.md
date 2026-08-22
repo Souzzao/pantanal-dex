@@ -351,3 +351,11 @@ A Conta 2 criou `scripts/image-license-audit.ts` e o comando `pnpm catalog:image
 Resultado reproduzível em 2026-08-22: `species=55`, `images=165`, `approvedLicenses=165`, `errors=[]`, `status=PASS`. Nenhum bloqueio comercial foi encontrado nesta auditoria. A revisão individual das páginas de origem continua sendo necessária quando houver mudança de arquivo ou metadado; o manifesto permanece a fonte de créditos por registro.
 
 Validação: `pnpm catalog:image-audit`, `pnpm check`, `pnpm lint`, `pnpm test` com 16 testes aprovados e 1 legado ignorado, e `git diff --check` passaram. Próximo passo: 12/50, auditar fontes estruturadas e URLs taxonômicas sem ampliar a lista de hosts aprovados por inferência.
+
+## Passo 12/50 — auditoria de fontes estruturadas e URLs taxonômicas
+
+A Conta 2 criou `scripts/catalog-source-audit.ts` e o comando `pnpm catalog:source-audit`. A auditoria percorre os 21 lotes e 55 espécies modulares, verificando título, URL HTTPS, host aprovado e presença de fonte estruturada por espécie e lote. O conjunto aprovado inclui GBIF, SiBBr, ICMBio, gov.br, Wikipédia PT e Wikidata conforme o contrato vigente.
+
+Resultado reproduzível: `batches=21`, `species=55`, `structuredSources=55`, `gbifUrls=110`, `errors=[]`, `status=PASS`. Não houve host fora da lista, URL taxonômica inválida, fonte sem título ou espécie sem fonte estruturada. A auditoria não altera status de conservação nem transforma uma fonte taxonômica em prova de ocorrência regional.
+
+Validação: `pnpm catalog:source-audit`, `pnpm check`, `pnpm lint`, `pnpm test` com 16 testes aprovados e 1 legado ignorado, e `git diff --check` passaram. Próximo passo: 13/50, consolidar sinônimos e nomes de busca sem introduzir taxonomia não documentada.
