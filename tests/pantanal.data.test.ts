@@ -170,6 +170,24 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(secondAmphibianBatch!)).toBe(false);
   });
 
+  it("audits fish-01 and keeps cachara blocked without inventing images", () => {
+    const firstFishBatch = catalogBatches.find((batch) => batch.batchId === "catalog-fish-01");
+    expect(firstFishBatch?.species.map((item) => item.commonName)).toEqual(["Dourado", "Pacu", "Piraputanga", "Cachara"]);
+    expect(firstFishBatch?.status).toBe("pending-review");
+    expect(firstFishBatch?.species).toHaveLength(4);
+    expect(firstFishBatch?.species[0].images).toHaveLength(3);
+    expect(firstFishBatch?.species[1].images).toHaveLength(3);
+    expect(firstFishBatch?.species[2].images).toHaveLength(3);
+    expect(firstFishBatch?.species[3].images).toHaveLength(1);
+    expect(firstFishBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(firstFishBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC0", "CC0", "CC0", "CC BY 2.0", "CC BY 4.0", "CC BY 4.0",
+      "CC BY-SA 2.0", "CC BY-SA 4.0", "CC BY 4.0", "CC BY-SA 3.0",
+    ]);
+    expect(validateEditorialCatalogBatch(firstFishBatch!)).toContain("cachara: deve ter exatamente três imagens");
+    expect(isCatalogBatchReviewReady(firstFishBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
@@ -214,6 +232,7 @@ describe("PantanalDex data contracts", () => {
     expect(catalogBatches).toHaveLength(12);
     expect(catalogSpecies).toHaveLength(36);
     expect(validateCatalogBatches(catalogBatches)).toEqual([
+      "cachara: deve ter exatamente três imagens",
       "perereca-fuscomarginata: deve ter exatamente três imagens",
       "perereca-folhagem-azul: deve ter exatamente três imagens",
     ]);
@@ -222,8 +241,8 @@ describe("PantanalDex data contracts", () => {
     expect(catalogReview.pendingSpecies).toBe(36);
     expect(catalogReview.verifiedBatches).toBe(0);
     expect(catalogReviewReport.totalBatches).toBe(12);
-    expect(catalogReviewReport.pendingBatches).toBe(11);
-    expect(catalogReviewReport.invalidBatches).toBe(1);
+    expect(catalogReviewReport.pendingBatches).toBe(10);
+    expect(catalogReviewReport.invalidBatches).toBe(2);
   });
 
   it("retries transient local writes and preserves the final error", async () => {
