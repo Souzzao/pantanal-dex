@@ -452,6 +452,7 @@
 - [x] MVP passo 8/50 — auditar segundo lote de aves, corrigir URLs de imagem e rastrear licenças por arquivo
 - [x] MVP passo 9/50 — auditar terceiro lote de aves, fontes, imagens, ocorrência e licenças
 - [x] MVP passo 10/50 — auditar primeiro lote de répteis, fontes, imagens, ocorrência e licenças
+- [x] MVP passo 11/50 — auditar segundo lote de répteis, fontes, imagens, ocorrência e licenças
 - [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
 - [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
 - [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3

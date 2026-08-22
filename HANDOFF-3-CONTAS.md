@@ -357,3 +357,9 @@ Todas as URLs de imagens, páginas Commons e fontes GBIF retornaram HTTP 200 na 
 Auditado o lote `catalog-reptiles-01`, com Teiú (*Salvator merianae*) e Cobra-cipó (*Oxybelis aeneus*). A estrutura passou: campos obrigatórios, grupo, ambientes, IDs, seis imagens, créditos, licenças, páginas Commons e fontes GBIF. Todas as URLs de imagens, páginas Commons e endpoints GBIF retornaram HTTP 200 na verificação passiva.
 
 O lote permanece `pending-review`: faltam checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e fonte oficial de conservação quando aplicável. Criado `docs/MVP-STEP-10-BATCH-AUDIT.md`, atualizado `todo.md` e adicionado teste determinístico. Validação: 41 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 11/50 concluído
+
+Auditado o lote `catalog-reptiles-02`, com Cágado-cabeçudo (*Acanthochelys macrocephala*), Cobra-d'água (*Helicops infrataeniatus*), Jacaré-do-Pantanal (*Caiman yacare*) e Teiú-vermelho (*Salvator rufescens*). Foram encontradas nove referências Commons 404 no lote anterior; as doze imagens foram substituídas por arquivos reais, com páginas de origem e licenças individuais. O helper foi corrigido para preservar a licença real por arquivo, incluindo CC BY-SA 3.0, CC BY-SA 2.0, CC BY-SA 2.5, CC BY 4.0, CC BY-SA 4.0, CC BY 3.0 e CC0.
+
+Todas as URLs de imagem, páginas Commons e fontes GBIF retornaram HTTP 200 na verificação passiva. O lote permanece `pending-review` por ausência de checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e fonte oficial de conservação quando aplicável. Criado `docs/MVP-STEP-11-BATCH-AUDIT.md`, atualizado `todo.md` e adicionado teste determinístico. Validação: 42 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

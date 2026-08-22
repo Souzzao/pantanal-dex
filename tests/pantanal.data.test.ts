@@ -110,6 +110,21 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(firstReptileBatch!)).toBe(false);
   });
 
+  it("audits the second reptile batch with reachable commercial images", () => {
+    const secondReptileBatch = catalogBatches.find((batch) => batch.batchId === "catalog-reptiles-02");
+    expect(secondReptileBatch?.species.map((item) => item.commonName)).toEqual(["Cágado-cabeçudo", "Cobra-d'água", "Jacaré-do-Pantanal", "Teiú-vermelho"]);
+    expect(secondReptileBatch?.status).toBe("pending-review");
+    expect(secondReptileBatch?.species).toHaveLength(4);
+    expect(secondReptileBatch?.species.flatMap((item) => item.images)).toHaveLength(12);
+    expect(secondReptileBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(secondReptileBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY-SA 3.0", "CC BY-SA 2.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY 4.0", "CC BY 4.0",
+      "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY-SA 3.0", "CC BY 4.0", "CC0",
+    ]);
+    expect(validateEditorialCatalogBatch(secondReptileBatch!)).toEqual([]);
+    expect(isCatalogBatchReviewReady(secondReptileBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
