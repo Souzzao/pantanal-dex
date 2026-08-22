@@ -188,6 +188,28 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(firstFishBatch!)).toBe(false);
   });
 
+  it("audits fish-02 without inventing missing species images", () => {
+    const secondFishBatch = catalogBatches.find((batch) => batch.batchId === "catalog-fish-02");
+    expect(secondFishBatch?.species.map((item) => item.scientificName)).toEqual([
+      "Zungaro jahu",
+      "Acestrorhynchus pantaneiro",
+      "Myloplus tiete",
+    ]);
+    expect(secondFishBatch?.status).toBe("pending-review");
+    expect(secondFishBatch?.species[0].images).toHaveLength(0);
+    expect(secondFishBatch?.species[1].images).toHaveLength(3);
+    expect(secondFishBatch?.species[2].images).toHaveLength(1);
+    expect(secondFishBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC0", "CC BY 4.0", "CC0", "CC BY 4.0",
+    ]);
+    expect(secondFishBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(validateEditorialCatalogBatch(secondFishBatch!)).toEqual([
+      "jau: deve ter exatamente três imagens",
+      "pacupeva: deve ter exatamente três imagens",
+    ]);
+    expect(isCatalogBatchReviewReady(secondFishBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
@@ -235,14 +257,16 @@ describe("PantanalDex data contracts", () => {
       "cachara: deve ter exatamente três imagens",
       "perereca-fuscomarginata: deve ter exatamente três imagens",
       "perereca-folhagem-azul: deve ter exatamente três imagens",
+      "jau: deve ter exatamente três imagens",
+      "pacupeva: deve ter exatamente três imagens",
     ]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
     expect(catalogReview.pendingBatches).toBe(12);
     expect(catalogReview.pendingSpecies).toBe(36);
     expect(catalogReview.verifiedBatches).toBe(0);
     expect(catalogReviewReport.totalBatches).toBe(12);
-    expect(catalogReviewReport.pendingBatches).toBe(10);
-    expect(catalogReviewReport.invalidBatches).toBe(2);
+    expect(catalogReviewReport.pendingBatches).toBe(9);
+    expect(catalogReviewReport.invalidBatches).toBe(3);
   });
 
   it("retries transient local writes and preserves the final error", async () => {

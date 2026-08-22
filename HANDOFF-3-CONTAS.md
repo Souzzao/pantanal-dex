@@ -387,3 +387,9 @@ O helper foi corrigido para preservar a licença por arquivo. O índice passou a
 Auditado o lote `catalog-fish-01`, com Dourado, Pacu, Piraputanga e Cachara. A inspeção encontrou diversas referências Commons 404 e licenças genéricas. Foram substituídas por dez arquivos reais com autores e licenças individuais: Dourado com três CC0; Pacu com CC BY 2.0 e duas CC BY 4.0; Piraputanga com CC BY-SA 2.0, CC BY-SA 4.0 e CC BY 4.0. Para Cachara, somente um arquivo específico foi confirmado; resultados gráficos, espécies próximas e arquivos sem identificação segura foram rejeitados.
 
 O helper foi corrigido para preservar a licença por imagem. O catálogo agora mantém o lote pending-review carregável, registra a Cachara como inválida no relatório operacional e evita tela branca; a promoção continua bloqueada. Criado `docs/MVP-STEP-15-FISH-BATCH-AUDIT.md`, atualizado `todo.md` e adicionados testes determinísticos. Validação: 46 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 16/50 concluído
+
+Auditado o lote `catalog-fish-02`, com Jaú, Peixe-cachorro e Pacupeva. As referências originais continham vários 404. Foram confirmadas três imagens específicas para Acestrorhynchus pantaneiro, com CC0, CC BY 4.0 e CC0, e uma para Myloplus tiete, com CC BY 4.0, todas com autor e página Commons individual. A busca não encontrou imagem segura de Zungaro jahu; resultados de Zungaro zungaro, PDF e gráficos foram rejeitados. Myloplus tiete permanece com duas imagens faltantes.
+
+O helper foi corrigido para preservar licença por imagem, e o teste determinístico impede completar o lote com espécies próximas, PDFs, gráficos ou duplicações. O lote continua pending-review e o carregamento seguro mantém erros documentados sem tela branca. Criado `docs/MVP-STEP-16-FISH-BATCH-AUDIT.md`, atualizado `todo.md` e handoff. Validação: 47 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
