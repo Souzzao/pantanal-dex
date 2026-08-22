@@ -8,6 +8,7 @@ import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
 import { createCatalogReviewReport, isCatalogBatchReviewReady } from "../shared/catalog/review";
 import { createLicenseAuditReport } from "../shared/catalog/license-audit";
+import { createP1AuditQueue, MVP_P1_NAMES } from "../shared/catalog/p1-audit";
 import { readStorageWithRetry, withStorageRetry } from "../shared/persistence";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
 import { isValidCoordinatePair, isValidSightingDate, isValidSightingTime, sanitizeSettings, sanitizeStoredSightings, species, validateSpeciesCatalog, type Sighting } from "../shared/pantanal";
@@ -35,6 +36,17 @@ describe("PantanalDex data contracts", () => {
     expect(new Set(species.map((item) => item.group))).toEqual(
       new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]),
     );
+  });
+
+  it("creates a deterministic P1 queue and blocks unreviewed batches", () => {
+    const queue = createP1AuditQueue(catalogSpecies, catalogBatches, createLicenseAuditReport(catalogSpecies));
+    expect(MVP_P1_NAMES).toHaveLength(20);
+    expect(queue).toHaveLength(20);
+    expect(new Set(queue.map((row) => row.priority)).size).toBe(20);
+    expect(queue.every((row) => row.status !== "ready-for-review")).toBe(true);
+    expect(queue.every((row) => row.blockers.length > 0)).toBe(true);
+    expect(queue.some((row) => row.status === "missing")).toBe(true);
+    expect(queue.some((row) => row.blockers.includes("checklist editorial do lote incompleto"))).toBe(true);
   });
 
   it("reports incomplete species records", () => {

@@ -311,3 +311,9 @@ A rotina passa a ser reexecutável para a Conta 2 antes de cada PR. A validaçã
 Foi definido `docs/MVP-STEP-03-P1-CORE.md` com 20 espécies prioritárias já existentes no catálogo: jacaré-do-Pantanal, arara-canindé, tucano-toco, tuiuiú, capivara, lobo-guará, queixada, cateto, veado-campeiro, sucuri-amarela, teiú, dourado, pacu, piraputanga, sapo-cururu, rã-pimenta, seriema, urubu-rei, ouriço-cacheiro e abelha-jataí.
 
 A lista é uma prioridade operacional de campo, não um ranking oficial de abundância. Cada linha exige validação de ocorrência, nomenclatura, conservação oficial quando aplicável, três imagens, licença, crédito e URL. Nenhuma espécie foi promovida neste passo.
+
+## MVP — passo 4/50 concluído
+
+Foi criado `shared/catalog/p1-audit.ts`, com a fila determinística das 20 prioridades P1, status `ready-for-review`, `blocked` ou `missing` e bloqueios deduplicados por espécie. A fila foi exportada pelo índice do catálogo e coberta por teste. A primeira expectativa foi corrigida para não confundir espécie P1 ausente dos lotes modulares com espécie existente porém bloqueada pelo checklist; a lacuna agora fica explícita em vez de mascarada.
+
+Validação atual: TypeScript aprovado e **35 testes aprovados**, 1 autenticação pulado. Nenhuma espécie foi promovida automaticamente.
