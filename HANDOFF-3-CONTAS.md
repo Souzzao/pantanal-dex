@@ -343,3 +343,11 @@ O lote permanece `pending-review` para ocorrência específica no Pantanal e con
 A Conta 2 adicionou `Morpho menelaus`, `Ascalapha odorata` e `Dynastes hercules`, em módulo separado, com nove imagens Commons verificadas individualmente. As licenças são CC BY 3.0 e CC BY-SA 4.0; não há NC, ND ou licença ausente. As três consultas GBIF retornaram `matchType=EXACT` e `status=ACCEPTED`, e as nove URLs `Special:FilePath` retornaram HTTP 200.
 
 Durante a validação foi encontrado um conflito global porque `morpho-helenor` já existia em `invertebrates-01`. O erro foi corrigido substituindo o registro novo por `morpho-menelaus`; os 11 testes voltaram a passar. O lote permanece `pending-review` para ocorrência específica no Pantanal e conservação oficial. Próxima tarefa desbloqueada: `birds-04` ou `fish-05`.
+
+## Passo 11/50 — auditoria comercial de imagens
+
+A Conta 2 criou `scripts/image-license-audit.ts` e o comando `pnpm catalog:image-audit`. A auditoria percorre as 55 espécies modulares e as 165 imagens, verificando exatamente três imagens por espécie, URI e `sourceUrl` HTTP(S), autoria, crédito e licença permitida. Licenças `NC`, `ND`, equivalentes textuais, ausentes ou não reconhecidas são bloqueadas.
+
+Resultado reproduzível em 2026-08-22: `species=55`, `images=165`, `approvedLicenses=165`, `errors=[]`, `status=PASS`. Nenhum bloqueio comercial foi encontrado nesta auditoria. A revisão individual das páginas de origem continua sendo necessária quando houver mudança de arquivo ou metadado; o manifesto permanece a fonte de créditos por registro.
+
+Validação: `pnpm catalog:image-audit`, `pnpm check`, `pnpm lint`, `pnpm test` com 16 testes aprovados e 1 legado ignorado, e `git diff --check` passaram. Próximo passo: 12/50, auditar fontes estruturadas e URLs taxonômicas sem ampliar a lista de hosts aprovados por inferência.

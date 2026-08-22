@@ -193,6 +193,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 24. `[x]` Executar passo 8/50: criar ledger `regional-occurrence.ts` para cinco consultas oficiais SiBBr; 5/5 permanecem `pending-review` porque o ambiente não retornou resposta estruturada. Nenhuma ausência foi inferida e o status de conservação não foi alterado.
 25. `[x]` Executar passo 9/50: localizar o dataset oficial ICMBio/SISBio `dr327` no SiBBr, licença CC BY 4.0, e auditar filtros para cinco espécies; 0 confirmações individuais por falta de contagem estruturada confiável, mantendo 5 pendências sem inferir ausência.
 26. `[x]` Executar passo 10/50: criar `shared/catalog/conservation.ts` com trilha SALVE/Livro Vermelho/portarias MMA-ICMBio; 5 registros `pending-review`, 0 status inventados e validação contra confirmação sem evidência.
+27. `[x]` Executar passo 11/50: criar `catalog:image-audit` e auditar as 165 imagens modulares; 165/165 licenças aprovadas, URLs e créditos presentes, 0 erros, 0 NC/ND e resultado `PASS`.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
