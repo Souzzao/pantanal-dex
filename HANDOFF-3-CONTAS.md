@@ -220,6 +220,12 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 27. Bloco de aves `catalog-birds-05`
+
+A Conta 2 adicionou `Egretta thula`, `Pitangus sulphuratus` e `Sicalis flaveola`, em módulo separado, totalizando três espécies e nove imagens Commons. As três consultas GBIF retornaram `EXACT`/`ACCEPTED`. As licenças são CC0 e CC BY-SA 3.0/4.0; não há NC, ND ou licença ausente. As nove URLs `Special:FilePath` foram verificadas com User-Agent e retentativas e retornaram HTTP 200.
+
+O lote permanece `pending-review` para ocorrência específica no Pantanal e conservação oficial. Próxima tarefa desbloqueada: `catalog-fish-06` ou `catalog-invertebrates-07`.
+
 ## 26. Bloco de invertebrados `catalog-invertebrates-06`
 
 A Conta 2 adicionou `Heliconius erato`, `Papilio thoas` e `Bombus pauloensis`, em módulo separado, totalizando três espécies e nove imagens Commons. As três consultas GBIF retornaram `EXACT`/`ACCEPTED`. As licenças são CC BY 4.0 e CC BY-SA 2.5/3.0/4.0; não há NC, ND ou licença ausente. As nove URLs `Special:FilePath` foram verificadas com User-Agent e retentativas e retornaram HTTP 200.
