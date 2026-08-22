@@ -375,3 +375,9 @@ Para evitar repetição ou invenção de dados, o passo foi fechado como invent�
 Auditado o lote `catalog-amphibians-01`, com Perereca (*Boana albopunctata*) e Perereca-macaco (*Phyllomedusa sauvagii*). As seis imagens, páginas Commons e dois endpoints GBIF retornaram HTTP 200; créditos e licenças individuais estão registrados. Foi removida uma nota que mencionava a IUCN, fonte proibida pela governança, e substituída por instrução compatível: não preencher conservação sem fonte oficial ICMBio/MMA.
 
 O lote permanece `pending-review` por ausência de checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e conservação oficial quando aplicável. Criado `docs/MVP-STEP-13-AMPHIBIAN-BATCH-AUDIT.md`, atualizado `todo.md` e adicionado teste determinístico. Validação: 44 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 14/50 concluído
+
+Auditado o lote `catalog-amphibians-02`, com Sapo-cururu, Rã-pimenta, Perereca-de-margem-escura e Perereca-de-folhagem-azul. Foram encontradas referências Commons quebradas; arquivos reais foram obtidos para as duas primeiras espécies e as licenças individuais foram registradas. Para Scinax fuscomarginatus e Phyllomedusa azurea, somente duas imagens específicas verificáveis foram encontradas; não foram usados arquivos de espécies próximas nem duplicações. Essas lacunas permanecem explícitas e bloqueiam a promoção.
+
+O helper foi corrigido para preservar a licença por arquivo. O índice passou a carregar lotes `pending-review` com erros documentados, mantendo os erros no relatório operacional e reservando falha fatal para lotes verificados e IDs duplicados; isso evita tela branca durante a auditoria. Criado `docs/MVP-STEP-14-AMPHIBIAN-BATCH-AUDIT.md`, atualizado `todo.md` e adicionados testes determinísticos. Validação final: 45 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

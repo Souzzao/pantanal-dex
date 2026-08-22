@@ -11,7 +11,7 @@ import { reptiles02 } from "./batches/reptiles-02";
 import { amphibians02 } from "./batches/amphibians-02";
 import { fish02 } from "./batches/fish-02";
 import { invertebrates01 } from "./batches/invertebrates-01";
-import { validateCatalogBatches, type CatalogBatch } from "./types";
+import { validateCatalogBatch, validateCatalogBatches, type CatalogBatch } from "./types";
 import { createCatalogReviewReport } from "./review";
 import { createLicenseAuditReport } from "./license-audit";
 import { createP1AuditQueue } from "./p1-audit";
@@ -30,6 +30,18 @@ export const catalogReviewReport = createCatalogReviewReport(catalogBatches, cat
 export const catalogLicenseAudit = createLicenseAuditReport(catalogSpecies);
 export const catalogP1AuditQueue = createP1AuditQueue(catalogSpecies, catalogBatches, catalogLicenseAudit);
 
-if (catalogValidationErrors.length) {
-  throw new Error(`Catálogo inválido: ${catalogValidationErrors.join("; ")}`);
+// Pending-review is intentionally loadable: its validation errors are evidence for the editorial queue,
+// not a reason to white-screen the app. Verified batches remain release-blocking.
+const verifiedBatchErrors = catalogBatches
+  .filter((batch) => batch.status === "verified")
+  .flatMap((batch) => validateCatalogBatch(batch));
+const ids = new Set<string>();
+const duplicateIdErrors: string[] = [];
+for (const batch of catalogBatches) for (const item of batch.species) {
+  if (ids.has(item.id)) duplicateIdErrors.push(`${item.id}: ID duplicado entre lotes`);
+  ids.add(item.id);
+}
+const catalogBlockingErrors = [...verifiedBatchErrors, ...duplicateIdErrors];
+if (catalogBlockingErrors.length) {
+  throw new Error(`Catálogo inválido: ${catalogBlockingErrors.join("; ")}`);
 }

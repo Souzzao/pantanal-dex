@@ -149,6 +149,27 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(firstAmphibianBatch!)).toBe(false);
   });
 
+  it("audits the second amphibian batch and keeps incomplete image sets blocked", () => {
+    const secondAmphibianBatch = catalogBatches.find((batch) => batch.batchId === "catalog-amphibians-02");
+    expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-pimenta", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
+    expect(secondAmphibianBatch?.status).toBe("pending-review");
+    expect(secondAmphibianBatch?.species).toHaveLength(4);
+    expect(secondAmphibianBatch?.species[0].images).toHaveLength(3);
+    expect(secondAmphibianBatch?.species[1].images).toHaveLength(3);
+    expect(secondAmphibianBatch?.species[2].images).toHaveLength(2);
+    expect(secondAmphibianBatch?.species[3].images).toHaveLength(2);
+    expect(secondAmphibianBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(secondAmphibianBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY-SA 2.5", "CC BY 4.0", "CC BY 4.0", "CC BY-SA 2.5", "CC BY-SA 2.5", "CC0",
+      "CC BY-SA 2.5", "CC BY-SA 2.5", "CC BY-SA 2.5", "CC BY-SA 2.5",
+    ]);
+    expect(validateEditorialCatalogBatch(secondAmphibianBatch!)).toEqual([
+      "perereca-fuscomarginata: deve ter exatamente três imagens",
+      "perereca-folhagem-azul: deve ter exatamente três imagens",
+    ]);
+    expect(isCatalogBatchReviewReady(secondAmphibianBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
@@ -192,14 +213,17 @@ describe("PantanalDex data contracts", () => {
   it("validates the modular pilot batches and reports their throughput", () => {
     expect(catalogBatches).toHaveLength(12);
     expect(catalogSpecies).toHaveLength(36);
-    expect(validateCatalogBatches(catalogBatches)).toEqual([]);
+    expect(validateCatalogBatches(catalogBatches)).toEqual([
+      "perereca-fuscomarginata: deve ter exatamente três imagens",
+      "perereca-folhagem-azul: deve ter exatamente três imagens",
+    ]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
     expect(catalogReview.pendingBatches).toBe(12);
     expect(catalogReview.pendingSpecies).toBe(36);
     expect(catalogReview.verifiedBatches).toBe(0);
     expect(catalogReviewReport.totalBatches).toBe(12);
-    expect(catalogReviewReport.pendingBatches).toBe(12);
-    expect(catalogReviewReport.invalidBatches).toBe(0);
+    expect(catalogReviewReport.pendingBatches).toBe(11);
+    expect(catalogReviewReport.invalidBatches).toBe(1);
   });
 
   it("retries transient local writes and preserves the final error", async () => {
