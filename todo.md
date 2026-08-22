@@ -149,7 +149,7 @@
 
 | Ciclos | Escopo | Estado |
 |---|---|---|
-| 1 | Contrato e índice de lotes (`shared/catalog`) | [x] Implementado e validado. |
+| 1. `[x]` Contrato e índice de lotes (`shared/catalog`) | [x] Implementado, congelado na versão `mvp-1` e validado. |
 | 2–3 | Mamíferos | [x] `catalog-mammals-01` adicionado com três espécies; revisão final pendente. |
 | 4–6 | Aves | [x] `catalog-birds-01` a `05` adicionados com quinze espécies; revisão regional e conservação pendentes. |
 | 7–8 | Répteis e anfíbios | [x] `catalog-reptiles-01` e `catalog-amphibians-01` adicionados; revisão final pendente. |
@@ -183,6 +183,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 15. `[x]` Implementar `pnpm mvp:report`, pois o comando exigido pelos pacotes MVP não existia; relatório atual reproduzível: 20 espécies públicas, 52 modulares, 72 totais, 20 lotes pending-review, 0 verificados e 156 imagens modulares.
 14. `[x]` Implementar `catalog-invertebrates-07` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200.
 16. `[ ]` Implementar `catalog-birds-06` ou `catalog-fish-07` com três espécies novas e evidência Commons/GBIF.
+17. `[x]` Executar passo 1/50: congelar contrato do catálogo em `shared/catalog/contract.ts`, exportar `frozenCatalogContract`, adicionar teste de superfície e validar com `pnpm mvp:report`, check, lint, test e diff check.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.

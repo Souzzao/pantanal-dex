@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 31. Passo 1/50 — congelamento do contrato do catálogo
+
+A Conta 2 executou o passo 1/50 dentro do escopo da branch: criou `shared/catalog/contract.ts` com a versão congelada `mvp-1`, campos obrigatórios, grupos e ambientes válidos e a superfície `FrozenCatalogContract`. O índice agora exporta `frozenCatalogContract`, preservando as exportações existentes.
+
+Foi adicionado teste específico para versão, listas contratuais, referências de lotes/espécies e imutabilidade superficial. A validação passou: `pnpm check`, `pnpm lint`, `pnpm test` com 12 testes aprovados e 1 legado ignorado, `git diff --check` e `pnpm mvp:report`. O relatório atual permanece em 20 espécies públicas, 55 modulares, 75 totais, 21 lotes pendentes, 0 verificados e 165 imagens modulares.
+
+O congelamento de `Sighting`, `Settings` e exportações fora do catálogo permanece responsabilidade das Contas 1/3 para evitar tocar em estado, persistência e nativos nesta branch. Próximo passo executável da Conta 2: `catalog-birds-06` ou `catalog-fish-07`.
+
 ## 30. Bloco de invertebrados `catalog-invertebrates-07`
 
 A Conta 2 adicionou `Anartia jatrophae`, `Battus polydamas` e `Vanessa myrinna`, em módulo separado, com nove imagens Commons. As três consultas GBIF retornaram `EXACT`/`ACCEPTED`. As licenças são CC0 e CC BY-SA 4.0; não há NC, ND ou licença ausente. As nove URLs `Special:FilePath` foram verificadas com User-Agent e retentativas e retornaram HTTP 200.

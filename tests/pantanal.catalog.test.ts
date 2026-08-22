@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCatalogSearch } from "../shared/pantanal";
 import { catalogSpeciesByEnvironment, catalogSpeciesByGroup } from "../shared/catalog";
-import { catalogBatches, catalogSpecies, catalogValidationErrors } from "../shared/catalog";
+import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract } from "../shared/catalog";
+import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch } from "../shared/catalog/types";
 
 describe("PantanalDex catalog", () => {
@@ -14,6 +15,18 @@ describe("PantanalDex catalog", () => {
     for (const environment of environments) {
       expect(species.some((item) => item.environments.includes(environment))).toBe(true);
     }
+  });
+
+  it("freezes the MVP catalog contract surface", () => {
+    expect(CATALOG_CONTRACT_VERSION).toBe("mvp-1");
+    expect(CATALOG_REQUIRED_SPECIES_FIELDS).toContain("images");
+    expect(CATALOG_REQUIRED_SPECIES_FIELDS).toContain("sources");
+    expect(CATALOG_ENVIRONMENTS).toHaveLength(5);
+    expect(CATALOG_GROUPS).toHaveLength(6);
+    expect(frozenCatalogContract.version).toBe(CATALOG_CONTRACT_VERSION);
+    expect(frozenCatalogContract.batches).toBe(catalogBatches);
+    expect(frozenCatalogContract.species).toBe(catalogSpecies);
+    expect(Object.isFrozen(frozenCatalogContract)).toBe(true);
   });
 
   it("integrates the modular catalog batches without validation errors", () => {
