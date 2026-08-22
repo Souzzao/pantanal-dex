@@ -91,3 +91,17 @@ As nove licenças são CC BY ou CC BY-SA. As URLs de origem são páginas indivi
 Arquivos consultados: `Pimelodus maculatus.jpg` — Paul Louis Oudart — domínio público — https://commons.wikimedia.org/wiki/File:Pimelodus_maculatus.jpg; `Mandi – Pimelodus maculatus (5257144069).jpg` — Secretaria de Agricultura e Abastecimento — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Mandi_–_Pimelodus_maculatus_(5257144069).jpg; `Pimelodus maculatus 469641789.jpg` — Rocío Esmeralda Pose — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:Pimelodus_maculatus_469641789.jpg; `Loricariichthys anus.jpg` — Cláudio Dias Timm — CC BY-SA 2.0 — https://commons.wikimedia.org/wiki/File:Loricariichthys_anus.jpg; `Loricariichthys anus Orbigny.jpg` — Paul Louis Oudart — domínio público — https://commons.wikimedia.org/wiki/File:Loricariichthys_anus_Orbigny.jpg; `Species of fishes from the Chasqueiro Stream (Mirim Lagoon system).jpg` — Fabiano Corrêa et al. — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:Species_of_fishes_from_the_Chasqueiro_Stream_(Mirim_Lagoon_system).jpg; `Corydoras paleatus by NiKo.jpg` — NiKo — domínio público — https://commons.wikimedia.org/wiki/File:Corydoras_paleatus_by_NiKo.jpg; `Corydoras paleatus 84869641.jpg` — Guillermo Debandi — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:Corydoras_paleatus_84869641.jpg; `Corydoras paleatus 1.jpg` — Juan Carlos Palau Díaz — CC BY 3.0 — https://commons.wikimedia.org/wiki/File:Corydoras_paleatus_1.jpg.
 
 As licenças verificadas são compatíveis com uso comercial. A taxonomia e a ocorrência regional devem ser validadas separadamente; não preencher conservação sem ICMBio/MMA.
+
+## Passo 7/50 — migração das cinco fontes legadas para GBIF
+
+Em 2026-08-22, as cinco fontes públicas legadas fora da lista aprovada foram substituídas por endpoints GBIF Species Match, sem alterar os nomes científicos nem inventar URLs. As consultas ao endpoint público retornaram `matchType=EXACT` e `status=ACCEPTED` para todos os cinco nomes.
+
+| ID legado | Nome científico | Referência substituta | Resultado GBIF |
+|---|---|---|---|
+| `pintado` | `Pseudoplatystoma corruscans` | `https://api.gbif.org/v1/species/match?name=Pseudoplatystoma%20corruscans` | `EXACT` / `ACCEPTED` |
+| `pacu` | `Piaractus mesopotamicus` | `https://api.gbif.org/v1/species/match?name=Piaractus%20mesopotamicus` | `EXACT` / `ACCEPTED` |
+| `piraputanga` | `Brycon hilarii` | `https://api.gbif.org/v1/species/match?name=Brycon%20hilarii` | `EXACT` / `ACCEPTED` |
+| `caranguejo-agua-doce` | `Dilocarcinus pagei` | `https://api.gbif.org/v1/species/match?name=Dilocarcinus%20pagei` | `EXACT` / `ACCEPTED` |
+| `camarao-agua-doce` | `Macrobrachium amazonicum` | `https://api.gbif.org/v1/species/match?name=Macrobrachium%20amazonicum` | `EXACT` / `ACCEPTED` |
+
+A migração resolve a pendência de host não aprovado dos cinco registros. Ela não prova ocorrência específica no recorte do Pantanal nem situação de conservação; essas etapas continuam dependentes de SiBBr/ICMBio e de fontes oficiais brasileiras.

@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 37. Passo 7/50 — migração das cinco fontes legadas para GBIF
+
+A Conta 2 substituiu as cinco fontes públicas fora da lista aprovada: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. As referências FishBase e WoRMS foram removidas de `shared/pantanal.ts` e substituídas por endpoints GBIF Species Match reais.
+
+As cinco consultas retornaram `matchType=EXACT` e `status=ACCEPTED`: `Pseudoplatystoma corruscans`, `Piaractus mesopotamicus`, `Brycon hilarii`, `Dilocarcinus pagei` e `Macrobrachium amazonicum`. A validação HTTP do endpoint, a ausência de FishBase/WoRMS/IUCN nos registros legados e os testes da aplicação passaram.
+
+A migração corrige a pendência de host não aprovado, mas não promove ocorrência regional nem conservação. A confirmação no Pantanal continua pendente de SiBBr/ICMBio e a conservação permanece vazia até Livro Vermelho ICMBio ou portaria MMA/ICMBio. Próximo passo: 8/50, validar e registrar evidência regional sem inferência.
+
 ## 36. Passo 6/50 — auditoria de IDs e campos científicos
 
 A Conta 2 adicionou `validateSpeciesRecord` e `validateSpeciesRecords` em `shared/catalog/types.ts` e um teste de auditoria no catálogo combinado. A auditoria confirmou 0 IDs duplicados e 0 falhas nos campos obrigatórios: ID, nome popular, nome científico, descrição, características, habitat, comportamento, dieta, distribuição e importância ecológica, além de ambientes, três imagens, créditos, licenças e fontes estruturadas.
