@@ -265,3 +265,13 @@ A persistência ganhou `withStorageRetry`, com duas tentativas controladas para 
 A camada offline agora re tenta leituras e gravações locais transitórias por duas tentativas controladas. Após esgotar as tentativas, o AppContext mantém o estado em memória, sinaliza `readError` ou `writeError` e deixa Configurações orientar o usuário. Foram adicionados testes para sucesso após falha transitória e erro persistente. A auditoria de licenças permanece informativa: nenhum lote pendente foi promovido e nenhum dado novo foi inserido sem conferência individual de fonte e imagem.
 
 Validação atual: 32 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## Bloco de metadados de revisão — checkpoint 93c2dd3d
+
+O contrato `CatalogBatch` agora aceita `reviewedAt`, `reviewedBy` e `reviewChecklist` com quatro critérios: taxonomia, ocorrência, licenças e conservação. O relatório operacional calcula `reviewReady` e transforma qualquer lote `verified` sem metadados completos em `invalid`, com bloqueio explícito. Isso impede que uma alteração manual de status mascare revisão editorial ausente.
+
+Foi adicionado teste determinístico para a regra de promoção. Validação atual: 33 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog READY. Nenhum lote foi promovido; a expansão científica continua aguardando conferência individual de imagens e fontes.
+
+## Pesquisa de cobertura e licenças — expansão segura
+
+Foi consultada a página oficial do ICMBio sobre o Pantanal, que informa referências de cobertura para mamíferos, aves e peixes, e os termos do GBIF, que distinguem CC0, CC BY e CC BY-NC e alertam que a precisão dos dados não é garantida. As URLs e decisões foram salvas em `docs/research-license-findings.md`. A equipe deve usar os números do ICMBio como meta de escala, nunca como preenchimento automático; cada espécie continua exigindo ocorrência, fonte, licença e crédito verificáveis.

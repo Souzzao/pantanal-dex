@@ -113,6 +113,14 @@ describe("PantanalDex data contracts", () => {
     expect(blocked.rows[0].blockedImages).toBe(1);
   });
 
+  it("blocks verified batches without a complete editorial checklist", () => {
+    const verified = { ...catalogBatches[0], status: "verified" as const };
+    const report = createCatalogReviewReport([verified]);
+    expect(report.rows[0]?.status).toBe("invalid");
+    expect(report.rows[0]?.reviewReady).toBe(false);
+    expect(report.rows[0]?.blockers.join(" ")).toContain("checklist editorial");
+  });
+
   it("marks a batch invalid in the operational report when validation errors identify it", () => {
     const invalid = createCatalogReviewReport(catalogBatches.slice(0, 1), [`${catalogBatches[0].batchId}: licença ausente`]);
     expect(invalid.rows[0]?.status).toBe("invalid");

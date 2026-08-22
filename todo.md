@@ -432,3 +432,11 @@
 - [x] Reforçar restauração offline, permissões nativas e estados acessíveis
 - [x] Adicionar testes de governança, catálogo e fluxos de campo
 - [ ] Atualizar handoff, validar, publicar PR e salvar checkpoint
+
+## Bloco massivo pós-checkpoint 93c2dd3d
+- [x] Auditar lotes, fontes estruturadas, branches e pendências sem repetir trabalho concluído
+- [x] Adicionar metadados de revisão editorial e datas de conferência por lote
+- [ ] Expandir espécies somente com fontes e imagens comercialmente auditáveis
+- [ ] Reforçar estados de campo, idiomas e acessibilidade nas rotas restantes
+- [x] Adicionar testes de metadados, lote científico e fluxos nativos
+- [x] Atualizar handoff, validar, publicar PR e salvar checkpoint

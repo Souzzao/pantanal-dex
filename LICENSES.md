@@ -49,3 +49,7 @@ Antes de cada lote, a Conta 2 informa a quantidade planejada e a Conta 1 registr
 Além da validação de lotes, o código mantém o relatório `catalogLicenseAudit`, calculado em `shared/catalog/license-audit.ts`. Ele mede por espécie a quantidade de imagens, imagens que passam o padrão comercial, créditos ausentes, URLs inválidas e bloqueios. O relatório é informativo e **não promove automaticamente** lotes `pending-review` para `verified`.
 
 A promoção editorial exige conferência individual das imagens, fontes, nomenclatura, ocorrência no recorte do Pantanal e situação de conservação. Cada lote deve permanecer em `pending-review` até que essa conferência seja registrada no handoff e revisada por outro agente. O relatório operacional distingue `verified`, `pending-review` e `invalid`, mantendo transparência entre volume catalogado e volume editorialmente aprovado.
+
+## Referências de cobertura do bioma
+
+A página oficial do [ICMBio sobre o Pantanal](https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal) informa números de referência para mamíferos, aves e peixes, mas esses números não substituem a conferência espécie a espécie. Os termos do [GBIF](https://www.gbif.org/terms) confirmam que datasets de ocorrência possuem licenças padronizadas, mas também alertam que a precisão dos dados não é garantida. O pipeline, portanto, registra dataset/registro específico, licença e fonte e não infere ocorrência ou conservação apenas pelo nome científico.

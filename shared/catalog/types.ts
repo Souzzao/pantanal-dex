@@ -14,6 +14,9 @@ export type CatalogBatch = {
   species: Species[];
   sources: { title: string; url: string }[];
   pendingNotes?: string[];
+  reviewedAt?: string;
+  reviewedBy?: string;
+  reviewChecklist?: { taxonomy: boolean; occurrence: boolean; licenses: boolean; conservation: boolean };
 };
 
 const requiredTextFields: (keyof Species)[] = [
