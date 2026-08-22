@@ -220,6 +220,12 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 30. Bloco de invertebrados `catalog-invertebrates-07`
+
+A Conta 2 adicionou `Anartia jatrophae`, `Battus polydamas` e `Vanessa myrinna`, em módulo separado, com nove imagens Commons. As três consultas GBIF retornaram `EXACT`/`ACCEPTED`. As licenças são CC0 e CC BY-SA 4.0; não há NC, ND ou licença ausente. As nove URLs `Special:FilePath` foram verificadas com User-Agent e retentativas e retornaram HTTP 200.
+
+O lote permanece `pending-review` para ocorrência regional no Pantanal e conservação oficial. Próxima tarefa: `catalog-birds-06` ou `catalog-fish-07`.
+
 ## 29. Comparação dos pacotes MVP anexados
 
 Os dois pacotes anexados foram inspecionados. O pacote do Agente 2 define auditoria P1, promoção somente com `reviewedAt`, `reviewedBy` e checklist real, além da meta intermediária de 60 espécies aprovadas. O pacote do Coordenador define 50 passos, distribuição entre branches e a exigência de `pnpm mvp:report`.

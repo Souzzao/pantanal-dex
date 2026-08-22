@@ -50,6 +50,10 @@ O GBIF retornou `ACCEPTED`/`EXACT` para `Brycon hilarii`, `Myloplus tiete` e `Gy
 
 Nenhuma licença contém NC ou ND. As referências e imagens não comprovam, sozinhas, ocorrência no recorte do Pantanal ou situação de conservação; manter `pending-review`.
 
+## Invertebrates-07 — pesquisa Commons e GBIF
+
+O GBIF retornou `ACCEPTED`/`EXACT` para `Anartia jatrophae`, `Battus polydamas` e `Vanessa myrinna`. A API Commons identificou CC0 e CC BY-SA 4.0 nos nove arquivos selecionados. As nove URLs `Special:FilePath` foram verificadas com User-Agent, timeout e retentativas e retornaram HTTP 200; uma primeira resposta vazia para `White peacock ... underside.JPG` foi confirmada como HTTP 200 na retentativa. Ocorrência no recorte do Pantanal e conservação oficial permanecem pendentes.
+
 ## Fish-06 — pesquisa Commons e GBIF
 
 O GBIF retornou `ACCEPTED`/`EXACT` para `Salminus brasiliensis`, `Pseudoplatystoma corruscans` e `Leporinus obtusidens`. A API Commons identificou licenças CC0, CC BY 4.0, CC BY-SA 2.0/2.5/4.0 e domínio público nos nove arquivos selecionados. Todas as URLs `Special:FilePath` retornaram HTTP 200 com User-Agent e retentativas. Os IDs novos foram sufixados com `-fish06` porque os dois primeiros nomes já possuíam registros legados no catálogo; essa correção foi coberta pelos testes. Ocorrência no recorte do Pantanal e conservação oficial permanecem pendentes.
