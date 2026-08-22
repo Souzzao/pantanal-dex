@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 32. Passo 2/50 — medição real do catálogo
+
+A Conta 2 executou `pnpm mvp:report` em 2026-08-22 e registrou a medição canônica da branch: 20 espécies públicas, 55 espécies modulares, 75 espécies combinadas, 21 lotes modulares `pending-review`, 0 lotes `verified`, 0 `review-ready` e 165 imagens nos lotes modulares.
+
+A distribuição modular medida foi: Mamíferos 4, Aves 20, Répteis 3, Anfíbios 3, Peixes 24 e Invertebrados 22. A distribuição pública medida foi: Mamíferos 5, Aves 5, Répteis 3, Anfíbios 2, Peixes 3 e Invertebrados 2. O relatório é reproduzível pelo script versionado `scripts/mvp-report.mjs`; os números históricos dos pacotes MVP permanecem baseline anterior.
+
+Validação do passo: `pnpm mvp:report`, `pnpm check`, `pnpm lint`, `pnpm test` e `git diff --check` passaram. Próximo passo: 3/50, consolidar e registrar o baseline científico/documental antes dos lotes seguintes.
+
 ## 31. Passo 1/50 — congelamento do contrato do catálogo
 
 A Conta 2 executou o passo 1/50 dentro do escopo da branch: criou `shared/catalog/contract.ts` com a versão congelada `mvp-1`, campos obrigatórios, grupos e ambientes válidos e a superfície `FrozenCatalogContract`. O índice agora exporta `frozenCatalogContract`, preservando as exportações existentes.
