@@ -6,7 +6,7 @@ import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
-import { createCatalogReviewReport } from "../shared/catalog/review";
+import { createCatalogReviewReport, isCatalogBatchReviewReady } from "../shared/catalog/review";
 import { createLicenseAuditReport } from "../shared/catalog/license-audit";
 import { readStorageWithRetry, withStorageRetry } from "../shared/persistence";
 import { createExportCsv, createExportJson, EXPORT_CSV_HEADER, parseExportJson, toExportableSighting } from "../shared/exports";
@@ -111,6 +111,15 @@ describe("PantanalDex data contracts", () => {
     const blocked = createLicenseAuditReport([{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }]);
     expect(blocked.speciesWithBlockers).toBe(1);
     expect(blocked.rows[0].blockedImages).toBe(1);
+  });
+
+  it("accepts a verified batch only with a complete editorial checklist", () => {
+    const reviewed = { ...catalogBatches[0], status: "verified" as const, reviewedAt: "2026-08-22", reviewedBy: "quality-agent", reviewChecklist: { taxonomy: true, occurrence: true, licenses: true, conservation: true } };
+    expect(isCatalogBatchReviewReady(reviewed)).toBe(true);
+    const report = createCatalogReviewReport([reviewed]);
+    expect(report.rows[0]?.status).toBe("verified");
+    expect(report.rows[0]?.reviewReady).toBe(true);
+    expect(isCatalogBatchReviewReady({ ...reviewed, reviewedAt: "22/08/2026" })).toBe(false);
   });
 
   it("blocks verified batches without a complete editorial checklist", () => {

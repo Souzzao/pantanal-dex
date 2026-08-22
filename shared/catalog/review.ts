@@ -20,11 +20,17 @@ export type CatalogReviewReport = {
   rows: CatalogReviewRow[];
 };
 
+export function isCatalogBatchReviewReady(batch: CatalogBatch): boolean {
+  const checklist = batch.reviewChecklist;
+  const validDate = Boolean(batch.reviewedAt && /^\d{4}-\d{2}-\d{2}$/.test(batch.reviewedAt) && !Number.isNaN(Date.parse(`${batch.reviewedAt}T00:00:00Z`)));
+  const validReviewer = Boolean(batch.reviewedBy?.trim());
+  return Boolean(validDate && validReviewer && checklist?.taxonomy && checklist.occurrence && checklist.licenses && checklist.conservation);
+}
+
 export function createCatalogReviewReport(batches: CatalogBatch[], validationErrors: string[] = []): CatalogReviewReport {
   const rows = batches.map((batch) => {
     const blockers = validationErrors.filter((error) => error.startsWith(`${batch.batchId}:`) || batch.species.some((item) => error.startsWith(`${item.id}:`)));
-    const checklist = batch.reviewChecklist;
-    const reviewReady = Boolean(batch.reviewedAt && batch.reviewedBy && checklist?.taxonomy && checklist.occurrence && checklist.licenses && checklist.conservation);
+    const reviewReady = isCatalogBatchReviewReady(batch);
     const status: CatalogReviewRow["status"] = blockers.length || (batch.status === "verified" && !reviewReady) ? "invalid" : batch.status;
     if (batch.status === "verified" && !reviewReady) blockers.push("lote verificado sem data, revisor ou checklist editorial completo");
     return { batchId: batch.batchId, status, group: batch.group, species: batch.species.length, blockers, reviewReady, reviewedAt: batch.reviewedAt, reviewedBy: batch.reviewedBy };

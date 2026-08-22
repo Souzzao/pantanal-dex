@@ -440,3 +440,10 @@
 - [ ] Reforçar estados de campo, idiomas e acessibilidade nas rotas restantes
 - [x] Adicionar testes de metadados, lote científico e fluxos nativos
 - [x] Atualizar handoff, validar, publicar PR e salvar checkpoint
+
+## Bloco massivo pós-checkpoint fe3f6f3f
+- [x] Auditar lote candidato, checklist, fontes, branches e PRs
+- [ ] Promover somente lote com checklist editorial e licenças confirmadas
+- [ ] Reforçar estados de campo, idiomas e acessibilidade nas rotas restantes
+- [x] Adicionar testes de promoção, escala do catálogo e fluxos nativos
+- [ ] Atualizar handoff, validar, publicar PR e salvar checkpoint

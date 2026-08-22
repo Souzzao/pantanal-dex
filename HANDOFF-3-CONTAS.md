@@ -275,3 +275,9 @@ Foi adicionado teste determinístico para a regra de promoção. Validação atu
 ## Pesquisa de cobertura e licenças — expansão segura
 
 Foi consultada a página oficial do ICMBio sobre o Pantanal, que informa referências de cobertura para mamíferos, aves e peixes, e os termos do GBIF, que distinguem CC0, CC BY e CC BY-NC e alertam que a precisão dos dados não é garantida. As URLs e decisões foram salvas em `docs/research-license-findings.md`. A equipe deve usar os números do ICMBio como meta de escala, nunca como preenchimento automático; cada espécie continua exigindo ocorrência, fonte, licença e crédito verificáveis.
+
+## Bloco de promoção segura — checkpoint fe3f6f3f
+
+A auditoria confirmou que os 12 lotes atuais são `pending-review`, portanto nenhum foi promovido artificialmente. Foi exportado `isCatalogBatchReviewReady`, que só aceita um lote quando há `reviewedAt` em formato ISO `YYYY-MM-DD`, `reviewedBy` não vazio e os quatro itens do checklist editorial verdadeiros. O teste cobre o caminho positivo, ausência de checklist e data inválida.
+
+A primeira validação encontrou uma expressão regular excessivamente escapada; ela foi corrigida imediatamente e a suíte voltou ao verde. Estado final: 34 testes aprovados, 1 teste de autenticação pulado, TypeScript, lint, diff check e watchdog READY.
