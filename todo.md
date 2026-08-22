@@ -180,8 +180,9 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 11. `[x]` Implementar `catalog-invertebrates-06` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200.
 12. `[x]` Implementar `catalog-birds-05` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200.
 13. `[x]` Implementar `catalog-fish-06` com três espécies novas, nove imagens Commons, GBIF EXACT/ACCEPTED e URLs HTTP 200; corrigir IDs duplicados contra registros legados.
+15. `[x]` Implementar `pnpm mvp:report`, pois o comando exigido pelos pacotes MVP não existia; relatório atual reproduzível: 20 espécies públicas, 52 modulares, 72 totais, 20 lotes pending-review, 0 verificados e 156 imagens modulares.
 14. `[ ]` Implementar `catalog-invertebrates-07` ou `catalog-birds-06` com três espécies novas e evidência Commons/GBIF.
-10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo.
+10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
 

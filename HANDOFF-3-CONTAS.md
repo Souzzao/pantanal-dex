@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 29. Comparação dos pacotes MVP anexados
+
+Os dois pacotes anexados foram inspecionados. O pacote do Agente 2 define auditoria P1, promoção somente com `reviewedAt`, `reviewedBy` e checklist real, além da meta intermediária de 60 espécies aprovadas. O pacote do Coordenador define 50 passos, distribuição entre branches e a exigência de `pnpm mvp:report`.
+
+Foi encontrada uma divergência operacional: o comando `pnpm mvp:report` descrito nos pacotes não existia nesta branch. A Conta 2 implementou `scripts/mvp-report.mjs` e adicionou o script ao `package.json`. A execução reproduziu a medição atual da branch: 20 espécies públicas, 52 modulares, 72 totais, 20 lotes `pending-review`, 0 verificados, 0 `review-ready` e 156 imagens modulares. Os números 102 públicas/36 modulares do pacote são baseline anterior e não devem substituir a medição executada.
+
+A melhoria foi validada com `pnpm mvp:report`, `pnpm check`, `pnpm lint`, `pnpm test` e `git diff --check`. O próximo bloqueio continua sendo a revisão editorial real de ocorrência, licenças e conservação antes de qualquer promoção.
+
 ## 28. Bloco de peixes `catalog-fish-06`
 
 A Conta 2 adicionou `Salminus brasiliensis`, `Pseudoplatystoma corruscans` e `Leporinus obtusidens`, em módulo separado, com nove imagens Commons. As três consultas GBIF retornaram `EXACT`/`ACCEPTED`. As licenças são CC0, CC BY 4.0, CC BY-SA 2.0/2.5/4.0 e domínio público; as nove URLs retornaram HTTP 200 após retentativas.
