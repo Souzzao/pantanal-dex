@@ -82,6 +82,20 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(secondBirdBatch!)).toBe(false);
   });
 
+  it("audits the third bird batch with reachable commercial images", () => {
+    const thirdBirdBatch = catalogBatches.find((batch) => batch.batchId === "catalog-birds-03");
+    expect(thirdBirdBatch?.species.map((item) => item.commonName)).toEqual(["Arara-canindé", "Urubu-de-cabeça-preta", "Tucano-toco"]);
+    expect(thirdBirdBatch?.status).toBe("pending-review");
+    expect(thirdBirdBatch?.species).toHaveLength(3);
+    expect(thirdBirdBatch?.species.flatMap((item) => item.images)).toHaveLength(9);
+    expect(thirdBirdBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(thirdBirdBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY 2.0", "CC BY 3.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY-SA 2.0",
+    ]);
+    expect(validateEditorialCatalogBatch(thirdBirdBatch!)).toEqual([]);
+    expect(isCatalogBatchReviewReady(thirdBirdBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
