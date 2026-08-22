@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCatalogSearch } from "../shared/pantanal";
 import { catalogSpeciesByEnvironment, catalogSpeciesByGroup, catalogP1Priorities, catalogP2Priorities, catalogPriorityCoverage } from "../shared/catalog";
-import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract, regionalOccurrenceRecords, regionalOccurrenceValidationErrors } from "../shared/catalog";
+import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract, regionalOccurrenceRecords, regionalOccurrenceValidationErrors, conservationReviewRecords, conservationReviewValidationErrors } from "../shared/catalog";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch, validateSpeciesRecords } from "../shared/catalog/types";
 
@@ -39,6 +39,13 @@ describe("PantanalDex catalog", () => {
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P2").every((item) => item.speciesId !== null && item.present)).toBe(true);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && !item.present).length).toBeGreaterThan(0);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && item.speciesId === null).every((item) => item.rationale.includes("ainda sem registro"))).toBe(true);
+  });
+
+  it("keeps conservation review official and conservative", () => {
+    expect(conservationReviewRecords).toHaveLength(5);
+    expect(conservationReviewValidationErrors).toEqual([]);
+    expect(conservationReviewRecords.every((record) => record.status === "pending-review")).toBe(true);
+    expect(conservationReviewRecords.every((record) => record.sourceUrl.startsWith("https://") && record.decisionRule.trim() && record.evidence.includes("nenhuma correspondência"))).toBe(true);
   });
 
   it("keeps regional occurrence evidence conservative and traceable", () => {

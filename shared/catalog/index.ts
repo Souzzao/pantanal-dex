@@ -24,15 +24,18 @@ import { validateCatalogBatches, type CatalogBatch } from "./types";
 import { createFrozenCatalogContract } from "./contract";
 import { catalogPriorityMatrix } from "./priorities";
 import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "./regional-occurrence";
+import { conservationReviewRecords, validateConservationReviewRecords } from "./conservation";
 
 export const catalogBatches: CatalogBatch[] = [mammals01, birds01, birds02, birds03, birds04, birds05, reptiles01, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const frozenCatalogContract = createFrozenCatalogContract(catalogBatches, catalogSpecies);
 export { catalogP1Priorities, catalogP2Priorities, catalogPriorityMatrix } from "./priorities";
 export { regionalOccurrenceRecords } from "./regional-occurrence";
+export { conservationReviewRecords } from "./conservation";
 export const catalogPriorityCoverage = catalogPriorityMatrix.map((priority) => ({ ...priority, present: priority.speciesId === null ? false : catalogSpecies.some((species) => species.id === priority.speciesId) }));
 export const catalogValidationErrors = validateCatalogBatches(catalogBatches);
 export const regionalOccurrenceValidationErrors = validateRegionalOccurrenceRecords(regionalOccurrenceRecords);
+export const conservationReviewValidationErrors = validateConservationReviewRecords(conservationReviewRecords);
 export const catalogSpeciesByEnvironment = catalogSpecies.reduce<Record<string, Species[]>>((index, item) => {
   for (const environment of item.environments) (index[environment] ??= []).push(item);
   return index;

@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 40. Passo 10/50 — trilha oficial de conservação
+
+A Conta 2 criou `shared/catalog/conservation.ts` para preparar a revisão oficial de conservação. A trilha registra SALVE/ICMBio, Livro Vermelho da Fauna Brasileira Ameaçada de Extinção 2018 e a página oficial do MMA com as listas nacionais e portarias aplicáveis.
+
+Foram registrados cinco alvos: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. Todos permanecem `pending-review`; nenhum `conservationStatus` foi preenchido. A regra exige correspondência taxonômica individual e categoria em fonte oficial antes de qualquer promoção. O validador rejeita confirmação com evidência que ainda declara ausência de correspondência.
+
+Fontes oficiais usadas na trilha: SALVE `https://salve.icmbio.gov.br/`; Livro Vermelho `https://www.gov.br/icmbio/pt-br/centrais-de-conteudo/publicacoes/publicacoes-diversas/livro-vermelho/livro-vermelho-da-fauna-brasileira-ameacada-de-extincao-2018`; conservação de espécies/MMA `https://www.gov.br/mma/pt-br/assuntos/biodiversidade-e-biomas/biodiversidade1/conservacao-de-especies`. Próximo passo: 11/50, preparar a revisão de imagens/licenças e separar evidência de arquivo, autoria e origem.
+
 ## 39. Passo 9/50 — auditoria com export/dataset ICMBio acessível
 
 A Conta 2 localizou e auditou o dataset oficial `ICMBio | Dados de ocorrência de espécies do SISBio`, recurso `dr327` no SiBBr. A página informa ocorrências em Unidades de Conservação Federais, aponta para o IPT oficial do ICMBio e registra licença CC BY 4.0. O índice público de ocorrências foi usado para consultas filtradas por nome científico.
