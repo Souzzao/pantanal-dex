@@ -333,3 +333,9 @@ O segundo lote P1 auditado foi `catalog-mammals-02`, com Veado-campeiro, Morcego
 O lote continua `pending-review` por ausência de checklist editorial completo, revisor/data, comprovação individual de ocorrência pantaneira e fonte oficial de conservação anexadas. Foi adicionado teste determinístico para impedir promoção implícita.
 
 Validação: **37 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 7/50 concluído
+
+O primeiro lote de aves auditado foi `catalog-birds-01`, com Seriema, Mutum-de-penacho e Anhuma. A validação estrutural confirmou campos, grupo, ambientes, IDs, três imagens, créditos, licenças, URLs e fontes declaradas. Seriema pertence ao núcleo P1; as três espécies permanecem bloqueadas até comprovação individual de ocorrência no Pantanal, conservação oficial quando aplicável, revisão das páginas de imagem e checklist com revisor/data.
+
+Foi criado `docs/MVP-STEP-07-BATCH-AUDIT.md` e adicionado teste determinístico que impede promoção implícita do lote. Validação: **38 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

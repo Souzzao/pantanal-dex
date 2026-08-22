@@ -62,6 +62,13 @@ describe("PantanalDex data contracts", () => {
     expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
   });
 
+  it("keeps the first bird batch blocked until evidence is complete", () => {
+    const firstBirdBatch = catalogBatches.find((batch) => batch.batchId === "catalog-birds-01");
+    expect(firstBirdBatch?.species.map((item) => item.commonName)).toEqual(["Seriema", "Mutum-de-penacho", "Anhuma"]);
+    expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("blocked");
+    expect(firstBirdBatch?.status).toBe("pending-review");
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
