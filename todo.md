@@ -442,6 +442,7 @@
 - [x] Atualizar handoff, validar, publicar PR e salvar checkpoint
 
 ## Reorientação para MVP final
+- [x] MVP passo 1/50 — congelar contratos-base, medir estado real e registrar evidências
 - [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
 - [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
 - [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3

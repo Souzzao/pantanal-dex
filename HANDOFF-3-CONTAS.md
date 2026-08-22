@@ -293,3 +293,9 @@ O pacote **Coordenador** é o arquivo geral: contém a matriz comum dos 50 passo
 O ciclo M1 foi executado após a conferência dos pacotes enviados. O relatório `pnpm mvp:report` confirmou 102 espécies públicas, 36 modulares, 12 lotes `pending-review`, 0 verificados, 0 `review-ready`, 306 imagens públicas e a distribuição 24/26/14/12/16/10 por grupo. A rotina foi adicionada ao `package.json` como `pnpm mvp:report`.
 
 Validação do ciclo: 34 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY. O próximo trabalho seguro é M2: auditoria real de imagens, fontes e ocorrência do núcleo P1; não promover lotes apenas para aumentar a contagem.
+
+## MVP — passo 1/50 concluído
+
+Os contratos `Species`, `Sighting`, `Settings` e `ExportEnvelope` foram conferidos e congelados sem alteração de nomes ou semântica. O inventário foi documentado em `docs/MVP-STEP-01-CONTRACT-FREEZE.md` e medido por `pnpm mvp:report`: 102 espécies públicas, 36 modulares, 12 lotes pending-review, 0 verificados, 0 review-ready e 306 imagens públicas.
+
+O passo 2 começa pela auditoria do núcleo P1. Promoção exige fonte estruturada, ocorrência pantaneira, nomenclatura, conservação oficial quando aplicável, licença individual permitida, crédito e checklist completo. O passo 1 não promoveu espécies nem alterou dados científicos.
