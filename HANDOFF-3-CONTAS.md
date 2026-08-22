@@ -305,3 +305,9 @@ O passo 2 começa pela auditoria do núcleo P1. Promoção exige fonte estrutura
 Foi criado `scripts/generate-mvp-audit-matrix.ts` e gerado `docs/MVP-STEP-02-AUDIT-MATRIX.md`. A matriz lista as **36 espécies modulares** por lote, estado, grupo, quantidade de imagens, fontes, conservação e bloqueios automáticos. Ela confirma 12 lotes `pending-review`, 0 verificados e 0 inválidos e não promove nenhum lote automaticamente.
 
 A rotina passa a ser reexecutável para a Conta 2 antes de cada PR. A validação do passo ficou verde com 34 testes aprovados, 1 autenticação pulado e TypeScript aprovado. O passo 3 deve começar pela auditoria manual do primeiro lote P1, registrando evidência individual de imagens, ocorrência, nomenclatura e conservação.
+
+## MVP — passo 3/50 em conclusão
+
+Foi definido `docs/MVP-STEP-03-P1-CORE.md` com 20 espécies prioritárias já existentes no catálogo: jacaré-do-Pantanal, arara-canindé, tucano-toco, tuiuiú, capivara, lobo-guará, queixada, cateto, veado-campeiro, sucuri-amarela, teiú, dourado, pacu, piraputanga, sapo-cururu, rã-pimenta, seriema, urubu-rei, ouriço-cacheiro e abelha-jataí.
+
+A lista é uma prioridade operacional de campo, não um ranking oficial de abundância. Cada linha exige validação de ocorrência, nomenclatura, conservação oficial quando aplicável, três imagens, licença, crédito e URL. Nenhuma espécie foi promovida neste passo.
