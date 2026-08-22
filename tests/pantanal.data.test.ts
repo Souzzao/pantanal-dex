@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSettings, restoreSettingsWithStatus, restoreSightings, restoreSightingsWithStatus, serializeSettings, serializeSightings } from "../shared/persistence";
-import { catalogBatches, catalogReview, catalogReviewReport, catalogSpecies } from "../shared/catalog/index";
+import { catalogBatches, catalogP1AuditQueue, catalogReview, catalogReviewReport, catalogSpecies } from "../shared/catalog/index";
 import { validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
@@ -47,6 +47,12 @@ describe("PantanalDex data contracts", () => {
     expect(queue.every((row) => row.blockers.length > 0)).toBe(true);
     expect(queue.some((row) => row.status === "missing")).toBe(true);
     expect(queue.some((row) => row.blockers.includes("checklist editorial do lote incompleto"))).toBe(true);
+  });
+
+  it("keeps the first P1 batch explicitly blocked until editorial evidence is complete", () => {
+    const firstBatch = catalogBatches.find((batch) => batch.batchId === "catalog-mammals-01");
+    expect(firstBatch?.species.map((item) => item.commonName)).toEqual(["Lobo-guará", "Queixada", "Cateto"]);
+    expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
   });
 
   it("reports incomplete species records", () => {

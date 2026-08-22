@@ -317,3 +317,11 @@ A lista é uma prioridade operacional de campo, não um ranking oficial de abund
 Foi criado `shared/catalog/p1-audit.ts`, com a fila determinística das 20 prioridades P1, status `ready-for-review`, `blocked` ou `missing` e bloqueios deduplicados por espécie. A fila foi exportada pelo índice do catálogo e coberta por teste. A primeira expectativa foi corrigida para não confundir espécie P1 ausente dos lotes modulares com espécie existente porém bloqueada pelo checklist; a lacuna agora fica explícita em vez de mascarada.
 
 Validação atual: TypeScript aprovado e **35 testes aprovados**, 1 autenticação pulado. Nenhuma espécie foi promovida automaticamente.
+
+## MVP — passo 5/50 concluído
+
+O primeiro lote P1 auditado foi `catalog-mammals-01`, com Lobo-guará, Queixada e Cateto. A validação estrutural confirmou três imagens, créditos, licenças, URLs e fontes registradas, mas o lote permanece `pending-review` porque não há checklist editorial completo, revisor/data, comprovação individual de ocorrência pantaneira e fonte oficial de conservação anexadas ao registro.
+
+Foi adicionado teste determinístico para garantir que essas três espécies continuam bloqueadas pela fila P1. A decisão preserva a governança comercial: nenhum lote é promovido por validação sintática בלבד.
+
+Validação: **36 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
