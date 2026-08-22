@@ -96,6 +96,20 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(thirdBirdBatch!)).toBe(false);
   });
 
+  it("audits the first reptile batch without promoting it", () => {
+    const firstReptileBatch = catalogBatches.find((batch) => batch.batchId === "catalog-reptiles-01");
+    expect(firstReptileBatch?.species.map((item) => item.commonName)).toEqual(["Teiú", "Cobra-cipó"]);
+    expect(firstReptileBatch?.status).toBe("pending-review");
+    expect(firstReptileBatch?.species).toHaveLength(2);
+    expect(firstReptileBatch?.species.flatMap((item) => item.images)).toHaveLength(6);
+    expect(firstReptileBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
+    expect(firstReptileBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY 2.0", "CC BY-SA 2.0", "CC BY-SA 4.0",
+    ]);
+    expect(validateEditorialCatalogBatch(firstReptileBatch!)).toEqual([]);
+    expect(isCatalogBatchReviewReady(firstReptileBatch!)).toBe(false);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
