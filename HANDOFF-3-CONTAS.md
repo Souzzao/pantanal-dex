@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 35. Passo 5/50 — divisão operacional entre agentes
+
+A Conta 2 criou `AGENTS-DIVISION.md`, registrando a divisão entre `integracao-ciclo-N` (Agente 1), `conta-2-catalogo` (Agente 2) e `conta-3-qualidade` (Agente 3). O documento define responsabilidades, limites de escopo, dependências, definição de pronto, protocolo de handoff e regras de integração seletiva.
+
+A Conta 2 permanece responsável por contratos do catálogo, lotes científicos, taxonomia, ocorrência, imagens, créditos, licenças e conservação oficial. Navegação, estado global, persistência, câmera, GPS, mapa e recursos nativos permanecem fora do escopo desta branch. A integração é responsabilidade do Agente 1; a qualidade de UX e recursos nativos é responsabilidade do Agente 3.
+
+O documento também fixa que cada bloco precisa de alteração verificável, testes, TODO, HANDOFF, checks, commit e PR descritivo, e que nenhum conflito deve ser resolvido apagando mudanças de outra conta. Próximo passo: 6/50, auditar IDs duplicados e campos científicos obrigatórios.
+
 ## 34. Passo 4/50 — matriz P1/P2 de espécies prioritárias
 
 A Conta 2 criou `shared/catalog/priorities.ts` e exportou a matriz pelo índice central. A matriz contém 28 prioridades P1 derivadas do núcleo de campo do pacote MVP e 13 prioridades P2, com justificativa, grupos, ambientes e áreas de revisão (`taxonomy`, `occurrence`, `licenses`, `conservation` e `editorial`).
