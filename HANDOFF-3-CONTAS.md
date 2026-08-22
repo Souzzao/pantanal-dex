@@ -325,3 +325,11 @@ O primeiro lote P1 auditado foi `catalog-mammals-01`, com Lobo-guará, Queixada 
 Foi adicionado teste determinístico para garantir que essas três espécies continuam bloqueadas pela fila P1. A decisão preserva a governança comercial: nenhum lote é promovido por validação sintática בלבד.
 
 Validação: **36 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 6/50 concluído
+
+O segundo lote P1 auditado foi `catalog-mammals-02`, com Veado-campeiro, Morcego-pescador e Ouriço-cacheiro. A estrutura passa a validação automática: três imagens por espécie, créditos, licenças, URLs e fontes registradas. Veado-campeiro e Ouriço-cacheiro estão no núcleo P1 e permanecem bloqueados; Morcego-pescador fica registrado como espécie do lote, mas fora do núcleo P1 atual.
+
+O lote continua `pending-review` por ausência de checklist editorial completo, revisor/data, comprovação individual de ocorrência pantaneira e fonte oficial de conservação anexadas. Foi adicionado teste determinístico para impedir promoção implícita.
+
+Validação: **37 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

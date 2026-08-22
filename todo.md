@@ -447,6 +447,7 @@
 - [x] MVP passo 3/50 — definir núcleo P1 e checklist de validação por espécie
 - [x] MVP passo 4/50 — criar fila rastreável de auditoria P1 e bloqueios por evidência
 - [x] MVP passo 5/50 — auditar primeiro lote P1 com fontes, imagens e checklist
+- [x] MVP passo 6/50 — auditar segundo lote P1 com fontes, imagens e checklist
 - [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
 - [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
 - [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3

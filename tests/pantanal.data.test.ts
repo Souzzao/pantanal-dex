@@ -55,6 +55,13 @@ describe("PantanalDex data contracts", () => {
     expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
   });
 
+  it("keeps the second P1 batch blocked until its evidence is attached", () => {
+    const secondBatch = catalogBatches.find((batch) => batch.batchId === "catalog-mammals-02");
+    expect(secondBatch?.species.map((item) => item.commonName)).toEqual(["Veado-campeiro", "Morcego-pescador", "Ouriço-cacheiro"]);
+    const auditedNames = ["Veado-campeiro", "Ouriço-cacheiro"];
+    expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
