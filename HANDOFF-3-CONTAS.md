@@ -339,3 +339,9 @@ Validação: **37 testes aprovados**, 1 autenticação pulado, TypeScript, lint,
 O primeiro lote de aves auditado foi `catalog-birds-01`, com Seriema, Mutum-de-penacho e Anhuma. A validação estrutural confirmou campos, grupo, ambientes, IDs, três imagens, créditos, licenças, URLs e fontes declaradas. Seriema pertence ao núcleo P1; as três espécies permanecem bloqueadas até comprovação individual de ocorrência no Pantanal, conservação oficial quando aplicável, revisão das páginas de imagem e checklist com revisor/data.
 
 Foi criado `docs/MVP-STEP-07-BATCH-AUDIT.md` e adicionado teste determinístico que impede promoção implícita do lote. Validação: **38 testes aprovados**, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 8/50 concluído
+
+Auditado o lote `catalog-birds-02`, com Gavião-belo (*Busarellus nigricollis*) e Urubu-rei (*Sarcoramphus papa*). A inspeção encontrou seis URLs de imagem 404 no lote anterior; foram substituídas por seis arquivos reais do Wikimedia Commons. O helper de imagem também foi corrigido para registrar a licença real por arquivo, sem atribuir uma licença genérica incorreta. As licenças conferidas são CC BY-SA 4.0, CC BY 2.0, CC BY-SA 3.0 e CC BY 4.0, todas compatíveis com uso comercial conforme o guardião atual.
+
+O lote permanece `pending-review`: faltam checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e fonte oficial de conservação quando aplicável. Criado `docs/MVP-STEP-08-BATCH-AUDIT.md` e teste determinístico. Validação: 39 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { mergeSightings, restoreSettings, restoreSettingsWithStatus, restoreSightings, restoreSightingsWithStatus, serializeSettings, serializeSightings } from "../shared/persistence";
 import { catalogBatches, catalogP1AuditQueue, catalogReview, catalogReviewReport, catalogSpecies } from "../shared/catalog/index";
-import { validateCatalogBatches } from "../shared/catalog/types";
+import { validateCatalogBatch as validateEditorialCatalogBatch, validateCatalogBatches } from "../shared/catalog/types";
 import { createCatalogLoader } from "../shared/catalog-loader";
 import { filterSpeciesCatalog, paginateSpeciesCatalog, sortSpeciesCatalog } from "../shared/catalog";
 import { currentCatalogBatch, mergeCatalogBatch, validateCatalogBatch } from "../shared/catalog-batches";
@@ -67,6 +67,19 @@ describe("PantanalDex data contracts", () => {
     expect(firstBirdBatch?.species.map((item) => item.commonName)).toEqual(["Seriema", "Mutum-de-penacho", "Anhuma"]);
     expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("blocked");
     expect(firstBirdBatch?.status).toBe("pending-review");
+  });
+
+  it("audits the second bird batch without promoting it", () => {
+    const secondBirdBatch = catalogBatches.find((batch) => batch.batchId === "catalog-birds-02");
+    expect(secondBirdBatch?.species.map((item) => item.commonName)).toEqual(["Gavião-belo", "Urubu-rei"]);
+    expect(secondBirdBatch?.status).toBe("pending-review");
+    expect(secondBirdBatch?.species).toHaveLength(2);
+    expect(secondBirdBatch?.species.every((item) => item.images.length === 3)).toBe(true);
+    expect(secondBirdBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
+      "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY-SA 4.0", "CC BY 2.0", "CC BY-SA 3.0", "CC BY 4.0",
+    ]);
+    expect(validateEditorialCatalogBatch(secondBirdBatch!)).toEqual([]);
+    expect(isCatalogBatchReviewReady(secondBirdBatch!)).toBe(false);
   });
 
   it("reports incomplete species records", () => {
