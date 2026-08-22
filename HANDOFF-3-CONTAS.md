@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 36. Passo 6/50 — auditoria de IDs e campos científicos
+
+A Conta 2 adicionou `validateSpeciesRecord` e `validateSpeciesRecords` em `shared/catalog/types.ts` e um teste de auditoria no catálogo combinado. A auditoria confirmou 0 IDs duplicados e 0 falhas nos campos obrigatórios: ID, nome popular, nome científico, descrição, características, habitat, comportamento, dieta, distribuição e importância ecológica, além de ambientes, três imagens, créditos, licenças e fontes estruturadas.
+
+A primeira execução revelou cinco fontes FishBase nos registros públicos legados (`pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`) fora da lista aprovada. Não foram mascaradas nem promovidas: o validador permite auditar campos/IDs do legado separadamente, enquanto os lotes modulares continuam exigindo hosts aprovados. A migração dessas cinco fontes para GBIF/SiBBr/ICMBio permanece pendência executável, sem inventar URLs.
+
+Validação final: `pnpm check`, `pnpm lint`, `pnpm test` com 14 testes aprovados e 1 legado ignorado, `git diff --check`, auditoria textual de IDs e bloqueio de licenças passaram. Próximo passo: 7/50, iniciar a trilha de fontes taxonômicas e regionalização sem alterar dados sem evidência.
+
 ## 35. Passo 5/50 — divisão operacional entre agentes
 
 A Conta 2 criou `AGENTS-DIVISION.md`, registrando a divisão entre `integracao-ciclo-N` (Agente 1), `conta-2-catalogo` (Agente 2) e `conta-3-qualidade` (Agente 3). O documento define responsabilidades, limites de escopo, dependências, definição de pronto, protocolo de handoff e regras de integração seletiva.

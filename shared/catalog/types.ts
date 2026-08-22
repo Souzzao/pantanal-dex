@@ -22,6 +22,33 @@ const requiredTextFields: (keyof Species)[] = [
   "habitat", "behavior", "diet", "distribution", "ecologicalImportance",
 ];
 
+export function validateSpeciesRecord(item: Species, seenIds = new Set<string>(), options: { enforceApprovedSources?: boolean } = { enforceApprovedSources: true }): string[] {
+  const errors: string[] = [];
+  for (const field of requiredTextFields) {
+    if (typeof item[field] !== "string" || !String(item[field]).trim()) errors.push(`${item.id || "sem-id"}: campo ${field} ausente`);
+  }
+  if (!asciiSpeciesId.test(item.id)) errors.push(`${item.id || "sem-id"}: ID deve ser ASCII em kebab-case`);
+  if (seenIds.has(item.id)) errors.push(`${item.id}: ID duplicado`);
+  seenIds.add(item.id);
+  if (!validGroups.has(item.group)) errors.push(`${item.id}: grupo inválido`);
+  if (!item.environments.length) errors.push(`${item.id}: ambiente ausente`);
+  if (item.environments.some((environment) => !validEnvironments.has(environment))) errors.push(`${item.id}: ambiente inválido`);
+  if (item.images.length !== 3) errors.push(`${item.id}: deve ter exatamente três imagens`);
+  for (const image of item.images) {
+    if (!/^https?:\/\//i.test(image.uri) || !/^https?:\/\//i.test(image.sourceUrl)) errors.push(`${item.id}: imagem sem URL HTTP válida`);
+    if (!image.credit.trim() || !image.license.trim()) errors.push(`${item.id}: crédito/licença de imagem ausente`);
+    if (!commercialImageLicenses.test(image.license) || blockedImageLicenses.test(image.license)) errors.push(`${item.id}: licença de imagem incompatível com uso comercial`);
+  }
+  if (!item.sources.length || item.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${item.id}: fonte estruturada ausente ou inválida`);
+  if (options.enforceApprovedSources !== false && item.sources.some((source) => { try { return !approvedSourceHosts.includes(new URL(source.url).hostname); } catch { return true; } })) errors.push(`${item.id}: fonte fora da lista aprovada`);
+  return errors;
+}
+
+export function validateSpeciesRecords(records: Species[], options: { enforceApprovedSources?: boolean } = { enforceApprovedSources: true }): string[] {
+  const ids = new Set<string>();
+  return records.flatMap((item) => validateSpeciesRecord(item, ids, options));
+}
+
 export function validateCatalogBatch(batch: CatalogBatch): string[] {
   const errors: string[] = [];
   if (!/^catalog-[a-z0-9-]+$/.test(batch.batchId)) errors.push(`${batch.batchId}: batchId inválido`);
@@ -29,24 +56,8 @@ export function validateCatalogBatch(batch: CatalogBatch): string[] {
   if (!batch.species.length) errors.push(`${batch.batchId}: lote vazio`);
   const ids = new Set<string>();
   for (const item of batch.species) {
-    for (const field of requiredTextFields) {
-      if (typeof item[field] !== "string" || !String(item[field]).trim()) errors.push(`${item.id || "sem-id"}: campo ${field} ausente`);
-    }
-    if (!asciiSpeciesId.test(item.id)) errors.push(`${item.id || "sem-id"}: ID deve ser ASCII em kebab-case`);
-    if (ids.has(item.id)) errors.push(`${item.id}: ID duplicado no lote`);
+    errors.push(...validateSpeciesRecord(item, ids));
     if (item.group !== batch.group) errors.push(`${item.id}: grupo não corresponde ao lote`);
-    if (!validGroups.has(item.group)) errors.push(`${item.id}: grupo inválido`);
-    if (item.environments.some((environment) => !validEnvironments.has(environment))) errors.push(`${item.id}: ambiente inválido`);
-    ids.add(item.id);
-    if (!item.environments.length) errors.push(`${item.id}: ambiente ausente`);
-    if (item.images.length !== 3) errors.push(`${item.id}: deve ter exatamente três imagens`);
-    for (const image of item.images) {
-      if (!/^https?:\/\//i.test(image.uri) || !/^https?:\/\//i.test(image.sourceUrl)) errors.push(`${item.id}: imagem sem URL HTTP válida`);
-      if (!image.credit.trim() || !image.license.trim()) errors.push(`${item.id}: crédito/licença de imagem ausente`);
-      if (!commercialImageLicenses.test(image.license) || blockedImageLicenses.test(image.license)) errors.push(`${item.id}: licença de imagem incompatível com uso comercial`);
-    }
-    if (!item.sources.length || item.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${item.id}: fonte estruturada ausente ou inválida`);
-    if (item.sources.some((source) => { try { return !approvedSourceHosts.includes(new URL(source.url).hostname); } catch { return true; } })) errors.push(`${item.id}: fonte fora da lista aprovada`);
   }
   if (batch.sources.some((source) => !source.title.trim() || !/^https?:\/\//i.test(source.url))) errors.push(`${batch.batchId}: fonte do lote inválida`);
   if (batch.sources.some((source) => { try { return !approvedSourceHosts.includes(new URL(source.url).hostname); } catch { return true; } })) errors.push(`${batch.batchId}: fonte do lote fora da lista aprovada`);

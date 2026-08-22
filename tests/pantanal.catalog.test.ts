@@ -3,7 +3,7 @@ import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCa
 import { catalogSpeciesByEnvironment, catalogSpeciesByGroup, catalogP1Priorities, catalogP2Priorities, catalogPriorityCoverage } from "../shared/catalog";
 import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract } from "../shared/catalog";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
-import { validateCatalogBatch } from "../shared/catalog/types";
+import { validateCatalogBatch, validateSpeciesRecords } from "../shared/catalog/types";
 
 describe("PantanalDex catalog", () => {
   it("contains at least 20 species across all supported groups and environments", () => {
@@ -39,6 +39,12 @@ describe("PantanalDex catalog", () => {
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P2").every((item) => item.speciesId !== null && item.present)).toBe(true);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && !item.present).length).toBeGreaterThan(0);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && item.speciesId === null).every((item) => item.rationale.includes("ainda sem registro"))).toBe(true);
+  });
+
+  it("audits required scientific fields and global IDs in the combined catalog", () => {
+    expect(validateSpeciesRecords(species, { enforceApprovedSources: false })).toEqual([]);
+    expect(new Set(species.map((item) => item.id)).size).toBe(species.length);
+    expect(species.every((item) => item.commonName.trim() && item.scientificName.trim() && item.description.trim() && item.habitat.trim() && item.behavior.trim() && item.diet.trim() && item.distribution.trim() && item.ecologicalImportance.trim())).toBe(true);
   });
 
   it("integrates the modular catalog batches without validation errors", () => {
