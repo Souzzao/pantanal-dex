@@ -359,3 +359,11 @@ A Conta 2 criou `scripts/catalog-source-audit.ts` e o comando `pnpm catalog:sour
 Resultado reproduzível: `batches=21`, `species=55`, `structuredSources=55`, `gbifUrls=110`, `errors=[]`, `status=PASS`. Não houve host fora da lista, URL taxonômica inválida, fonte sem título ou espécie sem fonte estruturada. A auditoria não altera status de conservação nem transforma uma fonte taxonômica em prova de ocorrência regional.
 
 Validação: `pnpm catalog:source-audit`, `pnpm check`, `pnpm lint`, `pnpm test` com 16 testes aprovados e 1 legado ignorado, e `git diff --check` passaram. Próximo passo: 13/50, consolidar sinônimos e nomes de busca sem introduzir taxonomia não documentada.
+
+## Passo 13/50 — sinônimos e nomes de busca
+
+A Conta 2 criou `shared/catalog/synonyms.ts` com 10 equivalências taxonômicas documentadas pelo GBIF para cinco espécies públicas: `tuiuiu`, `arara-azul`, `pintado`, `pacu` e `piraputanga`. Cada alias aponta para o endpoint de sinônimos do GBIF correspondente ao `usageKey`; não foram adicionados nomes por semelhança textual ou inferência regional.
+
+A função `applyDocumentedSynonyms` produz uma visão derivada com `searchNames`, deduplica aliases e preserva os registros originais. A visão pode ser aplicada tanto ao catálogo público quanto aos lotes modulares, sem ciclo de importação. O validador exige alias não vazio, não duplicado e fonte HTTPS no GBIF.
+
+Validação: `pnpm check`, `pnpm lint`, `pnpm test` com 17 testes aprovados e 1 legado ignorado, e `git diff --check` passaram. Durante a implementação foi corrigida uma tentativa de importação circular: a indexação mantém visão modular, enquanto consumidores podem aplicar a função ao catálogo combinado. Próximo passo: 14/50, auditoria de cobertura de busca e normalização sem promover aliases não documentados.

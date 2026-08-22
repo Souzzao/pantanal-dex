@@ -195,6 +195,7 @@ Um bloco só recebe status `[x]` quando contém alteração verificável de cód
 26. `[x]` Executar passo 10/50: criar `shared/catalog/conservation.ts` com trilha SALVE/Livro Vermelho/portarias MMA-ICMBio; 5 registros `pending-review`, 0 status inventados e validação contra confirmação sem evidência.
 27. `[x]` Executar passo 11/50: criar `catalog:image-audit` e auditar as 165 imagens modulares; 165/165 licenças aprovadas, URLs e créditos presentes, 0 erros, 0 NC/ND e resultado `PASS`.
 28. `[x]` Executar passo 12/50: criar `catalog:source-audit` e auditar 55 fontes estruturadas, 110 URLs GBIF, HTTPS, títulos e hosts aprovados; 0 erros e resultado `PASS`.
+29. `[x]` Executar passo 13/50: criar `shared/catalog/synonyms.ts`, consolidar 10 equivalências taxonômicas documentadas pelo GBIF para 5 espécies e expor visão derivada `catalogSpeciesWithSynonyms`; testes de duplicidade e rastreabilidade aprovados.
 10. `[ ]` Fechar pacote final do catálogo com contagem, IDs globais, fontes, pendências e PR descritivo; usar `pnpm mvp:report` como medição canônica da branch.
 
 Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e iniciar a primeira pendência desbloqueada. Auditorias já concluídas não devem ser repetidas sem evidência nova.
