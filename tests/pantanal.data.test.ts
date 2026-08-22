@@ -125,6 +125,15 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(secondReptileBatch!)).toBe(false);
   });
 
+  it("closes the reptile batch inventory without inventing a third lot", () => {
+    const reptileBatches = catalogBatches.filter((batch) => batch.group === "Répteis");
+    expect(reptileBatches.map((batch) => batch.batchId)).toEqual(["catalog-reptiles-01", "catalog-reptiles-02"]);
+    expect(reptileBatches).toHaveLength(2);
+    expect(reptileBatches.every((batch) => batch.status === "pending-review")).toBe(true);
+    expect(reptileBatches.flatMap((batch) => batch.species)).toHaveLength(6);
+    expect(reptileBatches.every((batch) => validateEditorialCatalogBatch(batch).length === 0)).toBe(true);
+  });
+
   it("reports incomplete species records", () => {
     const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);

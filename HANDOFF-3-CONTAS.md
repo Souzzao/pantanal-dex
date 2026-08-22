@@ -363,3 +363,9 @@ O lote permanece `pending-review`: faltam checklist editorial completo, `reviewe
 Auditado o lote `catalog-reptiles-02`, com Cágado-cabeçudo (*Acanthochelys macrocephala*), Cobra-d'água (*Helicops infrataeniatus*), Jacaré-do-Pantanal (*Caiman yacare*) e Teiú-vermelho (*Salvator rufescens*). Foram encontradas nove referências Commons 404 no lote anterior; as doze imagens foram substituídas por arquivos reais, com páginas de origem e licenças individuais. O helper foi corrigido para preservar a licença real por arquivo, incluindo CC BY-SA 3.0, CC BY-SA 2.0, CC BY-SA 2.5, CC BY 4.0, CC BY-SA 4.0, CC BY 3.0 e CC0.
 
 Todas as URLs de imagem, páginas Commons e fontes GBIF retornaram HTTP 200 na verificação passiva. O lote permanece `pending-review` por ausência de checklist editorial completo, `reviewedAt`, `reviewedBy`, comprovação individual de ocorrência pantaneira e fonte oficial de conservação quando aplicável. Criado `docs/MVP-STEP-11-BATCH-AUDIT.md`, atualizado `todo.md` e adicionado teste determinístico. Validação: 42 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 12/50 concluído
+
+A verificação do índice e do diretório de lotes confirmou que existem exatamente dois lotes de répteis: `catalog-reptiles-01` e `catalog-reptiles-02`. Não há `catalog-reptiles-03` no repositório. Os lotes já foram auditados nos passos 10 e 11, totalizando seis espécies e dezoito imagens, ambos ainda em `pending-review`.
+
+Para evitar repetição ou invenção de dados, o passo foi fechado como inventário da frente de répteis. Foi adicionado teste determinístico para os dois `batchId`, seis espécies, estado pendente e validação estrutural. Criado `docs/MVP-STEP-12-REPTILE-INVENTORY-CLOSURE.md`, atualizado `todo.md` e registrado que a próxima fila segura deve avançar para o próximo grupo com lote real. Validação: 43 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
