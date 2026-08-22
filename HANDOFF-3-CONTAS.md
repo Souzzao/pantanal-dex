@@ -220,6 +220,14 @@ A Conta 2 adicionou `Pimelodus maculatus`, `Loricariichthys anus` e `Corydoras p
 
 As três correspondências GBIF foram validadas antes da inclusão. O lote permanece `pending-review`: ocorrência no recorte do Pantanal e conservação oficial continuam sem confirmação. Alternativa executável: consultar SiBBr/ICMBio por espécie e o Livro Vermelho/portarias MMA/ICMBio para conservação, mantendo o campo vazio até evidência oficial.
 
+## 33. Passo 3/50 — baseline científico e documental
+
+A Conta 2 criou `scripts/catalog-baseline.mjs`, adicionou `pnpm catalog:baseline` ao `package.json` e gerou `MVP-CATALOG-BASELINE.md`. O artefato consolida a fotografia atual da branch: 20 espécies públicas, 55 modulares, 75 combinadas, 21 lotes, 165 imagens conforme o contrato de três imagens por espécie, 76 arrays de fontes estruturadas, 0 IDs duplicados e 0 menções de licenças NC/ND nos lotes.
+
+O baseline também registra distribuição por grupo e ambiente, status dos lotes, arquivos modulares presentes, ocorrência regional pendente e conservação sem preenchimento até fonte ICMBio/MMA. A métrica de imagens foi corrigida para derivar do contrato de três imagens por registro, pois os lotes usam helpers e não repetem literais `uri`/`license` em todos os objetos.
+
+Validação: `pnpm catalog:baseline`, `pnpm mvp:report`, `pnpm check`, `pnpm lint`, `pnpm test` com 12 testes aprovados e 1 legado ignorado, `git diff --check`, IDs globais e bloqueios comerciais passaram. Próximo passo: 4/50, fixar a matriz P1/P2 de espécies prioritárias.
+
 ## 32. Passo 2/50 — medição real do catálogo
 
 A Conta 2 executou `pnpm mvp:report` em 2026-08-22 e registrou a medição canônica da branch: 20 espécies públicas, 55 espécies modulares, 75 espécies combinadas, 21 lotes modulares `pending-review`, 0 lotes `verified`, 0 `review-ready` e 165 imagens nos lotes modulares.
