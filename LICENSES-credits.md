@@ -23,6 +23,7 @@ As imagens só podem usar `CC0`, `CC BY` ou `CC BY-SA`, em qualquer versão iden
 | `catalog-fish-03` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-fish-04` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-fish-05` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
+| `catalog-fish-06` | Peixes | 3 | GBIF Species Match | Wikimedia Commons; nove arquivos CC0/CC BY/CC BY-SA/domínio público com créditos no módulo do lote |
 | `catalog-invertebrates-01` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-02` | Invertebrados | 1 | GBIF Species Match | Wikimedia Commons; créditos e licenças no módulo do lote |
 | `catalog-invertebrates-03` | Invertebrados | 2 | GBIF Species Match | Wikimedia Commons; seis arquivos CC BY/CC BY-SA com créditos no módulo do lote |
@@ -35,6 +36,8 @@ Cada objeto `images` contém `uri`, `author`, `license`, `sourceUrl` e `credit`.
 ## Limites e pendências
 
 O manifesto não transforma uma licença permissiva em prova de ocorrência no Pantanal. Ocorrência regional, conservação e adequação da fotografia para identificação em campo permanecem pendentes quando não há confirmação SiBBr/ICMBio ou fonte oficial de conservação. Nenhum registro deve ser promovido a `verified` sem essa revisão.
+
+O lote `catalog-fish-06` usa três espécies e nove arquivos Commons selecionados a partir de metadados de licença consultados na API pública. Os autores e licenças declarados são David Morimoto (CC BY-SA 2.0), Pablo H Capovilla (CC BY-SA 4.0), Walter S. Prado (CC0), Rocío Esmeralda Pose (CC BY 4.0), Camila Marques e colaboradores (CC BY 4.0), MAV-USP/Wagner Souza e Silva (CC BY-SA 4.0), Paul Louis Oudart (domínio público) e Basenji1908 (CC BY-SA 4.0). As páginas individuais estão nas `sourceUrl` dos registros.
 
 O lote `catalog-birds-05` usa três espécies e nove arquivos Commons selecionados a partir de metadados de licença consultados na API pública. Os autores e licenças declarados são Frank Schulenburg (CC BY-SA 3.0), Rhododendrites (CC BY-SA 4.0), Hobbyfotowiki (CC0) e Charles J. Sharp (CC BY-SA 4.0). As páginas individuais estão nas `sourceUrl` dos registros.
 
