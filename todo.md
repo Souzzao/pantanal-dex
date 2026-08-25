@@ -476,3 +476,7 @@
 - [ ] Reforçar estados de campo, idiomas e acessibilidade nas rotas restantes
 - [x] Adicionar testes de promoção, escala do catálogo e fluxos nativos
 - [ ] Atualizar handoff, validar, publicar PR e salvar checkpoint
+
+- [x] Reconstruir e entregar dois pacotes ZIP de retomada para os Agentes 2 e 3, com estado real do MVP, backlog e protocolo GitHub
+
+- [x] Recalibrar o MVP para no mínimo 500 espécies verificadas e criar checklists operacionais de 300 pontos para os três agentes

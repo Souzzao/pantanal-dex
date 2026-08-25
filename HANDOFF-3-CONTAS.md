@@ -405,3 +405,11 @@ Os dois lotes permanecem `pending-review`, com os bloqueios de imagens incomplet
 A inspeção confirmou que existem exatamente dois lotes reais de peixes: `catalog-fish-01` e `catalog-fish-02`, totalizando sete espécies. Não existe `fish-03`; nenhum lote, espécie, fonte, imagem ou licença foi inventado ou repetido. Foi adicionado teste anti-repetição e criada `docs/MVP-STEP-17-FISH-INVENTORY-CLOSURE.md`.
 
 Os dois lotes permanecem `pending-review`, com bloqueios de imagens incompletas, ocorrência individual no Pantanal, checklist editorial, revisor/data e conservação oficial mantidos. O watchdog inicialmente bloqueou a sessão na main; a branch `integracao-ciclo-17` foi criada e validada como READY. Resultado: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint e diff check verdes.
+
+## Meta ampliada do MVP — 500 espécies e checklists de 300 pontos
+
+A meta mínima do MVP foi recalibrada para 500 espécies verificadas, separando explicitamente espécies públicas, modulares, estruturalmente válidas e editorialmente verificadas. Foi criada `handoffs/MVP-META-500-ESPECIES.md`, com distribuição de referência de 70 mamíferos, 180 aves, 60 répteis, 40 anfíbios, 80 peixes e 70 invertebrados.
+
+Foram gerados três checklists operacionais de exatamente 300 pontos cada, em 50 passos com seis evidências por passo: `handoffs/checklists/agente-1-coordenador-300-pontos.md`, `agente-2-catalogo-300-pontos.md` e `agente-3-qualidade-300-pontos.md`. Cada ponto exige alteração verificável, teste, documentação, checks, commit e PR.
+
+Foram montados e testados com `unzip -tq` três pacotes: `PantanalDex-Agente-1-RETOMADA-500.zip`, `PantanalDex-Agente-2-RETOMADA-500.zip` e `PantanalDex-Agente-3-RETOMADA-500.zip`. O fluxo GitHub mantém o repositório público `Souzzao/pantanal-dex`, branches separadas, PR contra main, integração pelo Agente 1 e bloqueio de dados sem fonte/licença/ocorrência/revisão.
