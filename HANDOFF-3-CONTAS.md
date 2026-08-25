@@ -393,3 +393,15 @@ O helper foi corrigido para preservar a licença por imagem. O catálogo agora m
 Auditado o lote `catalog-fish-02`, com Jaú, Peixe-cachorro e Pacupeva. As referências originais continham vários 404. Foram confirmadas três imagens específicas para Acestrorhynchus pantaneiro, com CC0, CC BY 4.0 e CC0, e uma para Myloplus tiete, com CC BY 4.0, todas com autor e página Commons individual. A busca não encontrou imagem segura de Zungaro jahu; resultados de Zungaro zungaro, PDF e gráficos foram rejeitados. Myloplus tiete permanece com duas imagens faltantes.
 
 O helper foi corrigido para preservar licença por imagem, e o teste determinístico impede completar o lote com espécies próximas, PDFs, gráficos ou duplicações. O lote continua pending-review e o carregamento seguro mantém erros documentados sem tela branca. Criado `docs/MVP-STEP-16-FISH-BATCH-AUDIT.md`, atualizado `todo.md` e handoff. Validação: 47 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## MVP — passo 17/50 concluído
+
+A inspeção confirmou que existem exatamente dois lotes reais de peixes: `catalog-fish-01` e `catalog-fish-02`, totalizando sete espécies. Não existe `fish-03`; nenhum lote, espécie, fonte, imagem ou licença foi inventado ou repetido. Foi adicionado teste anti-repetição e criada a documentação `docs/MVP-STEP-17-FISH-INVENTORY-CLOSURE.md`.
+
+Os dois lotes permanecem `pending-review`, com os bloqueios de imagens incompletas, ocorrência individual no Pantanal, checklist editorial, revisor/data e conservação oficial mantidos. O watchdog inicialmente bloqueou a execução porque a sessão estava na main; a branch `integracao-ciclo-17` foi criada e validada como READY. Resultado: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint e diff check verdes.
+
+## MVP — passo 17/50 concluído
+
+A inspeção confirmou que existem exatamente dois lotes reais de peixes: `catalog-fish-01` e `catalog-fish-02`, totalizando sete espécies. Não existe `fish-03`; nenhum lote, espécie, fonte, imagem ou licença foi inventado ou repetido. Foi adicionado teste anti-repetição e criada `docs/MVP-STEP-17-FISH-INVENTORY-CLOSURE.md`.
+
+Os dois lotes permanecem `pending-review`, com bloqueios de imagens incompletas, ocorrência individual no Pantanal, checklist editorial, revisor/data e conservação oficial mantidos. O watchdog inicialmente bloqueou a sessão na main; a branch `integracao-ciclo-17` foi criada e validada como READY. Resultado: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint e diff check verdes.

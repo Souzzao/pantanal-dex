@@ -458,6 +458,7 @@
 - [x] MVP passo 14/50 — auditar próximo lote de anfíbios, fontes, imagens, ocorrência e licenças
 - [x] MVP passo 15/50 — auditar o próximo lote real de animais, fontes, imagens, ocorrência e licenças
 - [x] MVP passo 16/50 — auditar o próximo lote real de peixes, fontes, imagens, ocorrência e licenças
+- [x] MVP passo 17/50 — fechar auditoria e inventário dos lotes de peixes, sem inventar um terceiro lote
 - [x] Medir contagem real por grupo, lotes, imagens, licenças e pendências
 - [x] Definir conjunto prioritário de espécies para o MVP e critérios de inclusão
 - [x] Criar prompts curtos e metas executáveis para Agentes 1, 2 e 3
