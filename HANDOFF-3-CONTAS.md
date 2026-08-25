@@ -413,3 +413,11 @@ A meta mínima do MVP foi recalibrada para 500 espécies verificadas, separando 
 Foram gerados três checklists operacionais de exatamente 300 pontos cada, em 50 passos com seis evidências por passo: `handoffs/checklists/agente-1-coordenador-300-pontos.md`, `agente-2-catalogo-300-pontos.md` e `agente-3-qualidade-300-pontos.md`. Cada ponto exige alteração verificável, teste, documentação, checks, commit e PR.
 
 Foram montados e testados com `unzip -tq` três pacotes: `PantanalDex-Agente-1-RETOMADA-500.zip`, `PantanalDex-Agente-2-RETOMADA-500.zip` e `PantanalDex-Agente-3-RETOMADA-500.zip`. O fluxo GitHub mantém o repositório público `Souzzao/pantanal-dex`, branches separadas, PR contra main, integração pelo Agente 1 e bloqueio de dados sem fonte/licença/ocorrência/revisão.
+
+## Retomada — passo 1/50 a partir do pacote do Agente 1
+
+O ZIP `PantanalDex-Agente-1-RETOMADA-500.zip`, recebido em `/home/ubuntu/upload`, foi extraído em `/home/ubuntu/recovery-agent1-500` e passou em `unzip -tq`. O pacote contém 11 arquivos de handoff, contexto, checklist e estado; não é uma cópia completa do código.
+
+A visão geral e a meta de 500 espécies têm hashes idênticos aos arquivos vivos em `handoffs/`. O TODO e o handoff dentro do ZIP são snapshots anteriores e foram preservados sem sobrescrever o estado atual. A revalidação foi registrada em `docs/MVP-STEP-01-AGENT1-PACKAGE-REVALIDATION.md`.
+
+A branch `integracao-retomada-passo-01` foi criada para preservar a regra de não trabalhar diretamente na main. Validação final: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.

@@ -480,3 +480,5 @@
 - [x] Reconstruir e entregar dois pacotes ZIP de retomada para os Agentes 2 e 3, com estado real do MVP, backlog e protocolo GitHub
 
 - [x] Recalibrar o MVP para no mínimo 500 espécies verificadas e criar checklists operacionais de 300 pontos para os três agentes
+
+- [x] Executar passo 1/50 a partir do pacote do Agente 1: extrair, comparar contratos, medir estado e registrar evidências
