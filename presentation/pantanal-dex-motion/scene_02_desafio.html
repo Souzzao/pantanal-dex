@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            border: 8px solid #0A3B24;
+            padding: 60px 80px;
+        }
+        #pd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 80px;
+        }
+        #pd-logo-container {
+            position: relative;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 10px 20px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: 900;
+            border: 4px solid #0A3B24;
+        }
+        #pd-title-container {
+            max-width: 600px;
+            text-align: right;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .problem-item {
+            border-top: 4px solid #1E56A0;
+            padding-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .problem-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 10px;
+        }
+        .problem-desc {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <header id="pd-header">
+            <div id="pd-logo-container">
+                <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+            </div>
+            <div id="pd-title-container">
+                <h1 id="pd-title">O Desafio: O Silêncio da Informação</h1>
+            </div>
+        </header>
+
+        <main class="problem-grid">
+            <div class="problem-item">
+                <p class="problem-title">Isolamento Digital</p>
+                <p class="problem-desc">Guias online falham onde a internet não chega.</p>
+            </div>
+            <div class="problem-item">
+                <p class="problem-title">Caos de Nomes</p>
+                <p class="problem-desc">Variações regionais impedem a identificação científica.</p>
+            </div>
+            <div class="problem-item">
+                <p class="problem-title">Dados Dispersos</p>
+                <p class="problem-desc">Observações valiosas se perdem em registros informais.</p>
+            </div>
+            <div class="problem-item">
+                <p class="problem-title">Falta de Rigor</p>
+                <p class="problem-desc">Informações sem fonte oficial prejudicam a conservação.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            
+            // Simulação de transição FLIP: começa do centro (Slide 1) e vai para o topo
+            tl.from("#pd-logo", {
+                x: 400,
+                y: 200,
+                fontSize: "84px",
+                padding: "20px 40px",
+                duration: 0.8,
+                ease: "power3.inOut"
+            })
+            .from("#pd-title", {
+                x: -300,
+                y: 250,
+                fontSize: "32px",
+                textAlign: "center",
+                duration: 0.8,
+                ease: "power3.inOut"
+            }, 0)
+            .to(".problem-item", {
+                opacity: 1,
+                y: 0,
+                stagger: 0.1,
+                duration: 0.5,
+                ease: "power2.out"
+            }, "-=0.2");
+        };
+    </script>
+</body>
+</html>

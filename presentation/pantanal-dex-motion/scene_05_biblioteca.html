@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            border: 8px solid #0A3B24;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+        }
+        #pd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 10px 20px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: 900;
+            border: 4px solid #0A3B24;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            text-align: right;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            flex-grow: 1;
+        }
+        .sources-col {
+            border-right: 4px solid #0A3B24;
+            padding-right: 30px;
+        }
+        .sources-title {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .source-item {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+        .taxa-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .taxa-card {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 20px;
+            border: 4px solid #0A3B24;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .taxa-name {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .taxa-count {
+            font-size: 14px;
+            color: #1E56A0;
+            font-weight: 700;
+        }
+        .visual-accent {
+            margin-top: 30px;
+            height: 180px;
+            width: 100%;
+            background: #0A3B24;
+            padding: 10px;
+        }
+        .visual-accent img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid #E8F0E6;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <header id="pd-header">
+            <div id="pd-logo-container">
+                <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+            </div>
+            <div id="pd-title-container">
+                <h1 id="pd-title">Biblioteca Viva: Rigor Científico</h1>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <aside class="sources-col">
+                <p class="sources-title">Fontes Oficiais</p>
+                <div class="source-item"><strong>GBIF:</strong> Global Biodiversity Information Facility.</div>
+                <div class="source-item"><strong>SiBBr:</strong> Sistema de Informação sobre a Biodiversidade Brasileira.</div>
+                <div class="source-item"><strong>Wikimedia:</strong> Acervo visual auditado e licenciado.</div>
+                <div class="visual-accent">
+                    <img src="/home/ubuntu/upload/search_images/kHNavgktsQql.jpg" alt="Biodiversity Detail">
+                </div>
+            </aside>
+
+            <section class="taxa-grid">
+                <div class="taxa-card">
+                    <p class="taxa-name">Mamíferos</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+                <div class="taxa-card">
+                    <p class="taxa-name">Aves</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+                <div class="taxa-card">
+                    <p class="taxa-name">Répteis</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+                <div class="taxa-card">
+                    <p class="taxa-name">Anfíbios</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+                <div class="taxa-card">
+                    <p class="taxa-name">Peixes</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+                <div class="taxa-card">
+                    <p class="taxa-name">Invertebrados</p>
+                    <p class="taxa-count">Auditando Lotes</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            
+            // Shared elements estáveis
+            tl.set("#pd-logo, #pd-title", { opacity: 1 });
+
+            tl.to(".taxa-card", {
+                opacity: 1,
+                scale: 1,
+                stagger: 0.05,
+                duration: 0.6,
+                ease: "back.out(1.7)"
+            })
+            .from(".sources-col", {
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.4");
+        };
+    </script>
+</body>
+</html>

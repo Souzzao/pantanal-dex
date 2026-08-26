@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            border: 8px solid #0A3B24;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        #pd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 80px;
+            margin-bottom: 40px;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 10px 20px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: 900;
+            border: 4px solid #0A3B24;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            text-align: right;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            padding: 0 80px;
+            border-top: 8px solid #0A3B24;
+            border-bottom: 8px solid #0A3B24;
+            flex-grow: 1;
+        }
+        .cell {
+            padding-top: 30px;
+            padding-right: 40px;
+            padding-left: 20px;
+            border-right: 8px solid #0A3B24;
+            border-bottom: 8px solid #0A3B24;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .cell:nth-child(2n) {
+            border-right: none;
+        }
+        .cell:nth-child(3), .cell:nth-child(4) {
+            border-bottom: none;
+        }
+        .cell-title {
+            font-family: Georgia, serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 12px;
+        }
+        .cell-text {
+            font-size: 17px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+        .footer-note {
+            padding-top: 30px;
+            padding-left: 80px;
+            font-size: 18px;
+            color: #2C3531;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <header id="pd-header">
+            <div id="pd-logo-container">
+                <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+            </div>
+            <div id="pd-title-container">
+                <h1 id="pd-title">Governança: A Alma do Dado</h1>
+            </div>
+        </header>
+        
+        <div class="grid">
+            <div class="cell">
+                <div class="cell-title">Auditoria por Lote</div>
+                <div class="cell-text">Cada espécie passa por um checklist rigoroso de taxonomia e ocorrência antes da publicação oficial.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Licenciamento Comercial</div>
+                <div class="cell-text">Uso exclusivo de imagens com licenças comerciais rastreáveis (CC0, CC-BY, CC-BY-SA). Rejeitamos NC/ND.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Fontes Oficiais</div>
+                <div class="cell-text">Status de conservação e dados científicos extraídos diretamente do ICMBio, MMA, GBIF e SiBBr.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Créditos Impecáveis</div>
+                <div class="cell-text">Respeito total à propriedade intelectual com atribuição clara de autores e páginas de origem em cada ficha.</div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Rigor ético e científico como base para a conservação digital.
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            tl.to(".cell", {
+                opacity: 1,
+                y: 0,
+                stagger: 0.15,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        };
+    </script>
+</body>
+</html>

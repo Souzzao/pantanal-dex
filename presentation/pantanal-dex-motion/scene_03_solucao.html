@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            border: 8px solid #0A3B24;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+        }
+        #pd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 10px 20px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: 900;
+            border: 4px solid #0A3B24;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            text-align: right;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 500px 1fr;
+            align-items: center;
+            gap: 40px;
+            flex-grow: 1;
+        }
+        .mockup-container {
+            width: 500px;
+            height: 480px;
+            background: #0A3B24;
+            padding: 10px;
+            border: 8px solid #0A3B24;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        .mockup-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid #E8F0E6;
+        }
+        .solution-col {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .solution-item {
+            border-left: 6px solid #1E56A0;
+            padding-left: 20px;
+            opacity: 0;
+        }
+        .solution-title {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 5px;
+        }
+        .solution-desc {
+            font-size: 15px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <header id="pd-header">
+            <div id="pd-logo-container">
+                <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+            </div>
+            <div id="pd-title-container">
+                <h1 id="pd-title">Conhecimento na Palma da Mão</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="solution-col">
+                <div class="solution-item">
+                    <p class="solution-title">Offline-First</p>
+                    <p class="solution-desc">Todo o catálogo disponível sem internet.</p>
+                </div>
+                <div class="solution-item">
+                    <p class="solution-title">Fichas Técnicas</p>
+                    <p class="solution-desc">Dados científicos e fotos de alta resolução.</p>
+                </div>
+            </div>
+
+            <div class="mockup-container" id="pd-main-visual">
+                <img src="/home/ubuntu/screenshots/webdev-preview-root-1787716601119452144-8883.png" alt="App Preview">
+            </div>
+
+            <div class="solution-col">
+                <div class="solution-item">
+                    <p class="solution-title">Busca Ágil</p>
+                    <p class="solution-desc">Identificação instantânea por nomes e filtros.</p>
+                </div>
+                <div class="solution-item">
+                    <p class="solution-title">Memória Viva</p>
+                    <p class="solution-desc">Registros pessoais geolocalizados no campo.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            
+            // Shared elements estáveis
+            tl.set("#pd-logo, #pd-title", { opacity: 1 });
+
+            tl.to("#pd-main-visual", {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            })
+            .to(".solution-item", {
+                opacity: 1,
+                x: 0,
+                stagger: 0.1,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "-=0.5");
+        };
+    </script>
+</body>
+</html>

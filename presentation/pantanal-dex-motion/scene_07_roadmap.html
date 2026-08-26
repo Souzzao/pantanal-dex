@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            border: 8px solid #0A3B24;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+        }
+        #pd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 10px 20px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: 900;
+            border: 4px solid #0A3B24;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            text-align: right;
+        }
+        .chart-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .chart-box {
+            width: 900px;
+            height: 300px;
+            border: 8px solid #0A3B24;
+            background: #FFFFFF;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 20px 60px;
+            position: relative;
+        }
+        .bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+        .bar {
+            width: 80px;
+            background: #0A3B24;
+            height: 0;
+        }
+        .bar.mvp { background: #1E56A0; }
+        .bar.vision { background: #2C3531; }
+        .bar-label {
+            margin-top: 15px;
+            font-weight: 900;
+            font-size: 18px;
+        }
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            margin-top: 40px;
+            border-top: 8px solid #0A3B24;
+            padding-top: 20px;
+        }
+        .metric-item {
+            text-align: center;
+            border-right: 4px solid #0A3B24;
+        }
+        .metric-item:last-child { border-right: none; }
+        .metric-value {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #1E56A0;
+        }
+        .metric-name {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <header id="pd-header">
+            <div id="pd-logo-container">
+                <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+            </div>
+            <div id="pd-title-container">
+                <h1 id="pd-title">Roadmap: Escalabilidade e Futuro</h1>
+            </div>
+        </header>
+
+        <main class="chart-area">
+            <div class="chart-box">
+                <div class="bar-wrapper">
+                    <div class="bar" id="bar-current" style="height: 13.8%;"></div>
+                    <div class="bar-label">ATUAL</div>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar mvp" id="bar-mvp" style="height: 50%;"></div>
+                    <div class="bar-label">MVP</div>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="bar vision" id="bar-vision" style="height: 100%;"></div>
+                    <div class="bar-label">VISÃO</div>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                <div class="metric-item">
+                    <div class="metric-value">138</div>
+                    <div class="metric-name">Espécies</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">500</div>
+                    <div class="metric-name">Meta MVP</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">3.000+</div>
+                    <div class="metric-name">Visão Final</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            tl.set(".bar", { height: 0 });
+            
+            tl.to("#bar-current", { height: "13.8%", duration: 0.8, ease: "power2.out" })
+              .to("#bar-mvp", { height: "50%", duration: 0.8, ease: "power2.out" }, "-=0.4")
+              .to("#bar-vision", { height: "100%", duration: 1, ease: "power4.out" }, "-=0.4")
+              .from(".metric-item", { opacity: 0, y: 20, stagger: 0.2, duration: 0.5 }, "-=0.5");
+        };
+    </script>
+</body>
+</html>

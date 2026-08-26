@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid #0A3B24;
+        }
+        #pd-main-visual {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 720px;
+            z-index: 1;
+            opacity: 0.2;
+        }
+        #pd-main-visual img {
+            width: 1280px;
+            height: 720px;
+            object-fit: cover;
+        }
+        #pd-logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+        .logo-box {
+            background: #0A3B24;
+            color: #E8F0E6;
+            padding: 20px 40px;
+            font-family: Georgia, serif;
+            font-size: 84px;
+            font-weight: 900;
+            border: 8px solid #0A3B24;
+            letter-spacing: -2px;
+        }
+        #pd-title-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .cta-text {
+            font-family: Georgia, serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+        .final-message {
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: #0A3B24;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div id="pd-main-visual">
+            <img src="/home/ubuntu/upload/search_images/hTqrJcopzXbu.jpg" alt="Pantanal Final Impact">
+        </div>
+        
+        <div id="pd-logo-container">
+            <div class="logo-box" id="pd-logo">PANTANALDEX</div>
+        </div>
+
+        <div id="pd-title-container">
+            <p class="cta-text" id="pd-cta">Explore. Registre. Proteja.</p>
+            <p class="final-message" id="pd-final">O guia definitivo para o maior espetáculo da natureza.</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const tl = gsap.timeline();
+            
+            // Transição de retorno: o logo vem da posição de cabeçalho (topo esquerdo) para o centro
+            tl.from("#pd-logo", {
+                x: -400,
+                y: -250,
+                fontSize: "32px",
+                padding: "10px 20px",
+                duration: 1.2,
+                ease: "power3.inOut"
+            })
+            .to("#pd-cta", {
+                opacity: 1,
+                y: -10,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.4")
+            .to("#pd-final", {
+                opacity: 1,
+                y: -5,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.6");
+        };
+    </script>
+</body>
+</html>

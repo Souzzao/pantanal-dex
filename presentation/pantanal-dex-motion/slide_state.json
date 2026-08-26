@@ -1,0 +1,94 @@
+{
+  "project_info": {
+    "title": "Abertura: O Chamado do Pantanal",
+    "created": 1787718551.779,
+    "last_updated": 1787718632.134,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "scene_01_hero",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "scene_02_desafio",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "scene_03_solucao",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "scene_04_ux",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "scene_05_biblioteca",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "scene_06_governanca",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "scene_07_roadmap",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "scene_08_fechamento",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "scene_01_hero",
+      "title": "Abertura: O Chamado do Pantanal",
+      "summary": "Estado inicial com logo centralizado e transição para título lateral. Metas: Impacto visual e continuidade do logo.",
+      "image_plan": "/home/ubuntu/upload/search_images/U1R3zy3aNbWU.jpg - Cover slide showing the Pantanal wetlands landscape to set the theme."
+    },
+    {
+      "id": "scene_02_desafio",
+      "title": "O Desafio: O Silêncio da Informação",
+      "summary": "Transformação do logo para o canto e entrada de blocos de problema. Foco em morfismo de elementos de texto."
+    },
+    {
+      "id": "scene_03_solucao",
+      "title": "A Solução: Conhecimento Offline-First",
+      "summary": "Transição fluida da imagem para o mockup do app. Continuidade do fundo e do título."
+    },
+    {
+      "id": "scene_04_ux",
+      "title": "UX: Design de Campo Resiliente",
+      "summary": "Morfismo do mockup para detalhes de interface. Foco em shared elements de ícones."
+    },
+    {
+      "id": "scene_05_biblioteca",
+      "title": "Biblioteca Viva: Rigor Científico",
+      "summary": "Expansão de elementos de lista a partir do estado anterior. Continuidade da paleta."
+    },
+    {
+      "id": "scene_06_governanca",
+      "title": "Governança: A Alma do Dado",
+      "summary": "Transformação de blocos de texto em pilares de governança. Shared element: selo de qualidade."
+    },
+    {
+      "id": "scene_07_roadmap",
+      "title": "Roadmap: Escalabilidade e Futuro",
+      "summary": "Morfismo de gráficos. Transição do estado atual para a visão final de 3.000+ espécies.",
+      "slide_template_key": ",summary:"
+    },
+    {
+      "id": "scene_08_fechamento",
+      "title": "Conclusão: Proteja o Pantanal",
+      "summary": "Retorno do logo ao centro e fechamento da cena contínua. Impacto final."
+    }
+  ]
+}
