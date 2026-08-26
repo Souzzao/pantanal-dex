@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "title": "PantanalDex: Enciclopédia Digital Offline",
+    "created": 1787716477.758,
+    "last_updated": 1787716588.245,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "premium_capa",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "premium_problema",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "premium_solucao",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "premium_ux",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "premium_biblioteca",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "premium_governanca",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "premium_roadmap",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "premium_impacto",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "premium_capa",
+      "title": "PantanalDex: Enciclopédia Digital Offline",
+      "summary": "Capa de alto impacto com paisagem alagada e missão do projeto.",
+      "image_plan": "/home/ubuntu/upload/search_images/U1R3zy3aNbWU.jpg - Cover slide showing the Pantanal wetlands landscape to set the theme."
+    },
+    {
+      "id": "premium_problema",
+      "title": "Desafios do Campo e Barreiras de Informação",
+      "summary": "Análise das dores: isolamento digital, caos de nomes e dados dispersos."
+    },
+    {
+      "id": "premium_solucao",
+      "title": "Conhecimento na Palma da Mão",
+      "summary": "Destaque para o conceito offline-first e fichas técnicas premium."
+    },
+    {
+      "id": "premium_ux",
+      "title": "Experiência de Campo Sem Fronteiras",
+      "summary": "Design otimizado para condições extremas, GPS e resiliência de dados."
+    },
+    {
+      "id": "premium_biblioteca",
+      "title": "Uma Biblioteca Viva e Auditada",
+      "summary": "Filtros dinâmicos, busca normalizada e referências científicas diretas."
+    },
+    {
+      "id": "premium_governanca",
+      "title": "Dados com Alma e Responsabilidade",
+      "summary": "Rigor ético, licenciamento comercial e fontes oficiais ICMBio/MMA."
+    },
+    {
+      "id": "premium_roadmap",
+      "title": "Rumo à Maior Base de Dados do Bioma",
+      "summary": "Estado atual (138 espécies) vs Meta MVP (500 espécies) e visão futura."
+    },
+    {
+      "id": "premium_impacto",
+      "title": "Ciência Cidadã e Conservação Ativa",
+      "summary": "O impacto do app na proteção ambiental e educação."
+    }
+  ]
+}

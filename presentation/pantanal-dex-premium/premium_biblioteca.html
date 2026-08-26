@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            align-items: stretch;
+        }
+        .content-side {
+            padding: 60px 60px 20px 80px;
+            border-right: 8px solid #0A3B24;
+            display: flex;
+            flex-direction: column;
+        }
+        .image-side {
+            background: #0A3B24;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 8px solid #E8F0E6;
+        }
+        .kicker {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+        .feature-box {
+            margin-bottom: 24px;
+            padding-top: 16px;
+            border-top: 4px solid #0A3B24;
+        }
+        .feature-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 8px;
+        }
+        .feature-text {
+            font-size: 17px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="content-side">
+            <p class="kicker">Acervo Digital</p>
+            <h1>Uma Biblioteca Viva e Auditada.</h1>
+            
+            <div class="feature-box">
+                <p class="feature-title">Busca Normalizada</p>
+                <p class="feature-text">Encontre espécies por nomes populares regionais ou nomenclatura científica rigorosa.</p>
+            </div>
+            
+            <div class="feature-box">
+                <p class="feature-title">Filtros por Ambiente</p>
+                <p class="feature-text">Navegue pela fauna de áreas alagadas, matas de galeria e campos limpos do Pantanal.</p>
+            </div>
+            
+            <div class="feature-box">
+                <p class="feature-title">Referências Diretas</p>
+                <p class="feature-text">Conexão com bases globais (GBIF) e nacionais (SiBBr) para validação científica em tempo real.</p>
+            </div>
+        </div>
+        <div class="image-side">
+            <img src="/home/ubuntu/upload/search_images/kHNavgktsQql.jpg" alt="Biodiversidade do Pantanal">
+        </div>
+    </div>
+</body>
+</html>

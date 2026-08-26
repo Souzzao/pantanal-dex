@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding-left: 80px;
+            margin-bottom: 40px;
+        }
+        .kicker {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            margin-top: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            padding: 0 80px;
+            border-top: 8px solid #0A3B24;
+            border-bottom: 8px solid #0A3B24;
+            flex-grow: 1;
+        }
+        .cell {
+            padding-top: 30px;
+            padding-right: 40px;
+            padding-left: 20px;
+            border-right: 8px solid #0A3B24;
+            border-bottom: 8px solid #0A3B24;
+        }
+        .cell:nth-child(2n) {
+            border-right: none;
+        }
+        .cell:nth-child(3), .cell:nth-child(4) {
+            border-bottom: none;
+        }
+        .cell-title {
+            font-family: Georgia, serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 12px;
+        }
+        .cell-text {
+            font-size: 17px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+        .footer-note {
+            padding-top: 30px;
+            padding-left: 80px;
+            font-size: 18px;
+            color: #2C3531;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="kicker">06 / GOVERNANÇA</div>
+            <h1>Dados com Alma e Responsabilidade.</h1>
+        </div>
+        
+        <div class="grid">
+            <div class="cell">
+                <div class="cell-title">Auditoria por Lote</div>
+                <div class="cell-text">Cada espécie passa por um checklist rigoroso de taxonomia e ocorrência antes da publicação oficial.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Licenciamento Comercial</div>
+                <div class="cell-text">Uso exclusivo de imagens com licenças comerciais rastreáveis (CC0, CC-BY, CC-BY-SA). Rejeitamos NC/ND.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Fontes Oficiais</div>
+                <div class="cell-text">Status de conservação e dados científicos extraídos diretamente do ICMBio, MMA, GBIF e SiBBr.</div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">Créditos Impecáveis</div>
+                <div class="cell-text">Respeito total à propriedade intelectual com atribuição clara de autores e páginas de origem em cada ficha.</div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Rigor ético e científico como base para a conservação digital.
+        </div>
+    </div>
+</body>
+</html>

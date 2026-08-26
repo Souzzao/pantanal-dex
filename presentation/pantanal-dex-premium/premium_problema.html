@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 60px;
+            border-bottom: 8px solid #0A3B24;
+            padding-bottom: 20px;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            flex-grow: 1;
+        }
+        .problem-box {
+            border-left: 8px solid #1E56A0;
+            padding-left: 20px;
+        }
+        .problem-title {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 10px;
+        }
+        .problem-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1>O Silêncio do Campo e a Barreira da Informação</h1>
+        <div class="problem-grid">
+            <div class="problem-box">
+                <p class="problem-title">Isolamento Digital</p>
+                <p class="problem-text">A falta de conexão torna guias online inúteis no momento da descoberta no coração do bioma.</p>
+            </div>
+            <div class="problem-box">
+                <p class="problem-title">Caos de Nomes</p>
+                <p class="problem-text">A variação regional de nomes populares gera confusão na identificação correta das espécies.</p>
+            </div>
+            <div class="problem-box">
+                <p class="problem-title">Dados Dispersos</p>
+                <p class="problem-text">Observações valiosas se perdem em cadernos de papel ou galerias de fotos desorganizadas.</p>
+            </div>
+            <div class="problem-box">
+                <p class="problem-title">Falta de Rigor</p>
+                <p class="problem-text">Informações sem fonte ou licença prejudicam o uso científico e comercial dos dados coletados.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

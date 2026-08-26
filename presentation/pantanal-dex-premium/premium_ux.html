@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            align-items: stretch;
+        }
+        .content-section {
+            padding-top: 80px;
+            padding-left: 80px;
+            padding-right: 60px;
+            border-right: 8px solid #0A3B24;
+            display: flex;
+            flex-direction: column;
+        }
+        .image-section {
+            background: #0A3B24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        .image-section img {
+            width: 440px;
+            height: 600px;
+            object-fit: cover;
+            border: 8px solid #E8F0E6;
+        }
+        .kicker {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+        .ux-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .ux-item {
+            padding-top: 16px;
+            border-top: 4px solid #1E56A0;
+        }
+        .ux-title {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 8px;
+        }
+        .ux-desc {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="content-section">
+            <p class="kicker">04 / EXPERIÊNCIA</p>
+            <h1>Exploração Sem Fronteiras: Design de Campo.</h1>
+            <div class="ux-grid">
+                <div class="ux-item">
+                    <p class="ux-title">Interface de Campo</p>
+                    <p class="ux-desc">Otimizada para alta luminosidade e operação com apenas uma mão em movimento.</p>
+                </div>
+                <div class="ux-item">
+                    <p class="ux-title">Inteligência Nativa</p>
+                    <p class="ux-desc">Integração profunda com GPS e Câmera para registros precisos e geolocalizados.</p>
+                </div>
+                <div class="ux-item">
+                    <p class="ux-title">Resiliência de Dados</p>
+                    <p class="ux-desc">Persistência versionada que protege seus avistamentos contra falhas de sistema.</p>
+                </div>
+                <div class="ux-item">
+                    <p class="ux-title">Suporte Multilíngue</p>
+                    <p class="ux-desc">Interface e dados técnicos localizados integralmente em PT, EN e ES.</p>
+                </div>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="/home/ubuntu/upload/search_images/0rEuYhSnMIt4.jpg" alt="Pantanal Field Environment">
+        </div>
+    </div>
+</body>
+</html>

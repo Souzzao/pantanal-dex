@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+        }
+        .hero-image {
+            width: 1280px;
+            height: 340px;
+            background: #0A3B24;
+            padding: 20px;
+            border-bottom: 8px solid #0A3B24;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid #E8F0E6;
+        }
+        .content-area {
+            padding: 40px 80px 0;
+            flex-grow: 1;
+        }
+        .kicker {
+            font-size: 16px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            border-top: 4px solid #0A3B24;
+            padding-top: 20px;
+        }
+        .impact-item h2 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 10px;
+        }
+        .impact-item p {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="hero-image">
+            <img src="/home/ubuntu/upload/search_images/hTqrJcopzXbu.jpg" alt="Arara-azul no Pantanal">
+        </div>
+        <div class="content-area">
+            <p class="kicker">Impacto e Conservação</p>
+            <h1>Ciência Cidadã e Conservação Ativa</h1>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <h2>Monitoramento</h2>
+                    <p>Dados de avistamentos que auxiliam pesquisadores em estudos de ocorrência e comportamento animal.</p>
+                </div>
+                <div class="impact-item">
+                    <h2>Educação</h2>
+                    <p>Uma ferramenta pedagógica poderosa para guias de turismo, escolas locais e visitantes do bioma.</p>
+                </div>
+                <div class="impact-item">
+                    <h2>Conscientização</h2>
+                    <p>O primeiro passo para proteger é conhecer. O app dá voz e visibilidade à fauna silenciosa do Pantanal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

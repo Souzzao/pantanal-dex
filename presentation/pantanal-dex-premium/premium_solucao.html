@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            align-items: stretch;
+            font-family: monospace;
+        }
+        .image-pane {
+            background: #0A3B24;
+            padding: 16px; /* reduced from 40px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 8px solid #0A3B24;
+        }
+        .image-pane img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 8px solid #E8F0E6;
+        }
+        .content-pane {
+            padding: 80px 30px; /* kept top padding 80px, reduced horizontal and bottom space */
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #0A3B24;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+        .solution-item {
+            margin-bottom: 12px; /* reduced from 30px */
+            padding-top: 8px; /* reduced from 15px */
+            border-top: 2px solid #1E56A0;
+        }
+        .solution-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 8px;
+        }
+        .solution-text {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #2C3531;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="image-pane">
+            <img src="/home/ubuntu/upload/search_images/8mBEUqVcegPJ.jpg" alt="Pantanal Solution">
+        </div>
+        <div class="content-pane">
+            <h1>PantanalDex: Conhecimento na Palma da Mão</h1>
+            <div class="solution-item">
+                <p class="solution-title">Offline-First</p>
+                <p class="solution-text">Todo o catálogo de espécies disponível sem necessidade de internet.</p>
+            </div>
+            <div class="solution-item">
+                <p class="solution-title">Fichas Técnicas Premium</p>
+                <p class="solution-text">Dados taxonômicos, habitat e galeria de alta resolução.</p>
+            </div>
+            <div class="solution-item">
+                <p class="solution-title">Identificação Ágil</p>
+                <p class="solution-text">Busca inteligente e filtros dinâmicos por grupos e ambientes.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
