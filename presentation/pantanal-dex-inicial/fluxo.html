@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            padding-left: 80px;
+            margin-bottom: 60px;
+        }
+        .kicker {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-top: 10px;
+        }
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 0 80px;
+            gap: 0;
+            border-top: 8px solid #0A3B24;
+            border-bottom: 8px solid #0A3B24;
+        }
+        .step {
+            padding-top: 40px;
+            min-height: 350px;
+            border-right: 8px solid #0A3B24;
+            padding-right: 30px;
+            padding-left: 20px;
+        }
+        .step:last-child {
+            border-right: none;
+        }
+        .step-num {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #1E56A0;
+            margin-bottom: 20px;
+        }
+        .step-title {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .step-desc {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #2C3531;
+        }
+        .footer-note {
+            padding-top: 40px;
+            padding-left: 80px;
+            font-size: 20px;
+            color: #2C3531;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="kicker">05 / O FLUXO</div>
+            <h1>Do avistamento ao registro.</h1>
+        </div>
+        
+        <div class="flow-grid">
+            <div class="step">
+                <div class="step-num">01</div>
+                <div class="step-title">Explorar</div>
+                <div class="step-desc">Pesquise por nome ou navegue pelos grupos para encontrar a ficha da espécie.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <div class="step-num">02</div>
+                <div class="step-title">Observar</div>
+                <div class="step-desc">Capture a foto e registre data, notas e localização no momento da avistagem.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <div class="step-title">Consultar</div>
+                <div class="step-desc">Acesse seu caderno pessoal e veja seus registros organizados no mapa.</div>
+            </div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <div class="step-title">Gerenciar</div>
+                <div class="step-desc">Edite seus avistamentos ou exporte seus dados para uso externo.</div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Um ciclo curto pensado para não interromper a experiência com a natureza.
+        </div>
+    </div>
+</body>
+</html>

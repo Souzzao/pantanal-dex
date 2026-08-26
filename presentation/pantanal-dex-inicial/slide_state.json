@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "title": "PantanalDex",
+    "created": 1787715784.585,
+    "last_updated": 1787716056.03,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "capa",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "bolso",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "desafio",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "biblioteca",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "fluxo",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "campo",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "responsabilidade",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "mvp",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "capa",
+      "title": "PantanalDex",
+      "summary": "Um guia de campo para conhecer, registrar e proteger a vida do Pantanal.",
+      "image_plan": "/home/ubuntu/upload/search_images/U1R3zy3aNbWU.jpg - Cover slide showing the Pantanal wetlands landscape to set the theme."
+    },
+    {
+      "id": "bolso",
+      "title": "O Pantanal cabe no bolso",
+      "summary": "Apresentar o PantanalDex como um guia de campo visual, simples e útil, inclusive sem conexão."
+    },
+    {
+      "id": "desafio",
+      "title": "O desafio é encontrar informação confiável no momento certo",
+      "summary": "Mostrar as dores de conexão instável, identificação difícil, licenças e perda de registros."
+    },
+    {
+      "id": "biblioteca",
+      "title": "Uma biblioteca viva da fauna pantaneira",
+      "summary": "Explicar busca, filtros, fichas visuais e caderno pessoal de avistamentos."
+    },
+    {
+      "id": "fluxo",
+      "title": "Do avistamento ao registro",
+      "summary": "Demonstrar o fluxo curto de explorar, observar, registrar e consultar novamente."
+    },
+    {
+      "id": "campo",
+      "title": "Feito para o campo, não para a tela de escritório",
+      "summary": "Destacar offline, estados de erro, permissões nativas, fallback web e idiomas."
+    },
+    {
+      "id": "responsabilidade",
+      "title": "Conteúdo com responsabilidade",
+      "summary": "Explicar lotes auditáveis, fontes, créditos, licenças comerciais e conservação oficial."
+    },
+    {
+      "id": "mvp",
+      "title": "Um MVP mensurável e ambicioso",
+      "summary": "Apresentar o estado atual de 138 espécies conhecidas e a meta de 500 espécies verificadas, fechando com visão de futuro."
+    }
+  ]
+}

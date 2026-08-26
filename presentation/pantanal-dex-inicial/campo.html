@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #2C3531;
+            font-family: monospace;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+        }
+        .content-block {
+            padding-top: 80px;
+            padding-left: 80px;
+            padding-right: 60px;
+            border-right: 8px solid #0A3B24;
+            display: flex;
+            flex-direction: column;
+        }
+        .image-block {
+            background: #0A3B24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+        }
+        .image-block img {
+            width: 540px;
+            height: 640px;
+            object-fit: cover;
+            border: 8px solid #E8F0E6;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-weight: 900;
+            font-size: 48px;
+            color: #0A3B24;
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+        .feature-list {
+            list-style: none;
+        }
+        .feature-item {
+            margin-bottom: 32px;
+            padding-top: 16px;
+            border-top: 2px solid #1E56A0;
+        }
+        .feature-title {
+            font-family: Georgia, serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: #1E56A0;
+            margin-bottom: 8px;
+        }
+        .feature-desc {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .kicker {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #1E56A0;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="content-block">
+            <p class="kicker">Experiência de Uso</p>
+            <h1>Feito para o campo, não para o escritório.</h1>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <p class="feature-title">Offline por Padrão</p>
+                    <p class="feature-desc">Estados de erro e carregamento pensados para locais sem sinal de internet.</p>
+                </li>
+                <li class="feature-item">
+                    <p class="feature-title">Poder Nativo</p>
+                    <p class="feature-desc">Uso inteligente de Câmera e GPS com permissões explicadas ao usuário.</p>
+                </li>
+                <li class="feature-item">
+                    <li class="feature-title">Acessibilidade Global</p>
+                    <p class="feature-desc">Interface localizada em PT, EN e ES com fallback robusto para Web.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="image-block">
+            <img src="/home/ubuntu/upload/search_images/0rEuYhSnMIt4.jpg" alt="Pantanal Wetlands Landscape">
+        </div>
+    </div>
+</body>
+</html>

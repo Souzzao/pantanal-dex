@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #E8F0E6;
+            color: #0A3B24;
+            font-family: monospace;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .kicker {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #1E56A0;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 56px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 900px;
+        }
+        .chart-wrapper {
+            width: 800px;
+            height: 320px;
+            background: #FFFFFF;
+            border: 8px solid #0A3B24;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 1000px;
+            border-top: 8px solid #0A3B24;
+            padding-top: 30px;
+        }
+        .stat-item {
+            text-align: center;
+            border-right: 4px solid #0A3B24;
+        }
+        .stat-item:last-child {
+            border-right: none;
+        }
+        .stat-value {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #1E56A0;
+        }
+        .stat-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+        .vision-text {
+            margin-top: 40px;
+            font-size: 22px;
+            color: #2C3531;
+            font-weight: 700;
+            text-align: center;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="kicker">08 / O FUTURO</div>
+        <h1>Um MVP mensurável e ambicioso.</h1>
+        
+        <div class="chart-wrapper">
+            <canvas id="mvpChart"></canvas>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">138</div>
+                <div class="stat-label">Espécies Atuais</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">500</div>
+                <div class="stat-label">Meta MVP</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3.000+</div>
+                <div class="stat-label">Visão Final</div>
+            </div>
+        </div>
+
+        <p class="vision-text">
+            PantanalDex: Conhecer é o primeiro passo para proteger.
+        </p>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('mvpChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Estado Atual', 'Meta MVP', 'Visão de Futuro'],
+                datasets: [{
+                    label: 'Número de Espécies',
+                    data: [138, 500, 3000],
+                    backgroundColor: ['#0A3B24', '#1E56A0', '#2C3531'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false },
+                        ticks: { font: { family: 'monospace', size: 14 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'monospace', size: 16, weight: 'bold' } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
