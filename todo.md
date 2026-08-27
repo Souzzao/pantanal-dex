@@ -662,3 +662,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Manter *Brycon orbignyanus*, *Rhamdia quelen*, *Crenicichla britskii* e *Podocnemis unifilis* como `pending-review`
 - [x] Registrar a ressalva de *Podocnemis unifilis* como espécie exótica para o MS na fonte consultada
 - [x] Executar checks científicos e atualizar o dossiê regional
+
+## Passo 39/60 — fechamento das pendências regionais do Lote 02
+
+- [x] Pesquisar fontes primárias e inventários para os quatro táxons restantes
+- [x] Confirmar que não há evidência individual suficiente para promover *Brycon orbignyanus*, *Rhamdia quelen* ou *Crenicichla britskii*
+- [x] Preservar *Podocnemis unifilis* como `pending-review` por ressalva regional e contagem GBIF não conclusiva
+- [x] Não promover ocorrências por inferência geográfica ou fonte genérica
+- [x] Atualizar auditoria regional e dossiê do passo 39
+- [x] Executar checks científicos e publicar o resultado

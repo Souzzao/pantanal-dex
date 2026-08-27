@@ -25,9 +25,9 @@ if (regionalOccurrenceRecords.some((record) => record.status !== "confirmed" && 
 if (regionalOccurrenceRecords.some((record) => record.checkedAt !== "2026-08-27")) errors.push("data de verificação regional desatualizada");
 
 const markdown = [
-  "# Auditoria do ledger de ocorrência regional — passo 36/60",
+  "# Auditoria do ledger de ocorrência regional — passo 39/60",
   "",
-  "O ledger registra sete espécies legadas confirmadas por fontes regionais independentes e 15 candidatos do Lote 02 em `pending-review`, apoiados por triagem GBIF e ainda aguardando fonte narrativa individualizada. `pending-review` não significa ausência; significa que a evidência estruturada ainda não foi promovida a confirmação regional.",
+  "O ledger registra 18 espécies confirmadas por fontes regionais independentes e quatro candidatos do Lote 02 em `pending-review`. `pending-review` não significa ausência; significa que as fontes consultadas ainda não sustentam uma confirmação regional individualizada.",
   "",
   "| ID | Região | Estado | Fonte | Evidência conservadora |",
   "|---|---|---|---|---|",
@@ -39,7 +39,7 @@ const markdown = [
   "",
   "## Limite da evidência",
   "",
-  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. Os 15 candidatos do Lote 02 têm triagem GBIF no retângulo operacional e identidade aceita no GBIF/Catalogue of Life, mas permanecem `pending-review` até fonte narrativa individualizada. Nenhuma categoria de conservação foi inferida deste ledger.",
+  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. O inventário do Parque Nacional do Pantanal Matogrossense confirmou sete peixes do Lote 02; a revisão de répteis do Mato Grosso do Sul confirmou quatro répteis com ocorrência indicada no Pantanal. Brycon orbignyanus, Rhamdia quelen, Crenicichla britskii e Podocnemis unifilis permanecem `pending-review`: as fontes pesquisadas não sustentaram promoção direta. Nenhuma categoria de conservação foi inferida deste ledger.",
   "## Referências",
   "",
   "[16]: https://api.gbif.org/v1/occurrence/search \"GBIF — busca de ocorrências estruturadas\"",
