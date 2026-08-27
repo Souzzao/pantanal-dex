@@ -61,3 +61,45 @@ A conservação continua no ledger independente: *Brycon orbignyanus* está como
 [3]: https://checklist.pensoft.net/article/18852/download/pdf/286620 "Check List — Fishes from the Parque Nacional do Pantanal Matogrossense"
 [4]: https://api.gbif.org/v1/species/match "GBIF Species Match API"
 [5]: https://api.gbif.org/v1/occurrence/search "GBIF Occurrence Search API"
+
+
+---
+
+# Revisão ampliada — resolução ativa das pendências
+
+Após a revisão do usuário, as pendências não foram mantidas como estado indefinido. Foi feita uma rodada adicional com o **Guia Ilustrado dos Peixes do Pantanal e Entorno**, publicado pelo IMASUL, e com fontes acadêmicas específicas.
+
+*Rhamdia quelen* foi promovida para `confirmed`: o guia oficial do IMASUL apresenta a espécie e identifica um espécime registrado no rio Formoso, município de Bonito, Mato Grosso do Sul.
+
+Os três casos que não puderam ser confirmados como ocorrência pantaneira foram encerrados de forma explícita como `not-confirmed`, e não como `pending-review`:
+
+| Táxon | Estado resolvido | Evidência decisiva |
+|---|---|---|
+| *Brycon orbignyanus* | `not-confirmed` | A fonte encontrada é modelagem de adequabilidade na bacia Paraná–Paraguai, incluindo o baixo Pantanal, mas não é registro primário de coleta pantaneira |
+| *Crenicichla britskii* | `not-confirmed` | A publicação encontrada documenta a espécie na planície do alto rio Paraná, fora do recorte Pantanal |
+| *Podocnemis unifilis* | `not-confirmed` | Revisão estadual registra a espécie como exótica para MS, associada à Amazônia/Cerrado; GBIF retornou zero no recorte, sem usar isso isoladamente como prova de ausência |
+
+`not-confirmed` significa que a triagem foi concluída sem base suficiente para afirmar presença no Pantanal neste catálogo. Não significa extinção, ausência absoluta ou categoria de conservação. Assim, não há mais pendências regionais abertas: cada candidato foi confirmado com evidência direta ou encerrado com justificativa rastreável.
+
+## Estado final após a revisão
+
+| Métrica | Resultado |
+|---|---:|
+| Registros regionais | 22 |
+| Confirmados | 19 |
+| Não confirmados | 3 |
+| Pendências abertas | 0 |
+| Erros | 0 |
+
+A conservação normativa permanece independente: *Brycon orbignyanus* continua CR pela Portaria MMA nº 148/2022, e os demais candidatos do Lote 02 permanecem `not-listed` quando não há correspondência exata na lista. Nenhuma licença ou imagem não verificada foi inserida.
+
+## Checks da revisão
+
+`pnpm check`, `pnpm lint`, `pnpm test`, `pnpm catalog:priority-audit`, `pnpm catalog:source-audit`, `pnpm catalog:conservation-audit`, `pnpm catalog:regional-occurrence-audit` e `git diff --check` passaram. A suíte registra 20 testes aprovados e 1 teste legado ignorado.
+
+## Referências adicionais
+
+[6]: https://www.imasul.ms.gov.br/guia-ilustrado-elaborado-pelo-imasul-apresenta-para-o-mundo-386-especies-de-peixes-do-pantanal/ "IMASUL — Guia Ilustrado dos Peixes do Pantanal e Entorno"
+[7]: https://www.imasul.ms.gov.br/wp-content/uploads/2022/11/Montagem-livro-Peixes-VERSAO-FINAL-MARCO-2022-ISBN97865-81066-05-5-ONLINE_FINAL-1.pdf "PDF oficial do Guia Ilustrado dos Peixes do Pantanal e Entorno"
+[8]: https://anaisonline.uems.br/enic/article/download/5212/5238 "UEMS — modelagem de distribuição de Brycon orbignyanus na bacia Paraná–Paraguai"
+[9]: https://www.scielo.br/j/ni/a/tScwvm8JLhKnbxKjtBQLPBx/?lang=en "SciELO — Peixes da planície de inundação do alto rio Paraná e áreas adjacentes"

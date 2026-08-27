@@ -671,3 +671,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não promover ocorrências por inferência geográfica ou fonte genérica
 - [x] Atualizar auditoria regional e dossiê do passo 39
 - [x] Executar checks científicos e publicar o resultado
+
+## Revisão ampliada dos passos 35–39 — pendências resolvidas
+
+- [x] Reabrir as pendências regionais do Lote 02 após revisão do usuário
+- [x] Confirmar *Rhamdia quelen* com o Guia Oficial do IMASUL e registro no rio Formoso, Bonito, MS
+- [x] Encerrar *Brycon orbignyanus*, *Crenicichla britskii* e *Podocnemis unifilis* como `not-confirmed`, com justificativa rastreável
+- [x] Alterar o contrato regional para distinguir `confirmed`, `pending-review` e `not-confirmed`
+- [x] Garantir zero pendências abertas no auditor regional
+- [x] Executar a suíte completa de checks e auditorias
