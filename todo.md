@@ -299,3 +299,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar o período da avaliação (2010–2014; ficha avaliada em 2010–2012) e seu escopo metodológico
 - [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-25-RESEARCH.md`, testes e handoff
 - [ ] Validar individualmente a conservação de `camarao-agua-doce`
+
+
+## Passo 26/50 — validação oficial de conservação do camarão-de-água-doce
+
+- [x] Localizar a ficha individual de `Macrobrachium amazonicum` no estudo técnico oficial do ICMBio
+- [x] Confirmar `category: LC` e o período da avaliação (2013–2014)
+- [x] Preservar a ressalva sobre possível sobrepesca localizada e o escopo temporal da avaliação
+- [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-26-RESEARCH.md`, testes e handoff
+- [x] Fechar a trilha de conservação com 5 registros confirmados e 0 pendências

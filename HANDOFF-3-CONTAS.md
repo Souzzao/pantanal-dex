@@ -569,3 +569,12 @@ A Conta 2 validou `caranguejo-agua-doce` (`Dilocarcinus pagei`) usando o estudo 
 O registro foi promovido para `status: confirmed`, `category: LC` e `sourceKind: Avaliação ICMBio`. A data e o escopo da avaliação foram preservados no campo de evidência. A categoria é uma avaliação científica oficial do ICMBio e não deve ser confundida automaticamente com uma classificação jurídica de lista nacional posterior. `camarao-agua-doce` permanece `pending-review`.
 
 O vocabulário de fontes, ledger, auditor, relatório, `STEP-25-RESEARCH.md`, teste, TODO e este handoff foram atualizados. O auditor retornou `PASS`, com 4 registros confirmados, 1 pendente e 0 erros; o teste direcionado passou com 20 casos aprovados.
+
+
+## 34. Passo 26/50 — validação oficial de conservação do camarão-de-água-doce
+
+A Conta 2 concluiu a trilha de conservação para `camarao-agua-doce` (`Macrobrachium amazonicum`). O estudo técnico oficial do ICMBio *Avaliação do risco de extinção dos crustáceos no Brasil: 2010–2014* apresenta ficha individual para `Macrobrachium amazonicum (Heller, 1862)`, avaliada entre 2013 e 2014, e registra a categoria **Menos Preocupante (LC)**. A ficha descreve a espécie como abundante e amplamente distribuída, ressalva possível proximidade do limiar de sobrepesca em alguns locais e conclui não haver evidência de ameaças significativas ao longo de toda a distribuição.
+
+O registro foi promovido para `status: confirmed`, `category: LC` e `sourceKind: Avaliação ICMBio`. O período, a ressalva sobre sobrepesca localizada e o escopo temporal foram preservados na evidência. A categoria representa uma avaliação científica oficial datada, não uma garantia de ausência de impactos atuais nem uma transposição automática para uma lista legal posterior.
+
+Com esta promoção, os cinco registros da trilha de conservação possuem classificação ou finding confirmado: `pintado` VU, `pacu` e `piraputanga` `not-listed`, e `caranguejo-agua-doce` e `camarao-agua-doce` LC. O auditor retornou `PASS`, com 5 registros confirmados, 0 pendentes e 0 erros. O relatório, `STEP-26-RESEARCH.md`, teste, TODO e este handoff foram atualizados.
