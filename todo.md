@@ -612,3 +612,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar acessibilidade, privacidade e salvamento sem mídia
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Atualizar `STEP-33-RESEARCH.md`
+
+## Passo 34/60 — triagem do Lote 02 V3
+
+- [x] Definir 15 candidatos novos de peixes e répteis
+- [x] Confirmar correspondência de espécie no GBIF
+- [x] Registrar chaves taxonômicas e nomes aceitos
+- [x] Consultar ocorrências no recorte geográfico operacional
+- [x] Verificar ausência de duplicidades no catálogo atual
+- [x] Não inferir ocorrência, conservação ou licença a partir de evidência insuficiente
+- [x] Manter o Lote 02 sem ingestão definitiva até auditoria completa
+- [x] Atualizar `STEP-34-RESEARCH.md`
