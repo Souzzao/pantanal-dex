@@ -35,3 +35,39 @@ Fontes de crédito: [5] [6] [7]
 [5]: https://commons.wikimedia.org/wiki/File:Venado-UY-Ozotoceros_bezoarticus.jpg "Wikimedia Commons — Venado-UY-Ozotoceros bezoarticus.jpg"
 [6]: https://commons.wikimedia.org/wiki/File:Pampas_deer_nursing_fwan.jpg "Wikimedia Commons — Pampas deer nursing fwan.jpg"
 [7]: https://commons.wikimedia.org/wiki/File:Venado-Campo-UY-Ozotoceros_bezoarticus.jpg "Wikimedia Commons — Venado-Campo-UY-Ozotoceros bezoarticus.jpg"
+
+
+---
+
+# Registro técnico do passo 27/60 — otimização contínua da listagem
+
+## Objetivo
+
+Aprofundar a preparação da listagem para 3.000+ espécies, continuando o trabalho de virtualização iniciado no passo 26 e preservando os contratos científicos, de acessibilidade e de licenciamento comercial.
+
+## Alterações realizadas
+
+A busca textual passou a usar `useDeferredValue` do React 19. A atualização visual do campo permanece imediata, enquanto a filtragem e a ordenação do catálogo podem ser processadas de forma adiada quando o usuário digita rapidamente. Isso reduz a competição entre entrada de texto e trabalho de lista em catálogos grandes.
+
+O callback de renderização da espécie foi estabilizado com `useCallback`, mantendo a linha `SpeciesRow` memoizada e evitando a criação de uma função de renderização diferente a cada renderização da tela. A arquitetura de `FlatList`, a janela de renderização, os lotes, os separadores, os filtros, a ordenação, a navegação, as labels de acessibilidade e o carregamento de imagens foram preservados.
+
+## Decisão técnica
+
+Não foi usado `getItemLayout`, pois o cabeçalho da lista tem altura dinâmica devido aos filtros horizontais, contador, busca e ordenação. Offsets fixos sem medição do cabeçalho poderiam gerar posições incorretas em operações de salto. A virtualização nativa da `FlatList` permanece ativa sem essa suposição insegura.
+
+## Validação
+
+| Verificação | Resultado |
+|---|---|
+| TypeScript (`pnpm check`) | PASS |
+| Lint (`pnpm lint`) | PASS; aviso preexistente de módulo do `eslint.config.js` |
+| Testes (`pnpm test`) | 20 aprovados; 1 teste legado ignorado |
+| Auditoria de prioridades | PASS; 41 entradas, 0 pendências |
+| Auditoria de fontes | PASS; 26 lotes, 60 espécies, 66 fontes estruturadas, 120 URLs GBIF |
+| Auditoria de conservação | PASS; 23 registros, 0 pendências |
+| Auditoria regional | PASS; 7 registros, 0 pendências |
+| `git diff --check` | PASS |
+
+## Conclusão
+
+O passo 27/60 está concluído. A listagem agora combina virtualização explícita, linhas memoizadas, callbacks estáveis e filtragem adiada durante a digitação, sem mudanças nos dados científicos ou nas regras comerciais.

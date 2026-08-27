@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useDeferredValue, useMemo, useState } from "react";
 import { FlatList, Platform, Pressable, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
@@ -38,16 +38,17 @@ export default function AnimalsScreen() {
   const [group, setGroup] = useState("");
   const [environment, setEnvironment] = useState("");
   const [sortMode, setSortMode] = useState<"name" | "group">("name");
+  const deferredQuery = useDeferredValue(query);
 
   const filtered = useMemo(() => species
     .filter((item) => {
-      const matchesQuery = !query || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(normalizeCatalogSearch(query));
+      const matchesQuery = !deferredQuery || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(normalizeCatalogSearch(deferredQuery));
       return matchesQuery && (!group || item.group === group) && (!environment || item.environments.includes(environment as never));
     })
     .sort((a, b) => sortMode === "name"
       ? a.commonName.localeCompare(b.commonName, "pt-BR")
       : a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR")),
-  [query, group, environment, sortMode]);
+  [deferredQuery, group, environment, sortMode]);
 
   const hasFilters = Boolean(query.trim() || group || environment);
   const clearFilters = useCallback(() => { setQuery(""); setGroup(""); setEnvironment(""); }, []);
@@ -57,6 +58,8 @@ export default function AnimalsScreen() {
       <Text style={{ color: active ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{label}</Text>
     </Pressable>
   ), [colors]);
+
+  const renderSpecies = useCallback(({ item }: { item: Species }) => <SpeciesRow item={item} onPress={openSpecies} />, [openSpecies]);
 
   const header = (
     <View>
@@ -76,7 +79,7 @@ export default function AnimalsScreen() {
     <FlatList
       data={filtered}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <SpeciesRow item={item} onPress={openSpecies} />}
+      renderItem={renderSpecies}
       ListHeaderComponent={header}
       ListEmptyComponent={<View style={{ alignItems: "center", paddingTop: 40, paddingHorizontal: 20 }}><Text style={{ color: colors.muted, textAlign: "center" }}>{hasFilters ? "Nenhuma espécie corresponde à busca e aos filtros atuais." : "O catálogo ainda não possui espécies disponíveis."}</Text>{hasFilters ? <Pressable onPress={clearFilters} style={{ marginTop: 14, borderColor: colors.primary, borderWidth: 1, borderRadius: 14, paddingHorizontal: 16, paddingVertical: 10 }}><Text style={{ color: colors.primary, fontWeight: "800" }}>Limpar e ver todas</Text></Pressable> : null}</View>}
       ItemSeparatorComponent={() => <View style={{ height: CARD_SEPARATOR }} />}

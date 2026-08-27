@@ -539,3 +539,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar contratos de taxonomia, conservação, ocorrência, fontes e licenças
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Criar `STEP-26-RESEARCH.md`
+
+## Passo 27/60 — otimização contínua da listagem virtualizada
+
+- [x] Adiar a filtragem textual com `useDeferredValue`
+- [x] Estabilizar o callback de renderização com `useCallback`
+- [x] Preservar virtualização, memória, navegação e acessibilidade
+- [x] Preservar contratos científicos, fontes, conservação, ocorrência e licenças
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Atualizar `STEP-27-RESEARCH.md`
