@@ -8,6 +8,10 @@ export const MVP_P1_NAMES = [
   "Lobo-guará", "Queixada", "Cateto", "Veado-campeiro", "Sucuri-amarela",
   "Teiú", "Dourado", "Pacu", "Piraputanga", "Sapo-cururu", "Rã-pimenta",
   "Seriema", "Urubu-rei", "Ouriço-cacheiro", "Abelha-jataí",
+  "Onça-pintada", "Ariranha", "Anta", "Tamanduá-bandeira", "Cervo-do-pantanal",
+  "Arara-azul", "Gavião-belo", "Colhereiro", "Cabeça-seca", "Carão",
+  "Sucuri-verde", "Cobra-cipó", "Cágado-cabeçudo", "Teiú-vermelho", "Cobra-d'água",
+  "Jaú", "Peixe-cachorro", "Pacupeva", "Formiga-cortadeira", "Aranha-armadeira",
 ] as const;
 
 export type P1AuditStatus = "ready-for-review" | "blocked" | "missing";

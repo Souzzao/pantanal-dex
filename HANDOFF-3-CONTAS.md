@@ -442,3 +442,11 @@ Instrução para Agente 2:
 3. Caso o remoto `github` não esteja configurado, use: `git remote add github https://github.com/Souzzao/pantanal-dex.git`.
 
 O commit `e327e20` está seguro localmente e será integrado assim que o push for concluído.
+
+## Passo 3/50 — Núcleo P1 Ampliado (40 Espécies)
+
+Estado: concluído na branch integracao-retomada-passo-02.
+
+Ações: o núcleo P1 foi ampliado de 20 para 40 espécies em `shared/catalog/p1-audit.ts`, incluindo Onça-pintada, Ariranha, Anta e outras espécies emblemáticas já presentes nos lotes modulares. A documentação em `docs/MVP-STEP-03-P1-CORE.md` foi atualizada.
+
+Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente 3 deve priorizar a auditoria individual destas linhas.

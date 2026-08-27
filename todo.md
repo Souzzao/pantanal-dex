@@ -484,3 +484,4 @@
 - [x] Executar passo 1/50 a partir do pacote do Agente 1: extrair, comparar contratos, medir estado e registrar evidências
 - [x] Criar apresentação premium Motion do PantanalDex como uma cena visual contínua (GSAP + FLIP)
 - [x] MVP passo 2/50 — Gerar matriz de auditoria atualizada com meta de 500 espécies
+- [x] MVP passo 3/50 — Definir núcleo P1 ampliado (40 espécies) e atualizar lógica de auditoria

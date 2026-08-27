@@ -40,9 +40,9 @@ describe("PantanalDex data contracts", () => {
 
   it("creates a deterministic P1 queue and blocks unreviewed batches", () => {
     const queue = createP1AuditQueue(catalogSpecies, catalogBatches, createLicenseAuditReport(catalogSpecies));
-    expect(MVP_P1_NAMES).toHaveLength(20);
-    expect(queue).toHaveLength(20);
-    expect(new Set(queue.map((row) => row.priority)).size).toBe(20);
+    expect(MVP_P1_NAMES).toHaveLength(40);
+    expect(queue).toHaveLength(40);
+    expect(new Set(queue.map((row) => row.priority)).size).toBe(40);
     expect(queue.every((row) => row.status !== "ready-for-review")).toBe(true);
     expect(queue.every((row) => row.blockers.length > 0)).toBe(true);
     expect(queue.some((row) => row.status === "missing")).toBe(true);
