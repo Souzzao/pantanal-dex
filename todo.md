@@ -465,3 +465,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir categoria a partir de outros táxons ou de registros sem correspondência exata
 - [x] Atualizar `STEP-43-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 44/50 — validação oficial de conservação do mandi
+
+- [x] Confirmar `Pimelodus maculatus` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Pimelodus maculatus`, `maculatus` e `Pimelodus`
+- [x] Registrar `pimelodus-maculatus` como `not-listed`, sem converter ausência em LC
+- [x] Não confundir `Pimelodus joannis`, `Pimelodus stewartii` ou `Microglanis maculatus` com o mandi
+- [x] Atualizar `STEP-44-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`

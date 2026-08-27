@@ -85,8 +85,9 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps conservation review official and conservative", () => {
-    expect(conservationReviewRecords).toHaveLength(17);
+    expect(conservationReviewRecords).toHaveLength(18);
     expect(conservationReviewValidationErrors).toEqual([]);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "pimelodus-maculatus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "vanessa-myrinna")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "hoplias-malabaricus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "prochilodus-lineatus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
