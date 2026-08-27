@@ -449,3 +449,11 @@ A auditoria `pnpm catalog:image-audit` foi complementada por `pnpm catalog:image
 A distribuição de licenças ficou registrada no artefato: CC BY-SA 4.0 (68), CC BY 4.0 (32), CC BY-SA 3.0 (18), CC BY-SA 2.0 (11), CC BY 2.0 (10), domínio público (10), CC0 (6), CC BY 3.0 (4), CC BY-SA 2.5 (4) e CC BY 2.5 (2). A cobertura foi exposta na tela nativa como “Imagens e licenças — Passo 11/50” e confirmada no My Browser com 55 espécies, 165 imagens e 165/165 créditos/licenças.
 
 O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 12/50: fontes estruturadas
+
+Foi criado `scripts/catalog-source-report.ts`, exposto como `pnpm catalog:source-report`, para complementar `pnpm catalog:source-audit`. O relatório cobre 55 espécies modulares, 55 fontes por espécie, 55 fontes por lote e 110 URLs GBIF no total. Todas as 110 referências possuem título, HTTPS e host aprovado; o resultado foi `PASS`.
+
+A cobertura foi exposta na tela nativa de Configurações como “Fontes estruturadas — Passo 12/50”. O My Browser confirmou “110 fontes · 110 URLs GBIF”, “110/110 com título” e “55 por espécie · 55 por lote”.
+
+O artefato `CATALOG-SOURCE-AUDIT.md` foi gerado, o TODO foi atualizado e falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.

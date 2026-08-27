@@ -18,6 +18,7 @@
     "catalog:image-audit": "tsx scripts/image-license-audit.ts",
     "catalog:image-report": "tsx scripts/image-license-report.ts",
     "catalog:source-audit": "tsx scripts/catalog-source-audit.ts",
+    "catalog:source-report": "tsx scripts/catalog-source-report.ts",
     "catalog:priority-audit": "tsx scripts/catalog-priority-audit.ts",
     "catalog:legacy-gbif-audit": "tsx scripts/legacy-gbif-audit.ts",
     "catalog:regional-occurrence-audit": "tsx scripts/regional-occurrence-audit.ts",
