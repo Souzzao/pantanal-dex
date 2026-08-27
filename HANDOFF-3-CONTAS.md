@@ -457,3 +457,11 @@ Foi criado `scripts/catalog-source-report.ts`, exposto como `pnpm catalog:source
 A cobertura foi exposta na tela nativa de Configurações como “Fontes estruturadas — Passo 12/50”. O My Browser confirmou “110 fontes · 110 URLs GBIF”, “110/110 com título” e “55 por espécie · 55 por lote”.
 
 O artefato `CATALOG-SOURCE-AUDIT.md` foi gerado, o TODO foi atualizado e falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 13/50: sinônimos taxonômicos
+
+Foi criado `scripts/synonym-audit.ts`, exposto como `pnpm catalog:synonym-audit`, para consultar os endpoints oficiais de sinônimos do GBIF. A execução encontrou os 10/10 aliases documentados para cinco espécies, com 0 erros, e gerou `CATALOG-SYNONYM-AUDIT.md`.
+
+A trilha continua sem duplicar registros: os aliases são aplicados apenas à busca derivada, mantendo o ID e o registro científico principal. A tela nativa foi atualizada como “Sinônimos taxonômicos — Passo 13/50”. Uma primeira leitura mostrou 0 registros porque a visão derivada modular não continha as cinco espécies públicas; isso foi corrigido para contar o catálogo combinado, e o My Browser confirmou “5 espécies · 10 sinônimos GBIF” e “5 registros com aliases de busca”.
+
+O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
