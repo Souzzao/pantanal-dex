@@ -429,3 +429,16 @@ Estado: concluído na branch integracao-retomada-passo-01.
 Ações: script `generate-mvp-audit-matrix.ts` atualizado para a nova meta de 500 espécies. Matriz gerada em `docs/MVP-STEP-02-AUDIT-MATRIX.md` com 36 espécies modulares (7% da meta). Registradas 99 imagens e 36 fontes. O relatório operacional agora identifica 3 lotes inválidos estruturalmente (lacunas de imagens) e 9 pendentes.
 
 Governança: Agente 2 deve focar na expansão massiva de lotes; Agente 3 na auditoria individual. Nenhum lote é promovido sem `isCatalogBatchReviewReady`.
+
+## Desbloqueio Operacional — Agente 2 (FelipeSouzao)
+
+Causa: conta `FelipeSouzao` sem permissão de escrita no repositório `Souzzao/pantanal-dex`, impedindo o push da branch `conta-2-catalogo-ciclo-18`.
+
+Ação: convite de colaborador enviado para `FelipeSouzao` com permissão de escrita (`push`).
+
+Instrução para Agente 2:
+1. Acesse https://github.com/Souzzao/pantanal-dex/invitations e aceite o convite.
+2. Tente novamente o comando: `git push github conta-2-catalogo-ciclo-18`.
+3. Caso o remoto `github` não esteja configurado, use: `git remote add github https://github.com/Souzzao/pantanal-dex.git`.
+
+O commit `e327e20` está seguro localmente e será integrado assim que o push for concluído.
