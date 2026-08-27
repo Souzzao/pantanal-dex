@@ -152,7 +152,7 @@ describe("PantanalDex data contracts", () => {
     expect(firstAmphibianBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
     expect(firstAmphibianBatch?.pendingNotes?.join(" ") ?? "").not.toMatch(/IUCN/i);
     expect(firstAmphibianBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
-      "CC BY-SA 2.5", "CC BY 4.0", "CC BY-SA 4.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "Public domain",
+      "CC BY-SA 2.5", "CC BY 4.0", "CC BY-SA 4.0", "CC BY-SA 3.0", "CC BY-SA 3.0", "CC BY 2.0",
     ]);
     expect(validateEditorialCatalogBatch(firstAmphibianBatch!)).toEqual([]);
     expect(isCatalogBatchReviewReady(firstAmphibianBatch!)).toBe(false);
@@ -161,6 +161,9 @@ describe("PantanalDex data contracts", () => {
   it("audits the second amphibian batch and keeps incomplete image sets blocked", () => {
     const secondAmphibianBatch = catalogBatches.find((batch) => batch.batchId === "catalog-amphibians-02");
     expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-pimenta", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
+    expect(secondAmphibianBatch?.species.map((item) => item.scientificName)).toEqual(["Rhinella diptycha", "Leptodactylus chaquensis", "Scinax fuscomarginatus", "Pithecopus azureus"]);
+    expect(secondAmphibianBatch?.pendingNotes?.join(" ")).toMatch(/sinônimo de Rhinella diptycha/);
+    expect(secondAmphibianBatch?.pendingNotes?.join(" ")).toMatch(/sinônimo de Pithecopus azureus/);
     expect(secondAmphibianBatch?.status).toBe("pending-review");
     expect(secondAmphibianBatch?.species).toHaveLength(4);
     expect(secondAmphibianBatch?.species[0].images).toHaveLength(3);
