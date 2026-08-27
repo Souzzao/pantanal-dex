@@ -397,3 +397,9 @@ A tela de Configurações foi reaberta e confirmada no My Browser durante a vali
 A matriz de prioridades foi exposta na tela nativa de Configurações para tornar a seleção editorial observável durante o uso do aplicativo. O cartão mostra 41 entradas, distribuídas em 28 prioridades P1 e 13 P2, com 36 espécies selecionadas no catálogo combinado e 5 pendentes sem registro correspondente. A contagem foi corrigida para considerar o catálogo combinado, e não apenas os lotes modulares; nenhuma pendência foi promovida sem evidência.
 
 A validação no My Browser confirmou visualmente as mensagens “Matriz íntegra e sem táxons duplicados” e “36 selecionadas no catálogo · 5 pendentes sem registro correspondente”. `pnpm check` e os 19 testes do catálogo passaram após a alteração. O próximo passo é concluir a rodada completa de auditorias, commit e publicação no PR #11.
+
+## Retomada adicional — Passo 5/50: divisão operacional
+
+O protocolo `AGENTS-DIVISION.md` foi atualizado para refletir o padrão real de branches `conta-2-catalogo-ciclo-N`, incluir validação nativa no My Browser como evidência obrigatória quando houver interface e apontar o PR de integração ativo (#11). A divisão entre Agente 1 (integração), Agente 2 (catálogo) e Agente 3 (qualidade/nativos) foi preservada, assim como os limites contra sobrescrita de dados científicos e a exigência de handoff com causa, evidência, alternativa, responsável e próximo passo.
+
+O TODO foi atualizado para marcar o Passo 5 como concluído. Este ciclo ainda precisa passar pelos checks finais, ser commitado e publicado na branch `conta-2-catalogo-ciclo-18`.
