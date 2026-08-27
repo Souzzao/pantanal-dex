@@ -113,3 +113,11 @@ Foi localizado o recurso oficial `ICMBio | Dados de ocorrência de espécies do 
 Foram tentadas consultas filtradas para `Pseudoplatystoma corruscans`, `Piaractus mesopotamicus`, `Brycon hilarii`, `Dilocarcinus pagei` e `Macrobrachium amazonicum`. O endpoint chegou a responder dados volumosos/HTML, mas não forneceu contagem estruturada confiável dentro do limite do ambiente para esses filtros. Assim, o dataset é uma fonte oficial acessível e a consulta fica registrada, porém nenhuma das cinco espécies foi promovida a ocorrência confirmada no Pantanal. `pending-review` não significa ausência.
 
 A página oficial do ICMBio sobre o bioma Pantanal também foi registrada como contexto de delimitação, sem ser usada para afirmar presença de espécie individual: https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal.
+
+## Passo 8/50 — fonte regional SiBBr/ICMBio revisitada em 2026-08-27
+
+A página oficial do recurso `dr327` identifica o conjunto como “Dados de ocorrência de espécies do Sistema de Autorização e Informações de Biodiversidade (SISBio) do ICMBio”, descreve ocorrências informadas por pesquisadores e informa licença **CC BY 4.0**. A página também aponta a consulta de registros no ALA-Hub/SiBBr: https://ala-hub.sibbr.gov.br/ala-hub/occurrence/search?q=data_resource_uid:dr327.
+
+A página de metadados do recurso foi acessada com sucesso, mas a consulta filtrada de ocorrências não forneceu conteúdo estruturado nesta execução. Portanto, o ledger mantém os cinco registros como `pending-review`: a limitação de consulta não é tratada como ausência de ocorrência nem como confirmação regional.
+
+Fonte consultada: https://collectory.sibbr.gov.br/collectory/public/show/dr327 — ICMBio/SISBio no SiBBr. A referência foi verificada em 2026-08-27.

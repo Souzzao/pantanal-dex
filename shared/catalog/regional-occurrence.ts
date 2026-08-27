@@ -16,7 +16,7 @@ export type RegionalOccurrenceRecord = {
 
 const icmbioDatasetUrl = "https://collectory.sibbr.gov.br/collectory/public/show/dr327";
 const icmbioOccurrenceUrl = "https://ala-hub.sibbr.gov.br/ala-hub/occurrence/search?q=data_resource_uid:dr327";
-const checkedAt = "2026-08-22";
+const checkedAt = "2026-08-27";
 
 /**
  * Ledger conservador: sem retorno estruturado do portal regional, não há

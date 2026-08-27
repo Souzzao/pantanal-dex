@@ -417,3 +417,11 @@ O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publ
 Foi criada a auditoria reproduzível `scripts/legacy-gbif-audit.ts`, exposta como `pnpm catalog:legacy-gbif-audit`, para consultar as URLs GBIF já versionadas nas cinco espécies legadas: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. A execução online consultou 5/5 registros sem erros; todos retornaram `matchType=EXACT`, `status=ACCEPTED`, confiança 99 e `usageKey` presente. O artefato `CATALOG-LEGACY-GBIF-AUDIT.md` registra os nomes canônicos e as evidências.
 
 A validação taxonômica não foi usada para inferir ocorrência regional, conservação, licença de imagem ou promoção a `verified`; essas trilhas continuam separadas. O TODO foi atualizado e o próximo ciclo deve concluir os checks completos, o commit e a publicação no PR #11.
+
+## Retomada adicional — Passo 8/50: ocorrência regional
+
+O ledger `shared/catalog/regional-occurrence.ts` foi revisitado e atualizado para 2026-08-27. A fonte oficial é o dataset `dr327` do ICMBio/SISBio no SiBBr, com licença CC BY 4.0 e consulta associada no ALA-Hub. As cinco espécies legadas estão cobertas: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`.
+
+Foi criado `scripts/regional-occurrence-audit.ts`, exposto como `pnpm catalog:regional-occurrence-audit`, e gerado `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`. O resultado foi `PASS`: 5/5 registros, 5 `pending-review` e 0 erros. Como a consulta filtrada não forneceu contagem estruturada confiável nesta execução, nenhuma espécie foi promovida a `confirmed` e nenhuma ausência foi inferida.
+
+A pesquisa oficial foi registrada em `catalog-research.md`, o TODO foi atualizado e falta apenas concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
