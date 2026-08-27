@@ -481,3 +481,19 @@ Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente
 - **Agente 3 (Qualidade)**: Validar a nova busca 100% modular no navegador e testar a integridade dos avistamentos existentes após a limpeza do catálogo legado.
 
 **Bloqueios:** Nenhum bloqueio técnico. Todos os 48 testes estão VERDES.
+
+## Status da Auditoria MVP — Passo 6/50
+
+**Estado:** Concluído (Promovido a `verified`).
+
+**Resumo:**
+- Auditado e promovido o lote `catalog-birds-01` (3 espécies): Seriema, Mutum-de-penacho e Anhuma.
+- Status de conservação atualizado conforme Portaria MMA nº 1.704/2026 (Mutum-de-penacho = VU).
+- Todas as 9 imagens verificadas (200 OK) e licenças comerciais confirmadas.
+- Testes automatizados atualizados para validar 4 lotes verificados.
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-02` (Arara-canindé, Jabiru, Colhereiro).
+- **Agente 3 (Qualidade)**: Validar a renderização das aves P1 no navegador e verificar se os filtros por ambiente (Matas, Áreas alagadas) estão precisos para estas espécies.
+
+**Bloqueios:** Nenhum. 48 testes VERDES.

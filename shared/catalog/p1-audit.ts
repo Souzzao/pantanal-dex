@@ -14,7 +14,7 @@ export const MVP_P1_NAMES = [
   "Jaú", "Peixe-cachorro", "Pacupeva", "Formiga-cortadeira", "Aranha-armadeira",
 ] as const;
 
-export type P1AuditStatus = "ready-for-review" | "blocked" | "missing";
+export type P1AuditStatus = "verified" | "ready-for-review" | "blocked" | "missing";
 
 export type P1AuditRow = {
   priority: number;
@@ -38,11 +38,12 @@ export function createP1AuditQueue(
     if (!owningBatch) blockers.push("lote proprietário ausente");
     if (owningBatch && !isCatalogBatchReviewReady(owningBatch)) blockers.push("checklist editorial do lote incompleto");
 
+    const status: P1AuditStatus = blockers.length ? "blocked" : (owningBatch?.status === "verified" ? "verified" : "ready-for-review");
     return {
       priority: index + 1,
       commonName,
       speciesId: item.id,
-      status: blockers.length ? "blocked" : "ready-for-review",
+      status,
       blockers: [...new Set(blockers)],
     };
   });

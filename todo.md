@@ -494,3 +494,10 @@
 - [x] Passo 3/50: Ampliação do núcleo P1 (40 espécies prioritárias).
 - [x] Passo 4/50: Auditoria funcional no navegador (rotas, busca, formulários e correção técnica de imagens).
 - [x] Passo 5/50: Auditoria editorial do primeiro lote P1 (mamíferos) - verificação de ocorrência e conservação.
+
+## MVP passo 6/50 — auditoria do primeiro lote de aves
+- [x] Auditar `catalog-birds-01` (Seriema, Mutum-de-penacho e Anhuma) com fontes taxonômicas e de ocorrência verificáveis.
+- [x] Conferir conservação oficial somente em fonte ICMBio/MMA quando houver status.
+- [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
+- [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.

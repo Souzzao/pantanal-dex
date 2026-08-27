@@ -40,7 +40,7 @@ describe("PantanalDex data contracts", () => {
     expect(MVP_P1_NAMES).toHaveLength(40);
     expect(queue).toHaveLength(40);
     expect(new Set(queue.map((row) => row.priority)).size).toBe(40);
-    expect(queue.some((row) => row.status === "ready-for-review")).toBe(true);
+    expect(queue.some((row) => row.status === "verified")).toBe(true);
     expect(queue.some((row) => row.status === "missing")).toBe(true);
   });
 
@@ -48,7 +48,7 @@ describe("PantanalDex data contracts", () => {
     const firstBatch = catalogBatches.find((batch) => batch.batchId === "catalog-mammals-01");
     expect(firstBatch?.species.map((item) => item.commonName)).toEqual(["Lobo-guará", "Queixada", "Cateto"]);
     expect(firstBatch?.status).toBe("verified");
-    expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "ready-for-review")).toBe(true);
+    expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "verified")).toBe(true);
   });
 
   it("promotes the second P1 batch after its evidence is attached", () => {
@@ -56,14 +56,14 @@ describe("PantanalDex data contracts", () => {
     expect(secondBatch?.species.map((item) => item.commonName)).toEqual(["Veado-campeiro", "Morcego-pescador", "Ouriço-cacheiro"]);
     expect(secondBatch?.status).toBe("verified");
     const auditedNames = ["Veado-campeiro", "Ouriço-cacheiro"];
-    expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "ready-for-review")).toBe(true);
+    expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "verified")).toBe(true);
   });
 
-  it("keeps the first bird batch blocked until evidence is complete", () => {
+  it("audits and promotes the first bird batch with verified evidence", () => {
     const firstBirdBatch = catalogBatches.find((batch) => batch.batchId === "catalog-birds-01");
     expect(firstBirdBatch?.species.map((item) => item.commonName)).toEqual(["Seriema", "Mutum-de-penacho", "Anhuma"]);
-    expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("blocked");
-    expect(firstBirdBatch?.status).toBe("pending-review");
+    expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("verified");
+    expect(firstBirdBatch?.status).toBe("verified");
   });
 
   it("audits the second bird batch without promoting it", () => {
@@ -276,9 +276,9 @@ describe("PantanalDex data contracts", () => {
       "pacupeva: deve ter exatamente três imagens",
     ]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
-    expect(catalogReview.verifiedBatches).toBe(3);
+    expect(catalogReview.verifiedBatches).toBe(4);
     expect(catalogReviewReport.totalBatches).toBe(14);
-    expect(catalogReviewReport.verifiedBatches).toBe(3);
+    expect(catalogReviewReport.verifiedBatches).toBe(4);
     expect(catalogReviewReport.invalidBatches).toBe(3);
   });
 
