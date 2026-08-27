@@ -465,3 +465,11 @@ Foi criado `scripts/synonym-audit.ts`, exposto como `pnpm catalog:synonym-audit`
 A trilha continua sem duplicar registros: os aliases são aplicados apenas à busca derivada, mantendo o ID e o registro científico principal. A tela nativa foi atualizada como “Sinônimos taxonômicos — Passo 13/50”. Uma primeira leitura mostrou 0 registros porque a visão derivada modular não continha as cinco espécies públicas; isso foi corrigido para contar o catálogo combinado, e o My Browser confirmou “5 espécies · 10 sinônimos GBIF” e “5 registros com aliases de busca”.
 
 O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 14/50: grupos e ambientes
+
+Foi criado `scripts/catalog-vocabulary-audit.ts`, exposto como `pnpm catalog:vocabulary-audit`, para auditar os 55 registros modulares contra os vocabulários congelados de seis grupos e cinco ambientes. O resultado foi `PASS`: nenhum grupo inválido, nenhum ambiente inválido, nenhum grupo sem registro e nenhum ambiente sem registro. O artefato gerado é `CATALOG-VOCABULARY-AUDIT.md`.
+
+A tela nativa foi atualizada como “Grupos e ambientes — Passo 14/50”. O My Browser confirmou “6 grupos · 5 ambientes” e “Cobertura completa do contrato”. A distribuição por grupo foi Mamíferos 3, Aves 15, Répteis 2, Anfíbios 2, Peixes 18 e Invertebrados 15; por ambiente, Rios e corixos 26, Áreas alagadas 29, Campos 14, Matas 18 e Bordas de mata 29.
+
+O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.

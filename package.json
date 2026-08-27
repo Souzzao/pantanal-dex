@@ -25,6 +25,7 @@
     "catalog:icmbio-dataset-audit": "tsx scripts/icmbio-dataset-audit.ts",
     "catalog:conservation-audit": "tsx scripts/conservation-audit.ts",
     "catalog:synonym-audit": "tsx scripts/synonym-audit.ts",
+    "catalog:vocabulary-audit": "tsx scripts/catalog-vocabulary-audit.ts",
     "watchdog": "pnpm check && pnpm lint && pnpm test && pnpm catalog:priority-audit",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "android": "expo start --android",
