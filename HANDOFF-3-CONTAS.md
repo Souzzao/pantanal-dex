@@ -441,3 +441,11 @@ A trilha `shared/catalog/conservation.ts` foi atualizada para 2026-08-27 e audit
 A trilha foi exposta na tela nativa de Configurações como “Trilha de conservação — Passo 10/50”. O My Browser confirmou “5 registros em revisão · 3 fontes oficiais” e “Nenhuma categoria inventada”. A regra permanece conservadora: acesso à fonte não substitui correspondência taxonômica individual e evidência citável.
 
 O TODO foi atualizado. Falta concluir checks completos, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 11/50: imagens, créditos e licenças
+
+A auditoria `pnpm catalog:image-audit` foi complementada por `pnpm catalog:image-report`, gerando `CATALOG-IMAGE-LICENSE-AUDIT.md`. Foram auditadas 55 espécies modulares e 165 imagens: 165/165 possuem crédito, 165/165 possuem licença e 165/165 passam pela política comercial, sem NC/ND e sem erros de URL.
+
+A distribuição de licenças ficou registrada no artefato: CC BY-SA 4.0 (68), CC BY 4.0 (32), CC BY-SA 3.0 (18), CC BY-SA 2.0 (11), CC BY 2.0 (10), domínio público (10), CC0 (6), CC BY 3.0 (4), CC BY-SA 2.5 (4) e CC BY 2.5 (2). A cobertura foi exposta na tela nativa como “Imagens e licenças — Passo 11/50” e confirmada no My Browser com 55 espécies, 165 imagens e 165/165 créditos/licenças.
+
+O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.

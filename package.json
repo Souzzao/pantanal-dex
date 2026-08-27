@@ -16,6 +16,7 @@
     "mvp:report": "node scripts/mvp-report.mjs",
     "catalog:baseline": "node scripts/catalog-baseline.mjs",
     "catalog:image-audit": "tsx scripts/image-license-audit.ts",
+    "catalog:image-report": "tsx scripts/image-license-report.ts",
     "catalog:source-audit": "tsx scripts/catalog-source-audit.ts",
     "catalog:priority-audit": "tsx scripts/catalog-priority-audit.ts",
     "catalog:legacy-gbif-audit": "tsx scripts/legacy-gbif-audit.ts",
