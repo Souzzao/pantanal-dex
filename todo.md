@@ -456,3 +456,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não usar a URL SALVE incompatível que resolveu para `Pecari tajacu` como evidência da traíra
 - [x] Atualizar `STEP-42-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 43/50 — validação oficial de conservação da pintada-do-sul
+
+- [x] Confirmar `Vanessa myrinna` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Vanessa myrinna`, `myrinna` e `Vanessa`
+- [x] Registrar `vanessa-myrinna` como `not-listed`, sem converter ausência em LC
+- [x] Não inferir categoria a partir de outros táxons ou de registros sem correspondência exata
+- [x] Atualizar `STEP-43-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
