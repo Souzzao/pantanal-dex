@@ -473,3 +473,9 @@ Foi criado `scripts/catalog-vocabulary-audit.ts`, exposto como `pnpm catalog:voc
 A tela nativa foi atualizada como “Grupos e ambientes — Passo 14/50”. O My Browser confirmou “6 grupos · 5 ambientes” e “Cobertura completa do contrato”. A distribuição por grupo foi Mamíferos 3, Aves 15, Répteis 2, Anfíbios 2, Peixes 18 e Invertebrados 15; por ambiente, Rios e corixos 26, Áreas alagadas 29, Campos 14, Matas 18 e Bordas de mata 29.
 
 O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 15/50: arquitetura modular
+
+Foi criado `scripts/catalog-architecture-audit.ts`, exposto como `pnpm catalog:architecture-audit`, para verificar isolamento dos lotes, unicidade de IDs e integridade dos índices. A primeira execução detectou corretamente que o status pertence ao lote, não à espécie; o auditor foi corrigido para usar `CatalogBatch.status` conforme o contrato real. A execução final resultou em `PASS`: 21 lotes, 55 espécies, 0 IDs de lote duplicados, 0 IDs de espécie duplicados, 6 grupos e 5 ambientes indexados.
+
+O artefato gerado é `CATALOG-ARCHITECTURE-AUDIT.md`. A tela nativa foi atualizada como “Arquitetura modular — Passo 15/50”, e o My Browser confirmou “21 lotes · 55 espécies” e “Arquitetura isolada e indexada”. O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.

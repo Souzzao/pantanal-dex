@@ -205,3 +205,5 @@ Ao concluir uma tarefa, marcar imediatamente o item correspondente como `[x]` e 
 Todo bloqueio deve registrar causa, evidência, alternativa executável e agente responsável. Fonte indisponível deve gerar pipeline, fixture ou teste; PR stale deve gerar tentativa de rebase coordenada; conflito deve ser resolvido por integração seletiva pelo Agente 1; falha deve ser corrigida e validada novamente. Só bloqueios reais permanecem como `[ ]`.
 
 31. `[x]` Executar passo 14/50: criar `pnpm catalog:vocabulary-audit` e `CATALOG-VOCABULARY-AUDIT.md`; auditar 55 registros contra 6 grupos e 5 ambientes, com 0 grupos/ambientes inválidos, 0 lacunas e cobertura completa confirmada no My Browser.
+
+32. `[x]` Executar passo 15/50 — arquitetura modular: criar `pnpm catalog:architecture-audit` e `CATALOG-ARCHITECTURE-AUDIT.md`; 21 lotes, 55 espécies, IDs de lote/espécie únicos, 6 grupos e 5 ambientes indexados, 0 falhas. Cartão nativo validado no My Browser.
