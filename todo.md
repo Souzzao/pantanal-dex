@@ -271,3 +271,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar `category: VU` e `status: confirmed` somente para `pintado`
 - [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-22-RESEARCH.md`, testes e handoff
 - [ ] Validar individualmente as categorias oficiais de `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 23/50 — validação oficial de conservação do pacu
+
+- [x] Confirmar no Portal de Dados Abertos do MMA que a Portaria MMA nº 148/2022 é a lista nacional vigente
+- [x] Consultar a Portaria por busca exata de `Piaractus mesopotamicus` e `pacu`
+- [x] Registrar `finding: not-listed` e `status: confirmed` para `pacu`, sem inventar `LC` ou outra categoria
+- [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-23-RESEARCH.md`, testes e handoff
+- [ ] Validar individualmente a conservação de `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`

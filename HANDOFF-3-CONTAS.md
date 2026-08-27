@@ -542,3 +542,12 @@ A Conta 2 iniciou a trilha oficial de conservação pelo `pintado` (`Pseudoplaty
 O ledger de conservação passou a ter um campo opcional `category`, com vocabulário controlado de categorias de risco. Apenas o pintado foi promovido para `confirmed`, com `category: VU` e `sourceKind: Portaria MMA/ICMBio`. Os outros quatro registros permanecem `pending-review` sem categoria preenchida. A busca no Volume VI — Peixes do Livro Vermelho de 2018 não encontrou ficha individual inequívoca do pintado; por isso, a decisão usa a correspondência individual mais direta da Portaria MMA nº 148/2022, sem inferência ou transposição de fonte secundária.
 
 O auditor de conservação foi atualizado para exigir a linha normativa individual, a categoria VU, o host oficial e a manutenção dos quatro pendentes. O relatório e `STEP-22-RESEARCH.md` registram as fontes e a limitação documental. Próxima etapa: concluir checks, validação visual e publicação do checkpoint do passo 22.
+
+
+## 31. Passo 23/50 — validação oficial de conservação do pacu
+
+A Conta 2 validou a posição oficial de conservação do `pacu` (`Piaractus mesopotamicus`) na Lista Nacional de Espécies Ameaçadas. O Portal de Dados Abertos do MMA informa que, em nível nacional, as espécies ameaçadas reconhecidas oficialmente são as constantes na Portaria MMA nº 148/2022, além de cinco elasmobrânquios explicitamente enumerados. A Portaria oficial foi baixada e consultada por texto; a busca exata não encontrou `Piaractus mesopotamicus` nem `pacu`.
+
+O ledger passou a registrar `pacu` como `status: confirmed` com `finding: not-listed`, sem categoria de ameaça. Esse finding significa somente “não listado na lista nacional oficial consultada”; não equivale a `LC`, não é uma nova avaliação de risco e não autoriza inferência sobre tendências populacionais. Os três registros restantes — `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce` — permanecem `pending-review` sem classificação.
+
+O tipo do ledger, o validador, o auditor, o relatório, `STEP-23-RESEARCH.md`, o teste e o TODO foram atualizados. O auditor retornou `PASS`, com 2 findings confirmados, 3 pendentes e 0 erros. Uma primeira execução do teste revelou apenas uma incompatibilidade da asserção com propriedade opcional ausente; a asserção foi corrigida e a rodada direcionada passou integralmente.
