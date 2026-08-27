@@ -519,3 +519,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir categoria a partir de outros himenópteros ou de outros gêneros
 - [x] Atualizar `STEP-49-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 50/50 — auditoria final integrada e encerramento do ciclo
+
+- [x] Executar watchdog, TypeScript, lint e suíte de testes
+- [x] Executar auditoria de prioridades: 41/41 entradas cobertas, 0 pendências
+- [x] Executar auditoria de fontes: 26 lotes, 60 espécies, 66 fontes estruturadas, 120 URLs GBIF, 0 erros
+- [x] Executar auditoria de conservação: 23 registros confirmados, 0 pendências
+- [x] Executar auditoria regional: 7 registros confirmados, 0 pendências
+- [x] Confirmar a política comercial de imagens e a ausência de licenças NC/ND
+- [x] Registrar a limitação conhecida de rate limiting HTTP 429 sem classificar como erro de licença
+- [x] Criar `STEP-50-FINAL-AUDIT.md` e encerrar o ciclo de 50 passos
