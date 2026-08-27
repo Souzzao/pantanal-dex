@@ -601,3 +601,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar fallback Web, acessibilidade e contratos científicos/comerciais
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Atualizar `STEP-32-RESEARCH.md`
+
+## Passo 33/60 — fallback Web e permissões negadas
+
+- [x] Exibir fallback persistente para captura no navegador
+- [x] Manter galeria disponível como alternativa na Web e no nativo
+- [x] Exibir recuperação para permissão negada ou bloqueada
+- [x] Oferecer nova tentativa ou abertura das configurações do aparelho
+- [x] Tratar erro de montagem da câmera sem perder o formulário
+- [x] Preservar acessibilidade, privacidade e salvamento sem mídia
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Atualizar `STEP-33-RESEARCH.md`
