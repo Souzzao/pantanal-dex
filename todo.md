@@ -235,3 +235,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Promover somente a trilha de ocorrência de `pacu` para `confirmed`, sem inferir conservação
 - [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-18-RESEARCH.md` e o handoff
 - [ ] Validar individualmente `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 19/50 — validação científica da piraputanga
+
+- [x] Validar `Brycon hilarii` como espécie aceita no GBIF/Catalogue of Life
+- [x] Confirmar ocorrência regional da piraputanga por estudos Springer e SciELO no Pantanal/Alto Paraguai
+- [x] Promover somente a trilha de ocorrência de `piraputanga` para `confirmed`, sem inferir conservação
+- [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-19-RESEARCH.md` e o handoff
+- [ ] Validar individualmente `caranguejo-agua-doce` e `camarao-agua-doce`

@@ -506,3 +506,12 @@ A Conta 2 validou `pacu` (`Piaractus mesopotamicus`) como a segunda pendência c
 Com as evidências regional e taxonômica separadas, o registro `pacu` foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência regional. A página GBIF lista uma categoria de conservação, mas ela não foi copiada nem inferida no catálogo. Os registros `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` por falta de resposta estruturada suficiente para confirmação individual.
 
 O auditor regional foi atualizado para exigir as confirmações documentadas de `pintado` e `pacu`, rejeitar promoções adicionais sem evidência e gerar o artefato do passo 18. A pesquisa detalhada está em `STEP-18-RESEARCH.md`. Próxima etapa: concluir checks, validação visual e publicação do checkpoint deste passo.
+
+
+## 27. Passo 19/50 — validação científica regional da piraputanga
+
+A Conta 2 validou `piraputanga` (`Brycon hilarii`) com duas publicações acadêmicas e uma confirmação taxonômica estruturada. O artigo do Journal of Ichthyology descreve a espécie como endêmica da bacia hidrográfica do Alto Paraguai e analisa seis coleções na região do Pantanal. O artigo do Brazilian Journal of Biology indexado pela SciELO registra 80 exemplares coletados em quatro pontos da sub-bacia do rio Miranda e descreve a distribuição da espécie pela bacia do rio Paraguai. O GBIF/Catalogue of Life confirma `Brycon hilarii (Valenciennes, 1850)` como espécie aceita e lista Piraputanga como nome vernacular em português.
+
+Com evidência regional direta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. Nenhuma categoria de conservação foi copiada da página do GBIF ou inferida. Os registros `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` por falta de resposta estruturada suficiente para confirmação individual.
+
+O auditor regional foi atualizado para exigir as confirmações documentadas de `pintado`, `pacu` e `piraputanga`, rejeitar promoções adicionais sem evidência e gerar o artefato do passo 19. A pesquisa detalhada está em `STEP-19-RESEARCH.md`. Próxima etapa: concluir checks, revisar a integração e publicar o checkpoint deste passo.
