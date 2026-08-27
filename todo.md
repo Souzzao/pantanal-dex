@@ -368,3 +368,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar explicitamente no ledger o escopo taxonômico da subespécie avaliada
 - [x] Atualizar `STEP-32-RESEARCH.md`, `CATALOG-CONSERVATION-AUDIT.md` e o auditor de conservação
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 33/50 — validação oficial de conservação da arara-canindé
+
+- [x] Confirmar a espécie-alvo `Ara ararauna` e a Portaria MMA nº 148/2022 como fonte normativa
+- [x] Pesquisar o PDF oficial por `Ara ararauna` e `arara-canindé`, incluindo conferência de termos relacionados do gênero
+- [x] Registrar `arara-caninde` como `not-listed`, sem converter ausência em LC ou em avaliação de baixo risco
+- [x] Atualizar `STEP-33-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`

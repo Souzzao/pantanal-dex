@@ -85,8 +85,9 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps conservation review official and conservative", () => {
-    expect(conservationReviewRecords).toHaveLength(6);
+    expect(conservationReviewRecords).toHaveLength(7);
     expect(conservationReviewValidationErrors).toEqual([]);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "arara-caninde")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "veado-campeiro")).toMatchObject({ status: "confirmed", category: "VU", sourceKind: "SALVE" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", category: "VU", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pacu")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
