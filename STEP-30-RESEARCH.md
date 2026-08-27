@@ -22,3 +22,37 @@ O registro será criado em `review-ready`. A indicação Near Threatened do GBIF
 
 [1]: https://www.gbif.org/taxon/5D95D "GBIF — Zungaro jahu"
 [2]: https://pubmed.ncbi.nlm.nih.gov/19372007/ "PubMed — Myxobolus cordeiroi em Zungaro jahu no Pantanal brasileiro"
+
+
+---
+
+# Registro técnico do passo 30/60 — refinamento da busca indexada
+
+## Implementação
+
+A busca pública passou a usar um índice pré-normalizado para os registros reais do catálogo. O índice reúne nome comum, nome científico e aliases documentados, convertendo os termos uma única vez com normalização Unicode NFD, remoção de diacríticos e caixa baixa em `pt-BR`.
+
+A função `speciesMatchesCatalogSearch` agora consulta o texto indexado durante a busca. Para registros clonados ou aliases temporários fornecidos por consumidores e testes, ela mantém um caminho de fallback que reconstrói os termos a partir do próprio objeto. O catálogo público também passou a expor `catalogSpeciesWithSynonyms`, fazendo com que os sinônimos taxonômicos documentados no GBIF sejam efetivamente pesquisáveis sem substituir o nome científico aceito.
+
+A tela `app/(tabs)/animals.tsx` foi conectada a essa função indexada e continua usando `useDeferredValue`, `FlatList` virtualizada e linhas memoizadas dos passos anteriores.
+
+## Validação
+
+| Verificação | Resultado |
+|---|---|
+| TypeScript (`pnpm check`) | PASS |
+| Lint (`pnpm lint`) | PASS; permanece aviso preexistente de módulo do ESLint |
+| Testes (`pnpm test`) | 20 aprovados; 1 teste legado ignorado |
+| Auditoria de prioridades | PASS; 41 entradas, 0 pendências |
+| Auditoria de fontes | PASS; 26 lotes, 60 espécies, 66 fontes estruturadas, 120 URLs GBIF |
+| Auditoria de conservação | PASS; 23 registros, 0 pendências |
+| Auditoria regional | PASS; 7 registros, 0 pendências |
+| `git diff --check` | PASS |
+
+## Preservação científica e comercial
+
+Nenhuma espécie nova foi adicionada neste passo. Nenhum nome aceito foi substituído por sinônimo, nenhuma categoria de conservação foi inferida e nenhuma licença ou imagem foi alterada. O Lote 01 V3 continua `pending-review` conforme registrado no passo 29.
+
+## Conclusão
+
+O passo 30/60 está concluído. A busca agora é indexada, tolerante a acentos, compatível com nomes científicos e aliases documentados, e permanece integrada à estratégia de virtualização e filtragem adiada.

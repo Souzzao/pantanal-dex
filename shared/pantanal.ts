@@ -1,4 +1,4 @@
-import { catalogSpecies } from "./catalog";
+import { catalogSpeciesWithSynonyms } from "./catalog";
 
 export type SpeciesGroup = "Mamíferos" | "Aves" | "Répteis" | "Anfíbios" | "Peixes" | "Invertebrados";
 export type Environment = "Rios e corixos" | "Áreas alagadas" | "Campos" | "Matas" | "Bordas de mata";
@@ -59,10 +59,15 @@ export function normalizeCatalogSearch(value: string) {
   return value.trim().toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+const catalogSearchIndex = new Map<string, string>();
+
 export function speciesMatchesCatalogSearch(item: Species, query: string) {
   const normalizedQuery = normalizeCatalogSearch(query);
   if (!normalizedQuery) return true;
-  return [item.commonName, item.scientificName, ...(item.searchNames ?? [])].some((value) => normalizeCatalogSearch(value).includes(normalizedQuery));
+  const indexedText = item.searchNames?.length
+    ? [item.commonName, item.scientificName, ...item.searchNames].map(normalizeCatalogSearch).join(" ")
+    : catalogSearchIndex.get(item.id) ?? [item.commonName, item.scientificName].map(normalizeCatalogSearch).join(" ");
+  return indexedText.includes(normalizedQuery);
 }
 
 const legacySpecies: Species[] = [
@@ -147,4 +152,7 @@ const legacySpecies: Species[] = [
   },
 ];
 
-export const species: Species[] = [...legacySpecies, ...catalogSpecies];
+export const species: Species[] = [...legacySpecies, ...catalogSpeciesWithSynonyms];
+for (const item of species) {
+  catalogSearchIndex.set(item.id, [item.commonName, item.scientificName, ...(item.searchNames ?? [])].map(normalizeCatalogSearch).join(" "));
+}

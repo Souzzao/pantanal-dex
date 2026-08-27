@@ -568,3 +568,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar o bloqueio HTTP 429 do Wikimedia Commons
 - [x] Atualizar `STEP-29-RESEARCH.md`
 - [ ] Promover os 15 registros modulares após auditoria comercial completa das mídias
+
+## Passo 30/60 — refinamento da busca indexada
+
+- [x] Criar índice pré-normalizado de nomes comuns, científicos e aliases documentados
+- [x] Tornar sinônimos GBIF pesquisáveis sem substituir nomes aceitos
+- [x] Preservar tolerância a acentos, caixa e espaços
+- [x] Integrar a tela virtualizada ao índice
+- [x] Corrigir e validar o fallback para registros clonados com aliases temporários
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Atualizar `STEP-30-RESEARCH.md`
+- [x] Manter o Lote 01 V3 em `pending-review`

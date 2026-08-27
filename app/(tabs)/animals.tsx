@@ -2,7 +2,7 @@ import { memo, useCallback, useDeferredValue, useMemo, useState } from "react";
 import { FlatList, Platform, Pressable, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
-import { environments, groups, normalizeCatalogSearch, species, type Species } from "@/shared/pantanal";
+import { environments, groups, species, speciesMatchesCatalogSearch, type Species } from "@/shared/pantanal";
 import { useColors } from "@/hooks/use-colors";
 import { SpeciesImage } from "@/components/species-image";
 
@@ -42,7 +42,7 @@ export default function AnimalsScreen() {
 
   const filtered = useMemo(() => species
     .filter((item) => {
-      const matchesQuery = !deferredQuery || normalizeCatalogSearch(`${item.commonName} ${item.scientificName}`).includes(normalizeCatalogSearch(deferredQuery));
+      const matchesQuery = speciesMatchesCatalogSearch(item, deferredQuery);
       return matchesQuery && (!group || item.group === group) && (!environment || item.environments.includes(environment as never));
     })
     .sort((a, b) => sortMode === "name"
