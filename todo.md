@@ -411,3 +411,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar a categoria oficial `LC` (Menos Preocupante), datada de 08/02/2018
 - [x] Atualizar `STEP-37-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 38/50 — validação oficial de conservação da dança-ninfas
+
+- [x] Confirmar `Heliconius erato` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Heliconius erato` e `Heliconius erato phyllis`
+- [x] Registrar `heliconius-erato` como `not-listed`, sem converter ausência em LC
+- [x] Não confundir outros Lepidoptera/Nymphalidae presentes no anexo com o táxon-alvo
+- [x] Atualizar `STEP-38-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
