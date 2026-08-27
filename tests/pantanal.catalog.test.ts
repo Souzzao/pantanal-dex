@@ -5,6 +5,7 @@ import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogC
 import { applyDocumentedSynonyms } from "../shared/catalog/synonyms";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch, validateSpeciesRecords } from "../shared/catalog/types";
+import { createCatalogInventoryMetrics } from "../shared/catalog/metrics";
 
 function catalogPriorityMatrixScientificNames() {
   const names = catalogPriorityMatrix.map((item) => item.scientificName?.toLowerCase() ?? "");
@@ -56,6 +57,20 @@ describe("PantanalDex catalog", () => {
 
     const duplicateTaxon = { ...catalogP1Priorities[0], speciesId: "outro-id" };
     expect(validateCatalogPriorities([...catalogP1Priorities, duplicateTaxon])).toEqual(expect.arrayContaining([expect.stringContaining("táxon prioritário duplicado")]));
+  });
+
+  it("measures the combined inventory without losing modular status", () => {
+    const metrics = createCatalogInventoryMetrics(species, catalogSpecies, catalogBatches, catalogValidationErrors);
+    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 55, totalSpecies: 75, uniqueIds: 75, duplicateIds: [], modularBatches: 21, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 0, modularImages: 165, validationErrors: [] });
+    expect(metrics.groups).toEqual([
+      { group: "Mamíferos", total: 8 },
+      { group: "Aves", total: 20 },
+      { group: "Répteis", total: 5 },
+      { group: "Anfíbios", total: 4 },
+      { group: "Peixes", total: 21 },
+      { group: "Invertebrados", total: 17 },
+    ]);
+    expect(metrics.environments.every((row) => row.total > 0)).toBe(true);
   });
 
   it("keeps documented synonyms traceable and searchable", () => {

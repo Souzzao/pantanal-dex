@@ -1,6 +1,6 @@
 # Relatório canônico do catálogo
 
-Gerado por **pnpm mvp:report** em 2026-08-25T15:02:43.672Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
+Gerado por **pnpm mvp:report** em 2026-08-27T15:41:06.865Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
 
 ## Quantitativos
 
@@ -30,12 +30,12 @@ Gerado por **pnpm mvp:report** em 2026-08-25T15:02:43.672Z. Este relatório mede
 
 | Grupo | Público | Modular |
 |---|---|---|
-| Mamíferos | 5 | 4 |
-| Aves | 5 | 20 |
-| Répteis | 3 | 3 |
-| Anfíbios | 2 | 3 |
-| Peixes | 3 | 24 |
-| Invertebrados | 2 | 22 |
+| Mamíferos | 5 | 3 |
+| Aves | 5 | 15 |
+| Répteis | 3 | 2 |
+| Anfíbios | 2 | 2 |
+| Peixes | 3 | 18 |
+| Invertebrados | 2 | 15 |
 
 ## Pendências de revisão
 

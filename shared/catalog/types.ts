@@ -11,7 +11,7 @@ export type CatalogBatch = {
   batchId: string;
   cycle: number;
   group: Species["group"];
-  status: "verified" | "pending-review";
+  status: "verified" | "pending-review" | "review-ready";
   species: Species[];
   sources: { title: string; url: string }[];
   pendingNotes?: string[];

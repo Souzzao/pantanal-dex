@@ -6,7 +6,8 @@ const publicFile = path.join(root, "shared", "pantanal.ts");
 const batchDir = path.join(root, "shared", "catalog", "batches");
 const publicText = fs.readFileSync(publicFile, "utf8");
 const batchFiles = fs.readdirSync(batchDir).filter((name) => name.endsWith(".ts")).sort();
-const batchText = batchFiles.map((name) => fs.readFileSync(path.join(batchDir, name), "utf8")).join("\n");
+const batchTexts = batchFiles.map((name) => fs.readFileSync(path.join(batchDir, name), "utf8"));
+const batchText = batchTexts.join("\n");
 const count = (text, pattern) => (text.match(pattern) ?? []).length;
 const groups = ["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"];
 const publicCount = count(publicText, /\bid:\s*["']/g);
@@ -22,7 +23,7 @@ const verified = count(batchText, /status:\s*["']verified["']/g);
 const reviewReady = count(batchText, /status:\s*["']review-ready["']/g);
 const rows = groups.map((group) => {
   const publicGroup = (publicText.match(new RegExp(`group:\\s*["']${group}["']`, "g")) ?? []).length;
-  const modularGroup = (batchText.match(new RegExp(`group:\\s*["']${group}["']`, "g")) ?? []).length;
+  const modularGroup = batchTexts.reduce((total, text) => total + Math.max(0, (text.match(new RegExp(`group:\\s*["']${group}["']`, "g")) ?? []).length - 1), 0);
   return { group, public: publicGroup, modular: modularGroup };
 });
 const report = { generatedAt: new Date().toISOString(), publicSpecies: publicCount, modularSpecies: modularCount, totalSpecies: publicCount + modularCount, modularBatches: batchFiles.length, pendingReviewBatches: pending, verifiedBatches: verified, reviewReadyBatches: reviewReady, modularImages, publicSourceArrays: count(publicText, /\bsources:\s*\[/g), modularSpeciesSourceArrays: count(batchText, /\bsources:\s*\[/g) - batchFiles.length, modularBatchSourceArrays: batchFiles.length, pendingNotes: count(batchText, /pendingNotes:/g), duplicateIds, uniqueCatalogIds: allIds.length, catalogIds: allIds, groups: rows };
