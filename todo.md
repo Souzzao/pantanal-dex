@@ -262,3 +262,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Promover somente a trilha de ocorrência de `camarao-agua-doce` para `confirmed`, sem inferir conservação
 - [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-21-RESEARCH.md` e o handoff
 - [x] Fechar o ledger regional legado com 5 de 5 registros confirmados e 0 pendências
+
+
+## Passo 22/50 — validação oficial de conservação do pintado
+
+- [x] Localizar a Portaria MMA nº 148/2022 na fonte oficial do ICMBio
+- [x] Confirmar a correspondência individual de `Pseudoplatystoma corruscans` na linha 448 do anexo de peixes
+- [x] Registrar `category: VU` e `status: confirmed` somente para `pintado`
+- [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-22-RESEARCH.md`, testes e handoff
+- [ ] Validar individualmente as categorias oficiais de `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`

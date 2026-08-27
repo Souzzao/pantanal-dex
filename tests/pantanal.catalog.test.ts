@@ -86,8 +86,11 @@ describe("PantanalDex catalog", () => {
   it("keeps conservation review official and conservative", () => {
     expect(conservationReviewRecords).toHaveLength(5);
     expect(conservationReviewValidationErrors).toEqual([]);
-    expect(conservationReviewRecords.every((record) => record.status === "pending-review")).toBe(true);
-    expect(conservationReviewRecords.every((record) => record.sourceUrl.startsWith("https://") && record.decisionRule.trim() && record.evidence.includes("nenhuma correspondência"))).toBe(true);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", category: "VU", sourceKind: "Portaria MMA/ICMBio" });
+    expect(conservationReviewRecords.filter((record) => record.speciesId !== "pintado").every((record) => record.status === "pending-review" && record.category === undefined)).toBe(true);
+    expect(conservationReviewRecords.every((record) => record.sourceUrl.startsWith("https://") && record.decisionRule.trim() && record.evidence.trim())).toBe(true);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")?.evidence).toContain("linha 448");
+    expect(conservationReviewRecords.filter((record) => record.speciesId !== "pintado").every((record) => record.evidence.includes("nenhuma correspondência"))).toBe(true);
   });
 
   it("keeps regional occurrence evidence conservative and traceable", () => {

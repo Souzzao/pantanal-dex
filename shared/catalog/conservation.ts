@@ -1,10 +1,12 @@
 export type ConservationReviewStatus = "pending-review" | "confirmed";
 export type ConservationSourceKind = "SALVE" | "Livro Vermelho ICMBio" | "Portaria MMA/ICMBio";
+export type ConservationCategory = "CR" | "EN" | "VU" | "NT" | "LC" | "DD" | "NE";
 
 export type ConservationReviewRecord = {
   speciesId: string;
   scientificName: string;
   status: ConservationReviewStatus;
+  category?: ConservationCategory;
   sourceKind: ConservationSourceKind;
   sourceUrl: string;
   decisionRule: string;
@@ -22,7 +24,7 @@ const checkedAt = "2026-08-27";
  * status entra no catálogo sem correspondência individual e fonte oficial.
  */
 export const conservationReviewRecords: readonly ConservationReviewRecord[] = [
-  { speciesId: "pintado", scientificName: "Pseudoplatystoma corruscans", status: "pending-review", sourceKind: "SALVE", sourceUrl: salveUrl, decisionRule: "Preencher somente com categoria individual do SALVE/Livro Vermelho ou lista oficial aplicável.", evidence: "Trilha oficial preparada; nenhuma correspondência individual foi registrada nesta etapa.", checkedAt },
+  { speciesId: "pintado", scientificName: "Pseudoplatystoma corruscans", status: "confirmed", category: "VU", sourceKind: "Portaria MMA/ICMBio", sourceUrl: "https://www.gov.br/icmbio/pt-br/assuntos/centros-de-pesquisa/aves-silvestres/arquivos/portaria-148-2022.pdf", decisionRule: "Promover somente com correspondência taxonômica exata na lista oficial aplicável.", evidence: "A linha 448 do anexo de peixes da Portaria MMA nº 148, de 7 de junho de 2022, registra Pseudoplatystoma corruscans na família Pimelodidae com categoria VU (Vulnerável). Correspondência individual normativa; não inferida de ocorrência, imagem ou fonte secundária.", checkedAt },
   { speciesId: "pacu", scientificName: "Piaractus mesopotamicus", status: "pending-review", sourceKind: "SALVE", sourceUrl: salveUrl, decisionRule: "Preencher somente com categoria individual do SALVE/Livro Vermelho ou lista oficial aplicável.", evidence: "Trilha oficial preparada; nenhuma correspondência individual foi registrada nesta etapa.", checkedAt },
   { speciesId: "piraputanga", scientificName: "Brycon hilarii", status: "pending-review", sourceKind: "Livro Vermelho ICMBio", sourceUrl: redBookUrl, decisionRule: "Preencher somente após localizar a espécie no volume taxonômico e conferir a categoria oficial.", evidence: "Trilha oficial preparada; nenhuma correspondência individual foi registrada nesta etapa.", checkedAt },
   { speciesId: "caranguejo-agua-doce", scientificName: "Dilocarcinus pagei", status: "pending-review", sourceKind: "Livro Vermelho ICMBio", sourceUrl: redBookUrl, decisionRule: "Preencher somente após localizar a espécie no volume de invertebrados e conferir a categoria oficial.", evidence: "Trilha oficial preparada; nenhuma correspondência individual foi registrada nesta etapa.", checkedAt },
@@ -39,6 +41,8 @@ export function validateConservationReviewRecords(records: readonly Conservation
     if (!/^https:\/\//.test(record.sourceUrl)) errors.push(`${record.speciesId}: fonte de conservação sem HTTPS`);
     if (!record.decisionRule.trim() || !record.evidence.trim()) errors.push(`${record.speciesId}: regra/evidência de conservação ausente`);
     if (record.status === "confirmed" && record.evidence.includes("nenhuma correspondência")) errors.push(`${record.speciesId}: confirmação sem evidência individual`);
+    if (record.status === "confirmed" && !record.category) errors.push(`${record.speciesId}: confirmação sem categoria oficial`);
+    if (record.status === "pending-review" && record.category) errors.push(`${record.speciesId}: categoria preenchida em registro pendente`);
   }
   return errors;
 }

@@ -533,3 +533,12 @@ A Conta 2 concluiu a validação de `camarao-agua-doce` (`Macrobrachium amazonic
 Com evidência regional direta baseada em coleta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. Nenhuma informação de conservação exibida por bases externas foi copiada ou inferida. Com essa promoção, os cinco registros legados do ledger estão confirmados regionalmente.
 
 O auditor regional foi atualizado para exigir as cinco confirmações documentadas e retornar falha se algum registro permanecer pendente. O relatório, o dossiê `STEP-21-RESEARCH.md`, o teste, TODO e este handoff foram atualizados. A próxima etapa do checklist deve avançar para a auditoria científica seguinte fora deste ledger de ocorrência.
+
+
+## 30. Passo 22/50 — validação oficial de conservação do pintado
+
+A Conta 2 iniciou a trilha oficial de conservação pelo `pintado` (`Pseudoplatystoma corruscans`). A cópia oficial da Portaria MMA nº 148, de 7 de junho de 2022, disponibilizada pelo ICMBio, registra no anexo de peixes, linha 448, `Pseudoplatystoma corruscans` na família Pimelodidae com categoria `VU` (Vulnerável). A mesma correspondência é citada em documento oficial de 2026 do PAN Alto Paraná.
+
+O ledger de conservação passou a ter um campo opcional `category`, com vocabulário controlado de categorias de risco. Apenas o pintado foi promovido para `confirmed`, com `category: VU` e `sourceKind: Portaria MMA/ICMBio`. Os outros quatro registros permanecem `pending-review` sem categoria preenchida. A busca no Volume VI — Peixes do Livro Vermelho de 2018 não encontrou ficha individual inequívoca do pintado; por isso, a decisão usa a correspondência individual mais direta da Portaria MMA nº 148/2022, sem inferência ou transposição de fonte secundária.
+
+O auditor de conservação foi atualizado para exigir a linha normativa individual, a categoria VU, o host oficial e a manutenção dos quatro pendentes. O relatório e `STEP-22-RESEARCH.md` registram as fontes e a limitação documental. Próxima etapa: concluir checks, validação visual e publicação do checkpoint do passo 22.
