@@ -645,3 +645,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não promover ocorrência narrativa, mídia ou licença sem evidência individual direta
 - [x] Atualizar `STEP-36-RESEARCH.md` e `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`
 - [x] Executar testes e auditorias completas
+
+## Passo 37/60 — fontes regionais narrativas do Lote 02
+
+- [x] Conferir o inventário de campo do Parque Nacional do Pantanal Matogrossense
+- [x] Promover sete peixes com identificação nominal no inventário para `confirmed`
+- [x] Manter oito táxons sem fonte narrativa individual como `pending-review`
+- [x] Não interpretar retorno GBIF ou contagem zero como prova regional definitiva
+- [x] Atualizar o auditor e o teste regional
+- [x] Executar checks científicos e publicar o dossiê

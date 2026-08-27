@@ -30,22 +30,22 @@ O passo 36 consolidou a triagem regional dos 15 candidatos do Lote 02 com táxon
 | Táxon | Chave GBIF | Ocorrências no recorte | Estado regional |
 |---|---:|---:|---|
 | *Brycon orbignyanus* | 2353463 | 1 | `pending-review` |
-| *Serrasalmus maculatus* | 2354117 | 170 | `pending-review` |
-| *Serrasalmus marginatus* | 2354121 | 183 | `pending-review` |
-| *Gymnotus inaequilabiatus* | 5212821 | 39 | `pending-review` |
-| *Eigenmannia virescens* | 2402039 | 64 | `pending-review` |
+| *Serrasalmus maculatus* | 2354117 | 170 | `confirmed` |
+| *Serrasalmus marginatus* | 2354121 | 183 | `confirmed` |
+| *Gymnotus inaequilabiatus* | 5212821 | 39 | `confirmed` |
+| *Eigenmannia virescens* | 2402039 | 64 | `confirmed` |
 | *Rhamdia quelen* | 2343735 | 199 | `pending-review` |
-| *Synbranchus marmoratus* | 2351979 | 148 | `pending-review` |
+| *Synbranchus marmoratus* | 2351979 | 148 | `confirmed` |
 | *Crenicichla britskii* | 2371008 | 5 | `pending-review` |
-| *Hemisorubim platyrhynchos* | 2338702 | 148 | `pending-review` |
-| *Loricariichthys platymetopon* | 2339173 | 86 | `pending-review` |
+| *Hemisorubim platyrhynchos* | 2338702 | 148 | `confirmed` |
+| *Loricariichthys platymetopon* | 2339173 | 86 | `confirmed` |
 | *Paleosuchus palpebrosus* | 2441396 | 47 | `pending-review` |
 | *Micrablepharus maximiliani* | 5222394 | 48 | `pending-review` |
 | *Phrynops geoffroanus* | 2442094 | 32 | `pending-review` |
 | *Podocnemis unifilis* | 2442782 | 0 | `pending-review` |
 | *Hydrodynastes gigas* | 2454428 | 101 | `pending-review` |
 
-A consulta estruturada retorna sinais de ocorrência, mas não substitui uma fonte regional narrativa individualizada. Por isso os 15 registros foram adicionados ao ledger regional como `pending-review`. O zero de *Podocnemis unifilis* não foi interpretado como ausência.
+A consulta estruturada retorna sinais de ocorrência, mas não substitui uma fonte regional narrativa individualizada. Sete táxons — *Serrasalmus maculatus*, *Serrasalmus marginatus*, *Gymnotus inaequilabiatus*, *Eigenmannia virescens*, *Synbranchus marmoratus*, *Hemisorubim platyrhynchos* e *Loricariichthys platymetopon* — foram promovidos a `confirmed` porque aparecem nominalmente no inventário de campo do Parque Nacional do Pantanal Matogrossense. Os oito restantes permanecem `pending-review`. O zero de *Podocnemis unifilis* não foi interpretado como ausência.
 
 ## Conservação normativa relacionada
 
@@ -65,7 +65,7 @@ Nenhuma imagem foi inserida ou aprovada. A validação comercial continua separa
 | Auditoria de prioridades | PASS; 41 entradas, 0 pendências |
 | Auditoria de fontes | PASS; 26 lotes, 60 espécies, 66 fontes estruturadas, 120 URLs GBIF |
 | Auditoria de conservação | PASS; 38 registros, 0 pendências |
-| Auditoria regional | PASS; 22 registros, 7 confirmados e 15 pendentes |
+| Auditoria regional | PASS; 22 registros, 14 confirmados e 8 pendentes |
 | `git diff --check` | PASS |
 
 ## Referências
