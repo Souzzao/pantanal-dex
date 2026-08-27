@@ -689,3 +689,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar a política comercial sem NC/ND
 - [x] Documentar que a auditoria de mídia dos lotes é não aplicável até a ingestão dos registros
 - [x] Executar checks científicos e auditorias do catálogo
+
+## Passo 41/60 — elegibilidade do Lote 01
+
+- [x] Auditar os 15 candidatos do Lote 01 contra o catálogo atual
+- [x] Resolver seis candidatos como duplicidades já existentes
+- [x] Classificar nove candidatos novos como não elegíveis neste estado por falta de pacote científico/comercial completo
+- [x] Não inserir registros, imagens ou licenças não verificadas
+- [x] Executar a suíte completa de checks e auditorias
