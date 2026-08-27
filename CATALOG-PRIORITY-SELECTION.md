@@ -9,8 +9,8 @@
 | Entradas prioritárias | 41 |
 | P1 | 28 |
 | P2 | 13 |
-| Selecionadas com ID no catálogo combinado | 40 |
-| Pendentes sem registro no catálogo | 1 |
+| Selecionadas com ID no catálogo combinado | 41 |
+| Pendentes sem registro no catálogo | 0 |
 | Resultado do validador | **PASS** |
 
 ## Seleções com registro correspondente
@@ -44,6 +44,7 @@
 | P1 | Jaú | Zungaro jahu | zungaro-jahu | Peixes | Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Zungaro%20jahu) |
 | P1 | Abelha-jataí | Tetragonisca angustula | tetragonisca-angustula | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Tetragonisca%20angustula) |
 | P1 | Formiga-cortadeira | Atta sexdens | atta-sexdens | Invertebrados | Campos, Matas | [GBIF](https://api.gbif.org/v1/species/match?name=Atta%20sexdens) |
+| P1 | Aranha-armadeira | Phoneutria nigriventer | phoneutria-nigriventer | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Phoneutria%20nigriventer) |
 | P2 | Cateto | Pecari tajacu | cateto | Mamíferos | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Pecari%20tajacu) |
 | P2 | Dança-ninfas | Heliconius erato | heliconius-erato | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Heliconius%20erato) |
 | P2 | Garça-branca-pequena | Egretta thula | egretta-thula | Aves | Áreas alagadas | [GBIF](https://api.gbif.org/v1/species/match?name=Egretta%20thula) |
@@ -62,7 +63,6 @@
 
 | Prioridade | Nome popular | Nome científico | ID | Grupo | Ambientes | Fonte taxonômica |
 |---|---|---|---|---|---|---|
-| P1 | Aranha-armadeira | Phoneutria nigriventer | — | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Phoneutria%20nigriventer) |
 
 ## Regras aplicadas
 

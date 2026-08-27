@@ -63,14 +63,14 @@ describe("PantanalDex catalog", () => {
 
   it("measures the combined inventory without losing modular status", () => {
     const metrics = createCatalogInventoryMetrics(species, catalogSpecies, catalogBatches, catalogValidationErrors);
-    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 59, totalSpecies: 79, uniqueIds: 79, duplicateIds: [], modularBatches: 25, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 4, modularImages: 177, validationErrors: [] });
+    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 60, totalSpecies: 80, uniqueIds: 80, duplicateIds: [], modularBatches: 26, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 5, modularImages: 180, validationErrors: [] });
     expect(metrics.groups).toEqual([
       { group: "Mamíferos", total: 9 },
       { group: "Aves", total: 22 },
       { group: "Répteis", total: 5 },
       { group: "Anfíbios", total: 4 },
       { group: "Peixes", total: 22 },
-      { group: "Invertebrados", total: 17 },
+      { group: "Invertebrados", total: 18 },
     ]);
     expect(metrics.environments.every((row) => row.total > 0)).toBe(true);
   });
@@ -103,7 +103,7 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps regional occurrence evidence conservative and traceable", () => {
-    expect(regionalOccurrenceRecords).toHaveLength(6);
+    expect(regionalOccurrenceRecords).toHaveLength(7);
     expect(regionalOccurrenceValidationErrors).toEqual([]);
     expect(regionalOccurrenceRecords.every((record) => record.region === "Pantanal")).toBe(true);
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", scientificName: "Pseudoplatystoma corruscans", sourceTitle: expect.stringContaining("Embrapa") });
@@ -124,14 +124,14 @@ describe("PantanalDex catalog", () => {
 
   it("keeps the scientific audit aggregate clean", () => {
     const audit = createScientificCatalogAudit(species);
-    expect(audit).toMatchObject({ records: 79, uniqueIds: 79, duplicateIds: [], errors: [], status: "PASS" });
+    expect(audit).toMatchObject({ records: 80, uniqueIds: 80, duplicateIds: [], errors: [], status: "PASS" });
     expect(Object.values(audit.missingFields).every((count) => count === 0)).toBe(true);
   });
 
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(59);
+    expect(catalogSpecies).toHaveLength(60);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
@@ -139,6 +139,7 @@ describe("PantanalDex catalog", () => {
     expect(catalogSpecies.some((item) => item.id === "arara-caninde")).toBe(true);
     expect(catalogSpecies.some((item) => item.id === "tucano-toco")).toBe(true);
     expect(catalogSpecies.some((item) => item.id === "zungaro-jahu")).toBe(true);
+    expect(catalogSpecies.some((item) => item.id === "phoneutria-nigriventer")).toBe(true);
     expect(species.some((item) => item.id === "anhuma")).toBe(true);
     expect(species.some((item) => item.id === "teiu")).toBe(true);
     expect(species.some((item) => item.id === "perereca-macaco")).toBe(true);

@@ -350,3 +350,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar a matriz P1 para apontar ao ID `zungaro-jahu`
 - [x] Atualizar o ledger regional, `STEP-30-RESEARCH.md`, métricas, testes e auditorias
 - [x] Reduzir as pendências P1/P2 para 1: `aranha-armadeira`
+
+## Passo 31/50 — inclusão e validação da aranha-armadeira
+
+- [x] Confirmar `Phoneutria nigriventer` como espécie aceita no GBIF/Catalogue of Life, incluindo combinações históricas
+- [x] Confirmar ocorrência no Mato Grosso do Sul e no recorte do Pantanal Sul por estudo SciELO de araneofauna
+- [x] Criar o lote isolado `catalog-invertebrates-08` em estado `review-ready`, com campos científicos completos
+- [x] Auditar três imagens Commons: CC BY-SA 3.0, CC BY 2.0 e CC BY-SA 4.0
+- [x] Atualizar a matriz P1 para apontar ao ID `phoneutria-nigriventer`
+- [x] Atualizar o ledger regional, `STEP-31-RESEARCH.md`, métricas, testes e auditorias
+- [x] Encerrar as pendências P1/P2: nenhuma espécie prioritária permanece pendente

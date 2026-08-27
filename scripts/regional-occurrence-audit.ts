@@ -3,7 +3,7 @@ import path from "node:path";
 import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "../shared/catalog/regional-occurrence";
 
 const errors = validateRegionalOccurrenceRecords(regionalOccurrenceRecords);
-const expectedIds = ["pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce", "zungaro-jahu"];
+const expectedIds = ["pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce", "zungaro-jahu", "phoneutria-nigriventer"];
 const ids = regionalOccurrenceRecords.map((record) => record.speciesId);
 if (regionalOccurrenceRecords.length !== expectedIds.length) errors.push(`ledger deveria conter ${expectedIds.length} registros`);
 if (JSON.stringify(ids) !== JSON.stringify(expectedIds)) errors.push("ordem ou cobertura de espécies divergente do contrato");
@@ -13,19 +13,21 @@ const piraputanga = regionalOccurrenceRecords.find((record) => record.speciesId 
 const caranguejo = regionalOccurrenceRecords.find((record) => record.speciesId === "caranguejo-agua-doce");
 const camarao = regionalOccurrenceRecords.find((record) => record.speciesId === "camarao-agua-doce");
 const jau = regionalOccurrenceRecords.find((record) => record.speciesId === "zungaro-jahu");
+const ar = regionalOccurrenceRecords.find((record) => record.speciesId === "phoneutria-nigriventer");
 if (!pintado || pintado.status !== "confirmed" || !pintado.sourceTitle.includes("Embrapa") || !pintado.evidence.includes("GBIF/Catalogue of Life")) errors.push("pintado não possui promoção sustentada por evidência regional e taxonômica");
 if (!pacu || pacu.status !== "confirmed" || !pacu.sourceTitle.includes("SciELO") || !pacu.evidence.includes("GBIF/Catalogue of Life")) errors.push("pacu não possui promoção sustentada por evidência regional e taxonômica");
 if (!piraputanga || piraputanga.status !== "confirmed" || !piraputanga.sourceTitle.includes("Springer") || !piraputanga.evidence.includes("GBIF/Catalogue of Life")) errors.push("piraputanga não possui promoção sustentada por evidência regional e taxonômica");
 if (!caranguejo || caranguejo.status !== "confirmed" || !caranguejo.sourceTitle.includes("SciELO") || !caranguejo.evidence.includes("GBIF/Catalogue of Life")) errors.push("caranguejo não possui promoção sustentada por evidência regional e taxonômica");
 if (!camarao || camarao.status !== "confirmed" || !camarao.sourceTitle.includes("PubMed") || !camarao.evidence.includes("GBIF/Catalogue of Life")) errors.push("camarao não possui promoção sustentada por evidência regional e taxonômica");
 if (!jau || jau.status !== "confirmed" || !jau.sourceTitle.includes("PubMed") || !jau.evidence.includes("GBIF/Catalogue of Life")) errors.push("jaú não possui promoção sustentada por evidência regional e taxonômica");
+if (!ar || ar.status !== "confirmed" || !ar.sourceTitle.includes("SciELO") || !ar.evidence.includes("GBIF/Catalogue of Life")) errors.push("aranha-armadeira não possui promoção sustentada por evidência regional e taxonômica");
 if (regionalOccurrenceRecords.some((record) => record.status !== "confirmed")) errors.push("registro regional permanece pendente após o fechamento da validação científica");
 if (regionalOccurrenceRecords.some((record) => record.checkedAt !== "2026-08-27")) errors.push("data de verificação regional desatualizada");
 
 const markdown = [
   "# Auditoria do ledger de ocorrência regional — passo 21/50",
   "",
-  "O ledger registra a validação individual de ocorrência para seis espécies legadas e prioritárias. `pintado` foi confirmado por estudo da Embrapa, `pacu` por artigo SciELO, `piraputanga` por estudos Springer/SciELO, `caranguejo-agua-doce` por artigo SciELO e `camarao-agua-doce` por estudo indexado no PubMed; os seis têm identidade taxonômica confirmada pelo GBIF e estão confirmados regionalmente.",
+  "O ledger registra a validação individual de ocorrência para sete espécies legadas e prioritárias. `pintado` foi confirmado por estudo da Embrapa, `pacu` por artigo SciELO, `piraputanga` por estudos Springer/SciELO, `caranguejo-agua-doce` por artigo SciELO e `camarao-agua-doce` por estudo indexado no PubMed; os sete têm identidade taxonômica confirmada pelo GBIF e estão confirmados regionalmente.",
   "",
   "| ID | Região | Estado | Fonte | Evidência conservadora |",
   "|---|---|---|---|---|",
@@ -37,7 +39,7 @@ const markdown = [
   "",
   "## Limite da evidência",
   "",
-  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. O GBIF/Catalogue of Life apresenta os seis nomes como espécies aceitas. Com a evidência publicada do último registro, não restam pendências no ledger regional; nenhuma categoria de conservação foi inferida.",
+  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. O GBIF/Catalogue of Life apresenta os sete nomes como espécies aceitas. Com a evidência publicada do último registro, não restam pendências no ledger regional; nenhuma categoria de conservação foi inferida.",
   "## Referências",
   "",
   "[1]: https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/789558 \"Embrapa Infoteca-e — estudo do pintado na bacia do rio Miranda\"",
@@ -53,6 +55,8 @@ const markdown = [
   "[11]: https://www.gbif.org/taxon/9GQ5P \"GBIF — Macrobrachium amazonicum (Heller, 1862)\"",
   "[12]: https://pubmed.ncbi.nlm.nih.gov/19372007/ \"PubMed — Zungaro jahu no Pantanal brasileiro\"",
   "[13]: https://www.gbif.org/taxon/5D95D \"GBIF — Zungaro jahu (Ihering, 1898)\"",
+  "[14]: https://www.scielo.br/j/isz/a/VnwWHnXJMxyw8mbMxbgsVmx/?lang=pt \"SciELO — araneofauna do Mato Grosso do Sul\"",
+  "[15]: https://www.gbif.org/taxon/4GQ68 \"GBIF — Phoneutria nigriventer (Keyserling, 1891)\"",
   "",
   ].join("\n");
 fs.writeFileSync(path.join(process.cwd(), "CATALOG-REGIONAL-OCCURRENCE-AUDIT.md"), markdown);
