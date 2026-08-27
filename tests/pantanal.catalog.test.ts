@@ -6,6 +6,7 @@ import { applyDocumentedSynonyms } from "../shared/catalog/synonyms";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch, validateSpeciesRecords } from "../shared/catalog/types";
 import { createCatalogInventoryMetrics } from "../shared/catalog/metrics";
+import { createScientificCatalogAudit } from "../shared/catalog/scientific-audit";
 
 function catalogPriorityMatrixScientificNames() {
   const names = catalogPriorityMatrix.map((item) => item.scientificName?.toLowerCase() ?? "");
@@ -103,6 +104,13 @@ describe("PantanalDex catalog", () => {
     expect(new Set(species.map((item) => item.id)).size).toBe(species.length);
     expect(species.every((item) => item.commonName.trim() && item.scientificName.trim() && item.description.trim() && item.habitat.trim() && item.behavior.trim() && item.diet.trim() && item.distribution.trim() && item.ecologicalImportance.trim())).toBe(true);
   });
+
+  it("keeps the scientific audit aggregate clean", () => {
+    const audit = createScientificCatalogAudit(species);
+    expect(audit).toMatchObject({ records: 75, uniqueIds: 75, duplicateIds: [], errors: [], status: "PASS" });
+    expect(Object.values(audit.missingFields).every((count) => count === 0)).toBe(true);
+  });
+
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);

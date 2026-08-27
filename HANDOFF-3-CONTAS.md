@@ -403,3 +403,11 @@ A validação no My Browser confirmou visualmente as mensagens “Matriz íntegr
 O protocolo `AGENTS-DIVISION.md` foi atualizado para refletir o padrão real de branches `conta-2-catalogo-ciclo-N`, incluir validação nativa no My Browser como evidência obrigatória quando houver interface e apontar o PR de integração ativo (#11). A divisão entre Agente 1 (integração), Agente 2 (catálogo) e Agente 3 (qualidade/nativos) foi preservada, assim como os limites contra sobrescrita de dados científicos e a exigência de handoff com causa, evidência, alternativa, responsável e próximo passo.
 
 O TODO foi atualizado para marcar o Passo 5 como concluído. Este ciclo ainda precisa passar pelos checks finais, ser commitado e publicado na branch `conta-2-catalogo-ciclo-18`.
+
+## Retomada adicional — Passo 6/50: auditoria científica
+
+Foi criado `shared/catalog/scientific-audit.ts` para agregar a auditoria de IDs globais e campos científicos obrigatórios. O resultado atual é de 75 registros, 75 IDs únicos, nenhum ID duplicado, nenhum campo obrigatório ausente, zero erros e status `PASS`. A auditoria também foi adicionada aos testes e à tela nativa de Configurações como “Auditoria científica — Passo 6/50”.
+
+Durante a integração foi detectada e corrigida uma dependência circular causada por calcular a auditoria dentro de `shared/catalog/index.ts`; o cálculo agora é feito diretamente pela tela e pelos testes, preservando o índice do catálogo acíclico. O My Browser confirmou visualmente “75 registros · 75 IDs únicos”, “Auditoria aprovada” e “IDs duplicados: nenhum”.
+
+O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
