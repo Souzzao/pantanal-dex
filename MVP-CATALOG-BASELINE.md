@@ -1,6 +1,6 @@
 # Baseline do catálogo — passo 3/50
 
-Gerado em **2026-08-27T16:05:05.213Z** por pnpm catalog:baseline. Este arquivo registra o estado observável da branch, sem promover espécies a verified.
+Gerado em **2026-08-27T16:10:59.300Z** por pnpm catalog:baseline. Este arquivo registra o estado observável da branch, sem promover espécies a verified.
 
 ## Quantitativos
 

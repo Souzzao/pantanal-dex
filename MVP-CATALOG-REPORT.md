@@ -1,6 +1,6 @@
 # Relatório canônico do catálogo
 
-Gerado por **pnpm mvp:report** em 2026-08-27T16:05:06.604Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
+Gerado por **pnpm mvp:report** em 2026-08-27T16:10:58.112Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
 
 ## Quantitativos
 

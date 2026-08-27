@@ -391,3 +391,9 @@ A rodada de validação passou `pnpm check`, `pnpm test -- tests/pantanal.catalo
 O baseline canônico foi regenerado em 2026-08-27 por `pnpm catalog:baseline` e permanece versionado em `MVP-CATALOG-BASELINE.md`. A fotografia auditável registra 20 espécies públicas, 55 modulares, 75 totais, 21 lotes modulares, 21 `pending-review`, 0 `verified`, 0 `review-ready`, 165 registros de imagens, 165 campos de licença, 76 arrays de fontes estruturadas, 75 IDs únicos, nenhum ID duplicado e nenhuma menção a licença NC/ND. A distribuição dos lotes por ambiente foi registrada para Rios e corixos (26), Áreas alagadas (29), Campos (14), Matas (18) e Bordas de mata (29).
 
 A tela de Configurações foi reaberta e confirmada no My Browser durante a validação nativa: os números do inventário continuam visíveis, o catálogo aparece como estruturalmente válido e o cartão mostra 75 espécies, 75 IDs únicos, 20 públicas, 55 modulares, 21 lotes e 165 imagens. O baseline não promoveu nenhum lote pendente a `verified`.
+
+## Retomada adicional — Passo 4/50: matriz de prioridades
+
+A matriz de prioridades foi exposta na tela nativa de Configurações para tornar a seleção editorial observável durante o uso do aplicativo. O cartão mostra 41 entradas, distribuídas em 28 prioridades P1 e 13 P2, com 36 espécies selecionadas no catálogo combinado e 5 pendentes sem registro correspondente. A contagem foi corrigida para considerar o catálogo combinado, e não apenas os lotes modulares; nenhuma pendência foi promovida sem evidência.
+
+A validação no My Browser confirmou visualmente as mensagens “Matriz íntegra e sem táxons duplicados” e “36 selecionadas no catálogo · 5 pendentes sem registro correspondente”. `pnpm check` e os 19 testes do catálogo passaram após a alteração. O próximo passo é concluir a rodada completa de auditorias, commit e publicação no PR #11.
