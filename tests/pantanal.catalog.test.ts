@@ -85,8 +85,9 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps conservation review official and conservative", () => {
-    expect(conservationReviewRecords).toHaveLength(22);
+    expect(conservationReviewRecords).toHaveLength(23);
     expect(conservationReviewValidationErrors).toEqual([]);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "bombus-pauloensis")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "leporinus-obtusidens")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "boana-albopunctata")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "oxybelis-aeneus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });

@@ -510,3 +510,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não confundir `Leporinus guttatus` ou `Leporinus pitingai` com o táxon-alvo
 - [x] Atualizar `STEP-48-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 49/50 — validação oficial de conservação da mamangava-de-chão
+
+- [x] Confirmar `Bombus pauloensis` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Bombus pauloensis`, `pauloensis` e `Bombus`
+- [x] Registrar `bombus-pauloensis` como `not-listed`, sem converter ausência em LC
+- [x] Não inferir categoria a partir de outros himenópteros ou de outros gêneros
+- [x] Atualizar `STEP-49-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
