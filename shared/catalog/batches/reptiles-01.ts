@@ -11,7 +11,10 @@ export const reptiles01: CatalogBatch = {
     { title: "GBIF Species Match — Salvator merianae", url: "https://api.gbif.org/v1/species/match?name=Salvator%20merianae" },
     { title: "GBIF Species Match — Oxybelis aeneus", url: "https://api.gbif.org/v1/species/match?name=Oxybelis%20aeneus" },
   ],
-  pendingNotes: ["Confirmar nomes aceitos, situação de conservação e ocorrência no Pantanal em revisão taxonômica especializada."],
+  pendingNotes: [
+    "Taxonomia conferida no GBIF; seis imagens e seis páginas individuais Commons foram verificadas, com correção de uma URL de origem que retornava 404.",
+    "Manter pending-review até registrar evidência individual de ocorrência no Pantanal, fonte oficial de conservação quando aplicável, reviewedAt/reviewedBy e checklist editorial completo."
+  ],
   species: [
     {
       id: "teiu", commonName: "Teiú", scientificName: "Salvator merianae", group: "Répteis", environments: ["Campos", "Bordas de mata", "Matas"],
@@ -24,7 +27,7 @@ export const reptiles01: CatalogBatch = {
       distribution: "Regiões do leste e centro da América do Sul, incluindo grande parte do Brasil.",
       ecologicalImportance: "Participa do controle de invertebrados e da movimentação de sementes e matéria orgânica no solo.",
       images: [
-        image("https://upload.wikimedia.org/wikipedia/commons/c/cd/Argentine_Black-and-white_Tegu_%28Salvator_merianae%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann.jpg", "Thomas Fuhrmann", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Argentine_Black-and-white_Tegu_(Salvator_merianae),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann.jpg", "Thomas Fuhrmann / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/c/cd/Argentine_Black-and-white_Tegu_%28Salvator_merianae%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann.jpg", "Thomas Fuhrmann", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Argentine_Black-and-white_Tegu_(Salvator_merianae),_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann.jpg", "Thomas Fuhrmann / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/2/23/182_Argentine_black_and_white_tegu_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:182_Argentine_black_and_white_tegu_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/c/ce/Salvator_merianae_-_Rafael_-_470540720.jpeg", "Rafael", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Salvator_merianae_-_Rafael_-_470540720.jpeg", "Rafael / Wikimedia Commons"),
       ],

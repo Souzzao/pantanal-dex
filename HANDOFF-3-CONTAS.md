@@ -520,3 +520,9 @@ Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente
 O terceiro lote de aves, `catalog-birds-03`, foi auditado com Arara-canindé (*Ara ararauna*), Urubu-de-cabeça-preta (*Coragyps atratus*) e Tucano-toco (*Ramphastos toco*). O GBIF confirmou os três nomes como espécies aceitas em correspondência exata; as nove URLs Commons retornaram HTTP 200, com créditos individuais e licenças CC BY/CC BY-SA permitidas para o produto comercial. O lote permanece `pending-review` porque não foram anexadas, de forma individual e reproduzível, evidências regionais do Pantanal, conservação oficial brasileira, `reviewedAt`, `reviewedBy` e checklist editorial completo. Nenhum status de conservação foi inventado.
 
 A fila contém 47 espécies no total e não há duplicação. O relatório `docs/MVP-STEP-08-BATCH-AUDIT.md` e o dossiê `docs/AUDIT-EVIDENCE-BIRDS-P1.md` foram atualizados. A Conta 2 deve anexar a evidência regional/conservacionista para promoção futura; a Conta 3 deve testar a renderização das três aves e das imagens no navegador. Próxima etapa coordenada: Passo 9/50, primeiro lote de répteis, sem repetir birds-03.
+
+## Status da Auditoria MVP — Passo 9/50
+
+O primeiro lote de répteis, `catalog-reptiles-01`, foi auditado com Teiú (*Salvator merianae*) e Cobra-cipó (*Oxybelis aeneus*). O GBIF confirmou ambos os nomes científicos como espécies aceitas. As seis imagens declaradas retornaram HTTP 200; na verificação das páginas individuais Commons, foi corrigida uma URL de origem do teiú que retornava 404 por divergência no título do arquivo. O lote permanece `pending-review` aguardando evidência individual de ocorrência regional, conservação oficial, `reviewedAt`, `reviewedBy` e checklist editorial completo. Nenhum dado foi inventado.
+
+Contagem total mantida em 47 espécies. Relatórios `docs/MVP-STEP-09-BATCH-AUDIT.md` e `docs/AUDIT-EVIDENCE-REPTILES-P1.md` atualizados. Próxima etapa coordenada: Passo 10/50, segundo lote de répteis.

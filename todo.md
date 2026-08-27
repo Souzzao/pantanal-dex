@@ -515,3 +515,10 @@
 - [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
 - [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
 - [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.
+
+## MVP passo 9/50 — auditoria do primeiro lote de répteis
+- [x] Auditar o primeiro lote real de répteis do catálogo com composição e IDs reconciliados.
+- [x] Verificar taxonomia, ocorrência no Pantanal e conservação oficial por espécie.
+- [x] Verificar imagens, URLs, autores, licenças comerciais e créditos individualmente.
+- [x] Corrigir somente evidências confirmadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit, PR e checkpoint.
