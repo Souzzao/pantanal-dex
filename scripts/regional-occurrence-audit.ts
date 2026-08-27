@@ -11,18 +11,19 @@ const pintado = regionalOccurrenceRecords.find((record) => record.speciesId === 
 const pacu = regionalOccurrenceRecords.find((record) => record.speciesId === "pacu");
 const piraputanga = regionalOccurrenceRecords.find((record) => record.speciesId === "piraputanga");
 const caranguejo = regionalOccurrenceRecords.find((record) => record.speciesId === "caranguejo-agua-doce");
+const camarao = regionalOccurrenceRecords.find((record) => record.speciesId === "camarao-agua-doce");
 if (!pintado || pintado.status !== "confirmed" || !pintado.sourceTitle.includes("Embrapa") || !pintado.evidence.includes("GBIF/Catalogue of Life")) errors.push("pintado não possui promoção sustentada por evidência regional e taxonômica");
 if (!pacu || pacu.status !== "confirmed" || !pacu.sourceTitle.includes("SciELO") || !pacu.evidence.includes("GBIF/Catalogue of Life")) errors.push("pacu não possui promoção sustentada por evidência regional e taxonômica");
 if (!piraputanga || piraputanga.status !== "confirmed" || !piraputanga.sourceTitle.includes("Springer") || !piraputanga.evidence.includes("GBIF/Catalogue of Life")) errors.push("piraputanga não possui promoção sustentada por evidência regional e taxonômica");
 if (!caranguejo || caranguejo.status !== "confirmed" || !caranguejo.sourceTitle.includes("SciELO") || !caranguejo.evidence.includes("GBIF/Catalogue of Life")) errors.push("caranguejo não possui promoção sustentada por evidência regional e taxonômica");
-if (regionalOccurrenceRecords.filter((record) => !["pintado", "pacu", "piraputanga", "caranguejo-agua-doce"].includes(record.speciesId)).some((record) => record.status !== "pending-review")) errors.push("registro além das quatro espécies validadas foi promovido sem evidência individual");
-if (regionalOccurrenceRecords.filter((record) => !["pintado", "pacu", "piraputanga", "caranguejo-agua-doce"].includes(record.speciesId)).some((record) => record.sourceUrl !== "https://collectory.sibbr.gov.br/collectory/public/show/dr327")) errors.push("fonte regional pendente não corresponde ao dataset ICMBio/SISBio dr327");
+if (!camarao || camarao.status !== "confirmed" || !camarao.sourceTitle.includes("PubMed") || !camarao.evidence.includes("GBIF/Catalogue of Life")) errors.push("camarao não possui promoção sustentada por evidência regional e taxonômica");
+if (regionalOccurrenceRecords.some((record) => record.status !== "confirmed")) errors.push("registro regional permanece pendente após o fechamento da validação científica");
 if (regionalOccurrenceRecords.some((record) => record.checkedAt !== "2026-08-27")) errors.push("data de verificação regional desatualizada");
 
 const markdown = [
-  "# Auditoria do ledger de ocorrência regional — passo 20/50",
+  "# Auditoria do ledger de ocorrência regional — passo 21/50",
   "",
-  "O ledger registra a validação individual de ocorrência para cinco espécies legadas. `pintado` foi confirmado por estudo da Embrapa, `pacu` por artigo SciELO, `piraputanga` por estudos Springer/SciELO e `caranguejo-agua-doce` por artigo SciELO; os quatro têm identidade taxonômica confirmada pelo GBIF. `camarao-agua-doce` permanece em revisão com o dataset ICMBio/SISBio `dr327`.",
+  "O ledger registra a validação individual de ocorrência para cinco espécies legadas. `pintado` foi confirmado por estudo da Embrapa, `pacu` por artigo SciELO, `piraputanga` por estudos Springer/SciELO, `caranguejo-agua-doce` por artigo SciELO e `camarao-agua-doce` por estudo indexado no PubMed; os cinco têm identidade taxonômica confirmada pelo GBIF e estão confirmados regionalmente.",
   "",
   "| ID | Região | Estado | Fonte | Evidência conservadora |",
   "|---|---|---|---|---|",
@@ -34,7 +35,7 @@ const markdown = [
   "",
   "## Limite da evidência",
   "",
-  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O GBIF/Catalogue of Life apresenta os quatro nomes como espécies aceitas. Para Macrobrachium amazonicum, o dataset oficial ICMBio/SISBio não forneceu contagem estruturada confiável; por isso, ele permanece pendente e nenhuma ausência foi inferida.",
+  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. O GBIF/Catalogue of Life apresenta os cinco nomes como espécies aceitas. Com a evidência publicada do último registro, não restam pendências no ledger regional; nenhuma categoria de conservação foi inferida.",
   "## Referências",
   "",
   "[1]: https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/789558 \"Embrapa Infoteca-e — estudo do pintado na bacia do rio Miranda\"",
@@ -46,6 +47,8 @@ const markdown = [
   "[7]: https://www.gbif.org/taxon/NH7H \"GBIF — Brycon hilarii (Valenciennes, 1850)\"",
   "[8]: https://www.scielo.br/j/paz/a/8d5vM7nQbcDxLyVHgvPnvQb/?lang=pt \"SciELO — Trichodactylidae em alagados do Pantanal\"",
   "[9]: https://www.gbif.org/taxon/365S7 \"GBIF — Dilocarcinus pagei Stimpson, 1861\"",
+  "[10]: https://pubmed.ncbi.nlm.nih.gov/23894962/ \"PubMed — Macrobrachium amazonicum no Pantanal\"",
+  "[11]: https://www.gbif.org/taxon/9GQ5P \"GBIF — Macrobrachium amazonicum (Heller, 1862)\"",
   "",
   ].join("\n");
 fs.writeFileSync(path.join(process.cwd(), "CATALOG-REGIONAL-OCCURRENCE-AUDIT.md"), markdown);

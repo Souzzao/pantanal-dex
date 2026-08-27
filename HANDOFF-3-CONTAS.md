@@ -524,3 +524,12 @@ A Conta 2 validou `caranguejo-agua-doce` (`Dilocarcinus pagei`) como a quarta pe
 Com evidência regional direta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. A indicação de conservação exibida pelo GBIF não foi copiada nem inferida. Apenas `camarao-agua-doce` (`Macrobrachium amazonicum`) permanece pendente no ledger, pois a consulta ICMBio/SISBio ainda não forneceu evidência estruturada suficiente para confirmação individual.
 
 O auditor regional foi atualizado para exigir as quatro confirmações documentadas e rejeitar promoções adicionais sem evidência. O relatório e o dossiê `STEP-20-RESEARCH.md` foram atualizados, junto com o teste, TODO e este handoff. Próxima etapa: concluir o commit e publicar o checkpoint do passo 20.
+
+
+## 29. Passo 21/50 — validação científica do camarão-de-água-doce
+
+A Conta 2 concluiu a validação de `camarao-agua-doce` (`Macrobrachium amazonicum`), último registro pendente do ledger regional. O artigo da Revista de Biología Tropical, indexado no PubMed, estudou 2.270 exemplares coletados em dois habitats naturais de água doce — rio Miranda e Lagoa Baiazinha — no Pantanal de Mato Grosso do Sul, Brasil. O GBIF/Catalogue of Life confirma `Macrobrachium amazonicum (Heller, 1862)` como espécie aceita, em Palaemonidae.
+
+Com evidência regional direta baseada em coleta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. Nenhuma informação de conservação exibida por bases externas foi copiada ou inferida. Com essa promoção, os cinco registros legados do ledger estão confirmados regionalmente.
+
+O auditor regional foi atualizado para exigir as cinco confirmações documentadas e retornar falha se algum registro permanecer pendente. O relatório, o dossiê `STEP-21-RESEARCH.md`, o teste, TODO e este handoff foram atualizados. A próxima etapa do checklist deve avançar para a auditoria científica seguinte fora deste ledger de ocorrência.
