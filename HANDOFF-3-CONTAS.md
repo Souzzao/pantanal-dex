@@ -515,3 +515,12 @@ A Conta 2 validou `piraputanga` (`Brycon hilarii`) com duas publicações acadê
 Com evidência regional direta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. Nenhuma categoria de conservação foi copiada da página do GBIF ou inferida. Os registros `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` por falta de resposta estruturada suficiente para confirmação individual.
 
 O auditor regional foi atualizado para exigir as confirmações documentadas de `pintado`, `pacu` e `piraputanga`, rejeitar promoções adicionais sem evidência e gerar o artefato do passo 19. A pesquisa detalhada está em `STEP-19-RESEARCH.md`. Próxima etapa: concluir checks, revisar a integração e publicar o checkpoint deste passo.
+
+
+## 28. Passo 20/50 — validação científica do caranguejo-de-água-doce
+
+A Conta 2 validou `caranguejo-agua-doce` (`Dilocarcinus pagei`) como a quarta pendência do ledger. O artigo de Papéis Avulsos de Zoologia indexado pela SciELO estudou caranguejos em alagados do Pantanal Mato-Grossense entre os rios Cuiabá e São Lourenço e nomeia `Dilocarcinus pagei` entre as espécies registradas na bacia do Alto Paraguai, incluindo as três espécies mais abundantes amostradas. O GBIF/Catalogue of Life confirma `Dilocarcinus pagei Stimpson, 1861` como espécie aceita, em Trichodactylidae.
+
+Com evidência regional direta e identidade taxonômica independente, o registro foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência. A indicação de conservação exibida pelo GBIF não foi copiada nem inferida. Apenas `camarao-agua-doce` (`Macrobrachium amazonicum`) permanece pendente no ledger, pois a consulta ICMBio/SISBio ainda não forneceu evidência estruturada suficiente para confirmação individual.
+
+O auditor regional foi atualizado para exigir as quatro confirmações documentadas e rejeitar promoções adicionais sem evidência. O relatório e o dossiê `STEP-20-RESEARCH.md` foram atualizados, junto com o teste, TODO e este handoff. Próxima etapa: concluir o commit e publicar o checkpoint do passo 20.

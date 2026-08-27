@@ -244,3 +244,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Promover somente a trilha de ocorrência de `piraputanga` para `confirmed`, sem inferir conservação
 - [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-19-RESEARCH.md` e o handoff
 - [ ] Validar individualmente `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 20/50 — validação científica do caranguejo-de-água-doce
+
+- [x] Validar `Dilocarcinus pagei` como espécie aceita no GBIF/Catalogue of Life
+- [x] Confirmar ocorrência regional por artigo SciELO sobre alagados do Pantanal Mato-Grossense e bacia do Alto Paraguai
+- [x] Promover somente a trilha de ocorrência de `caranguejo-agua-doce` para `confirmed`, sem inferir conservação
+- [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-20-RESEARCH.md` e o handoff
+- [ ] Validar individualmente `camarao-agua-doce`
