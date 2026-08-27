@@ -20,6 +20,7 @@
     "catalog:priority-audit": "tsx scripts/catalog-priority-audit.ts",
     "catalog:legacy-gbif-audit": "tsx scripts/legacy-gbif-audit.ts",
     "catalog:regional-occurrence-audit": "tsx scripts/regional-occurrence-audit.ts",
+    "catalog:icmbio-dataset-audit": "tsx scripts/icmbio-dataset-audit.ts",
     "watchdog": "pnpm check && pnpm lint && pnpm test && pnpm catalog:priority-audit",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "android": "expo start --android",

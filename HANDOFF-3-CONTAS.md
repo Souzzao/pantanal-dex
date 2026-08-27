@@ -425,3 +425,11 @@ O ledger `shared/catalog/regional-occurrence.ts` foi revisitado e atualizado par
 Foi criado `scripts/regional-occurrence-audit.ts`, exposto como `pnpm catalog:regional-occurrence-audit`, e gerado `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`. O resultado foi `PASS`: 5/5 registros, 5 `pending-review` e 0 erros. Como a consulta filtrada não forneceu contagem estruturada confiável nesta execução, nenhuma espécie foi promovida a `confirmed` e nenhuma ausência foi inferida.
 
 A pesquisa oficial foi registrada em `catalog-research.md`, o TODO foi atualizado e falta apenas concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 9/50: auditoria ICMBio/SISBio
+
+Foi criado `scripts/icmbio-dataset-audit.ts`, exposto como `pnpm catalog:icmbio-dataset-audit`, para auditar o recurso oficial `dr327`, a referência IPT v1.649 e os cinco filtros por espécie do ALA-Hub/SiBBr. A execução registrou metadados do SiBBr com HTTP 200; os cinco filtros responderam HTTP 200, porém sem conteúdo JSON/contagem estruturada; a referência IPT respondeu HTTP 401 nesta execução.
+
+O contrato do ledger passou: cinco filtros presentes, cinco registros `pending-review` e zero erros. A licença CC BY 4.0 e a descrição oficial do dataset foram confirmadas na página de metadados. A limitação do IPT e a falta de resposta estruturada dos filtros foram preservadas como limitações operacionais; não houve confirmação individual, inferência de ausência ou promoção de ocorrência.
+
+O artefato `CATALOG-ICMBIO-DATASET-AUDIT.md` foi gerado e o TODO atualizado. Ainda falta a rodada completa de checks, commit e publicação deste ciclo no PR #11.

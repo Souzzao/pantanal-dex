@@ -121,3 +121,9 @@ A página oficial do recurso `dr327` identifica o conjunto como “Dados de ocor
 A página de metadados do recurso foi acessada com sucesso, mas a consulta filtrada de ocorrências não forneceu conteúdo estruturado nesta execução. Portanto, o ledger mantém os cinco registros como `pending-review`: a limitação de consulta não é tratada como ausência de ocorrência nem como confirmação regional.
 
 Fonte consultada: https://collectory.sibbr.gov.br/collectory/public/show/dr327 — ICMBio/SISBio no SiBBr. A referência foi verificada em 2026-08-27.
+
+## Passo 9/50 — revalidação do dataset ICMBio/SISBio em 2026-08-27
+
+A página do recurso `dr327` no SiBBr foi reaberta e confirmou o título do conjunto do ICMBio/SISBio, a descrição de ocorrências informadas por pesquisadores, o recorte geográfico em Unidades de Conservação Federais do Brasil e a licença CC BY 4.0. A página informa a versão 1.649, última publicação verificada em 02 fev. 2026 e atualização de metadados em 19 ago. 2026: https://collectory.sibbr.gov.br/collectory/public/show/dr327.
+
+A referência IPT indicada pelo próprio recurso (`https://ipt.icmbio.gov.br/resource?r=sisbio_ocorrencia&v=1.649`) e a consulta ALA-Hub (`https://ala-hub.sibbr.gov.br/ala-hub/occurrence/search?q=data_resource_uid:dr327`) não forneceram conteúdo estruturado nesta extração. Esta limitação foi registrada como resultado operacional, não como ausência de registros. As cinco consultas por espécie permanecem `pending-review` no ledger.
