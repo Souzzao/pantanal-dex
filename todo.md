@@ -474,3 +474,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não confundir `Pimelodus joannis`, `Pimelodus stewartii` ou `Microglanis maculatus` com o mandi
 - [x] Atualizar `STEP-44-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 45/50 — validação oficial de conservação do bem-te-vi
+
+- [x] Confirmar `Pitangus sulphuratus` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Pitangus sulphuratus`, `sulphuratus` e `Pitangus`
+- [x] Registrar `pitangus-sulphuratus` como `not-listed`, sem converter ausência em LC
+- [x] Não inferir categoria a partir de registros gerais de aves ou de outros táxons
+- [x] Atualizar `STEP-45-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
