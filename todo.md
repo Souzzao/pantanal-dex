@@ -634,3 +634,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não promover imagens, licenças ou ocorrências sem evidência individual direta
 - [x] Atualizar ledger, testes e `STEP-35-RESEARCH.md`
 - [x] Executar TypeScript, lint, testes e auditorias científicas
+
+## Passo 36/60 — validação regional individualizada do Lote 02
+
+- [x] Consultar ocorrências GBIF por táxon no recorte operacional do Pantanal
+- [x] Confirmar chaves e nomes aceitos no GBIF/Catalogue of Life
+- [x] Registrar 15 candidatos no ledger regional como `pending-review`
+- [x] Preservar explicitamente o resultado zero de *Podocnemis unifilis* sem inferir ausência
+- [x] Manter sete registros anteriores confirmados por fontes regionais independentes
+- [x] Não promover ocorrência narrativa, mídia ou licença sem evidência individual direta
+- [x] Atualizar `STEP-36-RESEARCH.md` e `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`
+- [x] Executar testes e auditorias completas

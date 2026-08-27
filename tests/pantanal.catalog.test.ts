@@ -123,7 +123,7 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps regional occurrence evidence conservative and traceable", () => {
-    expect(regionalOccurrenceRecords).toHaveLength(7);
+    expect(regionalOccurrenceRecords).toHaveLength(22);
     expect(regionalOccurrenceValidationErrors).toEqual([]);
     expect(regionalOccurrenceRecords.every((record) => record.region === "Pantanal")).toBe(true);
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", scientificName: "Pseudoplatystoma corruscans", sourceTitle: expect.stringContaining("Embrapa") });
@@ -131,7 +131,8 @@ describe("PantanalDex catalog", () => {
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "piraputanga")).toMatchObject({ status: "confirmed", scientificName: "Brycon hilarii", sourceTitle: expect.stringContaining("Springer") });
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "caranguejo-agua-doce")).toMatchObject({ status: "confirmed", scientificName: "Dilocarcinus pagei", sourceTitle: expect.stringContaining("SciELO") });
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "camarao-agua-doce")).toMatchObject({ status: "confirmed", scientificName: "Macrobrachium amazonicum", sourceTitle: expect.stringContaining("PubMed") });
-    expect(regionalOccurrenceRecords.every((record) => record.status === "confirmed")).toBe(true);
+    expect(regionalOccurrenceRecords.filter((record) => record.status === "confirmed")).toHaveLength(7);
+    expect(regionalOccurrenceRecords.filter((record) => record.status === "pending-review")).toHaveLength(15);
     expect(regionalOccurrenceRecords.every((record) => record.sourceUrl.startsWith("https://") && record.queryUrl.startsWith("https://"))).toBe(true);
     expect(regionalOccurrenceRecords.every((record) => record.evidence.includes("GBIF/Catalogue of Life"))).toBe(true);
   });
