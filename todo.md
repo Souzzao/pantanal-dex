@@ -492,3 +492,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir categoria a partir de outras serpentes ou de outros gêneros
 - [x] Atualizar `STEP-46-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 47/50 — validação oficial de conservação da perereca-do-banheiro
+
+- [x] Confirmar `Boana albopunctata` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Boana albopunctata`, `albopunctata` e `Boana`
+- [x] Registrar `boana-albopunctata` como `not-listed`, sem converter ausência em LC
+- [x] Não confundir `Kielmeyera albopunctata` ou `Boana buriti` com o táxon-alvo
+- [x] Atualizar `STEP-47-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
