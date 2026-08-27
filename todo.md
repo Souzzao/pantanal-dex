@@ -376,3 +376,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar `arara-caninde` como `not-listed`, sem converter ausência em LC ou em avaliação de baixo risco
 - [x] Atualizar `STEP-33-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 34/50 — validação oficial de conservação do tucano-toco
+
+- [x] Confirmar a ficha oficial específica de `Ramphastos toco` no ICMBio/SALVE
+- [x] Confirmar correspondência taxonômica exata, sem restringir a avaliação a subespécie
+- [x] Registrar a categoria oficial `LC` (Menos Preocupante), datada de 05/10/2018
+- [x] Atualizar `STEP-34-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
