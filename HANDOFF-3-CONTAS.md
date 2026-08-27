@@ -421,3 +421,11 @@ O ZIP `PantanalDex-Agente-1-RETOMADA-500.zip`, recebido em `/home/ubuntu/upload`
 A visão geral e a meta de 500 espécies têm hashes idênticos aos arquivos vivos em `handoffs/`. O TODO e o handoff dentro do ZIP são snapshots anteriores e foram preservados sem sobrescrever o estado atual. A revalidação foi registrada em `docs/MVP-STEP-01-AGENT1-PACKAGE-REVALIDATION.md`.
 
 A branch `integracao-retomada-passo-01` foi criada para preservar a regra de não trabalhar diretamente na main. Validação final: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## Passo 2/50 — Matriz de Auditoria Atualizada (Meta 500)
+
+Estado: concluído na branch integracao-retomada-passo-01.
+
+Ações: script `generate-mvp-audit-matrix.ts` atualizado para a nova meta de 500 espécies. Matriz gerada em `docs/MVP-STEP-02-AUDIT-MATRIX.md` com 36 espécies modulares (7% da meta). Registradas 99 imagens e 36 fontes. O relatório operacional agora identifica 3 lotes inválidos estruturalmente (lacunas de imagens) e 9 pendentes.
+
+Governança: Agente 2 deve focar na expansão massiva de lotes; Agente 3 na auditoria individual. Nenhum lote é promovido sem `isCatalogBatchReviewReady`.

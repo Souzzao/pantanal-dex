@@ -17,23 +17,26 @@ const rows = catalogBatches.flatMap((batch) => batch.species.map((item) => {
 }));
 
 const lines = [
-  "# MVP — Passo 2/50: matriz de auditoria P1 e lotes modulares",
+  "# MVP — Passo 2/50: Matriz de Auditoria Atualizada (Meta 500 Espécies)",
   "",
-  `Gerado em ${new Date().toISOString()}. Esta matriz é operacional e não promove lotes automaticamente.`,
+  `Gerado em ${new Date().toISOString()}. Esta matriz é a base operacional para a meta de 500 espécies verificadas no MVP.`,
   "",
   "| Lote | Estado | Espécie | Científico | Grupo | Imagens | Fontes | Conservação | Bloqueios automáticos |",
   "|---|---|---|---|---|---:|---:|---|---|",
   ...rows.map((row) => `| ${row.batch} | ${row.status} | ${row.species} | ${row.scientific} | ${row.group} | ${row.images} | ${row.sources} | ${row.conservation} | ${row.blockers} |`),
   "",
-  "## Resumo",
+  "## Resumo da Auditoria",
   "",
-  `- Espécies modulares auditáveis na matriz: **${rows.length}**.`,
-  `- Lotes: **${catalogReviewReport.totalBatches}**; pending-review: **${catalogReviewReport.pendingBatches}**; verificados: **${catalogReviewReport.verifiedBatches}**; inválidos: **${catalogReviewReport.invalidBatches}**.`,
-  `- Imagens modulares: **${rows.reduce((total, row) => total + row.images, 0)}**; fontes registradas: **${rows.reduce((total, row) => total + row.sources, 0)}**.`,
+  `- Meta Mínima MVP: **500 espécies verificadas**.`,
+  `- Espécies modulares atualmente no catálogo: **${rows.length}** (${Math.round((rows.length / 500) * 100)}% da meta).`,
+  `- Lotes Totais: **${catalogReviewReport.totalBatches}**; Pending-review: **${catalogReviewReport.pendingBatches}**; Verificados: **${catalogReviewReport.verifiedBatches}**; Inválidos: **${catalogReviewReport.invalidBatches}**.`,
+  `- Acervo de Imagens: **${rows.reduce((total, row) => total + row.images, 0)}** arquivos; Fontes registradas: **${rows.reduce((total, row) => total + row.sources, 0)}**.`,
   "",
-  "## Regra do próximo passo",
+  "## Próximos Passos e Governança",
   "",
-  "A Conta 2 deve conferir cada linha contra a página individual da imagem, ocorrência no Pantanal, nomenclatura e fonte oficial de conservação quando houver status. Licença, crédito ou ocorrência não podem ser inferidos pelo padrão automático. Um lote só pode ser promovido quando isCatalogBatchReviewReady for verdadeiro e a evidência estiver registrada no PR.",
+  "1. **Agente 2 (Catálogo):** Deve expandir o catálogo em lotes de 10-20 espécies até atingir a meta de 500. Cada espécie deve ter 3 imagens licenciadas.",
+  "2. **Agente 3 (Qualidade):** Deve realizar a auditoria manual de cada lote pendente, verificando ocorrência regional e validade das licenças.",
+  "3. **Promoção de Lotes:** Um lote só passa de `pending-review` para `verified` após checklist editorial completo e validação técnica via `isCatalogBatchReviewReady`.",
 ];
 
 writeFileSync("docs/MVP-STEP-02-AUDIT-MATRIX.md", `${lines.join("\n")}\n`);
