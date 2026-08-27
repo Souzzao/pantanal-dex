@@ -46,3 +46,37 @@ Fontes: [4] [5] [6]
 [4]: https://commons.wikimedia.org/wiki/File:Phoneutria_nigriventer.jpg "Wikimedia Commons — Phoneutria nigriventer, João P. Burini, CC BY-SA 3.0"
 [5]: https://commons.wikimedia.org/wiki/File:Phoneutria_nigriventer_Brisbane.jpg "Wikimedia Commons — Phoneutria nigriventer Brisbane, Graham Wise, CC BY 2.0"
 [6]: https://commons.wikimedia.org/wiki/File:Phoneutria_nigriventer_male.jpg "Wikimedia Commons — Phoneutria nigriventer male, pablohcapovilla, CC BY-SA 4.0"
+
+
+---
+
+# Registro técnico do passo 31/60 — câmera nativa e galeria
+
+## Implementação
+
+O formulário `app/sightings/new.tsx` passou a oferecer captura nativa por `expo-camera`, usando `CameraView`, `useCameraPermissions` e `takePictureAsync`. A fotografia capturada é exibida em pré-visualização antes do salvamento e pode ser removida pelo usuário.
+
+A seleção da galeria foi mantida e reforçada com solicitação explícita de permissão por `expo-image-picker`. No Web, o botão principal não tenta abrir uma câmera nativa inexistente: informa a limitação e encaminha o usuário para a seleção de imagem da galeria. Em dispositivos nativos, a permissão da câmera só é solicitada quando o usuário escolhe abrir a câmera; em caso de recusa, a galeria continua disponível.
+
+A fotografia é associada ao registro local por `photoUri` e segue o fluxo existente de `addSighting`. Nenhum envio remoto, publicação automática ou alteração do catálogo científico foi introduzido. O controle de visibilidade, localização, observações e seleção de espécie foi preservado.
+
+## Privacidade e acessibilidade
+
+A câmera e a galeria são acionadas somente por ação explícita do usuário. Foram adicionados rótulos e estados de acessibilidade para voltar, selecionar espécie, abrir câmera, capturar, cancelar, remover fotografia, escolher galeria e salvar o avistamento. A recusa de permissões não impede salvar o registro sem fotografia ou coordenadas.
+
+## Validação
+
+| Verificação | Resultado |
+|---|---|
+| TypeScript (`pnpm check`) | PASS |
+| Lint (`pnpm lint`) | PASS; permanece aviso preexistente de módulo do ESLint |
+| Testes (`pnpm test`) | 20 aprovados; 1 teste legado ignorado |
+| Auditoria de prioridades | PASS; 41 entradas, 0 pendências |
+| Auditoria de fontes | PASS; 26 lotes, 60 espécies, 66 fontes estruturadas, 120 URLs GBIF |
+| Auditoria de conservação | PASS; 23 registros, 0 pendências |
+| Auditoria regional | PASS; 7 registros, 0 pendências |
+| `git diff --check` | PASS |
+
+## Conclusão
+
+O passo 31/60 está concluído com câmera nativa, galeria, pré-visualização, remoção de fotografia, tratamento de permissões e fallback Web. Os contratos científicos, os dados do catálogo e a política comercial de imagens não foram alterados.

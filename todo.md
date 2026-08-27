@@ -579,3 +579,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Atualizar `STEP-30-RESEARCH.md`
 - [x] Manter o Lote 01 V3 em `pending-review`
+
+## Passo 31/60 — câmera nativa e galeria
+
+- [x] Adicionar `expo-camera` compatível com Expo SDK 54
+- [x] Implementar `CameraView` e captura real com `takePictureAsync`
+- [x] Solicitar permissões somente após ação explícita do usuário
+- [x] Preservar seleção de galeria e adicionar fallback Web
+- [x] Integrar pré-visualização, remoção e `photoUri` ao avistamento
+- [x] Adicionar labels e estados de acessibilidade
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Atualizar `STEP-31-RESEARCH.md`
