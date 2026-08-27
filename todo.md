@@ -393,3 +393,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar a ressalva sobre a menção oficial do ICMBio à grafia `Zungaru jahu`
 - [x] Atualizar `STEP-35-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 36/50 — validação oficial de conservação da aranha-armadeira
+
+- [x] Confirmar `Phoneutria nigriventer` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Phoneutria nigriventer`, `nigriventer`, `Phoneutria` e `Ctenus`
+- [x] Registrar `phoneutria-nigriventer` como `not-listed`, sem converter ausência em LC
+- [x] Evitar inferência de risco a partir de fontes médicas, distribuição geral ou táxons de Ctenidae distintos
+- [x] Atualizar `STEP-36-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
