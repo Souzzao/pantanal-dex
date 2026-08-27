@@ -61,3 +61,16 @@ Nenhum dos 15 nomes candidatos foi localizado no catálogo atual (`shared/catalo
 ## Conclusão
 
 O passo 34/60 foi concluído como preparação e triagem segura do Lote 02. Os 15 candidatos têm correspondência taxonômica de espécie no GBIF, não duplicam o catálogo atual e foram registrados com evidência de triagem regional quando disponível. A ingestão definitiva permanece condicionada às validações científicas e comerciais dos passos seguintes.
+
+
+## Evidência regional complementar consultada no passo 35
+
+A página institucional do ICMBio sobre o Pantanal descreve o bioma e informa a escala de sua fauna, incluindo centenas de espécies de peixes e aves, mas não constitui, isoladamente, comprovação de cada candidato do Lote 02. [3]
+
+A revisão aberta de Alho sobre a biodiversidade do Pantanal registra 263 espécies de peixes e 113 espécies de répteis na planície, além de citar explicitamente *Hydrodynastes gigas* entre as serpentes da região. A revisão é evidência regional de contexto e de ocorrência explícita para esse táxon, mas os demais candidatos continuam exigindo confirmação individualizada antes da promoção. [4]
+
+O artigo de Fischer, Faria de Godoi e Paranhos Filho fornece uma lista anotada de répteis registrados em paisagens do Cerrado e Pantanal, com dados de campo e georreferenciamento. A publicação é distribuída sob CC BY 4.0, mas cada nome do lote ainda deve ser conferido no corpo ou nos dados associados antes de receber o estado `confirmed`. [5]
+
+[3]: https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal "ICMBio — Pantanal"
+[4]: https://www.scielo.br/j/bjb/a/cTbDFzkGmpNjD4RKnsxfTwn/?lang=en "Alho — Biodiversity of the Pantanal: response to seasonal flooding regime and to environmental degradation"
+[5]: https://checklist.pensoft.net/article/26813/ "Fischer et al. — Roadkill records of reptiles and birds in Cerrado and Pantanal landscapes"
