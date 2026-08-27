@@ -402,3 +402,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Evitar inferência de risco a partir de fontes médicas, distribuição geral ou táxons de Ctenidae distintos
 - [x] Atualizar `STEP-36-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 37/50 — validação oficial de conservação do cateto
+
+- [x] Confirmar `Pecari tajacu` como alvo taxonômico
+- [x] Localizar e abrir a ficha específica do ICMBio/SALVE
+- [x] Confirmar correspondência exata da espécie, sem restrição a subespécie
+- [x] Registrar a categoria oficial `LC` (Menos Preocupante), datada de 08/02/2018
+- [x] Atualizar `STEP-37-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
