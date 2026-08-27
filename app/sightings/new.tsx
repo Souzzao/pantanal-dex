@@ -25,18 +25,39 @@ export default function NewSightingScreen() {
   const [cameraOpen, setCameraOpen] = useState(false);
   const [visibility, setVisibility] = useState<Visibility>("private");
   const [coords, setCoords] = useState<{ latitude: number; longitude: number }>();
+  const [isBusy, setIsBusy] = useState(false);
+  const [mediaError, setMediaError] = useState<string>();
+  const [cameraReady, setCameraReady] = useState(false);
 
-  const pickPhoto = async () => {
-    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permission.granted) {
-      Alert.alert("Galeria não autorizada", "Permita o acesso à galeria para selecionar uma fotografia.");
+  const acceptMedia = (uri: string | undefined, fileSize?: number) => {
+    if (!uri || !/^https?:|^file:|^content:|^ph:|^blob:/i.test(uri)) {
+      setMediaError("A mídia selecionada não possui uma referência válida.");
       return;
     }
-    const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], quality: 0.8, allowsEditing: false });
-    if (!result.canceled && result.assets[0]?.uri) setPhotoUri(result.assets[0].uri);
+    if (fileSize && fileSize > 12 * 1024 * 1024) {
+      setMediaError("A fotografia excede o limite de 12 MB.");
+      return;
+    }
+    setMediaError(undefined);
+    setPhotoUri(uri);
+  };
+
+  const pickPhoto = async () => {
+    try {
+      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permission.granted) {
+        Alert.alert("Galeria não autorizada", "Permita o acesso à galeria para selecionar uma fotografia.");
+        return;
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], quality: 0.8, allowsEditing: false });
+      if (!result.canceled && result.assets[0]) acceptMedia(result.assets[0].uri, result.assets[0].fileSize);
+    } catch {
+      setMediaError("Não foi possível acessar a galeria. Tente novamente.");
+    }
   };
 
   const openCamera = async () => {
+    if (isBusy) return;
     if (Platform.OS === "web") {
       Alert.alert("Câmera no navegador", "A captura nativa não está disponível na Web. Selecione uma imagem pela galeria.");
       await pickPhoto();
@@ -49,14 +70,21 @@ export default function NewSightingScreen() {
         return;
       }
     }
+    setMediaError(undefined);
+    setCameraReady(false);
     setCameraOpen(true);
   };
 
   const takePhoto = async () => {
-    const result = await cameraRef.current?.takePictureAsync({ quality: 0.8, skipProcessing: true });
-    if (result?.uri) {
-      setPhotoUri(result.uri);
-      setCameraOpen(false);
+    if (!cameraReady || isBusy) return;
+    try {
+      const result = await cameraRef.current?.takePictureAsync({ quality: 0.8, skipProcessing: true });
+      if (result?.uri) {
+        acceptMedia(result.uri);
+        setCameraOpen(false);
+      } else setMediaError("A câmera não retornou uma fotografia. Tente novamente.");
+    } catch {
+      setMediaError("Não foi possível capturar a fotografia. Tente novamente.");
     }
   };
 
@@ -69,11 +97,20 @@ export default function NewSightingScreen() {
   };
 
   const save = async () => {
+    if (isBusy) return;
     if (!date) return Alert.alert("Data obrigatória", "Informe a data do avistamento.");
-    const id = `${Date.now()}`;
-    const now = new Date().toISOString();
-    await addSighting({ id, speciesId: selected, photoUri, date, time: time || undefined, locationLabel: locationLabel || undefined, latitude: coords?.latitude, longitude: coords?.longitude, locationPrecision: coords ? "exact" : "none", quantity: quantity ? Number(quantity) : undefined, notes: notes || undefined, visibility, createdAt: now, updatedAt: now });
-    router.replace({ pathname: "/sightings/[id]", params: { id } } as any);
+    const parsedQuantity = quantity ? Number(quantity) : undefined;
+    if (parsedQuantity !== undefined && (!Number.isFinite(parsedQuantity) || parsedQuantity < 0)) return Alert.alert("Quantidade inválida", "Informe uma quantidade igual ou maior que zero.");
+    setIsBusy(true);
+    try {
+      const id = `${Date.now()}`;
+      const now = new Date().toISOString();
+      await addSighting({ id, speciesId: selected, photoUri, date, time: time || undefined, locationLabel: locationLabel || undefined, latitude: coords?.latitude, longitude: coords?.longitude, locationPrecision: coords ? "exact" : "none", quantity: parsedQuantity, notes: notes || undefined, visibility, createdAt: now, updatedAt: now });
+      router.replace({ pathname: "/sightings/[id]", params: { id } } as any);
+    } catch {
+      Alert.alert("Não foi possível salvar", "Tente novamente sem sair desta tela.");
+      setIsBusy(false);
+    }
   };
 
   return <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5">
@@ -84,13 +121,14 @@ export default function NewSightingScreen() {
       <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Espécie</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingBottom: 15 }}>{species.map((item) => <Pressable key={item.id} onPress={() => setSelected(item.id)} accessibilityRole="button" accessibilityLabel={`Selecionar ${item.commonName}`} accessibilityState={{ selected: selected === item.id }} style={{ backgroundColor: selected === item.id ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}><Text style={{ color: selected === item.id ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{item.commonName}</Text></Pressable>)}</ScrollView>
       {[['Data *', date, setDate, '2026-08-21'], ['Horário', time, setTime, '14:30'], ['Local', locationLabel, setLocationLabel, 'Baía ou município'], ['Quantidade', quantity, setQuantity, 'Ex.: 2']].map(([label, value, setter, placeholder]) => <View key={label as string} style={{ marginBottom: 14 }}><Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 7 }}>{label as string}</Text><TextInput value={value as string} onChangeText={setter as any} placeholder={placeholder as string} placeholderTextColor={colors.muted} keyboardType={label === "Quantidade" ? "numeric" : "default"} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground }} /></View>)}
-      {cameraOpen ? <View style={{ height: 300, borderRadius: 16, overflow: "hidden", marginBottom: 12, backgroundColor: "#111" }}><CameraView ref={cameraRef} facing="back" style={{ flex: 1 }} /><View style={{ position: "absolute", left: 0, right: 0, bottom: 14, flexDirection: "row", justifyContent: "center", gap: 10 }}><Pressable onPress={() => setCameraOpen(false)} accessibilityRole="button" accessibilityLabel="Cancelar câmera" style={{ backgroundColor: "rgba(0,0,0,.65)", borderRadius: 18, paddingHorizontal: 16, paddingVertical: 11 }}><Text style={{ color: "#fff", fontWeight: "800" }}>Cancelar</Text></Pressable><Pressable onPress={takePhoto} accessibilityRole="button" accessibilityLabel="Capturar fotografia" style={{ backgroundColor: colors.primary, borderRadius: 18, paddingHorizontal: 18, paddingVertical: 11 }}><Text style={{ color: "#fff", fontWeight: "800" }}>Capturar</Text></Pressable></View></View> : null}
-      {photoUri ? <View style={{ marginBottom: 14 }}><Image source={{ uri: photoUri }} accessibilityLabel="Pré-visualização da fotografia do avistamento" style={{ width: "100%", height: 210, borderRadius: 14, backgroundColor: colors.border }} /><Pressable onPress={() => setPhotoUri(undefined)} accessibilityRole="button" accessibilityLabel="Remover fotografia" style={{ alignSelf: "flex-start", marginTop: 8 }}><Text style={{ color: colors.primary, fontWeight: "800" }}>Remover fotografia</Text></Pressable></View> : null}
+      {cameraOpen ? <View style={{ height: 300, borderRadius: 16, overflow: "hidden", marginBottom: 12, backgroundColor: "#111" }}><CameraView ref={cameraRef} facing="back" onCameraReady={() => setCameraReady(true)} style={{ flex: 1 }} /><View style={{ position: "absolute", left: 0, right: 0, bottom: 14, flexDirection: "row", justifyContent: "center", gap: 10 }}><Pressable onPress={() => { setCameraOpen(false); setCameraReady(false); }} accessibilityRole="button" accessibilityLabel="Cancelar câmera" style={{ backgroundColor: "rgba(0,0,0,.65)", borderRadius: 18, paddingHorizontal: 16, paddingVertical: 11 }}><Text style={{ color: "#fff", fontWeight: "800" }}>Cancelar</Text></Pressable><Pressable onPress={takePhoto} disabled={!cameraReady || isBusy} accessibilityRole="button" accessibilityLabel="Capturar fotografia" style={{ backgroundColor: cameraReady ? colors.primary : colors.muted, borderRadius: 18, paddingHorizontal: 18, paddingVertical: 11 }}><Text style={{ color: "#fff", fontWeight: "800" }}>{cameraReady ? "Capturar" : "Preparando…"}</Text></Pressable></View></View> : null}
+      {mediaError ? <Text accessibilityRole="alert" style={{ color: colors.error, marginBottom: 12 }}>{mediaError}</Text> : null}
+      {photoUri ? <View style={{ marginBottom: 14 }}><Image source={{ uri: photoUri }} accessibilityLabel="Pré-visualização da fotografia do avistamento" style={{ width: "100%", height: 210, borderRadius: 14, backgroundColor: colors.border }} /><Pressable onPress={() => { setPhotoUri(undefined); setMediaError(undefined); }} accessibilityRole="button" accessibilityLabel="Remover fotografia" style={{ alignSelf: "flex-start", marginTop: 8 }}><Text style={{ color: colors.primary, fontWeight: "800" }}>Remover fotografia</Text></Pressable></View> : null}
       <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }}><Pressable onPress={openCamera} accessibilityRole="button" accessibilityLabel="Abrir câmera" accessibilityHint="Solicita permissão e abre a câmera nativa no aparelho" style={{ flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14 }}><Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{Platform.OS === "web" ? "Selecionar foto" : "Abrir câmera"}</Text></Pressable><Pressable onPress={pickPhoto} accessibilityRole="button" accessibilityLabel="Selecionar foto da galeria" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}><Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Galeria</Text></Pressable></View>
       <Pressable onPress={useLocation} accessibilityRole="button" accessibilityLabel="Usar localização do aparelho" style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}><Text style={{ color: colors.primary, fontWeight: "800" }}>{coords ? "Localização adicionada" : "Usar localização do aparelho"}</Text></Pressable>
       <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 7 }}>Observações</Text><TextInput value={notes} onChangeText={setNotes} multiline placeholder="Comportamento, ambiente e outras notas" placeholderTextColor={colors.muted} style={{ minHeight: 105, textAlignVertical: "top", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 14 }} />
       <View style={{ flexDirection: "row", gap: 8, marginBottom: 20 }}>{(["private", "shareable"] as Visibility[]).map((item) => <Pressable key={item} onPress={() => setVisibility(item)} accessibilityRole="button" accessibilityLabel={item === "private" ? "Registro pessoal" : "Registro compartilhável"} accessibilityState={{ selected: visibility === item }} style={{ flex: 1, backgroundColor: visibility === item ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 12 }}><Text style={{ textAlign: "center", color: visibility === item ? "#fff" : colors.foreground, fontWeight: "700" }}>{item === "private" ? "Pessoal" : "Compartilhável"}</Text></Pressable>)}</View>
-      <Pressable onPress={save} accessibilityRole="button" accessibilityLabel="Salvar avistamento" style={{ backgroundColor: colors.primary, borderRadius: 16, padding: 16 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800", fontSize: 16 }}>Salvar avistamento</Text></Pressable>
+      <Pressable onPress={save} disabled={isBusy} accessibilityRole="button" accessibilityLabel="Salvar avistamento" style={{ backgroundColor: isBusy ? colors.muted : colors.primary, borderRadius: 16, padding: 16 }}><Text style={{ color: "#fff", textAlign: "center", fontWeight: "800", fontSize: 16 }}>{isBusy ? "Salvando…" : "Salvar avistamento"}</Text></Pressable>
     </ScrollView>
   </ScreenContainer>;
 }

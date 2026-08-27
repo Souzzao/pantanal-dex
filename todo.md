@@ -590,3 +590,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Adicionar labels e estados de acessibilidade
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Atualizar `STEP-31-RESEARCH.md`
+
+## Passo 32/60 — resiliência da câmera e galeria
+
+- [x] Controlar estado de câmera pronta com `onCameraReady`
+- [x] Permitir cancelamento e repetição sem estado obsoleto
+- [x] Validar URI e limitar arquivos de galeria a 12 MB
+- [x] Tratar falhas de permissão, galeria, captura e salvamento
+- [x] Impedir duplo salvamento e validar quantidade
+- [x] Preservar fallback Web, acessibilidade e contratos científicos/comerciais
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Atualizar `STEP-32-RESEARCH.md`
