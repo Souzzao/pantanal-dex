@@ -558,3 +558,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar a limitação HTTP 429 do endpoint do Commons
 - [x] Atualizar `STEP-28-RESEARCH.md`
 - [ ] Completar a ingestão modular e a auditoria comercial no passo 29/60
+
+## Passo 29/60 — Lote 01 V3 em revisão pendente
+
+- [x] Reconfirmar o escopo das 15 espécies do Lote 01
+- [x] Preservar a triagem taxonômica GBIF e corrigir o sinônimo `Aratinga nenday`
+- [x] Verificar fontes regionais oficiais disponíveis sem extrapolar evidência individual
+- [x] Não inserir imagens, autorias, licenças ou status de conservação não comprovados
+- [x] Registrar o bloqueio HTTP 429 do Wikimedia Commons
+- [x] Atualizar `STEP-29-RESEARCH.md`
+- [ ] Promover os 15 registros modulares após auditoria comercial completa das mídias
