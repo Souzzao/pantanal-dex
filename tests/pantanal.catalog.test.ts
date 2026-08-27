@@ -85,8 +85,9 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps conservation review official and conservative", () => {
-    expect(conservationReviewRecords).toHaveLength(19);
+    expect(conservationReviewRecords).toHaveLength(20);
     expect(conservationReviewValidationErrors).toEqual([]);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "oxybelis-aeneus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pitangus-sulphuratus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pimelodus-maculatus")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "vanessa-myrinna")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });

@@ -483,3 +483,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir categoria a partir de registros gerais de aves ou de outros táxons
 - [x] Atualizar `STEP-45-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 46/50 — validação oficial de conservação da cobra-cipó
+
+- [x] Confirmar `Oxybelis aeneus` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Oxybelis aeneus`, `aeneus` e `Oxybelis`
+- [x] Registrar `oxybelis-aeneus` como `not-listed`, sem converter ausência em LC
+- [x] Não inferir categoria a partir de outras serpentes ou de outros gêneros
+- [x] Atualizar `STEP-46-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
