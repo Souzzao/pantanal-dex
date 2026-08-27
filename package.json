@@ -27,6 +27,7 @@
     "catalog:synonym-audit": "tsx scripts/synonym-audit.ts",
     "catalog:vocabulary-audit": "tsx scripts/catalog-vocabulary-audit.ts",
     "catalog:architecture-audit": "tsx scripts/catalog-architecture-audit.ts",
+    "catalog:image-availability": "tsx scripts/image-availability-audit.ts",
     "watchdog": "pnpm check && pnpm lint && pnpm test && pnpm catalog:priority-audit",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "android": "expo start --android",

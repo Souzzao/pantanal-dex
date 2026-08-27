@@ -207,3 +207,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 31. `[x]` Executar passo 14/50: criar `pnpm catalog:vocabulary-audit` e `CATALOG-VOCABULARY-AUDIT.md`; auditar 55 registros contra 6 grupos e 5 ambientes, com 0 grupos/ambientes inválidos, 0 lacunas e cobertura completa confirmada no My Browser.
 
 32. `[x]` Executar passo 15/50 — arquitetura modular: criar `pnpm catalog:architecture-audit` e `CATALOG-ARCHITECTURE-AUDIT.md`; 21 lotes, 55 espécies, IDs de lote/espécie únicos, 6 grupos e 5 ambientes indexados, 0 falhas. Cartão nativo validado no My Browser.
+
+
+## Auditoria do catálogo — passos 1–16/50
+
+- [x] Passo 16/50: auditar disponibilidade HTTP de imagens e páginas de crédito
+- [x] Classificar HTTP 429 como rate limiting temporário, separado de falhas definitivas
+- [x] Corrigir a página Commons 404 de `Anodorhynchus hyacinthinus`
+- [x] Gerar `CATALOG-IMAGE-AVAILABILITY-AUDIT.md` com contagem por tipo e pendências
+- [ ] Rechecar as 192 URLs HTTP 429 com concorrência reduzida antes de promover disponibilidade plena
+- [ ] Passo 17/50: iniciar a próxima pendência científica desbloqueada após integração da Conta 1

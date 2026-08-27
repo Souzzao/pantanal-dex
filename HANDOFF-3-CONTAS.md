@@ -479,3 +479,12 @@ O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publ
 Foi criado `scripts/catalog-architecture-audit.ts`, exposto como `pnpm catalog:architecture-audit`, para verificar isolamento dos lotes, unicidade de IDs e integridade dos índices. A primeira execução detectou corretamente que o status pertence ao lote, não à espécie; o auditor foi corrigido para usar `CatalogBatch.status` conforme o contrato real. A execução final resultou em `PASS`: 21 lotes, 55 espécies, 0 IDs de lote duplicados, 0 IDs de espécie duplicados, 6 grupos e 5 ambientes indexados.
 
 O artefato gerado é `CATALOG-ARCHITECTURE-AUDIT.md`. A tela nativa foi atualizada como “Arquitetura modular — Passo 15/50”, e o My Browser confirmou “21 lotes · 55 espécies” e “Arquitetura isolada e indexada”. O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+
+## 24. Passo 16/50 — auditoria de disponibilidade de imagens
+
+A Conta 2 concluiu a auditoria automatizada de 330 URLs do catálogo combinado: 165 arquivos de imagem e 165 páginas de crédito, cobrindo 55 espécies modulares e três imagens por espécie. O script `scripts/image-availability-audit.ts` foi ajustado para distinguir falhas definitivas de HTTP 429 (rate limiting). O relatório versionado é `CATALOG-IMAGE-AVAILABILITY-AUDIT.md`.
+
+A primeira execução identificou uma página Commons 404 causada por grafia incorreta do epíteto específico no crédito de `Anodorhynchus hyacinthinus`; a URL foi corrigida e confirmada na página oficial do arquivo. A execução final registrou 138 respostas bem-sucedidas, 192 respostas HTTP 429 e 0 falhas definitivas, com status `PASS_WITH_LIMITATION`. As respostas 429 permanecem pendentes de rechecagem com menor concorrência/intervalo e não foram classificadas como URLs quebradas.
+
+A auditoria confirma apenas disponibilidade HTTP, não autoria, licença ou ocorrência regional. As licenças comerciais continuam sujeitas ao manifesto e ao validador do catálogo. Próximo passo: 17/50, selecionar a primeira pendência desbloqueada do checklist e executar sua validação científica sem promover dados sem evidência.

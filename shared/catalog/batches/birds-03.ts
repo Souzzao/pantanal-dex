@@ -47,7 +47,7 @@ export const birds03: CatalogBatch = {
       distribution: "Centro da América do Sul, com populações no Brasil, Bolívia e Paraguai.",
       ecologicalImportance: "Participa da dispersão e do consumo de sementes e depende de árvores maduras para reprodução.",
       images: [
-        image("https://upload.wikimedia.org/wikipedia/commons/7/78/Hyacinth_Macaw_%28Anodorhynchus_hyacinthinus%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw_(Anodorhynchus_hyacinthus),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/7/78/Hyacinth_Macaw_%28Anodorhynchus_hyacinthinus%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw_(Anodorhynchus_hyacinthinus),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann_2.jpg", "Thomas Fuhrmann / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/2/2a/Anodorhynchus_hyacinthinus_-Hyacinth_Macaw_-side_of_head.jpg", "Randy", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Anodorhynchus_hyacinthinus_-Hyacinth_Macaw_-side_of_head.jpg", "Randy / Wikimedia Commons"),
         image("https://upload.wikimedia.org/wikipedia/commons/d/da/Arara_Azul_no_Pantanal.jpg", "Leonardo Ramos", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Arara_Azul_no_Pantanal.jpg", "Leonardo Ramos / Wikimedia Commons"),
       ],
