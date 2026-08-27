@@ -22,7 +22,7 @@ import { invertebrates06 } from "./batches/invertebrates-06";
 import { invertebrates07 } from "./batches/invertebrates-07";
 import { validateCatalogBatches, type CatalogBatch } from "./types";
 import { createFrozenCatalogContract } from "./contract";
-import { catalogPriorityMatrix } from "./priorities";
+import { catalogPriorityMatrix, validateCatalogPriorities } from "./priorities";
 import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "./regional-occurrence";
 import { conservationReviewRecords, validateConservationReviewRecords } from "./conservation";
 import { applyDocumentedSynonyms, documentedSynonyms, validateDocumentedSynonyms } from "./synonyms";
@@ -30,7 +30,7 @@ import { applyDocumentedSynonyms, documentedSynonyms, validateDocumentedSynonyms
 export const catalogBatches: CatalogBatch[] = [mammals01, birds01, birds02, birds03, birds04, birds05, reptiles01, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const frozenCatalogContract = createFrozenCatalogContract(catalogBatches, catalogSpecies);
-export { catalogP1Priorities, catalogP2Priorities, catalogPriorityMatrix } from "./priorities";
+export { catalogP1Priorities, catalogP2Priorities, catalogPriorityMatrix, validateCatalogPriorities } from "./priorities";
 export { regionalOccurrenceRecords } from "./regional-occurrence";
 export { conservationReviewRecords } from "./conservation";
 export { documentedSynonyms } from "./synonyms";
@@ -40,6 +40,7 @@ export const regionalOccurrenceValidationErrors = validateRegionalOccurrenceReco
 export const conservationReviewValidationErrors = validateConservationReviewRecords(conservationReviewRecords);
 export const catalogSpeciesWithSynonyms = applyDocumentedSynonyms(catalogSpecies);
 export const documentedSynonymValidationErrors = validateDocumentedSynonyms(catalogSpecies);
+export const catalogPriorityValidationErrors = validateCatalogPriorities(catalogPriorityMatrix);
 export const catalogSpeciesByEnvironment = catalogSpecies.reduce<Record<string, Species[]>>((index, item) => {
   for (const environment of item.environments) (index[environment] ??= []).push(item);
   return index;
@@ -49,6 +50,6 @@ export const catalogSpeciesByGroup = catalogSpecies.reduce<Record<string, Specie
   return index;
 }, {});
 
-if (catalogValidationErrors.length) {
-  throw new Error(`Catálogo inválido: ${catalogValidationErrors.join("; ")}`);
+if (catalogValidationErrors.length || catalogPriorityValidationErrors.length) {
+  throw new Error(`Catálogo inválido: ${[...catalogValidationErrors, ...catalogPriorityValidationErrors].join("; ")}`);
 }

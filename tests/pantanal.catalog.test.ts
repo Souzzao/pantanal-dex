@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { environments, groups, normalizeCatalogSearch, species, speciesMatchesCatalogSearch } from "../shared/pantanal";
-import { catalogSpeciesByEnvironment, catalogSpeciesByGroup, catalogP1Priorities, catalogP2Priorities, catalogPriorityCoverage } from "../shared/catalog";
+import { catalogSpeciesByEnvironment, catalogSpeciesByGroup, catalogP1Priorities, catalogP2Priorities, catalogPriorityCoverage, catalogPriorityValidationErrors, validateCatalogPriorities, catalogPriorityMatrix } from "../shared/catalog";
 import { catalogBatches, catalogSpecies, catalogValidationErrors, frozenCatalogContract, regionalOccurrenceRecords, regionalOccurrenceValidationErrors, conservationReviewRecords, conservationReviewValidationErrors, catalogSpeciesWithSynonyms, documentedSynonyms, documentedSynonymValidationErrors } from "../shared/catalog";
 import { applyDocumentedSynonyms } from "../shared/catalog/synonyms";
 import { CATALOG_CONTRACT_VERSION, CATALOG_ENVIRONMENTS, CATALOG_GROUPS, CATALOG_REQUIRED_SPECIES_FIELDS } from "../shared/catalog/contract";
 import { validateCatalogBatch, validateSpeciesRecords } from "../shared/catalog/types";
+
+function catalogPriorityMatrixScientificNames() {
+  const names = catalogPriorityMatrix.map((item) => item.scientificName?.toLowerCase() ?? "");
+  return names.filter((name, index) => names.indexOf(name) !== index);
+}
 
 describe("PantanalDex catalog", () => {
   it("contains at least 20 species across all supported groups and environments", () => {
@@ -40,6 +45,17 @@ describe("PantanalDex catalog", () => {
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P2").every((item) => item.speciesId !== null && item.present)).toBe(true);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && !item.present).length).toBeGreaterThan(0);
     expect(catalogPriorityCoverage.filter((item) => item.priority === "P1" && item.speciesId === null).every((item) => item.rationale.includes("ainda sem registro"))).toBe(true);
+  });
+
+  it("keeps priority selection real, unique and taxonomically traceable", () => {
+    expect(catalogPriorityValidationErrors).toEqual([]);
+    expect(validateCatalogPriorities(catalogPriorityMatrix, species)).toEqual([]);
+    expect(catalogPriorityMatrixScientificNames()).toHaveLength(0);
+    expect(catalogP1Priorities.every((item) => item.scientificName && item.sourceUrl.startsWith("https://api.gbif.org/v1/species/match?name="))).toBe(true);
+    expect(catalogP2Priorities.some((item) => item.scientificName === "Hoplias malabaricus" && item.speciesId === "hoplias-malabaricus")).toBe(true);
+
+    const duplicateTaxon = { ...catalogP1Priorities[0], speciesId: "outro-id" };
+    expect(validateCatalogPriorities([...catalogP1Priorities, duplicateTaxon])).toEqual(expect.arrayContaining([expect.stringContaining("táxon prioritário duplicado")]));
   });
 
   it("keeps documented synonyms traceable and searchable", () => {
