@@ -35,7 +35,7 @@ export const catalogP1Priorities: readonly CatalogPriority[] = [
   p1("Tuiuiú", "Jabiru mycteria", "tuiuiu", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Símbolo do Pantanal e espécie de referência para áreas alagadas."),
   p1("Arara-azul", "Anodorhynchus hyacinthinus", "arara-azul", ["Aves"], ["Matas", "Bordas de mata"], "Espécie emblemática e prioritária para revisão de conservação."),
   p1("Arara-canindé", "Ara ararauna", "arara-caninde", ["Aves"], ["Matas", "Bordas de mata"], "Espécie P1 validada taxonomicamente e regionalmente no passo 28."),
-  p1("Tucano-toco", "Ramphastos toco", null, ["Aves"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Tucano-toco", "Ramphastos toco", "tucano-toco", ["Aves"], ["Matas", "Bordas de mata"], "Espécie P1 validada taxonomicamente e regionalmente no passo 29."),
   p1("Seriema", "Cariama cristata", "seriema", ["Aves"], ["Campos", "Bordas de mata"], "Ave terrestre emblemática de áreas abertas."),
   p1("Anhuma", "Anhima cornuta", "anhuma", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Ave de referência para áreas úmidas e campos alagáveis."),
   p1("Garça-branca", "Ardea alba", "garca-branca", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Indicadora visual de ambientes aquáticos rasos."),

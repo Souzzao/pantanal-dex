@@ -596,3 +596,12 @@ A Conta 2 validou `Arara-canindé` (`Ara ararauna`) como a próxima entrada P1 s
 Foi criado `catalog-birds-06` com 1 espécie, 3 imagens e fontes GBIF/ICMBio. O arquivo Commons `Blue-and-Yellow-Macaw.jpg` foi auditado e rejeitado por GFDL 1.2. As imagens selecionadas são `Ara-ararauna.jpg` (CC BY 2.0, Jan Smith), `Ara ararauna -Jurong Bird Park, Singapore-8.jpg` (CC BY 2.0, Jan Smith) e `"arara-canindé" - Ara ararauna.jpg` (CC BY-SA 4.0, DiogoKanouté). A matriz P1 foi atualizada para `arara-caninde`.
 
 O catálogo passou a 57 espécies modulares, 23 lotes, 171 imagens e 77 registros agregados; 38 prioridades estão selecionadas e 3 permanecem pendentes (`tucano-toco`, `jaú` e `aranha-armadeira`). Auditorias de prioridade e fontes retornaram `PASS`, com 0 erros; testes passaram com 20 aprovados e 1 legado ignorado. O dossiê `STEP-28-RESEARCH.md`, TODO e este handoff foram atualizados.
+
+
+## 37. Passo 29/50 — inclusão e validação científica do tucano-toco
+
+A Conta 2 validou `Tucano-toco` (`Ramphastos toco`) como a próxima entrada P1 sem registro. O GBIF/Catalogue of Life confirma *Ramphastos toco* P. L. S. Müller, 1776 como espécie aceita. O estudo de Ragusa-Netto, indexado no PubMed, documenta abundância e frugivoria em floresta de galeria do Pantanal Sul, sub-região de Miranda, sustentando a ocorrência regional direta.
+
+Foi criado `catalog-birds-07` em estado `review-ready`, com 1 espécie, 3 imagens e fontes GBIF/PubMed. As imagens selecionadas são Chris Parfitt (CC BY 2.0), Germano Roberto Schüür (CC BY-SA 3.0) e gipe25 (CC BY-SA 2.0), todas compatíveis com uso comercial. A informação de CITES II exibida pelo GBIF foi preservada como contexto de comércio e não convertida em categoria nacional de ameaça. A matriz P1 foi atualizada para `tucano-toco`.
+
+O catálogo passou a 58 espécies modulares, 24 lotes, 174 imagens e 78 registros agregados; 39 prioridades estão selecionadas e 2 permanecem pendentes (`jaú` e `aranha-armadeira`). A allowlist foi estendida para o host oficial PubMed e o auditor de fontes foi alinhado. Auditorias de prioridade e fontes retornaram `PASS`, com 0 erros; testes passaram com 20 aprovados e 1 legado ignorado. O dossiê `STEP-29-RESEARCH.md`, TODO e este handoff foram atualizados.

@@ -9,8 +9,8 @@
 | Entradas prioritárias | 41 |
 | P1 | 28 |
 | P2 | 13 |
-| Selecionadas com ID no catálogo combinado | 38 |
-| Pendentes sem registro no catálogo | 3 |
+| Selecionadas com ID no catálogo combinado | 39 |
+| Pendentes sem registro no catálogo | 2 |
 | Resultado do validador | **PASS** |
 
 ## Seleções com registro correspondente
@@ -27,6 +27,7 @@
 | P1 | Tuiuiú | Jabiru mycteria | tuiuiu | Aves | Áreas alagadas, Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Jabiru%20mycteria) |
 | P1 | Arara-azul | Anodorhynchus hyacinthinus | arara-azul | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Anodorhynchus%20hyacinthinus) |
 | P1 | Arara-canindé | Ara ararauna | arara-caninde | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Ara%20ararauna) |
+| P1 | Tucano-toco | Ramphastos toco | tucano-toco | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Ramphastos%20toco) |
 | P1 | Seriema | Cariama cristata | seriema | Aves | Campos, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Cariama%20cristata) |
 | P1 | Anhuma | Anhima cornuta | anhuma | Aves | Áreas alagadas, Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Anhima%20cornuta) |
 | P1 | Garça-branca | Ardea alba | garca-branca | Aves | Áreas alagadas, Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Ardea%20alba) |
@@ -60,7 +61,6 @@
 
 | Prioridade | Nome popular | Nome científico | ID | Grupo | Ambientes | Fonte taxonômica |
 |---|---|---|---|---|---|---|
-| P1 | Tucano-toco | Ramphastos toco | — | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Ramphastos%20toco) |
 | P1 | Jaú | Zungaro jahu | — | Peixes | Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Zungaro%20jahu) |
 | P1 | Aranha-armadeira | Phoneutria nigriventer | — | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Phoneutria%20nigriventer) |
 

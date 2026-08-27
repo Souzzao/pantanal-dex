@@ -1,6 +1,6 @@
 import { catalogBatches } from "../shared/catalog";
 
-const approvedHosts = new Set(["api.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "pt.wikipedia.org", "www.wikidata.org"]);
+const approvedHosts = new Set(["api.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "www.gov.br", "pubmed.ncbi.nlm.nih.gov", "pt.wikipedia.org", "www.wikidata.org"]);
 const errors: string[] = [];
 let sourceCount = 0;
 let gbifCount = 0;

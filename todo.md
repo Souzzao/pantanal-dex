@@ -329,3 +329,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar a matriz P1 para apontar ao ID `arara-caninde`
 - [x] Atualizar `STEP-28-RESEARCH.md`, métricas, testes, auditorias e handoff
 - [x] Reduzir as pendências P1/P2 para 3: `tucano-toco`, `jaú` e `aranha-armadeira`
+
+
+## Passo 29/50 — inclusão e validação do tucano-toco
+
+- [x] Confirmar `Ramphastos toco` como espécie aceita no GBIF/Catalogue of Life
+- [x] Confirmar ocorrência no Pantanal Sul, sub-região de Miranda, por estudo primário indexado no PubMed
+- [x] Criar o lote isolado `catalog-birds-07` em estado `review-ready`, com campos científicos completos
+- [x] Auditar três imagens Commons: CC BY 2.0, CC BY-SA 3.0 e CC BY-SA 2.0
+- [x] Atualizar a matriz P1 para apontar ao ID `tucano-toco`
+- [x] Atualizar `STEP-29-RESEARCH.md`, allowlist PubMed, métricas, testes, auditorias e handoff
+- [x] Reduzir as pendências P1/P2 para 2: `jaú` e `aranha-armadeira`
