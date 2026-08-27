@@ -7,9 +7,15 @@ export const birds04: CatalogBatch = {
   cycle: 5,
   group: "Aves",
   status: "pending-review",
+  pendingNotes: [
+    "O lote representa parte da frente P1 solicitada: Tuiuiú/Jabiru e Arara-azul. Arara-canindé permanece em birds-03; Colhereiro foi acrescentado neste lote após validação taxonômica e de imagens.",
+    "Não promover enquanto a ocorrência individual no Pantanal e a conservação oficial brasileira não estiverem documentadas em fonte ICMBio/MMA ou ficha SALVE reproduzível."
+  ],
   sources: [
     { title: "GBIF — Jabiru mycteria", url: "https://www.gbif.org/species/2481932" },
     { title: "GBIF — Anodorhynchus hyacinthinus", url: "https://www.gbif.org/species/2479359" },
+    { title: "GBIF — Platalea ajaja", url: "https://www.gbif.org/species/2480803" },
+    { title: "Wikipédia — Colhereiro", url: "https://pt.wikipedia.org/wiki/Colhereiro" },
   ],
   species: [
     {
@@ -50,9 +56,33 @@ export const birds04: CatalogBatch = {
       images: [
         image("https://commons.wikimedia.org/wiki/Special:FilePath/Anodorhynchus%20hyacinthinus%20-Brazil-8.jpg", "Dario Sanches", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Anodorhynchus_hyacinthinus_-Brazil-8.jpg", "Dario Sanches / Wikimedia Commons"),
         image("https://commons.wikimedia.org/wiki/Special:FilePath/Hyacinth%20Macaw.jpg?width=900", "iNaturalist", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw.jpg", "iNaturalist / Wikimedia Commons"),
-        image("https://commons.wikimedia.org/wiki/Special:FilePath/Anodorhynchus%20hyacinthinus%20in%20flight.jpg?width=900", "iNaturalist", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Anodorhynchus_hyacinthinus_in_flight.jpg", "iNaturalist / Wikimedia Commons")
+        image("https://commons.wikimedia.org/wiki/Special:FilePath/017%20Hyacinth%20macaw%20flying%20in%20Encontro%20das%20%C3%81guas%20State%20Park%20Photo%20by%20Giles%20Laurent.jpg?width=900", "Giles Laurent", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:017_Hyacinth_macaw_flying_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg", "Giles Laurent / Wikimedia Commons")
       ],
       sources: [{ title: "GBIF — Anodorhynchus hyacinthinus", url: "https://www.gbif.org/species/2479359" }],
+    },
+    {
+      id: "colhereiro",
+      commonName: "Colhereiro",
+      scientificName: "Platalea ajaja",
+      group: "Aves",
+      environments: ["Áreas alagadas", "Rios e corixos"],
+      description: "Ave pernalta de áreas úmidas, reconhecida pelo bico achatado em forma de colher e pela plumagem rosada.",
+      physicalCharacteristics: "Pescoço longo, pernas compridas, bico largo na extremidade e plumagem rosada.",
+      habitat: "Águas rasas, margens de lagoas, baías, rios e outras áreas alagadas.",
+      behavior: "Revira o fundo da água com o bico para localizar pequenos animais e pode forragear em bandos.",
+      diet: "Peixes, crustáceos, insetos e outros pequenos animais aquáticos.",
+      curiosities: ["O formato do bico favorece a busca de alimento em águas rasas.", "A intensidade da coloração rosada pode variar com a dieta."],
+      distribution: "Américas tropicais e subtropicais; a confirmação de ocorrência específica no Pantanal permanece pendente nesta auditoria.",
+      ecologicalImportance: "Integra as comunidades de aves limícolas e participa do fluxo de energia das áreas úmidas.",
+      images: [
+        image("https://commons.wikimedia.org/wiki/Special:FilePath/Platalea_ajaja_5.jpg?width=900", "Riverbanks Outdoor Store / berichard", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Platalea_ajaja_5.jpg", "Riverbanks Outdoor Store / berichard / Wikimedia Commons"),
+        image("https://commons.wikimedia.org/wiki/Special:FilePath/Roseate_Spoonbill_Platalea_ajaja_JG.jpg?width=900", "JeffreyGammon", "CC BY 4.0", "https://commons.wikimedia.org/wiki/File:Roseate_Spoonbill_Platalea_ajaja_JG.jpg", "JeffreyGammon / Wikimedia Commons"),
+        image("https://commons.wikimedia.org/wiki/Special:FilePath/Roseate_Spoonbill_Platalea_ajaja_National_Aviary_2650px.jpg?width=900", "Derek Ramsey (Ram-Man)", "CC BY-SA 2.5", "https://commons.wikimedia.org/wiki/File:Roseate_Spoonbill_Platalea_ajaja_National_Aviary_2650px.jpg", "Derek Ramsey (Ram-Man) / Wikimedia Commons")
+      ],
+      sources: [
+        { title: "GBIF — Platalea ajaja", url: "https://www.gbif.org/species/2480803" },
+        { title: "Wikipédia — Colhereiro", url: "https://pt.wikipedia.org/wiki/Colhereiro" }
+      ],
     },
   ],
 };

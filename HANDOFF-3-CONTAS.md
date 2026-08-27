@@ -497,3 +497,20 @@ Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente
 - **Agente 3 (Qualidade)**: Validar a renderização das aves P1 no navegador e verificar se os filtros por ambiente (Matas, Áreas alagadas) estão precisos para estas espécies.
 
 **Bloqueios:** Nenhum. 48 testes VERDES.
+
+## Status da Auditoria MVP — Passo 7/50
+
+**Estado:** Concluído (Pendente de evidência regional para promoção).
+
+**Resumo:**
+- Auditados os lotes `catalog-birds-02` (Gavião-belo e Urubu-rei) e `catalog-birds-04` (Tuiuiú, Arara-azul e Colhereiro).
+- **Colhereiro (*Platalea ajaja*)** acrescentado ao catálogo com 3 imagens Commons auditadas e fontes GBIF/Wikipédia.
+- Corrigida referência 404 da Arara-azul voando; todas as 15 imagens destes lotes agora retornam 200 OK.
+- Mantido status `pending-review` para todos os registros deste passo, pois a ocorrência pantaneira individual e a conservação oficial não foram localizadas de forma reproduzível no SALVE/Portaria nesta sessão.
+- Contagem total elevada para 47 espécies.
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-03` (Arara-canindé, Urubu-de-cabeça-preta e Tucano-toco).
+- **Agente 3 (Qualidade)**: Validar no navegador se a nova espécie (Colhereiro) está renderizando corretamente e se o filtro "Rios e corixos" a exibe junto com o Tuiuiú.
+
+**Bloqueios:** Nenhum. 49 testes VERDES.

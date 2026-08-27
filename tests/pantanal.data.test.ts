@@ -93,6 +93,18 @@ describe("PantanalDex data contracts", () => {
     expect(isCatalogBatchReviewReady(thirdBirdBatch!)).toBe(false);
   });
 
+  it("keeps the requested P1 bird set traceable across modular batches", () => {
+    const araraCaninde = catalogSpecies.find((item) => item.commonName === "Arara-canindé");
+    const tuiuiu = catalogSpecies.find((item) => item.commonName === "Tuiuiú");
+    const colhereiro = catalogSpecies.find((item) => item.commonName === "Colhereiro");
+    expect(araraCaninde?.scientificName).toBe("Ara ararauna");
+    expect(tuiuiu?.scientificName).toBe("Jabiru mycteria");
+    expect(colhereiro?.scientificName).toBe("Platalea ajaja");
+    expect(colhereiro?.images).toHaveLength(3);
+    expect(catalogBatches.find((batch) => batch.batchId === "catalog-birds-04")?.status).toBe("pending-review");
+    expect(catalogP1AuditQueue.find((row) => row.commonName === "Colhereiro")?.status).toBe("blocked");
+  });
+
   it("audits the first reptile batch without promoting it", () => {
     const firstReptileBatch = catalogBatches.find((batch) => batch.batchId === "catalog-reptiles-01");
     expect(firstReptileBatch?.species.map((item) => item.commonName)).toEqual(["Teiú", "Cobra-cipó"]);
@@ -267,7 +279,7 @@ describe("PantanalDex data contracts", () => {
 
   it("validates the modular pilot batches and reports their throughput", () => {
     expect(catalogBatches).toHaveLength(14);
-    expect(catalogSpecies).toHaveLength(46);
+    expect(catalogSpecies).toHaveLength(47);
     expect(validateCatalogBatches(catalogBatches)).toEqual([
       "cachara: deve ter exatamente três imagens",
       "perereca-fuscomarginata: deve ter exatamente três imagens",
