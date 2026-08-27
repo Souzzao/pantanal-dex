@@ -226,3 +226,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Promover somente a trilha de ocorrência de `pintado` para `confirmed`, sem inferir conservação
 - [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md` e `STEP-17-RESEARCH.md`
 - [ ] Validar individualmente `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 18/50 — validação científica do pacu
+
+- [x] Validar `Piaractus mesopotamicus` como espécie aceita no GBIF/Catalogue of Life
+- [x] Confirmar ocorrência de `pacu` no Pantanal de Mato Grosso do Sul por artigo científico SciELO
+- [x] Promover somente a trilha de ocorrência de `pacu` para `confirmed`, sem inferir conservação
+- [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md`, `STEP-18-RESEARCH.md` e o handoff
+- [ ] Validar individualmente `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`

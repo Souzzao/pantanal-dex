@@ -95,10 +95,11 @@ describe("PantanalDex catalog", () => {
     expect(regionalOccurrenceValidationErrors).toEqual([]);
     expect(regionalOccurrenceRecords.every((record) => record.region === "Pantanal")).toBe(true);
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", scientificName: "Pseudoplatystoma corruscans", sourceTitle: expect.stringContaining("Embrapa") });
-    expect(regionalOccurrenceRecords.filter((record) => record.speciesId !== "pintado").every((record) => record.status === "pending-review")).toBe(true);
+    expect(regionalOccurrenceRecords.find((record) => record.speciesId === "pacu")).toMatchObject({ status: "confirmed", scientificName: "Piaractus mesopotamicus", sourceTitle: expect.stringContaining("SciELO") });
+    expect(regionalOccurrenceRecords.filter((record) => record.speciesId !== "pintado" && record.speciesId !== "pacu").every((record) => record.status === "pending-review")).toBe(true);
     expect(regionalOccurrenceRecords.every((record) => record.sourceUrl.startsWith("https://") && record.queryUrl.startsWith("https://"))).toBe(true);
-    expect(regionalOccurrenceRecords.find((record) => record.speciesId === "pintado")?.evidence).toContain("GBIF/Catalogue of Life");
-    expect(regionalOccurrenceRecords.filter((record) => record.speciesId !== "pintado").every((record) => record.sourceTitle.includes("ICMBio/SISBio") && record.evidence.includes("não confirma ocorrência"))).toBe(true);
+    expect(regionalOccurrenceRecords.filter((record) => record.speciesId === "pintado" || record.speciesId === "pacu").every((record) => record.evidence.includes("GBIF/Catalogue of Life"))).toBe(true);
+    expect(regionalOccurrenceRecords.filter((record) => record.speciesId !== "pintado" && record.speciesId !== "pacu").every((record) => record.sourceTitle.includes("ICMBio/SISBio") && record.evidence.includes("não confirma ocorrência"))).toBe(true);
   });
 
   it("audits required scientific fields and global IDs in the combined catalog", () => {

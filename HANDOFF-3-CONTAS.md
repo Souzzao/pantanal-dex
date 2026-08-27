@@ -497,3 +497,12 @@ A Conta 2 iniciou a primeira pendência científica desbloqueada do ledger e val
 Com as duas evidências separadas e rastreáveis, o registro `pintado` foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência regional. Nenhum status de conservação foi inferido ou alterado. Os outros quatro registros (`pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`) permanecem `pending-review`, pois o dataset ICMBio/SISBio continua sem resposta estruturada suficiente nesta execução.
 
 O auditor `scripts/regional-occurrence-audit.ts` foi atualizado para exigir a evidência individual do pintado, rejeitar promoções dos demais registros e gerar `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md` com referências Embrapa/GBIF. A pesquisa detalhada está em `STEP-17-RESEARCH.md`. Próxima etapa: executar a rodada completa de checks, revisar a integração e publicar o checkpoint do passo 17.
+
+
+## 26. Passo 18/50 — validação científica regional do pacu
+
+A Conta 2 validou `pacu` (`Piaractus mesopotamicus`) como a segunda pendência científica do ledger. O artigo do Brazilian Journal of Biology indexado pela SciELO informa que o pacu é uma das espécies mais capturadas no Pantanal de Mato Grosso do Sul e analisa peixes capturados na região. O GBIF/Catalogue of Life apresenta `Piaractus mesopotamicus (Holmberg, 1887)` como espécie aceita, na família Serrasalmidae.
+
+Com as evidências regional e taxonômica separadas, o registro `pacu` foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência regional. A página GBIF lista uma categoria de conservação, mas ela não foi copiada nem inferida no catálogo. Os registros `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` por falta de resposta estruturada suficiente para confirmação individual.
+
+O auditor regional foi atualizado para exigir as confirmações documentadas de `pintado` e `pacu`, rejeitar promoções adicionais sem evidência e gerar o artefato do passo 18. A pesquisa detalhada está em `STEP-18-RESEARCH.md`. Próxima etapa: concluir checks, validação visual e publicação do checkpoint deste passo.
