@@ -1,63 +1,61 @@
-# MVP — Passo 9/50: auditoria do terceiro lote de aves
+# MVP — Passo 09/50: auditoria do primeiro lote de répteis
 
-**Lote:** `catalog-birds-03`  
-**Espécies:** Arara-canindé (*Ara ararauna*), Urubu-de-cabeça-preta (*Coragyps atratus*) e Tucano-toco (*Ramphastos toco*)  
+**Lote:** `catalog-reptiles-01`  
+**Espécies:** Teiú (*Salvator merianae*) e Cobra-cipó (*Oxybelis aeneus*)  
 **Estado:** `pending-review`  
-**Decisão:** não promover para `verified`.
+**Decisão:** lote não promovido para `verified`.
 
 ## Método
 
-Foi executada a validação determinística do contrato modular e uma verificação passiva de todos os endpoints declarados. Foram conferidos campos obrigatórios, grupo, ambientes, IDs, nove imagens, créditos, licenças comerciais, páginas de origem Commons, URLs de arquivo e fontes GBIF. A disponibilidade HTTP foi usada apenas como teste de integridade do link; não substitui a revisão taxonômica, de ocorrência ou de conservação.
+Foi executada a validação determinística do contrato modular e a verificação passiva de todas as URLs declaradas. Foram conferidos campos obrigatórios, grupo, ambientes, IDs, seis imagens, créditos, licenças, páginas de origem Commons, URLs dos arquivos e fontes GBIF. HTTP 200 confirma apenas que o endpoint está acessível; não substitui a revisão do conteúdo, a confirmação de ocorrência no Pantanal nem a conferência editorial da licença em cada página.
 
 ## Resultado por espécie
 
-| Espécie | Nome científico | Imagens | Licenças registradas | Fonte taxonômica | Situação |
+| Espécie | Nome científico | Imagens | Licenças declaradas | Fonte taxonômica | Resultado |
 |---|---|---:|---|---|---|
-| Arara-canindé | *Ara ararauna* | 3/3 acessíveis | CC BY 2.0; CC BY 3.0; CC BY-SA 3.0 | GBIF Species Match | Estruturalmente válida; revisão pendente |
-| Urubu-de-cabeça-preta | *Coragyps atratus* | 3/3 acessíveis | CC BY-SA 3.0; CC BY-SA 3.0; CC BY-SA 3.0 | GBIF Species Match | Estruturalmente válida; revisão pendente |
-| Tucano-toco | *Ramphastos toco* | 3/3 acessíveis | CC BY-SA 4.0; CC BY-SA 4.0; CC BY-SA 2.0 | GBIF Species Match | Estruturalmente válida; revisão pendente |
+| Teiú | *Salvator merianae* | 3/3 acessíveis | CC BY-SA 4.0 em todas | GBIF Species Match | Estruturalmente válido; revisão pendente |
+| Cobra-cipó | *Oxybelis aeneus* | 3/3 acessíveis | CC BY 2.0; CC BY-SA 2.0; CC BY-SA 4.0 | GBIF Species Match | Estruturalmente válido; revisão pendente |
 
-## Falhas encontradas e correção
+## Integridade dos endpoints
 
-A auditoria encontrou oito referências de arquivo/página Commons inválidas no conjunto anterior: duas imagens da Arara-canindé, duas do Urubu-de-cabeça-preta e três do Tucano-toco, além da referência restante que não correspondia ao arquivo publicado. As nove imagens do lote foram substituídas por arquivos reais retornados pela API de busca do Commons e suas páginas de origem específicas. Após a correção, todas as URLs do lote — imagens, páginas Commons e endpoints GBIF — retornaram HTTP 200 na verificação executada.
+As seis URLs dos arquivos no `upload.wikimedia.org`, as seis páginas específicas do Commons e os dois endpoints GBIF retornaram **HTTP 200** na verificação passiva executada durante este passo. Não foram detectados links quebrados ou hosts fora da lista aprovada.
 
-Também havia o mesmo problema de rastreabilidade encontrado no lote anterior: o helper atribuía `CC BY-SA 4.0` genericamente. O helper passou a receber `license` por imagem e os dados foram registrados de acordo com os metadados consultados nas páginas do Commons. Nenhuma licença NC, ND, ausente ou ambígua foi aceita.
+## Critérios estruturais
 
-## Evidências de origem e crédito
+| Critério | Teiú | Cobra-cipó | Lote |
+|---|---:|---:|---|
+| Campos obrigatórios | Passa | Passa | Passa |
+| Grupo e ambientes válidos | Passa | Passa | Passa |
+| IDs únicos | Passa | Passa | Passa |
+| Três imagens | Passa | Passa | Passa |
+| Crédito e licença declarados | 3/3 | 3/3 | Passa |
+| Fonte estruturada | GBIF | GBIF | Passa |
+| `reviewedAt` / `reviewedBy` | Ausentes | Ausentes | Bloqueado |
+| Checklist editorial | Incompleto | Incompleto | Bloqueado |
+| Ocorrência individual no Pantanal | Não anexada | Não anexada | Bloqueado |
+| Conservação oficial individual | Não anexada | Não anexada | Bloqueado |
 
-| Espécie | Arquivo/página | Autor registrado | Licença |
-|---|---|---|---|
-| Arara-canindé | `Ara_ararauna_Luc_Viatour.jpg` | Luc Viatour | CC BY 2.0 |
-| Arara-canindé | `Ara_ararauna_(Linnaeus_1758).jpg` | Michael Gäbler | CC BY 3.0 |
-| Arara-canindé | `Ara_ararauna_qtl3.jpg` | Quartl | CC BY-SA 3.0 |
-| Urubu-de-cabeça-preta | `Coragyps-atratus-002.jpg` | Mdf | CC BY-SA 3.0 |
-| Urubu-de-cabeça-preta | `Coragyps-atratus-001.jpg` | Mdf | CC BY-SA 3.0 |
-| Urubu-de-cabeça-preta | `Coragyps_atratus_brasiliensis_Black_vulture_Belém_01.jpg` | Cayambe | CC BY-SA 3.0 |
-| Tucano-toco | `Toco_toucan_(Ramphastos_toco)_in_flight_composite.jpg` | Charles J. Sharp | CC BY-SA 4.0 |
-| Tucano-toco | `Toco_toucan_(Ramphastos_toco)_drinking_composite.jpg` | Charles J. Sharp | CC BY-SA 4.0 |
-| Tucano-toco | `Toco_Toucan_(Ramphastos_toco)_-_48153967707.jpg` | Bernard DUPONT | CC BY-SA 2.0 |
+## Avaliação editorial
 
-## Bloqueios editoriais
+Os registros possuem descrições coerentes com os campos do catálogo e fontes taxonômicas estruturadas. As frases de distribuição são amplas e não constituem, isoladamente, evidência regional suficiente. A confirmação de ocorrência deve ser anexada por espécie, preferencialmente com fonte regional apropriada, sem inferência a partir de uma simples correspondência taxonômica do GBIF.
 
-As três espécies continuam pendentes porque o lote não contém `reviewedAt`, `reviewedBy` nem checklist completo de taxonomia, ocorrência, licenças e conservação. As frases de distribuição existentes mencionam o Pantanal, mas ainda não estão acompanhadas de evidência regional individual anexada ao registro. O GBIF Species Match é uma fonte taxonômica declarada, não uma prova suficiente de ocorrência local ou de situação de conservação.
+Não foi preenchido status de conservação sem fonte oficial do ICMBio ou MMA. O lote permanece pendente até que um revisor identifique a nomenclatura aceita, confirme a ocorrência no recorte do Pantanal, confira cada página de arquivo e finalize `reviewedAt`, `reviewedBy` e os quatro campos do checklist.
 
-Não foi preenchido status de conservação sem fonte oficial ICMBio/MMA. Até a revisão editorial formal, o lote não deve ser contado como verificado nem usado para afirmar que a ocorrência regional foi confirmada.
+## Imagens e licenças
 
-## Testes e validação
+Os registros já guardam autor, crédito, URL do arquivo e licença por imagem. O Teiú usa três arquivos atribuídos a Thomas Fuhrmann, Giles Laurent e Rafael, todos registrados como `CC BY-SA 4.0`. A Cobra-cipó usa arquivos atribuídos a Brian Gratwicke (`CC BY 2.0`), Tod Baker (`CC BY-SA 2.0`) e Lucas Vogel (`CC BY-SA 4.0`). As licenças declaradas são compatíveis com uso comercial e não incluem NC ou ND; a confirmação final arquivo a arquivo continua sendo responsabilidade da revisão editorial.
 
-Foi adicionado teste determinístico que confirma a composição do lote, nove imagens, páginas Commons, licenças por arquivo, validade modular e bloqueio de promoção. Resultado final: **40 testes aprovados e 1 teste de autenticação pulado**; `pnpm check`, `pnpm lint`, `git diff --check` e `pnpm watchdog` concluídos com sucesso.
+## Testes adicionados
+
+Foi adicionado teste determinístico que confirma a composição do lote, seis imagens, páginas específicas do Commons, licenças comerciais individuais, validade do contrato e bloqueio de promoção por `isCatalogBatchReviewReady`. A suíte final passou com **41 testes aprovados e 1 teste de autenticação pulado**; `pnpm check`, `pnpm lint`, `git diff --check` e `pnpm watchdog` concluíram com sucesso.
 
 ## Referências
 
-[1]: https://commons.wikimedia.org/wiki/File:Ara_ararauna_Luc_Viatour.jpg "Ara ararauna Luc Viatour — Wikimedia Commons"
-[2]: https://commons.wikimedia.org/wiki/File:Ara_ararauna_(Linnaeus_1758).jpg "Ara ararauna Linnaeus 1758 — Wikimedia Commons"
-[3]: https://commons.wikimedia.org/wiki/File:Ara_ararauna_qtl3.jpg "Ara ararauna qtl3 — Wikimedia Commons"
-[4]: https://commons.wikimedia.org/wiki/File:Coragyps-atratus-002.jpg "Coragyps atratus 002 — Wikimedia Commons"
-[5]: https://commons.wikimedia.org/wiki/File:Coragyps-atratus-001.jpg "Coragyps atratus 001 — Wikimedia Commons"
-[6]: https://commons.wikimedia.org/wiki/File:Coragyps_atratus_brasiliensis_Black_vulture_Belém_01.jpg "Coragyps atratus brasiliensis — Wikimedia Commons"
-[7]: https://commons.wikimedia.org/wiki/File:Toco_toucan_(Ramphastos_toco)_in_flight_composite.jpg "Toco toucan in flight — Wikimedia Commons"
-[8]: https://commons.wikimedia.org/wiki/File:Toco_toucan_(Ramphastos_toco)_drinking_composite.jpg "Toco toucan drinking — Wikimedia Commons"
-[9]: https://commons.wikimedia.org/wiki/File:Toco_Toucan_(Ramphastos_toco)_-_48153967707.jpg "Toco Toucan 48153967707 — Wikimedia Commons"
-[10]: https://api.gbif.org/v1/species/match?name=Ara%20ararauna "GBIF Species Match — Ara ararauna"
-[11]: https://api.gbif.org/v1/species/match?name=Coragyps%20atratus "GBIF Species Match — Coragyps atratus"
-[12]: https://api.gbif.org/v1/species/match?name=Ramphastos%20toco "GBIF Species Match — Ramphastos toco"
+[1]: https://api.gbif.org/v1/species/match?name=Salvator%20merianae "GBIF Species Match — Salvator merianae"
+[2]: https://api.gbif.org/v1/species/match?name=Oxybelis%20aeneus "GBIF Species Match — Oxybelis aeneus"
+[3]: https://commons.wikimedia.org/wiki/File:Argentine_Black-and-white_Tegu_(Salvator_merianae),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann.jpg "Teiú — Thomas Fuhrmann — Wikimedia Commons"
+[4]: https://commons.wikimedia.org/wiki/File:182_Argentine_black_and_white_tegu_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg "Teiú — Giles Laurent — Wikimedia Commons"
+[5]: https://commons.wikimedia.org/wiki/File:Salvator_merianae_-_Rafael_-_470540720.jpeg "Teiú — Rafael — Wikimedia Commons"
+[6]: https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus_01.jpg "Cobra-cipó — Brian Gratwicke — Wikimedia Commons"
+[7]: https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus.jpg "Cobra-cipó — Tod Baker — Wikimedia Commons"
+[8]: https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus_(Costa_Rica).jpg "Cobra-cipó — Lucas Vogel — Wikimedia Commons"
