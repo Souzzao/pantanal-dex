@@ -49,7 +49,7 @@ export const catalogP1Priorities: readonly CatalogPriority[] = [
   p1("Pacu", "Piaractus mesopotamicus", "pacu", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Peixe frugívoro associado ao pulso de inundação."),
   p1("Piraputanga", "Brycon hilarii", "piraputanga", ["Peixes"], ["Rios e corixos", "Matas"], "Peixe associado à mata ciliar e dispersão de sementes."),
   p1("Cachara", "Pseudoplatystoma reticulatum", "pseudoplatystoma-reticulatum", ["Peixes"], ["Rios e corixos", "Áreas alagadas"], "Grande bagre de importância ecológica e regional."),
-  p1("Jaú", "Zungaro jahu", null, ["Peixes"], ["Rios e corixos"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Jaú", "Zungaro jahu", "zungaro-jahu", ["Peixes"], ["Rios e corixos"], "Espécie P1 validada taxonomicamente e regionalmente no passo 30; a categoria normativa brasileira permanece pendente."),
   p1("Abelha-jataí", "Tetragonisca angustula", "tetragonisca-angustula", ["Invertebrados"], ["Matas", "Bordas de mata"], "Polinizador social de relevância ecológica."),
   p1("Formiga-cortadeira", "Atta sexdens", "atta-sexdens", ["Invertebrados"], ["Campos", "Matas"], "Engenheira de ecossistema e espécie de referência do solo."),
   p1("Aranha-armadeira", "Phoneutria nigriventer", null, ["Invertebrados"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),

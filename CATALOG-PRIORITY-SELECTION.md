@@ -9,8 +9,8 @@
 | Entradas prioritárias | 41 |
 | P1 | 28 |
 | P2 | 13 |
-| Selecionadas com ID no catálogo combinado | 39 |
-| Pendentes sem registro no catálogo | 2 |
+| Selecionadas com ID no catálogo combinado | 40 |
+| Pendentes sem registro no catálogo | 1 |
 | Resultado do validador | **PASS** |
 
 ## Seleções com registro correspondente
@@ -41,6 +41,7 @@
 | P1 | Pacu | Piaractus mesopotamicus | pacu | Peixes | Rios e corixos, Áreas alagadas | [GBIF](https://api.gbif.org/v1/species/match?name=Piaractus%20mesopotamicus) |
 | P1 | Piraputanga | Brycon hilarii | piraputanga | Peixes | Rios e corixos, Matas | [GBIF](https://api.gbif.org/v1/species/match?name=Brycon%20hilarii) |
 | P1 | Cachara | Pseudoplatystoma reticulatum | pseudoplatystoma-reticulatum | Peixes | Rios e corixos, Áreas alagadas | [GBIF](https://api.gbif.org/v1/species/match?name=Pseudoplatystoma%20reticulatum) |
+| P1 | Jaú | Zungaro jahu | zungaro-jahu | Peixes | Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Zungaro%20jahu) |
 | P1 | Abelha-jataí | Tetragonisca angustula | tetragonisca-angustula | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Tetragonisca%20angustula) |
 | P1 | Formiga-cortadeira | Atta sexdens | atta-sexdens | Invertebrados | Campos, Matas | [GBIF](https://api.gbif.org/v1/species/match?name=Atta%20sexdens) |
 | P2 | Cateto | Pecari tajacu | cateto | Mamíferos | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Pecari%20tajacu) |
@@ -61,7 +62,6 @@
 
 | Prioridade | Nome popular | Nome científico | ID | Grupo | Ambientes | Fonte taxonômica |
 |---|---|---|---|---|---|---|
-| P1 | Jaú | Zungaro jahu | — | Peixes | Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Zungaro%20jahu) |
 | P1 | Aranha-armadeira | Phoneutria nigriventer | — | Invertebrados | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Phoneutria%20nigriventer) |
 
 ## Regras aplicadas

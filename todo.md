@@ -340,3 +340,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar a matriz P1 para apontar ao ID `tucano-toco`
 - [x] Atualizar `STEP-29-RESEARCH.md`, allowlist PubMed, métricas, testes, auditorias e handoff
 - [x] Reduzir as pendências P1/P2 para 2: `jaú` e `aranha-armadeira`
+
+## Passo 30/50 — inclusão e validação do jaú
+
+- [x] Confirmar `Zungaro jahu` como espécie aceita no GBIF/Catalogue of Life, incluindo nomes históricos
+- [x] Confirmar ocorrência no Pantanal brasileiro por estudo primário indexado no PubMed
+- [x] Criar o lote isolado `catalog-fish-07` em estado `review-ready`, com campos científicos completos
+- [x] Auditar três figuras SciELO sob licença CC BY 4.0, comercialmente compatível com atribuição
+- [x] Atualizar a matriz P1 para apontar ao ID `zungaro-jahu`
+- [x] Atualizar o ledger regional, `STEP-30-RESEARCH.md`, métricas, testes e auditorias
+- [x] Reduzir as pendências P1/P2 para 1: `aranha-armadeira`
