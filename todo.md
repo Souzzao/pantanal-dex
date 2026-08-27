@@ -680,3 +680,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Alterar o contrato regional para distinguir `confirmed`, `pending-review` e `not-confirmed`
 - [x] Garantir zero pendências abertas no auditor regional
 - [x] Executar a suíte completa de checks e auditorias
+
+## Passo 40/60 — auditoria comercial dos Lotes 01 e 02
+
+- [x] Inventariar os 30 candidatos dos Lotes 01 e 02 no catálogo modular
+- [x] Confirmar que nenhum candidato foi ingerido com mídia não auditada
+- [x] Não introduzir imagens, autorias ou licenças fictícias
+- [x] Preservar a política comercial sem NC/ND
+- [x] Documentar que a auditoria de mídia dos lotes é não aplicável até a ingestão dos registros
+- [x] Executar checks científicos e auditorias do catálogo
