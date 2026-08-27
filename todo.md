@@ -429,3 +429,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não confundir ocorrências residuais de termos botânicos ou outros táxons com a espécie-alvo
 - [x] Atualizar `STEP-39-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 40/50 — validação oficial de conservação do tucanuçu-de-garganta-azul
+
+- [x] Confirmar `Megaceryle torquata` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Megaceryle torquata`, `torquata` e `Megaceryle`
+- [x] Registrar `megaceryle-torquata` como `not-listed`, sem converter ausência em LC
+- [x] Não inferir categoria a partir de menções gerais a aves aquáticas ou outros táxons
+- [x] Atualizar `STEP-40-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
