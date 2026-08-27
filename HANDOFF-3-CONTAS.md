@@ -587,3 +587,12 @@ A Conta 2 identificou `Veado-campeiro` (`Ozotoceros bezoarticus`) como a primeir
 Foi criado o lote isolado `catalog-mammals-02` em estado `review-ready`, com 1 espécie e 3 imagens Commons sob CC BY-SA 4.0, CC BY-SA 2.0 e CC BY-SA 4.0. As páginas de crédito foram verificadas para os autores Fedaro e Scott Presnell. O dossiê preserva a cautela de não transferir automaticamente a avaliação histórica da subespécie pantaneira `Ozotoceros bezoarticus leucogaster` para a espécie nominal; a conservação permanece fora da promoção deste passo.
 
 A matriz P1 foi atualizada para apontar `veado-campeiro` ao novo ID modular. O catálogo passou a 56 espécies modulares, 22 lotes, 168 imagens e 76 registros totais agregados; a prioridade passou de 36 para 37 entradas selecionadas e as pendências P1/P2 caíram de 5 para 4. As auditorias de prioridade e fontes retornaram `PASS`, com 0 erros. O novo lote, `STEP-27-RESEARCH.md`, testes, allowlist oficial de `www.gov.br`, TODO e este handoff foram atualizados.
+
+
+## 36. Passo 28/50 — inclusão e validação científica da arara-canindé
+
+A Conta 2 validou `Arara-canindé` (`Ara ararauna`) como a próxima entrada P1 sem registro. O GBIF confirma o nome como espécie aceita. Estudo sobre movimentos sazonais documenta a espécie nas planícies de inundação do Pantanal setentrional, e plano de manejo oficial do ICMBio para a RPPN Dona Aracy/Estância Caiman lista `Ara ararauna` na avifauna do Pantanal. O lote foi criado em estado `review-ready`; a conservação permanece separada e não foi promovida.
+
+Foi criado `catalog-birds-06` com 1 espécie, 3 imagens e fontes GBIF/ICMBio. O arquivo Commons `Blue-and-Yellow-Macaw.jpg` foi auditado e rejeitado por GFDL 1.2. As imagens selecionadas são `Ara-ararauna.jpg` (CC BY 2.0, Jan Smith), `Ara ararauna -Jurong Bird Park, Singapore-8.jpg` (CC BY 2.0, Jan Smith) e `"arara-canindé" - Ara ararauna.jpg` (CC BY-SA 4.0, DiogoKanouté). A matriz P1 foi atualizada para `arara-caninde`.
+
+O catálogo passou a 57 espécies modulares, 23 lotes, 171 imagens e 77 registros agregados; 38 prioridades estão selecionadas e 3 permanecem pendentes (`tucano-toco`, `jaú` e `aranha-armadeira`). Auditorias de prioridade e fontes retornaram `PASS`, com 0 erros; testes passaram com 20 aprovados e 1 legado ignorado. O dossiê `STEP-28-RESEARCH.md`, TODO e este handoff foram atualizados.

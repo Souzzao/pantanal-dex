@@ -318,3 +318,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar a matriz P1 para apontar ao ID `veado-campeiro`
 - [x] Atualizar `STEP-27-RESEARCH.md`, métricas, allowlist, testes, auditorias e handoff
 - [x] Reduzir as pendências P1/P2 de 5 para 4; permanecem `arara-canindé`, `tucano-toco`, `jaú` e `aranha-armadeira`
+
+
+## Passo 28/50 — inclusão e validação da arara-canindé
+
+- [x] Confirmar `Ara ararauna` como espécie aceita no GBIF
+- [x] Confirmar ocorrência no Pantanal por estudo de movimentos sazonais e fonte oficial do ICMBio
+- [x] Criar o lote isolado `catalog-birds-06` em estado `review-ready`, com campos científicos completos
+- [x] Auditar licenças: rejeitar GFDL 1.2 e selecionar 2 imagens CC BY 2.0 e 1 CC BY-SA 4.0
+- [x] Atualizar a matriz P1 para apontar ao ID `arara-caninde`
+- [x] Atualizar `STEP-28-RESEARCH.md`, métricas, testes, auditorias e handoff
+- [x] Reduzir as pendências P1/P2 para 3: `tucano-toco`, `jaú` e `aranha-armadeira`

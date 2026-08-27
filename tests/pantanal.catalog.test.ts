@@ -63,10 +63,10 @@ describe("PantanalDex catalog", () => {
 
   it("measures the combined inventory without losing modular status", () => {
     const metrics = createCatalogInventoryMetrics(species, catalogSpecies, catalogBatches, catalogValidationErrors);
-    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 56, totalSpecies: 76, uniqueIds: 76, duplicateIds: [], modularBatches: 22, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 1, modularImages: 168, validationErrors: [] });
+    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 57, totalSpecies: 77, uniqueIds: 77, duplicateIds: [], modularBatches: 23, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 2, modularImages: 171, validationErrors: [] });
     expect(metrics.groups).toEqual([
       { group: "Mamíferos", total: 9 },
-      { group: "Aves", total: 20 },
+      { group: "Aves", total: 21 },
       { group: "Répteis", total: 5 },
       { group: "Anfíbios", total: 4 },
       { group: "Peixes", total: 21 },
@@ -124,18 +124,19 @@ describe("PantanalDex catalog", () => {
 
   it("keeps the scientific audit aggregate clean", () => {
     const audit = createScientificCatalogAudit(species);
-    expect(audit).toMatchObject({ records: 76, uniqueIds: 76, duplicateIds: [], errors: [], status: "PASS" });
+    expect(audit).toMatchObject({ records: 77, uniqueIds: 77, duplicateIds: [], errors: [], status: "PASS" });
     expect(Object.values(audit.missingFields).every((count) => count === 0)).toBe(true);
   });
 
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(56);
+    expect(catalogSpecies).toHaveLength(57);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
     expect(catalogSpecies.some((item) => item.id === "veado-campeiro")).toBe(true);
+    expect(catalogSpecies.some((item) => item.id === "arara-caninde")).toBe(true);
     expect(species.some((item) => item.id === "anhuma")).toBe(true);
     expect(species.some((item) => item.id === "teiu")).toBe(true);
     expect(species.some((item) => item.id === "perereca-macaco")).toBe(true);
