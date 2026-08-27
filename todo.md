@@ -384,3 +384,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar a categoria oficial `LC` (Menos Preocupante), datada de 05/10/2018
 - [x] Atualizar `STEP-34-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 35/50 — validação oficial de conservação do jaú
+
+- [x] Confirmar `Zungaro jahu` como alvo e distinguir o táxon de `Zungaro zungaro`
+- [x] Consultar a Portaria MMA nº 148/2022 por extração textual e busca de variações de `Zungaro jahu`
+- [x] Registrar `zungaro-jahu` como `not-listed`, sem promover NT/VU por grafia divergente em publicação secundária
+- [x] Preservar a ressalva sobre a menção oficial do ICMBio à grafia `Zungaru jahu`
+- [x] Atualizar `STEP-35-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
