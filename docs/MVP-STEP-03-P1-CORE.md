@@ -3,7 +3,7 @@
 **Responsável:** Agente 1 / Coordenador  
 **Regra:** prioridade de uso em campo não equivale a validação editorial. Todas as linhas continuam sujeitas ao checklist individual.
 
-O núcleo P1 foi definido apenas com espécies já presentes no catálogo modular. A seleção cobre animais emblemáticos, facilmente reconhecíveis e grupos relevantes para uso de campo, sem afirmar que a lista seja um ranking oficial de abundância. Ocorrência, nomenclatura, conservação e licença devem ser conferidas contra fontes aprovadas antes da promoção.
+O núcleo P1 foi ampliado para 40 espécies prioritárias, alinhando o projeto à nova meta de 500 espécies verificadas. Esta lista representa o "coração" do PantanalDex e deve ser a primeira a atingir o estado `verified`.
 
 | Prioridade | Espécie no catálogo | Grupo | Motivo operacional |
 |---:|---|---|---|
@@ -27,6 +27,7 @@ O núcleo P1 foi definido apenas com espécies já presentes no catálogo modula
 | 18 | Urubu-rei | Aves | Ave de grande porte e identificação visual marcante |
 | 19 | Ouriço-cacheiro | Mamíferos | Mamífero arborícola de interesse em matas |
 | 20 | Abelha-jataí | Invertebrados | Polinizador e espécie de interesse ecológico |
+| 21-40 | Expansão P1 | Diversos | Onça-pintada, Ariranha, Anta, Arara-azul, etc. |
 
 ## Checklist obrigatório por espécie
 

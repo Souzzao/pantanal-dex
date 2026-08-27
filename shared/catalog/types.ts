@@ -2,7 +2,7 @@ import type { Species } from "../pantanal";
 
 const validGroups = new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]);
 const validEnvironments = new Set(["Rios e corixos", "Áreas alagadas", "Campos", "Matas", "Bordas de mata"]);
-const approvedSourceHosts = ["api.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "pt.wikipedia.org", "www.wikidata.org"];
+const approvedSourceHosts = ["api.gbif.org", "www.gbif.org", "sibbr.gov.br", "icmbio.gov.br", "gov.br", "www.gov.br", "in.gov.br", "www.in.gov.br", "pt.wikipedia.org", "www.wikidata.org", "commons.wikimedia.org", "www.wikiaves.com.br", "wikiaves.com.br"];
 const commercialImageLicenses = /^(CC0|CC BY(?:-SA)?(?: 2\.0| 2\.5| 3\.0| 4\.0)?|CC BY-SA(?: 2\.0| 2\.5| 3\.0| 4\.0)?|Public domain)$/i;
 const blockedImageLicenses = /\b(?:NC|ND|NON[- ]?COMMERCIAL|NO[- ]?DERIVATIVES)\b/i;
 

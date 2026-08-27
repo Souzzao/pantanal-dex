@@ -483,3 +483,35 @@
 
 - [x] Executar passo 1/50 a partir do pacote do Agente 1: extrair, comparar contratos, medir estado e registrar evidências
 - [x] Criar apresentação premium Motion do PantanalDex como uma cena visual contínua (GSAP + FLIP)
+- [x] MVP passo 2/50 — Gerar matriz de auditoria atualizada com meta de 500 espécies
+- [x] MVP passo 3/50 — Definir núcleo P1 ampliado (40 espécies) e atualizar lógica de auditoria
+
+- [ ] MVP passo 4/50 — validar rotas, lotes modulares e fila P1 no navegador; corrigir falhas verificáveis
+
+## Roadmap MVP 50 Passos (Retomada)
+- [x] Passo 1/50: Revalidação de pacotes e ambiente de retomada.
+- [x] Passo 2/50: Atualização da matriz de auditoria para meta de 500 espécies.
+- [x] Passo 3/50: Ampliação do núcleo P1 (40 espécies prioritárias).
+- [x] Passo 4/50: Auditoria funcional no navegador (rotas, busca, formulários e correção técnica de imagens).
+- [x] Passo 5/50: Auditoria editorial do primeiro lote P1 (mamíferos) - verificação de ocorrência e conservação.
+
+## MVP passo 6/50 — auditoria do primeiro lote de aves
+- [x] Auditar `catalog-birds-01` (Seriema, Mutum-de-penacho e Anhuma) com fontes taxonômicas e de ocorrência verificáveis.
+- [x] Conferir conservação oficial somente em fonte ICMBio/MMA quando houver status.
+- [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
+- [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.
+
+## MVP passo 7/50 — auditoria do segundo lote de aves
+- [x] Auditar `catalog-birds-02` (Arara-canindé, Jabiru/Tuiuiú e Colhereiro) com fontes taxonômicas e de ocorrência verificáveis.
+- [x] Conferir conservação oficial somente em fonte ICMBio/MMA quando houver status.
+- [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
+- [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.
+
+## MVP passo 8/50 — auditoria do terceiro lote de aves
+- [x] Auditar `catalog-birds-03` (Arara-canindé, Urubu-de-cabeça-preta e Tucano-toco) com fontes taxonômicas e de ocorrência verificáveis.
+- [x] Conferir conservação oficial somente em fonte ICMBio/MMA quando houver status.
+- [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
+- [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.

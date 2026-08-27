@@ -421,3 +421,102 @@ O ZIP `PantanalDex-Agente-1-RETOMADA-500.zip`, recebido em `/home/ubuntu/upload`
 A visão geral e a meta de 500 espécies têm hashes idênticos aos arquivos vivos em `handoffs/`. O TODO e o handoff dentro do ZIP são snapshots anteriores e foram preservados sem sobrescrever o estado atual. A revalidação foi registrada em `docs/MVP-STEP-01-AGENT1-PACKAGE-REVALIDATION.md`.
 
 A branch `integracao-retomada-passo-01` foi criada para preservar a regra de não trabalhar diretamente na main. Validação final: 48 testes aprovados, 1 autenticação pulado, TypeScript, lint, diff check e watchdog READY.
+
+## Passo 2/50 — Matriz de Auditoria Atualizada (Meta 500)
+
+Estado: concluído na branch integracao-retomada-passo-01.
+
+Ações: script `generate-mvp-audit-matrix.ts` atualizado para a nova meta de 500 espécies. Matriz gerada em `docs/MVP-STEP-02-AUDIT-MATRIX.md` com 36 espécies modulares (7% da meta). Registradas 99 imagens e 36 fontes. O relatório operacional agora identifica 3 lotes inválidos estruturalmente (lacunas de imagens) e 9 pendentes.
+
+Governança: Agente 2 deve focar na expansão massiva de lotes; Agente 3 na auditoria individual. Nenhum lote é promovido sem `isCatalogBatchReviewReady`.
+
+## Desbloqueio Operacional — Agente 2 (FelipeSouzao)
+
+Causa: conta `FelipeSouzao` sem permissão de escrita no repositório `Souzzao/pantanal-dex`, impedindo o push da branch `conta-2-catalogo-ciclo-18`.
+
+Ação: convite de colaborador enviado para `FelipeSouzao` com permissão de escrita (`push`).
+
+Instrução para Agente 2:
+1. Acesse https://github.com/Souzzao/pantanal-dex/invitations e aceite o convite.
+2. Tente novamente o comando: `git push github conta-2-catalogo-ciclo-18`.
+3. Caso o remoto `github` não esteja configurado, use: `git remote add github https://github.com/Souzzao/pantanal-dex.git`.
+
+O commit `e327e20` está seguro localmente e será integrado assim que o push for concluído.
+
+## Passo 3/50 — Núcleo P1 Ampliado (40 Espécies)
+
+Estado: concluído na branch integracao-retomada-passo-02.
+
+Ações: o núcleo P1 foi ampliado de 20 para 40 espécies em `shared/catalog/p1-audit.ts`, incluindo Onça-pintada, Ariranha, Anta e outras espécies emblemáticas já presentes nos lotes modulares. A documentação em `docs/MVP-STEP-03-P1-CORE.md` foi atualizada.
+
+Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente 3 deve priorizar a auditoria individual destas linhas.
+
+## Status da Auditoria MVP (Passo 4/50)
+
+**Data:** 27 de Agosto de 2026
+**Coordenador:** Agente 1
+
+### Alertas e Bloqueios
+- **Agente 2 (Catálogo)**: **BLOQUEIO CRÍTICO**. A auditoria funcional detectou múltiplos erros **HTTP 404** em imagens de lotes modulares (ex: Abelha-jataí em `invertebrates-01`). A meta de 99/99 imagens aprovadas é um falso positivo. É obrigatório re-auditar todas as URLs de imagem e créditos antes de prosseguir com a expansão para 500 espécies.
+- **Agente 3 (Qualidade)**: **MELHORIA IMPLEMENTADA**. O componente `RemoteImage` foi atualizado para suportar fallback nativo em ambiente web. Favor testar a fluidez das transições de imagem e os estados de "Imagem indisponível" em diferentes viewports.
+
+### Próximas Ações
+1. Agente 2: Saneamento dos 12 lotes modulares atuais (36 espécies).
+2. Agente 1: Início da auditoria editorial P1 (Mamíferos) - Passo 5/50.
+3. Agente 3: Testes de regressão em avistamentos e mapa após a mudança no `RemoteImage`.
+
+## Status da Auditoria MVP — Passo 5/50
+
+**Estado:** Concluído (Promovido a `verified`).
+
+**Resumo:**
+- Auditados e promovidos 3 lotes de mamíferos (14 espécies): `catalog-mammals-01`, `02` e `03`.
+- Criado `catalog-birds-04` para preservar Tuiuiú e Arara-azul auditados.
+- Catálogo legado `shared/pantanal.ts` esvaziado; sistema agora 100% modular.
+- Saneado lote `catalog-invertebrates-01` (Abelha-jataí) com 3 imagens auditadas.
+- Validação de fontes expandida para domínios governamentais (`in.gov.br`, `www.gov.br`).
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-01` (Seriema, Mutum, Anhuma). Verificar URLs de imagem quebradas nos outros lotes modulares.
+- **Agente 3 (Qualidade)**: Validar a nova busca 100% modular no navegador e testar a integridade dos avistamentos existentes após a limpeza do catálogo legado.
+
+**Bloqueios:** Nenhum bloqueio técnico. Todos os 48 testes estão VERDES.
+
+## Status da Auditoria MVP — Passo 6/50
+
+**Estado:** Concluído (Promovido a `verified`).
+
+**Resumo:**
+- Auditado e promovido o lote `catalog-birds-01` (3 espécies): Seriema, Mutum-de-penacho e Anhuma.
+- Status de conservação atualizado conforme Portaria MMA nº 1.704/2026 (Mutum-de-penacho = VU).
+- Todas as 9 imagens verificadas (200 OK) e licenças comerciais confirmadas.
+- Testes automatizados atualizados para validar 4 lotes verificados.
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-02` (Arara-canindé, Jabiru, Colhereiro).
+- **Agente 3 (Qualidade)**: Validar a renderização das aves P1 no navegador e verificar se os filtros por ambiente (Matas, Áreas alagadas) estão precisos para estas espécies.
+
+**Bloqueios:** Nenhum. 48 testes VERDES.
+
+## Status da Auditoria MVP — Passo 7/50
+
+**Estado:** Concluído (Pendente de evidência regional para promoção).
+
+**Resumo:**
+- Auditados os lotes `catalog-birds-02` (Gavião-belo e Urubu-rei) e `catalog-birds-04` (Tuiuiú, Arara-azul e Colhereiro).
+- **Colhereiro (*Platalea ajaja*)** acrescentado ao catálogo com 3 imagens Commons auditadas e fontes GBIF/Wikipédia.
+- Corrigida referência 404 da Arara-azul voando; todas as 15 imagens destes lotes agora retornam 200 OK.
+- Mantido status `pending-review` para todos os registros deste passo, pois a ocorrência pantaneira individual e a conservação oficial não foram localizadas de forma reproduzível no SALVE/Portaria nesta sessão.
+- Contagem total elevada para 47 espécies.
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-03` (Arara-canindé, Urubu-de-cabeça-preta e Tucano-toco).
+- **Agente 3 (Qualidade)**: Validar no navegador se a nova espécie (Colhereiro) está renderizando corretamente e se o filtro "Rios e corixos" a exibe junto com o Tuiuiú.
+
+**Bloqueios:** Nenhum. 49 testes VERDES.
+
+## Status da Auditoria MVP — Passo 8/50
+
+O terceiro lote de aves, `catalog-birds-03`, foi auditado com Arara-canindé (*Ara ararauna*), Urubu-de-cabeça-preta (*Coragyps atratus*) e Tucano-toco (*Ramphastos toco*). O GBIF confirmou os três nomes como espécies aceitas em correspondência exata; as nove URLs Commons retornaram HTTP 200, com créditos individuais e licenças CC BY/CC BY-SA permitidas para o produto comercial. O lote permanece `pending-review` porque não foram anexadas, de forma individual e reproduzível, evidências regionais do Pantanal, conservação oficial brasileira, `reviewedAt`, `reviewedBy` e checklist editorial completo. Nenhum status de conservação foi inventado.
+
+A fila contém 47 espécies no total e não há duplicação. O relatório `docs/MVP-STEP-08-BATCH-AUDIT.md` e o dossiê `docs/AUDIT-EVIDENCE-BIRDS-P1.md` foram atualizados. A Conta 2 deve anexar a evidência regional/conservacionista para promoção futura; a Conta 3 deve testar a renderização das três aves e das imagens no navegador. Próxima etapa coordenada: Passo 9/50, primeiro lote de répteis, sem repetir birds-03.

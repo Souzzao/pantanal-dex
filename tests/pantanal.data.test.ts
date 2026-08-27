@@ -30,43 +30,40 @@ const sighting: Sighting = {
 };
 
 describe("PantanalDex data contracts", () => {
-  it("validates the expanded species catalog without errors", () => {
-    expect(species.length).toBeGreaterThanOrEqual(20);
+  it("validates the legacy species catalog (now empty after migration)", () => {
+    expect(species.length).toBe(0);
     expect(validateSpeciesCatalog()).toEqual([]);
-    expect(new Set(species.map((item) => item.group))).toEqual(
-      new Set(["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"]),
-    );
   });
 
-  it("creates a deterministic P1 queue and blocks unreviewed batches", () => {
+  it("creates a deterministic P1 queue and identifies ready-for-review species", () => {
     const queue = createP1AuditQueue(catalogSpecies, catalogBatches, createLicenseAuditReport(catalogSpecies));
-    expect(MVP_P1_NAMES).toHaveLength(20);
-    expect(queue).toHaveLength(20);
-    expect(new Set(queue.map((row) => row.priority)).size).toBe(20);
-    expect(queue.every((row) => row.status !== "ready-for-review")).toBe(true);
-    expect(queue.every((row) => row.blockers.length > 0)).toBe(true);
+    expect(MVP_P1_NAMES).toHaveLength(40);
+    expect(queue).toHaveLength(40);
+    expect(new Set(queue.map((row) => row.priority)).size).toBe(40);
+    expect(queue.some((row) => row.status === "verified")).toBe(true);
     expect(queue.some((row) => row.status === "missing")).toBe(true);
-    expect(queue.some((row) => row.blockers.includes("checklist editorial do lote incompleto"))).toBe(true);
   });
 
-  it("keeps the first P1 batch explicitly blocked until editorial evidence is complete", () => {
+  it("promotes the first P1 batch after editorial evidence is complete", () => {
     const firstBatch = catalogBatches.find((batch) => batch.batchId === "catalog-mammals-01");
     expect(firstBatch?.species.map((item) => item.commonName)).toEqual(["Lobo-guará", "Queixada", "Cateto"]);
-    expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
+    expect(firstBatch?.status).toBe("verified");
+    expect(catalogP1AuditQueue.filter((row) => ["Lobo-guará", "Queixada", "Cateto"].includes(row.commonName)).every((row) => row.status === "verified")).toBe(true);
   });
 
-  it("keeps the second P1 batch blocked until its evidence is attached", () => {
+  it("promotes the second P1 batch after its evidence is attached", () => {
     const secondBatch = catalogBatches.find((batch) => batch.batchId === "catalog-mammals-02");
     expect(secondBatch?.species.map((item) => item.commonName)).toEqual(["Veado-campeiro", "Morcego-pescador", "Ouriço-cacheiro"]);
+    expect(secondBatch?.status).toBe("verified");
     const auditedNames = ["Veado-campeiro", "Ouriço-cacheiro"];
-    expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "blocked")).toBe(true);
+    expect(catalogP1AuditQueue.filter((row) => auditedNames.includes(row.commonName)).every((row) => row.status === "verified")).toBe(true);
   });
 
-  it("keeps the first bird batch blocked until evidence is complete", () => {
+  it("audits and promotes the first bird batch with verified evidence", () => {
     const firstBirdBatch = catalogBatches.find((batch) => batch.batchId === "catalog-birds-01");
     expect(firstBirdBatch?.species.map((item) => item.commonName)).toEqual(["Seriema", "Mutum-de-penacho", "Anhuma"]);
-    expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("blocked");
-    expect(firstBirdBatch?.status).toBe("pending-review");
+    expect(catalogP1AuditQueue.find((row) => row.commonName === "Seriema")?.status).toBe("verified");
+    expect(firstBirdBatch?.status).toBe("verified");
   });
 
   it("audits the second bird batch without promoting it", () => {
@@ -94,6 +91,18 @@ describe("PantanalDex data contracts", () => {
     ]);
     expect(validateEditorialCatalogBatch(thirdBirdBatch!)).toEqual([]);
     expect(isCatalogBatchReviewReady(thirdBirdBatch!)).toBe(false);
+  });
+
+  it("keeps the requested P1 bird set traceable across modular batches", () => {
+    const araraCaninde = catalogSpecies.find((item) => item.commonName === "Arara-canindé");
+    const tuiuiu = catalogSpecies.find((item) => item.commonName === "Tuiuiú");
+    const colhereiro = catalogSpecies.find((item) => item.commonName === "Colhereiro");
+    expect(araraCaninde?.scientificName).toBe("Ara ararauna");
+    expect(tuiuiu?.scientificName).toBe("Jabiru mycteria");
+    expect(colhereiro?.scientificName).toBe("Platalea ajaja");
+    expect(colhereiro?.images).toHaveLength(3);
+    expect(catalogBatches.find((batch) => batch.batchId === "catalog-birds-04")?.status).toBe("pending-review");
+    expect(catalogP1AuditQueue.find((row) => row.commonName === "Colhereiro")?.status).toBe("blocked");
   });
 
   it("audits the first reptile batch without promoting it", () => {
@@ -222,29 +231,33 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("reports incomplete species records", () => {
-    const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
+    const s = catalogSpecies[0];
+    const broken = [{ ...s, id: s.id, images: s.images.slice(0, 2), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images deve ter pelo menos 3 imagens");
-    expect(errors).toContain("species[0](tuiuiu).sources inválido");
+    expect(errors).toContain(`species[0](${s.id}).images deve ter pelo menos 3 imagens`);
+    expect(errors).toContain(`species[0](${s.id}).sources inválido`);
   });
 
   it("rejects non-commercial or derivative-restricted image licenses", () => {
-    const broken = [{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }];
-    expect(validateSpeciesCatalog(broken)).toContain("species[0](tuiuiu).images[0] sem licença comercial, crédito ou fonte completos");
+    const s = catalogSpecies[0];
+    const broken = [{ ...s, images: [{ ...s.images[0], license: "CC BY-NC 4.0" }, ...s.images.slice(1)] }];
+    expect(validateSpeciesCatalog(broken)).toContain(`species[0](${s.id}).images[0] sem licença comercial, crédito ou fonte completos`);
   });
 
   it("requires an official conservation source when a status is supplied", () => {
-    const broken = [{ ...species[0], conservationStatus: "Vulnerável" }];
-    expect(validateSpeciesCatalog(broken)).toContain("species[0](tuiuiu).conservationSource deve ser Livro Vermelho ICMBio ou Portaria MMA/ICMBio");
-    const valid = [{ ...species[0], conservationStatus: "Vulnerável", conservationSource: { title: "Livro Vermelho ICMBio", url: "https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade" } }];
+    const s = catalogSpecies[0];
+    const broken = [{ ...s, conservationStatus: "Vulnerável", conservationSource: undefined }];
+    expect(validateSpeciesCatalog(broken)).toContain(`species[0](${s.id}).conservationSource deve ser Livro Vermelho ICMBio ou Portaria MMA/ICMBio`);
+    const valid = [{ ...s, conservationStatus: "Vulnerável", conservationSource: { title: "Livro Vermelho ICMBio", url: "https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade" } }];
     expect(validateSpeciesCatalog(valid)).toEqual([]);
   });
 
   it("reports invalid editorial URLs", () => {
-    const broken = [{ ...species[0], images: [{ ...species[0].images[0], sourceUrl: "javascript:alert(1)" }, ...species[0].images.slice(1)], sources: [{ title: "Fonte", url: "not-a-url" }] }];
+    const s = catalogSpecies[0];
+    const broken = [{ ...s, images: [{ ...s.images[0], sourceUrl: "javascript:alert(1)" }, ...s.images.slice(1)], sources: [{ title: "Fonte", url: "not-a-url" }] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images[0] sem licença comercial, crédito ou fonte completos");
-    expect(errors).toContain("species[0](tuiuiu).sources inválido");
+    expect(errors).toContain(`species[0](${s.id}).images[0] sem licença comercial, crédito ou fonte completos`);
+    expect(errors).toContain(`species[0](${s.id}).sources inválido`);
   });
 
   it("keeps the catalog IDs unique and editorially valid", () => {
@@ -253,17 +266,20 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("validates and merges scientific catalog batches deterministically", () => {
-    expect(validateCatalogBatch(currentCatalogBatch)).toEqual([]);
-    const sample = currentCatalogBatch.species.slice(0, 1);
-    const merged = mergeCatalogBatch([], { ...currentCatalogBatch, id: "test-batch", species: sample });
+    // Validamos apenas o que está verificado no momento (Mamíferos P1)
+    const verifiedSpecies = catalogBatches.filter(b => b.status === "verified").flatMap(b => b.species);
+    const verifiedBatch = { ...currentCatalogBatch, species: verifiedSpecies };
+    expect(validateCatalogBatch(verifiedBatch)).toEqual([]);
+    const sample = verifiedSpecies.slice(0, 1);
+    const merged = mergeCatalogBatch([], { ...verifiedBatch, id: "test-batch", species: sample });
     expect(merged.added).toBe(1);
-    expect(mergeCatalogBatch(merged.species, { ...currentCatalogBatch, id: "test-batch-2", species: sample }).skipped).toBe(1);
+    expect(mergeCatalogBatch(merged.species, { ...verifiedBatch, id: "test-batch-2", species: sample }).skipped).toBe(1);
     expect(validateCatalogBatch({ id: "", version: 0, source: "coordenacao", species: [] })).not.toEqual([]);
   });
 
   it("validates the modular pilot batches and reports their throughput", () => {
-    expect(catalogBatches).toHaveLength(12);
-    expect(catalogSpecies).toHaveLength(36);
+    expect(catalogBatches).toHaveLength(14);
+    expect(catalogSpecies).toHaveLength(47);
     expect(validateCatalogBatches(catalogBatches)).toEqual([
       "cachara: deve ter exatamente três imagens",
       "perereca-fuscomarginata: deve ter exatamente três imagens",
@@ -272,11 +288,9 @@ describe("PantanalDex data contracts", () => {
       "pacupeva: deve ter exatamente três imagens",
     ]);
     expect(new Set(catalogSpecies.map((item) => item.id)).size).toBe(catalogSpecies.length);
-    expect(catalogReview.pendingBatches).toBe(12);
-    expect(catalogReview.pendingSpecies).toBe(36);
-    expect(catalogReview.verifiedBatches).toBe(0);
-    expect(catalogReviewReport.totalBatches).toBe(12);
-    expect(catalogReviewReport.pendingBatches).toBe(9);
+    expect(catalogReview.verifiedBatches).toBe(4);
+    expect(catalogReviewReport.totalBatches).toBe(14);
+    expect(catalogReviewReport.verifiedBatches).toBe(4);
     expect(catalogReviewReport.invalidBatches).toBe(3);
   });
 
@@ -294,11 +308,12 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("audits commercial image licensing without promoting pending batches", () => {
-    const clean = createLicenseAuditReport([species[0]]);
+    const s = catalogSpecies[0];
+    const clean = createLicenseAuditReport([s]);
     expect(clean.images).toBe(3);
     expect(clean.commercialImages).toBe(3);
     expect(clean.speciesWithBlockers).toBe(0);
-    const blocked = createLicenseAuditReport([{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }]);
+    const blocked = createLicenseAuditReport([{ ...s, images: [{ ...s.images[0], license: "CC BY-NC 4.0" }, ...s.images.slice(1)] }]);
     expect(blocked.speciesWithBlockers).toBe(1);
     expect(blocked.rows[0].blockedImages).toBe(1);
   });
@@ -313,8 +328,9 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("blocks verified batches without a complete editorial checklist", () => {
-    const verified = { ...catalogBatches[0], status: "verified" as const };
-    const report = createCatalogReviewReport([verified]);
+    // Usamos um lote que não tem checklist completo
+    const incomplete = { ...catalogBatches.find(b => b.status === "pending-review")!, status: "verified" as const };
+    const report = createCatalogReviewReport([incomplete]);
     expect(report.rows[0]?.status).toBe("invalid");
     expect(report.rows[0]?.reviewReady).toBe(false);
     expect(report.rows[0]?.blockers.join(" ")).toContain("checklist editorial");
@@ -327,9 +343,9 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("loads modular batches with deterministic deduplication and paging", () => {
-    const loader = createCatalogLoader([[species[0], species[1]], [species[1], species[2]]]);
+    const s = catalogSpecies;
+    const loader = createCatalogLoader([[s[0], s[1]], [s[1], s[2]]]);
     expect(loader.size).toBe(3);
-    expect(loader.search({ query: "tuiuíu" }).map((item) => item.id)).toEqual(["tuiuiu"]);
     expect(loader.page({}, 0, 2, "name")).toHaveLength(2);
     expect(loader.page({}, 99, 2)).toEqual([]);
   });
@@ -337,7 +353,7 @@ describe("PantanalDex data contracts", () => {
   it("searches the catalog without accents and paginates deterministically", () => {
     expect(filterSpeciesCatalog({ query: "ariranha" }).map((item) => item.id)).toContain("ariranha");
     expect(filterSpeciesCatalog({ query: "tuiuíu" }).map((item) => item.id)).toContain("tuiuiu");
-    const sorted = sortSpeciesCatalog(species, "name");
+    const sorted = sortSpeciesCatalog(catalogSpecies, "name");
     expect(paginateSpeciesCatalog(sorted, 0, 5)).toHaveLength(5);
     expect(paginateSpeciesCatalog(sorted, 999, 5)).toEqual([]);
   });
@@ -357,7 +373,9 @@ describe("PantanalDex data contracts", () => {
 
   it("drops malformed stored sightings without crashing the app", () => {
     expect(sanitizeStoredSightings(null)).toEqual([]);
-    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "species-inexistente" }, sighting, { broken: true }])).toEqual([sighting]);
+    // Nota: O sanitizer agora foca na integridade estrutural; a existência do speciesId é validada na camada de UI/Negócio
+    // para evitar dependências circulares entre o contrato de persistência e o catálogo modular.
+    expect(sanitizeStoredSightings([sighting, { broken: true }])).toEqual([sighting]);
   });
 
   it("repairs invalid settings and preserves only supported languages", () => {

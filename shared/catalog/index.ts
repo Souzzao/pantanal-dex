@@ -11,12 +11,14 @@ import { reptiles02 } from "./batches/reptiles-02";
 import { amphibians02 } from "./batches/amphibians-02";
 import { fish02 } from "./batches/fish-02";
 import { invertebrates01 } from "./batches/invertebrates-01";
+import { mammals03 } from "./batches/mammals-03";
+import { birds04 } from "./batches/birds-04";
 import { validateCatalogBatch, validateCatalogBatches, type CatalogBatch } from "./types";
 import { createCatalogReviewReport } from "./review";
 import { createLicenseAuditReport } from "./license-audit";
 import { createP1AuditQueue } from "./p1-audit";
 
-export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, birds02, fish01, mammals02, birds03, reptiles02, amphibians02, fish02, invertebrates01];
+export const catalogBatches: CatalogBatch[] = [mammals01, birds01, reptiles01, amphibians01, birds02, fish01, mammals02, birds03, reptiles02, amphibians02, fish02, invertebrates01, mammals03, birds04];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const catalogReview = {
   batches: catalogBatches.length,

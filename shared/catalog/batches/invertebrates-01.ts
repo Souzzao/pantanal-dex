@@ -15,7 +15,43 @@ export const invertebrates01: CatalogBatch = {
   pendingNotes: ["Confirmar licença do arquivo específico, autoria e distribuição local antes de promover o lote."],
   species: [
     {
-      id: "abelha-jatai", commonName: "Abelha-jataí", scientificName: "Tetragonisca angustula", group: "Invertebrados", environments: ["Matas", "Bordas de mata"], description: "Abelha sem ferrão social que vive em colônias e visita flores de diferentes ambientes do Pantanal.", physicalCharacteristics: "Pequena, corpo escuro com marcas amareladas e asas transparentes.", habitat: "Ocadas, cavidades, troncos e estruturas protegidas em áreas de vegetação.", behavior: "Vive em colônias, coleta recursos florais e defende a entrada do ninho.", diet: "Néctar, pólen e resinas vegetais.", curiosities: ["A espécie é criada tradicionalmente em meliponários.", "A entrada do ninho pode ter estrutura de cerume característica."], distribution: "Ampla distribuição na América tropical, incluindo o Brasil.", ecologicalImportance: "Poliniza plantas nativas e agrícolas, contribuindo para a regeneração vegetal.", images: [image("https://upload.wikimedia.org/wikipedia/commons/1/1a/Tetragonisca_angustula.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Tetragonisca_angustula.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/2/2b/Jatai_bee.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Jatai_bee.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/3/3c/Tetragonisca_nest.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Tetragonisca_nest.jpg")], sources: [{ title: "GBIF Species Match — Tetragonisca angustula", url: "https://api.gbif.org/v1/species/match?name=Tetragonisca%20angustula" }],
+      id: "abelha-jatai",
+      commonName: "Abelha-jataí",
+      scientificName: "Tetragonisca angustula",
+      group: "Invertebrados",
+      environments: ["Matas", "Bordas de mata"],
+      description: "Abelha sem ferrão social que vive em colônias e visita flores de diferentes ambientes do Pantanal.",
+      physicalCharacteristics: "Pequena, corpo escuro com marcas amareladas e asas transparentes.",
+      habitat: "Ocadas, cavidades, troncos e estruturas protegidas em áreas de vegetação.",
+      behavior: "Vive em colônias, coleta recursos florais e defende a entrada do ninho.",
+      diet: "Néctar, pólen e resinas vegetais.",
+      curiosities: ["A espécie é criada tradicionalmente em meliponários.", "A entrada do ninho pode ter estrutura de cerume característica."],
+      distribution: "Ampla distribuição na América tropical, incluindo o Brasil.",
+      ecologicalImportance: "Poliniza plantas nativas e agrícolas, contribuindo para a regeneração vegetal.",
+      images: [
+        {
+          uri: "https://upload.wikimedia.org/wikipedia/commons/8/85/Stingless_Bees_%28Tetragonisca_angustula%29_%286788207763%29.jpg",
+          author: "Bernard DUPONT",
+          license: "CC BY-SA 2.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Stingless_Bees_(Tetragonisca_angustula)_(6788207763).jpg",
+          credit: "Bernard DUPONT / Wikimedia Commons"
+        },
+        {
+          uri: "https://upload.wikimedia.org/wikipedia/commons/6/62/Abelha_jatai.jpg",
+          author: "Luis Carlos Martinelli",
+          license: "CC BY-SA 4.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Abelha_jatai.jpg",
+          credit: "Luis Carlos Martinelli / Wikimedia Commons"
+        },
+        {
+          uri: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tetragonisca_angustula.JPG",
+          author: "Bibafu",
+          license: "CC BY-SA 3.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Tetragonisca_angustula.JPG",
+          credit: "Bibafu / Wikimedia Commons"
+        }
+      ],
+      sources: [{ title: "GBIF Species Match — Tetragonisca angustula", url: "https://api.gbif.org/v1/species/match?name=Tetragonisca%20angustula" }],
     },
     {
       id: "formiga-cortadeira", commonName: "Formiga-cortadeira", scientificName: "Atta sexdens", group: "Invertebrados", environments: ["Campos", "Bordas de mata"], description: "Formiga social que corta folhas e cultiva fungos no interior de ninhos subterrâneos.", physicalCharacteristics: "Castas com tamanhos distintos, mandíbulas fortes e colônias numerosas.", habitat: "Solo de campos, bordas, clareiras e áreas de vegetação.", behavior: "Organiza trilhas, transporta fragmentos vegetais e mantém agricultura de fungos.", diet: "Fungo cultivado com material vegetal coletado pela colônia.", curiosities: ["As castas dividem tarefas de corte, transporte, defesa e cuidado.", "Os ninhos alteram a estrutura e a ciclagem do solo."], distribution: "América do Sul, com ampla ocorrência em áreas brasileiras.", ecologicalImportance: "Move matéria vegetal e modifica o solo, influenciando decomposição e nutrientes.", images: [image("https://upload.wikimedia.org/wikipedia/commons/4/4a/Atta_sexdens.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Atta_sexdens.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/5/5b/Leafcutter_ant_worker.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Leafcutter_ant_worker.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/6/6c/Atta_nest_trail.jpg", "Wikimedia Commons", "https://commons.wikimedia.org/wiki/File:Atta_nest_trail.jpg")], sources: [{ title: "GBIF Species Match — Atta sexdens", url: "https://api.gbif.org/v1/species/match?name=Atta%20sexdens" }],
