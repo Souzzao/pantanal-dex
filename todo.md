@@ -493,4 +493,4 @@
 - [x] Passo 2/50: Atualização da matriz de auditoria para meta de 500 espécies.
 - [x] Passo 3/50: Ampliação do núcleo P1 (40 espécies prioritárias).
 - [x] Passo 4/50: Auditoria funcional no navegador (rotas, busca, formulários e correção técnica de imagens).
-- [ ] Passo 5/50: Auditoria editorial do primeiro lote P1 (mamíferos) - verificação de ocorrência e conservação.
+- [x] Passo 5/50: Auditoria editorial do primeiro lote P1 (mamíferos) - verificação de ocorrência e conservação.

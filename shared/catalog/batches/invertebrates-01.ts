@@ -35,6 +35,20 @@ export const invertebrates01: CatalogBatch = {
           license: "CC BY-SA 2.0",
           sourceUrl: "https://commons.wikimedia.org/wiki/File:Stingless_Bees_(Tetragonisca_angustula)_(6788207763).jpg",
           credit: "Bernard DUPONT / Wikimedia Commons"
+        },
+        {
+          uri: "https://upload.wikimedia.org/wikipedia/commons/6/62/Abelha_jatai.jpg",
+          author: "Luis Carlos Martinelli",
+          license: "CC BY-SA 4.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Abelha_jatai.jpg",
+          credit: "Luis Carlos Martinelli / Wikimedia Commons"
+        },
+        {
+          uri: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tetragonisca_angustula.JPG",
+          author: "Bibafu",
+          license: "CC BY-SA 3.0",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Tetragonisca_angustula.JPG",
+          credit: "Bibafu / Wikimedia Commons"
         }
       ],
       sources: [{ title: "GBIF Species Match — Tetragonisca angustula", url: "https://api.gbif.org/v1/species/match?name=Tetragonisca%20angustula" }],

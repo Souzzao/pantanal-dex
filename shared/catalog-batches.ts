@@ -1,4 +1,5 @@
 import { species, validateSpeciesCatalog, type Species } from "./pantanal";
+import { catalogSpecies } from "./catalog/index";
 
 export type CatalogBatch = {
   id: string;
@@ -35,4 +36,4 @@ export function mergeCatalogBatch(existing: Species[], incoming: CatalogBatch): 
   return { species: Array.from(byId.values()), added, updated, skipped };
 }
 
-export const currentCatalogBatch: CatalogBatch = { id: "coordenacao-core-2026-08", version: 1, source: "coordenacao", species };
+export const currentCatalogBatch: CatalogBatch = { id: "coordenacao-core-2026-08", version: 1, source: "coordenacao", species: catalogSpecies.length > 0 ? catalogSpecies : species };

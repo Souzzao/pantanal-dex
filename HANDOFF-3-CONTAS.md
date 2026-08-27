@@ -464,3 +464,20 @@ Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente
 1. Agente 2: Saneamento dos 12 lotes modulares atuais (36 espécies).
 2. Agente 1: Início da auditoria editorial P1 (Mamíferos) - Passo 5/50.
 3. Agente 3: Testes de regressão em avistamentos e mapa após a mudança no `RemoteImage`.
+
+## Status da Auditoria MVP — Passo 5/50
+
+**Estado:** Concluído (Promovido a `verified`).
+
+**Resumo:**
+- Auditados e promovidos 3 lotes de mamíferos (14 espécies): `catalog-mammals-01`, `02` e `03`.
+- Criado `catalog-birds-04` para preservar Tuiuiú e Arara-azul auditados.
+- Catálogo legado `shared/pantanal.ts` esvaziado; sistema agora 100% modular.
+- Saneado lote `catalog-invertebrates-01` (Abelha-jataí) com 3 imagens auditadas.
+- Validação de fontes expandida para domínios governamentais (`in.gov.br`, `www.gov.br`).
+
+**Próximos passos coordenados:**
+- **Agente 2 (Catálogo)**: Iniciar a auditoria do lote `catalog-birds-01` (Seriema, Mutum, Anhuma). Verificar URLs de imagem quebradas nos outros lotes modulares.
+- **Agente 3 (Qualidade)**: Validar a nova busca 100% modular no navegador e testar a integridade dos avistamentos existentes após a limpeza do catálogo legado.
+
+**Bloqueios:** Nenhum bloqueio técnico. Todos os 48 testes estão VERDES.
