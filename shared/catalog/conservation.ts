@@ -15,7 +15,7 @@ export type ConservationReviewRecord = {
 const salveUrl = "https://salve.icmbio.gov.br/";
 const redBookUrl = "https://www.gov.br/icmbio/pt-br/centrais-de-conteudo/publicacoes/publicacoes-diversas/livro-vermelho/livro-vermelho-da-fauna-brasileira-ameacada-de-extincao-2018";
 const officialListsUrl = "https://www.gov.br/mma/pt-br/assuntos/biodiversidade-e-biomas/biodiversidade1/conservacao-de-especies";
-const checkedAt = "2026-08-22";
+const checkedAt = "2026-08-27";
 
 /**
  * Trilha conservadora: SALVE/Livro Vermelho orientam a busca, mas nenhum

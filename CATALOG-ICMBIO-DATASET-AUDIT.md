@@ -12,11 +12,11 @@ O dataset `dr327` foi auditado como fonte oficial de contexto para ocorrência e
 |---|---:|---|---|---|
 | Metadados do dataset ICMBio/SISBio dr327 | 200 | sim | não | resposta não estruturada para auditoria automática |
 | Referência IPT ICMBio/SISBio v1.649 | 401 | não | não | resposta não estruturada para auditoria automática |
+| Filtro Dilocarcinus pagei | 200 | sim | não | resposta não estruturada para auditoria automática |
+| Filtro Macrobrachium amazonicum | 200 | sim | não | resposta não estruturada para auditoria automática |
 | Filtro Brycon hilarii | 200 | sim | não | resposta não estruturada para auditoria automática |
 | Filtro Pseudoplatystoma corruscans | 200 | sim | não | resposta não estruturada para auditoria automática |
-| Filtro Dilocarcinus pagei | 200 | sim | não | resposta não estruturada para auditoria automática |
 | Filtro Piaractus mesopotamicus | 200 | sim | não | resposta não estruturada para auditoria automática |
-| Filtro Macrobrachium amazonicum | 200 | sim | não | resposta não estruturada para auditoria automática |
 
 **Resultado do contrato:** PASS. Cinco filtros regionais presentes; 5 permanecem `pending-review`; ${errors.length} erro(s).
 

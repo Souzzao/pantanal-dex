@@ -433,3 +433,11 @@ Foi criado `scripts/icmbio-dataset-audit.ts`, exposto como `pnpm catalog:icmbio-
 O contrato do ledger passou: cinco filtros presentes, cinco registros `pending-review` e zero erros. A licença CC BY 4.0 e a descrição oficial do dataset foram confirmadas na página de metadados. A limitação do IPT e a falta de resposta estruturada dos filtros foram preservadas como limitações operacionais; não houve confirmação individual, inferência de ausência ou promoção de ocorrência.
 
 O artefato `CATALOG-ICMBIO-DATASET-AUDIT.md` foi gerado e o TODO atualizado. Ainda falta a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 10/50: conservação oficial
+
+A trilha `shared/catalog/conservation.ts` foi atualizada para 2026-08-27 e auditada com `pnpm catalog:conservation-audit`. As fontes elegíveis foram revisitadas: SALVE/ICMBio, Livro Vermelho da Fauna Brasileira e página de listas/portarias MMA/ICMBio. O resultado foi `PASS`: cinco registros cobertos, três fontes oficiais referenciadas, todos em `pending-review` e nenhuma categoria de ameaça inventada.
+
+A trilha foi exposta na tela nativa de Configurações como “Trilha de conservação — Passo 10/50”. O My Browser confirmou “5 registros em revisão · 3 fontes oficiais” e “Nenhuma categoria inventada”. A regra permanece conservadora: acesso à fonte não substitui correspondência taxonômica individual e evidência citável.
+
+O TODO foi atualizado. Falta concluir checks completos, commit e publicação deste ciclo no PR #11.

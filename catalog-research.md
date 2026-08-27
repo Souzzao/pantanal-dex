@@ -127,3 +127,13 @@ Fonte consultada: https://collectory.sibbr.gov.br/collectory/public/show/dr327 �
 A página do recurso `dr327` no SiBBr foi reaberta e confirmou o título do conjunto do ICMBio/SISBio, a descrição de ocorrências informadas por pesquisadores, o recorte geográfico em Unidades de Conservação Federais do Brasil e a licença CC BY 4.0. A página informa a versão 1.649, última publicação verificada em 02 fev. 2026 e atualização de metadados em 19 ago. 2026: https://collectory.sibbr.gov.br/collectory/public/show/dr327.
 
 A referência IPT indicada pelo próprio recurso (`https://ipt.icmbio.gov.br/resource?r=sisbio_ocorrencia&v=1.649`) e a consulta ALA-Hub (`https://ala-hub.sibbr.gov.br/ala-hub/occurrence/search?q=data_resource_uid:dr327`) não forneceram conteúdo estruturado nesta extração. Esta limitação foi registrada como resultado operacional, não como ausência de registros. As cinco consultas por espécie permanecem `pending-review` no ledger.
+
+## Passo 10/50 — fontes oficiais de conservação revisitadas em 2026-08-27
+
+O SALVE/ICMBio foi acessado e se apresenta como Sistema de Avaliação do Risco de Extinção da Biodiversidade; a própria página distingue o número de espécies em destaque da lista oficial e direciona às listas oficiais de fauna: https://salve.icmbio.gov.br/.
+
+A página oficial do Livro Vermelho da Fauna Brasileira Ameaçada de Extinção 2018 foi acessada e disponibiliza sete volumes por grupo taxonômico, incluindo mamíferos, aves, répteis, anfíbios, peixes e invertebrados: https://www.gov.br/icmbio/pt-br/centrais-de-conteudo/publicacoes/publicacoes-diversas/livro-vermelho/livro-vermelho-da-fauna-brasileira-ameacada-de-extincao-2018.
+
+A página do MMA sobre conservação de espécies foi acessada e confirma o SALVE como fonte de dados da fauna brasileira, além de listar as listas nacionais oficiais e portarias aplicáveis. A página informa atualizações de 2026 para peixes/invertebrados aquáticos e para mamíferos, aves, répteis, anfíbios e invertebrados terrestres: https://www.gov.br/mma/pt-br/assuntos/biodiversidade-e-biomas/biodiversidade1/conservacao-de-especies.
+
+As páginas confirmam a trilha de fontes, mas não foram usadas para atribuir categoria individual às cinco espécies do ledger nesta execução. Os registros permanecem `pending-review` até existir correspondência taxonômica individual, categoria oficial e evidência citável.
