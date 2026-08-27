@@ -289,3 +289,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar `finding: not-listed` e `status: confirmed` para `piraputanga`, sem inventar `LC` ou outra categoria
 - [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-24-RESEARCH.md`, testes e handoff
 - [ ] Validar individualmente a conservação de `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 25/50 — validação oficial de conservação do caranguejo-de-água-doce
+
+- [x] Localizar o estudo técnico oficial do ICMBio sobre avaliação de crustáceos
+- [x] Confirmar a ficha individual de `Dilocarcinus pagei Stimpson, 1861`
+- [x] Registrar `category: LC`, `sourceKind: Avaliação ICMBio` e `status: confirmed`
+- [x] Preservar o período da avaliação (2010–2014; ficha avaliada em 2010–2012) e seu escopo metodológico
+- [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-25-RESEARCH.md`, testes e handoff
+- [ ] Validar individualmente a conservação de `camarao-agua-doce`

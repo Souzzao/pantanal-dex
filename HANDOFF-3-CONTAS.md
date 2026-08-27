@@ -560,3 +560,12 @@ A Conta 2 validou a posição oficial de conservação da `piraputanga` (`Brycon
 O registro foi promovido para `status: confirmed` com `finding: not-listed`, sem categoria de ameaça. Esse finding significa somente que a espécie não foi localizada na lista nacional oficial consultada; não equivale a `LC`, não representa avaliação independente de baixo risco e não substitui eventual avaliação estadual ou regional. `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` sem classificação.
 
 O ledger, validador, auditor, relatório, `STEP-24-RESEARCH.md`, testes, TODO e este handoff foram atualizados. O auditor retornou `PASS`, com 3 findings confirmados, 2 pendentes e 0 erros; o teste direcionado passou com 20 casos aprovados.
+
+
+## 33. Passo 25/50 — validação oficial de conservação do caranguejo-de-água-doce
+
+A Conta 2 validou `caranguejo-agua-doce` (`Dilocarcinus pagei`) usando o estudo técnico oficial do ICMBio *Avaliação do risco de extinção dos crustáceos no Brasil: 2010–2014*. A ficha individual de `Dilocarcinus pagei Stimpson, 1861`, no documento, registra a categoria **Menos Preocupante (LC)** e informa que a avaliação foi realizada entre 2010 e 2012, segundo os critérios de avaliação regional da IUCN de 2003. A justificativa menciona distribuição ampla, população presumivelmente grande e estável e ausência de ameaças de longo prazo.
+
+O registro foi promovido para `status: confirmed`, `category: LC` e `sourceKind: Avaliação ICMBio`. A data e o escopo da avaliação foram preservados no campo de evidência. A categoria é uma avaliação científica oficial do ICMBio e não deve ser confundida automaticamente com uma classificação jurídica de lista nacional posterior. `camarao-agua-doce` permanece `pending-review`.
+
+O vocabulário de fontes, ledger, auditor, relatório, `STEP-25-RESEARCH.md`, teste, TODO e este handoff foram atualizados. O auditor retornou `PASS`, com 4 registros confirmados, 1 pendente e 0 erros; o teste direcionado passou com 20 casos aprovados.
