@@ -217,3 +217,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Gerar `CATALOG-IMAGE-AVAILABILITY-AUDIT.md` com contagem por tipo e pendências
 - [ ] Rechecar as 192 URLs HTTP 429 com concorrência reduzida antes de promover disponibilidade plena
 - [ ] Passo 17/50: iniciar a próxima pendência científica desbloqueada após integração da Conta 1
+
+
+## Passo 17/50 — primeira validação científica
+
+- [x] Validar a identidade aceita de `Pseudoplatystoma corruscans` no GBIF/Catalogue of Life
+- [x] Confirmar ocorrência regional de `pintado` na bacia do rio Miranda, Pantanal de Mato Grosso do Sul, pela Embrapa
+- [x] Promover somente a trilha de ocorrência de `pintado` para `confirmed`, sem inferir conservação
+- [x] Atualizar `scripts/regional-occurrence-audit.ts`, `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md` e `STEP-17-RESEARCH.md`
+- [ ] Validar individualmente `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`

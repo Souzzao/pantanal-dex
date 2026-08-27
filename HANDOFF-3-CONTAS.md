@@ -488,3 +488,12 @@ A Conta 2 concluiu a auditoria automatizada de 330 URLs do catálogo combinado: 
 A primeira execução identificou uma página Commons 404 causada por grafia incorreta do epíteto específico no crédito de `Anodorhynchus hyacinthinus`; a URL foi corrigida e confirmada na página oficial do arquivo. A execução final registrou 138 respostas bem-sucedidas, 192 respostas HTTP 429 e 0 falhas definitivas, com status `PASS_WITH_LIMITATION`. As respostas 429 permanecem pendentes de rechecagem com menor concorrência/intervalo e não foram classificadas como URLs quebradas.
 
 A auditoria confirma apenas disponibilidade HTTP, não autoria, licença ou ocorrência regional. As licenças comerciais continuam sujeitas ao manifesto e ao validador do catálogo. Próximo passo: 17/50, selecionar a primeira pendência desbloqueada do checklist e executar sua validação científica sem promover dados sem evidência.
+
+
+## 25. Passo 17/50 — primeira validação científica regional
+
+A Conta 2 iniciou a primeira pendência científica desbloqueada do ledger e validou `pintado` (`Pseudoplatystoma corruscans`). A Embrapa Infoteca-e documenta explicitamente a espécie na bacia hidrográfica do rio Miranda, no Pantanal de Mato Grosso do Sul, incluindo migração, desova nos rios Miranda e Aquidauana e dispersão pelas áreas alagadas. O GBIF/Catalogue of Life confirma `Pseudoplatystoma corruscans (Spix & Agassiz, 1829)` como espécie aceita.
+
+Com as duas evidências separadas e rastreáveis, o registro `pintado` foi promovido de `pending-review` para `confirmed` somente na trilha de ocorrência regional. Nenhum status de conservação foi inferido ou alterado. Os outros quatro registros (`pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`) permanecem `pending-review`, pois o dataset ICMBio/SISBio continua sem resposta estruturada suficiente nesta execução.
+
+O auditor `scripts/regional-occurrence-audit.ts` foi atualizado para exigir a evidência individual do pintado, rejeitar promoções dos demais registros e gerar `CATALOG-REGIONAL-OCCURRENCE-AUDIT.md` com referências Embrapa/GBIF. A pesquisa detalhada está em `STEP-17-RESEARCH.md`. Próxima etapa: executar a rodada completa de checks, revisar a integração e publicar o checkpoint do passo 17.
