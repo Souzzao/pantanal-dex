@@ -551,3 +551,12 @@ A Conta 2 validou a posição oficial de conservação do `pacu` (`Piaractus mes
 O ledger passou a registrar `pacu` como `status: confirmed` com `finding: not-listed`, sem categoria de ameaça. Esse finding significa somente “não listado na lista nacional oficial consultada”; não equivale a `LC`, não é uma nova avaliação de risco e não autoriza inferência sobre tendências populacionais. Os três registros restantes — `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce` — permanecem `pending-review` sem classificação.
 
 O tipo do ledger, o validador, o auditor, o relatório, `STEP-23-RESEARCH.md`, o teste e o TODO foram atualizados. O auditor retornou `PASS`, com 2 findings confirmados, 3 pendentes e 0 erros. Uma primeira execução do teste revelou apenas uma incompatibilidade da asserção com propriedade opcional ausente; a asserção foi corrigida e a rodada direcionada passou integralmente.
+
+
+## 32. Passo 24/50 — validação oficial de conservação da piraputanga
+
+A Conta 2 validou a posição oficial de conservação da `piraputanga` (`Brycon hilarii`) na Lista Nacional de Espécies Ameaçadas. A Portaria MMA nº 148/2022 foi consultada na publicação oficial do Diário Oficial da União e na cópia disponibilizada pelo ICMBio. A busca exata por `Brycon hilarii` e `piraputanga` não encontrou correspondência no documento; a espécie também não está entre as exceções de elasmobrânquios enumeradas pelo MMA.
+
+O registro foi promovido para `status: confirmed` com `finding: not-listed`, sem categoria de ameaça. Esse finding significa somente que a espécie não foi localizada na lista nacional oficial consultada; não equivale a `LC`, não representa avaliação independente de baixo risco e não substitui eventual avaliação estadual ou regional. `caranguejo-agua-doce` e `camarao-agua-doce` permanecem `pending-review` sem classificação.
+
+O ledger, validador, auditor, relatório, `STEP-24-RESEARCH.md`, testes, TODO e este handoff foram atualizados. O auditor retornou `PASS`, com 3 findings confirmados, 2 pendentes e 0 erros; o teste direcionado passou com 20 casos aprovados.

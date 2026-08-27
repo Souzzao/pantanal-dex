@@ -280,3 +280,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Registrar `finding: not-listed` e `status: confirmed` para `pacu`, sem inventar `LC` ou outra categoria
 - [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-23-RESEARCH.md`, testes e handoff
 - [ ] Validar individualmente a conservação de `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`
+
+
+## Passo 24/50 — validação oficial de conservação da piraputanga
+
+- [x] Consultar a Portaria MMA nº 148/2022 no Diário Oficial e na cópia oficial do ICMBio
+- [x] Verificar a busca exata por `Brycon hilarii` e `piraputanga`
+- [x] Registrar `finding: not-listed` e `status: confirmed` para `piraputanga`, sem inventar `LC` ou outra categoria
+- [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-24-RESEARCH.md`, testes e handoff
+- [ ] Validar individualmente a conservação de `caranguejo-agua-doce` e `camarao-agua-doce`

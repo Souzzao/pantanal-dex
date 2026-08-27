@@ -89,11 +89,14 @@ describe("PantanalDex catalog", () => {
     expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")).toMatchObject({ status: "confirmed", category: "VU", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pacu")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "pacu")?.category).toBeUndefined();
-    expect(conservationReviewRecords.filter((record) => !["pintado", "pacu"].includes(record.speciesId)).every((record) => record.status === "pending-review" && record.category === undefined && record.finding === undefined)).toBe(true);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "piraputanga")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
+    expect(conservationReviewRecords.find((record) => record.speciesId === "piraputanga")?.category).toBeUndefined();
+    expect(conservationReviewRecords.filter((record) => !["pintado", "pacu", "piraputanga"].includes(record.speciesId)).every((record) => record.status === "pending-review" && record.category === undefined && record.finding === undefined)).toBe(true);
     expect(conservationReviewRecords.every((record) => record.sourceUrl.startsWith("https://") && record.decisionRule.trim() && record.evidence.trim())).toBe(true);
     expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")?.evidence).toContain("linha 448");
     expect(conservationReviewRecords.find((record) => record.speciesId === "pacu")?.evidence).toContain("não contém correspondência exata");
-    expect(conservationReviewRecords.filter((record) => !["pintado", "pacu"].includes(record.speciesId)).every((record) => record.evidence.includes("nenhuma correspondência"))).toBe(true);
+    expect(conservationReviewRecords.find((record) => record.speciesId === "piraputanga")?.evidence).toContain("Brycon hilarii nem para piraputanga");
+    expect(conservationReviewRecords.filter((record) => !["pintado", "pacu", "piraputanga"].includes(record.speciesId)).every((record) => record.evidence.includes("nenhuma correspondência"))).toBe(true);
   });
 
   it("keeps regional occurrence evidence conservative and traceable", () => {
