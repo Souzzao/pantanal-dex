@@ -360,3 +360,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar a matriz P1 para apontar ao ID `phoneutria-nigriventer`
 - [x] Atualizar o ledger regional, `STEP-31-RESEARCH.md`, métricas, testes e auditorias
 - [x] Encerrar as pendências P1/P2: nenhuma espécie prioritária permanece pendente
+
+## Passo 32/50 — validação oficial de conservação do veado-campeiro
+
+- [x] Identificar o primeiro alvo pós-cobertura P1/P2: `Ozotoceros bezoarticus`
+- [x] Confirmar na ficha oficial ICMBio/SALVE a categoria Vulnerável (VU) para `O. b. bezoarticus`
+- [x] Registrar explicitamente no ledger o escopo taxonômico da subespécie avaliada
+- [x] Atualizar `STEP-32-RESEARCH.md`, `CATALOG-CONSERVATION-AUDIT.md` e o auditor de conservação
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`

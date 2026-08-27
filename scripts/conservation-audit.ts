@@ -2,15 +2,17 @@ import fs from "node:fs";
 import path from "node:path";
 import { conservationReviewRecords, validateConservationReviewRecords } from "../shared/catalog/conservation";
 
-const expectedIds = ["pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce"];
+const expectedIds = ["veado-campeiro", "pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce"];
 const errors = validateConservationReviewRecords(conservationReviewRecords);
 if (conservationReviewRecords.length !== expectedIds.length) errors.push(`ledger deveria conter ${expectedIds.length} registros`);
 if (JSON.stringify(conservationReviewRecords.map((record) => record.speciesId)) !== JSON.stringify(expectedIds)) errors.push("cobertura ou ordem das espécies divergente do contrato");
+const veado = conservationReviewRecords.find((record) => record.speciesId === "veado-campeiro");
 const pintado = conservationReviewRecords.find((record) => record.speciesId === "pintado");
 const pacu = conservationReviewRecords.find((record) => record.speciesId === "pacu");
 const piraputanga = conservationReviewRecords.find((record) => record.speciesId === "piraputanga");
 const caranguejo = conservationReviewRecords.find((record) => record.speciesId === "caranguejo-agua-doce");
 const camarao = conservationReviewRecords.find((record) => record.speciesId === "camarao-agua-doce");
+if (!veado || veado.status !== "confirmed" || veado.category !== "VU" || veado.sourceKind !== "SALVE" || !veado.evidence.includes("Ozotoceros bezoarticus bezoarticus")) errors.push("veado-campeiro não possui confirmação oficial SALVE VU");
 if (!pintado || pintado.status !== "confirmed" || pintado.category !== "VU" || pintado.sourceKind !== "Portaria MMA/ICMBio" || !pintado.evidence.includes("linha 448")) errors.push("pintado não possui confirmação normativa individual VU");
 if (!pacu || pacu.status !== "confirmed" || pacu.finding !== "not-listed" || pacu.sourceKind !== "Portaria MMA/ICMBio" || !pacu.evidence.includes("não contém correspondência exata")) errors.push("pacu não possui finding oficial de não listagem");
 if (!piraputanga || piraputanga.status !== "confirmed" || piraputanga.finding !== "not-listed" || piraputanga.sourceKind !== "Portaria MMA/ICMBio" || !piraputanga.evidence.includes("Brycon hilarii nem para piraputanga")) errors.push("piraputanga não possui finding oficial de não listagem");
@@ -29,15 +31,15 @@ for (const record of conservationReviewRecords) {
 const markdown = [
   "# Auditoria da trilha oficial de conservação — passo 26/50",
   "",
-  "A trilha usa SALVE/ICMBio, Livro Vermelho da Fauna Brasileira e listas/portarias MMA/ICMBio como fontes elegíveis. No passo 22, `pintado` foi confirmado individualmente como VU pela Portaria MMA nº 148/2022. Nos passos 23 e 24, `pacu` e `piraputanga` foram confirmados como `not-listed` na mesma lista após busca exata; isso não equivale a LC e não representa uma avaliação de baixo risco. No passo 25, `caranguejo-agua-doce` recebeu LC e, no passo 26, `camarao-agua-doce` recebeu LC em avaliações técnicas oficiais do ICMBio.",
+  "A trilha usa SALVE/ICMBio, Livro Vermelho da Fauna Brasileira e listas/portarias MMA/ICMBio como fontes elegíveis. No passo 32, `veado-campeiro` foi confirmado como VU pelo SALVE/ICMBio, preservando o escopo da subespécie avaliada. No passo 22, `pintado` foi confirmado individualmente como VU pela Portaria MMA nº 148/2022. Nos passos 23 e 24, `pacu` e `piraputanga` foram confirmados como `not-listed` na mesma lista após busca exata; isso não equivale a LC e não representa uma avaliação de baixo risco. No passo 25, `caranguejo-agua-doce` recebeu LC e, no passo 26, `camarao-agua-doce` recebeu LC em avaliações técnicas oficiais do ICMBio.",
   "",
   "| ID | Nome científico | Categoria | Fonte | Estado | Regra |",
   "|---|---|---|---|---|---|",
   ...conservationReviewRecords.map((record) => `| \`${record.speciesId}\` | ${record.scientificName} | \`${record.category ?? "—"}\` | [${record.sourceKind}](${record.sourceUrl}) | \`${record.status}\` | ${record.decisionRule} |`),
   "",
-  `**Resultado:** ${errors.length ? "FAIL" : "PASS"}. ${conservationReviewRecords.length}/5 registros cobertos; ${conservationReviewRecords.filter((record) => record.status === "confirmed").length} confirmado(s); ${conservationReviewRecords.filter((record) => record.status === "pending-review").length} pendentes; ${errors.length} erro(s).`,
+  `**Resultado:** ${errors.length ? "FAIL" : "PASS"}. ${conservationReviewRecords.length}/${expectedIds.length} registros cobertos; ${conservationReviewRecords.filter((record) => record.status === "confirmed").length} confirmado(s); ${conservationReviewRecords.filter((record) => record.status === "pending-review").length} pendentes; ${errors.length} erro(s).`,
   "",
-  "> Nenhuma categoria de ameaça foi inventada. `pintado` tem VU na Portaria MMA nº 148/2022; `pacu` e `piraputanga` têm finding `not-listed`; `caranguejo-agua-doce` e `camarao-agua-doce` têm LC nas avaliações técnicas oficiais do ICMBio. As avaliações LC são datadas e não devem ser confundidas automaticamente com uma lista legal posterior.",
+  "> Nenhuma categoria de ameaça foi inventada. `pintado` tem VU na Portaria MMA nº 148/2022; `pacu` e `piraputanga` têm finding `not-listed`; `caranguejo-agua-doce` e `camarao-agua-doce` têm LC nas avaliações técnicas oficiais do ICMBio. O veado-campeiro tem VU na ficha oficial do SALVE, cuja unidade avaliada é a subespécie O. b. bezoarticus. As avaliações LC são datadas e não devem ser confundidas automaticamente com uma lista legal posterior.",
   "",
 ].join("\n");
 fs.writeFileSync(path.join(process.cwd(), "CATALOG-CONSERVATION-AUDIT.md"), markdown);
