@@ -530,3 +530,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Confirmar a política comercial de imagens e a ausência de licenças NC/ND
 - [x] Registrar a limitação conhecida de rate limiting HTTP 429 sem classificar como erro de licença
 - [x] Criar `STEP-50-FINAL-AUDIT.md` e encerrar o ciclo de 50 passos
+
+## Passo 26/60 — virtualização da listagem do catálogo
+
+- [x] Integrar busca, filtros, ordenação e contador ao `ListHeaderComponent`
+- [x] Extrair e memoizar os cartões com `SpeciesRow`
+- [x] Configurar janela e lotes de renderização para grande volume
+- [x] Preservar contratos de taxonomia, conservação, ocorrência, fontes e licenças
+- [x] Executar TypeScript, lint, testes e auditorias científicas
+- [x] Criar `STEP-26-RESEARCH.md`
