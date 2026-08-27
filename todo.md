@@ -438,3 +438,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir categoria a partir de menções gerais a aves aquáticas ou outros táxons
 - [x] Atualizar `STEP-40-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
 - [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
+
+## Passo 41/50 — validação oficial de conservação do curimbatá
+
+- [x] Confirmar `Prochilodus lineatus` como alvo taxonômico
+- [x] Pesquisar a Portaria MMA nº 148/2022 por `Prochilodus lineatus`, `lineatus` e `Prochilodus`
+- [x] Registrar `prochilodus-lineatus` como `not-listed`, sem converter ausência em LC
+- [x] Não confundir `Prochilodus britskii` ou `Prochilodus vimboides` com o curimbatá
+- [x] Atualizar `STEP-41-RESEARCH.md`, `shared/catalog/conservation.ts`, o auditor e os testes
+- [x] Executar TypeScript, testes, auditoria de conservação e `git diff --check`
