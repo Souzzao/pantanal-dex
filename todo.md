@@ -654,3 +654,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não interpretar retorno GBIF ou contagem zero como prova regional definitiva
 - [x] Atualizar o auditor e o teste regional
 - [x] Executar checks científicos e publicar o dossiê
+
+## Passo 38/60 — validação regional narrativa dos táxons pendentes
+
+- [x] Pesquisar fontes regionais para os oito táxons pendentes
+- [x] Promover *Paleosuchus palpebrosus*, *Micrablepharus maximiliani*, *Phrynops geoffroanus* e *Hydrodynastes gigas* com ocorrência indicada no Pantanal
+- [x] Manter *Brycon orbignyanus*, *Rhamdia quelen*, *Crenicichla britskii* e *Podocnemis unifilis* como `pending-review`
+- [x] Registrar a ressalva de *Podocnemis unifilis* como espécie exótica para o MS na fonte consultada
+- [x] Executar checks científicos e atualizar o dossiê regional

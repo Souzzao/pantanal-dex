@@ -131,8 +131,8 @@ describe("PantanalDex catalog", () => {
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "piraputanga")).toMatchObject({ status: "confirmed", scientificName: "Brycon hilarii", sourceTitle: expect.stringContaining("Springer") });
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "caranguejo-agua-doce")).toMatchObject({ status: "confirmed", scientificName: "Dilocarcinus pagei", sourceTitle: expect.stringContaining("SciELO") });
     expect(regionalOccurrenceRecords.find((record) => record.speciesId === "camarao-agua-doce")).toMatchObject({ status: "confirmed", scientificName: "Macrobrachium amazonicum", sourceTitle: expect.stringContaining("PubMed") });
-    expect(regionalOccurrenceRecords.filter((record) => record.status === "confirmed")).toHaveLength(14);
-    expect(regionalOccurrenceRecords.filter((record) => record.status === "pending-review")).toHaveLength(8);
+    expect(regionalOccurrenceRecords.filter((record) => record.status === "confirmed")).toHaveLength(18);
+    expect(regionalOccurrenceRecords.filter((record) => record.status === "pending-review")).toHaveLength(4);
     expect(regionalOccurrenceRecords.every((record) => record.sourceUrl.startsWith("https://") && record.queryUrl.startsWith("https://"))).toBe(true);
     expect(regionalOccurrenceRecords.every((record) => record.evidence.includes("GBIF/Catalogue of Life"))).toBe(true);
   });
