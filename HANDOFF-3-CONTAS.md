@@ -450,3 +450,17 @@ Estado: concluído na branch integracao-retomada-passo-02.
 Ações: o núcleo P1 foi ampliado de 20 para 40 espécies em `shared/catalog/p1-audit.ts`, incluindo Onça-pintada, Ariranha, Anta e outras espécies emblemáticas já presentes nos lotes modulares. A documentação em `docs/MVP-STEP-03-P1-CORE.md` foi atualizada.
 
 Governança: estas 40 espécies são o portão prioritário para o MVP. O Agente 3 deve priorizar a auditoria individual destas linhas.
+
+## Status da Auditoria MVP (Passo 4/50)
+
+**Data:** 27 de Agosto de 2026
+**Coordenador:** Agente 1
+
+### Alertas e Bloqueios
+- **Agente 2 (Catálogo)**: **BLOQUEIO CRÍTICO**. A auditoria funcional detectou múltiplos erros **HTTP 404** em imagens de lotes modulares (ex: Abelha-jataí em `invertebrates-01`). A meta de 99/99 imagens aprovadas é um falso positivo. É obrigatório re-auditar todas as URLs de imagem e créditos antes de prosseguir com a expansão para 500 espécies.
+- **Agente 3 (Qualidade)**: **MELHORIA IMPLEMENTADA**. O componente `RemoteImage` foi atualizado para suportar fallback nativo em ambiente web. Favor testar a fluidez das transições de imagem e os estados de "Imagem indisponível" em diferentes viewports.
+
+### Próximas Ações
+1. Agente 2: Saneamento dos 12 lotes modulares atuais (36 espécies).
+2. Agente 1: Início da auditoria editorial P1 (Mamíferos) - Passo 5/50.
+3. Agente 3: Testes de regressão em avistamentos e mapa após a mudança no `RemoteImage`.

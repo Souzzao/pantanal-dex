@@ -485,3 +485,12 @@
 - [x] Criar apresentação premium Motion do PantanalDex como uma cena visual contínua (GSAP + FLIP)
 - [x] MVP passo 2/50 — Gerar matriz de auditoria atualizada com meta de 500 espécies
 - [x] MVP passo 3/50 — Definir núcleo P1 ampliado (40 espécies) e atualizar lógica de auditoria
+
+- [ ] MVP passo 4/50 — validar rotas, lotes modulares e fila P1 no navegador; corrigir falhas verificáveis
+
+## Roadmap MVP 50 Passos (Retomada)
+- [x] Passo 1/50: Revalidação de pacotes e ambiente de retomada.
+- [x] Passo 2/50: Atualização da matriz de auditoria para meta de 500 espécies.
+- [x] Passo 3/50: Ampliação do núcleo P1 (40 espécies prioritárias).
+- [x] Passo 4/50: Auditoria funcional no navegador (rotas, busca, formulários e correção técnica de imagens).
+- [ ] Passo 5/50: Auditoria editorial do primeiro lote P1 (mamíferos) - verificação de ocorrência e conservação.
