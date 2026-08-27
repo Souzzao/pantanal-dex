@@ -411,3 +411,9 @@ Foi criado `shared/catalog/scientific-audit.ts` para agregar a auditoria de IDs 
 Durante a integração foi detectada e corrigida uma dependência circular causada por calcular a auditoria dentro de `shared/catalog/index.ts`; o cálculo agora é feito diretamente pela tela e pelos testes, preservando o índice do catálogo acíclico. O My Browser confirmou visualmente “75 registros · 75 IDs únicos”, “Auditoria aprovada” e “IDs duplicados: nenhum”.
 
 O TODO foi atualizado. Falta concluir a rodada completa de checks, commit e publicação deste ciclo no PR #11.
+
+## Retomada adicional — Passo 7/50: fontes taxonômicas GBIF
+
+Foi criada a auditoria reproduzível `scripts/legacy-gbif-audit.ts`, exposta como `pnpm catalog:legacy-gbif-audit`, para consultar as URLs GBIF já versionadas nas cinco espécies legadas: `pintado`, `pacu`, `piraputanga`, `caranguejo-agua-doce` e `camarao-agua-doce`. A execução online consultou 5/5 registros sem erros; todos retornaram `matchType=EXACT`, `status=ACCEPTED`, confiança 99 e `usageKey` presente. O artefato `CATALOG-LEGACY-GBIF-AUDIT.md` registra os nomes canônicos e as evidências.
+
+A validação taxonômica não foi usada para inferir ocorrência regional, conservação, licença de imagem ou promoção a `verified`; essas trilhas continuam separadas. O TODO foi atualizado e o próximo ciclo deve concluir os checks completos, o commit e a publicação no PR #11.

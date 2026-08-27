@@ -18,6 +18,7 @@
     "catalog:image-audit": "tsx scripts/image-license-audit.ts",
     "catalog:source-audit": "tsx scripts/catalog-source-audit.ts",
     "catalog:priority-audit": "tsx scripts/catalog-priority-audit.ts",
+    "catalog:legacy-gbif-audit": "tsx scripts/legacy-gbif-audit.ts",
     "watchdog": "pnpm check && pnpm lint && pnpm test && pnpm catalog:priority-audit",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "android": "expo start --android",
