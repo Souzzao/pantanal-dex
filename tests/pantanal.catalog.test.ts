@@ -85,7 +85,7 @@ describe("PantanalDex catalog", () => {
   });
 
   it("keeps conservation review official and conservative", () => {
-    expect(conservationReviewRecords).toHaveLength(23);
+    expect(conservationReviewRecords).toHaveLength(38);
     expect(conservationReviewValidationErrors).toEqual([]);
     expect(conservationReviewRecords.find((record) => record.speciesId === "bombus-pauloensis")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "leporinus-obtusidens")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
@@ -112,6 +112,8 @@ describe("PantanalDex catalog", () => {
     expect(conservationReviewRecords.find((record) => record.speciesId === "piraputanga")?.category).toBeUndefined();
     expect(conservationReviewRecords.find((record) => record.speciesId === "caranguejo-agua-doce")).toMatchObject({ status: "confirmed", category: "LC", sourceKind: "Avaliação ICMBio" });
     expect(conservationReviewRecords.find((record) => record.speciesId === "camarao-agua-doce")).toMatchObject({ status: "confirmed", category: "LC", sourceKind: "Avaliação ICMBio" });
+    expect(conservationReviewRecords.find((record) => record.speciesId === "brycon-orbignyanus")).toMatchObject({ status: "confirmed", category: "CR", sourceKind: "Portaria MMA/ICMBio" });
+    expect(conservationReviewRecords.find((record) => record.speciesId === "podocnemis-unifilis")).toMatchObject({ status: "confirmed", finding: "not-listed", sourceKind: "Portaria MMA/ICMBio" });
     expect(conservationReviewRecords.every((record) => record.sourceUrl.startsWith("https://") && record.decisionRule.trim() && record.evidence.trim())).toBe(true);
     expect(conservationReviewRecords.find((record) => record.speciesId === "pintado")?.evidence).toContain("linha 448");
     expect(conservationReviewRecords.find((record) => record.speciesId === "pacu")?.evidence).toContain("não contém correspondência exata");

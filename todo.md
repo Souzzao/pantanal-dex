@@ -623,3 +623,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não inferir ocorrência, conservação ou licença a partir de evidência insuficiente
 - [x] Manter o Lote 02 sem ingestão definitiva até auditoria completa
 - [x] Atualizar `STEP-34-RESEARCH.md`
+
+## Passo 35/60 — validação regional e normativa do Lote 02
+
+- [x] Consultar fontes institucionais e literatura regional do Pantanal
+- [x] Extrair e pesquisar a Portaria MMA nº 148/2022 por correspondência exata
+- [x] Confirmar *Brycon orbignyanus* como CR na lista normativa
+- [x] Registrar os demais 14 táxons como `not-listed`, sem converter ausência em LC
+- [x] Preservar *Podocnemis unifilis* como não conclusiva regionalmente apesar de contagem GBIF zero
+- [x] Não promover imagens, licenças ou ocorrências sem evidência individual direta
+- [x] Atualizar ledger, testes e `STEP-35-RESEARCH.md`
+- [x] Executar TypeScript, lint, testes e auditorias científicas
