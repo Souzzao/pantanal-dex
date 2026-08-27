@@ -548,3 +548,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar contratos científicos, fontes, conservação, ocorrência e licenças
 - [x] Executar TypeScript, lint, testes e auditorias científicas
 - [x] Atualizar `STEP-27-RESEARCH.md`
+
+## Passo 28/60 — triagem científica do Lote 01 V3
+
+- [x] Definir 15 espécies novas: 8 mamíferos e 7 aves
+- [x] Confirmar a triagem nominal no GBIF para os candidatos
+- [x] Substituir `Aratinga nenday` pelo nome aceito `Eupsittula nenday`
+- [x] Não inferir ocorrência pantaneira, conservação ou licença a partir de evidência insuficiente
+- [x] Registrar a limitação HTTP 429 do endpoint do Commons
+- [x] Atualizar `STEP-28-RESEARCH.md`
+- [ ] Completar a ingestão modular e a auditoria comercial no passo 29/60
