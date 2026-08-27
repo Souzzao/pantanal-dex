@@ -578,3 +578,12 @@ A Conta 2 concluiu a trilha de conservação para `camarao-agua-doce` (`Macrobra
 O registro foi promovido para `status: confirmed`, `category: LC` e `sourceKind: Avaliação ICMBio`. O período, a ressalva sobre sobrepesca localizada e o escopo temporal foram preservados na evidência. A categoria representa uma avaliação científica oficial datada, não uma garantia de ausência de impactos atuais nem uma transposição automática para uma lista legal posterior.
 
 Com esta promoção, os cinco registros da trilha de conservação possuem classificação ou finding confirmado: `pintado` VU, `pacu` e `piraputanga` `not-listed`, e `caranguejo-agua-doce` e `camarao-agua-doce` LC. O auditor retornou `PASS`, com 5 registros confirmados, 0 pendentes e 0 erros. O relatório, `STEP-26-RESEARCH.md`, teste, TODO e este handoff foram atualizados.
+
+
+## 35. Passo 27/50 — inclusão e validação científica do veado-campeiro
+
+A Conta 2 identificou `Veado-campeiro` (`Ozotoceros bezoarticus`) como a primeira entrada P1 sem registro correspondente após o fechamento das trilhas legadas. O GBIF apresenta o nome nominal como espécie aceita. A tese da Universidade de Brasília sobre ecologia e estrutura social documenta a espécie no Pantanal, e o ICMBio lista `Ozotoceros bezoarticus` no PAN Cervídeos, cuja atuação inclui o Pantanal. Essas fontes sustentam a inclusão regional, sem usar imagens como prova de ocorrência.
+
+Foi criado o lote isolado `catalog-mammals-02` em estado `review-ready`, com 1 espécie e 3 imagens Commons sob CC BY-SA 4.0, CC BY-SA 2.0 e CC BY-SA 4.0. As páginas de crédito foram verificadas para os autores Fedaro e Scott Presnell. O dossiê preserva a cautela de não transferir automaticamente a avaliação histórica da subespécie pantaneira `Ozotoceros bezoarticus leucogaster` para a espécie nominal; a conservação permanece fora da promoção deste passo.
+
+A matriz P1 foi atualizada para apontar `veado-campeiro` ao novo ID modular. O catálogo passou a 56 espécies modulares, 22 lotes, 168 imagens e 76 registros totais agregados; a prioridade passou de 36 para 37 entradas selecionadas e as pendências P1/P2 caíram de 5 para 4. As auditorias de prioridade e fontes retornaram `PASS`, com 0 erros. O novo lote, `STEP-27-RESEARCH.md`, testes, allowlist oficial de `www.gov.br`, TODO e este handoff foram atualizados.

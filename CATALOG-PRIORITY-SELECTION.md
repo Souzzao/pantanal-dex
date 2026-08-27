@@ -9,8 +9,8 @@
 | Entradas prioritárias | 41 |
 | P1 | 28 |
 | P2 | 13 |
-| Selecionadas com ID no catálogo combinado | 36 |
-| Pendentes sem registro no catálogo | 5 |
+| Selecionadas com ID no catálogo combinado | 37 |
+| Pendentes sem registro no catálogo | 4 |
 | Resultado do validador | **PASS** |
 
 ## Seleções com registro correspondente
@@ -23,6 +23,7 @@
 | P1 | Tamanduá-bandeira | Myrmecophaga tridactyla | tamandua-bandeira | Mamíferos | Campos, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Myrmecophaga%20tridactyla) |
 | P1 | Queixada | Tayassu pecari | queixada | Mamíferos | Matas | [GBIF](https://api.gbif.org/v1/species/match?name=Tayassu%20pecari) |
 | P1 | Lobo-guará | Chrysocyon brachyurus | lobo-guara | Mamíferos | Campos, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Chrysocyon%20brachyurus) |
+| P1 | Veado-campeiro | Ozotoceros bezoarticus | veado-campeiro | Mamíferos | Campos | [GBIF](https://api.gbif.org/v1/species/match?name=Ozotoceros%20bezoarticus) |
 | P1 | Tuiuiú | Jabiru mycteria | tuiuiu | Aves | Áreas alagadas, Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Jabiru%20mycteria) |
 | P1 | Arara-azul | Anodorhynchus hyacinthinus | arara-azul | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Anodorhynchus%20hyacinthinus) |
 | P1 | Seriema | Cariama cristata | seriema | Aves | Campos, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Cariama%20cristata) |
@@ -58,7 +59,6 @@
 
 | Prioridade | Nome popular | Nome científico | ID | Grupo | Ambientes | Fonte taxonômica |
 |---|---|---|---|---|---|---|
-| P1 | Veado-campeiro | Ozotoceros bezoarticus | — | Mamíferos | Campos | [GBIF](https://api.gbif.org/v1/species/match?name=Ozotoceros%20bezoarticus) |
 | P1 | Arara-canindé | Ara ararauna | — | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Ara%20ararauna) |
 | P1 | Tucano-toco | Ramphastos toco | — | Aves | Matas, Bordas de mata | [GBIF](https://api.gbif.org/v1/species/match?name=Ramphastos%20toco) |
 | P1 | Jaú | Zungaro jahu | — | Peixes | Rios e corixos | [GBIF](https://api.gbif.org/v1/species/match?name=Zungaro%20jahu) |

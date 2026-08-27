@@ -1,5 +1,6 @@
 import type { Species } from "../pantanal";
 import { mammals01 } from "./batches/mammals-01";
+import { mammals02 } from "./batches/mammals-02";
 import { birds01 } from "./batches/birds-01";
 import { birds02 } from "./batches/birds-02";
 import { birds03 } from "./batches/birds-03";
@@ -27,7 +28,7 @@ import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "./
 import { conservationReviewRecords, validateConservationReviewRecords } from "./conservation";
 import { applyDocumentedSynonyms, documentedSynonyms, validateDocumentedSynonyms } from "./synonyms";
 
-export const catalogBatches: CatalogBatch[] = [mammals01, birds01, birds02, birds03, birds04, birds05, reptiles01, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07];
+export const catalogBatches: CatalogBatch[] = [mammals01, mammals02, birds01, birds02, birds03, birds04, birds05, reptiles01, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const frozenCatalogContract = createFrozenCatalogContract(catalogBatches, catalogSpecies);
 export { catalogP1Priorities, catalogP2Priorities, catalogPriorityMatrix, validateCatalogPriorities } from "./priorities";

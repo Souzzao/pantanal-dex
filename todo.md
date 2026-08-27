@@ -308,3 +308,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar a ressalva sobre possível sobrepesca localizada e o escopo temporal da avaliação
 - [x] Atualizar `shared/catalog/conservation.ts`, `scripts/conservation-audit.ts`, `CATALOG-CONSERVATION-AUDIT.md`, `STEP-26-RESEARCH.md`, testes e handoff
 - [x] Fechar a trilha de conservação com 5 registros confirmados e 0 pendências
+
+
+## Passo 27/50 — inclusão e validação do veado-campeiro
+
+- [x] Identificar `Veado-campeiro` (`Ozotoceros bezoarticus`) como a primeira pendência P1 após o fechamento dos ledgers legados
+- [x] Confirmar a identidade aceita no GBIF e a ocorrência pantaneira por tese da UnB e referências do PAN Cervídeos/ICMBio
+- [x] Criar o lote isolado `catalog-mammals-02` em estado `review-ready`, com campos científicos completos e 3 imagens Commons licenciadas
+- [x] Atualizar a matriz P1 para apontar ao ID `veado-campeiro`
+- [x] Atualizar `STEP-27-RESEARCH.md`, métricas, allowlist, testes, auditorias e handoff
+- [x] Reduzir as pendências P1/P2 de 5 para 4; permanecem `arara-canindé`, `tucano-toco`, `jaú` e `aranha-armadeira`

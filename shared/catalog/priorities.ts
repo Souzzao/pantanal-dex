@@ -21,7 +21,8 @@ const p2 = (commonName: string, scientificName: string, speciesId: string, group
 
 /**
  * P1 reproduz o núcleo de campo definido pelo pacote MVP. Espécies sem registro
- * atual permanecem explícitas como speciesId=null e não podem ser promovidas.
+ * atual permanecem explícitas como speciesId=null e não podem ser promovidas; entradas
+ * validadas devem apontar para o ID modular correspondente.
  */
 export const catalogP1Priorities: readonly CatalogPriority[] = [
   p1("Onça-pintada", "Panthera onca", "onca-pintada", ["Mamíferos"], ["Matas", "Bordas de mata"], "Espécie emblemática e predador de referência do Pantanal."),
@@ -30,7 +31,7 @@ export const catalogP1Priorities: readonly CatalogPriority[] = [
   p1("Tamanduá-bandeira", "Myrmecophaga tridactyla", "tamandua-bandeira", ["Mamíferos"], ["Campos", "Bordas de mata"], "Mamífero emblemático com necessidade de auditoria de ocorrência e conservação."),
   p1("Queixada", "Tayassu pecari", "queixada", ["Mamíferos"], ["Matas"], "Herbívoro social e indicador de conectividade florestal."),
   p1("Lobo-guará", "Chrysocyon brachyurus", "lobo-guara", ["Mamíferos"], ["Campos", "Bordas de mata"], "Espécie emblemática de áreas abertas."),
-  p1("Veado-campeiro", "Ozotoceros bezoarticus", null, ["Mamíferos"], ["Campos"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),
+  p1("Veado-campeiro", "Ozotoceros bezoarticus", "veado-campeiro", ["Mamíferos"], ["Campos"], "Espécie campestre P1 validada taxonomicamente e regionalmente no passo 27."),
   p1("Tuiuiú", "Jabiru mycteria", "tuiuiu", ["Aves"], ["Áreas alagadas", "Rios e corixos"], "Símbolo do Pantanal e espécie de referência para áreas alagadas."),
   p1("Arara-azul", "Anodorhynchus hyacinthinus", "arara-azul", ["Aves"], ["Matas", "Bordas de mata"], "Espécie emblemática e prioritária para revisão de conservação."),
   p1("Arara-canindé", "Ara ararauna", null, ["Aves"], ["Matas", "Bordas de mata"], "Prioridade P1 do MVP ainda sem registro correspondente no catálogo atual."),

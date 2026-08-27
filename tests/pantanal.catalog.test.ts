@@ -54,6 +54,7 @@ describe("PantanalDex catalog", () => {
     expect(validateCatalogPriorities(catalogPriorityMatrix, species)).toEqual([]);
     expect(catalogPriorityMatrixScientificNames()).toHaveLength(0);
     expect(catalogP1Priorities.every((item) => item.scientificName && item.sourceUrl.startsWith("https://api.gbif.org/v1/species/match?name="))).toBe(true);
+    expect(catalogP1Priorities.find((item) => item.scientificName === "Ozotoceros bezoarticus")).toMatchObject({ speciesId: "veado-campeiro", priority: "P1" });
     expect(catalogP2Priorities.some((item) => item.scientificName === "Hoplias malabaricus" && item.speciesId === "hoplias-malabaricus")).toBe(true);
 
     const duplicateTaxon = { ...catalogP1Priorities[0], speciesId: "outro-id" };
@@ -62,9 +63,9 @@ describe("PantanalDex catalog", () => {
 
   it("measures the combined inventory without losing modular status", () => {
     const metrics = createCatalogInventoryMetrics(species, catalogSpecies, catalogBatches, catalogValidationErrors);
-    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 55, totalSpecies: 75, uniqueIds: 75, duplicateIds: [], modularBatches: 21, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 0, modularImages: 165, validationErrors: [] });
+    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 56, totalSpecies: 76, uniqueIds: 76, duplicateIds: [], modularBatches: 22, pendingReviewBatches: 21, verifiedBatches: 0, reviewReadyBatches: 1, modularImages: 168, validationErrors: [] });
     expect(metrics.groups).toEqual([
-      { group: "Mamíferos", total: 8 },
+      { group: "Mamíferos", total: 9 },
       { group: "Aves", total: 20 },
       { group: "Répteis", total: 5 },
       { group: "Anfíbios", total: 4 },
@@ -123,17 +124,18 @@ describe("PantanalDex catalog", () => {
 
   it("keeps the scientific audit aggregate clean", () => {
     const audit = createScientificCatalogAudit(species);
-    expect(audit).toMatchObject({ records: 75, uniqueIds: 75, duplicateIds: [], errors: [], status: "PASS" });
+    expect(audit).toMatchObject({ records: 76, uniqueIds: 76, duplicateIds: [], errors: [], status: "PASS" });
     expect(Object.values(audit.missingFields).every((count) => count === 0)).toBe(true);
   });
 
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(55);
+    expect(catalogSpecies).toHaveLength(56);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);
+    expect(catalogSpecies.some((item) => item.id === "veado-campeiro")).toBe(true);
     expect(species.some((item) => item.id === "anhuma")).toBe(true);
     expect(species.some((item) => item.id === "teiu")).toBe(true);
     expect(species.some((item) => item.id === "perereca-macaco")).toBe(true);
