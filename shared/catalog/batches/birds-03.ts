@@ -12,7 +12,10 @@ export const birds03: CatalogBatch = {
     { title: "GBIF Species Match — Coragyps atratus", url: "https://api.gbif.org/v1/species/match?name=Coragyps%20atratus" },
     { title: "GBIF Species Match — Ramphastos toco", url: "https://api.gbif.org/v1/species/match?name=Ramphastos%20toco" },
   ],
-  pendingNotes: ["Confirmar individualmente licença e origem das imagens Commons antes da publicação comercial."],
+  pendingNotes: [
+    "Imagens, créditos e licenças foram conferidos individualmente e as URLs retornaram HTTP 200.",
+    "Manter pending-review até registrar evidência individual de ocorrência no Pantanal, fonte oficial de conservação quando aplicável, reviewedAt/reviewedBy e checklist editorial completo."
+  ],
   species: [
     {
       id: "arara-caninde", commonName: "Arara-canindé", scientificName: "Ara ararauna", group: "Aves", environments: ["Matas", "Bordas de mata"], description: "Arara de grande porte e plumagem azul e amarela, associada a matas e áreas abertas com árvores altas.", physicalCharacteristics: "Asas azuis, peito amarelo, bico forte e cauda longa.", habitat: "Matas ciliares, florestas abertas, bordas e palmeirais.", behavior: "Vive em pares ou grupos e utiliza ocos de árvores para repouso e reprodução.", diet: "Frutos, sementes, castanhas e partes de plantas.", curiosities: ["O bico quebra sementes resistentes.", "Deslocamentos em grupo podem conectar diferentes fragmentos de mata."], distribution: "América do Sul tropical, incluindo áreas do Pantanal.", ecologicalImportance: "Dispersa sementes e depende de árvores maduras para abrigo e nidificação.", images: [image("https://upload.wikimedia.org/wikipedia/commons/e/ec/Ara_ararauna_Luc_Viatour.jpg", "Luc Viatour", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Ara_ararauna_Luc_Viatour.jpg"), image("https://upload.wikimedia.org/wikipedia/commons/9/9c/Ara_ararauna_%28Linnaeus_1758%29.jpg", "Michael Gäbler", "CC BY 3.0", "https://commons.wikimedia.org/wiki/File:Ara_ararauna_(Linnaeus_1758).jpg"), image("https://upload.wikimedia.org/wikipedia/commons/6/60/Ara_ararauna_qtl3.jpg", "Quartl", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Ara_ararauna_qtl3.jpg")], sources: [{ title: "GBIF Species Match — Ara ararauna", url: "https://api.gbif.org/v1/species/match?name=Ara%20ararauna" }],

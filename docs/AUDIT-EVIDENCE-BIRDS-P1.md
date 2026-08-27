@@ -41,3 +41,11 @@ A página Commons `Roseate Spoonbill Platalea ajaja JG.jpg` identifica JeffreyGa
 ## Correção de imagem — Arara-azul
 
 A referência anterior `Anodorhynchus hyacinthinus in flight.jpg` retornou 404. A página individual do arquivo `017 Hyacinth macaw flying in Encontro das Águas State Park Photo by Giles Laurent.jpg` confirmou o autor Giles Laurent e a licença CC BY-SA 4.0, incluindo a atribuição recomendada `© Giles Laurent, gileslaurent.com, License CC BY-SA`. A nova URL `Special:FilePath` foi verificada com redirecionamento e retornou HTTP 200 com conteúdo `image/jpeg`. A referência foi substituída sem alterar o ID da espécie.
+
+## Evidências — Passo 8/50
+
+A auditoria do `catalog-birds-03` encontrou exatamente as três espécies solicitadas: Arara-canindé, Urubu-de-cabeça-preta e Tucano-toco. As nove URLs de imagens declaradas retornaram HTTP 200 e `image/jpeg` após seguir redirecionamentos.
+
+A API GBIF confirmou `Ara ararauna (Linnaeus, 1758)` como `ACCEPTED`, rank `SPECIES`, `matchType EXACT`, confidence 99 e usageKey `5959231`. Também confirmou `Coragyps atratus (Bechstein, 1793)` como `ACCEPTED`, rank `SPECIES`, `matchType EXACT`, confidence 99 e usageKey `2481942`. A confirmação taxonômica do Tucano-toco permanece registrada no lote por fonte GBIF e será consolidada com a mesma regra, sem atribuir conservação ou ocorrência pantaneira apenas pelo nome aceito.
+
+A API GBIF confirmou `Ramphastos toco P.L.S.Müller, 1776` como `ACCEPTED`, rank `SPECIES`, `matchType EXACT`, confidence 99 e usageKey `2478765`. Com isso, os três nomes científicos do lote birds-03 têm correspondência taxonômica exata no GBIF. A auditoria não promoveu o lote porque a política exige evidência editorial regional e conservação oficial individual, não apenas correspondência taxonômica ou URLs acessíveis.

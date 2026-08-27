@@ -508,3 +508,10 @@
 - [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
 - [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
 - [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.
+
+## MVP passo 8/50 — auditoria do terceiro lote de aves
+- [x] Auditar `catalog-birds-03` (Arara-canindé, Urubu-de-cabeça-preta e Tucano-toco) com fontes taxonômicas e de ocorrência verificáveis.
+- [x] Conferir conservação oficial somente em fonte ICMBio/MMA quando houver status.
+- [x] Verificar três imagens por espécie, URL individual, autor, licença comercial e crédito.
+- [x] Corrigir somente referências comprovadas e atualizar testes/documentação.
+- [x] Executar check, lint, test e diff check; registrar handoff, commit e checkpoint.
