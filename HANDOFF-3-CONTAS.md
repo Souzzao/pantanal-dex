@@ -532,3 +532,9 @@ Contagem total mantida em 47 espécies. Relatórios `docs/MVP-STEP-09-BATCH-AUDI
 O segundo lote de répteis, `catalog-reptiles-02`, foi auditado com Cágado-cabeçudo (*Acanthochelys macrocephala*), Cobra-d'água (*Helicops infrataeniatus*), Jacaré-do-Pantanal (*Caiman yacare*) e Teiú-vermelho (*Salvator rufescens*). O GBIF confirmou os quatro nomes científicos como espécies aceitas. A **Portaria MMA nº 1.704/2026** confirmou a categoria oficial **VU (Vulnerável)** para *Acanthochelys macrocephala*. As 12 imagens e 12 páginas individuais Commons retornaram HTTP 200 com licenças comerciais válidas. O lote permanece `pending-review` aguardando evidência individual de ocorrência regional para o teiú-vermelho e revisão editorial formal.
 
 Contagem total mantida em 47 espécies. Relatórios `docs/MVP-STEP-10-BATCH-AUDIT.md` e `docs/AUDIT-EVIDENCE-REPTILES-P1.md` atualizados. Próxima etapa coordenada: Passo 11/50, auditoria do próximo lote de animais.
+
+## Status da Auditoria MVP — Passo 11/50
+
+O primeiro lote de anfíbios, `catalog-amphibians-01`, foi auditado com Perereca (*Boana albopunctata*) e Perereca-macaco (*Phyllomedusa sauvagii*). O GBIF confirmou os dois nomes científicos. Três arquivos de imagem de *Phyllomedusa sauvagii* foram substituídos por alternativas com licenças comerciais explicitamente confirmadas (CC BY-SA 3.0 e CC BY 2.0), removendo referências Public Domain/GFDL incertas. As seis páginas Commons retornaram HTTP 200. O lote permanece `pending-review` aguardando evidência individual de ocorrência regional e revisão editorial formal.
+
+Contagem total mantida em 47 espécies. Relatórios `docs/MVP-STEP-11-BATCH-AUDIT.md` e `docs/AUDIT-EVIDENCE-AMPHIBIANS-P1.md` atualizados. Próxima etapa coordenada: Passo 12/50, auditoria do próximo lote de animais.

@@ -41,9 +41,9 @@ export const amphibians01: CatalogBatch = {
       distribution: "Regiões secas e sazonais do centro da América do Sul, incluindo áreas do Brasil, Bolívia, Paraguai e Argentina.",
       ecologicalImportance: "Controla pequenos invertebrados e transfere energia entre a vegetação e os predadores noturnos.",
       images: [
-        image("https://upload.wikimedia.org/wikipedia/commons/2/26/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg", "Brocken Inaglory", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg", "Brocken Inaglory / Wikimedia Commons"),
-        image("https://upload.wikimedia.org/wikipedia/commons/4/4e/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg", "Brocken Inaglory", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg", "Brocken Inaglory / Wikimedia Commons"),
-        image("https://upload.wikimedia.org/wikipedia/commons/2/2f/Waxy.tree.frog.arp.jpg", "Adrian Pingstone", "Public domain", "https://commons.wikimedia.org/wiki/File:Waxy.tree.frog.arp.jpg", "Adrian Pingstone / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/b/be/Phyllomedusa_sauvagii_-_Zoo_Frankfurt.jpg", "Jutta234", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Phyllomedusa_sauvagii_-_Zoo_Frankfurt.jpg", "Jutta234 / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/9/95/WaxingMonekyFrog_PhyllomedusaSauvagii.jpg", "Ltshears", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:WaxingMonekyFrog_PhyllomedusaSauvagii.jpg", "Ltshears / Wikimedia Commons"),
+        image("https://upload.wikimedia.org/wikipedia/commons/b/b0/Waxy_Monkey_Frog_%28Phyllomedusa_sauvagii%29_%282864604026%29.jpg", "Cliff from Arlington, Virginia, USA", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Frog_(Phyllomedusa_sauvagii)_(2864604026).jpg", "Cliff from Arlington, Virginia, USA / Wikimedia Commons"),
       ],
       sources: [{ title: "GBIF Species Match — Phyllomedusa sauvagii", url: "https://api.gbif.org/v1/species/match?name=Phyllomedusa%20sauvagii" }],
     },
