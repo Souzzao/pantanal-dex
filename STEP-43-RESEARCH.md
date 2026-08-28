@@ -47,3 +47,10 @@ Os quatro candidatos permanecem fora dos lotes modulares publicados até que tr�
 ## Checks
 
 `pnpm check`, `pnpm lint`, `pnpm test`, as auditorias de prioridades, fontes, conservação e ocorrência regional e `git diff --check` permanecem obrigatórios antes da publicação deste passo.
+
+
+---
+
+# Correção de estado — conclusão do passo 44/60
+
+A auditoria comercial posterior do passo 44 resolveu o bloqueio registrado acima. Foram verificadas três referências de imagem por espécie para *Puma concolor*, *Lontra longicaudis*, *Pteronura brasiliensis* e *Nasua nasua*, totalizando 12 páginas individuais do Wikimedia Commons. Todas têm licença CC BY ou CC BY-SA, sem NC/ND, com autoria e URL de página registradas. O lote modular passou a ser `mammals03`, com quatro espécies e status `verified`; a seção anterior sobre bloqueio de ingestão corresponde ao estado intermediário do passo 43 e foi superada pela auditoria do passo 44.

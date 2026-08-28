@@ -715,3 +715,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não introduzir URLs, autores ou licenças presumidos
 - [x] Preservar o catálogo em 60 espécies e 26 lotes
 - [x] Executar checks e auditorias completas
+
+## Passo 44/60 — lote de mamíferos auditado
+
+- [x] Auditar três páginas Commons por espécie para quatro mamíferos
+- [x] Confirmar autoria e licença CC BY/CC BY-SA sem NC/ND
+- [x] Integrar quatro espécies em `catalog-mammals-03`
+- [x] Integrar 12 referências de imagem e fontes GBIF
+- [x] Atualizar métricas para 64 espécies, 27 lotes e 192 imagens
+- [x] Executar checks e auditorias completas
