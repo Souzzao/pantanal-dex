@@ -1,41 +1,41 @@
 # Relatório canônico do catálogo
 
-Gerado por **pnpm mvp:report** em 2026-08-27T16:10:58.112Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
+Gerado por **pnpm mvp:report** em 2026-08-28T02:18:54.031Z. Este relatório mede a branch sem promover lotes pendentes a espécies verificadas.
 
 ## Quantitativos
 
 | Métrica | Valor |
 |---|---|
 | Espécies públicas | 20 |
-| Espécies modulares | 55 |
-| Total combinado | **75** |
-| Lotes modulares | 21 |
+| Espécies modulares | 76 |
+| Total combinado | **96** |
+| Lotes modulares | 28 |
 | Lotes pending-review | 21 |
-| Lotes verified | 0 |
-| Lotes review-ready | 0 |
-| Imagens nos lotes | 165 |
+| Lotes verified | 3 |
+| Lotes review-ready | 5 |
+| Imagens nos lotes | 228 |
 | Fontes estruturadas por espécie pública | 20 |
-| Fontes estruturadas por espécie modular | 55 |
-| Fontes estruturadas por lote | 21 |
-| Notas de pendência por lote | 21 |
+| Fontes estruturadas por espécie modular | 75 |
+| Fontes estruturadas por lote | 28 |
+| Notas de pendência por lote | 26 |
 
 ## Integridade dos IDs
 
 | Verificação | Resultado |
 |---|---|
-| IDs globais únicos | 75 |
+| IDs globais únicos | 96 |
 | IDs duplicados | Nenhum |
 
 ## Distribuição por grupo
 
 | Grupo | Público | Modular |
 |---|---|---|
-| Mamíferos | 5 | 3 |
-| Aves | 5 | 15 |
-| Répteis | 3 | 2 |
+| Mamíferos | 5 | 8 |
+| Aves | 5 | 17 |
+| Répteis | 3 | 6 |
 | Anfíbios | 2 | 2 |
-| Peixes | 3 | 18 |
-| Invertebrados | 2 | 15 |
+| Peixes | 3 | 27 |
+| Invertebrados | 2 | 16 |
 
 ## Pendências de revisão
 
@@ -83,6 +83,8 @@ Gerado por **pnpm mvp:report** em 2026-08-27T16:10:58.112Z. Este relatório mede
 - `egretta-thula`
 - `pitangus-sulphuratus`
 - `sicalis-flaveola`
+- `arara-caninde`
+- `tucano-toco`
 - `pseudoplatystoma-corruscans`
 - `piaractus-mesopotamicus`
 - `salminus-brasiliensis`
@@ -101,6 +103,19 @@ Gerado por **pnpm mvp:report** em 2026-08-27T16:10:58.112Z. Este relatório mede
 - `salminus-brasiliensis-fish06`
 - `pseudoplatystoma-corruscans-fish06`
 - `leporinus-obtusidens`
+- `zungaro-jahu`
+- `serrasalmus-maculatus`
+- `serrasalmus-marginatus`
+- `gymnotus-inaequilabiatus`
+- `eigenmannia-virescens`
+- `rhamdia-quelen`
+- `synbranchus-marmoratus`
+- `hemisorubim-platyrhynchos`
+- `loricariichthys-platymetopon`
+- `paleosuchus-palpebrosus`
+- `micrablepharus-maximiliani`
+- `phrynops-geoffroanus`
+- `hydrodynastes-gigas`
 - `morpho-helenor`
 - `tetragonisca-angustula`
 - `paraponera-clavata`
@@ -116,9 +131,15 @@ Gerado por **pnpm mvp:report** em 2026-08-27T16:10:58.112Z. Este relatório mede
 - `anartia-jatrophae`
 - `battus-polydamas`
 - `vanessa-myrinna`
+- `phoneutria-nigriventer`
 - `lobo-guara`
 - `queixada`
 - `cateto`
+- `veado-campeiro`
+- `puma-concolor`
+- `lontra-longicaudis`
+- `pteronura-brasiliensis`
+- `nasua-nasua`
 - `teiu`
 - `cobra-cipo`
 
