@@ -788,3 +788,14 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Atualizar via fila persistente existente sem duplicar registros
 - [x] Adicionar teste de preservação de identidade, ordem e registros vizinhos
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 53/60 — busca e filtros operacionais
+
+- [x] Criar filtro determinístico reutilizável para avistamentos
+- [x] Buscar por espécie, nome científico, local e observação
+- [x] Filtrar por intervalo inclusivo de datas
+- [x] Filtrar por visibilidade pessoal/compartilhável
+- [x] Filtrar por presença de coordenadas GPS
+- [x] Preservar FlatList virtualizada e busca com `useDeferredValue`
+- [x] Adicionar cobertura de volume de 3.000 registros
+- [x] Executar checks, testes e auditorias completas
