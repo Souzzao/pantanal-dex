@@ -769,3 +769,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Auditar dataset ICMBio/SISBio sem impor o contrato histórico obsoleto
 - [x] Corrigir duplicidade de ID de lote e URL editorial bloqueada
 - [x] Executar checks, testes e auditorias finais sem pendências definitivas
+
+## Passo 51/60 — compartilhamento individual seguro
+
+- [x] Adicionar compartilhamento nativo de um avistamento no detalhe
+- [x] Gerar arquivo JSON compatível com o envelope versionado
+- [x] Exigir confirmação adicional para registros pessoais com localização
+- [x] Preservar fallback quando o compartilhamento nativo não estiver disponível
+- [x] Desabilitar a ação durante a geração do arquivo
+- [x] Executar checks, testes e auditorias completas
