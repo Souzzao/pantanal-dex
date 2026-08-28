@@ -819,3 +819,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Sanitizar versões e valores inválidos com fallback seguro
 - [x] Adicionar testes de migração, corrupção e privacidade
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 56/60 — painel agregado de avistamentos
+
+- [x] Criar agregação determinística de métricas do caderno
+- [x] Exibir total, espécies, GPS e compartilháveis
+- [x] Exibir período mínimo/máximo e espécie mais frequente
+- [x] Não exibir notas, coordenadas ou locais individuais no resumo
+- [x] Cobrir caderno vazio e volume de 3.000 registros
+- [x] Executar checks, testes e auditorias completas
