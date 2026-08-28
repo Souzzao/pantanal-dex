@@ -697,3 +697,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Classificar nove candidatos novos como não elegíveis neste estado por falta de pacote científico/comercial completo
 - [x] Não inserir registros, imagens ou licenças não verificadas
 - [x] Executar a suíte completa de checks e auditorias
+
+## Passo 42/60 — resolução ativa do Lote 01
+
+- [x] Reavaliar os nove candidatos novos com fontes regionais abertas
+- [x] Confirmar *Puma concolor*, *Lontra longicaudis*, *Pteronura brasiliensis* e *Nasua nasua*
+- [x] Encerrar *Rhea americana*, *Anhinga anhinga*, *Eudocimus ruber*, *Caracara plancus* e *Eupsittula nenday* como `not-confirmed`
+- [x] Expandir o ledger regional para 31 registros com zero `pending-review`
+- [x] Não ingerir espécies sem pacote científico e comercial completo
+- [x] Executar checks e auditorias completas

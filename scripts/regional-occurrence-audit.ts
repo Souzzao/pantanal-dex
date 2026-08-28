@@ -3,7 +3,7 @@ import path from "node:path";
 import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "../shared/catalog/regional-occurrence";
 
 const errors = validateRegionalOccurrenceRecords(regionalOccurrenceRecords);
-const expectedIds = ["pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce", "zungaro-jahu", "phoneutria-nigriventer", "brycon-orbignyanus", "serrasalmus-maculatus", "serrasalmus-marginatus", "gymnotus-inaequilabiatus", "eigenmannia-virescens", "rhamdia-quelen", "synbranchus-marmoratus", "crenicichla-britskii", "hemisorubim-platyrhynchos", "loricariichthys-platymetopon", "paleosuchus-palpebrosus", "micrablepharus-maximiliani", "phrynops-geoffroanus", "podocnemis-unifilis", "hydrodynastes-gigas"];
+const expectedIds = ["pintado", "pacu", "piraputanga", "caranguejo-agua-doce", "camarao-agua-doce", "zungaro-jahu", "phoneutria-nigriventer", "brycon-orbignyanus", "serrasalmus-maculatus", "serrasalmus-marginatus", "gymnotus-inaequilabiatus", "eigenmannia-virescens", "rhamdia-quelen", "synbranchus-marmoratus", "crenicichla-britskii", "hemisorubim-platyrhynchos", "loricariichthys-platymetopon", "paleosuchus-palpebrosus", "micrablepharus-maximiliani", "phrynops-geoffroanus", "podocnemis-unifilis", "hydrodynastes-gigas", "puma-concolor", "lontra-longicaudis", "ariranha", "quati", "rhea-americana", "anhinga-anhinga", "eudocimus-ruber", "caracara-plancus", "eupsittula-nenday"];
 const ids = regionalOccurrenceRecords.map((record) => record.speciesId);
 if (regionalOccurrenceRecords.length !== expectedIds.length) errors.push(`ledger deveria conter ${expectedIds.length} registros`);
 if (JSON.stringify(ids) !== JSON.stringify(expectedIds)) errors.push("ordem ou cobertura de espécies divergente do contrato");
@@ -25,9 +25,9 @@ if (!ar || ar.status !== "confirmed" || !ar.sourceTitle.includes("SciELO") || !a
 if (regionalOccurrenceRecords.some((record) => record.checkedAt !== "2026-08-27")) errors.push("data de verificação regional desatualizada");
 
 const markdown = [
-  "# Auditoria do ledger de ocorrência regional — passo 39/60",
+  "# Auditoria do ledger de ocorrência regional — passo 42/60",
   "",
-  "O ledger registra 19 espécies confirmadas por fontes regionais independentes e três candidatos do Lote 02 encerrados como `not-confirmed`. Não há pendências abertas: `not-confirmed` registra que a triagem foi concluída sem evidência suficiente para afirmar ocorrência no Pantanal.",
+  "O ledger registra 23 espécies confirmadas por fontes regionais independentes e oito candidatos encerrados como `not-confirmed`. Não há pendências abertas: `not-confirmed` registra que a triagem foi concluída sem evidência suficiente para afirmar ocorrência no Pantanal.",
   "",
   "| ID | Região | Estado | Fonte | Evidência conservadora |",
   "|---|---|---|---|---|",
@@ -39,7 +39,7 @@ const markdown = [
   "",
   "## Limite da evidência",
   "",
-  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. O inventário do Parque Nacional do Pantanal Matogrossense confirmou sete peixes do Lote 02; a revisão de répteis do Mato Grosso do Sul confirmou quatro répteis com ocorrência indicada no Pantanal; e o guia oficial do IMASUL confirmou Rhamdia quelen no rio Formoso, em Bonito, MS. Brycon orbignyanus, Crenicichla britskii e Podocnemis unifilis foram encerrados como `not-confirmed` para o recorte Pantanal, com motivação documentada e sem inferência de ausência absoluta. Nenhuma categoria de conservação foi inferida deste ledger.",
+  "A publicação da Embrapa descreve Pseudoplatystoma corruscans no Pantanal de Mato Grosso do Sul. O artigo SciELO informa que Piaractus mesopotamicus é uma das espécies mais capturadas no Pantanal. Os estudos Springer/SciELO documentam Brycon hilarii no Pantanal e na sub-bacia do rio Miranda. O artigo SciELO sobre Trichodactylidae nomeia Dilocarcinus pagei entre as espécies registradas em alagados do Pantanal e na bacia do Alto Paraguai. O estudo indexado no PubMed analisou 2.270 exemplares de Macrobrachium amazonicum coletados no rio Miranda e na Lagoa Baiazinha, no Pantanal de Mato Grosso do Sul. Outro artigo indexado no PubMed examinou 50 exemplares de Zungaro jahu no Pantanal brasileiro e identificou explicitamente o hospedeiro. O inventário do Parque Nacional do Pantanal Matogrossense confirmou sete peixes do Lote 02; a revisão de répteis do Mato Grosso do Sul confirmou quatro répteis; o guia oficial do IMASUL confirmou Rhamdia quelen no rio Formoso, em Bonito, MS; e a revisão aberta de mamíferos do Pantanal confirmou Puma concolor, Lontra longicaudis, Pteronura brasiliensis e Nasua nasua no contexto pantaneiro. Brycon orbignyanus, Crenicichla britskii, Podocnemis unifilis, Rhea americana, Anhinga anhinga, Eudocimus ruber, Caracara plancus e Eupsittula nenday foram encerrados como `not-confirmed` para o recorte Pantanal, com motivação documentada e sem inferência de ausência absoluta. Nenhuma categoria de conservação foi inferida deste ledger.",
   "## Referências",
   "",
   "[16]: https://api.gbif.org/v1/occurrence/search \"GBIF — busca de ocorrências estruturadas\"",
