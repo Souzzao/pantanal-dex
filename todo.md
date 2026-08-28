@@ -750,3 +750,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Relatar registros inválidos e IDs duplicados sem abortar o lote
 - [x] Cobrir transferência, privacidade e compatibilidade com testes automatizados
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 49/60 — interface de transferência nativa
+
+- [x] Adicionar seleção de arquivo JSON com Expo DocumentPicker
+- [x] Integrar importação ao armazenamento local existente
+- [x] Exibir confirmação explícita sobre dados privados e coordenadas
+- [x] Exibir relatório de aceitos, rejeitados e já existentes
+- [x] Preservar exportação JSON e CSV com compartilhamento nativo
+- [x] Manter fallback web e mensagens de erro controladas
+- [x] Executar checks, testes e auditorias completas
