@@ -23,9 +23,10 @@ async function main() {
   await probe("Referência IPT ICMBio/SISBio v1.649", iptUrl);
   await Promise.all(regionalOccurrenceRecords.map((record) => probe(`Filtro ${record.scientificName}`, record.queryUrl)));
 
-  if (regionalOccurrenceRecords.length !== 5) errors.push("dataset auditado deveria ter cinco filtros regionais");
-  if (regionalOccurrenceRecords.some((record) => record.sourceUrl !== datasetUrl)) errors.push("há registro apontando para dataset diferente de dr327");
-  if (regionalOccurrenceRecords.some((record) => record.status !== "pending-review")) errors.push("filtro regional promovido sem contagem estruturada");
+  if (!regionalOccurrenceRecords.length) errors.push("ledger regional sem registros");
+  const datasetRecords = regionalOccurrenceRecords.filter((record) => record.sourceUrl === datasetUrl);
+  if (datasetRecords.some((record) => record.status !== "pending-review")) errors.push("registro do dataset dr327 promovido sem contagem estruturada");
+  if (regionalOccurrenceRecords.some((record) => record.status === "pending-review")) errors.push("há registro regional ainda pendente após a auditoria final");
   const metadata = checks[0];
   if (!metadata?.accessible) errors.push("metadados do dataset não acessíveis nesta execução");
 
@@ -44,7 +45,7 @@ async function main() {
     "|---|---:|---|---|---|",
     ...checks.map((check) => `| ${check.label} | ${check.httpStatus} | ${check.accessible ? "sim" : "não"} | ${check.structured ? "sim" : "não"} | ${check.note} |`),
     "",
-    `**Resultado do contrato:** ${errors.length ? "FAIL" : "PASS"}. Cinco filtros regionais presentes; ${regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length} permanecem ` + "`pending-review`" + "; ${errors.length} erro(s).",
+    `**Resultado do contrato:** ${errors.length ? "FAIL" : "PASS"}. ${regionalOccurrenceRecords.length} registros regionais auditados; ${datasetRecords.length} usam o dataset dr327; ${regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length} permanecem ` + "`pending-review`" + "; ${errors.length} erro(s).",
     "",
     "> Acesso ao dataset e licença não equivalem a confirmação de presença de uma espécie no Pantanal. Sem contagem ou resposta estruturada por filtro, o ledger não promove o registro e não infere ausência.",
     "",

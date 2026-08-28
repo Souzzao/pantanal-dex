@@ -760,3 +760,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar exportação JSON e CSV com compartilhamento nativo
 - [x] Manter fallback web e mensagens de erro controladas
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 50/60 — auditoria final integrada
+
+- [x] Auditar arquitetura, vocabulário, prioridades e fontes científicas
+- [x] Auditar conservação, ocorrência regional, sinônimos e GBIF legado
+- [x] Auditar licenças comerciais e disponibilidade de imagens
+- [x] Auditar dataset ICMBio/SISBio sem impor o contrato histórico obsoleto
+- [x] Corrigir duplicidade de ID de lote e URL editorial bloqueada
+- [x] Executar checks, testes e auditorias finais sem pendências definitivas

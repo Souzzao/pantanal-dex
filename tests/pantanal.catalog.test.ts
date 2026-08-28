@@ -270,7 +270,7 @@ describe("PantanalDex catalog", () => {
         expect(image.author.trim()).not.toBe("");
         expect(image.license.trim()).not.toBe("");
         expect(image.credit.trim()).not.toBe("");
-        expect(image.sourceUrl).toMatch(/^https?:\/\/(?:commons\.wikimedia\.org\/wiki\/File:|www\.scielo\.br\/j\/alb\/a\/)/);
+        expect(image.sourceUrl).toMatch(/^https?:\/\/(?:commons\.wikimedia\.org\/wiki\/File:|www\.scielo\.br\/j\/alb\/a\/|actalb\.org\/journal\/alb\/article\/doi\/)/);
       }
     }
   });

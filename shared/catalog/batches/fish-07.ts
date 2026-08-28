@@ -33,9 +33,9 @@ export const fish07: CatalogBatch = {
     distribution: "Bacia do Prata, com ocorrência documentada no Pantanal brasileiro; a espécie também foi registrada fora de sua área nativa no alto rio Iguaçu.",
     ecologicalImportance: "Predador de grande porte que participa da estruturação das comunidades de peixes e depende da conectividade longitudinal dos rios.",
     images: [
-      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/eb5356f76ea4ae038beae2ff4c61e58b1afe041c.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://www.scielo.br/j/alb/a/9SwFrcF7SCMSf4H5cczJvSh/?lang=pt", "SciELO / Acta Limnologica Brasiliensia"),
-      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/bbe751f3163c3c5c784e0b420675e8b4a95bee3f.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://www.scielo.br/j/alb/a/9SwFrcF7SCMSf4H5cczJvSh/?lang=pt", "SciELO / Acta Limnologica Brasiliensia"),
-      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/10d4d6c32f2e72335dc553c39b6318bc30ad09cf.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://www.scielo.br/j/alb/a/9SwFrcF7SCMSf4H5cczJvSh/?lang=pt", "SciELO / Acta Limnologica Brasiliensia"),
+      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/eb5356f76ea4ae038beae2ff4c61e58b1afe041c.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://actalb.org/journal/alb/article/doi/10.1590/S2179-975X4322", "SciELO / Acta Limnologica Brasiliensia"),
+      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/bbe751f3163c3c5c784e0b420675e8b4a95bee3f.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://actalb.org/journal/alb/article/doi/10.1590/S2179-975X4322", "SciELO / Acta Limnologica Brasiliensia"),
+      image("https://minio.scielo.br/documentstore/2179-975X/9SwFrcF7SCMSf4H5cczJvSh/10d4d6c32f2e72335dc553c39b6318bc30ad09cf.jpg", "Frota et al. / SciELO", "CC BY 4.0", "https://actalb.org/journal/alb/article/doi/10.1590/S2179-975X4322", "SciELO / Acta Limnologica Brasiliensia"),
     ],
     sources: [
       gbif("Zungaro jahu"),

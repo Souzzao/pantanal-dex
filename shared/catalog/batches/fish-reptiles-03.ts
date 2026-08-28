@@ -139,7 +139,7 @@ const fishSpecies = fishReptilesSpecies.filter((item) => item.group === "Peixes"
 const reptileSpecies = fishReptilesSpecies.filter((item) => item.group === "Répteis");
 
 export const fishReptiles03: CatalogBatch = {
-  batchId: "catalog-fish-03",
+  batchId: "catalog-fish-08",
   cycle: 3,
   group: "Peixes",
   status: "verified",

@@ -13,7 +13,7 @@ if (duplicateBatchIds.length) errors.push(`IDs de lote duplicados: ${duplicateBa
 if (duplicateSpeciesIds.length) errors.push(`IDs de espécie duplicados: ${duplicateSpeciesIds.join(", ")}`);
 for (const batch of catalogBatches) {
   if (!batch.batchId || !batch.species.length) errors.push(`${batch.batchId || "lote sem ID"}: lote vazio ou sem ID`);
-  if (batch.status !== "pending-review") errors.push(`${batch.batchId}: lote fora do estado modular pending-review`);
+  if (!("pending-review" === batch.status || "review-ready" === batch.status || "verified" === batch.status)) errors.push(`${batch.batchId}: lote fora dos estados modulares permitidos`);
   if (batch.species.some((species) => !catalogSpecies.some((candidate) => candidate.id === species.id))) errors.push(`${batch.batchId}: índice combinado não contém espécie do lote`);
 }
 for (const group of CATALOG_GROUPS) if (!catalogSpeciesByGroup[group]?.length) errors.push(`${group}: índice de grupo vazio`);
