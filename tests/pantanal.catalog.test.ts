@@ -63,13 +63,13 @@ describe("PantanalDex catalog", () => {
 
   it("measures the combined inventory without losing modular status", () => {
     const metrics = createCatalogInventoryMetrics(species, catalogSpecies, catalogBatches, catalogValidationErrors);
-    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 64, totalSpecies: 84, uniqueIds: 84, duplicateIds: [], modularBatches: 27, pendingReviewBatches: 21, verifiedBatches: 1, reviewReadyBatches: 5, modularImages: 192, validationErrors: [] });
+    expect(metrics).toMatchObject({ publicSpecies: 20, modularSpecies: 76, totalSpecies: 96, uniqueIds: 96, duplicateIds: [], modularBatches: 29, pendingReviewBatches: 21, verifiedBatches: 3, reviewReadyBatches: 5, modularImages: 228, validationErrors: [] });
     expect(metrics.groups).toEqual([
       { group: "Mamíferos", total: 13 },
       { group: "Aves", total: 22 },
-      { group: "Répteis", total: 5 },
+      { group: "Répteis", total: 9 },
       { group: "Anfíbios", total: 4 },
-      { group: "Peixes", total: 22 },
+      { group: "Peixes", total: 30 },
       { group: "Invertebrados", total: 18 },
     ]);
     expect(metrics.environments.every((row) => row.total > 0)).toBe(true);
@@ -146,14 +146,14 @@ describe("PantanalDex catalog", () => {
 
   it("keeps the scientific audit aggregate clean", () => {
     const audit = createScientificCatalogAudit(species);
-    expect(audit).toMatchObject({ records: 84, uniqueIds: 84, duplicateIds: [], errors: [], status: "PASS" });
+    expect(audit).toMatchObject({ records: 96, uniqueIds: 96, duplicateIds: [], errors: [], status: "PASS" });
     expect(Object.values(audit.missingFields).every((count) => count === 0)).toBe(true);
   });
 
 
   it("integrates the modular catalog batches without validation errors", () => {
     expect(catalogBatches.length).toBeGreaterThan(0);
-    expect(catalogSpecies).toHaveLength(64);
+    expect(catalogSpecies).toHaveLength(76);
     expect(catalogValidationErrors).toEqual([]);
     expect(validateCatalogBatch(catalogBatches[0])).toEqual([]);
     expect(species.some((item) => item.id === "lobo-guara")).toBe(true);

@@ -18,6 +18,7 @@ import { fish04 } from "./batches/fish-04";
 import { fish05 } from "./batches/fish-05";
 import { fish06 } from "./batches/fish-06";
 import { fish07 } from "./batches/fish-07";
+import { fishReptiles03, reptiles02 } from "./batches/fish-reptiles-03";
 import { invertebrates01 } from "./batches/invertebrates-01";
 import { invertebrates02 } from "./batches/invertebrates-02";
 import { invertebrates03 } from "./batches/invertebrates-03";
@@ -33,7 +34,7 @@ import { regionalOccurrenceRecords, validateRegionalOccurrenceRecords } from "./
 import { conservationReviewRecords, validateConservationReviewRecords } from "./conservation";
 import { applyDocumentedSynonyms, documentedSynonyms, validateDocumentedSynonyms } from "./synonyms";
 
-export const catalogBatches: CatalogBatch[] = [mammals01, mammals02, mammals03, birds01, birds02, birds03, birds04, birds05, birds06, birds07, reptiles01, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, fish07, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07, invertebrates08];
+export const catalogBatches: CatalogBatch[] = [mammals01, mammals02, mammals03, birds01, birds02, birds03, birds04, birds05, birds06, birds07, reptiles01, reptiles02, amphibians01, fish01, fish02, fish03, fish04, fish05, fish06, fish07, fishReptiles03, invertebrates01, invertebrates02, invertebrates03, invertebrates04, invertebrates05, invertebrates06, invertebrates07, invertebrates08];
 export const catalogSpecies: Species[] = catalogBatches.flatMap((batch) => batch.species);
 export const frozenCatalogContract = createFrozenCatalogContract(catalogBatches, catalogSpecies);
 export { catalogP1Priorities, catalogP2Priorities, catalogPriorityMatrix, validateCatalogPriorities } from "./priorities";

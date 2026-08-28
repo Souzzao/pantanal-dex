@@ -724,3 +724,11 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Integrar 12 referências de imagem e fontes GBIF
 - [x] Atualizar métricas para 64 espécies, 27 lotes e 192 imagens
 - [x] Executar checks e auditorias completas
+
+## Passo 45/60 — ingestão do Lote 02 confirmada
+
+- [x] Integrar oito peixes regionalmente confirmados
+- [x] Integrar quatro répteis regionalmente confirmados
+- [x] Auditar 36 imagens Commons com autoria e licença comercial
+- [x] Manter Brycon, Crenicichla e Podocnemis fora da ingestão por not-confirmed
+- [x] Executar checks e auditorias completas
