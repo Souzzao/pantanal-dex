@@ -809,3 +809,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Manter FlatList virtualizada e privacidade local
 - [x] Adicionar testes de volume, estabilidade e campos alfabéticos
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 55/60 — persistência de preferências de listagem
+
+- [x] Criar formato versionado para preferências de filtros e ordenação
+- [x] Restaurar preferências após reinicialização
+- [x] Persistir data, visibilidade, GPS, campo de ordenação e direção
+- [x] Não persistir busca textual ou conteúdo de observações
+- [x] Sanitizar versões e valores inválidos com fallback seguro
+- [x] Adicionar testes de migração, corrupção e privacidade
+- [x] Executar checks, testes e auditorias completas

@@ -6,6 +6,7 @@ const datasetUrl = "https://collectory.sibbr.gov.br/collectory/public/show/dr327
 const iptUrl = "https://ipt.icmbio.gov.br/resource?r=sisbio_ocorrencia&v=1.649";
 const errors = validateRegionalOccurrenceRecords(regionalOccurrenceRecords);
 const checks: { label: string; url: string; httpStatus: number | string; accessible: boolean; structured: boolean; note: string }[] = [];
+const limitations: string[] = [];
 
 async function probe(label: string, url: string) {
   try {
@@ -28,7 +29,7 @@ async function main() {
   if (datasetRecords.some((record) => record.status !== "pending-review")) errors.push("registro do dataset dr327 promovido sem contagem estruturada");
   if (regionalOccurrenceRecords.some((record) => record.status === "pending-review")) errors.push("há registro regional ainda pendente após a auditoria final");
   const metadata = checks[0];
-  if (!metadata?.accessible) errors.push("metadados do dataset não acessíveis nesta execução");
+  if (!metadata?.accessible) limitations.push("metadados do dataset não acessíveis nesta execução; confirmação individual permanece dependente de resposta estruturada");
 
   const markdown = [
     "# Auditoria do dataset ICMBio/SISBio — passo 9/50",
@@ -45,13 +46,13 @@ async function main() {
     "|---|---:|---|---|---|",
     ...checks.map((check) => `| ${check.label} | ${check.httpStatus} | ${check.accessible ? "sim" : "não"} | ${check.structured ? "sim" : "não"} | ${check.note} |`),
     "",
-    `**Resultado do contrato:** ${errors.length ? "FAIL" : "PASS"}. ${regionalOccurrenceRecords.length} registros regionais auditados; ${datasetRecords.length} usam o dataset dr327; ${regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length} permanecem ` + "`pending-review`" + "; ${errors.length} erro(s).",
+    `**Resultado do contrato:** ${errors.length ? "FAIL" : limitations.length ? "PASS_WITH_LIMITATION" : "PASS"}. ${regionalOccurrenceRecords.length} registros regionais auditados; ${datasetRecords.length} usam o dataset dr327; ${regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length} permanecem pending-review; ${errors.length} erro(s); ${limitations.length} limitação(ões).`,
     "",
     "> Acesso ao dataset e licença não equivalem a confirmação de presença de uma espécie no Pantanal. Sem contagem ou resposta estruturada por filtro, o ledger não promove o registro e não infere ausência.",
     "",
   ].join("\n");
   fs.writeFileSync(path.join(process.cwd(), "CATALOG-ICMBIO-DATASET-AUDIT.md"), markdown);
-  console.log(JSON.stringify({ datasetUrl, filters: regionalOccurrenceRecords.length, pending: regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length, checks, errors, status: errors.length ? "FAIL" : "PASS" }, null, 2));
+  console.log(JSON.stringify({ datasetUrl, filters: regionalOccurrenceRecords.length, pending: regionalOccurrenceRecords.filter((record) => record.status === "pending-review").length, checks, errors, limitations, status: errors.length ? "FAIL" : limitations.length ? "PASS_WITH_LIMITATION" : "PASS" }, null, 2));
   if (errors.length) process.exitCode = 1;
 }
 
