@@ -1,6 +1,6 @@
 # Auditoria GBIF das espécies legadas — passo 7/50
 
-Consulta executada em 2026-08-28T01:28:18.084Z contra as URLs GBIF versionadas nos registros do catálogo.
+Consulta executada em 2026-08-28T01:32:53.323Z contra as URLs GBIF versionadas nos registros do catálogo.
 
 | ID | Nome esperado | Canonical name GBIF | Usage key | Status | Match type | Confiança | Resultado |
 |---|---|---|---:|---|---|---:|---|
