@@ -706,3 +706,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Expandir o ledger regional para 31 registros com zero `pending-review`
 - [x] Não ingerir espécies sem pacote científico e comercial completo
 - [x] Executar checks e auditorias completas
+
+## Passo 43/60 — ingestão segura dos mamíferos confirmados
+
+- [x] Validar ocorrência regional de *Puma concolor*, *Lontra longicaudis*, *Pteronura brasiliensis* e *Nasua nasua*
+- [x] Conferir necessidade de três mídias licenciadas por espécie
+- [x] Bloquear ingestão enquanto autoria e licença dos 12 arquivos não estiverem individualmente verificadas
+- [x] Não introduzir URLs, autores ou licenças presumidos
+- [x] Preservar o catálogo em 60 espécies e 26 lotes
+- [x] Executar checks e auditorias completas

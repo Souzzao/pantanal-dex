@@ -15,3 +15,35 @@ Fonte: [1]
 ## Referências
 
 [1]: https://www.gov.br/icmbio/pt-br/assuntos/centros-de-pesquisa/aves-silvestres/arquivos/portaria-148-2022.pdf "Portaria MMA nº 148/2022 — lista oficial de espécies ameaçadas"
+
+
+---
+
+# Passo 43/60 — ingestão segura dos mamíferos confirmados do Lote 01
+
+## Auditoria de elegibilidade
+
+Os quatro mamíferos do Lote 01 — *Puma concolor*, *Lontra longicaudis*, *Pteronura brasiliensis* e *Nasua nasua* — possuem confirmação regional no ledger por fonte aberta sobre mamíferos do Pantanal e identidade taxonômica separada no GBIF/Catalogue of Life.
+
+A ingestão modular exige também três imagens por espécie com URL original, autoria e licença comercial verificáveis. A busca visual encontrou resultados no Wikimedia Commons para parte dos táxons, mas os resultados disponíveis nesta rodada não forneceram metadados completos e verificáveis para todos os 12 arquivos exigidos. O Commons também apresentou HTTP 429 em consultas anteriores. Assim, nenhuma imagem foi promovida com base apenas em miniatura, título de busca ou URL presumida.
+
+| Critério | Resultado |
+|---|---:|
+| Mamíferos candidatos | 4 |
+| Confirmação regional | 4/4 |
+| Identidade taxonômica | 4/4 |
+| Imagens comerciais exigidas | 12 |
+| Conjuntos com licença individual confirmada | 0/4 |
+| Registros modulares ingeridos | 0 |
+| Licenças NC/ND aceitas | 0 |
+| URLs/autorias inventadas | 0 |
+
+## Decisão
+
+A ingestão foi bloqueada para os quatro registros porque o pacote comercial ainda não está completo. Os táxons não foram deixados como `pending-review` no ledger regional: sua ocorrência está resolvida; o bloqueio restante é exclusivamente de ingestão de mídia no catálogo. Não alterei o contrato de imagem nem converti resultados de busca em aprovação de licença.
+
+Os quatro candidatos permanecem fora dos lotes modulares publicados até que três páginas Commons individualmente auditadas por espécie tenham fonte, autor e licença compatível com uso comercial. A ausência de ingestão não cria duplicidade nem altera as 60 espécies já publicadas.
+
+## Checks
+
+`pnpm check`, `pnpm lint`, `pnpm test`, as auditorias de prioridades, fontes, conservação e ocorrência regional e `git diff --check` permanecem obrigatórios antes da publicação deste passo.
