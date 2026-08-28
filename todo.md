@@ -732,3 +732,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Auditar 36 imagens Commons com autoria e licença comercial
 - [x] Manter Brycon, Crenicichla e Podocnemis fora da ingestão por not-confirmed
 - [x] Executar checks e auditorias completas
+
+## Passo 46/60 — persistência local resiliente
+
+- [x] Migrar o armazenamento de avistamentos para formato versionado
+- [x] Dividir avistamentos em blocos de 100 registros para reduzir gravações monolíticas
+- [x] Adicionar fila de gravação para serializar operações concorrentes
+- [x] Validar e descartar entradas corrompidas sem derrubar a inicialização
+- [x] Preservar migração automática do formato legado
+- [x] Executar checks, testes e auditorias completas
