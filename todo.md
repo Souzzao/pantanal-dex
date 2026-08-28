@@ -741,3 +741,12 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Validar e descartar entradas corrompidas sem derrubar a inicialização
 - [x] Preservar migração automática do formato legado
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 48/60 — transferência robusta de avistamentos
+
+- [x] Criar exportação JSON versionada 2.0
+- [x] Aceitar envelope versionado e arrays legados
+- [x] Sanitizar campos desconhecidos na importação
+- [x] Relatar registros inválidos e IDs duplicados sem abortar o lote
+- [x] Cobrir transferência, privacidade e compatibilidade com testes automatizados
+- [x] Executar checks, testes e auditorias completas

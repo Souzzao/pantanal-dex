@@ -1,17 +1,20 @@
-# Passo 48/50 — validação oficial de conservação da piava
+# Passo 48/60 — transferência robusta de avistamentos
 
-## Alvo
+O passo 48 criou `lib/sightings-transfer.ts`, uma camada independente para exportação e importação de avistamentos. A exportação JSON agora usa o envelope versionado `2.0`, mantém os dados necessários ao registro e continua disponível pela função pública `createExportJson` do `AppContext`.
 
-A sequência P2 segue para a piava, `Leporinus obtusidens`, registro prioritário do catálogo.
+A importação aceita tanto o envelope versionado quanto o array legado. Cada item é validado contra o contrato `Sighting`; itens inválidos são rejeitados com índice, motivo e ID quando disponível, enquanto os registros válidos continuam sendo processados. IDs repetidos no mesmo arquivo também são reportados sem interromper o restante do lote.
 
-## Fonte oficial e busca normativa
+A importação reconstrói explicitamente os campos permitidos do registro, removendo propriedades desconhecidas. Assim, tokens, metadados acidentais e campos não pertencentes ao modelo não são persistidos. Coordenadas, notas e visibilidade permanecem intactas para registros válidos, inclusive quando a visibilidade é privada.
 
-A Portaria MMA nº 148/2022 foi extraída e pesquisada diretamente por `Leporinus obtusidens`, `obtusidens` e `Leporinus`. Não foi localizada correspondência exata para o táxon no texto extraído. O anexo contém outros táxons do gênero, como `Leporinus guttatus` e `Leporinus pitingai`, mas são espécies distintas e não foram confundidas com `Leporinus obtusidens`.
+| Recurso | Resultado |
+|---|---|
+| Exportação | Envelope JSON versão 2.0 |
+| Compatibilidade | Arrays legados aceitos |
+| Validação | Campos obrigatórios e enums de `Sighting` |
+| Rejeições | Registro inválido e ID duplicado, com relatório |
+| Sanitização | Apenas campos permitidos são reconstruídos |
+| Falha de JSON | Resultado controlado, sem exceção ao chamador |
 
-A ausência será registrada como `not-listed`, limitada à lista nacional consultada. Nenhuma categoria de ameaça será inferida, e a espécie não será tratada como LC apenas por não aparecer na Portaria.
+Foram adicionados cinco testes em `tests/sightings-transfer.test.ts`, cobrindo exportação, sanitização, arrays legados, rejeições parciais e JSON inválido. A suíte completa passou com **30 testes aprovados e 1 ignorado**. Também passaram `pnpm check`, `pnpm lint`, as auditorias de prioridades, fontes, conservação e ocorrência regional, além de `git diff --check`.
 
-Fonte: [1]
-
-## Referências
-
-[1]: https://www.gov.br/icmbio/pt-br/assuntos/centros-de-pesquisa/aves-silvestres/arquivos/portaria-148-2022.pdf "Portaria MMA nº 148/2022 — lista oficial de espécies ameaçadas"
+As métricas científicas permaneceram estáveis em 76 espécies modulares, 29 lotes, 82 fontes estruturadas, 152 URLs GBIF, 38 registros de conservação e 31 registros regionais, todos sem pendências.
