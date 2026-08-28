@@ -828,3 +828,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Não exibir notas, coordenadas ou locais individuais no resumo
 - [x] Cobrir caderno vazio e volume de 3.000 registros
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 57/60 — exportação agregada do resumo
+
+- [x] Criar contrato versionado para exportação do resumo
+- [x] Exportar métricas agregadas em JSON
+- [x] Exportar métricas e distribuição por espécie em CSV
+- [x] Integrar compartilhamento nativo e fallback controlado
+- [x] Excluir registros individuais, notas e locais da exportação
+- [x] Adicionar testes de consistência e resumo vazio
+- [x] Executar checks, testes e auditorias completas
