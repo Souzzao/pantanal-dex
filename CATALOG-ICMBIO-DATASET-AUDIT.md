@@ -12,37 +12,37 @@ O dataset `dr327` foi auditado como fonte oficial de contexto para ocorrência e
 |---|---:|---|---|---|
 | Metadados do dataset ICMBio/SISBio dr327 | 200 | sim | não | resposta não estruturada para auditoria automática |
 | Referência IPT ICMBio/SISBio v1.649 | 401 | não | não | resposta não estruturada para auditoria automática |
-| Filtro Macrobrachium amazonicum | 200 | sim | sim | resposta JSON |
-| Filtro Dilocarcinus pagei | 200 | sim | sim | resposta JSON |
-| Filtro Phoneutria nigriventer | 200 | sim | sim | resposta JSON |
-| Filtro Eupsittula nenday | 200 | sim | sim | resposta JSON |
-| Filtro Brycon hilarii | 200 | sim | sim | resposta JSON |
-| Filtro Micrablepharus maximiliani | 200 | sim | sim | resposta JSON |
-| Filtro Pseudoplatystoma corruscans | 200 | sim | sim | resposta JSON |
-| Filtro Piaractus mesopotamicus | 200 | sim | sim | resposta JSON |
-| Filtro Hemisorubim platyrhynchos | 200 | sim | sim | resposta JSON |
-| Filtro Serrasalmus maculatus | 200 | sim | sim | resposta JSON |
-| Filtro Phrynops geoffroanus | 200 | sim | sim | resposta JSON |
-| Filtro Brycon orbignyanus | 200 | sim | sim | resposta JSON |
-| Filtro Caracara plancus | 200 | sim | sim | resposta JSON |
-| Filtro Lontra longicaudis | 200 | sim | sim | resposta JSON |
-| Filtro Zungaro jahu | 200 | sim | sim | resposta JSON |
-| Filtro Rhamdia quelen | 200 | sim | sim | resposta JSON |
-| Filtro Podocnemis unifilis | 200 | sim | sim | resposta JSON |
-| Filtro Puma concolor | 200 | sim | sim | resposta JSON |
-| Filtro Paleosuchus palpebrosus | 200 | sim | sim | resposta JSON |
-| Filtro Loricariichthys platymetopon | 200 | sim | sim | resposta JSON |
-| Filtro Nasua nasua | 200 | sim | sim | resposta JSON |
-| Filtro Hydrodynastes gigas | 200 | sim | sim | resposta JSON |
-| Filtro Synbranchus marmoratus | 200 | sim | sim | resposta JSON |
-| Filtro Crenicichla britskii | 200 | sim | sim | resposta JSON |
-| Filtro Anhinga anhinga | 200 | sim | sim | resposta JSON |
-| Filtro Eigenmannia virescens | 200 | sim | sim | resposta JSON |
-| Filtro Serrasalmus marginatus | 200 | sim | sim | resposta JSON |
-| Filtro Rhea americana | 200 | sim | sim | resposta JSON |
-| Filtro Gymnotus inaequilabiatus | 200 | sim | sim | resposta JSON |
 | Filtro Eudocimus ruber | 200 | sim | sim | resposta JSON |
+| Filtro Eupsittula nenday | 200 | sim | sim | resposta JSON |
+| Filtro Caracara plancus | 200 | sim | sim | resposta JSON |
+| Filtro Synbranchus marmoratus | 200 | sim | sim | resposta JSON |
+| Filtro Micrablepharus maximiliani | 200 | sim | sim | resposta JSON |
+| Filtro Dilocarcinus pagei | 200 | sim | sim | resposta JSON |
+| Filtro Phrynops geoffroanus | 200 | sim | sim | resposta JSON |
+| Filtro Gymnotus inaequilabiatus | 200 | sim | sim | resposta JSON |
+| Filtro Phoneutria nigriventer | 200 | sim | sim | resposta JSON |
+| Filtro Podocnemis unifilis | 200 | sim | sim | resposta JSON |
+| Filtro Hydrodynastes gigas | 200 | sim | sim | resposta JSON |
+| Filtro Rhea americana | 200 | sim | sim | resposta JSON |
+| Filtro Eigenmannia virescens | 200 | sim | sim | resposta JSON |
 | Filtro Pteronura brasiliensis | 200 | sim | sim | resposta JSON |
+| Filtro Pseudoplatystoma corruscans | 200 | sim | sim | resposta JSON |
+| Filtro Crenicichla britskii | 200 | sim | sim | resposta JSON |
+| Filtro Brycon hilarii | 200 | sim | sim | resposta JSON |
+| Filtro Puma concolor | 200 | sim | sim | resposta JSON |
+| Filtro Zungaro jahu | 200 | sim | sim | resposta JSON |
+| Filtro Paleosuchus palpebrosus | 200 | sim | sim | resposta JSON |
+| Filtro Serrasalmus maculatus | 200 | sim | sim | resposta JSON |
+| Filtro Piaractus mesopotamicus | 200 | sim | sim | resposta JSON |
+| Filtro Brycon orbignyanus | 200 | sim | sim | resposta JSON |
+| Filtro Anhinga anhinga | 200 | sim | sim | resposta JSON |
+| Filtro Loricariichthys platymetopon | 200 | sim | sim | resposta JSON |
+| Filtro Macrobrachium amazonicum | 200 | sim | sim | resposta JSON |
+| Filtro Hemisorubim platyrhynchos | 200 | sim | sim | resposta JSON |
+| Filtro Rhamdia quelen | 200 | sim | sim | resposta JSON |
+| Filtro Lontra longicaudis | 200 | sim | sim | resposta JSON |
+| Filtro Serrasalmus marginatus | 200 | sim | sim | resposta JSON |
+| Filtro Nasua nasua | 200 | sim | sim | resposta JSON |
 
 **Resultado do contrato:** PASS. 31 registros regionais auditados; 0 usam o dataset dr327; 0 permanecem `pending-review`; ${errors.length} erro(s).
 
