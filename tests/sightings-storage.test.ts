@@ -48,6 +48,19 @@ describe("sightings storage", () => {
     expect(await persisted.load()).toEqual(second);
   });
 
+  it("preserva identidade e registros vizinhos ao atualizar um avistamento", async () => {
+    const { storage } = memoryStorage();
+    const persisted = createSightingsStorage(storage);
+    const original = [makeSighting(1), makeSighting(2), makeSighting(3)];
+    await persisted.save(original);
+    const edited = { ...original[1], notes: "revisado", updatedAt: "2026-08-28T12:00:00.000Z" };
+    await persisted.save(original.map((item) => item.id === edited.id ? edited : item));
+    const loaded = await persisted.load();
+    expect(loaded).toHaveLength(3);
+    expect(loaded.map((item) => item.id)).toEqual(["s-1", "s-2", "s-3"]);
+    expect(loaded[1]).toMatchObject({ id: "s-2", createdAt: original[1].createdAt, notes: "revisado" });
+  });
+
   it("remove chunks excedentes ao reduzir o inventário", async () => {
     const { storage, data } = memoryStorage();
     const persisted = createSightingsStorage(storage);

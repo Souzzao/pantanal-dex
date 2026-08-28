@@ -778,3 +778,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar fallback quando o compartilhamento nativo não estiver disponível
 - [x] Desabilitar a ação durante a geração do arquivo
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 52/60 — revisão e edição segura
+
+- [x] Criar rota de edição de avistamento
+- [x] Preservar ID e `createdAt` durante atualizações
+- [x] Validar data e quantidade antes da persistência
+- [x] Confirmar explicitamente a mudança de pessoal para compartilhável
+- [x] Atualizar via fila persistente existente sem duplicar registros
+- [x] Adicionar teste de preservação de identidade, ordem e registros vizinhos
+- [x] Executar checks, testes e auditorias completas
