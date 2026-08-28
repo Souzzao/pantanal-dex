@@ -799,3 +799,13 @@ Todo bloqueio deve registrar causa, evidência, alternativa executável e agente
 - [x] Preservar FlatList virtualizada e busca com `useDeferredValue`
 - [x] Adicionar cobertura de volume de 3.000 registros
 - [x] Executar checks, testes e auditorias completas
+
+## Passo 54/60 — ordenação operacional
+
+- [x] Criar ordenação determinística por data, espécie, local e atualização
+- [x] Adicionar direção ascendente e descendente
+- [x] Preservar estabilidade em empates
+- [x] Integrar ordenação depois dos filtros existentes
+- [x] Manter FlatList virtualizada e privacidade local
+- [x] Adicionar testes de volume, estabilidade e campos alfabéticos
+- [x] Executar checks, testes e auditorias completas

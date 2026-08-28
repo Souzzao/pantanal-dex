@@ -3,6 +3,20 @@ import { normalizeCatalogSearch, type Sighting, type Species } from "../shared/p
 export type SightingVisibilityFilter = "all" | "private" | "shareable";
 export type SightingFilters = { query: string; dateFrom: string; dateTo: string; visibility: SightingVisibilityFilter; locatedOnly: boolean };
 
+export type SightingSortKey = "date" | "species" | "location" | "updatedAt";
+export type SightingSortDirection = "asc" | "desc";
+
+export function sortSightings(sightings: readonly Sighting[], catalog: readonly Species[], key: SightingSortKey, direction: SightingSortDirection = "desc") {
+  return sightings.map((item, index) => ({ item, index })).sort((a, b) => {
+    const animalA = catalog.find((entry) => entry.id === a.item.speciesId);
+    const animalB = catalog.find((entry) => entry.id === b.item.speciesId);
+    const valueA = key === "species" ? animalA?.commonName ?? "" : key === "location" ? a.item.locationLabel ?? "" : key === "updatedAt" ? a.item.updatedAt : a.item.date;
+    const valueB = key === "species" ? animalB?.commonName ?? "" : key === "location" ? b.item.locationLabel ?? "" : key === "updatedAt" ? b.item.updatedAt : b.item.date;
+    const comparison = valueA.localeCompare(valueB, "pt-BR", { numeric: true, sensitivity: "base" });
+    return comparison === 0 ? a.index - b.index : direction === "asc" ? comparison : -comparison;
+  }).map(({ item }) => item);
+}
+
 export function filterSightings(sightings: readonly Sighting[], catalog: readonly Species[], filters: SightingFilters) {
   const query = normalizeCatalogSearch(filters.query);
   return sightings.filter((sighting) => {
