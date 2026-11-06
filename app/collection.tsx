@@ -64,6 +64,15 @@ const BADGES: Record<BadgeId, { icon: string; pt: [string, string]; en: [string,
   "full-group": { icon: "🏆", pt: ["Grupo completo", "Descubra todas as espécies de um grupo"], en: ["Full group", "Discover every species in a group"], es: ["Grupo completo", "Descubre todas las especies de un grupo"] },
 };
 
+const GROUP_LABELS: Record<SpeciesGroup, Record<Lang, string>> = {
+  Mamíferos: { pt: "Mamíferos", en: "Mammals", es: "Mamíferos" },
+  Aves: { pt: "Aves", en: "Birds", es: "Aves" },
+  Répteis: { pt: "Répteis", en: "Reptiles", es: "Reptiles" },
+  Anfíbios: { pt: "Anfíbios", en: "Amphibians", es: "Anfibios" },
+  Peixes: { pt: "Peixes", en: "Fish", es: "Peces" },
+  Invertebrados: { pt: "Invertebrados", en: "Invertebrates", es: "Invertebrados" },
+};
+
 function ProgressBar({ percent, color, track, height = 8 }: { percent: number; color: string; track: string; height?: number }) {
   const value = Math.max(0, Math.min(100, percent));
   return <View style={{ height, borderRadius: height / 2, backgroundColor: track, overflow: "hidden" }}><View style={{ width: `${value}%`, height: "100%", backgroundColor: color, borderRadius: height / 2 }} /></View>;
@@ -134,9 +143,9 @@ export default function CollectionScreen() {
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800", marginTop: 24, marginBottom: 10 }}>{t.byGroup}</Text>
       {summary.groups.map((item) => (
         <Pressable key={item.group} onPress={() => setGroup(group === item.group ? "all" : item.group)} accessibilityRole="button" accessibilityState={{ selected: group === item.group }}
-          accessibilityLabel={`${item.group}: ${item.discovered} / ${item.total}, ${item.percent}%`} style={({ pressed }) => [{ marginBottom: 12 }, pressed && { opacity: 0.8 }]}>
+          accessibilityLabel={`${GROUP_LABELS[item.group][lang]}: ${item.discovered} / ${item.total}, ${item.percent}%`} style={({ pressed }) => [{ marginBottom: 12 }, pressed && { opacity: 0.8 }]}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 5 }}>
-            <Text style={{ color: group === item.group ? colors.primary : colors.foreground, fontWeight: "700" }}>{item.group}</Text>
+            <Text style={{ color: group === item.group ? colors.primary : colors.foreground, fontWeight: "700" }}>{GROUP_LABELS[item.group][lang]}</Text>
             <Text style={{ color: colors.muted, fontWeight: "700" }}>{item.discovered}/{item.total} · {item.percent}%</Text>
           </View>
           <ProgressBar percent={item.percent} color={item.discovered === item.total ? colors.success : colors.primary} track={colors.border} />
@@ -167,7 +176,7 @@ export default function CollectionScreen() {
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20, marginTop: 10 }} contentContainerStyle={{ gap: 8, paddingHorizontal: 20, paddingBottom: 14 }}>
         {chip(t.allGroups, group === "all", () => setGroup("all"), "group-all")}
-        {groups.map((item) => chip(item, group === item, () => setGroup(item), `group-${item}`))}
+        {groups.map((item) => chip(GROUP_LABELS[item][lang], group === item, () => setGroup(item), `group-${item}`))}
       </ScrollView>
     </View>
   );
@@ -185,7 +194,7 @@ export default function CollectionScreen() {
         <View style={{ padding: 8 }}>
           <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800" }}>{number}</Text>
           <Text numberOfLines={2} style={{ color: item.discovered ? colors.foreground : colors.muted, fontSize: 13, fontWeight: "800", marginTop: 2, minHeight: 34 }}>{item.discovered ? name : t.unknown}</Text>
-          <Text numberOfLines={1} style={{ color: item.discovered ? colors.primary : colors.muted, fontSize: 11, marginTop: 2 }}>{item.discovered ? t.seen(item.sightingCount) : item.species.group}</Text>
+          <Text numberOfLines={1} style={{ color: item.discovered ? colors.primary : colors.muted, fontSize: 11, marginTop: 2 }}>{item.discovered ? t.seen(item.sightingCount) : GROUP_LABELS[item.species.group][lang]}</Text>
         </View>
       </Pressable>
     );
