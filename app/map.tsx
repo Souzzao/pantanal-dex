@@ -6,9 +6,8 @@ import NativeMapView from "@/components/NativeMapView";
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { filterSpeciesCatalog } from "@/shared/catalog";
+import { roundToPublicLocationGrid } from "@/shared/location";
 import { useColors } from "@/hooks/use-colors";
-
-const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
 
 export default function MapScreen() {
   const colors = useColors();
@@ -191,10 +190,10 @@ export default function MapScreen() {
             item.visibility === "private" && item.locationPrecision === "exact";
           const latitude = isPrivateExact
             ? item.latitude!
-            : roundCoordinate(item.latitude!);
+            : roundToPublicLocationGrid(item.latitude!);
           const longitude = isPrivateExact
             ? item.longitude!
-            : roundCoordinate(item.longitude!);
+            : roundToPublicLocationGrid(item.longitude!);
           return (
             <View
               key={item.id}
@@ -231,8 +230,8 @@ export default function MapScreen() {
                 <Text
                   style={{ color: colors.primary, marginTop: 6, fontSize: 12 }}
                 >
-                  {latitude.toFixed(2)}, {longitude.toFixed(2)}
-                  {isPrivateExact ? "" : " · posição aproximada"}
+                  {latitude.toFixed(isPrivateExact ? 4 : 1)}, {longitude.toFixed(isPrivateExact ? 4 : 1)}
+                  {isPrivateExact ? "" : " · posição aproximada (~11 km)"}
                 </Text>
               </Pressable>
               <Pressable

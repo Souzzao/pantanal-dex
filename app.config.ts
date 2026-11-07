@@ -41,7 +41,7 @@ const env = {
 const config: ExpoConfig = {
   name: env.appName,
   slug: env.appSlug,
-  version: "1.0.0",
+  version: "1.1.0",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
   scheme: env.scheme,
@@ -55,6 +55,7 @@ const config: ExpoConfig = {
       }
   },
   android: {
+    versionCode: 2,
     adaptiveIcon: {
       backgroundColor: "#E6F4FE",
       foregroundImage: "./assets/images/android-icon-foreground.png",
@@ -64,7 +65,6 @@ const config: ExpoConfig = {
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
     package: env.androidPackage,
-    permissions: ["POST_NOTIFICATIONS"],
     intentFilters: [
       {
         action: "VIEW",
@@ -97,20 +97,7 @@ const config: ExpoConfig = {
       {
         cameraPermission: "Permita que o PantanalDex use a câmera para registrar avistamentos.",
         photosPermission: "Permita que o PantanalDex acesse fotos para anexá-las aos avistamentos.",
-      },
-    ],
-    [
-      "expo-audio",
-      {
-        microphonePermission: "Permita que o PantanalDex use o microfone somente quando necessário.",
-        recordAudioAndroid: false,
-      },
-    ],
-    [
-      "expo-video",
-      {
-        supportsBackgroundPlayback: true,
-        supportsPictureInPicture: true,
+        microphonePermission: false,
       },
     ],
     [
@@ -135,6 +122,11 @@ const config: ExpoConfig = {
       },
     ],
   ],
+  extra: {
+    eas: {
+      projectId: "f8dd1e6d-bf7b-433b-bbb3-38e7e565b50b",
+    },
+  },
   experiments: {
     typedRoutes: true,
     reactCompiler: true,

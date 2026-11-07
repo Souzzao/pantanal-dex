@@ -2,6 +2,7 @@ export type SpeciesGroup = "Mamíferos" | "Aves" | "Répteis" | "Anfíbios" | "P
 export type Environment = "Rios e corixos" | "Áreas alagadas" | "Campos" | "Matas" | "Bordas de mata";
 export type LocationPrecision = "exact" | "approximate" | "municipality" | "none";
 export type Visibility = "private" | "shareable";
+export const UNKNOWN_SPECIES_ID = "unknown";
 
 export type Species = {
   id: string;
@@ -388,10 +389,17 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_PATTERN = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
+export function getLocalTodayISODate(date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export function isValidSightingDate(value: string): boolean {
   if (!ISO_DATE_PATTERN.test(value)) return false;
   const parsed = new Date(`${value}T00:00:00Z`);
-  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value && value <= getLocalTodayISODate();
 }
 
 export function isValidSightingTime(value: string): boolean {
@@ -413,7 +421,7 @@ export function sanitizeStoredSightings(value: unknown): Sighting[] {
       (typeof sighting.quantity === "number" && Number.isInteger(sighting.quantity) && sighting.quantity > 0);
     const timeIsValid = sighting.time === undefined || (typeof sighting.time === "string" && isValidSightingTime(sighting.time));
     return typeof sighting.id === "string" && sighting.id.length > 0 &&
-      typeof sighting.speciesId === "string" && species.some((entry) => entry.id === sighting.speciesId) &&
+      typeof sighting.speciesId === "string" && (sighting.speciesId === UNKNOWN_SPECIES_ID || species.some((entry) => entry.id === sighting.speciesId)) &&
       typeof sighting.date === "string" && isValidSightingDate(sighting.date) &&
       typeof sighting.createdAt === "string" && typeof sighting.updatedAt === "string" &&
       ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&

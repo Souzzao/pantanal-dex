@@ -428,14 +428,14 @@ describe("PantanalDex data contracts", () => {
     expect(source).toEqual([sighting]);
   });
 
-  it("masks exact coordinates for shareable records", () => {
+  it("masks exact coordinates to a 0.1-degree cell for shareable records", () => {
     const shareable = { ...sighting, visibility: "shareable" as const, locationPrecision: "exact" as const, latitude: -16.2537, longitude: -56.6519 };
     const exportable = toExportableSighting(shareable);
-    expect(exportable.latitude).toBe(-16.25);
-    expect(exportable.longitude).toBe(-56.65);
+    expect(exportable.latitude).toBe(-16.3);
+    expect(exportable.longitude).toBe(-56.7);
     expect(exportable.locationPrecision).toBe("approximate");
-    expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.25);
-    expect(createExportCsv([shareable])).toContain('"-16.25","-56.65","approximate"');
+    expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.3);
+    expect(createExportCsv([shareable])).toContain('"-16.3","-56.7","approximate"');
   });
 
   it("validates exported JSON and preserves the CSV header contract", () => {

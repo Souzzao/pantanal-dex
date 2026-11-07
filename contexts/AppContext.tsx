@@ -1,19 +1,23 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Platform } from "react-native";
 
 import type { Sighting } from "@/shared/pantanal";
 import { sanitizeSettings } from "@/shared/pantanal";
 import { createExportCsv, createExportJson } from "@/shared/exports";
-import { mergeSightings, readStorageWithRetry, restoreSettingsWithStatus, restoreSightingsWithStatus, serializeSettings, serializeSightings, withStorageRetry, type RestoreStatus } from "@/shared/persistence";
+import { mergeSightings, readStorageWithRetry, restoreSettingsWithStatus, serializeSettings, withStorageRetry, type RestoreStatus } from "@/shared/persistence";
 import type { Settings } from "@/shared/contracts";
+import { restoreNotebook, serializeNotebook } from "@/shared/notebook";
+import { createSightingCreationLedger, recordSightingCreation, validateSightingOperation, type SightingCreationLedger } from "@/shared/sighting-rules";
+import { isInsidePantanal } from "@/shared/pantanal-boundary";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
+const NOTEBOOK_KEY = "pantanal-dex:notebook-v2";
 type StorageDiagnostics = { sightings: RestoreStatus; settings: RestoreStatus; readError: boolean; writeError: boolean };
-type AppContextValue = { sightings: Sighting[]; settings: Settings; ready: boolean; storage: StorageDiagnostics; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
+type AppContextValue = { sightings: Sighting[]; creationLedger: SightingCreationLedger; canWriteSightings: boolean; settings: Settings; ready: boolean; storage: StorageDiagnostics; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
 const DEFAULT_SETTINGS: Settings = { defaultLanguage: "Português", quickLanguages: ["Português", "English"] };
 
@@ -27,50 +31,85 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
   const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty", readError: false, writeError: false });
   const [ready, setReady] = useState(false);
+  const [creationLedger, setCreationLedger] = useState(createSightingCreationLedger);
+  const [canWriteSightings, setCanWriteSightings] = useState(false);
+  const currentSightings = useRef<Sighting[]>([]);
+  const currentLedger = useRef(createSightingCreationLedger());
+  const writable = useRef(false);
+  const writeQueue = useRef<Promise<unknown>>(Promise.resolve());
 
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const [rawSightings, rawSettings] = await Promise.all([readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
-      const restoredSightings = restoreSightingsWithStatus(rawSightings.value);
+      const [rawNotebook, rawSightings, rawSettings] = await Promise.all([readRaw(NOTEBOOK_KEY), readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
+      const restored = restoreNotebook(rawNotebook.value, rawSightings.value);
       const restoredSettings = restoreSettingsWithStatus(rawSettings.value, DEFAULT_SETTINGS);
-      if (rawSightings.value && restoredSightings.status === "legacy-migrated" && restoredSightings.value.length) {
-        try { await withStorageRetry(() => AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(restoredSightings.value))); } catch { /* preserva o diagnóstico de leitura/gravação */ }
-      }
       if (!mounted) return;
-      setSightings(restoredSightings.value);
+      currentSightings.current = restored.sightings;
+      currentLedger.current = restored.ledger;
+      writable.current = restored.canWrite && !rawNotebook.failed && (rawNotebook.value !== null || !rawSightings.failed);
+      setSightings(restored.sightings);
+      setCreationLedger(restored.ledger);
+      setCanWriteSightings(writable.current);
       setSettingsState(restoredSettings.value);
-      setStorage({ sightings: restoredSightings.status, settings: restoredSettings.status, readError: rawSightings.failed || rawSettings.failed, writeError: false });
+      setStorage({ sightings: restored.status, settings: restoredSettings.status, readError: rawNotebook.failed || rawSightings.failed || rawSettings.failed, writeError: false });
       setReady(true);
     })();
     return () => { mounted = false; };
   }, []);
 
-  const persistSightings = async (next: Sighting[]) => {
+  const persistSightings = async (next: Sighting[], ledger = currentLedger.current) => {
+    if (!writable.current) throw new Error("O caderno ainda está carregando ou precisa de recuperação. Exporte os dados disponíveis antes de continuar.");
     try {
-      await withStorageRetry(() => AsyncStorage.setItem(SIGHTINGS_KEY, serializeSightings(next)));
+      await withStorageRetry(() => AsyncStorage.setItem(NOTEBOOK_KEY, serializeNotebook(next, ledger)));
+      currentSightings.current = next;
+      currentLedger.current = ledger;
       setSightings(next);
-      setStorage((current) => ({ ...current, writeError: false }));
+      setCreationLedger(ledger);
+      setStorage((current) => ({ ...current, sightings: "restored", writeError: false }));
     } catch (error) {
       setStorage((current) => ({ ...current, writeError: true }));
       throw error;
     }
   };
 
+  const enqueue = <T,>(operation: () => Promise<T>): Promise<T> => {
+    const result = writeQueue.current.then(operation);
+    writeQueue.current = result.catch(() => undefined);
+    return result;
+  };
+
+  const assertValid = (sighting: Sighting, operation: "create" | "update", now: Date) => {
+    const result = validateSightingOperation(sighting, { operation, now, ledger: currentLedger.current, isWithinArea: isInsidePantanal });
+    if (!result.valid) throw new Error(result.errors[0].message);
+  };
+
   const value = useMemo<AppContextValue>(() => ({
     sightings,
+    creationLedger,
+    canWriteSightings,
     settings,
     ready,
     storage,
-    addSighting: async (sighting) => persistSightings([sighting, ...sightings.filter((item) => item.id !== sighting.id)]),
-    updateSighting: async (sighting) => persistSightings(sightings.map((item) => item.id === sighting.id ? sighting : item)),
-    deleteSighting: async (id) => persistSightings(sightings.filter((item) => item.id !== id)),
-    clearSightings: async () => persistSightings([]),
-    importSightings: async (incoming) => {
-      const result = mergeSightings(sightings, incoming);
+    addSighting: (sighting) => enqueue(async () => {
+      const now = new Date();
+      if (currentSightings.current.some(item => item.id === sighting.id)) throw new Error("Este registro já existe no caderno.");
+      assertValid(sighting, "create", now);
+      const ledger = recordSightingCreation(currentLedger.current, sighting.id, now);
+      await persistSightings([sighting, ...currentSightings.current], ledger);
+    }),
+    updateSighting: (sighting) => enqueue(async () => {
+      if (!currentSightings.current.some(item => item.id === sighting.id)) throw new Error("O registro não foi encontrado no caderno.");
+      assertValid(sighting, "update", new Date());
+      await persistSightings(currentSightings.current.map(item => item.id === sighting.id ? sighting : item));
+    }),
+    deleteSighting: (id) => enqueue(() => persistSightings(currentSightings.current.filter(item => item.id !== id))),
+    clearSightings: () => enqueue(() => persistSightings([])),
+    importSightings: (incoming) => enqueue(async () => {
+      const result = mergeSightings(currentSightings.current, incoming);
       await persistSightings(result.sightings);
       return { added: result.added, updated: result.updated, skipped: result.skipped };
-    },
+    }),
     setSettings: async (next) => {
       const safe = sanitizeSettings(next);
       try {
@@ -82,7 +121,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         throw error;
       }
     },
-  }), [sightings, settings, ready, storage]);
+  }), [sightings, creationLedger, canWriteSightings, settings, ready, storage]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
