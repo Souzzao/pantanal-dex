@@ -9,6 +9,7 @@ import { createExportCsv, createExportJson, useApp } from "@/contexts/AppContext
 import { parseExportJson } from "@/shared/exports";
 import { createExportGeoJson } from "@/shared/geojson";
 import { OfflineImagesCard } from "@/components/OfflineImagesCard";
+import { AccountCard } from "@/components/AccountCard";
 import { languages, validateSpeciesCatalog } from "@/shared/pantanal";
 import { catalogCoverage, catalogLicenseAudit, catalogReview, filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
@@ -111,7 +112,8 @@ export default function SettingsScreen() {
 
   return <ScreenContainer className="px-5"><ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
     <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>{labels.title}</Text>
-    <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 24 }}>{labels.subtitle}</Text>
+    <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 12 }}>{labels.subtitle}</Text>
+    <View style={{ marginBottom: 12 }}><AccountCard /></View>
     <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 15, marginBottom: 24 }} accessibilityRole="summary">
       <Text style={{ color: colors.foreground, fontWeight: "800" }}>{ready ? labels.ready : labels.restoring}</Text>
       <Text style={{ color: colors.muted, marginTop: 5 }}>{ready ? `${sightings.length} ${labels.loaded}` : labels.wait}</Text>

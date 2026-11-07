@@ -10,7 +10,7 @@
 export type MapMode = "public" | "pick" | "points";
 
 /** Ponto enviado ao mapa. No modo público as coordenadas já vêm generalizadas (célula de 0,1°). */
-export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string };
+export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean };
 
 export type StreetMapState = {
   mode: MapMode;
@@ -73,7 +73,7 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
-    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "" })),
+    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
@@ -185,7 +185,8 @@ const PAGE_SCRIPT = String.raw`
           .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
       }
       var size = Math.min(58, 30 + Math.round(Math.sqrt(items.length) * 6));
-      var html = '<div class="bubble' + (high ? " high" : "") + (isSelected ? " sel" : "") + '" style="width:' + size + "px;height:" + size + "px;line-height:" + size + 'px">' + items.length + "</div>";
+      var allPending = items.every(function (p) { return p.pending; });
+      var html = '<div class="bubble' + (high ? " high" : "") + (allPending ? " pending" : "") + (isSelected ? " sel" : "") + '" style="width:' + size + "px;height:" + size + "px;line-height:" + size + 'px">' + items.length + "</div>";
       L.marker([lat, lon], { icon: L.divIcon({ html: html, className: "", iconSize: [size, size] }), title: title, keyboard: true })
         .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
     });
@@ -245,6 +246,7 @@ const PAGE_CSS = `
 html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
 .bubble{border-radius:50%;background:#195946;color:#fff;font-weight:800;font-size:14px;text-align:center;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
 .bubble.high{background:#C2410C}
+.bubble.pending{border-style:dashed;opacity:.85}
 .bubble.sel{border-color:#FACC15;border-width:4px}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
 #hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(25,89,70,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}

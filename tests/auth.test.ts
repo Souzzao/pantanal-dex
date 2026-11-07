@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { normalizeAuditRow, normalizeLogRow, REJECT_REASONS } from "../shared/audit";
 import { authErrorKey, canAudit, isDev, restoreAccount, validateSignUp, type Account } from "../shared/auth";
 
 const account = (role: Account["role"]): Account => ({ id: "u1", email: "a@b.co", displayName: "Ana", role });
@@ -34,5 +35,24 @@ describe("cadastro", () => {
     expect(authErrorKey("Email not confirmed")).toBe("confirm");
     expect(authErrorKey("Failed to fetch")).toBe("network");
     expect(authErrorKey("algo estranho")).toBe("unknown");
+  });
+});
+
+
+describe("auditoria", () => {
+  it("lê a pilha e descarta linhas sem coordenada", () => {
+    expect(normalizeAuditRow({ id: "x", species_id: "tuiuiu", observed_on: "2026-11-06", observed_time: null, exact_lat: -16.43, exact_lon: -56.87, notes: "perto do rio", photo_path: "u/x.jpg", published_at: "2026-11-07T10:00:00Z", owner_name: "Ana" }))
+      .toMatchObject({ id: "x", exactLat: -16.43, photoPath: "u/x.jpg", ownerName: "Ana" });
+    expect(normalizeAuditRow({ id: "x", species_id: "tuiuiu", observed_on: "2026-11-06", exact_lat: null })).toBeNull();
+  });
+
+  it("lê o histórico só com decisões válidas", () => {
+    expect(normalizeLogRow({ sighting_id: "x", decision: "rejected", note: "foto ruim", created_at: "t", auditor_name: "B" })).toMatchObject({ decision: "rejected", note: "foto ruim" });
+    expect(normalizeLogRow({ sighting_id: "x", decision: "talvez" })).toBeNull();
+  });
+
+  it("tem motivos rápidos nos três idiomas", () => {
+    expect(REJECT_REASONS.pt).toHaveLength(REJECT_REASONS.en.length);
+    expect(REJECT_REASONS.es).toHaveLength(REJECT_REASONS.en.length);
   });
 });

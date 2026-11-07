@@ -78,9 +78,9 @@ const TEXT = {
 } as const;
 
 const EXTRA = {
-  pt: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa offline", noTiles: "Sem internet para o satélite: mostrando o mapa offline.", fitAll: "Ver tudo", close: "Fechar", high: "alta incidência", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público em imagem de satélite. Toque num círculo para ver os registros." },
-  en: { filters: "Filters", hideFilters: "Hide filters", streets: "Satellite", offlineMap: "Offline map", noTiles: "No internet for the satellite map: showing the offline map.", fitAll: "Show all", close: "Close", high: "high incidence", records: (n: number) => `${n} ${n === 1 ? "record" : "records"}`, mapLabel: "Public satellite map. Tap a circle to see its records." },
-  es: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el satélite: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público satelital. Toca un círculo para ver sus registros." },
+  pt: { pending: "aguardando verificação", filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa offline", noTiles: "Sem internet para o satélite: mostrando o mapa offline.", fitAll: "Ver tudo", close: "Fechar", high: "alta incidência", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público em imagem de satélite. Toque num círculo para ver os registros." },
+  en: { pending: "awaiting review", filters: "Filters", hideFilters: "Hide filters", streets: "Satellite", offlineMap: "Offline map", noTiles: "No internet for the satellite map: showing the offline map.", fitAll: "Show all", close: "Close", high: "high incidence", records: (n: number) => `${n} ${n === 1 ? "record" : "records"}`, mapLabel: "Public satellite map. Tap a circle to see its records." },
+  es: { pending: "esperando verificación", filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el satélite: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público satelital. Toca un círculo para ver sus registros." },
 } as const;
 
 export default function PublicMapScreen() {
@@ -123,7 +123,7 @@ export default function PublicMapScreen() {
 
   const mapState = useMemo<StreetMapState>(() => ({
     mode: "public",
-    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude })),
+    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending" })),
     pick: null,
     selectedIds,
     highIncidenceMin: HIGH_INCIDENCE_MIN,
@@ -247,7 +247,7 @@ export default function PublicMapScreen() {
                   <Pressable key={record.id} onPress={() => names.has(record.speciesId) && router.push({ pathname: "/species/[id]", params: { id: record.speciesId } } as any)} accessibilityRole={names.has(record.speciesId) ? "button" : undefined}
                     style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.border }}>
                     <Text style={{ color: colors.foreground, flex: 1 }}>{names.get(record.speciesId) ?? t.unknown}</Text>
-                    <Text style={{ color: colors.muted }}>{record.date}{record.sample ? ` · ${t.sample}` : record.owner === "me" ? ` · ${t.mine}` : ""}</Text>
+                    <Text style={{ color: colors.muted }}>{record.date}{record.sample ? ` · ${t.sample}` : record.owner === "me" ? ` · ${t.mine}` : ""}{record.status === "pending" ? ` · ${x.pending}` : ""}</Text>
                   </Pressable>
                 ))}
               </ScrollView>

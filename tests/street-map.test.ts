@@ -55,7 +55,7 @@ describe("mensagens do mapa", () => {
 
   it("serializa o estado sem pontos inválidos e com os textos prontos", () => {
     const parsed = JSON.parse(serializeState(state));
-    expect(parsed.points).toEqual([{ id: "a", lat: -16.4, lon: -56.9, label: "" }]);
+    expect(parsed.points).toEqual([{ id: "a", lat: -16.4, lon: -56.9, label: "", pending: false }]);
     expect(parsed.labels.one).toBe("1 registro");
     expect(parsed.labels.many).toBe("{n} registros");
     expect(parsed.fitKey).toBe(3);
