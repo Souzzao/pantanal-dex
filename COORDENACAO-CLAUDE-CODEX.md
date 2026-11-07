@@ -64,6 +64,7 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 ## Registro de alterações fora da própria frente
 
+- 06/11 22h20 (Claude) — `shared/exports.ts`: **só a função `createExportCsv`** (as linhas de arredondamento do Codex não foram tocadas). Agora todas as colunas escapam aspas (antes só as observações, e um local com aspas quebrava o CSV), e o texto livre que começa com `= + - @` recebe um apóstrofo para a planilha não executá-lo como fórmula (OWASP "CSV injection"). Números continuam números. Testes em `tests/exports-csv.test.ts`; os testes antigos do CSV continuam passando.
 - 06/11 22h10 (Claude) — `app/(tabs)/settings.tsx`: botão **GeoJSON** ao lado de JSON/CSV e uma linha de ajuda; `exportData` aceita `"geojson"`. Nenhuma outra mudança no arquivo.
 - 06/11 (Claude) — `app/(tabs)/sightings.tsx`: `{speciesFilter && (` → `{!!speciesFilter && (`. Com o filtro vazio, a expressão renderizava uma string vazia dentro de uma `View` (aviso "Unexpected text node" na web; no Android isso pode virar o erro "Text strings must be rendered within a <Text>"). Mudança de uma linha, sem outra alteração no arquivo.
 
