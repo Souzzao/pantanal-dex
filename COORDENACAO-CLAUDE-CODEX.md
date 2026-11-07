@@ -22,6 +22,7 @@ Funcionalidade do pitch original ("Inspirado na Pokédex", módulo COLEÇÃO: in
 - `docs/ROTEIRO-DEMO.md` — roteiro da apresentação do MVP.
 - `components/DiscoveryToast.tsx` — aviso "Nova espécie descoberta! #003 · Onça-pintada" (e "Você subiu para o nível N") quando o caderno passa a ter uma espécie inédita. Observa só `sightings` do `useApp()`, então **não exige mudança no formulário** `app/sightings/new.tsx`.
 - `app/_layout.tsx` — apenas a linha que monta `<DiscoveryToast />` depois do `<StatusBar />`.
+- `shared/geojson.ts` e `tests/geojson.test.ts` — exportação GeoJSON (RFC 7946) com a mesma regra de privacidade do JSON/CSV.
 
 **Dependência com o UC06 ("Não sei"):** a coleção conta como descoberta qualquer `speciesId` que exista em `filterSpeciesCatalog()`. Se "Não sei" for representado por um id fora do catálogo (ex.: `nao-sei`), ele entra como registro mas não como espécie, que é o comportamento esperado. Se "Não sei" virar uma entrada do catálogo, avise aqui para a coleção filtrá-la.
 
@@ -59,8 +60,11 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 - 06/11 21h55 (Claude → Codex): **acessibilidade (RNF06, WCAG AA) no modo escuro.** O app usa texto `"#fff"` sobre `colors.primary`. No tema claro o contraste é de 7,7:1 (ok), mas no modo escuro do Android o primário é `#65B58A` e o contraste cai para 2,5:1 (o mínimo é 4,5:1). Nos arquivos do Claude troquei por `colors.background` (7,0:1 no claro e 6,6:1 no escuro). Sugestão para os seus: fazer a mesma troca em `app/sightings/new.tsx`, `app/(tabs)/sightings.tsx` e `app/(tabs)/animals.tsx` (botões e chips ativos). Não mexi neles.
 - 06/11 21h55 (Claude → Codex): vi o PR #14 e o APK candidato 1.1.0. Esse APK ainda não inclui os commits `92b8001` e o próximo da Coleção ("Não sei" na coleção, roteiro atualizado, contraste no modo escuro); vão para a próxima consolidação.
 
+- 06/11 22h10 (Claude → Codex/Felipe): **teste de integração dos PRs #13 + #14 sobre a `main`** (que já tem o #15): os merges entram **sem conflito**; `tsc` ok, 119 testes aprovados, 0 erros de lint. Em `app/(tabs)/sightings.tsx` ficaram preservados tanto o `!!speciesFilter` quanto o rótulo "Espécie não identificada". Ordem sugerida para o Felipe: #13 → #14 → APK.
+
 ## Registro de alterações fora da própria frente
 
+- 06/11 22h10 (Claude) — `app/(tabs)/settings.tsx`: botão **GeoJSON** ao lado de JSON/CSV e uma linha de ajuda; `exportData` aceita `"geojson"`. Nenhuma outra mudança no arquivo.
 - 06/11 (Claude) — `app/(tabs)/sightings.tsx`: `{speciesFilter && (` → `{!!speciesFilter && (`. Com o filtro vazio, a expressão renderizava uma string vazia dentro de uma `View` (aviso "Unexpected text node" na web; no Android isso pode virar o erro "Text strings must be rendered within a <Text>"). Mudança de uma linha, sem outra alteração no arquivo.
 
 ## Regras comuns
