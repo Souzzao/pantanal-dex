@@ -488,7 +488,7 @@ export default function SightingsScreen() {
               ]}
             >
               <RemoteImage
-                source={{ uri: item.photoUri || animal?.images[0].uri }}
+                source={item.photoUri || animal?.images[0]?.uri ? { uri: item.photoUri || animal?.images[0]?.uri } : undefined}
                 label={animal?.commonName ?? "Animal"}
                 style={{ width: 104, height: 104 }}
               />
