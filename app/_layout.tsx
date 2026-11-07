@@ -10,6 +10,7 @@ import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider } from "@/contexts/AppContext";
 import { DevCollabPanel } from "@/components/DevCollabPanel";
+import { DiscoveryToast } from "@/components/DiscoveryToast";
 import {
   SafeAreaFrameContext,
   SafeAreaInsetsContext,
@@ -98,6 +99,7 @@ export default function RootLayout() {
             <Stack.Screen name="oauth/callback" />
           </Stack>
           <StatusBar style="auto" />
+          <DiscoveryToast />
           {__DEV__ && Platform.OS !== "web" && typeof window !== "undefined" && <DevCollabPanel />}
         </QueryClientProvider>
       </trpc.Provider>

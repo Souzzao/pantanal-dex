@@ -160,6 +160,22 @@ export function computeCollection(catalog: readonly Species[], sightings: readon
   };
 }
 
+/**
+ * Espécies que passaram a constar como descobertas entre dois estados do caderno.
+ * Usado para o aviso "Nova espécie descoberta!" logo após salvar ou importar registros.
+ * Editar um registro já existente para outra espécie também conta como descoberta.
+ */
+export function findNewDiscoveries(
+  catalog: readonly Species[],
+  previous: readonly Sighting[],
+  next: readonly Sighting[],
+): CollectionEntry[] {
+  const before = new Set(previous.map((item) => item.speciesId));
+  const after = new Set(next.map((item) => item.speciesId));
+  if (![...after].some((id) => !before.has(id))) return [];
+  return computeCollection(catalog, next).entries.filter((entry) => entry.discovered && !before.has(entry.species.id));
+}
+
 export function filterCollectionEntries(
   entries: readonly CollectionEntry[],
   options: { filter?: CollectionFilter; group?: SpeciesGroup | "all" } = {},

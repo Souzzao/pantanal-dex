@@ -4,6 +4,7 @@ import { filterSpeciesCatalog } from "../shared/catalog";
 import {
   computeCollection,
   filterCollectionEntries,
+  findNewDiscoveries,
   formatCollectionNumber,
   PANTANAL_ICONS,
   XP_PER_LEVEL,
@@ -113,5 +114,26 @@ describe("Minha Coleção", () => {
     expect(formatCollectionNumber(1)).toBe("#001");
     expect(formatCollectionNumber(42)).toBe("#042");
     expect(formatCollectionNumber(1234)).toBe("#1234");
+  });
+
+  it("detecta apenas espécies inéditas entre dois estados do caderno", () => {
+    const before = [sighting("capivara")];
+    const after = [sighting("onca-pintada"), sighting("capivara"), sighting("capivara"), sighting("nao-sei")];
+    const found = findNewDiscoveries(catalog, before, after);
+    expect(found.map((entry) => entry.species.id)).toEqual(["onca-pintada"]);
+    expect(found[0].number).toBe(computeCollection(catalog, after).entries.find((entry) => entry.species.id === "onca-pintada")?.number);
+  });
+
+  it("não avisa ao repetir espécie, excluir registros ou manter o caderno igual", () => {
+    const base = [sighting("capivara"), sighting("tuiuiu")];
+    expect(findNewDiscoveries(catalog, base, [...base, sighting("capivara")])).toEqual([]);
+    expect(findNewDiscoveries(catalog, base, base.slice(0, 1))).toEqual([]);
+    expect(findNewDiscoveries(catalog, base, base)).toEqual([]);
+  });
+
+  it("lista várias descobertas de uma importação na ordem da coleção", () => {
+    const found = findNewDiscoveries(catalog, [], PANTANAL_ICONS.map((id) => sighting(id)));
+    expect(found).toHaveLength(PANTANAL_ICONS.length);
+    expect(found.map((entry) => entry.number)).toEqual([...found.map((entry) => entry.number)].sort((a, b) => a - b));
   });
 });
