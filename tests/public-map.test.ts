@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import { filterSpeciesCatalog } from "../shared/catalog";
 import type { Sighting } from "../shared/pantanal";
 import {
+  diffPublicNotebook,
+  publicSignature,
   buildSampleRecords,
   clusterCellForSpan,
   clusterRecords,
@@ -191,5 +193,35 @@ describe("registros de exemplo", () => {
     expect(a.every((item) => item.sample === true && item.owner === "others")).toBe(true);
     expect(a.every((item) => toPublicCell(item.latitude) === item.latitude && toPublicCell(item.longitude) === item.longitude)).toBe(true);
     expect(clusterRecords(a, 0.5).some((cluster) => cluster.highIncidence)).toBe(true);
+  });
+});
+
+describe("mudanças no caderno que afetam o mapa público", () => {
+  it("primeira leitura não gera ações", () => {
+    const diff = diffPublicNotebook(null, [sighting()]);
+    expect([diff.fresh, diff.removed, diff.lost, diff.changed]).toEqual([[], [], [], []]);
+    expect(diff.signatures.get("s1")).toBe(publicSignature(sighting()));
+  });
+
+  it("separa novos, apagados, que viraram pessoais e que mudaram", () => {
+    const before = diffPublicNotebook(null, [sighting({ id: "a" }), sighting({ id: "b" }), sighting({ id: "c" }), sighting({ id: "d" })]).signatures;
+    const diff = diffPublicNotebook(before, [
+      sighting({ id: "a" }), // igual
+      sighting({ id: "b", visibility: "private" }), // virou pessoal
+      sighting({ id: "c", speciesId: "capivara" }), // mudou a espécie
+      // "d" apagado
+      sighting({ id: "e" }), // novo compartilhável
+      sighting({ id: "f", visibility: "private" }), // novo pessoal: não publica
+    ]);
+    expect(diff.fresh).toEqual(["e"]);
+    expect(diff.lost).toEqual(["b"]);
+    expect(diff.changed).toEqual(["c"]);
+    expect(diff.removed).toEqual(["d"]);
+  });
+
+  it("mexer na coordenada dentro da mesma célula pública não conta como mudança", () => {
+    const before = diffPublicNotebook(null, [sighting({ id: "a", latitude: -16.41 })]).signatures;
+    expect(diffPublicNotebook(before, [sighting({ id: "a", latitude: -16.42 })]).changed).toEqual([]);
+    expect(diffPublicNotebook(before, [sighting({ id: "a", latitude: -16.52 })]).changed).toEqual(["a"]);
   });
 });

@@ -100,13 +100,17 @@ export function restoreFeedQueue(raw: string | null): FeedQueue {
   }
 }
 
+const PERMANENT_STATUSES = new Set([400, 404, 409, 422]);
+
 async function callRpc(config: FeedConfig, fetchImpl: FetchLike, name: string, body: Record<string, unknown>) {
   const response = await fetchImpl(`${config.url}/rest/v1/rpc/${name}`, { method: "POST", headers: headers(config), body: JSON.stringify(body) });
   if (!response.ok) {
     const detail = await response.text().catch(() => "");
     const error = new Error(`Servidor recusou (${response.status}) ${detail}`.trim()) as Error & { permanent?: boolean };
-    // 4xx = regra do servidor recusou (não adianta reenviar); 5xx/rede = tentar depois.
-    error.permanent = response.status >= 400 && response.status < 500;
+    // 400/404/409/422 = regra do servidor recusou (não adianta reenviar igual).
+    // 401/403 (chave/configuração), 429 (limite de pedidos), 5xx e rede = tentar depois.
+    error.permanent = PERMANENT_STATUSES.has(response.status);
+    (error as Error & { status?: number }).status = response.status;
     throw error;
   }
 }
@@ -132,8 +136,9 @@ export function operationRequest(operation: FeedOperation, secret: string): { na
 export type FlushResult = { queue: FeedQueue; sent: number; rejected: { operation: FeedOperation; message: string }[]; stoppedByNetwork: boolean };
 
 /**
- * Envia a fila em ordem. Para no primeiro erro de rede/servidor (5xx) e mantém o restante;
- * operações recusadas pelas regras do servidor (4xx) saem da fila e são informadas.
+ * Envia a fila em ordem. Para no primeiro erro temporário (rede, 5xx, 401/403, 429) e mantém o
+ * restante; operações recusadas pelas regras do servidor (400/404/409/422) saem da fila e são
+ * informadas em `rejected`.
  */
 export async function flushQueue(queue: FeedQueue, config: FeedConfig, fetchImpl: FetchLike, secret: string): Promise<FlushResult> {
   const remaining = [...queue.operations];
@@ -182,4 +187,32 @@ function defaultRandom(bytes: Uint8Array) {
   // Alternativa sem API de criptografia (aparelhos antigos): menos forte, mas o segredo só protege
   // o direito de encerrar/renovar as próprias publicações.
   for (let index = 0; index < bytes.length; index += 1) bytes[index] = Math.floor(Math.random() * 256);
+}
+
+/**
+ * Aplica o resultado de um envio à fila ATUAL, que pode ter mudado durante o envio.
+ * Tira só as operações do lote enviado que foram confirmadas ou recusadas; operações novas
+ * (ou que substituíram uma do lote) continuam na fila.
+ */
+export function applyFlushResult(current: FeedQueue, sentBatch: readonly FeedOperation[], remainingOfBatch: readonly FeedOperation[]): FeedQueue {
+  const processed = new Set(sentBatch.filter((operation) => !remainingOfBatch.includes(operation)));
+  return { ...current, operations: current.operations.filter((operation) => !processed.has(operation)) };
+}
+
+/** Id do avistamento a partir do id público (`<id>@<8 letras do aparelho>`). */
+export function sightingIdFromPublicId(publicId: string): string {
+  const at = publicId.lastIndexOf("@");
+  return at > 0 ? publicId.slice(0, at) : publicId;
+}
+
+export const FEED_REJECTIONS_KEY = "pantanal-dex:public-feed-rejections-v1";
+
+/** Mensagem curta para a pessoa a partir do erro do servidor. */
+export function friendlyRejection(message: string): string {
+  if (/limite de 30/i.test(message)) return "limite de 30 publicações por dia";
+  if (/futuro/i.test(message)) return "data no futuro";
+  if (/outro aparelho/i.test(message)) return "registro pertence a outro aparelho";
+  if (/grade/i.test(message)) return "localização fora da grade pública";
+  if (/vencido/i.test(message)) return "prazo já vencido";
+  return "recusado pelo servidor";
 }

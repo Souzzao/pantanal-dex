@@ -1,7 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
 import {
+  applyFlushResult,
   createFeedQueue,
+  friendlyRejection,
+  sightingIdFromPublicId,
   enqueue,
   fetchPublicFeed,
   flushQueue,
@@ -132,3 +135,44 @@ describe("id público", () => {
   });
 });
 
+
+describe("envio sem perder ações feitas durante o envio", () => {
+  it("encerrar durante uma resposta lenta continua na fila", async () => {
+    let queue = enqueue(createFeedQueue(), publish("a"));
+    let release: () => void = () => undefined;
+    const slow: FetchLike = () => new Promise((resolve) => { release = () => resolve(response(204)); });
+    const batch = queue.operations;
+    const pending = flushQueue(queue, config, slow, secret);
+    // Enquanto o "publicar" está no ar, a pessoa encerra.
+    queue = enqueue(queue, { type: "end", id: "a", queuedAt: "2026-11-07T12:00:00.000Z" });
+    release();
+    const result = await pending;
+    const after = applyFlushResult(queue, batch, result.queue.operations);
+    expect(after.operations).toEqual([{ type: "end", id: "a", queuedAt: "2026-11-07T12:00:00.000Z" }]);
+  });
+
+  it("operação nova de outro registro também fica", () => {
+    const first = enqueue(createFeedQueue(), publish("a"));
+    const batch = first.operations;
+    const current = enqueue(first, publish("b"));
+    expect(applyFlushResult(current, batch, []).operations.map((item) => (item.type === "publish" ? item.record.id : item.id))).toEqual(["b"]);
+  });
+
+  it("401, 403 e 429 não descartam a operação (configuração ou limite de pedidos)", async () => {
+    for (const status of [401, 403, 429]) {
+      const result = await flushQueue(enqueue(createFeedQueue(), publish("a")), config, async () => response(status), secret);
+      expect(result.stoppedByNetwork).toBe(true);
+      expect(result.rejected).toEqual([]);
+      expect(result.queue.operations).toHaveLength(1);
+    }
+  });
+});
+
+describe("recusas", () => {
+  it("acha o avistamento pelo id público e traduz o motivo", () => {
+    expect(sightingIdFromPublicId("sighting-1@aaaaaaaa")).toBe("sighting-1");
+    expect(sightingIdFromPublicId("sem-arroba")).toBe("sem-arroba");
+    expect(friendlyRejection('Servidor recusou (400) {"message":"limite de 30 publicações por dia"}')).toBe("limite de 30 publicações por dia");
+    expect(friendlyRejection("qualquer coisa")).toBe("recusado pelo servidor");
+  });
+});

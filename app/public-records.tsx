@@ -8,6 +8,7 @@ import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { Sighting } from "@/shared/pantanal";
+import { friendlyRejection } from "@/shared/public-feed";
 import { PUBLIC_DURATIONS, publicationStatus, type PublicationStatus, type PublicDurationId } from "@/shared/public-map";
 
 type Lang = "pt" | "en" | "es";
@@ -62,12 +63,19 @@ const formatDate = (iso: string) => {
   return `${String(date.getDate()).padStart(2, "0")}/${String(date.getMonth() + 1).padStart(2, "0")}/${date.getFullYear()}`;
 };
 
+const REMOTE = {
+  pt: { pending: "Enviando ao mapa de todos… (vai quando houver internet)", synced: "No mapa de todos", rejected: (why: string) => `Não entrou no mapa de todos: ${why}. Escolha um prazo para tentar de novo.` },
+  en: { pending: "Sending to everyone's map… (sent when online)", synced: "On everyone's map", rejected: (why: string) => `Not on everyone's map: ${why}. Choose a duration to try again.` },
+  es: { pending: "Enviando al mapa de todos… (se envía con internet)", synced: "En el mapa de todos", rejected: (why: string) => `No entró en el mapa de todos: ${why}. Elige un plazo para intentarlo de nuevo.` },
+} as const;
+
 export default function PublicRecordsScreen() {
   const colors = useColors();
   const { sightings, settings } = useApp();
-  const { store, publish, end } = usePublications();
+  const { store, publish, end, remoteStatus, rejectionFor } = usePublications();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
+  const r = REMOTE[lang];
   const names = useMemo(() => new Map(filterSpeciesCatalog().map((item) => [item.id, item.commonName])), []);
   const [busy, setBusy] = useState<string | null>(null);
   const now = new Date();
@@ -111,6 +119,14 @@ export default function PublicRecordsScreen() {
             {t.status[status]}{detail ? `\n${detail}` : ""}
           </Text>
         </View>
+
+        {status === "active" && (() => {
+          const remote = remoteStatus(item.id);
+          if (remote === "local") return null;
+          const why = rejectionFor(item.id);
+          const text = remote === "pending" ? r.pending : remote === "rejected" ? r.rejected(friendlyRejection(why ?? "")) : r.synced;
+          return <Text accessibilityLiveRegion="polite" style={{ color: remote === "rejected" ? colors.error : remote === "pending" ? colors.warning : colors.success, fontSize: 12, fontWeight: "700", marginTop: 8 }}>{text}</Text>;
+        })()}
 
         {status === "no-location" ? (
           <Text style={{ color: colors.muted, fontSize: 12, marginTop: 8 }}>{t.noLocationHint}</Text>

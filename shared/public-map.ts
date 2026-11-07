@@ -323,3 +323,44 @@ export function buildSampleRecords(catalog: readonly Pick<Species, "id">[], now:
   }
   return records;
 }
+
+// ───────────── Mudanças no caderno que afetam o mapa público ─────────────
+
+/**
+ * "Assinatura" pública de um avistamento: o que os outros veem (espécie, data, hora, célula).
+ * `null` quando o avistamento não pode estar no mapa público (pessoal ou sem localização).
+ */
+export function publicSignature(sighting: Sighting): string | null {
+  if (sighting.visibility !== "shareable" || !hasValidCoordinates(sighting)) return null;
+  return [sighting.speciesId, sighting.date, sighting.time ?? "", toPublicCell(sighting.latitude), toPublicCell(sighting.longitude)].join("|");
+}
+
+export type NotebookDiff = {
+  signatures: Map<string, string | null>;
+  /** Novos e compartilháveis (publicar com o prazo padrão). */
+  fresh: string[];
+  /** Apagados do caderno (encerrar no servidor). */
+  removed: string[];
+  /** Deixaram de poder ser públicos, ex.: viraram "Pessoal" (encerrar). */
+  lost: string[];
+  /** Continuam públicos, mas espécie/data/hora/local mudou (atualizar no servidor). */
+  changed: string[];
+};
+
+/** Compara o caderno com a leitura anterior. Na primeira leitura (`previous` nulo) não gera ações. */
+export function diffPublicNotebook(previous: ReadonlyMap<string, string | null> | null, sightings: readonly Sighting[]): NotebookDiff {
+  const signatures = new Map(sightings.map((item) => [item.id, publicSignature(item)] as const));
+  const diff: NotebookDiff = { signatures, fresh: [], removed: [], lost: [], changed: [] };
+  if (!previous) return diff;
+  for (const [id, signature] of signatures) {
+    if (!previous.has(id)) {
+      if (signature) diff.fresh.push(id);
+      continue;
+    }
+    const before = previous.get(id) ?? null;
+    if (before && !signature) diff.lost.push(id);
+    else if (before && signature && before !== signature) diff.changed.push(id);
+  }
+  for (const id of previous.keys()) if (!signatures.has(id)) diff.removed.push(id);
+  return diff;
+}
