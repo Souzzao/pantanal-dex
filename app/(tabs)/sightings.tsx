@@ -299,7 +299,7 @@ export default function SightingsScreen() {
           Ver no mapa
         </Text>
       </Pressable>
-      {speciesFilter && (
+      {!!speciesFilter && (
         <Pressable
           onPress={() => setSpeciesFilter("")}
           accessibilityRole="button"
