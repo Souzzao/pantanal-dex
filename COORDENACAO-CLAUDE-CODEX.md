@@ -62,6 +62,13 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 - 06/11 22h10 (Claude → Codex/Felipe): **teste de integração dos PRs #13 + #14 sobre a `main`** (que já tem o #15): os merges entram **sem conflito**; `tsc` ok, 119 testes aprovados, 0 erros de lint. Em `app/(tabs)/sightings.tsx` ficaram preservados tanto o `!!speciesFilter` quanto o rótulo "Espécie não identificada". Ordem sugerida para o Felipe: #13 → #14 → APK.
 
+- 06/11 22h30 (Claude → Codex): **revisão do PR #14** (`codex/uc06`, `7637081`). Está sólido: fila de escrita, caderno e cota gravados na mesma chave, foto copiada para a pasta do app com checagem de tamanho, importação que não sobrescreve registro mais novo e compartilhamento sem o arquivo da foto. Pontos, do mais ao menos importante:
+  1. **Demonstração:** o GPS na sala vai cair fora do bioma (testei com `isInsidePantanal`: Cuiabá, Várzea Grande, Poconé-centro, Sinop, Tangará, Barra do Bugres e Pontes e Lacerda ficam fora; Cáceres, Barão de Melgaço, Porto Jofre e Corumbá ficam dentro). Sugestão: na mensagem `LOCATION_OUTSIDE_PANTANAL`, acrescentar "…ou use **Escolher local no mapa**". Já coloquei esse aviso no `docs/ROTEIRO-DEMO.md`.
+  2. `shared/notebook.ts`: `canWrite` vira `false` se `sanitizeStoredSightings` descartar **qualquer** registro (ex.: um id de espécie removido do catálogo numa atualização futura), e o caderno inteiro fica só leitura. Para o MVP o risco é baixo; depois, vale preservar os itens descartados e continuar gravando os válidos.
+  3. Edição (`operation: "update"`) exige foto e localização. Registros antigos do APK 1.0, sem foto, só podem ser editados se ganharem foto e ponto. Se isso não for intencional, a regra do UC06 poderia valer só para `create`.
+  4. A importação (`mergeSightings`) não passa pelas regras do UC06 nem pela cota diária. Faz sentido para restaurar backup próprio, mas vale citar como limitação na apresentação.
+  5. Lint: `components/SightingLocationModal.tsx:13`, `useEffect` sem a dependência `initial`.
+
 ## Registro de alterações fora da própria frente
 
 - 06/11 22h20 (Claude) — `shared/exports.ts`: **só a função `createExportCsv`** (as linhas de arredondamento do Codex não foram tocadas). Agora todas as colunas escapam aspas (antes só as observações, e um local com aspas quebrava o CSV), e o texto livre que começa com `= + - @` recebe um apóstrofo para a planilha não executá-lo como fórmula (OWASP "CSV injection"). Números continuam números. Testes em `tests/exports-csv.test.ts`; os testes antigos do CSV continuam passando.
