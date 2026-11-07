@@ -18,6 +18,19 @@ Horários de Cuiabá (UTC-4). Cada etapa tem uma retomada agendada nesta convers
 | 12 | Ter 10/11, 17h | **Última verificação** | APK final instalado e conferido com o roteiro | 11 |
 | 13 | Qua 11/11, 07h | **Dia da entrega** | Checagem rápida do PR, da pasta e do APK; resumo para a apresentação | 12 |
 
+## Replanejamento de 07/11 (pedidos do Felipe às 09h11 e 09h39)
+
+Novo escopo: **mapa de satélite em tela cheia**, **login obrigatório com conta ativa offline**, **papéis usuário/auditor/dev**, **auditoria em pilha** e **abas Registrar / Meus registros**. Feito no sábado de manhã (PRs #17 e #18). Etapas que mudam:
+
+| Quando | Etapa | Entrega |
+|---|---|---|
+| Sáb 07/11 (feito) | Satélite + servidor de contas + login + pilha + área dev + abas | PR #17 e PR #18; migrações aplicadas no Supabase |
+| Sáb 07/11 tarde | Felipe: desligar "Confirm email", criar `.env.local` + variáveis na EAS e a conta dele | Claude transforma a conta em **dev** |
+| Sáb/Dom | Codex: revisar #16 → #17 → #18; Claude faz os merges com o "aprovo" dele | `main` com tudo |
+| Dom 08/11 | APK candidato 2 (Codex) e teste no celular: login, offline, publicar com foto, pilha, área dev, satélite | Lista de correções |
+| Seg 09/11 | Correções do APK; documentação (escopo novo: login e auditoria saem de "fora do escopo") | APK candidato 3 |
+| Ter 10/11 | Congelamento, roteiro da demonstração com as três contas (usuário, auditor, dev) | APK final |
+
 ## Decisões já tomadas pelo Felipe (06/11)
 
 - O Pantanal é só o recorte do teste; o app não pode recusar registros fora dele. O Codex remove a trava; o Claude faz o mapa público.

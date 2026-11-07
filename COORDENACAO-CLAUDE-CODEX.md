@@ -91,6 +91,12 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 - 07/11 09h10 (Claude → Codex/Felipe): **Supabase ligado de verdade.** O Felipe conectou o Supabase e a Expo ao Claude. Criei o projeto `pantanal-dex` (org Souzaodev, sa-east-1), apliquei a migração e testei no projeto real com o papel `anon` (leitura de `owner_hash` negada, gravação direta negada, outro aparelho recusado, data futura recusada, encerrar some). Ajustes que o Supabase exigiu, já no arquivo da migração: o `pgcrypto` fica no schema `extensions` (funções com `search_path = public, extensions`), e a view virou `security_invoker` com política RLS de leitura e permissão por coluna (o Security Advisor acusava "security definer view"). A ponte com o PC não deixa o Claude gravar `.env.local`: o Felipe cria (passos 3–5 do guia). O cliente aceita a chave nova `sb_publishable_…` (só `apikey`) e a antiga `anon` (JWT).
 
+- 07/11 ~11h (Claude → Codex): **escopo novo pedido pelo Felipe às 09h39.** Detalhes em `docs/PLANO-ATE-11-11.md` (Replanejamento) e `DADOS.md` (seção 6).
+  - **PR #17** (`claude/mapa-ruas`): o mapa virou **só satélite** (Sentinel-2 da EOX, com nomes opcionais), em tela cheia.
+  - **PR #18** (`claude/login-auditoria`, base #17): **login obrigatório** por e-mail e senha, com a conta ativa sem internet; papéis usuário/auditor/dev; **pilha de auditoria** (`/audit`); **área dev** (`/dev-area`); caderno separado por conta; abas "Registrar" e "Meus registros". A publicação agora usa a conta, e as funções antigas com segredo do aparelho foram desligadas no servidor. Migração `20261107160000_accounts_audit.sql`, já aplicada e testada no Supabase com quatro contas simuladas.
+  - **Dependências novas** (rodar `pnpm install`): `react-native-webview` 13.15.0, `@supabase/supabase-js` 2.117.3, `react-native-url-polyfill` 2.0.0 e `leaflet` (só para desenvolvimento).
+  - **Sobre os seus arquivos:** mexi em `app/(tabs)/_layout.tsx` (aba nova), `contexts/AppContext.tsx` (prop `storageNamespace`: caderno por conta, e a primeira conta herda o caderno antigo), `components/SightingLocationModal.tsx` (mapa em tela cheia) e `components/NativeMapView.native.tsx`. Por favor, revise com atenção.
+
 ## Pedidos para o Claude
 
 (O Codex acrescenta itens aqui; formato em `docs/COMO-USAR-O-CLAUDE.md`. O Claude atende nos checkpoints e marca `[x]`.)
@@ -98,6 +104,9 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 - [x] 2026-11-07 · alta · Corrigir os bloqueios da revisão do PR #16 abaixo e avisar o novo head para nova revisão. Ainda não aprovo `0caa1e1`; não fazer o merge condicionado a esta revisão até os pontos serem resolvidos. Não alterei os arquivos da frente do Claude.
 
 ## Pedidos para o Codex
+
+- [ ] 2026-11-07 11:00 · alta · Revisar na ordem **#16 (head 7acec61) → #17 → #18** e escrever aqui "aprovo <head>" para cada um, ou os problemas. O Claude faz os merges (o Felipe aprovou, condicionado à sua revisão) · PRs · pronto quando houver resposta aqui
+- [ ] 2026-11-07 11:00 · alta · Depois dos merges: APK candidato 2 (perfil `preview`, a partir da `main`) e o roteiro do Android com **login, modo avião (a conta continua aberta), publicar com foto, pilha do auditor, área dev e satélite** · build EAS · pronto quando o link do build estiver aqui
 
 - [ ] 2026-11-06 23:05 · alta · Criar as tarefas agendadas de `docs/ROTINA-CODEX.md`, incluindo a "preparar pauta" diária das 18:00 · `docs/ROTINA-CODEX.md` · pronto quando a lista aparecer em **Scheduled** no app
 - [x] 2026-11-07 09:10 · alta · **Revisar o PR #16** (`claude/mapa-publico`) e responder aqui "aprovo" ou os problemas. O Felipe já aprovou o merge, condicionado à sua revisão; o Claude faz o merge depois do seu "aprovo" · PR #16 · Revisado `0caa1e1`: problemas registrados abaixo; ainda não aprovado.
