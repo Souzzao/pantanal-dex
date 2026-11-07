@@ -13,6 +13,9 @@ import {
 } from "../shared/collection";
 import type { Sighting } from "../shared/pantanal";
 
+/** Mesmo valor de `UNKNOWN_SPECIES_ID` ("Não sei"), da frente UC06 do Codex. Local para o teste não depender da ordem de merge. */
+const UNKNOWN_SPECIES_ID = "unknown";
+
 const catalog = filterSpeciesCatalog();
 
 let counter = 0;
@@ -135,5 +138,20 @@ describe("Minha Coleção", () => {
     const found = findNewDiscoveries(catalog, [], PANTANAL_ICONS.map((id) => sighting(id)));
     expect(found).toHaveLength(PANTANAL_ICONS.length);
     expect(found.map((entry) => entry.number)).toEqual([...found.map((entry) => entry.number)].sort((a, b) => a - b));
+  });
+
+  it("trata a opção \"Não sei\" do UC06 como registro, sem descobrir espécie", () => {
+    const summary = computeCollection(catalog, [sighting(UNKNOWN_SPECIES_ID), sighting(UNKNOWN_SPECIES_ID, "2026-11-02")]);
+    expect(catalog.some((item) => item.id === UNKNOWN_SPECIES_ID)).toBe(false);
+    expect(summary.discoveredSpecies).toBe(0);
+    expect(summary.unmatchedSightings).toBe(2);
+    expect(summary.fieldDays).toBe(2);
+    expect(findNewDiscoveries(catalog, [], [sighting(UNKNOWN_SPECIES_ID)])).toEqual([]);
+  });
+
+  it("descobre a espécie quando um registro \"Não sei\" é editado e identificado", () => {
+    const pending = sighting(UNKNOWN_SPECIES_ID);
+    const identified = { ...pending, speciesId: "capivara" };
+    expect(findNewDiscoveries(catalog, [pending], [identified]).map((entry) => entry.species.id)).toEqual(["capivara"]);
   });
 });

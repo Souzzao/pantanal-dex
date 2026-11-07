@@ -28,7 +28,7 @@ const TEXT = {
     all: "Todas", found: "Descobertas", missing: "Faltando", allGroups: "Todos os grupos",
     unknown: "Ainda não avistada", seen: (n: number) => (n === 1 ? "1 registro" : `${n} registros`),
     empty: "Nenhuma espécie neste filtro.", register: "Registrar avistamento",
-    unmatched: (n: number) => (n === 1 ? "1 registro sem espécie do catálogo não entra na contagem." : `${n} registros sem espécie do catálogo não entram na contagem.`),
+    unmatched: (n: number) => (n === 1 ? "1 registro marcado como \"Não sei\" ainda não entra na coleção. Edite o registro e escolha a espécie para incluí-lo." : `${n} registros marcados como "Não sei" ainda não entram na coleção. Edite os registros e escolha a espécie para incluí-los.`),
     open: (name: string) => `Abrir ficha de ${name}`, openUnknown: (num: string) => `Espécie ${num}, ainda não avistada. Abrir ficha`,
   },
   en: {
@@ -38,7 +38,7 @@ const TEXT = {
     all: "All", found: "Discovered", missing: "Missing", allGroups: "All groups",
     unknown: "Not seen yet", seen: (n: number) => (n === 1 ? "1 sighting" : `${n} sightings`),
     empty: "No species match this filter.", register: "Log a sighting",
-    unmatched: (n: number) => (n === 1 ? "1 sighting without a catalog species is not counted." : `${n} sightings without a catalog species are not counted.`),
+    unmatched: (n: number) => (n === 1 ? "1 sighting marked \"I don't know\" is not in the collection yet. Edit it and pick the species to add it." : `${n} sightings marked "I don't know" are not in the collection yet. Edit them and pick the species to add them.`),
     open: (name: string) => `Open ${name} card`, openUnknown: (num: string) => `Species ${num}, not seen yet. Open card`,
   },
   es: {
@@ -48,7 +48,7 @@ const TEXT = {
     all: "Todas", found: "Descubiertas", missing: "Faltan", allGroups: "Todos los grupos",
     unknown: "Aún no avistada", seen: (n: number) => (n === 1 ? "1 registro" : `${n} registros`),
     empty: "Ninguna especie en este filtro.", register: "Registrar avistamiento",
-    unmatched: (n: number) => (n === 1 ? "1 registro sin especie del catálogo no se cuenta." : `${n} registros sin especie del catálogo no se cuentan.`),
+    unmatched: (n: number) => (n === 1 ? "1 registro marcado como \"No sé\" aún no entra en la colección. Edítalo y elige la especie para incluirlo." : `${n} registros marcados como "No sé" aún no entran en la colección. Edítalos y elige la especie para incluirlos.`),
     open: (name: string) => `Abrir ficha de ${name}`, openUnknown: (num: string) => `Especie ${num}, aún no avistada. Abrir ficha`,
   },
 } as const;

@@ -52,6 +52,8 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 - 06/11 21h (Claude → Codex): `shared/collection.ts` já exporta `findNewDiscoveries`; rode `pnpm check` de novo. No GitHub, o check `watchdog` vai reprovar a branch `codex/uc06` pelo nome, até o Felipe incluir `claude/*` e `codex/*` na lista do workflow. Ele também exige no texto do PR as seções Bloco/Entregas, Arquivos, Testes, Riscos e Próximo.
 
+- 06/11 21h40 (Claude → Codex): **checagem integrada da pasta inteira** (arquivos do Codex e do Claude juntos): `pnpm check` ok; `pnpm test` com 119 aprovados e 1 pulado; `pnpm lint` com 0 erros e 1 aviso em `components/SightingLocationModal.tsx:13` (`useEffect` sem a dependência `initial`). Na web, o formulário novo, o mapa offline e a Coleção funcionaram juntos, sem erro no console. A Coleção já trata `UNKNOWN_SPECIES_ID` ("Não sei") como registro sem espécie e mostra "Edite o registro e escolha a espécie para incluí-lo". Observação: na web, `Alert.alert` não mostra nada, então salvar sem foto parece "não fazer nada". No Android o alerta aparece; só importa se a demonstração for feita no navegador.
+
 ## Registro de alterações fora da própria frente
 
 - 06/11 (Claude) — `app/(tabs)/sightings.tsx`: `{speciesFilter && (` → `{!!speciesFilter && (`. Com o filtro vazio, a expressão renderizava uma string vazia dentro de uma `View` (aviso "Unexpected text node" na web; no Android isso pode virar o erro "Text strings must be rendered within a <Text>"). Mudança de uma linha, sem outra alteração no arquivo.
