@@ -98,7 +98,7 @@ export default function CollectionScreen() {
   const chip = (label: string, active: boolean, onPress: () => void, key: string) => (
     <Pressable key={key} onPress={onPress} accessibilityRole="button" accessibilityState={{ selected: active }} accessibilityLabel={label}
       style={({ pressed }) => [{ paddingHorizontal: 14, paddingVertical: 9, borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface, minHeight: 40, justifyContent: "center" }, pressed && { opacity: 0.8 }]}>
-      <Text style={{ color: active ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text>
+      <Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text>
     </Pressable>
   );
 
@@ -217,7 +217,7 @@ export default function CollectionScreen() {
         ListEmptyComponent={<View style={{ alignItems: "center", paddingVertical: 30 }}>
           <Text style={{ color: colors.muted, marginBottom: 12 }}>{t.empty}</Text>
           <Pressable onPress={() => router.push("/sightings/new" as any)} accessibilityRole="button" style={({ pressed }) => [{ backgroundColor: colors.primary, paddingHorizontal: 18, paddingVertical: 12, borderRadius: 14 }, pressed && { opacity: 0.8 }]}>
-            <Text style={{ color: "#fff", fontWeight: "700" }}>{t.register}</Text>
+            <Text style={{ color: colors.background, fontWeight: "700" }}>{t.register}</Text>
           </Pressable>
         </View>}
       />

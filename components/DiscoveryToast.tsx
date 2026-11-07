@@ -122,10 +122,10 @@ export function DiscoveryToast() {
         >
           <Text style={{ fontSize: 30 }}>✨</Text>
           <View style={{ flex: 1 }}>
-            <Text style={{ color: "#fff", fontWeight: "900", fontSize: 16 }}>{notice.title}</Text>
-            <Text style={{ color: "#fff", fontWeight: "700", marginTop: 3 }}>{notice.detail}</Text>
-            {notice.levelUp ? <Text style={{ color: "#FFE7A3", fontWeight: "800", marginTop: 4 }}>⬆ {notice.levelUp}</Text> : null}
-            <Text style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, marginTop: 4 }}>{t.hint}</Text>
+            <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>{notice.title}</Text>
+            <Text style={{ color: colors.background, fontWeight: "700", marginTop: 3 }}>{notice.detail}</Text>
+            {notice.levelUp ? <Text style={{ color: colors.background, fontWeight: "900", marginTop: 4 }}>⬆ {notice.levelUp}</Text> : null}
+            <Text style={{ color: colors.background, fontSize: 12, marginTop: 4 }}>{t.hint}</Text>
           </View>
         </Pressable>
       </Animated.View>
