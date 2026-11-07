@@ -8,37 +8,37 @@ const copy: Record<NativeLanguage, Record<NativeFeature, Record<PermissionState,
   Português: {
     camera: {
       denied: { title: "Câmera não autorizada", detail: "Autorize o acesso à câmera para registrar uma fotografia." },
-      "services-disabled": { title: "Câmera indisponível", detail: "A câmera não está disponível neste aparelho. Você ainda pode salvar sem fotografia." },
-      error: { title: "Não foi possível abrir a câmera", detail: "Você ainda pode salvar o avistamento sem fotografia." },
+      "services-disabled": { title: "Câmera indisponível", detail: "A câmera não está disponível neste aparelho. Escolha uma fotografia pela galeria." },
+      error: { title: "Não foi possível abrir a câmera", detail: "Escolha uma fotografia pela galeria para completar o registro." },
     },
     location: {
-      denied: { title: "Localização não autorizada", detail: "Você pode salvar o registro sem coordenadas." },
+      denied: { title: "Localização não autorizada", detail: "Escolha o local do avistamento manualmente no mapa." },
       "services-disabled": { title: "Localização desativada", detail: "Ative o serviço de localização para registrar coordenadas." },
-      error: { title: "Não foi possível obter a localização", detail: "Verifique o sinal do aparelho ou salve sem coordenadas." },
+      error: { title: "Não foi possível obter a localização", detail: "Verifique o sinal do aparelho ou escolha o ponto manualmente no mapa." },
     },
   },
   English: {
     camera: {
       denied: { title: "Camera not authorized", detail: "Allow camera access to record a photograph." },
-      "services-disabled": { title: "Camera unavailable", detail: "The camera is unavailable on this device. You can save without a photograph." },
-      error: { title: "Could not open camera", detail: "You can still save the sighting without a photograph." },
+      "services-disabled": { title: "Camera unavailable", detail: "The camera is unavailable. Choose a photograph from the gallery." },
+      error: { title: "Could not open camera", detail: "Choose a photograph from the gallery to complete the record." },
     },
     location: {
-      denied: { title: "Location not authorized", detail: "You can save the record without coordinates." },
+      denied: { title: "Location not authorized", detail: "Choose the sighting location manually on the map." },
       "services-disabled": { title: "Location services disabled", detail: "Enable location services to record coordinates." },
-      error: { title: "Could not get location", detail: "Check the device signal or save without coordinates." },
+      error: { title: "Could not get location", detail: "Check the device signal or choose the point manually on the map." },
     },
   },
   Español: {
     camera: {
       denied: { title: "Cámara no autorizada", detail: "Autoriza el acceso a la cámara para registrar una fotografía." },
-      "services-disabled": { title: "Cámara no disponible", detail: "La cámara no está disponible. Puedes guardar sin fotografía." },
-      error: { title: "No se pudo abrir la cámara", detail: "Aún puedes guardar el avistamiento sin fotografía." },
+      "services-disabled": { title: "Cámara no disponible", detail: "La cámara no está disponible. Elige una fotografía de la galería." },
+      error: { title: "No se pudo abrir la cámara", detail: "Elige una fotografía de la galería para completar el registro." },
     },
     location: {
-      denied: { title: "Ubicación no autorizada", detail: "Puedes guardar el registro sin coordenadas." },
+      denied: { title: "Ubicación no autorizada", detail: "Elige el lugar del avistamiento manualmente en el mapa." },
       "services-disabled": { title: "Ubicación desactivada", detail: "Activa el servicio de ubicación para registrar coordenadas." },
-      error: { title: "No se pudo obtener la ubicación", detail: "Comprueba la señal o guarda sin coordenadas." },
+      error: { title: "No se pudo obtener la ubicación", detail: "Comprueba la señal o elige el punto manualmente en el mapa." },
     },
   },
 };
