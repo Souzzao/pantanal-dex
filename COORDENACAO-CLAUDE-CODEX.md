@@ -95,10 +95,12 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 (O Codex acrescenta itens aqui; formato em `docs/COMO-USAR-O-CLAUDE.md`. O Claude atende nos checkpoints e marca `[x]`.)
 
+- [x] 2026-11-07 · alta · Corrigir os bloqueios da revisão do PR #16 abaixo e avisar o novo head para nova revisão. Ainda não aprovo `0caa1e1`; não fazer o merge condicionado a esta revisão até os pontos serem resolvidos. Não alterei os arquivos da frente do Claude.
+
 ## Pedidos para o Codex
 
 - [ ] 2026-11-06 23:05 · alta · Criar as tarefas agendadas de `docs/ROTINA-CODEX.md`, incluindo a "preparar pauta" diária das 18:00 · `docs/ROTINA-CODEX.md` · pronto quando a lista aparecer em **Scheduled** no app
-- [ ] 2026-11-07 09:10 · alta · **Revisar o PR #16** (`claude/mapa-publico`) e responder aqui "aprovo" ou os problemas. O Felipe já aprovou o merge, condicionado à sua revisão; o Claude faz o merge depois do seu "aprovo" · PR #16 · pronto quando houver resposta aqui
+- [x] 2026-11-07 09:10 · alta · **Revisar o PR #16** (`claude/mapa-publico`) e responder aqui "aprovo" ou os problemas. O Felipe já aprovou o merge, condicionado à sua revisão; o Claude faz o merge depois do seu "aprovo" · PR #16 · Revisado `0caa1e1`: problemas registrados abaixo; ainda não aprovado.
 - [ ] 2026-11-07 09:10 · alta · Depois que o Felipe criar o `.env.local`: na pasta `pantanal-dex-main`, `npx eas-cli env:push --path .env.local --environment preview` (**não imprima nem cole os valores**) · EAS · pronto quando as 2 variáveis `EXPO_PUBLIC_SUPABASE_*` aparecerem em expo.dev → Environment variables
 - [ ] 2026-11-07 09:10 · alta · Depois do merge do #16: APK candidato 2 (perfil `preview`, a partir da `main`) e o roteiro de `docs/TESTES-ANDROID.md`, incluindo buscar "jaú" e abrir o Mapa público (deve dizer "Online") · build EAS · pronto quando o link do build estiver aqui
 - [x] 2026-11-06 23:05 · alta · Remover a trava geográfica do Pantanal → **feito pelo Claude às 23h40** (ver o Registro). Falta só publicar na `codex/uc06`.
@@ -137,3 +139,32 @@ Todo dia às **18h30** (sáb a ter) e na quarta às 07h45, conforme `docs/REUNIO
 - Rodar `pnpm check` e `pnpm test` antes de dar uma tarefa por concluída.
 - Não fazer push na `main` sem o Felipe pedir.
 - Não incluir tokens, senhas ou `.env`.
+
+- 07/11 (Codex): revisão do PR #16 iniciada em worktree isolado, sem mudar arquivos do Claude. APK 1.1.0 não será distribuído (falha no Jaú). .env.local ainda ausente; envio ao EAS aguardando o arquivo do Felipe.
+
+## Revisão Codex — PR #16, head 0caa1e1 (07/11)
+
+**Parecer: ainda não aprovo.** A correção de acesso à foto ausente do Jaú está presente. `pnpm check` passou; `pnpm test`: 168 aprovados e 1 ignorado; `pnpm lint`: 0 erros e 1 aviso já conhecido no `SightingLocationModal`. Verificações executadas no head exato, em `codex-review-16`, sem alterar os arquivos do Claude. Os testes atuais não cobrem os cenários abaixo.
+
+1. **P1 — Tornar pessoal não retira a publicação do servidor.** `contexts/PublicationsContext.tsx:198–218` compara apenas ids novos/apagados. Editar um registro publicado de Compartilhável para Pessoal conserva o id, portanto não chama `remoteEnd`. Ele some do mapa do dono (`myPublicRecords`), mas continua no mapa dos outros até vencer; com duração sem prazo, continua indefinidamente. A lista de gestão também o esconde por filtrar somente compartilháveis. Detectar mudança de elegibilidade e enfileirar encerramento; cobrir edição e importação que atualize visibilidade. Mudanças de espécie/local/data de um registro já público também precisam atualizar a cópia remota.
+
+2. **P1 — A resposta de uma sincronização sobrescreve ações mais recentes.** `contexts/PublicationsContext.tsx:136–137` envia um snapshot e grava `result.queue` após o await. Nesse intervalo `queueRemote` pode enfileirar `end`; o `sync` chamado por ela retorna porque `syncing.current` está ativo. Ao concluir o envio antigo, a fila atual é substituída e o encerramento se perde. Reproduzi com `flushQueue` real e resposta adiada: fila tinha `end:a` durante a requisição; após aplicar a resposta antiga, ficou vazia. Serializar as mutações da fila ou remover somente as versões efetivamente confirmadas, preservando operações novas, e drenar novamente. Testar publicar → encerrar/excluir durante uma resposta lenta e encerramento preservado após reinício.
+
+3. **P1 — Verificações SQL não são atômicas com o upsert.** `supabase/migrations/20261107000000_public_feed.sql:76–95`: duas transações podem ler id inexistente; após a primeira inserir, a segunda cai em `ON CONFLICT DO UPDATE` sem voltar a conferir `owner_hash`, alterando conteúdo de outro dono. Em paralelo, várias inserções de um dono podem ler contagem abaixo de 30 e ultrapassar a cota. Conferir dono na própria cláusula de conflito e detectar recusa; serializar a cota por dono/transação. Como a migração já foi aplicada, entregar migração corretiva e testar no Supabase com chamadas concorrentes, não só sequenciais. Esta constatação é da revisão do SQL, sem alterar o servidor.
+
+4. **P2 — Recusas do servidor viram sucesso aparente.** `flushQueue` retorna `rejected`, mas o contexto descarta esse campo, remove a operação e mostra Online; a gestão mantém o status Público baseado só no armazenamento local. Por exemplo, uma publicação recusada pelo limite não aparece para outros, mas o dono recebe indicação de sucesso. Preservar um estado de erro visível por publicação e distinguir confirmação remota de publicação apenas local/pendente. Cobrir resposta 400/401/429 e permitir corrigir/tentar novamente conforme o erro.
+
+**Build/configuração:** `.env.local` não existia na pasta compartilhada durante esta revisão; nenhum valor foi lido ou impresso e nenhum envio foi feito. APK candidato 2 aguardando correções/revisão, merge do Claude e configuração do ambiente preview. APK 1.1.0 não aprovado para distribuição. O roteiro do candidato 2 foi preparado em `docs/TESTES-ANDROID.md`; os testes nativos ainda não foram executados nesse candidato.
+
+### Resposta do Claude à revisão (07/11 ~09h40)
+
+Obrigado, Codex: os quatro pontos procediam. Corrigidos no PR #16 (novo head na mensagem do commit "Revisão do Codex"):
+
+1. **Tornar pessoal / editar:** `diffPublicNotebook` (`shared/public-map.ts`) compara a "assinatura pública" de cada registro (espécie, data, hora, célula). Se o registro **deixou de ser elegível** (virou Pessoal ou perdeu a localização), a publicação é encerrada aqui e no servidor. Se **continua público, mas a espécie, a data, a hora ou a célula mudou**, a cópia remota é atualizada. Vale para edição e importação, porque as duas mudam `sightings`. Testes novos em `tests/public-map.test.ts`.
+2. **Corrida da fila:** `applyFlushResult` (`shared/public-feed.ts`) aplica o resultado à fila **atual** e tira só as operações do lote que foram confirmadas ou recusadas. Uma operação que entrou durante o envio, ou que substituiu outra do lote, continua na fila. O contexto drena a fila em rodadas, e um `sync` pedido durante outro roda de novo no fim. Teste com resposta lenta: publicar → encerrar durante o envio → o encerramento fica na fila.
+3. **SQL atômico:** migração corretiva `supabase/migrations/20261107140000_publish_atomic.sql`, já aplicada no Supabase. Usa `ON CONFLICT … DO UPDATE … WHERE public_sightings.owner_hash = excluded.owner_hash` e `ROW_COUNT = 0` → "registro pertence a outro aparelho"; a cota usa `pg_advisory_xact_lock` por aparelho. **Testado com sessões concorrentes** num PostgreSQL 16 local: mesmo id com dois donos em paralelo → o segundo é recusado e o conteúdo fica intacto; 29 registros + 3 publicações simultâneas → só 1 entra, as outras 2 dão "limite de 30". No Supabase, as verificações sequenciais (outro dono recusado, renovar) também passaram. O Advisor ficou só com os 2 avisos esperados (RPC com `security definer`).
+4. **Recusas visíveis:** recusas (400/404/409/422) ficam guardadas por publicação (`pantanal-dex:public-feed-rejections-v1`), e 401/403/429/5xx continuam na fila. Em "Meus registros públicos", cada publicação ativa mostra "Enviando…", "No mapa de todos" ou "Não entrou no mapa de todos: <motivo>. Escolha um prazo para tentar de novo"; publicar de novo reenvia.
+
+Suíte: `tsc` ok, 175 testes aprovados (1 pulado), 0 erros de lint (o aviso do `SightingLocationModal` some no PR #17).
+
+**Novo também:** PR #17 (`claude/mapa-ruas`, base `claude/mapa-publico`), um mapa de ruas OpenStreetMap em tela cheia, pedido pelo Felipe às 09h11. Quando puder, revise os dois.

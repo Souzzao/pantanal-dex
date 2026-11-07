@@ -6,9 +6,11 @@ import { Platform } from "react-native";
 import { useApp } from "@/contexts/AppContext";
 import type { Sighting } from "@/shared/pantanal";
 import {
+  applyFlushResult,
   createFeedQueue,
   enqueue,
   FEED_QUEUE_KEY,
+  FEED_REJECTIONS_KEY,
   FEED_SECRET_KEY,
   fetchPublicFeed,
   flushQueue,
@@ -16,6 +18,7 @@ import {
   publicIdFor,
   readFeedConfig,
   restoreFeedQueue,
+  sightingIdFromPublicId,
   type FeedOperation,
   type FeedQueue,
   type FetchLike,
@@ -23,6 +26,7 @@ import {
 import {
   createPublicationStore,
   DEFAULT_PUBLIC_DURATION,
+  diffPublicNotebook,
   endPublication,
   prunePublications,
   publishSighting,
@@ -44,6 +48,8 @@ const FEED_CONFIG = readFeedConfig({
 });
 
 export type FeedStatus = "off" | "loading" | "online" | "offline";
+/** Situação de uma publicação no servidor: só no aparelho (sem servidor), na fila, recusada ou enviada. */
+export type RemoteStatus = "local" | "pending" | "rejected" | "synced";
 
 type PublicationsContextValue = {
   store: PublicationStore;
@@ -57,12 +63,13 @@ type PublicationsContextValue = {
   pendingCount: number;
   lastSyncAt: string | null;
   refreshFeed: () => Promise<void>;
+  /** Situação no servidor de uma publicação deste aparelho. */
+  remoteStatus: (sightingId: string) => RemoteStatus;
+  /** Motivo da recusa pelo servidor (quando `remoteStatus` é "rejected"). */
+  rejectionFor: (sightingId: string) => string | null;
 };
 
 const PublicationsContext = createContext<PublicationsContextValue | null>(null);
-
-const canAutoPublish = (sighting: Sighting) =>
-  sighting.visibility === "shareable" && typeof sighting.latitude === "number" && typeof sighting.longitude === "number";
 
 async function readSecret(): Promise<string> {
   const read = async () => (Platform.OS === "web" ? AsyncStorage.getItem(FEED_SECRET_KEY) : SecureStore.getItemAsync(FEED_SECRET_KEY));
@@ -83,7 +90,7 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
   const [writeError, setWriteError] = useState(false);
   const current = useRef<PublicationStore>(createPublicationStore());
   const queue = useRef<Promise<unknown>>(Promise.resolve());
-  const knownIds = useRef<Set<string> | null>(null);
+  const knownSignatures = useRef<Map<string, string | null> | null>(null);
   const sightingsRef = useRef<Sighting[]>(sightings);
   sightingsRef.current = sightings;
 
@@ -94,15 +101,21 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
   const [remoteRecords, setRemoteRecords] = useState<PublicRecord[]>([]);
   const [feedStatus, setFeedStatus] = useState<FeedStatus>(FEED_CONFIG ? "loading" : "off");
   const [lastSyncAt, setLastSyncAt] = useState<string | null>(null);
+  const [rejections, setRejections] = useState<Record<string, string>>({});
+  const rejectionsRef = useRef<Record<string, string>>({});
   const syncing = useRef(false);
+  /** Pedido de sincronização que chegou durante outra; roda de novo no fim. */
+  const resyncRequested = useRef(false);
+  const syncRef = useRef<() => Promise<void>>(async () => undefined);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
       let raw: string | null = null;
       let rawQueue: string | null = null;
+      let rawRejections: string | null = null;
       try {
-        [raw, rawQueue] = await Promise.all([AsyncStorage.getItem(PUBLICATIONS_KEY), AsyncStorage.getItem(FEED_QUEUE_KEY)]);
+        [raw, rawQueue, rawRejections] = await Promise.all([AsyncStorage.getItem(PUBLICATIONS_KEY), AsyncStorage.getItem(FEED_QUEUE_KEY), AsyncStorage.getItem(FEED_REJECTIONS_KEY)]);
       } catch {
         raw = null;
       }
@@ -112,6 +125,15 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
       current.current = restored;
       feedQueue.current = restoreFeedQueue(rawQueue);
       setPendingCount(feedQueue.current.operations.length);
+      try {
+        const parsed = rawRejections ? (JSON.parse(rawRejections) as unknown) : {};
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          rejectionsRef.current = Object.fromEntries(Object.entries(parsed as Record<string, unknown>).filter((entry): entry is [string, string] => typeof entry[1] === "string"));
+          setRejections(rejectionsRef.current);
+        }
+      } catch {
+        // Lixo no armazenamento: começa sem recusas.
+      }
       setStore(restored);
       setReady(true);
     })();
@@ -126,16 +148,50 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
     await AsyncStorage.setItem(FEED_QUEUE_KEY, JSON.stringify(next)).catch(() => undefined);
   }, []);
 
-  /** Envia a fila e baixa o mapa público. Sem servidor configurado, não faz nada. */
+  const saveRejections = useCallback((change: (previous: Record<string, string>) => Record<string, string>) => {
+    const next = change(rejectionsRef.current);
+    if (next === rejectionsRef.current) return;
+    rejectionsRef.current = next;
+    setRejections(next);
+    void AsyncStorage.setItem(FEED_REJECTIONS_KEY, JSON.stringify(next)).catch(() => undefined);
+  }, []);
+
+  /**
+   * Envia a fila e baixa o mapa público. Sem servidor configurado, não faz nada.
+   * Ações feitas durante um envio não se perdem: o resultado tira da fila só o que foi enviado,
+   * e a fila é drenada de novo enquanto houver operações novas.
+   */
   const sync = useCallback(async () => {
-    if (!FEED_CONFIG || !secret.current || syncing.current) return;
+    if (!FEED_CONFIG || !secret.current) return;
+    if (syncing.current) {
+      resyncRequested.current = true;
+      return;
+    }
     syncing.current = true;
+    resyncRequested.current = false;
+    let offline = false;
     const fetchImpl = fetch as unknown as FetchLike;
     try {
-      if (feedQueue.current.operations.length) {
-        const result = await flushQueue(feedQueue.current, FEED_CONFIG, fetchImpl, secret.current);
-        await saveFeedQueue(result.queue);
+      for (let round = 0; round < 5 && feedQueue.current.operations.length; round += 1) {
+        const batch = feedQueue.current.operations;
+        const result = await flushQueue({ ...feedQueue.current, operations: batch }, FEED_CONFIG, fetchImpl, secret.current);
+        await saveFeedQueue(applyFlushResult(feedQueue.current, batch, result.queue.operations));
+        // Publicações aceitas limpam a recusa antiga; recusadas ficam marcadas com o motivo.
+        const confirmed = batch.filter((operation) => !result.queue.operations.includes(operation) && !result.rejected.some((item) => item.operation === operation));
+        saveRejections((previous) => {
+          let next = previous;
+          for (const operation of confirmed) {
+            const id = sightingIdFromPublicId(operation.type === "publish" ? operation.record.id : operation.id);
+            if (next[id]) { next = { ...next }; delete next[id]; }
+          }
+          for (const { operation, message } of result.rejected) {
+            if (operation.type !== "publish") continue;
+            next = { ...next, [sightingIdFromPublicId(operation.record.id)]: message };
+          }
+          return next;
+        });
         if (result.stoppedByNetwork) {
+          offline = true;
           setFeedStatus("offline");
           return;
         }
@@ -147,11 +203,14 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
       setFeedStatus("online");
       setLastSyncAt(new Date().toISOString());
     } catch {
+      offline = true;
       setFeedStatus("offline");
     } finally {
       syncing.current = false;
+      if (resyncRequested.current && !offline) setTimeout(() => void syncRef.current(), 0);
     }
-  }, [saveFeedQueue]);
+  }, [saveFeedQueue, saveRejections]);
+  syncRef.current = sync;
 
   const queueRemote = useCallback(async (operations: FeedOperation[]) => {
     if (!FEED_CONFIG || !secret.current || operations.length === 0) return;
@@ -192,26 +251,31 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
     return run;
   }, []);
 
-  // Publica automaticamente (prazo padrão) os avistamentos compartilháveis criados a partir de agora,
-  // e limpa publicações de registros apagados do caderno.
+  // Mantém o mapa público em dia com o caderno:
+  //  - novos avistamentos compartilháveis são publicados com o prazo padrão;
+  //  - apagados ou que viraram "Pessoal"/perderam a localização são encerrados (aqui e no servidor);
+  //  - os que continuam públicos mas mudaram espécie/data/hora/local são atualizados no servidor.
   useEffect(() => {
     if (!ready || !notebookReady) return;
-    const ids = new Set(sightings.map((item) => item.id));
-    const previous = knownIds.current;
-    knownIds.current = ids;
-    const fresh = previous === null ? [] : sightings.filter((item) => !previous.has(item.id) && canAutoPublish(item));
-    const removed = previous === null || !notebookHealthy ? [] : [...previous].filter((id) => !ids.has(id));
+    const diff = diffPublicNotebook(knownSignatures.current, sightings);
+    knownSignatures.current = diff.signatures;
+    const ids = new Set(diff.signatures.keys());
+    const removed = notebookHealthy ? diff.removed : [];
+    let hadPublication: Set<string> = new Set();
     void commit((state) => {
+      hadPublication = new Set([...diff.lost, ...removed].filter((id) => state.items[id] && !state.items[id].endedAt));
       let next = notebookHealthy ? prunePublications(state, ids) : state;
       const now = new Date();
-      for (const item of fresh) {
-        if (!next.items[item.id]) next = publishSighting(next, item.id, DEFAULT_PUBLIC_DURATION, now);
+      for (const id of diff.fresh) {
+        if (!next.items[id]) next = publishSighting(next, id, DEFAULT_PUBLIC_DURATION, now);
       }
+      for (const id of diff.lost) next = endPublication(next, id, now);
       return next;
     }).then((state) => {
       const operations = [
-        ...fresh.map((item) => remotePublish(item.id, state)),
-        ...removed.map((id) => remoteEnd(id)),
+        ...diff.fresh.map((id) => remotePublish(id, state)),
+        ...diff.changed.map((id) => remotePublish(id, state)),
+        ...[...hadPublication].map((id) => remoteEnd(id)),
       ].filter((item): item is FeedOperation => item !== null);
       return queueRemote(operations);
     }).catch(() => undefined);
@@ -221,6 +285,15 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
   useEffect(() => {
     if (ready && notebookReady && FEED_CONFIG) void sync();
   }, [ready, notebookReady, sync]);
+
+  const remoteStatus = useCallback((sightingId: string): RemoteStatus => {
+    if (!FEED_CONFIG || !secret.current) return "local";
+    const publicId = publicIdFor(sightingId, secret.current);
+    if (feedQueue.current.operations.some((operation) => (operation.type === "publish" ? operation.record.id : operation.id) === publicId)) return "pending";
+    if (rejections[sightingId]) return "rejected";
+    return "synced";
+    // pendingCount entra nas dependências para recalcular quando a fila muda.
+  }, [rejections, pendingCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const value = useMemo<PublicationsContextValue>(() => ({
     store,
@@ -233,6 +306,12 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
     },
     end: async (sightingId) => {
       await commit((previous) => endPublication(previous, sightingId, new Date()));
+      saveRejections((previous) => {
+        if (!previous[sightingId]) return previous;
+        const next = { ...previous };
+        delete next[sightingId];
+        return next;
+      });
       const operation = remoteEnd(sightingId);
       if (operation) await queueRemote([operation]);
     },
@@ -241,7 +320,9 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
     pendingCount,
     lastSyncAt,
     refreshFeed: sync,
-  }), [store, ready, writeError, commit, remotePublish, remoteEnd, queueRemote, remoteRecords, feedStatus, pendingCount, lastSyncAt, sync]);
+    remoteStatus,
+    rejectionFor: (sightingId) => rejections[sightingId] ?? null,
+  }), [store, ready, writeError, commit, remotePublish, remoteEnd, queueRemote, saveRejections, remoteRecords, feedStatus, pendingCount, lastSyncAt, sync, remoteStatus, rejections]);
 
   return <PublicationsContext.Provider value={value}>{children}</PublicationsContext.Provider>;
 }
