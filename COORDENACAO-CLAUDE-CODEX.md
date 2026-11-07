@@ -50,7 +50,7 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 | Mapa offline e seleção manual de ponto | Codex | `components/PantanalMap.tsx`, `components/SightingLocationModal.tsx`, `shared/map-projection.ts` | Em andamento |
 | Check `watchdog` aceita `claude/*` e `codex/*` | Felipe | `.github/workflows/agent-watchdog.yml` | Feito (PR #15 juntado) |
 | Remover a trava geográfica do Pantanal (o app deve aceitar o mundo inteiro) | Claude (no lugar do Codex) | `shared/sighting-rules.ts`, formulário, `AppContext`, mapa de escolha | Feito na pasta; o Codex publica no PR #14 |
-| Mapa público, agrupamento por área, filtro por data e duração das publicações | Claude | `shared/public-map.ts`, `app/public-map.tsx`, `app/public-records.tsx` | Pronto no aparelho; servidor (Supabase) no sáb 08h |
+| Mapa público, agrupamento por área, filtro por data e duração das publicações | Claude | `shared/public-map.ts`, `app/public-map.tsx`, `app/public-records.tsx` | Pronto no aparelho **e pronto para servidor** (07/11 08h): liga sozinho quando o Felipe criar o Supabase (`docs/SUPABASE-PASSO-A-PASSO.md`) |
 | APK novo com tudo integrado | Codex | build EAS | Depois dos merges |
 | Ensaio do roteiro no aparelho | Felipe | — | Antes de 11/11 |
 
@@ -85,6 +85,9 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 - 06/11 22h45 (Claude → Codex): **mapa público pronto no aparelho** (rotas `/public-map` e `/public-records`; atalho na Home). Como integrar a duração no formulário (sua tarefa de sáb 14:00): `const { publish } = usePublications();` e, depois de salvar um registro "Compartilhável" com localização, chamar `publish(sighting.id, duração)`, em que a duração é `"1d" | "7d" | "30d" | "90d" | "365d" | "forever"` (`PUBLIC_DURATIONS` em `shared/public-map.ts`). Sem isso, o contexto já publica sozinho por 30 dias todo registro compartilhável novo; chamar `publish` depois apenas troca o prazo.
 
 - 06/11 22h50 (Claude → Codex/Felipe): o **PR #13 foi juntado à `main`** (squash) com a Coleção, o GeoJSON e o contraste. O que veio depois (correção do travamento do Jaú, CSV seguro, fotos offline e mapa público) está no **PR #16** (`claude/mapa-publico`, verde e sem conflito com a `main`). Ordem sugerida: **#16 → #14**. Ao juntar o #14, mantenha a versão da `main` em `app/(tabs)/animals.tsx` e `app/(tabs)/sightings.tsx`. Onde a `docs/ROTINA-CODEX.md` diz "PR #13", leia "PR #16".
+
+- 07/11 08h15 (Claude → Codex/Felipe): **mapa público pronto para servidor (Etapa 4).** Arquivos novos: `supabase/migrations/20261107000000_public_feed.sql` (tabela com RLS e sem acesso direto; leitura pela view `public_feed`; escrita só pelas funções `publish_sighting`/`end_publication`, com grade de 0,1°, data não futura, 30/dia e dono por hash do segredo), `shared/public-feed.ts` (+12 testes) e `DADOS.md`. Mudados: `contexts/PublicationsContext.tsx` (fila offline, segredo no SecureStore, envia ao publicar/encerrar, baixa os registros dos outros) e `app/public-map.tsx` (aviso Online/Sem conexão/pendentes e botão Atualizar). **Sem as variáveis no `.env.local`/EAS, nada muda: o app não fala com servidor nenhum.** O SQL foi testado em PostgreSQL 16 real com o papel `anon` (15 cenários) e com os pedidos gerados pelo próprio app (publicar → aparece na view → encerrar → some). `.gitignore` agora ignora também `.env`. Suíte: 167 aprovados, `tsc` ok.
+  - **Codex, para o build:** se o Felipe criar as variáveis `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY` na EAS (ambiente `preview`), o build `preview` já as usa. Nunca peça nem cole os valores no chat.
 
 ## Pedidos para o Claude
 

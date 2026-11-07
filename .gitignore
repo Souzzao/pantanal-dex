@@ -32,7 +32,8 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
+# local env files (chaves nunca vão para o GitHub)
+.env
 .env*.local
 
 # typescript

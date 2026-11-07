@@ -25,7 +25,7 @@ const TEXT = {
   pt: {
     back: "‹ Voltar", title: "Mapa público",
     subtitle: "Registros públicos das pessoas, sempre com localização aproximada (~11 km). Áreas com muitos registros aparecem juntas como área de alta incidência.",
-    local: "Somente neste aparelho: seus registros públicos" , samples: "Mostrar registros de exemplo", samplesHint: "Exemplos de demonstração, até o servidor ser ligado. Aparecem marcados como exemplo.",
+    local: "Somente neste aparelho: seus registros públicos", connecting: "Conectando ao servidor…", online: "Online: registros públicos de todas as pessoas", offline: "Sem conexão: mostrando seus registros e os últimos dados recebidos", pending: (n: number) => `${n} ${n === 1 ? "envio pendente" : "envios pendentes"} (vai quando houver internet)`, synced: (time: string) => `Atualizado às ${time}`, refresh: "Atualizar", samples: "Mostrar registros de exemplo", samplesHint: "Exemplos de demonstração, até o servidor ser ligado. Aparecem marcados como exemplo.",
     period: "Período", presets: { "7d": "7 dias", "30d": "30 dias", "365d": "12 meses", all: "Tudo" } as Record<DatePreset, string>, custom: "Escolher datas",
     from: "De (AAAA-MM-DD)", to: "Até (AAAA-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "registro" : "registros"} em ${areas} ${areas === 1 ? "área" : "áreas"}`,
@@ -42,7 +42,7 @@ const TEXT = {
   en: {
     back: "‹ Back", title: "Public map",
     subtitle: "People's public records, always with an approximate location (~11 km). Areas with many records are grouped as high-incidence areas.",
-    local: "This device only: your public records", samples: "Show sample records", samplesHint: "Demo examples until the server is connected. They are labeled as samples.",
+    local: "This device only: your public records", connecting: "Connecting to the server…", online: "Online: everyone's public records", offline: "Offline: showing your records and the last data received", pending: (n: number) => `${n} pending ${n === 1 ? "upload" : "uploads"} (sent when online)`, synced: (time: string) => `Updated at ${time}`, refresh: "Refresh", samples: "Show sample records", samplesHint: "Demo examples until the server is connected. They are labeled as samples.",
     period: "Period", presets: { "7d": "7 days", "30d": "30 days", "365d": "12 months", all: "All" } as Record<DatePreset, string>, custom: "Pick dates",
     from: "From (YYYY-MM-DD)", to: "To (YYYY-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "record" : "records"} in ${areas} ${areas === 1 ? "area" : "areas"}`,
@@ -59,7 +59,7 @@ const TEXT = {
   es: {
     back: "‹ Volver", title: "Mapa público",
     subtitle: "Registros públicos de las personas, siempre con ubicación aproximada (~11 km). Las áreas con muchos registros se agrupan como áreas de alta incidencia.",
-    local: "Solo en este dispositivo: tus registros públicos", samples: "Mostrar registros de ejemplo", samplesHint: "Ejemplos de demostración hasta conectar el servidor. Aparecen marcados como ejemplo.",
+    local: "Solo en este dispositivo: tus registros públicos", connecting: "Conectando al servidor…", online: "En línea: registros públicos de todas las personas", offline: "Sin conexión: mostrando tus registros y los últimos datos recibidos", pending: (n: number) => `${n} ${n === 1 ? "envío pendiente" : "envíos pendientes"} (se envían con internet)`, synced: (time: string) => `Actualizado a las ${time}`, refresh: "Actualizar", samples: "Mostrar registros de ejemplo", samplesHint: "Ejemplos de demostración hasta conectar el servidor. Aparecen marcados como ejemplo.",
     period: "Período", presets: { "7d": "7 días", "30d": "30 días", "365d": "12 meses", all: "Todo" } as Record<DatePreset, string>, custom: "Elegir fechas",
     from: "Desde (AAAA-MM-DD)", to: "Hasta (AAAA-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "registro" : "registros"} en ${areas} ${areas === 1 ? "área" : "áreas"}`,
@@ -78,13 +78,14 @@ const TEXT = {
 export default function PublicMapScreen() {
   const colors = useColors();
   const { sightings, settings } = useApp();
-  const { store } = usePublications();
+  const { store, remoteRecords, feedStatus, pendingCount, lastSyncAt, refreshFeed } = usePublications();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
 
   const catalog = useMemo(() => filterSpeciesCatalog(), []);
   const names = useMemo(() => new Map(catalog.map((item) => [item.id, item.commonName])), [catalog]);
-  const [showSamples, setShowSamples] = useState(true);
+  // Exemplos ligados de início só quando não há servidor; com servidor, o mapa mostra os registros reais.
+  const [showSamples, setShowSamples] = useState(feedStatus === "off");
   const [filter, setFilter] = useState<DateFilter>({ preset: "all" });
   const [customOpen, setCustomOpen] = useState(false);
   const [from, setFrom] = useState("");
@@ -94,9 +95,9 @@ export default function PublicMapScreen() {
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
   const records = useMemo(() => {
-    const all = [...myPublicRecords(sightings, store, now), ...(showSamples ? samples : [])].filter((item) => isRecordActive(item, now));
+    const all = [...myPublicRecords(sightings, store, now), ...remoteRecords, ...(showSamples ? samples : [])].filter((item) => isRecordActive(item, now));
     return filterByDate(all, filter, now);
-  }, [sightings, store, now, showSamples, samples, filter]);
+  }, [sightings, store, now, remoteRecords, showSamples, samples, filter]);
 
   // A área selecionada é refeita a partir dos registros filtrados atuais, para não mostrar dados desatualizados.
   const selectedRecords = selected ? records.filter((record) => selected.records.some((item) => item.id === record.id)) : [];
@@ -127,7 +128,18 @@ export default function PublicMapScreen() {
         <Text style={{ color: colors.muted, fontSize: 15, marginTop: 4 }}>{t.subtitle}</Text>
 
         <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginTop: 14 }}>
-          <Text style={{ color: colors.foreground, fontWeight: "700" }}>{t.local}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+            <Text accessibilityLiveRegion="polite" style={{ color: feedStatus === "online" ? colors.success : feedStatus === "offline" ? colors.warning : colors.foreground, fontWeight: "700", flex: 1 }}>
+              {feedStatus === "off" ? t.local : feedStatus === "loading" ? t.connecting : feedStatus === "online" ? t.online : t.offline}
+            </Text>
+            {feedStatus !== "off" && (
+              <Pressable onPress={() => void refreshFeed()} accessibilityRole="button" accessibilityLabel={t.refresh} style={({ pressed }) => [{ paddingHorizontal: 12, minHeight: 36, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary }, pressed && { opacity: 0.7 }]}>
+                <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 12 }}>{t.refresh}</Text>
+              </Pressable>
+            )}
+          </View>
+          {lastSyncAt && feedStatus === "online" && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 2 }}>{t.synced(new Date(lastSyncAt).toLocaleTimeString().slice(0, 5))}</Text>}
+          {pendingCount > 0 && <Text style={{ color: colors.warning, fontSize: 12, marginTop: 2 }}>{t.pending(pendingCount)}</Text>}
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 8 }}>
             <Text style={{ color: colors.foreground, flex: 1 }}>{t.samples}</Text>
             <Switch value={showSamples} onValueChange={(value) => { setShowSamples(value); setSelected(null); }} accessibilityLabel={t.samples} trackColor={{ true: colors.primary, false: colors.border }} />
