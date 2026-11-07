@@ -121,7 +121,6 @@ const PAGE_SCRIPT = String.raw`
 
   var map = L.map("map", { zoomControl: false, worldCopyJump: true, minZoom: 2, maxZoom: 17, attributionControl: true }).setView([-17.5, -57.0], 6);
   L.control.zoom({ position: "bottomright" }).addTo(map);
-  L.control.scale({ imperial: false, position: "bottomleft" }).addTo(map);
 
   var base = {}, overlays = {};
   LAYERS.forEach(function (layer) {
@@ -253,6 +252,7 @@ html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font
 .leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#195946;font-weight:800;font-size:13px;text-decoration:none}
 .leaflet-control-layers-toggle::after{content:"Nomes"}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
+.leaflet-control-attribution{font-size:9px;line-height:1.25;max-width:100%;background:rgba(255,255,255,.75)!important}
 .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px;font-size:20px}
 `;
 
