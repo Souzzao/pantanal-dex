@@ -3,15 +3,14 @@ import { describe, expect, it, vi } from "vitest";
 import {
   applyFlushResult,
   createFeedQueue,
-  friendlyRejection,
-  sightingIdFromPublicId,
   enqueue,
+  fetchMyPublications,
   fetchPublicFeed,
   flushQueue,
+  friendlyRejection,
   headers,
-  generateDeviceSecret,
   operationRequest,
-  publicIdFor,
+  photoPathFor,
   readFeedConfig,
   restoreFeedQueue,
   rowToRecord,
@@ -20,50 +19,56 @@ import {
 } from "../shared/public-feed";
 
 const config = { url: "https://exemplo.supabase.co", anonKey: "chave-anon" };
-const secret = "a".repeat(64);
-const publish = (id: string): FeedOperation => ({ type: "publish", queuedAt: "2026-11-07T10:00:00.000Z", record: { id, speciesId: "tuiuiu", date: "2026-11-06", latitude: -16.43, longitude: -56.87, expiresAt: null } });
+const token = "token-da-conta";
+const publish = (localId: string): FeedOperation => ({ type: "publish", localId, queuedAt: "2026-11-07T10:00:00.000Z", payload: { speciesId: "tuiuiu", date: "2026-11-06", latitude: -16.4321, longitude: -56.8765, notes: "  perto do rio ", expiresAt: null } });
+const end = (localId: string, queuedAt = "2026-11-07T11:00:00.000Z"): FeedOperation => ({ type: "end", localId, queuedAt });
 
 function response(status: number, body: unknown = []) {
   return { ok: status >= 200 && status < 300, status, json: async () => body, text: async () => JSON.stringify(body) };
 }
+const ids = (operations: FeedOperation[]) => operations.map((item) => `${item.type}:${item.localId}`);
 
 describe("configuração do servidor", () => {
-  it("só liga com URL https e chave anon", () => {
+  it("só liga com URL https e chave", () => {
     expect(readFeedConfig({})).toBeNull();
     expect(readFeedConfig({ EXPO_PUBLIC_SUPABASE_URL: "http://inseguro.co", EXPO_PUBLIC_SUPABASE_ANON_KEY: "k" })).toBeNull();
     expect(readFeedConfig({ EXPO_PUBLIC_SUPABASE_URL: "https://x.supabase.co/", EXPO_PUBLIC_SUPABASE_ANON_KEY: " k " })).toEqual({ url: "https://x.supabase.co", anonKey: "k" });
   });
-});
 
-describe("cabeçalhos", () => {
-  it("manda Authorization só com a chave anon antiga (JWT)", () => {
-    expect(headers({ url: "https://x.supabase.co", anonKey: "eyJabc" }).Authorization).toBe("Bearer eyJabc");
-    const novo = headers({ url: "https://x.supabase.co", anonKey: "sb_publishable_abc" });
-    expect(novo.apikey).toBe("sb_publishable_abc");
-    expect(novo.Authorization).toBeUndefined();
+  it("manda o token da conta; sem conta, só a chave", () => {
+    expect(headers(config, token).Authorization).toBe(`Bearer ${token}`);
+    expect(headers({ url: config.url, anonKey: "eyJabc" }).Authorization).toBe("Bearer eyJabc");
+    expect(headers({ url: config.url, anonKey: "sb_publishable_abc" }).Authorization).toBeUndefined();
   });
 });
 
 describe("leitura do mapa público", () => {
-  it("converte linhas, mantém a grade pública e marca os registros deste aparelho", async () => {
+  it("converte linhas, mantém a grade, marca os desta conta e esconde reprovados", async () => {
     const rows = [
-      { id: "meu", species_id: "tuiuiu", observed_on: "2026-11-06", observed_time: null, cell_lat: "-16.4", cell_lon: "-56.9", published_at: "2026-11-06T10:00:00Z", expires_at: null },
-      { id: "outro", species_id: "capivara", observed_on: "2026-11-05", observed_time: "07:30", cell_lat: -17.43, cell_lon: -56.77, published_at: "2026-11-05T10:00:00Z", expires_at: "2026-12-05T10:00:00Z" },
+      { id: "meu", species_id: "tuiuiu", observed_on: "2026-11-06", observed_time: null, cell_lat: "-16.4", cell_lon: "-56.9", published_at: "2026-11-06T10:00:00Z", expires_at: null, status: "approved" },
+      { id: "outro", species_id: "capivara", observed_on: "2026-11-05", observed_time: "07:30", cell_lat: -17.43, cell_lon: -56.77, published_at: "2026-11-05T10:00:00Z", expires_at: null, status: "pending" },
+      { id: "reprovado", species_id: "capivara", observed_on: "2026-11-05", observed_time: null, cell_lat: 1, cell_lon: 1, published_at: "", expires_at: null, status: "rejected" },
       { id: "ruim", species_id: "x", observed_on: "ontem", observed_time: null, cell_lat: 0, cell_lon: 0, published_at: "", expires_at: null },
     ];
     const fetchImpl = vi.fn(async () => response(200, rows)) as unknown as FetchLike;
-    const records = await fetchPublicFeed(config, fetchImpl, new Set(["meu"]));
-    expect(records.map((item) => [item.id, item.owner, item.latitude, item.longitude])).toEqual([["meu", "me", -16.4, -56.9], ["outro", "others", -17.4, -56.8]]);
-    expect((fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0][0]).toContain("/rest/v1/public_feed?");
-    expect((fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0][1].headers.apikey).toBe("chave-anon");
+    const records = await fetchPublicFeed(config, fetchImpl, token, new Set(["meu"]));
+    expect(records.map((item) => [item.id, item.owner, item.latitude, item.longitude, item.status])).toEqual([["meu", "me", -16.4, -56.9, "approved"], ["outro", "others", -17.4, -56.8, "pending"]]);
+    const call = (fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0];
+    expect(call[0]).toContain("/rest/v1/public_feed?");
+    expect(call[1].headers.Authorization).toBe(`Bearer ${token}`);
   });
 
   it("falha com mensagem clara quando o servidor responde erro", async () => {
-    await expect(fetchPublicFeed(config, async () => response(503), new Set())).rejects.toThrow("503");
+    await expect(fetchPublicFeed(config, async () => response(503), token, new Set())).rejects.toThrow("503");
   });
 
   it("descarta linha com coordenada impossível", () => {
     expect(rowToRecord({ id: "x", species_id: "tuiuiu", observed_on: "2026-11-06", observed_time: null, cell_lat: 120, cell_lon: 0, published_at: "", expires_at: null }, new Set())).toBeNull();
+  });
+
+  it("lê o resultado da auditoria das minhas publicações", async () => {
+    const rows = [{ local_id: "s-1", id: "u1", status: "rejected", review_note: "foto não mostra o animal", ended_at: null }, { local_id: 3 }];
+    expect(await fetchMyPublications(config, async () => response(200, rows), token)).toEqual([{ localId: "s-1", id: "u1", status: "rejected", reviewNote: "foto não mostra o animal", endedAt: null }]);
   });
 });
 
@@ -71,29 +76,31 @@ describe("fila de envio", () => {
   it("a última operação de um registro substitui a anterior", () => {
     let queue = enqueue(createFeedQueue(), publish("a"));
     queue = enqueue(queue, publish("b"));
-    queue = enqueue(queue, { type: "end", id: "a", queuedAt: "2026-11-07T11:00:00.000Z" });
-    expect(queue.operations.map((item) => (item.type === "end" ? `end:${item.id}` : `pub:${item.record.id}`))).toEqual(["pub:b", "end:a"]);
+    queue = enqueue(queue, end("a"));
+    expect(ids(queue.operations)).toEqual(["publish:b", "end:a"]);
   });
 
-  it("restaura do armazenamento e ignora lixo", () => {
+  it("restaura do armazenamento e ignora lixo e a fila antiga (sem conta)", () => {
     const queue = enqueue(createFeedQueue(), publish("a"));
     expect(restoreFeedQueue(JSON.stringify(queue))).toEqual(queue);
     expect(restoreFeedQueue("{quebrado")).toEqual(createFeedQueue());
-    expect(restoreFeedQueue(JSON.stringify({ version: 1, operations: [{ type: "publish" }, publish("b")] })).operations).toHaveLength(1);
+    expect(restoreFeedQueue(JSON.stringify({ version: 1, operations: [{ type: "end", id: "x" }] }))).toEqual(createFeedQueue());
+    expect(restoreFeedQueue(JSON.stringify({ version: 2, operations: [{ type: "publish", localId: "x" }, publish("b")] })).operations).toHaveLength(1);
   });
 
-  it("monta o pedido de publicação com a coordenada generalizada e o segredo", () => {
-    const request = operationRequest(publish("a"), secret);
-    expect(request.name).toBe("publish_sighting");
-    expect(request.body).toMatchObject({ p_id: "a", p_cell_lat: -16.4, p_cell_lon: -56.9, p_secret: secret, p_observed_time: null });
-    expect(operationRequest({ type: "end", id: "a", queuedAt: "" }, secret)).toEqual({ name: "end_publication", body: { p_id: "a", p_secret: secret } });
+  it("monta o pedido com a coordenada exata (só o auditor vê) e a observação limpa", () => {
+    const request = operationRequest(publish("a"));
+    expect(request.name).toBe("publish_my_sighting");
+    expect(request.body).toMatchObject({ p_local_id: "a", p_exact_lat: -16.4321, p_exact_lon: -56.8765, p_notes: "perto do rio", p_observed_time: null, p_photo_path: null });
+    expect(operationRequest(end("a"))).toEqual({ name: "end_my_publication", body: { p_local_id: "a" } });
   });
 
-  it("envia tudo quando há rede", async () => {
-    const fetchImpl = vi.fn(async () => response(204)) as unknown as FetchLike;
-    const result = await flushQueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), config, fetchImpl, secret);
+  it("envia tudo quando há rede, com o token da conta", async () => {
+    const fetchImpl = vi.fn(async () => response(200, "id")) as unknown as FetchLike;
+    const result = await flushQueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), config, fetchImpl, token);
     expect(result).toMatchObject({ sent: 2, stoppedByNetwork: false });
     expect(result.queue.operations).toEqual([]);
+    expect((fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0][1].headers.Authorization).toBe(`Bearer ${token}`);
   });
 
   it("para no erro de rede e guarda o restante para depois", async () => {
@@ -103,64 +110,24 @@ describe("fila de envio", () => {
       if (calls === 2) throw new Error("sem rede");
       return response(204);
     };
-    const result = await flushQueue(enqueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), publish("c")), config, fetchImpl, secret);
+    const result = await flushQueue(enqueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), publish("c")), config, fetchImpl, token);
     expect(result.sent).toBe(1);
     expect(result.stoppedByNetwork).toBe(true);
-    expect(result.queue.operations.map((item) => (item.type === "publish" ? item.record.id : item.id))).toEqual(["b", "c"]);
+    expect(ids(result.queue.operations)).toEqual(["publish:b", "publish:c"]);
   });
 
-  it("tira da fila o que o servidor recusou pelas regras (4xx) e segue com o resto", async () => {
-    const fetchImpl: FetchLike = async (_url, init) => (init?.body?.includes('"p_id":"a"') ? response(400, { message: "limite de 30 publicações por dia" }) : response(204));
-    const result = await flushQueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), config, fetchImpl, secret);
+  it("tira da fila o que o servidor recusou pelas regras (400) e segue com o resto", async () => {
+    const fetchImpl: FetchLike = async (_url, init) => (init?.body?.includes('"p_local_id":"a"') ? response(400, { message: "limite de 30 publicações por dia" }) : response(204));
+    const result = await flushQueue(enqueue(enqueue(createFeedQueue(), publish("a")), publish("b")), config, fetchImpl, token);
     expect(result.sent).toBe(1);
     expect(result.rejected).toHaveLength(1);
     expect(result.rejected[0].message).toContain("limite de 30");
     expect(result.queue.operations).toEqual([]);
   });
-});
 
-describe("segredo do aparelho", () => {
-  it("tem 64 caracteres hexadecimais e usa a fonte aleatória recebida", () => {
-    const value = generateDeviceSecret((bytes) => bytes.fill(171));
-    expect(value).toBe("ab".repeat(32));
-    expect(generateDeviceSecret()).toMatch(/^[0-9a-f]{64}$/);
-  });
-});
-
-describe("id público", () => {
-  it("separa aparelhos diferentes com o mesmo id local", () => {
-    expect(publicIdFor("sighting-1", "a".repeat(64))).toBe("sighting-1@aaaaaaaa");
-    expect(publicIdFor("sighting-1", "b".repeat(64))).not.toBe(publicIdFor("sighting-1", "a".repeat(64)));
-    expect(publicIdFor("x".repeat(100), "a".repeat(64))).toHaveLength(80);
-  });
-});
-
-
-describe("envio sem perder ações feitas durante o envio", () => {
-  it("encerrar durante uma resposta lenta continua na fila", async () => {
-    let queue = enqueue(createFeedQueue(), publish("a"));
-    let release: () => void = () => undefined;
-    const slow: FetchLike = () => new Promise((resolve) => { release = () => resolve(response(204)); });
-    const batch = queue.operations;
-    const pending = flushQueue(queue, config, slow, secret);
-    // Enquanto o "publicar" está no ar, a pessoa encerra.
-    queue = enqueue(queue, { type: "end", id: "a", queuedAt: "2026-11-07T12:00:00.000Z" });
-    release();
-    const result = await pending;
-    const after = applyFlushResult(queue, batch, result.queue.operations);
-    expect(after.operations).toEqual([{ type: "end", id: "a", queuedAt: "2026-11-07T12:00:00.000Z" }]);
-  });
-
-  it("operação nova de outro registro também fica", () => {
-    const first = enqueue(createFeedQueue(), publish("a"));
-    const batch = first.operations;
-    const current = enqueue(first, publish("b"));
-    expect(applyFlushResult(current, batch, []).operations.map((item) => (item.type === "publish" ? item.record.id : item.id))).toEqual(["b"]);
-  });
-
-  it("401, 403 e 429 não descartam a operação (configuração ou limite de pedidos)", async () => {
+  it("401, 403 e 429 não descartam a operação (conta ou limite de pedidos)", async () => {
     for (const status of [401, 403, 429]) {
-      const result = await flushQueue(enqueue(createFeedQueue(), publish("a")), config, async () => response(status), secret);
+      const result = await flushQueue(enqueue(createFeedQueue(), publish("a")), config, async () => response(status), token);
       expect(result.stoppedByNetwork).toBe(true);
       expect(result.rejected).toEqual([]);
       expect(result.queue.operations).toHaveLength(1);
@@ -168,11 +135,34 @@ describe("envio sem perder ações feitas durante o envio", () => {
   });
 });
 
-describe("recusas", () => {
-  it("acha o avistamento pelo id público e traduz o motivo", () => {
-    expect(sightingIdFromPublicId("sighting-1@aaaaaaaa")).toBe("sighting-1");
-    expect(sightingIdFromPublicId("sem-arroba")).toBe("sem-arroba");
+describe("envio sem perder ações feitas durante o envio", () => {
+  it("encerrar durante uma resposta lenta continua na fila", async () => {
+    let queue = enqueue(createFeedQueue(), publish("a"));
+    let release: () => void = () => undefined;
+    const slow: FetchLike = () => new Promise((resolve) => { release = () => resolve(response(204)); });
+    const batch = queue.operations;
+    const pending = flushQueue(queue, config, slow, token);
+    queue = enqueue(queue, end("a", "2026-11-07T12:00:00.000Z"));
+    release();
+    const result = await pending;
+    expect(applyFlushResult(queue, batch, result.queue.operations).operations).toEqual([end("a", "2026-11-07T12:00:00.000Z")]);
+  });
+
+  it("operação nova de outro registro também fica", () => {
+    const first = enqueue(createFeedQueue(), publish("a"));
+    const batch = first.operations;
+    const current = enqueue(first, publish("b"));
+    expect(ids(applyFlushResult(current, batch, []).operations)).toEqual(["publish:b"]);
+  });
+});
+
+describe("recusas e fotos", () => {
+  it("traduz o motivo da recusa", () => {
     expect(friendlyRejection('Servidor recusou (400) {"message":"limite de 30 publicações por dia"}')).toBe("limite de 30 publicações por dia");
     expect(friendlyRejection("qualquer coisa")).toBe("recusado pelo servidor");
+  });
+
+  it("guarda a foto na pasta da conta com nome seguro", () => {
+    expect(photoPathFor("uid-1", "sighting-1/../x")).toBe("uid-1/sighting-1____x.jpg");
   });
 });

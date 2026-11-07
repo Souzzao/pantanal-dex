@@ -15,6 +15,11 @@ export { createExportCsv, createExportJson } from "@/shared/exports";
 const SIGHTINGS_KEY = "pantanal-dex:sightings";
 const SETTINGS_KEY = "pantanal-dex:settings";
 const NOTEBOOK_KEY = "pantanal-dex:notebook-v2";
+/** Conta que "herdou" o caderno salvo antes do login existir (só uma conta herda). */
+const LEGACY_CLAIM_KEY = "pantanal-dex:legacy-notebook-owner";
+
+/** Chave do caderno de uma conta: cada conta tem o próprio caderno no aparelho. */
+export const notebookKeyFor = (namespace?: string) => (namespace ? `${NOTEBOOK_KEY}:${namespace}` : NOTEBOOK_KEY);
 type StorageDiagnostics = { sightings: RestoreStatus; settings: RestoreStatus; readError: boolean; writeError: boolean };
 type AppContextValue = { sightings: Sighting[]; creationLedger: SightingCreationLedger; canWriteSightings: boolean; settings: Settings; ready: boolean; storage: StorageDiagnostics; addSighting: (sighting: Sighting) => Promise<void>; updateSighting: (sighting: Sighting) => Promise<void>; deleteSighting: (id: string) => Promise<void>; clearSightings: () => Promise<void>; importSightings: (incoming: Sighting[]) => Promise<{ added: number; updated: number; skipped: number }>; setSettings: (settings: Settings) => Promise<void> };
 const AppContext = createContext<AppContextValue | null>(null);
@@ -25,7 +30,8 @@ async function readRaw(key: string): Promise<RawRead> {
   try { return { value: await readStorageWithRetry(() => AsyncStorage.getItem(key)), failed: false }; } catch { return { value: null, failed: true }; }
 }
 
-export function AppProvider({ children }: { children: React.ReactNode }) {
+export function AppProvider({ children, storageNamespace }: { children: React.ReactNode; storageNamespace?: string }) {
+  const notebookKey = notebookKeyFor(storageNamespace);
   const [sightings, setSightings] = useState<Sighting[]>([]);
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
   const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty", readError: false, writeError: false });
@@ -40,8 +46,29 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const [rawNotebook, rawSightings, rawSettings] = await Promise.all([readRaw(NOTEBOOK_KEY), readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
+      let [rawNotebook, rawSightings, rawSettings] = await Promise.all([readRaw(notebookKey), storageNamespace ? Promise.resolve<RawRead>({ value: null, failed: false }) : readRaw(SIGHTINGS_KEY), readRaw(SETTINGS_KEY)]);
+      // Primeira vez desta conta no aparelho: herda o caderno de antes do login, se ninguém herdou ainda.
+      let claimedLegacy = false;
+      if (storageNamespace && !rawNotebook.failed && rawNotebook.value === null) {
+        const claim = await readRaw(LEGACY_CLAIM_KEY);
+        if (!claim.failed && (claim.value === null || claim.value === storageNamespace)) {
+          const [legacyNotebook, legacySightings] = await Promise.all([readRaw(NOTEBOOK_KEY), readRaw(SIGHTINGS_KEY)]);
+          if (!legacyNotebook.failed && !legacySightings.failed && (legacyNotebook.value !== null || legacySightings.value !== null)) {
+            rawNotebook = legacyNotebook;
+            rawSightings = legacySightings;
+            claimedLegacy = true;
+          }
+        }
+      }
       const restored = restoreNotebook(rawNotebook.value, rawSightings.value);
+      if (claimedLegacy && restored.canWrite) {
+        try {
+          await AsyncStorage.setItem(notebookKey, serializeNotebook(restored.sightings, restored.ledger));
+          await AsyncStorage.setItem(LEGACY_CLAIM_KEY, storageNamespace!);
+        } catch {
+          // Se falhar, tenta de novo na próxima abertura; o caderno antigo continua intacto.
+        }
+      }
       const restoredSettings = restoreSettingsWithStatus(rawSettings.value, DEFAULT_SETTINGS);
       if (!mounted) return;
       currentSightings.current = restored.sightings;
@@ -55,12 +82,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setReady(true);
     })();
     return () => { mounted = false; };
-  }, []);
+  }, [notebookKey, storageNamespace]);
 
   const persistSightings = async (next: Sighting[], ledger = currentLedger.current) => {
     if (!writable.current) throw new Error("O caderno ainda está carregando ou precisa de recuperação. Exporte os dados disponíveis antes de continuar.");
     try {
-      await withStorageRetry(() => AsyncStorage.setItem(NOTEBOOK_KEY, serializeNotebook(next, ledger)));
+      await withStorageRetry(() => AsyncStorage.setItem(notebookKey, serializeNotebook(next, ledger)));
       currentSightings.current = next;
       currentLedger.current = ledger;
       setSightings(next);

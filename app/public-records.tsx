@@ -8,7 +8,6 @@ import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { Sighting } from "@/shared/pantanal";
-import { friendlyRejection } from "@/shared/public-feed";
 import { PUBLIC_DURATIONS, publicationStatus, type PublicationStatus, type PublicDurationId } from "@/shared/public-map";
 
 type Lang = "pt" | "en" | "es";
@@ -64,9 +63,9 @@ const formatDate = (iso: string) => {
 };
 
 const REMOTE = {
-  pt: { pending: "Enviando ao mapa de todos… (vai quando houver internet)", synced: "No mapa de todos", rejected: (why: string) => `Não entrou no mapa de todos: ${why}. Escolha um prazo para tentar de novo.` },
-  en: { pending: "Sending to everyone's map… (sent when online)", synced: "On everyone's map", rejected: (why: string) => `Not on everyone's map: ${why}. Choose a duration to try again.` },
-  es: { pending: "Enviando al mapa de todos… (se envía con internet)", synced: "En el mapa de todos", rejected: (why: string) => `No entró en el mapa de todos: ${why}. Elige un plazo para intentarlo de nuevo.` },
+  pt: { sending: "Enviando… (vai quando houver internet)", error: (why: string) => `O servidor não aceitou: ${why}. Escolha um prazo para tentar de novo.`, review: "Aguardando verificação de um auditor (já aparece no mapa como pendente)", approved: "Verificado: no mapa de todos", rejected: (why: string) => `Reprovado pelo auditor${why ? `: ${why}` : ""}. Corrija o registro para enviar de novo.` },
+  en: { sending: "Sending… (sent when online)", error: (why: string) => `The server did not accept it: ${why}. Choose a duration to try again.`, review: "Waiting for a reviewer (shown on the map as pending)", approved: "Verified: on everyone's map", rejected: (why: string) => `Rejected by a reviewer${why ? `: ${why}` : ""}. Fix the record to send it again.` },
+  es: { sending: "Enviando… (se envía con internet)", error: (why: string) => `El servidor no lo aceptó: ${why}. Elige un plazo para intentarlo de nuevo.`, review: "Esperando a un auditor (aparece en el mapa como pendiente)", approved: "Verificado: en el mapa de todos", rejected: (why: string) => `Rechazado por el auditor${why ? `: ${why}` : ""}. Corrige el registro para enviarlo de nuevo.` },
 } as const;
 
 export default function PublicRecordsScreen() {
@@ -123,9 +122,10 @@ export default function PublicRecordsScreen() {
         {status === "active" && (() => {
           const remote = remoteStatus(item.id);
           if (remote === "local") return null;
-          const why = rejectionFor(item.id);
-          const text = remote === "pending" ? r.pending : remote === "rejected" ? r.rejected(friendlyRejection(why ?? "")) : r.synced;
-          return <Text accessibilityLiveRegion="polite" style={{ color: remote === "rejected" ? colors.error : remote === "pending" ? colors.warning : colors.success, fontSize: 12, fontWeight: "700", marginTop: 8 }}>{text}</Text>;
+          const why = rejectionFor(item.id) ?? "";
+          const text = remote === "sending" ? r.sending : remote === "error" ? r.error(why) : remote === "review" ? r.review : remote === "approved" ? r.approved : r.rejected(why);
+          const color = remote === "error" || remote === "rejected" ? colors.error : remote === "approved" ? colors.success : colors.warning;
+          return <Text accessibilityLiveRegion="polite" style={{ color, fontSize: 12, fontWeight: "700", marginTop: 8 }}>{text}</Text>;
         })()}
 
         {status === "no-location" ? (

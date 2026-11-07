@@ -2,13 +2,16 @@ import "@/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
-import { Platform } from "react-native";
+import { ActivityIndicator, Platform, View } from "react-native";
+import { useColors } from "@/hooks/use-colors";
 import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider } from "@/contexts/AppContext";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { LoginScreen } from "@/components/LoginScreen";
 import { DevCollabPanel } from "@/components/DevCollabPanel";
 import { DiscoveryToast } from "@/components/DiscoveryToast";
 import { PublicationsProvider } from "@/contexts/PublicationsContext";
@@ -95,14 +98,16 @@ export default function RootLayout() {
           {/* Default to hiding native headers so raw route segments don't appear (e.g. "(tabs)", "products/[id]"). */}
           {/* If a screen needs the native header, explicitly enable it and set a human title via Stack.Screen options. */}
           {/* in order for ios apps tab switching to work properly, use presentation: "fullScreenModal" for login page, whenever you decide to use presentation: "modal*/}
-          <PublicationsProvider>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="oauth/callback" />
-          </Stack>
+          <AuthGate>
+            <PublicationsProvider>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="oauth/callback" />
+            </Stack>
+            <DiscoveryToast />
+            </PublicationsProvider>
+          </AuthGate>
           <StatusBar style="auto" />
-          <DiscoveryToast />
-          </PublicationsProvider>
           {__DEV__ && Platform.OS !== "web" && typeof window !== "undefined" && <DevCollabPanel />}
         </QueryClientProvider>
       </trpc.Provider>
@@ -113,7 +118,8 @@ export default function RootLayout() {
 
   if (shouldOverrideSafeArea) {
     return (
-      <AppProvider>
+      <AuthProvider>
+      <AccountScopedApp>
         <ThemeProvider>
           <SafeAreaProvider initialMetrics={providerInitialMetrics}>
             <SafeAreaFrameContext.Provider value={frame}>
@@ -123,17 +129,39 @@ export default function RootLayout() {
             </SafeAreaFrameContext.Provider>
           </SafeAreaProvider>
         </ThemeProvider>
-      </AppProvider>
+      </AccountScopedApp>
+      </AuthProvider>
     );
   }
 
   return (
-    <AppProvider>
+    <AuthProvider>
+    <AccountScopedApp>
       <ThemeProvider>
         <SafeAreaProvider initialMetrics={providerInitialMetrics}>
           {content}
         </SafeAreaProvider>
       </ThemeProvider>
-    </AppProvider>
+    </AccountScopedApp>
+    </AuthProvider>
   );
+}
+
+/** Cada conta tem o próprio caderno: trocar de conta recarrega os dados daquela conta. */
+function AccountScopedApp({ children }: { children: React.ReactNode }) {
+  const { account } = useAuth();
+  const namespace = account?.id;
+  return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}>{children}</AppProvider>;
+}
+
+/** Login obrigatório: sem conta aberta, mostra a tela de entrar. */
+function AuthGate({ children }: { children: React.ReactNode }) {
+  const { status, account } = useAuth();
+  const colors = useColors();
+  if (status === "loading") {
+    return <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: colors.background }}><ActivityIndicator color={colors.primary} size="large" /></View>;
+  }
+  if (status === "signedOut") return <LoginScreen />;
+  // A chave remonta as telas e os dados ao trocar de conta.
+  return <React.Fragment key={account?.id ?? "local"}>{children}</React.Fragment>;
 }

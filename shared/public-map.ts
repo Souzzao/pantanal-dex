@@ -132,6 +132,8 @@ export type PublicRecord = {
   owner: "me" | "others";
   /** Registro de demonstração, sempre identificado como exemplo na interface. */
   sample?: boolean;
+  /** Situação na auditoria (servidor). Pendentes aparecem com o selo "aguardando verificação". */
+  status?: "pending" | "approved";
 };
 
 function hasValidCoordinates(sighting: Pick<Sighting, "latitude" | "longitude">): sighting is { latitude: number; longitude: number } {
