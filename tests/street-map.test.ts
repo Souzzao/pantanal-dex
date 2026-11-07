@@ -25,9 +25,13 @@ describe("página do mapa de ruas", () => {
     expect(LEAFLET_JS.toLowerCase()).not.toContain("</script");
   });
 
-  it("mostra o crédito do OpenStreetMap em todas as camadas", () => {
+  it("usa satélite Sentinel-2 com crédito e nomes como camada opcional", () => {
+    const [satellite, names] = TILE_LAYERS;
+    expect(satellite.overlay).toBe(false);
+    expect(satellite.attribution).toContain("Copernicus Sentinel data 2024");
+    expect(names.overlay).toBe(true);
+    expect(names.attribution).toContain("OpenStreetMap");
     for (const layer of TILE_LAYERS) {
-      expect(layer.attribution).toContain("OpenStreetMap");
       expect(layer.url.startsWith("https://")).toBe(true);
       expect(html).toContain(layer.url);
     }

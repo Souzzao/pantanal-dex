@@ -82,31 +82,30 @@ export function serializeState(state: StreetMapState): string {
   });
 }
 
-/** Camadas do mapa. Todas grátis, sem chave, com crédito obrigatório. */
+/**
+ * Mapa de satélite: mosaico Sentinel-2 sem nuvens (EOxCloudless 2024, EOX IT Services), grátis para
+ * uso não comercial com crédito (CC BY-NC-SA 4.0). Resolução de 10 m: mostra rios, matas e áreas
+ * alagadas; além do zoom 14 a imagem é ampliada (fica borrada, sem telhados).
+ * Por cima, uma camada opcional de nomes e divisas (dados do OpenStreetMap, desenho da EOX).
+ */
 export const TILE_LAYERS = [
   {
-    id: "ruas",
-    name: "Ruas",
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: "abcd",
-    maxZoom: 19,
-  },
-  {
-    id: "relevo",
-    name: "Relevo",
-    url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, SRTM | &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
-    subdomains: "abc",
+    id: "satelite",
+    name: "Satélite",
+    url: "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg",
+    attribution: '<a href="https://cloudless.eox.at">EOxCloudless</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2024)',
+    maxNativeZoom: 14,
     maxZoom: 17,
+    overlay: false,
   },
   {
-    id: "osm",
-    name: "OpenStreetMap",
-    url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    subdomains: "",
-    maxZoom: 19,
+    id: "nomes",
+    name: "Nomes e divisas",
+    url: "https://tiles.maps.eox.at/wmts/1.0.0/overlay_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.png",
+    attribution: 'Nomes: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, desenho EOX',
+    maxNativeZoom: 16,
+    maxZoom: 17,
+    overlay: true,
   },
 ] as const;
 
@@ -120,19 +119,17 @@ const PAGE_SCRIPT = String.raw`
     else if (window.parent && window.parent !== window) window.parent.postMessage(text, "*");
   }
 
-  var map = L.map("map", { zoomControl: false, worldCopyJump: true, minZoom: 2, attributionControl: true }).setView([-17.5, -57.0], 6);
+  var map = L.map("map", { zoomControl: false, worldCopyJump: true, minZoom: 2, maxZoom: 17, attributionControl: true }).setView([-17.5, -57.0], 6);
   L.control.zoom({ position: "bottomright" }).addTo(map);
   L.control.scale({ imperial: false, position: "bottomleft" }).addTo(map);
 
-  var base = {};
-  LAYERS.forEach(function (layer, index) {
-    var options = { maxZoom: layer.maxZoom, attribution: layer.attribution };
-    if (layer.subdomains) options.subdomains = layer.subdomains;
-    var tiles = L.tileLayer(layer.url, options);
-    base[layer.name] = tiles;
-    if (index === 0) tiles.addTo(map);
+  var base = {}, overlays = {};
+  LAYERS.forEach(function (layer) {
+    var tiles = L.tileLayer(layer.url, { maxZoom: layer.maxZoom, maxNativeZoom: layer.maxNativeZoom, attribution: layer.attribution });
+    if (layer.overlay) overlays[layer.name] = tiles; else base[layer.name] = tiles;
+    tiles.addTo(map);
   });
-  L.control.layers(base, null, { position: "bottomright" }).addTo(map);
+  L.control.layers(base, overlays, { position: "bottomright" }).addTo(map);
 
   // Avisa o app se os azulejos não carregam (sem internet), para ele oferecer o mapa offline.
   var loaded = 0, failed = 0, reported = null;
@@ -184,7 +181,7 @@ const PAGE_SCRIPT = String.raw`
       var title = countLabel(items.length) + (high ? " · " + state.labels.high : "");
       if (cellMode) {
         var c = items[0], h = 0.05;
-        L.rectangle([[c.lat - h, c.lon - h], [c.lat + h, c.lon + h]], { color: color, weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.35 : 0.22 })
+        L.rectangle([[c.lat - h, c.lon - h], [c.lat + h, c.lon + h]], { color: isSelected ? "#FACC15" : "#ffffff", weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.45 : 0.32 })
           .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
       }
       var size = Math.min(58, 30 + Math.round(Math.sqrt(items.length) * 6));
@@ -245,14 +242,14 @@ const PAGE_SCRIPT = String.raw`
 `;
 
 const PAGE_CSS = `
-html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#e8eef0;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
+html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
 .bubble{border-radius:50%;background:#195946;color:#fff;font-weight:800;font-size:14px;text-align:center;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
 .bubble.high{background:#C2410C}
 .bubble.sel{border-color:#FACC15;border-width:4px}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
 #hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(25,89,70,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
 .leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#195946;font-weight:800;font-size:13px;text-decoration:none}
-.leaflet-control-layers-toggle::after{content:"Camadas"}
+.leaflet-control-layers-toggle::after{content:"Nomes"}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
 .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px;font-size:20px}
 `;

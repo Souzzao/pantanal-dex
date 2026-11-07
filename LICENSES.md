@@ -56,7 +56,8 @@ A página oficial do [ICMBio sobre o Pantanal](https://www.gov.br/icmbio/pt-br/a
 
 ## Mapas
 
-- **Mapa de ruas** (Mapa público, "Onde foi o avistamento?" e mapa dos avistamentos): desenhado com [Leaflet](https://leafletjs.com) 1.9.4 (BSD-2-Clause), embutido no app em `shared/leaflet-assets.ts` (gerado por `scripts/build-leaflet-assets.mjs`).
-- **Dados do mapa:** © colaboradores do [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL). Camadas: "Ruas" (© [CARTO](https://carto.com/attributions), uso gratuito não comercial), "Relevo" (© [OpenTopoMap](https://opentopomap.org), CC-BY-SA) e "OpenStreetMap" (servidor padrão da OSMF, [política de uso](https://operations.osmfoundation.org/policies/tiles/)). O crédito aparece no canto do mapa e não pode ser removido.
+- **Mapa de satélite** (Mapa público, "Onde foi o avistamento?" e mapa dos avistamentos): desenhado com [Leaflet](https://leafletjs.com) 1.9.4 (BSD-2-Clause), embutido no app em `shared/leaflet-assets.ts` (gerado por `scripts/build-leaflet-assets.mjs`).
+- **Imagem:** "EOxCloudless https://cloudless.eox.at by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2024)", licença [CC BY-NC-SA 4.0](https://cloudless.eox.at/license-non-commercial): **uso não comercial** com crédito (projeto acadêmico). Resolução de 10 m.
+- **Nomes e divisas (camada opcional):** dados © colaboradores do [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL), desenho da EOX.
 - **Mapa offline:** continentes do [Natural Earth](https://www.naturalearthdata.com) (domínio público) e contorno do Pantanal do IBGE 2025.
-- Para uso comercial ou com muitos usuários, trocar a camada por um provedor com contrato (ex.: MapTiler, Stadia ou Mapbox) — só muda a URL em `TILE_LAYERS`.
+- O crédito aparece no canto do mapa e não pode ser removido. Para uso comercial, trocar a imagem por um provedor com contrato (ex.: Esri World Imagery com conta ArcGIS, MapTiler ou Mapbox): muda só a URL em `TILE_LAYERS`.

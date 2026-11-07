@@ -51,14 +51,14 @@ export function SightingLocationModal({ visible, initial, onClose, onConfirm }: 
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 22, fontWeight: "800" }}>Onde foi o avistamento?</Text>
       <Text style={{ color: colors.muted, marginBottom: 8 }}>Toque no mapa (ou arraste o marcador). Pode ser em qualquer lugar do mundo.</Text>
       <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
-        {toggle("Mapa de ruas", mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); })}
+        {toggle("Satélite", mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); })}
         {toggle("Mapa offline", mapKind === "offline", () => setMapKind("offline"))}
       </View>
-      {noTiles && mapKind === "offline" && <Text style={{ color: colors.warning, marginBottom: 6 }}>Sem internet para o mapa de ruas: usando o mapa offline.</Text>}
+      {noTiles && mapKind === "offline" && <Text style={{ color: colors.warning, marginBottom: 6 }}>Sem internet para o satélite: usando o mapa offline.</Text>}
     </View>
     <View style={{ flex: 1, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.border }}>
       {mapKind === "streets"
-        ? <StreetMap state={mapState} onEvent={onMapEvent} accessibilityLabel="Mapa com ruas e rios. Toque para escolher a localização do avistamento" />
+        ? <StreetMap state={mapState} onEvent={onMapEvent} accessibilityLabel="Mapa de satélite. Toque para escolher a localização do avistamento" />
         : <ScrollView contentContainerStyle={{ padding: 12 }}><PantanalMap selected={hasPoint ? point : undefined} onSelect={setPoint} /></ScrollView>}
     </View>
     <View style={{ paddingHorizontal: 16, paddingTop: 10 }}>

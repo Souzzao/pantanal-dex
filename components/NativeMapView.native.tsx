@@ -27,11 +27,11 @@ export default function NativeMapView() {
   const toggle = (label: string, active: boolean, onPress: () => void) => <Pressable onPress={onPress} accessibilityRole="button" accessibilityState={{ selected: active }} style={{ paddingHorizontal: 12, minHeight: 36, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface }}><Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text></Pressable>;
   return <View style={{ marginTop: 14 }}>
     <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
-      {toggle("Mapa de ruas", mapKind === "streets", () => setMapKind("streets"))}
+      {toggle("Satélite", mapKind === "streets", () => setMapKind("streets"))}
       {toggle("Mapa offline", mapKind === "offline", () => setMapKind("offline"))}
     </View>
     {mapKind === "streets"
-      ? <View style={{ height: 460, borderRadius: 14, overflow: "hidden", borderWidth: 1, borderColor: colors.border }}><StreetMap state={state} onEvent={onEvent} accessibilityLabel="Mapa dos seus avistamentos com ruas e rios" /></View>
+      ? <View style={{ height: 460, borderRadius: 14, overflow: "hidden", borderWidth: 1, borderColor: colors.border }}><StreetMap state={state} onEvent={onEvent} accessibilityLabel="Mapa de satélite dos seus avistamentos" /></View>
       : <PantanalMap points={points} onOpenPoint={open} />}
   </View>;
 }

@@ -78,9 +78,9 @@ const TEXT = {
 } as const;
 
 const EXTRA = {
-  pt: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Mapa de ruas", offlineMap: "Mapa offline", noTiles: "Sem internet para o mapa de ruas: mostrando o mapa offline.", fitAll: "Ver tudo", close: "Fechar", high: "alta incidência", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público com ruas e rios. Toque num círculo para ver os registros." },
-  en: { filters: "Filters", hideFilters: "Hide filters", streets: "Street map", offlineMap: "Offline map", noTiles: "No internet for the street map: showing the offline map.", fitAll: "Show all", close: "Close", high: "high incidence", records: (n: number) => `${n} ${n === 1 ? "record" : "records"}`, mapLabel: "Public map with streets and rivers. Tap a circle to see its records." },
-  es: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Mapa de calles", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el mapa de calles: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público con calles y ríos. Toca un círculo para ver sus registros." },
+  pt: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa offline", noTiles: "Sem internet para o satélite: mostrando o mapa offline.", fitAll: "Ver tudo", close: "Fechar", high: "alta incidência", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público em imagem de satélite. Toque num círculo para ver os registros." },
+  en: { filters: "Filters", hideFilters: "Hide filters", streets: "Satellite", offlineMap: "Offline map", noTiles: "No internet for the satellite map: showing the offline map.", fitAll: "Show all", close: "Close", high: "high incidence", records: (n: number) => `${n} ${n === 1 ? "record" : "records"}`, mapLabel: "Public satellite map. Tap a circle to see its records." },
+  es: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el satélite: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público satelital. Toca un círculo para ver sus registros." },
 } as const;
 
 export default function PublicMapScreen() {
