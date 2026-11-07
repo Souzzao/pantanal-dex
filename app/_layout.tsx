@@ -11,6 +11,7 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider } from "@/contexts/AppContext";
 import { DevCollabPanel } from "@/components/DevCollabPanel";
 import { DiscoveryToast } from "@/components/DiscoveryToast";
+import { PublicationsProvider } from "@/contexts/PublicationsContext";
 import {
   SafeAreaFrameContext,
   SafeAreaInsetsContext,
@@ -94,12 +95,14 @@ export default function RootLayout() {
           {/* Default to hiding native headers so raw route segments don't appear (e.g. "(tabs)", "products/[id]"). */}
           {/* If a screen needs the native header, explicitly enable it and set a human title via Stack.Screen options. */}
           {/* in order for ios apps tab switching to work properly, use presentation: "fullScreenModal" for login page, whenever you decide to use presentation: "modal*/}
+          <PublicationsProvider>
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="oauth/callback" />
           </Stack>
           <StatusBar style="auto" />
           <DiscoveryToast />
+          </PublicationsProvider>
           {__DEV__ && Platform.OS !== "web" && typeof window !== "undefined" && <DevCollabPanel />}
         </QueryClientProvider>
       </trpc.Provider>
