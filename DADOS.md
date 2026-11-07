@@ -56,3 +56,24 @@ Arquivo com todas as regras: `supabase/migrations/20261107000000_public_feed.sql
 - Login opcional (Supabase Auth) para levar os registros para outro celular.
 - Apagar de vez as linhas encerradas há mais de 30 dias (`pg_cron`).
 - Moderação/denúncia de registros públicos estranhos.
+
+## 6. Contas, papéis e auditoria (07/11)
+
+Login obrigatório por **e-mail e senha** (Supabase Auth). Depois do primeiro acesso, a conta fica guardada no aparelho e o app abre **sem internet** (caderno da conta e catálogo); o que depende do servidor espera a conexão.
+
+| Papel | O que faz |
+|---|---|
+| Usuário | Registra avistamentos (sempre guardados no aparelho, na conta) e publica os compartilháveis. |
+| Auditor | Confere a **pilha** de pendentes: vê foto enviada, foto do catálogo, espécie, data, local exato e observação; pode corrigir a espécie; aprova ou reprova **com motivo**. |
+| Dev | Tudo do auditor + escolhe os papéis das contas e vê os números (contas, pendentes, aprovados, reprovados, decisões do dia). |
+
+**O que muda no servidor com a conta:**
+- `profiles`: nome e papel (só o dev muda papel, pela função `dev_set_role`; ninguém se promove sozinho).
+- `public_sightings` ganha `owner_id`, `status` (pendente/aprovado/reprovado), `exact_lat/exact_lon`, `notes`, `photo_path` e os dados da revisão. **O público continua vendo só espécie, data, hora, célula de ~11 km e a situação**; coordenada exata, observação e foto só o auditor vê (pela função `audit_queue`), e a pessoa autorizou isso ao publicar.
+- `sighting_reviews`: histórico de cada decisão (quem, quando, espécie antes/depois, motivo).
+- Fotos: bucket privado `sighting-photos`, pasta da própria conta; só o dono e os auditores abrem (link temporário de 10 min).
+- Reprovados somem do mapa; pendentes aparecem com borda tracejada e o selo "aguardando verificação".
+
+**No aparelho:** cada conta tem o próprio caderno (`pantanal-dex:notebook-v2:<id da conta>`). A primeira conta que entrar herda o caderno de antes do login. Sair da conta não apaga nada.
+
+Migração: `supabase/migrations/20261107160000_accounts_audit.sql` (aplicada; testada no Supabase com quatro contas simuladas, uma por papel).
