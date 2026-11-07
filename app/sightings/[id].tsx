@@ -6,12 +6,11 @@ import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
-import { species } from "@/shared/pantanal";
+import { species, UNKNOWN_SPECIES_ID } from "@/shared/pantanal";
 import { createExportJson, toExportableSighting } from "@/shared/exports";
+import { roundToPublicLocationGrid } from "@/shared/location";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
-
-const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
 
 export default function SightingDetailScreen() {
   const colors = useColors();
@@ -19,7 +18,7 @@ export default function SightingDetailScreen() {
   const { sightings, deleteSighting } = useApp();
   const [sharing, setSharing] = useState(false);
   const sighting = sightings.find((item) => item.id === id);
-  const animal = species.find((item) => item.id === sighting?.speciesId);
+  const animal = species.find((item) => item.id === sighting?.speciesId) ?? (sighting?.speciesId === UNKNOWN_SPECIES_ID ? { commonName: "Espécie não identificada", scientificName: "Registrada como “Não sei”", images: [] } : undefined);
 
   if (!sighting || !animal) {
     return (
@@ -34,8 +33,8 @@ export default function SightingDetailScreen() {
   }
 
   const showExactLocation = sighting.visibility === "private" && sighting.locationPrecision === "exact";
-  const displayLatitude = sighting.latitude === undefined ? undefined : showExactLocation ? sighting.latitude : roundCoordinate(sighting.latitude);
-  const displayLongitude = sighting.longitude === undefined ? undefined : showExactLocation ? sighting.longitude : roundCoordinate(sighting.longitude);
+  const displayLatitude = sighting.latitude === undefined ? undefined : showExactLocation ? sighting.latitude : roundToPublicLocationGrid(sighting.latitude);
+  const displayLongitude = sighting.longitude === undefined ? undefined : showExactLocation ? sighting.longitude : roundToPublicLocationGrid(sighting.longitude);
 
   const shareSighting = async () => {
     if (sharing) return;
@@ -76,7 +75,7 @@ export default function SightingDetailScreen() {
           <Text style={{ color: colors.muted, marginTop: 6 }}>{sighting.date}{sighting.time ? ` · ${sighting.time}` : ""}</Text>
           <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16 }}>Local</Text>
           <Text style={{ color: colors.muted, marginTop: 6 }}>{sighting.locationLabel || "Não informado"}</Text>
-          {displayLatitude !== undefined && displayLongitude !== undefined && <Text style={{ color: colors.muted, marginTop: 5 }}>Coordenadas: {displayLatitude.toFixed(showExactLocation ? 4 : 2)}, {displayLongitude.toFixed(showExactLocation ? 4 : 2)}{showExactLocation ? "" : " · posição aproximada"}</Text>}
+          {displayLatitude !== undefined && displayLongitude !== undefined && <Text style={{ color: colors.muted, marginTop: 5 }}>Coordenadas: {displayLatitude.toFixed(showExactLocation ? 4 : 1)}, {displayLongitude.toFixed(showExactLocation ? 4 : 1)}{showExactLocation ? "" : " · posição aproximada (~11 km)"}</Text>}
           <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16 }}>Quantidade</Text>
           <Text style={{ color: colors.muted, marginTop: 6 }}>{sighting.quantity ?? "Não informada"}</Text>
           <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16 }}>Visibilidade</Text>

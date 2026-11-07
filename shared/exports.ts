@@ -1,9 +1,8 @@
 import { sanitizeStoredSightings, type Sighting } from "./pantanal";
+import { roundToPublicLocationGrid } from "./location";
 
 export const EXPORT_VERSION = "1.0";
 export const EXPORT_CSV_HEADER = "id,speciesId,date,time,locationLabel,latitude,longitude,locationPrecision,quantity,notes,visibility";
-
-const roundCoordinate = (value: number) => Math.round(value * 100) / 100;
 
 export function toExportableSighting(sighting: Sighting): Sighting {
   if (sighting.visibility !== "shareable" || sighting.latitude === undefined || sighting.longitude === undefined) {
@@ -11,8 +10,8 @@ export function toExportableSighting(sighting: Sighting): Sighting {
   }
   return {
     ...sighting,
-    latitude: roundCoordinate(sighting.latitude),
-    longitude: roundCoordinate(sighting.longitude),
+    latitude: roundToPublicLocationGrid(sighting.latitude),
+    longitude: roundToPublicLocationGrid(sighting.longitude),
     locationPrecision: "approximate",
   };
 }

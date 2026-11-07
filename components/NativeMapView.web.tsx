@@ -1,3 +1,1 @@
-export default function NativeMapView() {
-  return null;
-}
+export { default } from "./NativeMapView.native";

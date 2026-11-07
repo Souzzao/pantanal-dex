@@ -10,7 +10,7 @@ Entrega: APK Android, **11/11/2026**. Duração alvo: **7 a 8 minutos** de demon
 - [ ] Localização e câmera do aparelho ativadas; ter **duas ou três fotos de animais na galeria** (a foto agora é obrigatória).
 - [ ] Idioma do app em Português.
 - [ ] Modo avião à mão para mostrar o funcionamento offline.
-- [ ] **Atenção ao GPS:** o limite do app é o bioma Pantanal do IBGE. Cuiabá, Várzea Grande, Poconé (centro) e os campi da UNEMAT fora de Cáceres ficam **fora** do bioma. Na sala, "Usar localização do aparelho" vai ser recusado; use **"Escolher local no mapa"** e toque num ponto dentro do contorno verde.
+- [ ] Para mostrar que o app vale para o mundo todo: tenha à mão uma coordenada de outro país (ex.: Paris, 48.8566 / 2.3522).
 
 ## Roteiro
 
@@ -20,7 +20,7 @@ Entrega: APK Android, **11/11/2026**. Duração alvo: **7 a 8 minutos** de demon
 | 2 | 0:40 | **Animais** → buscar "onça" → abrir a ficha | Busca por nome popular ou científico; filtros por grupo e ambiente; a ficha traz descrição, habitat, alimentação, **fontes e créditos/licença de cada imagem**. | RF08, RF09, RF10, RN06 |
 | 3 | 1:40 | Na ficha, o selo **"#003 · Ainda não avistada"** | "Cada espécie tem um número na coleção. Ela ainda não foi descoberta porque não há registro meu." | Módulo COLEÇÃO |
 | 4 | 2:00 | **Registrar avistamento** a partir da ficha | A espécie já vem preenchida. O topo do formulário mostra "Foto e localização são obrigatórias" e o contador "N/30 novos registros hoje neste aparelho". Anexar a foto (galeria ou câmera, até 10 MB) e usar a localização do aparelho, ou **Escolher local no mapa** offline do Pantanal (contorno IBGE 2025). O app pede permissão só nesse momento; se a pessoa negar, dá para usar a galeria e o ponto manual. | UC06, RF04, RF05, UC06-A1 |
-| 5 | 3:00 | Exceções do UC06 | Tentar salvar **sem foto** → "Adicione uma fotografia…" (E1). Tocar em **"Usar localização do aparelho"** dentro da sala: como a sala fica fora do bioma, o app recusa com "Escolha um ponto dentro do bioma Pantanal…" (E3). Em seguida, **"Escolher local no mapa"** e tocar dentro do contorno. Data futura → erro (E2). Explicar o limite de 30 novos registros por dia (E4) e o máximo de 500 caracteres nas observações. | UC06 E1–E4, RN-01 a RN-05, RNF05 |
+| 5 | 3:00 | Exceções do UC06 e alcance mundial | Tentar salvar **sem foto** → "Adicione uma fotografia…" (E1). Data futura → erro (E2). Explicar o limite de 30 novos registros por dia (E4) e as observações com no máximo 500 caracteres. **Escolher local no mapa** → afastar com "−" até o mundo e marcar outro país: o app aceita registros de qualquer lugar; o Pantanal é só o recorte do catálogo deste MVP. | UC06 E1, E2, E4, RN-01, RN-02, RN-05, RNF05 |
 | 6 | 3:40 | Escolha **Pessoal / Compartilhável** e salvar → aparece **"Nova espécie descoberta! #003 · Onça-pintada"** | "A coordenada exata fica só no aparelho; registros compartilháveis saem arredondados para uma célula de 0,1° (~11 km), protegendo espécies sensíveis contra caça e tráfico." Ao salvar, o aviso de descoberta aparece no topo. | RN03, RF11, RNF07, módulo COLEÇÃO |
 | 7 | 4:20 | Novo registro com **"Não sei"** (UC06-A2) | Registrar um animal que a pessoa não identificou. Ele entra no caderno como "Espécie não identificada". | UC06-A2 |
 | 8 | 4:50 | **Avistamentos** (lista) → abrir o registro "Não sei" → **editar** e escolher a espécie → salvar | Consultar, editar e excluir os próprios registros (filtros por espécie, grupo, ambiente e período). Ao identificar a espécie, a coleção registra a descoberta e o aviso aparece de novo. | UC07, UC08, RF10 |
@@ -40,7 +40,8 @@ A especificação completa tem 15 RFs, 10 RNFs e 10 RNs para um sistema com serv
 ## Perguntas prováveis
 
 - **"Os dados são reais?"** — Sim. As 102 espécies do catálogo trazem fontes (GBIF, Wikimedia Commons) e licença por imagem. Conservação só aparece quando há fonte oficial ICMBio/MMA; a API da IUCN não é usada.
-- **"E se não tiver GPS?"** — A pessoa escolhe o ponto no mapa offline do Pantanal (UC06 A1); pontos fora do bioma são recusados (E3).
+- **"E se não tiver GPS?"** — A pessoa escolhe o ponto no mapa offline ou digita as coordenadas (UC06 A1).
+- **"Por que só animais do Pantanal?"** — O app registra avistamentos em qualquer lugar do mundo; o catálogo começa pelo Pantanal para validar o MVP sem catalogar todas as espécies de uma vez. A regra E3 (recusar fora do Pantanal) da especificação original foi retirada por decisão de escopo.
 - **"Como protege espécies ameaçadas?"** — A coordenada exata nunca sai do aparelho sem confirmação; o que é compartilhado vai arredondado para 0,1°.
 - **"Qual metodologia vocês usaram?"** — Incremental, com quadro Kanban (a fazer / em andamento / concluído) e testes automatizados (100+ testes de domínio rodando a cada mudança).
 

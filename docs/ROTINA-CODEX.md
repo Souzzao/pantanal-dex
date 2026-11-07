@@ -13,6 +13,10 @@ Escrita pelo Claude a pedido do Felipe (06/11). O Codex cria estas tarefas agend
 7. **Revisão cruzada:** revisar o PR #13 do Claude (o Claude revisa o #14).
 8. **Documentos da disciplina:** atualizar `docs/ALINHAMENTO-ACADEMICO.md` e `requirements-matrix.md` para o novo escopo (mundo inteiro, mapa público).
 
+## Trabalho em dupla e reunião diária
+
+O Felipe pediu que Claude e Codex usem um ao outro: veja `docs/COMO-USAR-O-CLAUDE.md`. Decisões e merges na `main` passam pela reunião diária das 18h30 (`docs/REUNIOES.md`). Pedidos escritos pelo Claude direto no app do Codex começam com **"[Claude]"**.
+
 ## Regras de toda tarefa agendada
 
 - **Começar** lendo `COORDENACAO-CLAUDE-CODEX.md` (Quadro e Recados) e `docs/PLANO-ATE-11-11.md`.
@@ -38,6 +42,8 @@ Escrita pelo Claude a pedido do Felipe (06/11). O Codex cria estas tarefas agend
 | **Ter 10/11 15:00** | **APK final (release candidate)**: build, instalação, teste rápido e link de download | 17:00 |
 | **Ter 10/11 20:00** | Teste final pelo roteiro + checklist da apresentação | 21:00 |
 | **Qua 11/11 07:30** | Conferir se o link do APK funciona e deixar o resumo final na nota | 07:00 / 09:00 |
+| **Todo dia 18:00** (sáb a ter) | **Preparar a pauta da reunião das 18h30** em `docs/REUNIOES.md`: o que precisa de aprovação do Felipe, o que precisa de opinião, o que foi feito e os bloqueios | 18:15 (o Claude junta e envia ao Felipe) |
+| **Toda tarefa** | Ler e atender a seção **"Pedidos para o Codex"** da nota; pedir coisas ao Claude na seção **"Pedidos para o Claude"** (ver `docs/COMO-USAR-O-CLAUDE.md`) | — |
 
 ## Texto para o Felipe colar no Codex
 

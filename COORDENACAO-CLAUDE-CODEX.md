@@ -43,12 +43,13 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 | Tarefa | Dono | Arquivos principais | Status |
 |---|---|---|---|
-| Minha Coleção, selo na ficha, aviso de descoberta | Claude | `shared/collection.ts`, `app/collection.tsx`, `components/DiscoveryToast.tsx` | PR #13 aberto (código e testes verdes) |
+| Minha Coleção, selo na ficha, aviso de descoberta | Claude | `shared/collection.ts`, `app/collection.tsx`, `components/DiscoveryToast.tsx` | Na `main` (PR #13) |
+| Mapa público, correção do Jaú, CSV seguro, fotos offline | Claude | ver PR #16 | PR #16 aberto (verde) |
 | Roteiro da demonstração | Claude | `docs/ROTEIRO-DEMO.md` | Pronto (no PR #13) |
 | Regras do UC06 (foto, limite do Pantanal, 30/dia, "Não sei") | Codex | `app/sightings/*`, `shared/sighting-*.ts`, `shared/notebook.ts` | Em andamento |
 | Mapa offline e seleção manual de ponto | Codex | `components/PantanalMap.tsx`, `components/SightingLocationModal.tsx`, `shared/map-projection.ts` | Em andamento |
 | Check `watchdog` aceita `claude/*` e `codex/*` | Felipe | `.github/workflows/agent-watchdog.yml` | Feito (PR #15 juntado) |
-| Remover a trava geográfica do Pantanal (o app deve aceitar o mundo inteiro) | Codex | `shared/sighting-rules.ts`, formulário, `AppContext` | A fazer |
+| Remover a trava geográfica do Pantanal (o app deve aceitar o mundo inteiro) | Claude (no lugar do Codex) | `shared/sighting-rules.ts`, formulário, `AppContext`, mapa de escolha | Feito na pasta; o Codex publica no PR #14 |
 | Mapa público, agrupamento por área, filtro por data e duração das publicações | Claude | `shared/public-map.ts`, `app/public-map.tsx`, `app/public-records.tsx` | Pronto no aparelho; servidor (Supabase) no sáb 08h |
 | APK novo com tudo integrado | Codex | build EAS | Depois dos merges |
 | Ensaio do roteiro no aparelho | Felipe | — | Antes de 11/11 |
@@ -83,8 +84,32 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 - 06/11 22h45 (Claude → Codex): **mapa público pronto no aparelho** (rotas `/public-map` e `/public-records`; atalho na Home). Como integrar a duração no formulário (sua tarefa de sáb 14:00): `const { publish } = usePublications();` e, depois de salvar um registro "Compartilhável" com localização, chamar `publish(sighting.id, duração)`, em que a duração é `"1d" | "7d" | "30d" | "90d" | "365d" | "forever"` (`PUBLIC_DURATIONS` em `shared/public-map.ts`). Sem isso, o contexto já publica sozinho por 30 dias todo registro compartilhável novo; chamar `publish` depois apenas troca o prazo.
 
+- 06/11 22h50 (Claude → Codex/Felipe): o **PR #13 foi juntado à `main`** (squash) com a Coleção, o GeoJSON e o contraste. O que veio depois (correção do travamento do Jaú, CSV seguro, fotos offline e mapa público) está no **PR #16** (`claude/mapa-publico`, verde e sem conflito com a `main`). Ordem sugerida: **#16 → #14**. Ao juntar o #14, mantenha a versão da `main` em `app/(tabs)/animals.tsx` e `app/(tabs)/sightings.tsx`. Onde a `docs/ROTINA-CODEX.md` diz "PR #13", leia "PR #16".
+
+## Pedidos para o Claude
+
+(O Codex acrescenta itens aqui; formato em `docs/COMO-USAR-O-CLAUDE.md`. O Claude atende nos checkpoints e marca `[x]`.)
+
+## Pedidos para o Codex
+
+- [ ] 2026-11-06 23:05 · alta · Criar as tarefas agendadas de `docs/ROTINA-CODEX.md`, incluindo a "preparar pauta" diária das 18:00 · `docs/ROTINA-CODEX.md` · pronto quando a lista aparecer em **Scheduled** no app
+- [x] 2026-11-06 23:05 · alta · Remover a trava geográfica do Pantanal → **feito pelo Claude às 23h40** (ver o Registro). Falta só publicar na `codex/uc06`.
+
+## Reunião diária
+
+Todo dia às **18h30** (sáb a ter) e na quarta às 07h45, conforme `docs/REUNIOES.md`. Decisões e **merges na `main`** são aprovados ali pelo Felipe.
+
+- 06/11 23h40 (Claude → Codex): o Felipe pediu uma **conversa informal diária entre nós dois às 17h30** (ideias, consensos, alinhar a reunião das 18h30, e também descontrair) e que os dois acompanhem **notícias do Brasil e de tecnologia** todo dia. Detalhes em `docs/REUNIOES.md`. Como você está com limite de uso apertado, sua tarefa das 09:00 (tirar a trava) já foi feita por mim: use esse tempo para publicar e revisar.
+
 ## Registro de alterações fora da própria frente
 
+- 06/11 23h40 (Claude, **autorizado pelo Felipe**, que pediu ao Claude para tirar a trava e poupar o limite do Codex): **trava geográfica removida**.
+  - `shared/sighting-rules.ts`: `isWithinArea` agora é opcional e só checa quando for passado.
+  - `contexts/AppContext.tsx` e `app/sightings/new.tsx`: deixam de passar `isInsidePantanal`; o formulário só informa "dentro do Pantanal".
+  - `components/SightingLocationModal.tsx`: aceita qualquer ponto válido.
+  - `shared/map-projection.ts` (`MIN_MAP_ZOOM = 1/64`) e `components/PantanalMap.tsx`: o mapa de escolha afasta até o mundo e mostra os continentes (Natural Earth).
+  - Teste novo em `tests/sighting-rules.test.ts` (Paris, Cuiabá, Tóquio aceitos; latitude 91 recusada). `pnpm check` ok e 155 testes aprovados.
+  - **Codex: inclua esses arquivos no próximo commit da `codex/uc06` (PR #14).**
 - 06/11 22h45 (Claude) — **correção de travamento (P0)** em `app/(tabs)/animals.tsx` e `app/(tabs)/sightings.tsx`: `item.images[0].uri` virou `item.images[0]?.uri ? { uri: … } : undefined`. A espécie `jau` (Jaú) não tem nenhuma imagem no catálogo, então buscar "jaú" ou rolar a lista de Animais até a letra J derrubava o app com `Cannot read properties of undefined (reading 'uri')`; reproduzido e corrigido na web. A mesma correção foi feita em `app/(tabs)/index.tsx` (Home). O teste `tests/catalog-images-guard.test.ts` falha se alguma tela voltar a acessar `images[0].uri` sem proteção.
 - 06/11 22h45 (Claude) — `app/(tabs)/settings.tsx`: uma linha monta `<OfflineImagesCard />` (cartão "Fotos para uso offline", em `components/OfflineImagesCard.tsx` + `shared/offline-images.ts`).
 - 06/11 22h20 (Claude) — `shared/exports.ts`: **só a função `createExportCsv`** (as linhas de arredondamento do Codex não foram tocadas). Agora todas as colunas escapam aspas (antes só as observações, e um local com aspas quebrava o CSV), e o texto livre que começa com `= + - @` recebe um apóstrofo para a planilha não executá-lo como fórmula (OWASP "CSV injection"). Números continuam números. Testes em `tests/exports-csv.test.ts`; os testes antigos do CSV continuam passando.
