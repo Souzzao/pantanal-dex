@@ -20,9 +20,13 @@ export function readFeedConfig(env: Record<string, string | undefined>): FeedCon
   return { url, anonKey };
 }
 
-const headers = (config: FeedConfig) => ({
+/**
+ * A chave antiga (`anon`, um JWT que começa com "eyJ") também vai no Authorization.
+ * A chave nova (`sb_publishable_…`) não é JWT: vai só no cabeçalho `apikey`.
+ */
+export const headers = (config: FeedConfig): Record<string, string> => ({
   apikey: config.anonKey,
-  Authorization: `Bearer ${config.anonKey}`,
+  ...(config.anonKey.startsWith("eyJ") ? { Authorization: `Bearer ${config.anonKey}` } : {}),
   "Content-Type": "application/json",
 });
 

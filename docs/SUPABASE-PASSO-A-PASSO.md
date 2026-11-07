@@ -2,6 +2,8 @@
 
 Tempo: uns 15 minutos. Custo: zero (plano gratuito). Não precisa saber programar.
 
+> **Situação em 07/11 (09h):** os passos 1 a 4 **já foram feitos pelo Claude** pelo conector do Supabase: projeto `pantanal-dex` (org Souzaodev, São Paulo), migração aplicada, avisos de segurança conferidos. **Falta o Felipe** (o Claude não pode gravar arquivo `.env` pela ponte com o PC): criar o `.env.local` (passo 4, copiando URL e chave do painel, passo 3) e as variáveis na EAS (passo 5). Uns 5 minutos. Este guia fica para refazer do zero, se precisar.
+
 > **Regras de ouro**
 > - **Nunca cole chaves no chat** (nem com o Claude, nem com o Codex). Elas só vão para o arquivo `.env.local` e para o painel da Expo.
 > - Use **só** a chave `anon` / `publishable`. A chave `service_role` / `secret` **nunca** vai para o app, para o `.env` ou para o GitHub.
@@ -55,6 +57,8 @@ O `.env.local` não vai para o servidor da Expo quando o Codex faz o build. Por 
    - `EXPO_PUBLIC_SUPABASE_ANON_KEY` = a chave anon — ambiente **preview**, visibilidade **Plain text** (ela é pública por definição).
 3. Avise o Codex só **"variáveis do Supabase criadas na EAS"** — **sem colar os valores**. Ele faz o build `preview` normalmente.
 
+**Atalho (sem digitar nada):** no terminal, na pasta do projeto, `npx eas-cli env:push --path .env.local --environment preview` copia as duas variáveis do `.env.local` para a EAS.
+
 ## 6. Teste rápido (2 celulares ou 1 celular + Expo Go)
 
 1. No celular A: novo avistamento com visibilidade **Compartilhável** → ele entra no mapa público automaticamente (30 dias).
@@ -71,5 +75,7 @@ O `.env.local` não vai para o servidor da Expo quando o Codex faz o build. Por 
 | Erro ao rodar o SQL | Rode de novo: o arquivo pode ser executado mais de uma vez sem estragar nada. Se persistir, mande **a mensagem de erro** (não as chaves) para o Claude. |
 | Registro não sobe | Pode ter batido o limite de 30 publicações por dia por aparelho, ou a data está no futuro. |
 | Vazou a chave `service_role` | Painel → API Keys → **Reset/Roll** a chave na hora. |
+
+Sobre os avisos do painel (Security Advisor): sobram 2 avisos amarelos dizendo que `publish_sighting` e `end_publication` podem ser chamadas sem login. **É de propósito:** são a única porta de escrita e conferem segredo, grade de 0,1°, data e limite diário. O aviso vermelho de "view security definer" foi resolvido (a view agora usa as permissões de quem consulta).
 
 Detalhes do que é guardado e por quê: `DADOS.md`.

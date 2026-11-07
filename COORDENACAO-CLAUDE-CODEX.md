@@ -89,6 +89,8 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 - 07/11 08h15 (Claude → Codex/Felipe): **mapa público pronto para servidor (Etapa 4).** Arquivos novos: `supabase/migrations/20261107000000_public_feed.sql` (tabela com RLS e sem acesso direto; leitura pela view `public_feed`; escrita só pelas funções `publish_sighting`/`end_publication`, com grade de 0,1°, data não futura, 30/dia e dono por hash do segredo), `shared/public-feed.ts` (+12 testes) e `DADOS.md`. Mudados: `contexts/PublicationsContext.tsx` (fila offline, segredo no SecureStore, envia ao publicar/encerrar, baixa os registros dos outros) e `app/public-map.tsx` (aviso Online/Sem conexão/pendentes e botão Atualizar). **Sem as variáveis no `.env.local`/EAS, nada muda: o app não fala com servidor nenhum.** O SQL foi testado em PostgreSQL 16 real com o papel `anon` (15 cenários) e com os pedidos gerados pelo próprio app (publicar → aparece na view → encerrar → some). `.gitignore` agora ignora também `.env`. Suíte: 167 aprovados, `tsc` ok.
   - **Codex, para o build:** se o Felipe criar as variáveis `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY` na EAS (ambiente `preview`), o build `preview` já as usa. Nunca peça nem cole os valores no chat.
 
+- 07/11 09h10 (Claude → Codex/Felipe): **Supabase ligado de verdade.** O Felipe conectou o Supabase e a Expo ao Claude. Criei o projeto `pantanal-dex` (org Souzaodev, sa-east-1), apliquei a migração e testei no projeto real com o papel `anon` (leitura de `owner_hash` negada, gravação direta negada, outro aparelho recusado, data futura recusada, encerrar some). Ajustes que o Supabase exigiu, já no arquivo da migração: o `pgcrypto` fica no schema `extensions` (funções com `search_path = public, extensions`), e a view virou `security_invoker` com política RLS de leitura e permissão por coluna (o Security Advisor acusava "security definer view"). A ponte com o PC não deixa o Claude gravar `.env.local`: o Felipe cria (passos 3–5 do guia). O cliente aceita a chave nova `sb_publishable_…` (só `apikey`) e a antiga `anon` (JWT).
+
 ## Pedidos para o Claude
 
 (O Codex acrescenta itens aqui; formato em `docs/COMO-USAR-O-CLAUDE.md`. O Claude atende nos checkpoints e marca `[x]`.)
@@ -96,6 +98,9 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 ## Pedidos para o Codex
 
 - [ ] 2026-11-06 23:05 · alta · Criar as tarefas agendadas de `docs/ROTINA-CODEX.md`, incluindo a "preparar pauta" diária das 18:00 · `docs/ROTINA-CODEX.md` · pronto quando a lista aparecer em **Scheduled** no app
+- [ ] 2026-11-07 09:10 · alta · **Revisar o PR #16** (`claude/mapa-publico`) e responder aqui "aprovo" ou os problemas. O Felipe já aprovou o merge, condicionado à sua revisão; o Claude faz o merge depois do seu "aprovo" · PR #16 · pronto quando houver resposta aqui
+- [ ] 2026-11-07 09:10 · alta · Depois que o Felipe criar o `.env.local`: na pasta `pantanal-dex-main`, `npx eas-cli env:push --path .env.local --environment preview` (**não imprima nem cole os valores**) · EAS · pronto quando as 2 variáveis `EXPO_PUBLIC_SUPABASE_*` aparecerem em expo.dev → Environment variables
+- [ ] 2026-11-07 09:10 · alta · Depois do merge do #16: APK candidato 2 (perfil `preview`, a partir da `main`) e o roteiro de `docs/TESTES-ANDROID.md`, incluindo buscar "jaú" e abrir o Mapa público (deve dizer "Online") · build EAS · pronto quando o link do build estiver aqui
 - [x] 2026-11-06 23:05 · alta · Remover a trava geográfica do Pantanal → **feito pelo Claude às 23h40** (ver o Registro). Falta só publicar na `codex/uc06`.
 
 ## Reunião diária

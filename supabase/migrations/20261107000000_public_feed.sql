@@ -4,11 +4,13 @@
 --  * Nunca guarda a coordenada exata: só o centro da célula de 0,1° (RN03).
 --  * Sem login no MVP. Cada aparelho tem um segredo aleatório; o banco guarda só o hash
 --    (sha256) desse segredo. Só quem tem o segredo encerra ou renova a própria publicação.
---  * Ninguém lê nem escreve na tabela diretamente (RLS ligado, sem políticas para anon).
---    Leitura pela view public_feed (só registros ativos, sem dado do dono).
---    Escrita pelas funções publish_sighting e end_publication, que validam tudo.
+--  * Leitura pública só de registros ativos e sem o dado do dono: RLS com política de leitura
+--    + permissão por coluna (owner_hash fica de fora). A view public_feed é security_invoker.
+--  * Ninguém escreve na tabela diretamente: escrita só pelas funções publish_sighting e
+--    end_publication (security definer, de propósito), que validam tudo.
 --  * Limite de 30 publicações novas por aparelho por dia (mesma regra do UC06).
 
+-- No Supabase o pgcrypto fica no schema "extensions"; por isso as funções usam search_path = public, extensions.
 create extension if not exists pgcrypto;
 
 create table if not exists public.public_sightings (
@@ -28,14 +30,22 @@ create index if not exists public_sightings_active_idx on public.public_sighting
 create index if not exists public_sightings_owner_day_idx on public.public_sightings (owner_hash, published_at);
 
 alter table public.public_sightings enable row level security;
--- Nenhuma política para anon/authenticated: acesso só pela view e pelas funções abaixo.
 revoke all on public.public_sightings from anon, authenticated;
+-- Leitura: só as colunas públicas (sem owner_hash nem ended_at) e só registros ativos.
+grant select (id, species_id, observed_on, observed_time, cell_lat, cell_lon, published_at, expires_at)
+  on public.public_sightings to anon, authenticated;
+drop policy if exists "registros ativos sao publicos" on public.public_sightings;
+create policy "registros ativos sao publicos" on public.public_sightings
+  for select to anon, authenticated
+  using (ended_at is null and (expires_at is null or expires_at > now()));
+-- Sem política de insert/update/delete: escrever só pelas funções abaixo.
 
--- Leitura pública: só registros ativos, sem owner_hash.
-create or replace view public.public_feed as
+-- Leitura pública pela view (roda com as permissões de quem consulta; a política acima já
+-- filtra os registros ativos, e a view não cita colunas privadas).
+drop view if exists public.public_feed;
+create view public.public_feed with (security_invoker = true) as
   select id, species_id, observed_on, observed_time, cell_lat, cell_lon, published_at, expires_at
-  from public.public_sightings
-  where ended_at is null and (expires_at is null or expires_at > now());
+  from public.public_sightings;
 
 grant select on public.public_feed to anon, authenticated;
 
@@ -44,7 +54,7 @@ create or replace function public.publish_sighting(
   p_id text, p_species_id text, p_observed_on date, p_observed_time text,
   p_cell_lat numeric, p_cell_lon numeric, p_expires_at timestamptz, p_secret text
 ) returns void
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public, extensions as $$
 declare
   v_hash text := encode(digest(coalesce(p_secret, ''), 'sha256'), 'hex');
   v_existing text;
@@ -87,7 +97,7 @@ $$;
 
 -- Encerra antes do prazo (só o dono).
 create or replace function public.end_publication(p_id text, p_secret text) returns void
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public, extensions as $$
 begin
   update public_sightings set ended_at = now()
     where id = p_id and owner_hash = encode(digest(coalesce(p_secret, ''), 'sha256'), 'hex') and ended_at is null;

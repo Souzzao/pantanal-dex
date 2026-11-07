@@ -5,6 +5,7 @@ import {
   enqueue,
   fetchPublicFeed,
   flushQueue,
+  headers,
   generateDeviceSecret,
   operationRequest,
   publicIdFor,
@@ -28,6 +29,15 @@ describe("configuração do servidor", () => {
     expect(readFeedConfig({})).toBeNull();
     expect(readFeedConfig({ EXPO_PUBLIC_SUPABASE_URL: "http://inseguro.co", EXPO_PUBLIC_SUPABASE_ANON_KEY: "k" })).toBeNull();
     expect(readFeedConfig({ EXPO_PUBLIC_SUPABASE_URL: "https://x.supabase.co/", EXPO_PUBLIC_SUPABASE_ANON_KEY: " k " })).toEqual({ url: "https://x.supabase.co", anonKey: "k" });
+  });
+});
+
+describe("cabeçalhos", () => {
+  it("manda Authorization só com a chave anon antiga (JWT)", () => {
+    expect(headers({ url: "https://x.supabase.co", anonKey: "eyJabc" }).Authorization).toBe("Bearer eyJabc");
+    const novo = headers({ url: "https://x.supabase.co", anonKey: "sb_publishable_abc" });
+    expect(novo.apikey).toBe("sb_publishable_abc");
+    expect(novo.Authorization).toBeUndefined();
   });
 });
 

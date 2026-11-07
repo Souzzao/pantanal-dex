@@ -31,8 +31,8 @@ Com o servidor ligado, cada registro público vira **uma linha** na tabela `publ
 
 ## 3. Quem pode ler e escrever (segurança no banco)
 
-- A tabela tem **RLS ligado e nenhuma política** para o público: ninguém lê nem escreve nela diretamente.
-- **Leitura:** pela view `public_feed`, que entrega só registros ativos e **sem** `owner_hash`.
+- A tabela tem **RLS ligado**. A única política é de **leitura** e só deixa ver registros ativos; não há política de escrita, então ninguém grava direto na tabela.
+- **Leitura:** pela view `public_feed`. O público só tem permissão nas colunas públicas: `owner_hash` e `ended_at` ficam de fora.
 - **Escrita:** só pelas funções `publish_sighting` e `end_publication`, que conferem:
   - segredo do aparelho com pelo menos 32 caracteres;
   - coordenada já arredondada na grade de 0,1° (o servidor recusa coordenada exata);
@@ -41,7 +41,7 @@ Com o servidor ligado, cada registro público vira **uma linha** na tabela `publ
   - no máximo 30 publicações novas por aparelho por dia (mesma regra do UC06).
 - A chave `anon` que vai no app é **pública por definição** (qualquer app Supabase funciona assim); a proteção está nas regras acima. A chave `service_role` **nunca** entra no app nem no repositório.
 
-Arquivo com todas as regras: `supabase/migrations/20261107000000_public_feed.sql` (testado em PostgreSQL 16 real com o papel `anon`, 15 cenários + teste ponta a ponta com os pedidos gerados pelo próprio app).
+Arquivo com todas as regras: `supabase/migrations/20261107000000_public_feed.sql` (testado em PostgreSQL 16 com o papel `anon` e depois no projeto real do Supabase: leitura do dono negada, gravação direta negada, outro aparelho recusado, coordenada exata e data futura recusadas, encerrar some do mapa).
 
 ## 4. LGPD em uma frase por princípio
 
