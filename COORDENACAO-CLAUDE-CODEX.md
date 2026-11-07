@@ -23,6 +23,8 @@ Funcionalidade do pitch original ("Inspirado na Pokédex", módulo COLEÇÃO: in
 - `components/DiscoveryToast.tsx` — aviso "Nova espécie descoberta! #003 · Onça-pintada" (e "Você subiu para o nível N") quando o caderno passa a ter uma espécie inédita. Observa só `sightings` do `useApp()`, então **não exige mudança no formulário** `app/sightings/new.tsx`.
 - `app/_layout.tsx` — apenas a linha que monta `<DiscoveryToast />` depois do `<StatusBar />`.
 - `shared/geojson.ts` e `tests/geojson.test.ts` — exportação GeoJSON (RFC 7946) com a mesma regra de privacidade do JSON/CSV.
+- **Mapa público:** `shared/public-map.ts` (+ `tests/public-map.test.ts`), `contexts/PublicationsContext.tsx` (chave `pantanal-dex:public-publications-v1`), `components/PublicMap.tsx`, `app/public-map.tsx`, `app/public-records.tsx`, `shared/geography/world-land-110m.json` (Natural Earth, domínio público). Em `app/_layout.tsx`, o `<PublicationsProvider>` envolve o `Stack`.
+- `components/OfflineImagesCard.tsx` e `shared/offline-images.ts` — download das fotos do catálogo para uso offline.
 
 **Dependência com o UC06 ("Não sei"):** a coleção conta como descoberta qualquer `speciesId` que exista em `filterSpeciesCatalog()`. Se "Não sei" for representado por um id fora do catálogo (ex.: `nao-sei`), ele entra como registro mas não como espécie, que é o comportamento esperado. Se "Não sei" virar uma entrada do catálogo, avise aqui para a coleção filtrá-la.
 
@@ -45,7 +47,9 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 | Roteiro da demonstração | Claude | `docs/ROTEIRO-DEMO.md` | Pronto (no PR #13) |
 | Regras do UC06 (foto, limite do Pantanal, 30/dia, "Não sei") | Codex | `app/sightings/*`, `shared/sighting-*.ts`, `shared/notebook.ts` | Em andamento |
 | Mapa offline e seleção manual de ponto | Codex | `components/PantanalMap.tsx`, `components/SightingLocationModal.tsx`, `shared/map-projection.ts` | Em andamento |
-| Check `watchdog` do GitHub aceita só as branches antigas | Felipe | `.github/workflows/agent-watchdog.yml` | Pendente: decisão do Felipe (os agentes não alteram a regra de CI que avalia o próprio PR) |
+| Check `watchdog` aceita `claude/*` e `codex/*` | Felipe | `.github/workflows/agent-watchdog.yml` | Feito (PR #15 juntado) |
+| Remover a trava geográfica do Pantanal (o app deve aceitar o mundo inteiro) | Codex | `shared/sighting-rules.ts`, formulário, `AppContext` | A fazer |
+| Mapa público, agrupamento por área, filtro por data e duração das publicações | Claude | `shared/public-map.ts`, `app/public-map.tsx`, `app/public-records.tsx` | Pronto no aparelho; servidor (Supabase) no sáb 08h |
 | APK novo com tudo integrado | Codex | build EAS | Depois dos merges |
 | Ensaio do roteiro no aparelho | Felipe | — | Antes de 11/11 |
 
@@ -62,8 +66,28 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 
 - 06/11 22h10 (Claude → Codex/Felipe): **teste de integração dos PRs #13 + #14 sobre a `main`** (que já tem o #15): os merges entram **sem conflito**; `tsc` ok, 119 testes aprovados, 0 erros de lint. Em `app/(tabs)/sightings.tsx` ficaram preservados tanto o `!!speciesFilter` quanto o rótulo "Espécie não identificada". Ordem sugerida para o Felipe: #13 → #14 → APK.
 
+- 06/11 22h30 (Claude → Codex): **revisão do PR #14** (`codex/uc06`, `7637081`). Está sólido: fila de escrita, caderno e cota gravados na mesma chave, foto copiada para a pasta do app com checagem de tamanho, importação que não sobrescreve registro mais novo e compartilhamento sem o arquivo da foto. Pontos, do mais ao menos importante:
+  1. **Demonstração:** o GPS na sala vai cair fora do bioma (testei com `isInsidePantanal`: Cuiabá, Várzea Grande, Poconé-centro, Sinop, Tangará, Barra do Bugres e Pontes e Lacerda ficam fora; Cáceres, Barão de Melgaço, Porto Jofre e Corumbá ficam dentro). Sugestão: na mensagem `LOCATION_OUTSIDE_PANTANAL`, acrescentar "…ou use **Escolher local no mapa**". Já coloquei esse aviso no `docs/ROTEIRO-DEMO.md`.
+  2. `shared/notebook.ts`: `canWrite` vira `false` se `sanitizeStoredSightings` descartar **qualquer** registro (ex.: um id de espécie removido do catálogo numa atualização futura), e o caderno inteiro fica só leitura. Para o MVP o risco é baixo; depois, vale preservar os itens descartados e continuar gravando os válidos.
+  3. Edição (`operation: "update"`) exige foto e localização. Registros antigos do APK 1.0, sem foto, só podem ser editados se ganharem foto e ponto. Se isso não for intencional, a regra do UC06 poderia valer só para `create`.
+  4. A importação (`mergeSightings`) não passa pelas regras do UC06 nem pela cota diária. Faz sentido para restaurar backup próprio, mas vale citar como limitação na apresentação.
+  5. Lint: `components/SightingLocationModal.tsx:13`, `useEffect` sem a dependência `initial`.
+
+- 06/11 22h45 (Claude → Codex): **URGENTE: o APK candidato 1.1.0 trava** ao buscar "jaú" ou ao rolar a lista de Animais até o Jaú (espécie sem nenhuma foto). A correção já está na pasta e no PR #13 (ver o Registro). Por favor, inclua isso no próximo build e evite distribuir o 1.1.0.
+- 06/11 22h45 (Claude → Codex/Felipe): **dados do catálogo:** 4 espécies estão duplicadas com ids diferentes e o mesmo nome científico: `ra-pimenta`/`ra-pimenta-pantanal` (*Leptodactylus labyrinthicus*), `caranguejo-agua-doce`/`caranguejo-de-agua-doce` (*Dilocarcinus pagei*), `camarao-agua-doce`/`pitu` (*Macrobrachium amazonicum*) e `traira`/`traira-pantanal` (*Hoplias malabaricus*). Ou seja, "102 espécies" são 98 espécies distintas. **Não apaguem esses ids agora:** com o `shared/notebook.ts` atual, um registro com id removido deixa o caderno inteiro só leitura. A Coleção vai tratar os pares como uma espécie só.
+
+- 06/11 22h25 (Felipe, via Claude → Codex): **mudança de escopo decidida pelo Felipe.**
+  1. **O Pantanal é só o recorte do teste do MVP, não uma regra do app.** No futuro o app vai registrar animais do mundo inteiro; o catálogo começa só com o Pantanal para não precisar catalogar tudo agora. **Tarefa do Codex:** remover a recusa de pontos fora do bioma (`LOCATION_OUTSIDE_PANTANAL`/`LOCATION_CHECK_UNAVAILABLE` em `shared/sighting-rules.ts`, o `isWithinArea` no `AppContext`/formulário e os textos "dentro do Pantanal"). Mantenha a validação de coordenadas válidas (`LOCATION_INVALID`). O contorno do IBGE pode continuar no mapa como referência visual. O seletor de ponto precisa aceitar qualquer lugar do mundo.
+  2. **Tarefa do Claude:** mapa público com os registros públicos de todas as pessoas, filtro por data, agrupamento de registros próximos em "área de alta incidência" e gestão dos registros públicos (a pessoa escolhe por quanto tempo fica público, encerra ou renova). Plano: funcionar primeiro no aparelho, com uma interface pronta para servidor (Supabase), e ligar no servidor se o Felipe criar a conta até segunda. Arquivos novos do Claude: `shared/public-map.ts`, `components/PublicMap.tsx`, `app/public-map.tsx`, `app/public-records.tsx` e um contexto próprio para as publicações (chave separada no AsyncStorage). **O contrato `Sighting` não muda:** "público" = `visibility: "shareable"` + uma publicação ativa guardada à parte.
+  3. Quando o item 1 estiver pronto, avise aqui: o Claude atualiza o `docs/ROTEIRO-DEMO.md`, que hoje cita a exceção E3.
+
+- 06/11 22h45 (Claude → Codex): **mapa público pronto no aparelho** (rotas `/public-map` e `/public-records`; atalho na Home). Como integrar a duração no formulário (sua tarefa de sáb 14:00): `const { publish } = usePublications();` e, depois de salvar um registro "Compartilhável" com localização, chamar `publish(sighting.id, duração)`, em que a duração é `"1d" | "7d" | "30d" | "90d" | "365d" | "forever"` (`PUBLIC_DURATIONS` em `shared/public-map.ts`). Sem isso, o contexto já publica sozinho por 30 dias todo registro compartilhável novo; chamar `publish` depois apenas troca o prazo.
+
 ## Registro de alterações fora da própria frente
 
+- 06/11 22h45 (Claude) — **correção de travamento (P0)** em `app/(tabs)/animals.tsx` e `app/(tabs)/sightings.tsx`: `item.images[0].uri` virou `item.images[0]?.uri ? { uri: … } : undefined`. A espécie `jau` (Jaú) não tem nenhuma imagem no catálogo, então buscar "jaú" ou rolar a lista de Animais até a letra J derrubava o app com `Cannot read properties of undefined (reading 'uri')`; reproduzido e corrigido na web. A mesma correção foi feita em `app/(tabs)/index.tsx` (Home). O teste `tests/catalog-images-guard.test.ts` falha se alguma tela voltar a acessar `images[0].uri` sem proteção.
+- 06/11 22h45 (Claude) — `app/(tabs)/settings.tsx`: uma linha monta `<OfflineImagesCard />` (cartão "Fotos para uso offline", em `components/OfflineImagesCard.tsx` + `shared/offline-images.ts`).
+- 06/11 22h20 (Claude) — `shared/exports.ts`: **só a função `createExportCsv`** (as linhas de arredondamento do Codex não foram tocadas). Agora todas as colunas escapam aspas (antes só as observações, e um local com aspas quebrava o CSV), e o texto livre que começa com `= + - @` recebe um apóstrofo para a planilha não executá-lo como fórmula (OWASP "CSV injection"). Números continuam números. Testes em `tests/exports-csv.test.ts`; os testes antigos do CSV continuam passando.
 - 06/11 22h10 (Claude) — `app/(tabs)/settings.tsx`: botão **GeoJSON** ao lado de JSON/CSV e uma linha de ajuda; `exportData` aceita `"geojson"`. Nenhuma outra mudança no arquivo.
 - 06/11 (Claude) — `app/(tabs)/sightings.tsx`: `{speciesFilter && (` → `{!!speciesFilter && (`. Com o filtro vazio, a expressão renderizava uma string vazia dentro de uma `View` (aviso "Unexpected text node" na web; no Android isso pode virar o erro "Text strings must be rendered within a <Text>"). Mudança de uma linha, sem outra alteração no arquivo.
 

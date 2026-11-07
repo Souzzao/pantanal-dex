@@ -31,24 +31,32 @@ export function parseExportJson(value: string): Sighting[] {
   }
 }
 
+/** Aspas duplicadas conforme RFC 4180; vale para todas as colunas, não só observações. */
+const csvCell = (value: string | number | undefined) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+
+/**
+ * Texto livre digitado pela pessoa: se começar com =, +, -, @, tab ou CR, planilhas (Excel, Google
+ * Planilhas, LibreOffice) podem executá-lo como fórmula ("CSV injection", OWASP). O apóstrofo inicial
+ * faz a planilha tratar o conteúdo como texto. Não se aplica a números (latitude negativa continua número).
+ */
+const csvText = (value: string | undefined) => csvCell(value && /^[=+\-@\t\r]/.test(value) ? `'${value}` : value);
+
 export function createExportCsv(sightings: Sighting[]) {
   const header = EXPORT_CSV_HEADER;
   const rows = sightings.map(toExportableSighting).map((sighting) =>
     [
-      sighting.id,
-      sighting.speciesId,
-      sighting.date,
-      sighting.time ?? "",
-      sighting.locationLabel ?? "",
-      sighting.latitude ?? "",
-      sighting.longitude ?? "",
-      sighting.locationPrecision,
-      sighting.quantity ?? "",
-      (sighting.notes ?? "").replaceAll('"', '""'),
-      sighting.visibility,
-    ]
-      .map((value) => `"${value}"`)
-      .join(","),
+      csvCell(sighting.id),
+      csvCell(sighting.speciesId),
+      csvCell(sighting.date),
+      csvCell(sighting.time),
+      csvText(sighting.locationLabel),
+      csvCell(sighting.latitude),
+      csvCell(sighting.longitude),
+      csvCell(sighting.locationPrecision),
+      csvCell(sighting.quantity),
+      csvText(sighting.notes),
+      csvCell(sighting.visibility),
+    ].join(","),
   );
   return [header, ...rows].join("\n");
 }

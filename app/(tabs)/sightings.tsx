@@ -488,8 +488,8 @@ export default function SightingsScreen() {
               ]}
             >
               <RemoteImage
-                source={{ uri: item.photoUri || animal?.images[0].uri }}
-                label={animal?.commonName ?? "Animal"}
+                source={item.photoUri || animal?.images[0]?.uri ? { uri: item.photoUri || animal?.images[0]?.uri } : undefined}
+                label={animal?.commonName ?? "Espécie não identificada"}
                 style={{ width: 104, height: 104 }}
               />
               <View style={{ flex: 1, padding: 13 }}>
@@ -500,7 +500,7 @@ export default function SightingsScreen() {
                     fontSize: 17,
                   }}
                 >
-                  {animal?.commonName ?? "Animal"}
+                  {animal?.commonName ?? "Espécie não identificada"}
                 </Text>
                 <Text style={{ color: colors.muted, marginTop: 5 }}>
                   {item.date}
