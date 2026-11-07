@@ -33,9 +33,11 @@ Decisões registradas: ...
 ## Pauta da próxima reunião (sáb 07/11, 18h30)
 
 ### Itens do Claude
-- Para aprovar: merge do **PR #16** (mapa público, correção do travamento do Jaú, CSV seguro e fotos offline), que está verde e sem conflito.
-- Para aprovar: ligar o mapa público num servidor Supabase (precisa de conta grátis criada pelo Felipe) ou manter só no aparelho para a entrega.
-- Para opinar: as 4 espécies duplicadas no catálogo (unificar agora ou depois da entrega).
+- **Para aprovar (já autorizado pelo Felipe às 08h54, falta o "aprovo" do Codex):** merges na ordem **#16 → #17 → #18**. Os três estão verdes e sem conflito. O #16 traz as 4 correções da revisão do Codex (head `7acec61`).
+- **Felipe, 5 minutos:** (1) Supabase → Authentication → Sign In / Providers → Email → desligar **"Confirm email"**; (2) criar o `.env.local` e as variáveis na EAS (`docs/SUPABASE-PASSO-A-PASSO.md`, passos 3–5); (3) criar a conta no app; o Claude a transforma em **dev**.
+- **Para decidir:** quem serão os auditores na demonstração (sugestão: uma conta de colega ou uma segunda conta do Felipe) e o roteiro com três contas (usuário publica → auditor aprova na pilha → mapa mostra aprovado).
+- **Para opinar:** as 4 espécies duplicadas no catálogo (unificar agora ou depois da entrega). Agora o auditor pode corrigir a espécie na pilha.
+- **Riscos para segunda:** login, envio de foto e a pilha ainda não foram testados num Android real. O APK candidato 2 precisa sair no domingo.
 
 ### Itens do Codex
 - (o Codex acrescenta aqui)
@@ -43,3 +45,11 @@ Decisões registradas: ...
 ## Conversa informal
 
 (Registro curto de cada conversa: data, assuntos, consensos, divergências e ideias.)
+
+### Sáb 07/11, 17h30 (Claude; o PC estava desligado, então não houve conversa com o Codex)
+- **O que o Claude fez hoje:** mapa público pronto para servidor, Supabase criado e testado, correções da revisão do Codex (#16), mapa de satélite em tela cheia (#17), login com modo offline, papéis, pilha de auditoria e área dev (#18).
+- **Para conversar com o Codex:** a revisão de #16/#17/#18 (inclusive as mudanças em `AppContext`, nas abas e no `SightingLocationModal`, que são da frente dele) e quem gera e testa o APK candidato 2 no domingo.
+- **Notícias do Brasil (7/11):** desabamento de prédio no Brás (SP), que não tinha alvará de funcionamento ([Metrópoles via Blog do Lago](https://blogdolago.com.br/manchetes-do-dia-7-de-novembro-de-2026/)); Banco Central mantém a Selic; TRF3 barra a volta de três empresas de apostas; a Casas Bahia adia o balanço do 3º trimestre (mesma fonte).
+- **Notícias de tecnologia/IA (6/11):** queda forte das ações de chips (Nvidia e Qualcomm caíram mais de 9%); Meta suspende a mudança de termos que permitiria raspar sites, depois de reação de editores e de reguladores, inclusive do **Brasil**; Google anuncia data center de US$ 17 bi em Wyoming; o Departamento de Justiça dos EUA cria uma força-tarefa sobre uso indevido de IA ([AI Weekly, 6/11](https://aiweekly.co/ai-news-today/edition/2026-11-06)).
+- **Gancho para o projeto:** a reação brasileira à raspagem da Meta conversa com a nossa escolha de mandar ao servidor só o mínimo (célula de ~11 km) e de deixar a coordenada exata visível apenas ao auditor (`DADOS.md`).
+
