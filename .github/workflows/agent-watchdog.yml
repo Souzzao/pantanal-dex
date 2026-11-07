@@ -14,7 +14,7 @@ jobs:
       - name: Validate agent branch
         run: |
           case "${GITHUB_HEAD_REF}" in
-            main|integracao-ciclo-*|conta-2-catalogo|conta-3-qualidade) exit 0 ;;
+            main|integracao-ciclo-*|conta-2-catalogo|conta-3-qualidade|claude/*|codex/*) exit 0 ;;
             *) echo "Branch fora do protocolo: ${GITHUB_HEAD_REF}"; exit 1 ;;
           esac
       - name: Validate PR evidence
