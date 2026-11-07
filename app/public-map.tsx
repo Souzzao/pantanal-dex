@@ -1,13 +1,15 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, Switch, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 
 import { PublicMap, type PublicMapLabels } from "@/components/PublicMap";
+import { StreetMap } from "@/components/StreetMap";
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
+import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
 import {
   buildSampleRecords,
   filterByDate,
@@ -75,12 +77,19 @@ const TEXT = {
   },
 } as const;
 
+const EXTRA = {
+  pt: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Mapa de ruas", offlineMap: "Mapa offline", noTiles: "Sem internet para o mapa de ruas: mostrando o mapa offline.", fitAll: "Ver tudo", close: "Fechar", high: "alta incidência", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público com ruas e rios. Toque num círculo para ver os registros." },
+  en: { filters: "Filters", hideFilters: "Hide filters", streets: "Street map", offlineMap: "Offline map", noTiles: "No internet for the street map: showing the offline map.", fitAll: "Show all", close: "Close", high: "high incidence", records: (n: number) => `${n} ${n === 1 ? "record" : "records"}`, mapLabel: "Public map with streets and rivers. Tap a circle to see its records." },
+  es: { filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Mapa de calles", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el mapa de calles: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público con calles y ríos. Toca un círculo para ver sus registros." },
+} as const;
+
 export default function PublicMapScreen() {
   const colors = useColors();
   const { sightings, settings } = useApp();
   const { store, remoteRecords, feedStatus, pendingCount, lastSyncAt, refreshFeed } = usePublications();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
+  const x = EXTRA[lang];
 
   const catalog = useMemo(() => filterSpeciesCatalog(), []);
   const names = useMemo(() => new Map(catalog.map((item) => [item.id, item.commonName])), [catalog]);
@@ -88,9 +97,15 @@ export default function PublicMapScreen() {
   const [showSamples, setShowSamples] = useState(feedStatus === "off");
   const [filter, setFilter] = useState<DateFilter>({ preset: "all" });
   const [customOpen, setCustomOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [selected, setSelected] = useState<RecordCluster | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  // "streets" = mapa de ruas (internet); "offline" = mapa de contornos (sempre funciona).
+  const [mapKind, setMapKind] = useState<"streets" | "offline">("streets");
+  const [noTiles, setNoTiles] = useState(false);
+  const [fitKey, setFitKey] = useState(1);
 
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
@@ -100,13 +115,32 @@ export default function PublicMapScreen() {
   }, [sightings, store, now, remoteRecords, showSamples, samples, filter]);
 
   // A área selecionada é refeita a partir dos registros filtrados atuais, para não mostrar dados desatualizados.
-  const selectedRecords = selected ? records.filter((record) => selected.records.some((item) => item.id === record.id)) : [];
+  const selectedRecords = useMemo(() => records.filter((record) => selectedIds.includes(record.id)), [records, selectedIds]);
+  const selectedHigh = selectedRecords.length >= HIGH_INCIDENCE_MIN;
   const areaCount = useMemo(() => new Set(records.map((item) => `${item.latitude}:${item.longitude}`)).size, [records]);
+
+  const clearSelection = () => { setSelectedIds([]); setSelectedKey(null); };
+
+  const mapState = useMemo<StreetMapState>(() => ({
+    mode: "public",
+    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude })),
+    pick: null,
+    selectedIds,
+    highIncidenceMin: HIGH_INCIDENCE_MIN,
+    fitKey,
+    labels: { high: x.high, records: x.records, pickHint: "" },
+  }), [records, selectedIds, fitKey, x]);
+
+  const onMapEvent = useCallback((event: StreetMapEvent) => {
+    if (event.type === "select") setSelectedIds(event.ids);
+    else if (event.type === "tiles" && !event.ok) { setNoTiles(true); setMapKind("offline"); }
+    else if (event.type === "tiles" && event.ok) setNoTiles(false);
+  }, []);
 
   const presetActive = (preset: DatePreset) => "preset" in filter && filter.preset === preset;
   const chip = (label: string, active: boolean, onPress: () => void) => (
     <Pressable key={label} onPress={onPress} accessibilityRole="button" accessibilityState={{ selected: active }}
-      style={({ pressed }) => [{ paddingHorizontal: 14, paddingVertical: 9, minHeight: 40, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface }, pressed && { opacity: 0.8 }]}>
+      style={({ pressed }) => [{ paddingHorizontal: 14, paddingVertical: 8, minHeight: 38, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface, elevation: 2, shadowColor: "#000", shadowOpacity: 0.15, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } }, pressed && { opacity: 0.8 }]}>
       <Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text>
     </Pressable>
   );
@@ -115,80 +149,112 @@ export default function PublicMapScreen() {
     setFrom(nextFrom);
     setTo(nextTo);
     setFilter({ from: nextFrom, to: nextTo });
-    setSelected(null);
+    clearSelection();
   };
 
-  return (
-    <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
-        <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as any))} accessibilityRole="button" accessibilityLabel={t.back}>
-          <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>{t.back}</Text>
-        </Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontWeight: "800" }}>{t.title}</Text>
-        <Text style={{ color: colors.muted, fontSize: 15, marginTop: 4 }}>{t.subtitle}</Text>
+  const statusText = feedStatus === "off" ? t.local : feedStatus === "loading" ? t.connecting : feedStatus === "online" ? t.online : t.offline;
+  const statusColor = feedStatus === "online" ? colors.success : feedStatus === "offline" ? colors.warning : colors.muted;
 
-        <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginTop: 14 }}>
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-            <Text accessibilityLiveRegion="polite" style={{ color: feedStatus === "online" ? colors.success : feedStatus === "offline" ? colors.warning : colors.foreground, fontWeight: "700", flex: 1 }}>
-              {feedStatus === "off" ? t.local : feedStatus === "loading" ? t.connecting : feedStatus === "online" ? t.online : t.offline}
+  return (
+    <ScreenContainer edges={["top", "left", "right", "bottom"]}>
+      <View style={{ flex: 1 }}>
+        {/* Barra do topo, compacta */}
+        <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
+          <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as any))} accessibilityRole="button" accessibilityLabel={t.back} hitSlop={8}>
+            <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 8 }}>{t.back}</Text>
+          </Pressable>
+          <View style={{ flex: 1 }}>
+            <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800" }}>{t.title}</Text>
+            <Text accessibilityLiveRegion="polite" numberOfLines={1} style={{ color: statusColor, fontSize: 12, fontWeight: "700" }}>
+              {t.summary(records.length, areaCount)} · {pendingCount > 0 ? t.pending(pendingCount) : lastSyncAt && feedStatus === "online" ? t.synced(new Date(lastSyncAt).toLocaleTimeString().slice(0, 5)) : statusText}
             </Text>
-            {feedStatus !== "off" && (
-              <Pressable onPress={() => void refreshFeed()} accessibilityRole="button" accessibilityLabel={t.refresh} style={({ pressed }) => [{ paddingHorizontal: 12, minHeight: 36, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary }, pressed && { opacity: 0.7 }]}>
-                <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 12 }}>{t.refresh}</Text>
-              </Pressable>
+          </View>
+          {feedStatus !== "off" && (
+            <Pressable onPress={() => void refreshFeed()} accessibilityRole="button" accessibilityLabel={t.refresh} style={({ pressed }) => [{ paddingHorizontal: 10, minHeight: 36, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary }, pressed && { opacity: 0.7 }]}>
+              <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 12 }}>{t.refresh}</Text>
+            </Pressable>
+          )}
+        </View>
+
+        {/* Mapa ocupando o resto da tela */}
+        <View style={{ flex: 1, borderTopWidth: 1, borderColor: colors.border }}>
+          {mapKind === "streets" ? (
+            <StreetMap state={mapState} onEvent={onMapEvent} accessibilityLabel={x.mapLabel} />
+          ) : (
+            <ScrollView contentContainerStyle={{ padding: 12 }}>
+              <PublicMap records={records} selectedKey={selectedKey} onSelectCluster={(cluster) => { setSelectedKey(cluster?.key ?? null); setSelectedIds(cluster ? cluster.records.map((item) => item.id) : []); }} labels={t.map} height={420} />
+            </ScrollView>
+          )}
+
+          {/* Período e botões por cima do mapa */}
+          <View pointerEvents="box-none" style={{ position: "absolute", top: 8, left: 8, right: 8 }}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingRight: 8 }}>
+              {chip(filtersOpen ? x.hideFilters : x.filters, filtersOpen, () => setFiltersOpen((open) => !open))}
+              {(["7d", "30d", "365d", "all"] as DatePreset[]).map((preset) => chip(t.presets[preset], presetActive(preset), () => { setFilter({ preset }); setCustomOpen(false); clearSelection(); setFitKey((k) => k + 1); }))}
+            </ScrollView>
+            {filtersOpen && (
+              <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginTop: 8, gap: 8 }}>
+                {chip(t.custom, customOpen || !("preset" in filter), () => setCustomOpen((open) => !open))}
+                {customOpen && (
+                  <View style={{ flexDirection: "row", gap: 8 }}>
+                    <TextInput value={from} onChangeText={(value) => applyCustom(value, to)} placeholder={t.from} accessibilityLabel={t.from} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
+                      style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.background }} />
+                    <TextInput value={to} onChangeText={(value) => applyCustom(from, value)} placeholder={t.to} accessibilityLabel={t.to} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
+                      style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.background }} />
+                  </View>
+                )}
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                  <Text style={{ color: colors.foreground, flex: 1 }}>{t.samples}</Text>
+                  <Switch value={showSamples} onValueChange={(value) => { setShowSamples(value); clearSelection(); setFitKey((k) => k + 1); }} accessibilityLabel={t.samples} trackColor={{ true: colors.primary, false: colors.border }} />
+                </View>
+                {showSamples && <Text style={{ color: colors.muted, fontSize: 12 }}>{t.samplesHint}</Text>}
+                <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+                  {chip(x.streets, mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); clearSelection(); })}
+                  {chip(x.offlineMap, mapKind === "offline", () => { setMapKind("offline"); clearSelection(); })}
+                  {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
+                </View>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#195946" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#C2410C" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
+                </View>
+                <Pressable onPress={() => router.push("/public-records" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 12, padding: 10 }, pressed && { opacity: 0.8 }]}>
+                  <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{t.manage}</Text>
+                </Pressable>
+              </View>
+            )}
+            {noTiles && mapKind === "offline" && (
+              <View style={{ backgroundColor: colors.surface, borderColor: colors.warning, borderWidth: 1, borderRadius: 12, padding: 10, marginTop: 8 }}>
+                <Text style={{ color: colors.foreground, fontSize: 13 }}>{x.noTiles}</Text>
+              </View>
             )}
           </View>
-          {lastSyncAt && feedStatus === "online" && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 2 }}>{t.synced(new Date(lastSyncAt).toLocaleTimeString().slice(0, 5))}</Text>}
-          {pendingCount > 0 && <Text style={{ color: colors.warning, fontSize: 12, marginTop: 2 }}>{t.pending(pendingCount)}</Text>}
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 8 }}>
-            <Text style={{ color: colors.foreground, flex: 1 }}>{t.samples}</Text>
-            <Switch value={showSamples} onValueChange={(value) => { setShowSamples(value); setSelected(null); }} accessibilityLabel={t.samples} trackColor={{ true: colors.primary, false: colors.border }} />
-          </View>
-          {showSamples && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 4 }}>{t.samplesHint}</Text>}
+
+          {records.length === 0 && (
+            <View pointerEvents="none" style={{ position: "absolute", left: 16, right: 16, bottom: 24, backgroundColor: colors.surface, borderRadius: 12, padding: 12, borderWidth: 1, borderColor: colors.border }}>
+              <Text style={{ color: colors.muted, textAlign: "center" }}>{t.empty}</Text>
+            </View>
+          )}
+
+          {/* Painel da área selecionada, por cima da parte de baixo do mapa */}
+          {selectedRecords.length > 0 && (
+            <View style={{ position: "absolute", left: 8, right: 8, bottom: 8, maxHeight: "45%", backgroundColor: colors.surface, borderColor: selectedHigh ? "#C2410C" : colors.primary, borderWidth: 2, borderRadius: 16, padding: 12, elevation: 6, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 2 } }} accessibilityLiveRegion="polite">
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 15, flex: 1 }}>{t.area}: {t.count(selectedRecords.length)} · {t.species(new Set(selectedRecords.map((item) => item.speciesId)).size)}{selectedHigh ? ` · ${x.high}` : ""}</Text>
+                <Pressable onPress={clearSelection} accessibilityRole="button" accessibilityLabel={x.close} hitSlop={10}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>✕</Text></Pressable>
+              </View>
+              <ScrollView style={{ marginTop: 4 }}>
+                {selectedRecords.slice(0, 50).map((record) => (
+                  <Pressable key={record.id} onPress={() => names.has(record.speciesId) && router.push({ pathname: "/species/[id]", params: { id: record.speciesId } } as any)} accessibilityRole={names.has(record.speciesId) ? "button" : undefined}
+                    style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.border }}>
+                    <Text style={{ color: colors.foreground, flex: 1 }}>{names.get(record.speciesId) ?? t.unknown}</Text>
+                    <Text style={{ color: colors.muted }}>{record.date}{record.sample ? ` · ${t.sample}` : record.owner === "me" ? ` · ${t.mine}` : ""}</Text>
+                  </Pressable>
+                ))}
+              </ScrollView>
+            </View>
+          )}
         </View>
-
-        <Text style={{ color: colors.foreground, fontWeight: "800", marginTop: 16, marginBottom: 8 }}>{t.period}</Text>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
-          {(["7d", "30d", "365d", "all"] as DatePreset[]).map((preset) => chip(t.presets[preset], presetActive(preset), () => { setFilter({ preset }); setCustomOpen(false); setSelected(null); }))}
-          {chip(t.custom, customOpen || !("preset" in filter), () => setCustomOpen((open) => !open))}
-        </View>
-        {customOpen && (
-          <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
-            <TextInput value={from} onChangeText={(value) => applyCustom(value, to)} placeholder={t.from} accessibilityLabel={t.from} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
-              style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.surface }} />
-            <TextInput value={to} onChangeText={(value) => applyCustom(from, value)} placeholder={t.to} accessibilityLabel={t.to} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
-              style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.surface }} />
-          </View>
-        )}
-
-        <Text accessibilityLiveRegion="polite" style={{ color: colors.foreground, fontWeight: "800", marginTop: 16, marginBottom: 8 }}>{t.summary(records.length, areaCount)}</Text>
-        <PublicMap records={records} selectedKey={selected?.key ?? null} onSelectCluster={setSelected} labels={t.map} />
-
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14, marginTop: 10 }}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: colors.primary }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#C2410C" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
-        </View>
-
-        {records.length === 0 && <Text style={{ color: colors.muted, marginTop: 12 }}>{t.empty}</Text>}
-        {records.length > 0 && !selected && <Text style={{ color: colors.muted, marginTop: 12 }}>{t.tapHint}</Text>}
-
-        {selected && selectedRecords.length > 0 && (
-          <View style={{ backgroundColor: colors.surface, borderColor: selected.highIncidence ? "#C2410C" : colors.primary, borderWidth: 1, borderRadius: 16, padding: 14, marginTop: 14 }} accessibilityLiveRegion="polite">
-            <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 16 }}>{t.area}: {t.count(selectedRecords.length)} · {t.species(new Set(selectedRecords.map((item) => item.speciesId)).size)}</Text>
-            {selectedRecords.slice(0, 30).map((record) => (
-              <Pressable key={record.id} onPress={() => names.has(record.speciesId) && router.push({ pathname: "/species/[id]", params: { id: record.speciesId } } as any)} accessibilityRole={names.has(record.speciesId) ? "button" : undefined}
-                style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.border, marginTop: 6 }}>
-                <Text style={{ color: colors.foreground, flex: 1 }}>{names.get(record.speciesId) ?? t.unknown}</Text>
-                <Text style={{ color: colors.muted }}>{record.date}{record.sample ? ` · ${t.sample}` : record.owner === "me" ? ` · ${t.mine}` : ""}</Text>
-              </Pressable>
-            ))}
-          </View>
-        )}
-
-        <Pressable onPress={() => router.push("/public-records" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 18 }, pressed && { opacity: 0.8 }]}>
-          <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{t.manage}</Text>
-        </Pressable>
-      </ScrollView>
+      </View>
     </ScreenContainer>
   );
 }
