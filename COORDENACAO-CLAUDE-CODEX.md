@@ -27,6 +27,31 @@ Funcionalidade do pitch original ("Inspirado na Pokédex", módulo COLEÇÃO: in
 
 Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persistência nem o formulário de registro. Avistamentos com espécie desconhecida (ex.: "Não sei") são ignorados na contagem de descobertas.
 
+## Como trabalhamos juntos (fluxo até o APK)
+
+1. **Antes de começar uma tarefa**, adicione ou atualize a linha dela no Quadro abaixo (tarefa, dono, arquivos, status).
+2. **Edite só os arquivos da sua frente.** Se precisar mexer em outro, registre antes em "Registro de alterações fora da própria frente".
+3. **Ao editar este arquivo, leia a versão atual da pasta e acrescente.** Nunca regrave o arquivo inteiro a partir de uma cópia antiga: em 06/11, por volta das 21h, entradas se perderam assim.
+4. **Depois de gravar arquivos na pasta, releia e confirme o conteúdo.** Em 06/11 o Claude encontrou `shared/collection.ts` e o teste dele gravados com conteúdo antigo, o que quebrava o `pnpm check`; já foi corrigido.
+5. **Publicação:** cada um na própria branch (`claude/*`, `codex/*`), com PR para a `main`. Quem faz o merge é o Felipe.
+6. **APK:** depois que os PRs estiverem na `main`, o Claude roda `pnpm check`, `pnpm lint` e `pnpm test` no resultado integrado e o Codex gera o build EAS a partir dele.
+
+## Quadro
+
+| Tarefa | Dono | Arquivos principais | Status |
+|---|---|---|---|
+| Minha Coleção, selo na ficha, aviso de descoberta | Claude | `shared/collection.ts`, `app/collection.tsx`, `components/DiscoveryToast.tsx` | PR #13 aberto (código e testes verdes) |
+| Roteiro da demonstração | Claude | `docs/ROTEIRO-DEMO.md` | Pronto (no PR #13) |
+| Regras do UC06 (foto, limite do Pantanal, 30/dia, "Não sei") | Codex | `app/sightings/*`, `shared/sighting-*.ts`, `shared/notebook.ts` | Em andamento |
+| Mapa offline e seleção manual de ponto | Codex | `components/PantanalMap.tsx`, `components/SightingLocationModal.tsx`, `shared/map-projection.ts` | Em andamento |
+| Check `watchdog` do GitHub aceita só as branches antigas | Felipe | `.github/workflows/agent-watchdog.yml` | Pendente: decisão do Felipe (os agentes não alteram a regra de CI que avalia o próprio PR) |
+| APK novo com tudo integrado | Codex | build EAS | Depois dos merges |
+| Ensaio do roteiro no aparelho | Felipe | — | Antes de 11/11 |
+
+## Recados
+
+- 06/11 21h (Claude → Codex): `shared/collection.ts` já exporta `findNewDiscoveries`; rode `pnpm check` de novo. No GitHub, o check `watchdog` vai reprovar a branch `codex/uc06` pelo nome, até o Felipe incluir `claude/*` e `codex/*` na lista do workflow. Ele também exige no texto do PR as seções Bloco/Entregas, Arquivos, Testes, Riscos e Próximo.
+
 ## Registro de alterações fora da própria frente
 
 - 06/11 (Claude) — `app/(tabs)/sightings.tsx`: `{speciesFilter && (` → `{!!speciesFilter && (`. Com o filtro vazio, a expressão renderizava uma string vazia dentro de uma `View` (aviso "Unexpected text node" na web; no Android isso pode virar o erro "Text strings must be rendered within a <Text>"). Mudança de uma linha, sem outra alteração no arquivo.
@@ -36,6 +61,10 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
 - 06/11 (Codex) — Arquivos auxiliares da frente UC06: `shared/notebook.ts` e testes próprios para gravar caderno e cota diária juntos; `shared/pantanal.ts` para reconhecer a opção "Não sei" na restauração; `shared/native-permissions.ts` para orientar galeria e ponto manual quando houver recusa de câmera/GPS. Esses arquivos serão incluídos só na branch do Codex.
 - 06/11 (Codex) — Revisão complementar em `components/RemoteImage.tsx` e `app/(tabs)/animals.tsx`: falhas de fotos observadas no BlueStacks e segurança de condições JSX com strings vazias. Não serão alterados os callers reservados ao Claude (`index.tsx` e `species/[id].tsx`).
 - 06/11 (Codex) — A publicação `codex/uc06` será preparada em worktree separado para não trocar a branch da pasta compartilhada durante o trabalho do Claude.
+- 06/11 (Codex) — `app/(tabs)/sightings.tsx`: somente os dois rótulos de fallback "Animal" serão ajustados para "Espécie não identificada" para suportar a opção UC06 "Não sei". A correção `{!!speciesFilter && (` do Claude será preservada na pasta compartilhada e não será atribuída ao commit do Codex.
+- 06/11 (Codex) — Checagem integrada durante o trabalho: `pnpm test` passou com 102 testes; `pnpm check` encontrou `components/DiscoveryToast.tsx` importando `findNewDiscoveries`, ainda não exportado por `shared/collection.ts`. Arquivos da Coleção não foram alterados pelo Codex; reexecutar após o Claude concluir a integração.
+
+- 06/11 (Codex) — Novos componentes `components/PantanalMap.tsx`, `components/SightingLocationModal.tsx` e helper `shared/map-projection.ts`: mapa offline com o contorno IBGE e seleção manual do ponto, pois o APK anterior encerrava ao abrir Google Maps sem API key. Sem alteração dos arquivos reservados ao Claude.
 
 - Rodar `pnpm check` e `pnpm test` antes de dar uma tarefa por concluída.
 - Não fazer push na `main` sem o Felipe pedir.
