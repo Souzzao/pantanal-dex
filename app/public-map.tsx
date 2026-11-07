@@ -86,7 +86,7 @@ const EXTRA = {
 export default function PublicMapScreen() {
   const colors = useColors();
   const { sightings, settings } = useApp();
-  const { store, remoteRecords, feedStatus, pendingCount, lastSyncAt, refreshFeed } = usePublications();
+  const { store, remoteRecords, feedStatus, pendingCount, lastSyncAt, refreshFeed, remoteStatus } = usePublications();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
   const x = EXTRA[lang];
@@ -110,9 +110,16 @@ export default function PublicMapScreen() {
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
   const records = useMemo(() => {
-    const all = [...myPublicRecords(sightings, store, now), ...remoteRecords, ...(showSamples ? samples : [])].filter((item) => isRecordActive(item, now));
+    // Os meus registros: com servidor, reprovados não aparecem e os ainda não verificados ficam como pendentes.
+    const mine = myPublicRecords(sightings, store, now).flatMap((item) => {
+      const remote = remoteStatus(item.id);
+      if (remote === "local") return [item];
+      if (remote === "rejected") return [];
+      return [{ ...item, status: remote === "approved" ? ("approved" as const) : ("pending" as const) }];
+    });
+    const all = [...mine, ...remoteRecords, ...(showSamples ? samples : [])].filter((item) => isRecordActive(item, now));
     return filterByDate(all, filter, now);
-  }, [sightings, store, now, remoteRecords, showSamples, samples, filter]);
+  }, [sightings, store, now, remoteRecords, showSamples, samples, filter, remoteStatus]);
 
   // A área selecionada é refeita a partir dos registros filtrados atuais, para não mostrar dados desatualizados.
   const selectedRecords = useMemo(() => records.filter((record) => selectedIds.includes(record.id)), [records, selectedIds]);
