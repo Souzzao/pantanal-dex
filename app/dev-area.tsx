@@ -130,7 +130,7 @@ export default function DevAreaScreen() {
                 <View style={{ flexDirection: "row", gap: 6, marginTop: 8 }}>
                   {(["user", "auditor", "dev"] as Role[]).map((role) => (
                     <Pressable key={role} onPress={() => void setRole(user, role)} disabled={saving === user.id} accessibilityRole="button" accessibilityState={{ selected: user.role === role }}
-                      style={{ flex: 1, paddingVertical: 8, borderRadius: 10, borderWidth: 1, borderColor: colors.primary, backgroundColor: user.role === role ? colors.primary : colors.background, opacity: saving === user.id ? 0.6 : 1 }}>
+                      style={{ flex: 1, minHeight: 44, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary, backgroundColor: user.role === role ? colors.primary : colors.background, opacity: saving === user.id ? 0.6 : 1 }}>
                       <Text style={{ color: user.role === role ? colors.background : colors.primary, fontWeight: "800", textAlign: "center", fontSize: 13 }}>{t.roles[role]}</Text>
                     </Pressable>
                   ))}

@@ -168,7 +168,7 @@ export default function AuditScreen() {
         <View style={{ flexDirection: "row", gap: 6 }}>
           {(["stack", "history"] as const).map((key) => (
             <Pressable key={key} onPress={() => setTab(key)} accessibilityRole="button" accessibilityState={{ selected: tab === key }}
-              style={{ paddingHorizontal: 12, minHeight: 34, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: tab === key ? colors.primary : colors.surface }}>
+              style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: tab === key ? colors.primary : colors.surface }}>
               <Text style={{ color: tab === key ? colors.background : colors.primary, fontWeight: "800", fontSize: 13 }}>{key === "stack" ? t.stack : t.history}</Text>
             </Pressable>
           ))}
@@ -231,7 +231,7 @@ export default function AuditScreen() {
                     <Text style={{ color: colors.foreground, fontSize: 20, fontWeight: "800" }}>{species?.commonName ?? t.unknownSpecies}</Text>
                     {species && <Text style={{ color: colors.muted, fontStyle: "italic" }}>{species.scientificName}</Text>}
                   </View>
-                  <Pressable onPress={() => setPickerOpen(true)} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 8 }}>
+                  <Pressable onPress={() => setPickerOpen(true)} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 10, paddingHorizontal: 10, minHeight: 44, justifyContent: "center" }}>
                     <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 13 }}>{t.change}</Text>
                   </Pressable>
                 </View>
@@ -249,8 +249,8 @@ export default function AuditScreen() {
             <Pressable onPress={() => setRejectOpen(true)} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ flex: 1, borderColor: colors.error, borderWidth: 2, borderRadius: 16, paddingVertical: 14, alignItems: "center" }, pressed && { opacity: 0.8 }]}>
               <Text style={{ color: colors.error, fontWeight: "900", fontSize: 16 }}>✕ {t.reject}</Text>
             </Pressable>
-            <Pressable onPress={() => void decide("approved")} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ flex: 1, backgroundColor: colors.success, borderRadius: 16, paddingVertical: 14, alignItems: "center" }, (pressed || busy) && { opacity: 0.8 }]}>
-              {busy ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontWeight: "900", fontSize: 16 }}>✓ {t.approve}</Text>}
+            <Pressable onPress={() => void decide("approved")} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, borderRadius: 16, paddingVertical: 14, alignItems: "center" }, (pressed || busy) && { opacity: 0.8 }]}>
+              {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>✓ {t.approve}</Text>}
             </Pressable>
           </View>
           <Text style={{ color: colors.muted, fontSize: 11, textAlign: "center", marginTop: 6 }}>{t.swipe}</Text>
@@ -264,7 +264,7 @@ export default function AuditScreen() {
             <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>{t.rejectTitle}</Text>
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 6 }}>
               {REJECT_REASONS[lang].map((option) => (
-                <Pressable key={option} onPress={() => setReason(option)} accessibilityRole="button" style={{ borderColor: reason === option ? colors.error : colors.border, borderWidth: 1, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 7 }}>
+                <Pressable key={option} onPress={() => setReason(option)} accessibilityRole="button" style={{ borderColor: reason === option ? colors.error : colors.border, borderWidth: 1, borderRadius: 999, paddingHorizontal: 12, minHeight: 44, justifyContent: "center" }}>
                   <Text style={{ color: colors.foreground, fontSize: 13 }}>{option}</Text>
                 </Pressable>
               ))}
@@ -275,7 +275,7 @@ export default function AuditScreen() {
               <Pressable onPress={() => setRejectOpen(false)} accessibilityRole="button" style={{ flex: 1, padding: 14, alignItems: "center" }}><Text style={{ color: colors.primary, fontWeight: "800" }}>{t.cancel}</Text></Pressable>
               <Pressable onPress={() => void decide("rejected", reason.trim())} disabled={!reason.trim() || busy} accessibilityRole="button"
                 style={{ flex: 1, backgroundColor: colors.error, opacity: reason.trim() ? 1 : 0.5, borderRadius: 14, padding: 14, alignItems: "center" }}>
-                <Text style={{ color: "#fff", fontWeight: "800" }}>{t.confirmReject}</Text>
+                <Text style={{ color: colors.background, fontWeight: "800" }}>{t.confirmReject}</Text>
               </Pressable>
             </View>
           </View>

@@ -147,7 +147,7 @@ export default function PublicMapScreen() {
   const presetActive = (preset: DatePreset) => "preset" in filter && filter.preset === preset;
   const chip = (label: string, active: boolean, onPress: () => void) => (
     <Pressable key={label} onPress={onPress} accessibilityRole="button" accessibilityState={{ selected: active }}
-      style={({ pressed }) => [{ paddingHorizontal: 14, paddingVertical: 8, minHeight: 38, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface, elevation: 2, shadowColor: "#000", shadowOpacity: 0.15, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } }, pressed && { opacity: 0.8 }]}>
+      style={({ pressed }) => [{ paddingHorizontal: 14, paddingVertical: 8, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface, elevation: 2, shadowColor: "#000", shadowOpacity: 0.15, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } }, pressed && { opacity: 0.8 }]}>
       <Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text>
     </Pressable>
   );
@@ -168,7 +168,7 @@ export default function PublicMapScreen() {
         {/* Barra do topo, compacta */}
         <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
           <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as any))} accessibilityRole="button" accessibilityLabel={t.back} hitSlop={8}>
-            <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 8 }}>{t.back}</Text>
+            <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 12 }}>{t.back}</Text>
           </Pressable>
           <View style={{ flex: 1 }}>
             <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800" }}>{t.title}</Text>
@@ -177,7 +177,7 @@ export default function PublicMapScreen() {
             </Text>
           </View>
           {feedStatus !== "off" && (
-            <Pressable onPress={() => void refreshFeed()} accessibilityRole="button" accessibilityLabel={t.refresh} style={({ pressed }) => [{ paddingHorizontal: 10, minHeight: 36, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary }, pressed && { opacity: 0.7 }]}>
+            <Pressable onPress={() => void refreshFeed()} accessibilityRole="button" accessibilityLabel={t.refresh} style={({ pressed }) => [{ paddingHorizontal: 10, minHeight: 44, justifyContent: "center", borderRadius: 10, borderWidth: 1, borderColor: colors.primary }, pressed && { opacity: 0.7 }]}>
               <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 12 }}>{t.refresh}</Text>
             </Pressable>
           )}
@@ -252,7 +252,7 @@ export default function PublicMapScreen() {
               <ScrollView style={{ marginTop: 4 }}>
                 {selectedRecords.slice(0, 50).map((record) => (
                   <Pressable key={record.id} onPress={() => names.has(record.speciesId) && router.push({ pathname: "/species/[id]", params: { id: record.speciesId } } as any)} accessibilityRole={names.has(record.speciesId) ? "button" : undefined}
-                    style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.border }}>
+                    style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", minHeight: 44, borderTopWidth: 1, borderTopColor: colors.border }}>
                     <Text style={{ color: colors.foreground, flex: 1 }}>{names.get(record.speciesId) ?? t.unknown}</Text>
                     <Text style={{ color: colors.muted }}>{record.date}{record.sample ? ` · ${t.sample}` : record.owner === "me" ? ` · ${t.mine}` : ""}{record.status === "pending" ? ` · ${x.pending}` : ""}</Text>
                   </Pressable>
