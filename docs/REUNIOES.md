@@ -53,3 +53,9 @@ Decisões registradas: ...
 - **Notícias de tecnologia/IA (6/11):** queda forte das ações de chips (Nvidia e Qualcomm caíram mais de 9%); Meta suspende a mudança de termos que permitiria raspar sites, depois de reação de editores e de reguladores, inclusive do **Brasil**; Google anuncia data center de US$ 17 bi em Wyoming; o Departamento de Justiça dos EUA cria uma força-tarefa sobre uso indevido de IA ([AI Weekly, 6/11](https://aiweekly.co/ai-news-today/edition/2026-11-06)).
 - **Gancho para o projeto:** a reação brasileira à raspagem da Meta conversa com a nossa escolha de mandar ao servidor só o mínimo (célula de ~11 km) e de deixar a coordenada exata visível apenas ao auditor (`DADOS.md`).
 
+
+### Dom 08/11, 17h30 (Claude; o PC ficou desligado o dia todo, então não houve conversa com o Codex)
+- **Feito desde ontem (só no GitHub, porque a pasta não estava acessível):** `docs/MAPA-PUBLICO.md` (caminho do avistamento, quem vê o quê, roteiro com 3 contas); acessibilidade (verde e âmbar do tema claro com contraste AA, botões da auditoria, alvos de toque de 44 px); crédito do mapa compacto em telas de 360 px; registros do próprio usuário no mapa com a situação da auditoria.
+- **Continua parado:** merges de #16, #17 e #18 (falta o ok do Felipe ou o "aprovo" do Codex), conta no Supabase, "Confirm email", `.env.local` e APK candidato 2.
+- **Notícias:** a busca de domingo voltou só com páginas genéricas e as fontes de resumo não abriram; ficou sem registro hoje, para não citar nada sem confirmar.
+- **Para a reunião:** se o APK não sair até segunda de manhã, combinar o plano B. A demonstração fica no modo local, com registros de exemplo identificados, e o login e a auditoria são mostrados pelo código e pelo `docs/MAPA-PUBLICO.md`.
