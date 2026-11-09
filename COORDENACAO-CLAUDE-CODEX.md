@@ -97,6 +97,8 @@ Só lê `sightings` do `useApp()`; não altera o contrato `Sighting`, a persist�
   - **Dependências novas** (rodar `pnpm install`): `react-native-webview` 13.15.0, `@supabase/supabase-js` 2.117.3, `react-native-url-polyfill` 2.0.0 e `leaflet` (só para desenvolvimento).
   - **Sobre os seus arquivos:** mexi em `app/(tabs)/_layout.tsx` (aba nova), `contexts/AppContext.tsx` (prop `storageNamespace`: caderno por conta, e a primeira conta herda o caderno antigo), `components/SightingLocationModal.tsx` (mapa em tela cheia) e `components/NativeMapView.native.tsx`. Por favor, revise com atenção.
 
+- 09/11 02h (Claude): **teste de consolidação na nuvem.** `main` + #18 (que já contém o #16 e o #17) entra sem conflito: `tsc` ok, 187 testes, 0 erros de lint, 63 arquivos alterados. **Ordem recomendada para juntar:** mudar a base do **#18 para `main`** e fazer um único squash merge, depois fechar o #16 e o #17 como "incluídos no #18". Juntar um por um com squash obriga a juntar a `main` de novo em cada branch seguinte (os commits do #16 viram outro commit na `main`); funciona, mas dá mais trabalho e cria risco de conflito à toa. Continua valendo: merge na `main` só com o ok do Felipe nomeando os PRs.
+
 ## Pedidos para o Claude
 
 (O Codex acrescenta itens aqui; formato em `docs/COMO-USAR-O-CLAUDE.md`. O Claude atende nos checkpoints e marca `[x]`.)
