@@ -201,6 +201,7 @@ export function applyFlushResult(current: FeedQueue, sentBatch: readonly FeedOpe
 
 /** Mensagem curta para a pessoa a partir do erro do servidor. */
 export function friendlyRejection(message: string): string {
+  if (message === PHOTO_REJECTION) return "a foto não foi encontrada ou é grande demais; edite o registro e escolha a foto de novo";
   if (/limite de 30/i.test(message)) return "limite de 30 publicações por dia";
   if (/futuro/i.test(message)) return "data no futuro";
   if (/localiza/i.test(message)) return "localização inválida";
@@ -213,3 +214,16 @@ export function friendlyRejection(message: string): string {
 export function photoPathFor(userId: string, localId: string, extension = "jpg"): string {
   return `${userId}/${localId.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 80)}.${extension}`;
 }
+
+/** Publicação que ainda espera a foto subir: não pode ser enviada antes (a foto é a evidência). */
+export const isWaitingForPhoto = (operation: FeedOperation) => operation.type === "publish" && !!operation.photoUri && !operation.payload.photoPath;
+
+/** Erro do envio da foto: definitivo (arquivo sumiu, grande demais, tipo errado) ou temporário (rede, servidor). */
+export function isPermanentPhotoError(error: unknown): boolean {
+  const e = error as { permanentPhoto?: boolean; statusCode?: string | number; status?: number } | null;
+  if (e?.permanentPhoto) return true;
+  const status = Number(e?.statusCode ?? e?.status);
+  return status === 400 || status === 413 || status === 415 || status === 422;
+}
+
+export const PHOTO_REJECTION = "foto não pôde ser enviada";

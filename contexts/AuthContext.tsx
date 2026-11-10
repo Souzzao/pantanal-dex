@@ -37,6 +37,12 @@ function isNetworkError(error: unknown) {
   return name === "AuthRetryableFetchError" || status === 0;
 }
 
+/** Conta mínima a partir da sessão (antes de o perfil do servidor chegar). */
+function baseAccount(session: Session): Account {
+  const email = session.user.email ?? "";
+  return { id: session.user.id, email, displayName: (session.user.user_metadata?.display_name as string | undefined) ?? email.split("@")[0], role: "user" };
+}
+
 async function saveAccount(account: Account | null) {
   try {
     if (account) await AsyncStorage.setItem(ACCOUNT_CACHE_KEY, JSON.stringify(account));
@@ -52,6 +58,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [offline, setOffline] = useState(false);
   const accountRef = useRef<Account | null>(null);
+  /** Conta da sessão ativa agora. Respostas atrasadas de outra conta são ignoradas. */
+  const activeUserId = useRef<string | null>(null);
 
   const applyAccount = useCallback((next: Account | null) => {
     accountRef.current = next;
@@ -62,17 +70,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   /** Lê nome e papel no servidor; sem internet, mantém o que estava guardado. */
   const loadProfile = useCallback(async (current: Session) => {
     if (!supabase) return;
+    const userId = current.user.id;
+    activeUserId.current = userId;
     const base: Account = accountRef.current?.id === current.user.id
       ? accountRef.current
-      : { id: current.user.id, email: current.user.email ?? "", displayName: (current.user.user_metadata?.display_name as string | undefined) ?? (current.user.email ?? "").split("@")[0], role: "user" };
+      : baseAccount(current);
     try {
       const { data, error } = await supabase.from("profiles").select("display_name, role").eq("id", current.user.id).maybeSingle();
       if (error) throw error;
+      if (activeUserId.current !== userId) return; // saiu ou trocou de conta enquanto esperava
       setOffline(false);
       applyAccount({ ...base, email: current.user.email ?? base.email, displayName: data?.display_name ?? base.displayName, role: isRole(data?.role) ? data.role : base.role });
     } catch {
+      if (activeUserId.current !== userId) return;
       setOffline(true);
-      applyAccount(base);
+      // Mantém o que já foi carregado desta conta (ex.: papel), se houver.
+      applyAccount(accountRef.current?.id === userId ? accountRef.current : base);
     }
   }, [applyAccount]);
 
@@ -86,13 +99,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const current = data.session;
       if (!current && cached && isNetworkError(error)) {
         // Sem internet e com o token vencido: abre com a conta guardada (modo offline).
+        activeUserId.current = cached.id;
         applyAccount(cached);
         setOffline(true);
         setStatus("signedIn");
         return;
       }
       if (current) {
-        if (cached?.id === current.user.id) applyAccount(cached);
+        activeUserId.current = current.user.id;
+        applyAccount(cached?.id === current.user.id ? cached : baseAccount(current));
         setSession(current);
         setStatus("signedIn");
         void loadProfile(current);
@@ -109,9 +124,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!mounted) return;
       setSession(next);
       if (event === "SIGNED_OUT" || !next) {
+        activeUserId.current = null;
         applyAccount(null);
         setStatus("signedOut");
       } else if (event === "SIGNED_IN" || event === "USER_UPDATED" || event === "TOKEN_REFRESHED") {
+        // A conta certa entra antes de as telas abrirem; o perfil do servidor chega depois.
+        activeUserId.current = next.user.id;
+        if (accountRef.current?.id !== next.user.id) applyAccount(baseAccount(next));
         setStatus("signedIn");
         void loadProfile(next);
       }
@@ -146,6 +165,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = useCallback(async () => {
     if (!supabase) return;
     // scope "local": sai deste aparelho mesmo sem internet.
+    activeUserId.current = null;
     await supabase.auth.signOut({ scope: "local" }).catch(() => undefined);
     applyAccount(null);
     setSession(null);

@@ -9,6 +9,9 @@ import {
   flushQueue,
   friendlyRejection,
   headers,
+  isPermanentPhotoError,
+  isWaitingForPhoto,
+  PHOTO_REJECTION,
   operationRequest,
   photoPathFor,
   readFeedConfig,
@@ -164,5 +167,30 @@ describe("recusas e fotos", () => {
 
   it("guarda a foto na pasta da conta com nome seguro", () => {
     expect(photoPathFor("uid-1", "sighting-1/../x")).toBe("uid-1/sighting-1____x.jpg");
+  });
+});
+
+describe("foto antes da publicação", () => {
+  it("publicação com foto local ainda não enviada espera; depois do envio, segue", () => {
+    const withPhoto: FeedOperation = { ...publish("a"), photoUri: "file:///foto.jpg" } as FeedOperation;
+    expect(isWaitingForPhoto(withPhoto)).toBe(true);
+    expect(isWaitingForPhoto(publish("b"))).toBe(false);
+    expect(isWaitingForPhoto(end("a"))).toBe(false);
+    if (withPhoto.type === "publish") withPhoto.payload = { ...withPhoto.payload, photoPath: "uid/a.jpg" };
+    expect(isWaitingForPhoto(withPhoto)).toBe(false);
+  });
+
+  it("a pendência da foto sobrevive a fechar e abrir o app", () => {
+    const queue = enqueue(createFeedQueue(), { ...publish("a"), photoUri: "file:///foto.jpg" } as FeedOperation);
+    const restored = restoreFeedQueue(JSON.stringify(queue));
+    expect(isWaitingForPhoto(restored.operations[0])).toBe(true);
+  });
+
+  it("separa erro definitivo (arquivo sumiu, 413) de temporário (rede, 503)", () => {
+    expect(isPermanentPhotoError({ permanentPhoto: true })).toBe(true);
+    expect(isPermanentPhotoError({ statusCode: "413" })).toBe(true);
+    expect(isPermanentPhotoError({ statusCode: "503" })).toBe(false);
+    expect(isPermanentPhotoError(new Error("Network request failed"))).toBe(false);
+    expect(friendlyRejection(PHOTO_REJECTION)).toContain("foto");
   });
 });

@@ -15,6 +15,9 @@ import {
   fetchPublicFeed,
   flushQueue,
   friendlyRejection,
+  isPermanentPhotoError,
+  isWaitingForPhoto,
+  PHOTO_REJECTION,
   photoPathFor,
   restoreFeedQueue,
   type FeedOperation,
@@ -70,8 +73,15 @@ const PublicationsContext = createContext<PublicationsContextValue | null>(null)
 async function uploadPhoto(userId: string, localId: string, uri: string): Promise<string | null> {
   if (!supabase) return null;
   const path = photoPathFor(userId, localId);
-  const response = await fetch(uri);
-  const body = await response.arrayBuffer();
+  let body: ArrayBuffer;
+  try {
+    // Ler o arquivo do aparelho: se falhar, o arquivo sumiu (erro definitivo, não de rede).
+    const response = await fetch(uri);
+    body = await response.arrayBuffer();
+    if (body.byteLength === 0) throw new Error("foto vazia");
+  } catch (cause) {
+    throw Object.assign(new Error("foto local indisponível"), { permanentPhoto: true, cause });
+  }
   const { error } = await supabase.storage.from("sighting-photos").upload(path, body, { contentType: "image/jpeg", upsert: true });
   if (error) throw error;
   return path;
@@ -178,18 +188,26 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
         return;
       }
       for (let round = 0; round < 5 && feedQueue.current.operations.length; round += 1) {
-        // Fotos ainda não enviadas sobem antes da publicação.
-        for (const operation of feedQueue.current.operations) {
-          if (operation.type !== "publish" || operation.payload.photoPath || !operation.photoUri) continue;
+        // Fotos sobem antes da publicação. Se o envio falhar por rede/servidor, a publicação
+        // fica na fila com a foto e tenta de novo depois; ela nunca é publicada sem a foto.
+        let photoBlocked = false;
+        for (const operation of [...feedQueue.current.operations]) {
+          if (!isWaitingForPhoto(operation) || operation.type !== "publish") continue;
           try {
-            const path = await uploadPhoto(userId, operation.localId, operation.photoUri);
+            const path = await uploadPhoto(userId, operation.localId, operation.photoUri!);
             operation.payload = { ...operation.payload, photoPath: path };
-          } catch {
-            // Sem a foto, a publicação segue; o auditor decide com o que tiver.
-            operation.photoUri = undefined;
+            await saveFeedQueue({ ...feedQueue.current });
+          } catch (error) {
+            if (isPermanentPhotoError(error)) {
+              // Arquivo sumiu ou é inválido: tira da fila e mostra o erro para a pessoa corrigir.
+              await saveFeedQueue({ ...feedQueue.current, operations: feedQueue.current.operations.filter((item) => item !== operation) });
+              saveRejections((previous) => ({ ...previous, [operation.localId]: PHOTO_REJECTION }));
+            } else {
+              photoBlocked = true;
+            }
           }
         }
-        const batch = feedQueue.current.operations;
+        const batch = feedQueue.current.operations.filter((operation) => !isWaitingForPhoto(operation));
         const result = await flushQueue({ ...feedQueue.current, operations: batch }, SUPABASE_CONFIG, fetchImpl, token);
         await saveFeedQueue(applyFlushResult(feedQueue.current, batch, result.queue.operations));
         const confirmed = batch.filter((operation) => !result.queue.operations.includes(operation) && !result.rejected.some((item) => item.operation === operation));
@@ -203,7 +221,7 @@ export function PublicationsProvider({ children }: { children: React.ReactNode }
           }
           return next;
         });
-        if (result.stoppedByNetwork) {
+        if (result.stoppedByNetwork || photoBlocked) {
           offline = true;
           setFeedStatus("offline");
           return;
