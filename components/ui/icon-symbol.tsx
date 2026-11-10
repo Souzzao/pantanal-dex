@@ -7,7 +7,7 @@ import { ComponentProps } from "react";
 import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
 type IconMapping = Record<SymbolViewProps["name"], ComponentProps<typeof MaterialIcons>["name"]>;
-type IconSymbolName = "house.fill" | "paperplane.fill" | "chevron.left.forwardslash.chevron.right" | "chevron.right" | "pawprint.fill" | "mappin.and.ellipse" | "gearshape.fill";
+type IconSymbolName = "house.fill" | "paperplane.fill" | "chevron.left.forwardslash.chevron.right" | "chevron.right" | "pawprint.fill" | "mappin.and.ellipse" | "gearshape.fill" | "plus.circle.fill";
 
 /**
  * Add your SF Symbols to Material Icons mappings here.
@@ -22,6 +22,7 @@ const MAPPING = {
   "pawprint.fill": "pets",
   "mappin.and.ellipse": "location-on",
   "gearshape.fill": "settings",
+  "plus.circle.fill": "add-circle",
 } as IconMapping;
 
 const WEB_GLYPHS: Record<IconSymbolName, string> = {
@@ -32,6 +33,7 @@ const WEB_GLYPHS: Record<IconSymbolName, string> = {
   "pawprint.fill": "♣",
   "mappin.and.ellipse": "⌖",
   "gearshape.fill": "⚙",
+  "plus.circle.fill": "＋",
 };
 
 /**

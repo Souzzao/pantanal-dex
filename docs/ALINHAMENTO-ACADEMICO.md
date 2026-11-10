@@ -8,17 +8,18 @@ O PantanalDex é um guia de campo para explorar espécies do Pantanal e registra
 
 | Tema dos materiais | Como aparece no MVP | Situação |
 |---|---|---|
-| Problema, público e limite do projeto | Guia de fauna e caderno de campo para visitante/observador; sem depender de conta ou conexão para as funções centrais | Implementado como escopo do MVP |
+| Problema, público e limite do projeto | Guia de fauna e caderno de campo para visitante/observador. O Pantanal é o recorte do catálogo; registros valem no mundo inteiro. Login obrigatório, mas a conta continua aberta sem internet (caderno e catálogo) | Implementado (PR #18) |
 | Catálogo e consulta de espécies | Busca, filtros e fichas com nomes, informações, fontes e créditos | Implementado; o catálogo ainda é menor que a meta de 500 espécies prevista no roadmap do repositório |
 | Registrar e consultar avistamentos (UC06–UC08) | Formulário local, lista, mapa, edição e exclusão | Implementado em modo pessoal/offline |
-| Proteção de localização | O proprietário pode ver o ponto exato localmente; mapa e exportação usam a célula de 0,1° (~11 km) para registros compartilháveis; exportar coordenadas exatas de registros pessoais exige confirmação | Implementado para o caderno local; não há mapa público central neste MVP |
-| Cadastro, autenticação, moderação e auditoria | Contas, fila de revisão, justificativa de decisão e histórico auditável | Fora do escopo desta versão; exigem serviço compartilhado e papéis de usuário |
+| Proteção de localização (RN03) | O dono vê o ponto exato no aparelho; o público vê só a célula de 0,1° (~11 km); a coordenada exata vai ao servidor apenas para o auditor | Implementado no caderno, na exportação e no mapa público (PRs #16–#18) |
+| Cadastro, autenticação, moderação e auditoria | E-mail e senha (Supabase Auth); papéis usuário/auditor/dev; pilha de auditoria com aprovar/reprovar (motivo obrigatório) e correção de espécie; histórico de decisões; área dev para papéis e números | Implementado (PR #18); servidor testado com contas simuladas; falta o teste no Android |
 | Validações específicas do UC06 | Foto e coordenadas obrigatórias; validação do contorno IBGE 2025; opção "Não sei"; bloqueio de data futura; horário, quantidade e observações até 500 caracteres | Implementado no caderno local; enforcement global depende de serviço |
-| Limite diário | Até 30 novos registros por dia local e por aparelho; excluir registros não libera cota; edição e importação de backup não consomem cota | Caderno e histórico diário gravados no mesmo envelope; não é controle global por conta |
+| Limite diário | Até 30 novos registros por dia no aparelho; e até 30 publicações por dia **por conta** no servidor (com trava contra envios simultâneos) | Implementado nos dois lados |
 | Evidência fotográfica | Arquivo até 10 MiB, copiado do cache do seletor para a pasta permanente do app | Implementado no Android; a foto não é embutida no JSON/CSV nem tem EXIF removido por este helper |
-| Seleção manual e mapa | Mapa regional offline do contorno IBGE, com ponto manual, ampliação, deslocamento e abertura do registro | Funciona sem chave Google Maps; não contém ruas ou imagens de satélite |
+| Mapa público | Registros públicos de todas as contas, agrupados em áreas (alta incidência a partir de 5), filtro por data, prazo de publicação escolhido pela pessoa, pendentes com selo "aguardando verificação" | Implementado (PRs #16–#18) |
+| Seleção manual e mapa | Mapa de satélite Sentinel-2 em tela cheia (com nomes opcionais), ponto manual por toque ou arrasto; sem internet, mapa offline com contorno IBGE | Implementado (PR #17), sem chave do Google Maps |
 
-O escopo acima distingue uma versão utilizável de MVP do sistema completo descrito na especificação. A apresentação deve chamar o caderno de **pessoal e local**; nenhum registro é publicado ou submetido a moderação pelo app atual.
+Atualizado em 09/11: com o Supabase, o MVP passou a ter contas, mapa público e auditoria (ver `docs/MAPA-PUBLICO.md` e `DADOS.md`). O caderno continua **pessoal e local**: publicar é escolha da pessoa, por registro.
 
 ## Fluxo principal para demonstração
 
@@ -55,7 +56,7 @@ Esse plano aplica entrega incremental e um quadro Kanban simples (a fazer, em an
 ## Próximas iterações após o MVP
 
 1. Aplicar o limite diário por conta também no servidor, tratar EXIF antes de publicação de evidências e definir política de revisão para espécies não identificadas. As regras locais do UC06 estão implementadas; não substituem controles de um serviço público.
-2. Definir e implementar API, autenticação, submissão para revisão, moderação imparcial e trilha de auditoria.
+2. Já implementado no MVP (PR #18): autenticação, revisão e trilha de auditoria. Próximo passo: denúncia de registros, mais de um auditor por registro e limpeza automática de publicações antigas.
 3. Ampliar o catálogo com revisão científica e meta explícita de cobertura; não tratar registros estruturais como espécies verificadas.
 4. Validar acessibilidade e fluxos nativos em aparelhos Android e testar com usuários do público definido.
 

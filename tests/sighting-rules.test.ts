@@ -71,6 +71,15 @@ describe("UC06 validation of new writes", () => {
     expect(isWithinArea).not.toHaveBeenCalled();
   });
 
+  it("aceita qualquer lugar do mundo quando nenhuma área é informada (padrão do app desde 06/11)", () => {
+    const worldwide = { operation: "create" as const, now, ledger: createSightingCreationLedger() };
+    for (const [latitude, longitude] of [[48.8566, 2.3522], [-15.601, -56.097], [35.6762, 139.6503], [-89.9, 179.9]]) {
+      const result = validateSightingOperation({ ...draft, latitude, longitude }, worldwide);
+      expect(result.errors.map((issue) => issue.code)).toEqual([]);
+    }
+    expect(validateSightingOperation({ ...draft, latitude: 91 }, worldwide).errors.map((issue) => issue.code)).toContain("LOCATION_INVALID");
+  });
+
   it("rejects locations outside the supplied Pantanal boundary and fails closed when its check errors", () => {
     const isWithinArea = vi.fn(() => false);
     expect(codes(draft, { isWithinArea })).toContain("LOCATION_OUTSIDE_PANTANAL");

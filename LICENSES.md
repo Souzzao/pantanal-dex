@@ -53,3 +53,11 @@ A promoção editorial exige conferência individual das imagens, fontes, nomenc
 ## Referências de cobertura do bioma
 
 A página oficial do [ICMBio sobre o Pantanal](https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal) informa números de referência para mamíferos, aves e peixes, mas esses números não substituem a conferência espécie a espécie. Os termos do [GBIF](https://www.gbif.org/terms) confirmam que datasets de ocorrência possuem licenças padronizadas, mas também alertam que a precisão dos dados não é garantida. O pipeline, portanto, registra dataset/registro específico, licença e fonte e não infere ocorrência ou conservação apenas pelo nome científico.
+
+## Mapas
+
+- **Mapa de satélite** (Mapa público, "Onde foi o avistamento?" e mapa dos avistamentos): desenhado com [Leaflet](https://leafletjs.com) 1.9.4 (BSD-2-Clause), embutido no app em `shared/leaflet-assets.ts` (gerado por `scripts/build-leaflet-assets.mjs`).
+- **Imagem:** "EOxCloudless https://cloudless.eox.at by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2024)", licença [CC BY-NC-SA 4.0](https://cloudless.eox.at/license-non-commercial): **uso não comercial** com crédito (projeto acadêmico). Resolução de 10 m.
+- **Nomes e divisas (camada opcional):** dados © colaboradores do [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL), desenho da EOX.
+- **Mapa offline:** continentes do [Natural Earth](https://www.naturalearthdata.com) (domínio público) e contorno do Pantanal do IBGE 2025.
+- O crédito aparece no canto do mapa e não pode ser removido. Para uso comercial, trocar a imagem por um provedor com contrato (ex.: Esri World Imagery com conta ArcGIS, MapTiler ou Mapbox): muda só a URL em `TILE_LAYERS`.

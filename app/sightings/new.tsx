@@ -168,7 +168,7 @@ export default function NewSightingScreen() {
       updatedAt: now,
     };
     try {
-      const validation = validateSightingOperation(sighting, { operation: existing ? "update" : "create", now: currentTime, ledger: creationLedger, isWithinArea: isInsidePantanal });
+      const validation = validateSightingOperation(sighting, { operation: existing ? "update" : "create", now: currentTime, ledger: creationLedger });
       if (!validation.valid) {
         Alert.alert("Confira o registro", validation.errors[0].message);
         return;
@@ -243,7 +243,7 @@ export default function NewSightingScreen() {
           <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{coords ? "Atualizar localização do aparelho" : "Usar localização do aparelho"}</Text>
         </Pressable>
         <Pressable onPress={() => setPickingLocation(true)} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Escolher local no mapa</Text></Pressable>
-        <Text style={{ color: coords && !isInsidePantanal(coords.latitude, coords.longitude) ? colors.error : colors.muted, marginBottom: 16 }}>{coords ? `${coords.latitude.toFixed(5)}, ${coords.longitude.toFixed(5)} · ${isInsidePantanal(coords.latitude, coords.longitude) ? "dentro do Pantanal" : "fora do Pantanal: ajuste o ponto"}` : "Selecione o local pelo GPS ou pelo mapa."}</Text>
+        <Text style={{ color: colors.muted, marginBottom: 16 }}>{coords ? `${coords.latitude.toFixed(5)}, ${coords.longitude.toFixed(5)}${isInsidePantanal(coords.latitude, coords.longitude) ? " · dentro do Pantanal" : ""}` : "Selecione o local pelo GPS ou pelo mapa."}</Text>
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 7 }}>Observações</Text>
         <TextInput value={notes} onChangeText={setNotes} multiline maxLength={500} placeholder="Comportamento, ambiente e outras notas (até 500 caracteres)" placeholderTextColor={colors.muted} style={{ minHeight: 105, textAlignVertical: "top", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 13, color: colors.foreground, marginBottom: 14 }} />
         <View style={{ flexDirection: "row", gap: 8, marginBottom: 20 }}>

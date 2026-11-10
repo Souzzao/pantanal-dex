@@ -49,7 +49,11 @@ export type SightingValidationOptions = {
   operation: "create" | "update";
   now: Date;
   ledger: SightingCreationLedger;
-  isWithinArea: (latitude: number, longitude: number) => boolean;
+  /**
+   * Opcional. O app não restringe mais a área (decisão do Felipe, 06/11: o Pantanal é só o recorte do
+   * catálogo do MVP; o app registra animais do mundo inteiro). Mantido para uma futura área restrita.
+   */
+  isWithinArea?: (latitude: number, longitude: number) => boolean;
 };
 
 function isCalendarDate(value: unknown): value is string {
@@ -177,7 +181,7 @@ export function validateSightingOperation(draft: SightingDraft, options: Sightin
   } else if (typeof latitude !== "number" || !Number.isFinite(latitude) || latitude < -90 || latitude > 90 ||
     typeof longitude !== "number" || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
     add("coordinates", "LOCATION_INVALID", "As coordenadas informadas são inválidas. Escolha a localização novamente.");
-  } else {
+  } else if (options.isWithinArea) {
     try {
       if (options.isWithinArea(latitude, longitude) !== true) {
         add("coordinates", "LOCATION_OUTSIDE_PANTANAL", "Escolha um ponto dentro do bioma Pantanal para registrar o avistamento.");
