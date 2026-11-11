@@ -1,6 +1,8 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ActivityIndicator, Animated, Image, Modal, PanResponder, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Animated, Image, Modal, PanResponder, ScrollView, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { StreetMap } from "@/components/StreetMap";
@@ -10,7 +12,7 @@ import { useColors } from "@/hooks/use-colors";
 import { supabase } from "@/lib/supabase";
 import { canAudit } from "@/shared/auth";
 import { normalizeAuditRow, REJECT_REASONS, type AuditItem, type LogItem, normalizeLogRow } from "@/shared/audit";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapState } from "@/shared/street-map";
 
 const TEXT = {
@@ -46,12 +48,13 @@ const TEXT = {
 const SWIPE_THRESHOLD = 110;
 
 export default function AuditScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { settings } = useApp();
   const { account } = useAuth();
   const lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
-  const catalog = useMemo(() => filterSpeciesCatalog(), []);
+  const catalog = useMemo(() => localizedSpeciesCatalog(locale, ), [locale]);
   const byId = useMemo(() => new Map(catalog.map((item) => [item.id, item])), [catalog]);
 
   const [tab, setTab] = useState<"stack" | "history">("stack");

@@ -1,12 +1,14 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import { Alert, FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
+import { Alert, Pressable, Text } from "@/components/Localized";
 import { router } from "expo-router";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import type { Sighting } from "@/shared/pantanal";
 import { PUBLIC_DURATIONS, publicationStatus, type PublicationStatus, type PublicDurationId } from "@/shared/public-map";
 
@@ -69,13 +71,14 @@ const REMOTE = {
 } as const;
 
 export default function PublicRecordsScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, settings } = useApp();
   const { store, publish, end, remoteStatus, rejectionFor } = usePublications();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
   const t = TEXT[lang];
   const r = REMOTE[lang];
-  const names = useMemo(() => new Map(filterSpeciesCatalog().map((item) => [item.id, item.commonName])), []);
+  const names = useMemo(() => new Map(localizedSpeciesCatalog(locale, ).map((item) => [item.id, item.commonName])), [locale]);
   const [busy, setBusy] = useState<string | null>(null);
   const now = new Date();
 

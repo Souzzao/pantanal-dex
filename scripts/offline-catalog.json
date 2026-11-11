@@ -1,0 +1,1892 @@
+[
+  {
+    "id": "tuiuiu",
+    "scientificName": "Jabiru mycteria",
+    "commonName": "Tuiuiú",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Jabiru%20(Jabiru%20mycteria)%202.JPG?width=900",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "arara-azul",
+    "scientificName": "Anodorhynchus hyacinthinus",
+    "commonName": "Arara-azul",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Hyacinth%20Macaw.jpg?width=900",
+        "author": "Malcolm",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw.jpg",
+        "credit": "Malcolm / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "onca-pintada",
+    "scientificName": "Panthera onca",
+    "commonName": "Onça-pintada",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Jaguar%20(Panthera%20onca%20palustris)%20male%20Rio%20Negro%202.JPG?width=900",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jaguar_(Panthera_onca_palustris)_male_Rio_Negro_2.JPG",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "capivara",
+    "scientificName": "Hydrochoerus hydrochaeris",
+    "commonName": "Capivara",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Hydrochoerus%20hydrochaeris.jpg?width=900",
+        "author": "Liftarn",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hydrochoerus_hydrochaeris.jpg",
+        "credit": "Liftarn / Wikimedia Commons"
+      },
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Capybara%20swimming.jpg?width=900",
+        "author": "Bob Johnson",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Capybara_swimming.jpg",
+        "credit": "Bob Johnson / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jacare-do-pantanal",
+    "scientificName": "Caiman yacare",
+    "commonName": "Jacaré-do-pantanal",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Caiman%20yacare.jpg?width=900",
+        "author": "Lea Maimone",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Caiman_yacare.jpg",
+        "credit": "Lea Maimone / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "anta",
+    "scientificName": "Tapirus terrestris",
+    "commonName": "Anta",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/036%20South%20American%20tapir%20in%20Encontro%20das%20%C3%81guas%20State%20Park%20Photo%20by%20Giles%20Laurent.jpg?width=900",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:036_South_American_tapir_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tamandua-bandeira",
+    "scientificName": "Myrmecophaga tridactyla",
+    "commonName": "Tamanduá-bandeira",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Myrmecophaga%20tridactyla.jpg?width=900",
+        "author": "Mateus Hidalgo",
+        "license": "CC BY-SA 2.5 BR",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myrmecophaga_tridactyla.jpg",
+        "credit": "Mateus Hidalgo / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cervo-do-pantanal",
+    "scientificName": "Blastocerus dichotomus",
+    "commonName": "Cervo-do-pantanal",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Blastocerus%20dichotomus.jpg?width=900",
+        "author": "Taragui",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blastocerus_dichotomus.jpg",
+        "credit": "Taragui / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ema",
+    "scientificName": "Rhea americana",
+    "commonName": "Ema",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Rhea%20americana.jpg?width=900",
+        "author": "Dezidor",
+        "license": "CC BY 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhea_americana.jpg",
+        "credit": "Dezidor / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "colhereiro",
+    "scientificName": "Platalea ajaja",
+    "commonName": "Colhereiro",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Roseate%20Spoonbill%20Platalea%20ajaja%20JG.jpg?width=900",
+        "author": "JeffreyGammon",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roseate_Spoonbill_Platalea_ajaja_JG.jpg",
+        "credit": "JeffreyGammon / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "garca-branca",
+    "scientificName": "Ardea alba",
+    "commonName": "Garça-branca",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Great%20egret%20fishing.jpg?width=900",
+        "author": "Rahul Sankar",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_egret_fishing.jpg",
+        "credit": "Rahul Sankar / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "sucuri-verde",
+    "scientificName": "Eunectes murinus",
+    "commonName": "Sucuri-verde",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Eunectes%20murinus.jpg?width=900",
+        "author": "Wikimedia Commons",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eunectes_murinus.jpg",
+        "credit": "Wikimedia Commons / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jabuti-piranga",
+    "scientificName": "Chelonoidis carbonaria",
+    "commonName": "Jabuti-piranga",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Chelonoidis%20carbonaria.jpg?width=900",
+        "author": "Ovelhamauro",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chelonoidis_carbonaria.jpg",
+        "credit": "Ovelhamauro / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "sapo-cururu",
+    "scientificName": "Rhinella diptycha",
+    "commonName": "Sapo-cururu",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Rhinella%20diptycha.jpg?width=900",
+        "author": "Romeofrog",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhinella_diptycha.jpg",
+        "credit": "Romeofrog / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ra-pimenta",
+    "scientificName": "Leptodactylus labyrinthicus",
+    "commonName": "Rã-pimenta",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Leptodactylus%20labyrinthicus.jpg?width=900",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_labyrinthicus.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "pintado",
+    "scientificName": "Pseudoplatystoma corruscans",
+    "commonName": "Pintado",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Surub%C3%AD%20(Pseudoplatystoma%20corruscans)%2C%20It%C3%A1%20Ibat%C3%A9.jpg?width=900",
+        "author": "Martín Acosta Albarracín",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Surub%C3%AD_(Pseudoplatystoma_corruscans)%2C_It%C3%A1_Ibat%C3%A9.jpg",
+        "credit": "Martín Acosta Albarracín / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "pacu",
+    "scientificName": "Piaractus mesopotamicus",
+    "commonName": "Pacu",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/33/Piaractus_mesopotamicus_-_Flickr_-_Dick_Culbert.jpg",
+        "author": "Dick Culbert from Gibsons, B.C., Canada",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Piaractus_mesopotamicus_-_Flickr_-_Dick_Culbert.jpg",
+        "credit": "Dick Culbert from Gibsons, B.C., Canada / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Piaractus_mesopotamicus_307099193.jpg",
+        "author": "Nicolas Olejnik",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Piaractus_mesopotamicus_307099193.jpg",
+        "credit": "Nicolas Olejnik / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/4/47/Piaractus_mesopotamicus_387099634.jpg",
+        "author": "R Vasconcellos",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Piaractus_mesopotamicus_387099634.jpg",
+        "credit": "R Vasconcellos / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "piraputanga",
+    "scientificName": "Brycon hilarii",
+    "commonName": "Piraputanga",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Brycon_hilarii.jpg",
+        "author": "David Morimoto (treez44est)",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brycon_hilarii.jpg",
+        "credit": "David Morimoto (treez44est) / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/af/Brycon_hilarii_-_Piraputanga_no_Monumento_Natural_do_Rio_Formoso.jpg",
+        "author": "BRASIL AQUA",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brycon_hilarii_-_Piraputanga_no_Monumento_Natural_do_Rio_Formoso.jpg",
+        "credit": "BRASIL AQUA / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/93/Brycon_hilarii_632830884.jpg",
+        "author": "Nicola Crockford",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brycon_hilarii_632830884.jpg",
+        "credit": "Nicola Crockford / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "caranguejo-agua-doce",
+    "scientificName": "Dilocarcinus pagei",
+    "commonName": "Caranguejo-de-água-doce",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Dilocarcinus%20pagei%2C%20Bolivia.jpg?width=900",
+        "author": "Vincent A. Vos",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dilocarcinus_pagei%2C_Bolivia.jpg",
+        "credit": "Vincent A. Vos / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "camarao-agua-doce",
+    "scientificName": "Macrobrachium amazonicum",
+    "commonName": "Camarão-da-amazônia",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Macrobrachium%20amazonicum%20(Heller%2C%201862).jpg?width=900",
+        "author": "Jonathan Vera Caripe",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Macrobrachium_amazonicum_(Heller%2C_1862).jpg",
+        "credit": "Jonathan Vera Caripe / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "bugio-preto",
+    "scientificName": "Alouatta caraya",
+    "commonName": "Bugio-preto",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Alouatta%20caraya.jpg?width=900",
+        "author": "Gonce",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alouatta_caraya.jpg",
+        "credit": "Gonce / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ariranha",
+    "scientificName": "Pteronura brasiliensis",
+    "commonName": "Ariranha",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Pteronura%20brasiliensis.jpg?width=900",
+        "author": "Steve Wilson",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pteronura_brasiliensis.jpg",
+        "credit": "Steve Wilson / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "lontra-neotropical",
+    "scientificName": "Lontra longicaudis",
+    "commonName": "Lontra-neotropical",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Lontra%20longicaudis.jpg?width=900",
+        "author": "Eugenio Hansen, OFS",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lontra_longicaudis.jpg",
+        "credit": "Eugenio Hansen, OFS / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "queixada",
+    "scientificName": "Tayassu pecari",
+    "commonName": "Queixada",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/8/85/Tayassu_pecari.jpg",
+        "author": "Chrumps",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tayassu_pecari.jpg",
+        "credit": "Chrumps / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Tayassu_pecari_-Brazil-8.jpg",
+        "author": "Ana_Cotta",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tayassu_pecari_-Brazil-8.jpg",
+        "credit": "Ana_Cotta / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Tayassu_pecari_339487426.jpg",
+        "author": "Tomás Tamagno",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tayassu_pecari_339487426.jpg",
+        "credit": "Tomás Tamagno / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "mutum-de-penacho",
+    "scientificName": "Crax fasciolata",
+    "commonName": "Mutum-de-penacho",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2b/076_Male_Bare-faced_curassow_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:076_Male_Bare-faced_curassow_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/d/da/Bare-faced_curassow_%28Crax_fasciolata%29_male_head.JPG",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bare-faced_curassow_(Crax_fasciolata)_male_head.JPG",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Crax_fasciolata_-Parque_das_Aves-8.jpg",
+        "author": "Bruno Girin",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crax_fasciolata_-Parque_das_Aves-8.jpg",
+        "credit": "Bruno Girin / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "carau",
+    "scientificName": "Aramus guarauna",
+    "commonName": "Carão",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Aramus%20guarauna.jpg?width=900",
+        "author": "leppyone",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aramus_guarauna.jpg",
+        "credit": "leppyone / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "seriema",
+    "scientificName": "Cariama cristata",
+    "commonName": "Seriema",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/24/Cariama_cristata_-near_Goiania%2C_Goias%2C_Brazil-8.jpg",
+        "author": "Wagner Machado Carlos Lemes",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cariama_cristata_-near_Goiania,_Goias,_Brazil-8.jpg",
+        "credit": "Wagner Machado Carlos Lemes / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/6/64/174_Red-legged_seriema_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:174_Red-legged_seriema_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Red-legged_seriema_%28Cariama_cristata%29_head.JPG",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-legged_seriema_(Cariama_cristata)_head.JPG",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "teiú",
+    "scientificName": "Salvator merianae",
+    "commonName": "Teiú",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Argentine%20black%20and%20white%20tegu.jpg?width=900",
+        "author": "SimonWaldherr",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Argentine_black_and_white_tegu.jpg",
+        "credit": "SimonWaldherr / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "dourado",
+    "scientificName": "Salminus brasiliensis",
+    "commonName": "Dourado",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Salminus_brasiliensis_102879277.jpg",
+        "author": "Diego Carús",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salminus_brasiliensis_102879277.jpg",
+        "credit": "Diego Carús / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/34/Salminus_brasiliensis_102879283.jpg",
+        "author": "Diego Carús",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salminus_brasiliensis_102879283.jpg",
+        "credit": "Diego Carús / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Salminus_brasiliensis_61505781.jpg",
+        "author": "Walter S. Prado",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salminus_brasiliensis_61505781.jpg",
+        "credit": "Walter S. Prado / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jaguatirica",
+    "scientificName": "Leopardus pardalis",
+    "commonName": "Jaguatirica",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Leopardus%20pardalis.jpg?width=900",
+        "author": "Hans Hillewaert",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leopardus_pardalis.jpg",
+        "credit": "Hans Hillewaert / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "mao-pelada",
+    "scientificName": "Procyon cancrivorus",
+    "commonName": "Mão-pelada",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Procyon%20cancrivorus.jpg?width=900",
+        "author": "Ryskas",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Procyon_cancrivorus.jpg",
+        "credit": "Ryskas / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cachorro-do-mato",
+    "scientificName": "Cerdocyon thous",
+    "commonName": "Cachorro-do-mato",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Cerdocyon%20thous.jpg?width=900",
+        "author": "Petruss",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cerdocyon_thous.jpg",
+        "credit": "Petruss / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "macaco-prego",
+    "scientificName": "Sapajus cay",
+    "commonName": "Macaco-prego",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Sapajus%20cay%20107571775.jpg?width=900",
+        "author": "João D'Andretta",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sapajus_cay_107571775.jpg",
+        "credit": "João D'Andretta / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "anhuma",
+    "scientificName": "Anhima cornuta",
+    "commonName": "Anhuma",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/93/Anhima_cornuta.jpg",
+        "author": "Christoph2007",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anhima_cornuta.jpg",
+        "credit": "Christoph2007 / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/6/60/Anhima_cornuta_252513408.jpg",
+        "author": "agujaceratops",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anhima_cornuta_252513408.jpg",
+        "credit": "agujaceratops / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Anhima_cornuta_366954418.jpg",
+        "author": "miguelpodas",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anhima_cornuta_366954418.jpg",
+        "credit": "miguelpodas / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "urubu-rei",
+    "scientificName": "Sarcoramphus papa",
+    "commonName": "Urubu-rei",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Sarcoramphus_papa_in_Ecuador.jpg",
+        "author": "Geoff Gallice",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sarcoramphus_papa_in_Ecuador.jpg",
+        "credit": "Geoff Gallice / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/5/55/Sarcoramphus_papa_%28K%C3%B6nigsgeier_-_King_Vulture%29_-_Weltvogelpark_Walsrode_2013-01.jpg",
+        "author": "Olaf Oliviero Riemer",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sarcoramphus_papa_(K%C3%B6nigsgeier_-_King_Vulture)_-_Weltvogelpark_Walsrode_2013-01.jpg",
+        "credit": "Olaf Oliviero Riemer / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/d/da/Sarcoramphus_papa_441774682.jpg",
+        "author": "Anthony Batista",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sarcoramphus_papa_441774682.jpg",
+        "credit": "Anthony Batista / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jacare-coroa",
+    "scientificName": "Paleosuchus palpebrosus",
+    "commonName": "Jacaré-coroa",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Paleosuchus%20palpebrosus.jpg?width=900",
+        "author": "TimVickers",
+        "license": "Public Domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paleosuchus_palpebrosus.jpg",
+        "credit": "TimVickers / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "traira",
+    "scientificName": "Hoplias malabaricus",
+    "commonName": "Traíra",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Hoplias%20malabaricus.jpg?width=900",
+        "author": "Cláudio D. Timm",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoplias_malabaricus.jpg",
+        "credit": "Cláudio D. Timm / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cutia",
+    "scientificName": "Dasyprocta azarae",
+    "commonName": "Cutia",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Dasyprocta%20azarae%20425662054.jpg?width=900",
+        "author": "Darren Obbard",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dasyprocta_azarae_425662054.jpg",
+        "credit": "Darren Obbard / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "paca",
+    "scientificName": "Cuniculus paca",
+    "commonName": "Paca",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Cuniculus%20paca.jpg?width=900",
+        "author": "Hans Hillewaert",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cuniculus_paca.jpg",
+        "credit": "Hans Hillewaert / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "gato-mourisco",
+    "scientificName": "Herpailurus yagouaroundi",
+    "commonName": "Gato-mourisco",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Herpailurus%20yagouaroundi%20323451560%20(cropped).jpg?width=900",
+        "author": "thibaudaronson",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Herpailurus_yagouaroundi_323451560_(cropped).jpg",
+        "credit": "thibaudaronson / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "aracua",
+    "scientificName": "Ortalis canicollis",
+    "commonName": "Aracuã",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Ortalis%20canicollis.jpg?width=900",
+        "author": "Grr.dentista",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ortalis_canicollis.jpg",
+        "credit": "Grr.dentista / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "soco-boi",
+    "scientificName": "Tigrisoma lineatum",
+    "commonName": "Socó-boi",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Tigrisoma%20lineatum.jpg?width=900",
+        "author": "Cristóbal Alvarado Minic",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tigrisoma_lineatum.jpg",
+        "credit": "Cristóbal Alvarado Minic / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jacana",
+    "scientificName": "Jacana jacana",
+    "commonName": "Jaçanã",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Jacana%20jacana.jpg?width=900",
+        "author": "Júlio Reis",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jacana_jacana.jpg",
+        "credit": "Júlio Reis / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "martim-pescador-grande",
+    "scientificName": "Megaceryle torquata",
+    "commonName": "Martim-pescador-grande",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Megaceryle%20torquata.jpg?width=900",
+        "author": "timinbrazil",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Megaceryle_torquata.jpg",
+        "credit": "timinbrazil / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "curimbata",
+    "scientificName": "Prochilodus lineatus",
+    "commonName": "Curimbatá",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Prochilodus%20lineatus.jpg?width=900",
+        "author": "Wikimedia Commons",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prochilodus_lineatus.jpg",
+        "credit": "Wikimedia Commons / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cagado-de-barbicha",
+    "scientificName": "Phrynops geoffroanus",
+    "commonName": "Cágado-de-barbicha",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Phrynops%20geoffroanus.jpg?width=900",
+        "author": "Daiju Azuma",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phrynops_geoffroanus.jpg",
+        "credit": "Daiju Azuma / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cobra-verde",
+    "scientificName": "Philodryas olfersii",
+    "commonName": "Cobra-verde",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Philodryas%20olfersii.jpg?width=900",
+        "author": "DuSantos",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Philodryas_olfersii.jpg",
+        "credit": "DuSantos / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-cabecuda",
+    "scientificName": "Boana raniceps",
+    "commonName": "Perereca-cabeçuda",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Hypsiboas%20raniceps.jpg?width=900",
+        "author": "Ariovaldo Giaretta",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hypsiboas_raniceps.jpg",
+        "credit": "Ariovaldo Giaretta / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ra-quatro-olhos",
+    "scientificName": "Pleurodema diplolister",
+    "commonName": "Rã-de-quatro-olhos",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Pleurodema%20diplolister.jpg?width=900",
+        "author": "Erlem Fonseca",
+        "license": "Public Domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pleurodema_diplolister.jpg",
+        "credit": "Erlem Fonseca / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "piranha-vermelha",
+    "scientificName": "Pygocentrus nattereri",
+    "commonName": "Piranha-vermelha",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Pygocentrus%20nattereri.jpg?width=900",
+        "author": "Wikimedia Commons",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pygocentrus_nattereri.jpg",
+        "credit": "Wikimedia Commons / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tuvira",
+    "scientificName": "Gymnotus inaequilabiatus",
+    "commonName": "Tuvira",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Gymnotus%20inaequilabiatus.jpg?width=900",
+        "author": "Paul Louis Oudart",
+        "license": "Public Domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gymnotus_inaequilabiatus.jpg",
+        "credit": "Paul Louis Oudart / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "morfoborboleta",
+    "scientificName": "Morpho helenor",
+    "commonName": "Borboleta-morfo",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Morpho%20helenor.jpg?width=900",
+        "author": "Nosferattus",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morpho_helenor.jpg",
+        "credit": "Nosferattus / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "besouro-rola-bosta",
+    "scientificName": "Deltochilum verruciferum",
+    "commonName": "Besouro-rola-bosta",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Deltochilum%20gibbosum%20IMG%209238a.jpg?width=900",
+        "author": "xpda",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Deltochilum_gibbosum_IMG_9238a.jpg",
+        "credit": "xpda / Wikimedia Commons — Deltochilum gibbosum, espécie do mesmo gênero"
+      }
+    ]
+  },
+  {
+    "id": "biguá",
+    "scientificName": "Nannopterum brasilianum",
+    "commonName": "Biguá",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Phalacrocorax%20brasilianus%20(Costa%20Rica).jpg?width=900",
+        "author": "Hans Hillewaert",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phalacrocorax_brasilianus_(Costa_Rica).jpg",
+        "credit": "Hans Hillewaert / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "garca-moura",
+    "scientificName": "Ardea cocoi",
+    "commonName": "Garça-moura",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Ardea%20cocoi.jpg?width=900",
+        "author": "Dario Sanches",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ardea_cocoi.jpg",
+        "credit": "Dario Sanches / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "soco-dorminhoco",
+    "scientificName": "Nycticorax nycticorax",
+    "commonName": "Socó-dorminhoco",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Nycticorax%20nycticorax.jpg?width=900",
+        "author": "Luka Marković",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nycticorax_nycticorax.jpg",
+        "credit": "Luka Marković / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "coruja-buraqueira",
+    "scientificName": "Athene cunicularia",
+    "commonName": "Coruja-buraqueira",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Athene%20cunicularia.jpg?width=900",
+        "author": "Erik Neves",
+        "license": "CC BY 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Athene_cunicularia.jpg",
+        "credit": "Erik Neves / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "lambari-do-pantanal",
+    "scientificName": "Astyanax lacustris",
+    "commonName": "Lambari",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Astyanax%20lacustris.jpg?width=900",
+        "author": "W.S.Serra",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Astyanax_lacustris.jpg",
+        "credit": "W.S.Serra / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "mandi",
+    "scientificName": "Pimelodus maculatus",
+    "commonName": "Mandi",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Pimelodus%20maculatus.jpg?width=900",
+        "author": "Paul Louis Oudart",
+        "license": "Public Domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pimelodus_maculatus.jpg",
+        "credit": "Paul Louis Oudart / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "pitu",
+    "scientificName": "Macrobrachium amazonicum",
+    "commonName": "Pitu",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Macrobrachium%20amazonicum%20(Heller%2C%201862).jpg?width=900",
+        "author": "Jonathan Vera Caripe",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Macrobrachium_amazonicum_(Heller%2C_1862).jpg",
+        "credit": "Jonathan Vera Caripe / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "libelula-pantaneira",
+    "scientificName": "Pantala flavescens",
+    "commonName": "Libélula pantaneira",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Pantala%20flavescens.jpg?width=900",
+        "author": "yimhafiz",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pantala_flavescens.jpg",
+        "credit": "yimhafiz / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tamandua-mirim",
+    "scientificName": "Tamandua tetradactyla",
+    "commonName": "Tamanduá-mirim",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Tamandua%20tetradactyla.jpg?width=900",
+        "author": "Wikimedia Commons",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tamandua_tetradactyla.jpg",
+        "credit": "Wikimedia Commons / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "irara",
+    "scientificName": "Eira barbara",
+    "commonName": "Irara",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Eira%20barbara.jpg?width=900",
+        "author": "Bodlina",
+        "license": "CC BY 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eira_barbara.jpg",
+        "credit": "Bodlina / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "quati",
+    "scientificName": "Nasua nasua",
+    "commonName": "Quati",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Nasua%20nasua.jpg?width=900",
+        "author": "Andrew Magill",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nasua_nasua.jpg",
+        "credit": "Andrew Magill / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "carrapateiro",
+    "scientificName": "Milvago chimachima",
+    "commonName": "Carrapateiro",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Milvago%20chimachima.jpg?width=900",
+        "author": "Dario Sanches",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milvago_chimachima.jpg",
+        "credit": "Dario Sanches / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "gaviao-caramujeiro",
+    "scientificName": "Rostrhamus sociabilis",
+    "commonName": "Gavião-caramujeiro",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Rostrhamus%20sociabilis.jpg?width=900",
+        "author": "Dario Sanches",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rostrhamus_sociabilis.jpg",
+        "credit": "Dario Sanches / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "pica-pau-do-campo",
+    "scientificName": "Colaptes campestris",
+    "commonName": "Pica-pau-do-campo",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Colaptes%20campestris.jpg?width=900",
+        "author": "mauroguanandi",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colaptes_campestris.jpg",
+        "credit": "mauroguanandi / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tesourinha",
+    "scientificName": "Tyrannus savana",
+    "commonName": "Tesourinha",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannus%20savana.jpg?width=900",
+        "author": "Leoadec",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tyrannus_savana.jpg",
+        "credit": "Leoadec / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "sucuri-amarela",
+    "scientificName": "Eunectes notaeus",
+    "commonName": "Sucuri-amarela",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Eunectes%20notaeus.jpg?width=900",
+        "author": "Dawson",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eunectes_notaeus.jpg",
+        "credit": "Dawson / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "teiu",
+    "scientificName": "Salvator merianae",
+    "commonName": "Teiú",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Argentine_Black-and-white_Tegu_%28Salvator_merianae%29%2C_Parque_Estadual_Encontro_das_%C3%81guas_Thomas-Fuhrmann.jpg",
+        "author": "Thomas Fuhrmann",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Argentine_Black-and-white_Tegu_(Salvator_merianae),_Parque_Estadual_Encontro_das_Águas_Thomas-Fuhrmann.jpg",
+        "credit": "Thomas Fuhrmann / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/23/182_Argentine_black_and_white_tegu_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:182_Argentine_black_and_white_tegu_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Salvator_merianae_-_Rafael_-_470540720.jpeg",
+        "author": "Rafael",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salvator_merianae_-_Rafael_-_470540720.jpeg",
+        "credit": "Rafael / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-de-cera",
+    "scientificName": "Phyllomedusa sauvagii",
+    "commonName": "Perereca-de-cera",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Phyllomedusa%20sauvagii.jpg?width=900",
+        "author": "Ianaré Sévi",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phyllomedusa_sauvagii.jpg",
+        "credit": "Ianaré Sévi / Wikimedia Commons"
+      },
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Waxy%20monkey%20tree%20frog.jpg?width=900",
+        "author": "Julia Sumangil",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waxy_monkey_tree_frog.jpg",
+        "credit": "Julia Sumangil / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ra-pimenta-pantanal",
+    "scientificName": "Leptodactylus labyrinthicus",
+    "commonName": "Rã-pimenta",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Leptodactylus%20labyrinthicus.jpg?width=900",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_labyrinthicus.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "traira-pantanal",
+    "scientificName": "Hoplias malabaricus",
+    "commonName": "Traíra",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Hoplias%20malabaricus.jpg?width=900",
+        "author": "Cláudio D. Timm",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoplias_malabaricus.jpg",
+        "credit": "Cláudio D. Timm / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "piau-tres-pintas",
+    "scientificName": "Leporinus friderici",
+    "commonName": "Piau-três-pintas",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Leporinus%20friderici.jpg?width=900",
+        "author": "Citron",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leporinus_friderici.jpg",
+        "credit": "Citron / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "caranguejo-de-agua-doce",
+    "scientificName": "Dilocarcinus pagei",
+    "commonName": "Caranguejo-de-água-doce",
+    "images": [
+      {
+        "uri": "https://commons.wikimedia.org/wiki/Special:FilePath/Dilocarcinus%20pagei%2C%20Bolivia.jpg?width=900",
+        "author": "Vincent A. Vos",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dilocarcinus_pagei%2C_Bolivia.jpg",
+        "credit": "Vincent A. Vos / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "lobo-guara",
+    "scientificName": "Chrysocyon brachyurus",
+    "commonName": "Lobo-guará",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Maned_wolf_%28Chrysocyon_brachyurus%29_%2892775971%29.jpg",
+        "author": "Pascal Vuylsteker",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maned_wolf_(Chrysocyon_brachyurus)_(92775971).jpg",
+        "credit": "Pascal Vuylsteker / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Chrysocyon_Brachyurus.jpg",
+        "author": "Spencer Wright",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysocyon_Brachyurus.jpg",
+        "credit": "Spencer Wright / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Chrysocyon.brachyurus.jpg",
+        "author": "sarefo",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysocyon.brachyurus.jpg",
+        "credit": "sarefo / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cateto",
+    "scientificName": "Pecari tajacu",
+    "commonName": "Cateto",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Pecari_tajacu_%28Costa_Rica%29.jpg",
+        "author": "Hans Hillewaert",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pecari_tajacu_(Costa_Rica).jpg",
+        "credit": "Hans Hillewaert / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Pecari_tajacu_-_02.jpg",
+        "author": "Carlos Delgado",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pecari_tajacu_-_02.jpg",
+        "credit": "Carlos Delgado / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/91/Collared_Peccary_%28Pecari_tajacu%29_-_geograph.org.uk_-_883326.jpg",
+        "author": "Evelyn Simak",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Collared_Peccary_(Pecari_tajacu)_-_geograph.org.uk_-_883326.jpg",
+        "credit": "Evelyn Simak / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cobra-cipo",
+    "scientificName": "Oxybelis aeneus",
+    "commonName": "Cobra-cipó",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Oxybelis_aeneus_01.jpg",
+        "author": "Brian Gratwicke",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus_01.jpg",
+        "credit": "Brian Gratwicke / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Oxybelis_aeneus.jpg",
+        "author": "Tod Baker",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus.jpg",
+        "credit": "Tod Baker / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Oxybelis_aeneus_%28Costa_Rica%29.jpg",
+        "author": "Lucas Vogel",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus_(Costa_Rica).jpg",
+        "credit": "Lucas Vogel / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-do-banheiro",
+    "scientificName": "Boana albopunctata",
+    "commonName": "Perereca",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Hypsiboas_albopunctatus01a.jpg",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hypsiboas_albopunctatus01a.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boana_albopunctata_-_Lucas_Mantelo_Cruz_-_353779982.jpeg",
+        "author": "Lucas Mantelo Cruz",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boana_albopunctata_-_Lucas_Mantelo_Cruz_-_353779982.jpeg",
+        "credit": "Lucas Mantelo Cruz / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/7/76/Boana_albopunctata_-_karla_daniel_de_faria_-_536102291.jpeg",
+        "author": "karla daniel de faria",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boana_albopunctata_-_karla_daniel_de_faria_-_536102291.jpeg",
+        "credit": "karla daniel de faria / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-macaco",
+    "scientificName": "Phyllomedusa sauvagii",
+    "commonName": "Perereca-macaco",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/26/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg",
+        "author": "Brocken Inaglory",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii.jpg",
+        "credit": "Brocken Inaglory / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg",
+        "author": "Brocken Inaglory",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waxy_Monkey_Tree_Frogs_Phyllomedusa_sauvagii_1.jpg",
+        "credit": "Brocken Inaglory / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Waxy.tree.frog.arp.jpg",
+        "author": "Adrian Pingstone",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waxy.tree.frog.arp.jpg",
+        "credit": "Adrian Pingstone / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "gaviao-belo",
+    "scientificName": "Busarellus nigricollis",
+    "commonName": "Gavião-belo",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Black-collared_hawk_%28Busarellus_nigricollis%29_adult.jpg",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-collared_hawk_(Busarellus_nigricollis)_adult.jpg",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/93/Black-collared_hawk_%28Busarellus_nigricollis%29_immature.JPG",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-collared_hawk_(Busarellus_nigricollis)_immature.JPG",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/90/022_Black-collared_hawk_flying_with_a_fish_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:022_Black-collared_hawk_flying_with_a_fish_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cachara",
+    "scientificName": "Pseudoplatystoma reticulatum",
+    "commonName": "Cachara",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Pseudoplatystoma_reticulatum.JPG",
+        "author": "CHUCAO",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pseudoplatystoma_reticulatum.JPG",
+        "credit": "CHUCAO / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "veado-campeiro",
+    "scientificName": "Ozotoceros bezoarticus",
+    "commonName": "Veado-campeiro",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b8/O._bezoarticus_buck.jpg",
+        "author": "Fabio Rage",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:O._bezoarticus_buck.jpg",
+        "credit": "Fabio Rage / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Pampas_deer_nursing_fwan.jpg",
+        "author": "Scott Presnell",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pampas_deer_nursing_fwan.jpg",
+        "credit": "Scott Presnell / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Venado-Campo-UY-Ozotoceros_bezoarticus.jpg",
+        "author": "Fedaro",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Venado-Campo-UY-Ozotoceros_bezoarticus.jpg",
+        "credit": "Fedaro / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "morcego-pescador",
+    "scientificName": "Noctilio leporinus",
+    "commonName": "Morcego-pescador",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Noctilio_leporinus_407860893.jpg",
+        "author": "E Santos Ortega",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Noctilio_leporinus_407860893.jpg",
+        "credit": "E Santos Ortega / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Noctilio_leporinus_407860831.jpg",
+        "author": "E Santos Ortega",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Noctilio_leporinus_407860831.jpg",
+        "credit": "E Santos Ortega / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/21/Noctilio_leporinus_407860758.jpg",
+        "author": "E Santos Ortega",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Noctilio_leporinus_407860758.jpg",
+        "credit": "E Santos Ortega / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "ourico-cacheiro",
+    "scientificName": "Coendou prehensilis",
+    "commonName": "Ouriço-cacheiro",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/0/08/Coendou_prehensilis_2_-_Buffalo_Zoo.jpg",
+        "author": "Dave Pape",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coendou_prehensilis_2_-_Buffalo_Zoo.jpg",
+        "credit": "Dave Pape / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/98/Brazilian_Porcupine_at_Louisville_Zoo.jpg",
+        "author": "Ltshears",
+        "license": "Public domain",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brazilian_Porcupine_at_Louisville_Zoo.jpg",
+        "credit": "Ltshears / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Prehensile_Tail_Porcupine_Curled_and_Relaxed_%2818144690005%29.jpg",
+        "author": "Eric Kilby",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prehensile_Tail_Porcupine_Curled_and_Relaxed_%2818144690005%29.jpg",
+        "credit": "Eric Kilby / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "arara-caninde",
+    "scientificName": "Ara ararauna",
+    "commonName": "Arara-canindé",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ara_ararauna_Luc_Viatour.jpg",
+        "author": "Luc Viatour",
+        "license": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ara_ararauna_Luc_Viatour.jpg",
+        "credit": "Luc Viatour / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Ara_ararauna_%28Linnaeus_1758%29.jpg",
+        "author": "Michael Gäbler",
+        "license": "CC BY 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ara_ararauna_(Linnaeus_1758).jpg",
+        "credit": "Michael Gäbler / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/6/60/Ara_ararauna_qtl3.jpg",
+        "author": "Quartl",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ara_ararauna_qtl3.jpg",
+        "credit": "Quartl / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "urubu-de-cabeca-preta",
+    "scientificName": "Coragyps atratus",
+    "commonName": "Urubu-de-cabeça-preta",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Coragyps-atratus-002.jpg",
+        "author": "Mdf",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coragyps-atratus-002.jpg",
+        "credit": "Mdf / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Coragyps-atratus-001.jpg",
+        "author": "Mdf",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coragyps-atratus-001.jpg",
+        "credit": "Mdf / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Coragyps_atratus_brasiliensis_Black_vulture_Bel%C3%A9m_01.jpg",
+        "author": "Cayambe",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coragyps_atratus_brasiliensis_Black_vulture_Bel%C3%A9m_01.jpg",
+        "credit": "Cayambe / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tucano-toco",
+    "scientificName": "Ramphastos toco",
+    "commonName": "Tucano-toco",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Toco_toucan_%28Ramphastos_toco%29_in_flight_composite.jpg",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toco_toucan_(Ramphastos_toco)_in_flight_composite.jpg",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/36/Toco_toucan_%28Ramphastos_toco%29_drinking_composite.jpg",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toco_toucan_(Ramphastos_toco)_drinking_composite.jpg",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Toco_Toucan_%28Ramphastos_toco%29_-_48153967707.jpg",
+        "author": "Bernard DUPONT",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toco_Toucan_(Ramphastos_toco)_-_48153967707.jpg",
+        "credit": "Bernard DUPONT / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cangapara",
+    "scientificName": "Acanthochelys macrocephala",
+    "commonName": "Cágado-cabeçudo",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Acanthochelys_macrocephala.jpg",
+        "author": "Goodshort",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acanthochelys_macrocephala.jpg",
+        "credit": "Goodshort / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Big-headed_Pantanal_Swamp_Turtle_%28Acanthochelys_macrocephala%29.jpg",
+        "author": "Bernard DUPONT",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big-headed_Pantanal_Swamp_Turtle_(Acanthochelys_macrocephala).jpg",
+        "credit": "Bernard DUPONT / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/10/Big-headed_Pantanal_Swamp_Turtle_%28Acanthochelys_macrocephala%29_%2831831317365%29.jpg",
+        "author": "Bernard DUPONT",
+        "license": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big-headed_Pantanal_Swamp_Turtle_(Acanthochelys_macrocephala)_(31831317365).jpg",
+        "credit": "Bernard DUPONT / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "cobra-dagua",
+    "scientificName": "Helicops infrataeniatus",
+    "commonName": "Cobra-d'água",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/35/Helicops_infrataeniatus01.jpg",
+        "author": "Diogo B. Provete",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Helicops_infrataeniatus01.jpg",
+        "credit": "Diogo B. Provete / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Helicops_infrataeniatus_cabeca_Catanduva_SP_OAVM.jpg",
+        "author": "Otavio A Marques",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Helicops_infrataeniatus_cabeca_Catanduva_SP_OAVM.jpg",
+        "credit": "Otavio A Marques / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Helicops_infrataeniatus_Catanduva_SP_OAVM2.jpg",
+        "author": "Otavio A Marques",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Helicops_infrataeniatus_Catanduva_SP_OAVM2.jpg",
+        "credit": "Otavio A Marques / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jacare-pagua",
+    "scientificName": "Caiman yacare",
+    "commonName": "Jacaré-do-Pantanal",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Brillenkaiman_Caiman_yacare.jpg",
+        "author": "Andreas Trepte",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brillenkaiman_Caiman_yacare.jpg",
+        "credit": "Andreas Trepte / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/6/66/Yacare_caiman_%28Caiman_yacare%29_2.jpg",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yacare_caiman_(Caiman_yacare)_2.jpg",
+        "credit": "Charles J. Sharp / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/7/7e/023_Yacare_caiman_sunbathing_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:023_Yacare_caiman_sunbathing_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+        "credit": "Giles Laurent / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "tei-de-cauda-vermelha",
+    "scientificName": "Salvator rufescens",
+    "commonName": "Teiú-vermelho",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Argentine_Red_Tegu_8_weeks.jpeg",
+        "author": "Scott Hogge",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Argentine_Red_Tegu_8_weeks.jpeg",
+        "credit": "Scott Hogge / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/35/Red_Tegu_%28Salvator_rufescens%29.jpg",
+        "author": "Holger Braun",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red_Tegu_(Salvator_rufescens).jpg",
+        "credit": "Holger Braun / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Salvator_rufescens_32477548.jpg",
+        "author": "Hugo Hulsberg",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salvator_rufescens_32477548.jpg",
+        "credit": "Hugo Hulsberg / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "sapinho-cururu",
+    "scientificName": "Rhinella schneideri",
+    "commonName": "Sapo-cururu",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Bufo_schneideri.jpg",
+        "author": "user:Dawson",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bufo_schneideri.jpg",
+        "credit": "user:Dawson / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/4/48/Cururu_%28Rhinella_schneideri%29%2C_Uruguay%2C_2015.jpg",
+        "author": "Enrique González",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cururu_(Rhinella_schneideri),_Uruguay,_2015.jpg",
+        "credit": "Enrique González / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Curur%C3%BA%2C_%28Rhinella_schneideri%29%2C_Uruguay%2C_2019.jpg",
+        "author": "Enrique González",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cururú,_(Rhinella_schneideri),_Uruguay,_2019.jpg",
+        "credit": "Enrique González / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "rã-pimenta",
+    "scientificName": "Leptodactylus chaquensis",
+    "commonName": "Rã-pimenta",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Leptodactylus_chaquensis.jpg",
+        "author": "Axel Kwet",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_chaquensis.jpg",
+        "credit": "Axel Kwet / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Leptodactylus_chaquensis06.jpg",
+        "author": "Diogo B. Provete",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_chaquensis06.jpg",
+        "credit": "Diogo B. Provete / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/8/85/Leptodactylus_chaquensis_08.jpg",
+        "author": "Rhalah",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_chaquensis_08.jpg",
+        "credit": "Rhalah / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-fuscomarginata",
+    "scientificName": "Scinax fuscomarginatus",
+    "commonName": "Perereca-de-margem-escura",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Scinax_fuscomarginatus01.jpg",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scinax_fuscomarginatus01.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Scinax_fuscomarginatus02.jpg",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scinax_fuscomarginatus02.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "perereca-folhagem-azul",
+    "scientificName": "Phyllomedusa azurea",
+    "commonName": "Perereca-de-folhagem-azul",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Phyllomedusa_azurea.jpg",
+        "author": "Ariovaldo Giaretta",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phyllomedusa_azurea.jpg",
+        "credit": "Ariovaldo Giaretta / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Phyllomedusa_azurea01.jpg",
+        "author": "Lucas Grandinetti",
+        "license": "CC BY-SA 2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phyllomedusa_azurea01.jpg",
+        "credit": "Lucas Grandinetti / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "jau",
+    "scientificName": "Zungaro jahu",
+    "commonName": "Jaú",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/38/Ja%C3%BA_catfish.jpg",
+        "author": "Waltman30",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ja%C3%BA_catfish.jpg",
+        "credit": "Waltman30 / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "peixe-cachorro",
+    "scientificName": "Acestrorhynchus pantaneiro",
+    "commonName": "Peixe-cachorro",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Acestrorhynchus_pantaneiro_313835282.jpg",
+        "author": "demianlescano",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acestrorhynchus_pantaneiro_313835282.jpg",
+        "credit": "demianlescano / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Acestrorhynchus_pantaneiro_333993221.jpg",
+        "author": "Luciano Massa",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acestrorhynchus_pantaneiro_333993221.jpg",
+        "credit": "Luciano Massa / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Acestrorhynchus_pantaneiro_351129961.jpg",
+        "author": "Sebastián Lovera",
+        "license": "CC0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acestrorhynchus_pantaneiro_351129961.jpg",
+        "credit": "Sebastián Lovera / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "pacupeva",
+    "scientificName": "Myloplus tiete",
+    "commonName": "Pacupeva",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Myloplus_tiete.jpg",
+        "author": "Douglas Lopes",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myloplus_tiete.jpg",
+        "credit": "Douglas Lopes / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "abelha-jatai",
+    "scientificName": "Tetragonisca angustula",
+    "commonName": "Abelha-jataí",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Tetragonisca_angustula.JPG",
+        "author": "Bibafu",
+        "license": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tetragonisca_angustula.JPG",
+        "credit": "Bibafu / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Parque_Est_Intervales_-_abelhas_jata%C3%AD.jpg",
+        "author": "Claudio JJ",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parque_Est_Intervales_-_abelhas_jata%C3%AD.jpg",
+        "credit": "Claudio JJ / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/16/Soldado_jatai.jpg",
+        "author": "Victorvsb",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Soldado_jatai.jpg",
+        "credit": "Victorvsb / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "formiga-cortadeira",
+    "scientificName": "Atta sexdens",
+    "commonName": "Formiga-cortadeira",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/7/77/Fourmi_champignoniste_%2824%29.jpg",
+        "author": "Cangadoba",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fourmi_champignoniste_%2824%29.jpg",
+        "credit": "Cangadoba / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/0/04/Atta_sexdens_casent0173817_dorsal_1.jpg",
+        "author": "April Nobile",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Atta_sexdens_casent0173817_dorsal_1.jpg",
+        "credit": "April Nobile / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/0/06/Atta_sexdens_casent0173816_profile_1.jpg",
+        "author": "April Nobile",
+        "license": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Atta_sexdens_casent0173816_profile_1.jpg",
+        "credit": "April Nobile / Wikimedia Commons"
+      }
+    ]
+  },
+  {
+    "id": "aranha-armadeira",
+    "scientificName": "Phoneutria nigriventer",
+    "commonName": "Aranha-armadeira",
+    "images": [
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%281%29.jpg",
+        "author": "Rodrigo Tetsuo Argenton",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%281%29.jpg",
+        "credit": "Rodrigo Tetsuo Argenton / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%284%29.jpg",
+        "author": "Rodrigo Tetsuo Argenton",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%284%29.jpg",
+        "credit": "Rodrigo Tetsuo Argenton / Wikimedia Commons"
+      },
+      {
+        "uri": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%283%29.jpg",
+        "author": "Rodrigo Tetsuo Argenton",
+        "license": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aranha_armadeira%28Phoneutria_nigriventer%29_por_Rodrigo_Tetsuo_Argenton_%283%29.jpg",
+        "credit": "Rodrigo Tetsuo Argenton / Wikimedia Commons"
+      }
+    ]
+  }
+]

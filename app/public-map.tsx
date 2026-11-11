@@ -1,5 +1,7 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useCallback, useMemo, useState } from "react";
-import { Pressable, ScrollView, Switch, Text, TextInput, View } from "react-native";
+import { ScrollView, Switch, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 import { router } from "expo-router";
 
 import { PublicMap, type PublicMapLabels } from "@/components/PublicMap";
@@ -8,7 +10,7 @@ import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
 import {
   buildSampleRecords,
@@ -84,6 +86,7 @@ const EXTRA = {
 } as const;
 
 export default function PublicMapScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, settings } = useApp();
   const { store, remoteRecords, feedStatus, pendingCount, lastSyncAt, refreshFeed, remoteStatus } = usePublications();
@@ -91,7 +94,7 @@ export default function PublicMapScreen() {
   const t = TEXT[lang];
   const x = EXTRA[lang];
 
-  const catalog = useMemo(() => filterSpeciesCatalog(), []);
+  const catalog = useMemo(() => localizedSpeciesCatalog(locale, ), [locale]);
   const names = useMemo(() => new Map(catalog.map((item) => [item.id, item.commonName])), [catalog]);
   // Exemplos ligados de início só quando não há servidor; com servidor, o mapa mostra os registros reais.
   const [showSamples, setShowSamples] = useState(feedStatus === "off");

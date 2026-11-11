@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { Alert, Pressable, Text } from "@/components/Localized";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import { router, useLocalSearchParams } from "expo-router";

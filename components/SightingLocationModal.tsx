@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Modal, ScrollView, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 import { PantanalMap } from "./PantanalMap";
 import { ScreenContainer } from "./screen-container";
 import { StreetMap } from "./StreetMap";

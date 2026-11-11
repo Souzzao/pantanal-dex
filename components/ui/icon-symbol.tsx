@@ -2,7 +2,8 @@
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SymbolWeight, SymbolViewProps } from "expo-symbols";
-import { Platform, Text } from "react-native";
+import { Platform } from "react-native";
+import { Text } from "@/components/Localized";
 import { ComponentProps } from "react";
 import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 

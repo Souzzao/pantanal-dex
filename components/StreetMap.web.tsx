@@ -1,3 +1,4 @@
+import { useI18n } from '@/contexts/LanguageContext';
 import { createElement, useCallback, useEffect, useMemo, useRef } from "react";
 import { View } from "react-native";
 
@@ -10,9 +11,10 @@ const pageHtml = () => (cachedHtml ??= buildStreetMapHtml({ js: LEAFLET_JS, css:
 
 /** Mesma página do mapa num iframe (web). */
 export function StreetMap({ state, onEvent, style, accessibilityLabel }: StreetMapProps) {
+  const { locale } = useI18n();
   const frame = useRef<HTMLIFrameElement | null>(null);
   const ready = useRef(false);
-  const serialized = useMemo(() => serializeState(state), [state]);
+  const serialized = useMemo(() => serializeState(state, locale), [state, locale]);
   const latest = useRef(serialized);
   latest.current = serialized;
 

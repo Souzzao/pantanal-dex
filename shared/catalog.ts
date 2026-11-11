@@ -1,6 +1,8 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
+import { getTranslatedSpecies } from "./i18n/catalog-translations";
+import photoMetadata from "./species-photo-metadata.json";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
@@ -8,7 +10,19 @@ export type CatalogSort = CatalogLoaderSort;
 const catalogLoader = createCatalogLoader([species, catalogSpecies]);
 
 export function filterSpeciesCatalog(filters: CatalogFilters = {}): Species[] {
-  return catalogLoader.search(filters);
+  const metadata = photoMetadata as Record<string, Species['images'][number]>;
+  return catalogLoader.search(filters).map(animal => metadata[animal.id] ? { ...animal, images: [metadata[animal.id]] } : animal);
+}
+
+/** Search both original and translated names without changing stable catalog IDs. */
+export function localizedSpeciesCatalog(locale: string, filters: CatalogFilters = {}): Species[] {
+  const source = filterSpeciesCatalog({ ...filters, query: undefined });
+  const normalized = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
+  const query = normalized(filters.query?.trim() ?? '');
+  return source.flatMap(animal => {
+    const translated = getTranslatedSpecies(animal, locale);
+    return !query || normalized(`${animal.commonName} ${translated.commonName} ${animal.scientificName}`).includes(query) ? [translated] : [];
+  });
 }
 
 export function sortSpeciesCatalog(items: Species[], sort: CatalogSort = "name"): Species[] {

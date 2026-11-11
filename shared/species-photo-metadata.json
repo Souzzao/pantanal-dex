@@ -1,0 +1,716 @@
+{
+  "abelha-jatai": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/155397688/medium.jpeg",
+    "author": "(c) Carlos Alexandre Mattos Raposo, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/155397688",
+    "credit": "(c) Carlos Alexandre Mattos Raposo, some rights reserved (CC BY)"
+  },
+  "anhuma": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/291436517/medium.jpg",
+    "author": "(c) Vincent A. Vos, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/291436517",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY)"
+  },
+  "anta": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/036_South_American_tapir_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/500px-036_South_American_tapir_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Giles Laurent",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:036_South_American_tapir_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+    "credit": "Giles Laurent / Wikimedia Commons"
+  },
+  "aracua": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/527248737/medium.jpg",
+    "author": "(c) Luciano Silveira, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/527248737",
+    "credit": "(c) Luciano Silveira, some rights reserved (CC BY-SA)"
+  },
+  "aranha-armadeira": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/304800566/medium.jpeg",
+    "author": "(c) Jefferson Ferreira, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/304800566",
+    "credit": "(c) Jefferson Ferreira, some rights reserved (CC BY)"
+  },
+  "arara-azul": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Hyacinth_Macaw.jpg/500px-Hyacinth_Macaw.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Malcolm",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyacinth_Macaw.jpg",
+    "credit": "Malcolm / Wikimedia Commons"
+  },
+  "arara-caninde": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/111056864/medium.jpg",
+    "author": "(c) Manuel Vicente Miranda del Solar, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/111056864",
+    "credit": "(c) Manuel Vicente Miranda del Solar, some rights reserved (CC BY)"
+  },
+  "ariranha": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/10663302/medium.jpg",
+    "author": "(c) avocat, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/10663302",
+    "credit": "(c) avocat, some rights reserved (CC BY)"
+  },
+  "besouro-rola-bosta": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/185599409/medium.jpg",
+    "author": "Thomaz de Carvalho Callado",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/185599409",
+    "credit": "(c) Thomaz de Carvalho Callado, some rights reserved (CC BY), uploaded by Thomaz de Carvalho Callado"
+  },
+  "biguá": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Phalacrocorax_brasilianus_%28Costa_Rica%29.jpg/500px-Phalacrocorax_brasilianus_%28Costa_Rica%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Hans Hillewaert",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phalacrocorax_brasilianus_(Costa_Rica).jpg",
+    "credit": "Hans Hillewaert / Wikimedia Commons"
+  },
+  "bugio-preto": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/167857590/medium.jpeg",
+    "author": "(c) Andy Jordan, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/167857590",
+    "credit": "(c) Andy Jordan, some rights reserved (CC BY)"
+  },
+  "cachara": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/57707427/medium.jpeg",
+    "author": "CHUCAO",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/57707427",
+    "credit": "(c) CHUCAO, some rights reserved (CC BY-SA)"
+  },
+  "cachorro-do-mato": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/34537325/medium.jpeg",
+    "author": "Diego Carús",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/34537325",
+    "credit": "no rights reserved, uploaded by Diego Carús"
+  },
+  "cagado-de-barbicha": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/238763798/medium.jpg",
+    "author": "(c) Thomaz de Carvalho Callado, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/238763798",
+    "credit": "(c) Thomaz de Carvalho Callado, some rights reserved (CC BY)"
+  },
+  "camarao-agua-doce": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/449253646/medium.jpg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/449253646",
+    "credit": "no rights reserved"
+  },
+  "cangapara": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/249558819/medium.jpeg",
+    "author": "(c) Adrien Jailloux, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/249558819",
+    "credit": "(c) Adrien Jailloux, some rights reserved (CC BY)"
+  },
+  "capivara": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Hydrochoerus_hydrochaeris.jpg/500px-Hydrochoerus_hydrochaeris.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Liftarn",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hydrochoerus_hydrochaeris.jpg",
+    "credit": "Liftarn / Wikimedia Commons"
+  },
+  "caranguejo-agua-doce": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/182258693/medium.jpg",
+    "author": "(c) Morten Ross, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/182258693",
+    "credit": "(c) Morten Ross, some rights reserved (CC BY)"
+  },
+  "caranguejo-de-agua-doce": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Dilocarcinus_pagei%2C_Bolivia.jpg/500px-Dilocarcinus_pagei%2C_Bolivia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Vincent A. Vos",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dilocarcinus_pagei,_Bolivia.jpg",
+    "credit": "Vincent A. Vos / Wikimedia Commons"
+  },
+  "carau": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/109296676/medium.jpg",
+    "author": "(c) Court Harding, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/109296676",
+    "credit": "(c) Court Harding, some rights reserved (CC BY)"
+  },
+  "carrapateiro": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Milvago_chimachima.jpg/500px-Milvago_chimachima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Dario Sanches from São Paulo, Brasil",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milvago_chimachima.jpg",
+    "credit": "Dario Sanches from São Paulo, Brasil / Wikimedia Commons"
+  },
+  "cateto": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Pecari_tajacu_%28Costa_Rica%29.jpg/500px-Pecari_tajacu_%28Costa_Rica%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Hans Hillewaert",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pecari_tajacu_(Costa_Rica).jpg",
+    "credit": "Hans Hillewaert / Wikimedia Commons"
+  },
+  "cervo-do-pantanal": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Blastocerus_dichotomus.jpg/500px-Blastocerus_dichotomus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "No machine-readable author provided. Taragui assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blastocerus_dichotomus.jpg",
+    "credit": "No machine-readable author provided. Taragui assumed (based on copyright claims). / Wikimedia Commons"
+  },
+  "cobra-cipo": {
+    "uri": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Oxybelis_aeneus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "author": "Tod Baker from Tianjin, China",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oxybelis_aeneus.jpg",
+    "credit": "Tod Baker from Tianjin, China / Wikimedia Commons"
+  },
+  "cobra-dagua": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/444881489/medium.jpeg",
+    "author": "(c) Nicolas Olejnik, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/444881489",
+    "credit": "(c) Nicolas Olejnik, some rights reserved (CC BY)"
+  },
+  "cobra-verde": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/632052277/medium.jpg",
+    "author": "(c) Inacio Oliveira, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/632052277",
+    "credit": "(c) Inacio Oliveira, some rights reserved (CC BY)"
+  },
+  "colhereiro": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/174351446/medium.jpeg",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/174351446",
+    "credit": "(c) Jared Shorma, some rights reserved (CC BY)"
+  },
+  "coruja-buraqueira": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Athene_cunicularia.jpg/500px-Athene_cunicularia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Erik Neves",
+    "license": "CC BY 2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Athene_cunicularia.jpg",
+    "credit": "Erik Neves / Wikimedia Commons"
+  },
+  "curimbata": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/651623567/medium.jpg",
+    "author": "Nicola Crockford",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/651623567",
+    "credit": "(c) Nicola Crockford, some rights reserved (CC BY), uploaded by Nicola Crockford"
+  },
+  "cutia": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/305628453/medium.jpeg",
+    "author": "(c) Luciano Massa, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/305628453",
+    "credit": "(c) Luciano Massa, some rights reserved (CC BY)"
+  },
+  "dourado": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/128962485/medium.jpg",
+    "author": "David Morimoto (treez44est)",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/128962485",
+    "credit": "(c) David Morimoto (treez44est), some rights reserved (CC BY-SA)"
+  },
+  "ema": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/67921206/medium.jpeg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/67921206",
+    "credit": "no rights reserved"
+  },
+  "formiga-cortadeira": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/121490781/medium.jpeg",
+    "author": "(c) Jonghyun Park, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/121490781",
+    "credit": "(c) Jonghyun Park, some rights reserved (CC BY)"
+  },
+  "garca-branca": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/493469366/medium.jpeg",
+    "author": "(c) William Harland, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/493469366",
+    "credit": "(c) William Harland, some rights reserved (CC BY)"
+  },
+  "garca-moura": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Ardea_cocoi.jpg/500px-Ardea_cocoi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Dario Sanches from São Paulo, Brasil",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ardea_cocoi.jpg",
+    "credit": "Dario Sanches from São Paulo, Brasil / Wikimedia Commons"
+  },
+  "gato-mourisco": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/310267736/medium.jpeg",
+    "author": "Ben Jobson",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/310267736",
+    "credit": "(c) Ben Jobson, some rights reserved (CC BY), uploaded by Ben Jobson"
+  },
+  "gaviao-belo": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Black-collared_hawk_%28Busarellus_nigricollis%29_adult.jpg/500px-Black-collared_hawk_%28Busarellus_nigricollis%29_adult.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black-collared_hawk_(Busarellus_nigricollis)_adult.jpg",
+    "credit": "Charles J. Sharp / Wikimedia Commons"
+  },
+  "gaviao-caramujeiro": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/31341912/medium.jpg",
+    "author": "(c) keesgroenendijk, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/31341912",
+    "credit": "(c) keesgroenendijk, some rights reserved (CC BY)"
+  },
+  "irara": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/151904110/medium.jpeg",
+    "author": "(c) Patricio Cowper Coles, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/151904110",
+    "credit": "(c) Patricio Cowper Coles, some rights reserved (CC BY)"
+  },
+  "jabuti-piranga": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Chelonoidis_carbonaria.jpg/500px-Chelonoidis_carbonaria.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Ovelhamauro",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chelonoidis_carbonaria.jpg",
+    "credit": "Ovelhamauro / Wikimedia Commons"
+  },
+  "jacana": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/224354834/medium.jpg",
+    "author": "(c) Anthony Batista, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/224354834",
+    "credit": "(c) Anthony Batista, some rights reserved (CC BY)"
+  },
+  "jacare-coroa": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/18607447/medium.jpeg",
+    "author": "Vincent A. Vos",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/18607447",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY), uploaded by Vincent A. Vos"
+  },
+  "jacare-do-pantanal": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Caiman_yacare.jpg/500px-Caiman_yacare.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Lea Maimone",
+    "license": "CC BY-SA 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Caiman_yacare.jpg",
+    "credit": "Lea Maimone / Wikimedia Commons"
+  },
+  "jacare-pagua": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/318877164/medium.jpeg",
+    "author": "(c) Rafael Tosi, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/318877164",
+    "credit": "(c) Rafael Tosi, some rights reserved (CC BY)"
+  },
+  "jaguatirica": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/624962198/medium.jpg",
+    "author": "(c) Emily Turteltaub Nelson, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/624962198",
+    "credit": "(c) Emily Turteltaub Nelson, some rights reserved (CC BY)"
+  },
+  "jau": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/613886168/medium.jpg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/613886168",
+    "credit": "no rights reserved"
+  },
+  "lambari-do-pantanal": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/699088318/medium.jpg",
+    "author": "W.S.Serra",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/699088318",
+    "credit": "(c) W.S.Serra, some rights reserved (CC BY-SA)"
+  },
+  "libelula-pantaneira": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Pantala_flavescens.jpg/500px-Pantala_flavescens.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "yimhafiz",
+    "license": "CC BY 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pantala_flavescens.jpg",
+    "credit": "yimhafiz / Wikimedia Commons"
+  },
+  "lobo-guara": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Chrysocyon.brachyurus.jpg/500px-Chrysocyon.brachyurus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "sarefo",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chrysocyon.brachyurus.jpg",
+    "credit": "sarefo / Wikimedia Commons"
+  },
+  "lontra-neotropical": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/460766073/medium.jpg",
+    "author": "Dan Vickers",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/460766073",
+    "credit": "(c) Dan Vickers, some rights reserved (CC BY), uploaded by Dan Vickers"
+  },
+  "macaco-prego": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/527211431/medium.jpg",
+    "author": "(c) Luciano Silveira, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/527211431",
+    "credit": "(c) Luciano Silveira, some rights reserved (CC BY-SA)"
+  },
+  "mandi": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Pimelodus_maculatus.jpg/500px-Pimelodus_maculatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Paul Louis Oudart",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pimelodus_maculatus.jpg",
+    "credit": "Paul Louis Oudart / Wikimedia Commons"
+  },
+  "mao-pelada": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/140948898/medium.jpg",
+    "author": "(c) João Vitor Oliveira de Souza, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/140948898",
+    "credit": "(c) João Vitor Oliveira de Souza, some rights reserved (CC BY)"
+  },
+  "martim-pescador-grande": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/253613064/medium.jpeg",
+    "author": "(c) Katherin Solis-Lufí, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/253613064",
+    "credit": "(c) Katherin Solis-Lufí, some rights reserved (CC BY)"
+  },
+  "morcego-pescador": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Noctilio_leporinus_407860893.jpg/500px-Noctilio_leporinus_407860893.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "E Santos Ortega",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Noctilio_leporinus_407860893.jpg",
+    "credit": "E Santos Ortega / Wikimedia Commons"
+  },
+  "morfoborboleta": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Morpho_helenor.jpg/500px-Morpho_helenor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Nosferattus",
+    "license": "CC0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morpho_helenor.jpg",
+    "credit": "Nosferattus / Wikimedia Commons"
+  },
+  "mutum-de-penacho": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/573928175/medium.jpg",
+    "author": "(c) Donald Davesne, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/573928175",
+    "credit": "(c) Donald Davesne, some rights reserved (CC BY)"
+  },
+  "onca-pintada": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Jaguar_%28Panthera_onca_palustris%29_male_Rio_Negro_2.JPG/500px-Jaguar_%28Panthera_onca_palustris%29_male_Rio_Negro_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jaguar_(Panthera_onca_palustris)_male_Rio_Negro_2.JPG",
+    "credit": "Charles J. Sharp / Wikimedia Commons"
+  },
+  "ourico-cacheiro": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/548669878/medium.jpg",
+    "author": "(c) Antonio Nonato, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/548669878",
+    "credit": "(c) Antonio Nonato, some rights reserved (CC BY)"
+  },
+  "paca": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/271854591/medium.jpg",
+    "author": "(c) André Ambrozio, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/271854591",
+    "credit": "(c) André Ambrozio, some rights reserved (CC BY)"
+  },
+  "pacu": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/387099634/medium.jpeg",
+    "author": "R Vasconcellos",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/387099634",
+    "credit": "(c) R Vasconcellos, some rights reserved (CC BY), uploaded by R Vasconcellos"
+  },
+  "pacupeva": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/347548620/medium.jpeg",
+    "author": "Douglas Lopes",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/347548620",
+    "credit": "(c) Douglas Lopes, some rights reserved (CC BY), uploaded by Douglas Lopes"
+  },
+  "peixe-cachorro": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/351129961/medium.jpeg",
+    "author": "Sebastián Lovera",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/351129961",
+    "credit": "no rights reserved, uploaded by Sebastián Lovera"
+  },
+  "perereca-cabecuda": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/263681659/medium.jpeg",
+    "author": "Lucas Mantelo Cruz",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/263681659",
+    "credit": "(c) Lucas Mantelo Cruz, some rights reserved (CC BY), uploaded by Lucas Mantelo Cruz"
+  },
+  "perereca-de-cera": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/701576360/medium.jpg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/701576360",
+    "credit": "no rights reserved"
+  },
+  "perereca-do-banheiro": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Hypsiboas_albopunctatus01a.jpg/500px-Hypsiboas_albopunctatus01a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Lucas Grandinetti",
+    "license": "CC BY-SA 2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hypsiboas_albopunctatus01a.jpg",
+    "credit": "Lucas Grandinetti / Wikimedia Commons"
+  },
+  "perereca-folhagem-azul": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Phyllomedusa_azurea.jpg/500px-Phyllomedusa_azurea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Ariovaldo Giaretta",
+    "license": "CC BY-SA 2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phyllomedusa_azurea.jpg",
+    "credit": "Ariovaldo Giaretta / Wikimedia Commons"
+  },
+  "perereca-fuscomarginata": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/155342746/medium.jpeg",
+    "author": "(c) Vincent A. Vos, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/155342746",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY)"
+  },
+  "perereca-macaco": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Waxy.tree.frog.arp.jpg/500px-Waxy.tree.frog.arp.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Adrian Pingstone",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waxy.tree.frog.arp.jpg",
+    "credit": "Adrian Pingstone / Wikimedia Commons"
+  },
+  "piau-tres-pintas": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Leporinus_friderici.jpg/500px-Leporinus_friderici.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "This illustration was made by Citron You must credit this : Citron / CC-BY-SA-3.0",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leporinus_friderici.jpg",
+    "credit": "This illustration was made by Citron You must credit this : Citron / CC-BY-SA-3.0 / Wikimedia Commons"
+  },
+  "pica-pau-do-campo": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/255071970/medium.jpeg",
+    "author": "(c) Gonzalo Roget, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/255071970",
+    "credit": "(c) Gonzalo Roget, some rights reserved (CC BY)"
+  },
+  "pintado": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/470887644/medium.jpg",
+    "author": "(c) Rocío Esmeralda Pose, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/470887644",
+    "credit": "(c) Rocío Esmeralda Pose, some rights reserved (CC BY)"
+  },
+  "piranha-vermelha": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/84709831/medium.jpg",
+    "author": "Marco Verch",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/84709831",
+    "credit": "(c) Marco Verch, some rights reserved (CC BY)"
+  },
+  "piraputanga": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/584369625/medium.jpg",
+    "author": "(c) Donald Davesne, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/584369625",
+    "credit": "(c) Donald Davesne, some rights reserved (CC BY)"
+  },
+  "pitu": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Macrobrachium_amazonicum_%28Heller%2C_1862%29.jpg/500px-Macrobrachium_amazonicum_%28Heller%2C_1862%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Jonathan Vera Caripe",
+    "license": "CC BY 2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Macrobrachium_amazonicum_(Heller,_1862).jpg",
+    "credit": "Jonathan Vera Caripe / Wikimedia Commons"
+  },
+  "quati": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/29129520/medium.jpeg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/29129520",
+    "credit": "no rights reserved"
+  },
+  "queixada": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/339487371/medium.jpeg",
+    "author": "(c) Tomás Tamagno, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/339487371",
+    "credit": "(c) Tomás Tamagno, some rights reserved (CC BY)"
+  },
+  "ra-pimenta": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/432816536/medium.jpeg",
+    "author": "(c) Mario Barroso, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/432816536",
+    "credit": "(c) Mario Barroso, some rights reserved (CC BY)"
+  },
+  "rã-pimenta": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Leptodactylus_chaquensis.jpg/500px-Leptodactylus_chaquensis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Axel Kwet",
+    "license": "CC BY-SA 2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leptodactylus_chaquensis.jpg",
+    "credit": "Axel Kwet / Wikimedia Commons"
+  },
+  "ra-pimenta-pantanal": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/432816536/medium.jpeg",
+    "author": "(c) Mario Barroso, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/432816536",
+    "credit": "(c) Mario Barroso, some rights reserved (CC BY)"
+  },
+  "ra-quatro-olhos": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/588406273/medium.jpg",
+    "author": "Reuber Brandão",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/588406273",
+    "credit": "(c) Reuber Brandão, some rights reserved (CC BY), uploaded by Reuber Brandão"
+  },
+  "sapinho-cururu": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Bufo_schneideri.jpg/500px-Bufo_schneideri.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "user:Dawson",
+    "license": "CC BY-SA 2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bufo_schneideri.jpg",
+    "credit": "user:Dawson / Wikimedia Commons"
+  },
+  "sapo-cururu": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/623922151/medium.jpg",
+    "author": "(c) Thomaz de Carvalho Callado, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/623922151",
+    "credit": "(c) Thomaz de Carvalho Callado, some rights reserved (CC BY)"
+  },
+  "seriema": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/369191272/medium.jpeg",
+    "author": "(c) Felipe Augusto, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/369191272",
+    "credit": "(c) Felipe Augusto, some rights reserved (CC BY)"
+  },
+  "soco-boi": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/161838532/medium.jpeg",
+    "author": "(c) Christoph Moning, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/161838532",
+    "credit": "(c) Christoph Moning, some rights reserved (CC BY)"
+  },
+  "soco-dorminhoco": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/49357930/medium.jpg",
+    "author": "Kyle Nessen",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/49357930",
+    "credit": "no rights reserved, uploaded by Kyle Nessen"
+  },
+  "sucuri-amarela": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/242208428/medium.jpeg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/242208428",
+    "credit": "no rights reserved"
+  },
+  "sucuri-verde": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/12213433/medium.jpeg",
+    "author": "(c) Vincent A. Vos, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/12213433",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY)"
+  },
+  "tamandua-bandeira": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Myresluger2.jpg/500px-Myresluger2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Malene Thyssen",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myresluger2.jpg",
+    "credit": "Malene Thyssen / Wikimedia Commons"
+  },
+  "tamandua-mirim": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Tamandua_tetradactyla_qtl1.jpg/500px-Tamandua_tetradactyla_qtl1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Quartl",
+    "license": "CC BY-SA 3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tamandua_tetradactyla_qtl1.jpg",
+    "credit": "Quartl / Wikimedia Commons"
+  },
+  "tei-de-cauda-vermelha": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/445539053/medium.jpeg",
+    "author": "(c) Sebastián Fornés, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/445539053",
+    "credit": "(c) Sebastián Fornés, some rights reserved (CC BY)"
+  },
+  "teiu": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/91124302/medium.jpg",
+    "author": "(c) RAP, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/91124302",
+    "credit": "(c) RAP, some rights reserved (CC BY)"
+  },
+  "teiú": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/91124302/medium.jpg",
+    "author": "(c) RAP, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/91124302",
+    "credit": "(c) RAP, some rights reserved (CC BY)"
+  },
+  "tesourinha": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/596460001/medium.jpg",
+    "author": "Guilherme Cameis Freda",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/596460001",
+    "credit": "(c) Guilherme Cameis Freda, some rights reserved (CC BY-SA), uploaded by Guilherme Cameis Freda"
+  },
+  "traira": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/171973592/medium.jpeg",
+    "author": "(c) Vincent A. Vos, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/171973592",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY)"
+  },
+  "traira-pantanal": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/171973592/medium.jpeg",
+    "author": "(c) Vincent A. Vos, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/171973592",
+    "credit": "(c) Vincent A. Vos, some rights reserved (CC BY)"
+  },
+  "tucano-toco": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/95469825/medium.jpg",
+    "author": "(c) Diogo Luiz, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/95469825",
+    "credit": "(c) Diogo Luiz, some rights reserved (CC BY)"
+  },
+  "tuiuiu": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Jabiru_%28Jabiru_mycteria%29_2.JPG/500px-Jabiru_%28Jabiru_mycteria%29_2.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jabiru_(Jabiru_mycteria)_2.JPG",
+    "credit": "Charles J. Sharp / Wikimedia Commons"
+  },
+  "tuvira": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Gymnotus_inaequilabiatus.jpg/500px-Gymnotus_inaequilabiatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Paul Louis Oudart",
+    "license": "Public domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gymnotus_inaequilabiatus.jpg",
+    "credit": "Paul Louis Oudart / Wikimedia Commons"
+  },
+  "urubu-de-cabeca-preta": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/342659116/medium.jpeg",
+    "author": "(c) Cricket Raspet, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "sourceUrl": "https://www.inaturalist.org/photos/342659116",
+    "credit": "(c) Cricket Raspet, some rights reserved (CC BY)"
+  },
+  "urubu-rei": {
+    "uri": "https://inaturalist-open-data.s3.amazonaws.com/photos/573725545/medium.jpg",
+    "author": "no rights reserved",
+    "license": "CC0",
+    "sourceUrl": "https://www.inaturalist.org/photos/573725545",
+    "credit": "no rights reserved"
+  },
+  "veado-campeiro": {
+    "uri": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Venado-Campo-UY-Ozotoceros_bezoarticus.jpg/500px-Venado-Campo-UY-Ozotoceros_bezoarticus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Fedaro",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Venado-Campo-UY-Ozotoceros_bezoarticus.jpg",
+    "credit": "Fedaro / Wikimedia Commons"
+  }
+}

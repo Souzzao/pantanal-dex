@@ -1,0 +1,1430 @@
+{
+  "tuiuiu": {
+    "commonName": "Jabiru",
+    "description": "Großer Watvogel, Symbol des Pantanal, häufig in offenen und überschwemmten Gebieten zu beobachten.",
+    "physicalCharacteristics": "Weißes Gefieder, schwarzer Kopf und roter Kropf, mit langen Beinen und kräftigem Schnabel.",
+    "habitat": "Überflutbare Felder, Buchten, Ebbe und Flussufer.",
+    "behavior": "Es baut hohe Nester und kann in seichten Gewässern bei der Nahrungssuche beobachtet werden.",
+    "diet": "Fische, Amphibien, Reptilien, Insekten und kleine Wirbeltiere.",
+    "curiosities": [
+      "Er ist einer der größten Flugvögel Südamerikas.",
+      "Ihr Nest kann mehrere Jahre lang wiederverwendet werden."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich des gesamten Pantanal.",
+    "ecologicalImportance": "Hilft bei der Anzeige der Nahrungsverfügbarkeit und des Gesundheitszustands von Feuchtgebieten."
+  },
+  "arara-azul": {
+    "commonName": "Hyazinthara",
+    "description": "Großer Ara, erkennbar an seinem kobaltblauen Gefieder und seinem kräftigen Schnabel.",
+    "physicalCharacteristics": "Intensives Blau, gelber Ring um die Augen und den Schnabelansatz.",
+    "habitat": "Auwälder, Karandazalgebiete und Waldränder.",
+    "behavior": "Er lebt paarweise oder in Familiengruppen und nistet in hohlen Bäumen.",
+    "diet": "Hauptsächlich Palmfrüchte wie Acuri und Bocaiúva.",
+    "curiosities": [
+      "Der Schnabel zerbricht sehr widerstandsfähige Früchte.",
+      "Der Naturschutz ist auf die Versorgung mit Palmen und Hohlbäumen angewiesen."
+    ],
+    "distribution": "Zentralbrasilien, Bolivien und Paraguay, mit einer bedeutenden Bevölkerung im Pantanal.",
+    "ecologicalImportance": "Es verteilt Samen und beteiligt sich an der Regeneration von Pantanal-Palmen."
+  },
+  "onca-pintada": {
+    "commonName": "Jaguar",
+    "description": "Größte Raubkatze in Amerika und Top-Raubtier in Sumpfgebieten.",
+    "physicalCharacteristics": "Goldenes Fell mit Rosetten, muskulöser Körper und sehr kräftiger Biss.",
+    "habitat": "Wälder in der Nähe von Flüssen, Bächen und Gebieten mit gutem Beuteangebot.",
+    "behavior": "Einzelgänger, Territorialhund und ausgezeichneter Schwimmer.",
+    "diet": "Wasserschweine, Alligatoren, Pekari, Hirsche und andere Wirbeltiere.",
+    "curiosities": [
+      "Die Rosetten können kleine zentrale Punkte haben.",
+      "Flüsse und Buchten sind wichtige Korridore für die Art."
+    ],
+    "distribution": "Von Mexiko bis Nordargentinien, mit einer relevanten Population im Pantanal.",
+    "ecologicalImportance": "Reguliert Beutepopulationen und hilft, das Gleichgewicht in den Nahrungsketten aufrechtzuerhalten."
+  },
+  "capivara": {
+    "commonName": "Wasserschwein",
+    "description": "Größtes lebendes Nagetier der Welt, eng mit den Ufern von Gewässern verbunden.",
+    "physicalCharacteristics": "Robuster Körper, teilweise mit Schwimmhäuten versehene Pfoten und rotbraunes Fell.",
+    "habitat": "Flussufer, Lagunen, Buchten und feuchte Felder.",
+    "behavior": "Sozial, lebt in Gruppen und sucht bei Bedrohung Zuflucht im Wasser.",
+    "diet": "Gräser und Wasserpflanzen.",
+    "curiosities": [
+      "Es kann mehrere Minuten unter Wasser bleiben.",
+      "Gruppen neigen dazu, eine starke soziale Organisation zu haben."
+    ],
+    "distribution": "Ein Großteil Südamerikas, einschließlich des Pantanal.",
+    "ecologicalImportance": "Es ist eine wichtige Beute für große Raubtiere und beeinflusst die Ufervegetation."
+  },
+  "jacare-do-pantanal": {
+    "commonName": "Brillenkaiman des Pantanals",
+    "description": "Alligatoren kommen in den Gewässern des Pantanal häufig vor und sind an die saisonale Dynamik von Überschwemmungen angepasst.",
+    "physicalCharacteristics": "Langgestreckter Körper, schmale Schnauze und helle Bänder am Kiefer.",
+    "habitat": "Buchten, Bäche, Lagunen und langsam fließende Flüsse.",
+    "behavior": "Er sonnt sich an Ufern und jagt hauptsächlich während der nächtlichen Aktivitätszeit.",
+    "diet": "Fische, Krebstiere, Amphibien und kleine Wirbeltiere.",
+    "curiosities": [
+      "Feuchtgebiete bieten bei Dürreperioden Schutz und Nahrung.",
+      "Jungtiere nutzen die Randvegetation zum Schutz."
+    ],
+    "distribution": "Zentrales Südamerika, insbesondere Brasilien, Bolivien und Paraguay.",
+    "ecologicalImportance": "Es beteiligt sich an der Kontrolle der Wasserpopulationen und transportiert Nährstoffe zwischen Gewässern und Ufern."
+  },
+  "anta": {
+    "commonName": "Flachlandtapir",
+    "description": "Großes pflanzenfressendes Säugetier, das Wälder, Wege und Flussufer im Pantanal durchstreift.",
+    "physicalCharacteristics": "Massiver Körper, verlängerte Schnauze und kurzes braunes Fell.",
+    "habitat": "Auwälder, Kapaune und wassernahe Gebiete.",
+    "behavior": "Einzelgänger, im Allgemeinen in der Dämmerung und in der Nacht aktiver.",
+    "diet": "Blätter, Früchte, Triebe und andere Pflanzenteile.",
+    "curiosities": [
+      "Es ist ein wichtiger Samenverteiler.",
+      "Es schwimmt gut und nutzt Wasser, um Bedrohungen zu entkommen."
+    ],
+    "distribution": "Südamerika östlich der Anden, einschließlich des Pantanal.",
+    "ecologicalImportance": "Es transportiert Samen zwischen verschiedenen Umgebungen und trägt zur Waldregeneration bei."
+  },
+  "tamandua-bandeira": {
+    "commonName": "Großer Ameisenbär",
+    "description": "Ein Säugetier, das sich mit seiner langen, klebrigen Zunge darauf spezialisiert hat, Ameisen und Termiten zu fangen.",
+    "physicalCharacteristics": "Röhrenförmige Schnauze, sehr voluminöser Schwanz und dunkler Diagonalstreifen am Körper.",
+    "habitat": "Felder, Savannen und Waldränder mit zum Graben geeignetem Boden.",
+    "behavior": "Es geht lange Strecken und kann Tag und Nacht aktiv sein.",
+    "diet": "Ameisen und Termiten.",
+    "curiosities": [
+      "Es hat keine funktionsfähigen Zähne.",
+      "Die Zunge kann wiederholt vorgeschoben werden, um Insekten aus Nestern zu entfernen."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich offener Gebiete des Pantanal.",
+    "ecologicalImportance": "Kontrolliert Populationen sozialer Insekten und verändert den Boden, indem es Ameisenhaufen und Termitenhügel öffnet."
+  },
+  "cervo-do-pantanal": {
+    "commonName": "Sumpfhirsch",
+    "description": "Größter Hirsch Südamerikas, der mit Überschwemmungsgebieten, Sümpfen und überflutbaren Feldern in Verbindung gebracht wird.",
+    "physicalCharacteristics": "Lange Beine, rotbraunes Fell und verzweigtes Geweih bei den Männchen.",
+    "habitat": "Sümpfe, Buchten, überflutbare Felder und Flussufer.",
+    "behavior": "Es nutzt überschwemmte Gebiete als Unterschlupf und macht sich auf die Suche nach Wasservegetation.",
+    "diet": "Gräser, Wasserpflanzen, Blätter und Triebe.",
+    "curiosities": [
+      "Beinanpassungen begünstigen die Bewegung auf feuchtem Gelände.",
+      "Die Art ist auf die Erhaltung zusammenhängender Feuchtgebiete angewiesen."
+    ],
+    "distribution": "Mittel- und Südsüdamerika, kommt im Pantanal vor.",
+    "ecologicalImportance": "Es beteiligt sich an der Dynamik der Feuchtgebietsvegetation und verbreitet Samen."
+  },
+  "ema": {
+    "commonName": "Nandu",
+    "description": "Großer Laufvogel, der Felder und offene Gebiete des Pantanal bewohnt.",
+    "physicalCharacteristics": "Langer Hals, reduzierte Flügel, kräftige Beine und braunes Gefieder.",
+    "habitat": "Felder, Savannen und offene Gebiete mit geringer Vegetation.",
+    "behavior": "Es lebt in Gruppen und rennt schnell, wenn es gestört wird.",
+    "diet": "Früchte, Samen, Blätter und Kleintiere.",
+    "curiosities": [
+      "Das Männchen beteiligt sich an der Brutzeit und der Betreuung der Jungen.",
+      "Die Flügel helfen beim Laufen, das Gleichgewicht zu halten."
+    ],
+    "distribution": "Südamerika, kommt in offenen Gebieten des Pantanal vor.",
+    "ecologicalImportance": "Es verbreitet Samen und integriert die Nahrungsketten der Felder."
+  },
+  "colhereiro": {
+    "commonName": "Rosalöffler",
+    "description": "Wasservogel mit spatenförmigem Schnabel, der in seichten Gewässern und schlammigen Ufern beobachtet wird.",
+    "physicalCharacteristics": "Rosa Gefieder, heller Hals und langer Schnabel mit löffelförmiger Spitze.",
+    "habitat": "Lagunen, Buchten, Sümpfe und Flussufer.",
+    "behavior": "Bewegt seinen Schnabel im Wasser hin und her, um Nahrung zu finden.",
+    "diet": "Kleine Fische, Krebstiere, Insekten und andere wirbellose Wassertiere.",
+    "curiosities": [
+      "Die rosa Farbe hängt mit Lebensmitteln zusammen.",
+      "Normalerweise sucht es in Gruppen in flachen Bereichen nach Nahrung."
+    ],
+    "distribution": "Amerika, hauptsächlich Küsten- und Kontinentalfeuchtgebiete.",
+    "ecologicalImportance": "Verbindet die Nahrungsketten von Wirbellosen und kleinen Fischen in Feuchtgebieten."
+  },
+  "garca-branca": {
+    "commonName": "Silberreiher",
+    "description": "Großer, blasser Reiher, häufig an Ufern, Überschwemmungsgebieten und Gewässern im Pantanal.",
+    "physicalCharacteristics": "Weißes Gefieder, langer Hals, gelber Schnabel und dunkle Beine.",
+    "habitat": "Flüsse, Buchten, Bäche, Sümpfe und überflutete Felder.",
+    "behavior": "Es bewegt sich langsam im seichten Wasser und fängt Beute mit einem schnellen Schnabelschlag.",
+    "diet": "Fische, Amphibien, kleine Reptilien, Krebstiere und Insekten.",
+    "curiosities": [
+      "Während der Jagd kann es längere Zeit bewegungslos bleiben.",
+      "Zur Fortpflanzung sammelt es sich in Kolonien."
+    ],
+    "distribution": "Breite weltweite Verbreitung mit Präsenz in ganz Brasilien.",
+    "ecologicalImportance": "Es jagt mehrere Wasserorganismen und zeigt die Verfügbarkeit von Nahrung an den Ufern an."
+  },
+  "sucuri-verde": {
+    "commonName": "Große Anakonda",
+    "description": "Große semi-aquatische Schlange, die Flüsse, Buchten und überschwemmte Gebiete zur Jagd nutzt.",
+    "physicalCharacteristics": "Robuster Körper, olivgrüne Farbe mit dunklen Flecken und auf dem Kopf positionierten Augen.",
+    "habitat": "Sümpfe, Lagunen, Buchten, Bäche und Flussufer.",
+    "behavior": "Es bleibt teilweise unter Wasser und fängt Beute durch Zusammenschnüren.",
+    "diet": "Fische, Vögel, Säugetiere und andere Wirbeltiere kompatibler Größe.",
+    "curiosities": [
+      "Die Nasenlöcher und Augen helfen dabei, die Umgebung bei eingetauchtem Körper zu beobachten.",
+      "Gemessen am Körpergewicht ist sie eine der größten Schlangen der Welt."
+    ],
+    "distribution": "Tropische Regionen Südamerikas, einschließlich des Pantanal.",
+    "ecologicalImportance": "Es fungiert als Top-Raubtier in Wasser- und Flussumgebungen."
+  },
+  "jabuti-piranga": {
+    "commonName": "Köhlerschildkröte",
+    "description": "Landschildkröte mit vorwiegend tagaktiven Gewohnheiten, die in Waldgebieten und deren Umgebung vorkommt.",
+    "physicalCharacteristics": "Dunkler Panzer mit gelben oder orangefarbenen Flecken und farbigen Schuppen an den Beinen.",
+    "habitat": "Wälder, Dickichte, Waldränder und Flächen mit Einstreu.",
+    "behavior": "Es bewegt sich am Boden entlang und sucht zwischen abgefallenen Blättern und Früchten nach Nahrung.",
+    "diet": "Früchte, Blätter, Blüten, Pilze und kleine Wirbellose.",
+    "curiosities": [
+      "Es kann zur Verbreitung der Samen der von ihm verzehrten Früchte beitragen.",
+      "Der Panzer bietet Schutz, macht die Art aber nicht immun gegen Brände und Lebensraumverlust."
+    ],
+    "distribution": "Nord- und Mittelsüdamerika, einschließlich der Gebiete Zentralbrasiliens.",
+    "ecologicalImportance": "Es verbreitet Samen und beteiligt sich am Kreislauf organischer Stoffe im Boden."
+  },
+  "sapo-cururu": {
+    "commonName": "Cururu-Kröte",
+    "description": "Großer Frosch, anpassungsfähig an offene Flächen und häufig nach Regenfällen zu beobachten.",
+    "physicalCharacteristics": "Raue Haut, deutliche Ohrspeicheldrüsen und variable Färbung in Erdtönen.",
+    "habitat": "Felder, Waldränder, temporäre Feuchtgebiete und veränderte Umgebungen.",
+    "behavior": "Es ist nachts am aktivsten und brütet in temporären oder permanenten Gewässern.",
+    "diet": "Insekten und andere kleine Wirbellose.",
+    "curiosities": [
+      "Hautdrüsen produzieren Abwehrstoffe.",
+      "Kaulquappen sind für ihre Entwicklung auf Wasser angewiesen."
+    ],
+    "distribution": "Zentralbrasilien und andere Gebiete Südamerikas, einschließlich des Pantanal.",
+    "ecologicalImportance": "Es bekämpft Wirbellose und dient Raubtieren als Nahrung."
+  },
+  "ra-pimenta": {
+    "commonName": "Pfefferfrosch",
+    "description": "Großer Frosch, der mit feuchten Gebieten, Pfützen und bewachsenen Ufern in Verbindung gebracht wird.",
+    "physicalCharacteristics": "Robuster Körper, brauner Rücken mit kontrastierenden Mustern und kräftige Hinterbeine.",
+    "habitat": "Sümpfe, temporäre Teiche, Feuchtfelder und Bachufer.",
+    "behavior": "Es kann Schaumnester bauen und vor allem während der Fortpflanzungszeit Laute äußern.",
+    "diet": "Insekten, Spinnen und andere Kleintiere.",
+    "curiosities": [
+      "Der Schaum trägt dazu bei, Eier in Umgebungen zu schützen, in denen der Wasserstand schwankt.",
+      "Die Art ist für ihre starken Lautäußerungen bei Regen bekannt."
+    ],
+    "distribution": "Brasilien und Nachbarländer, kommt in offenen und feuchten Gebieten im mittleren Süden vor.",
+    "ecologicalImportance": "Es ist an der Bekämpfung von Wirbellosen beteiligt und reagiert empfindlich auf Veränderungen in den Fortpflanzungsbereichen."
+  },
+  "pintado": {
+    "commonName": "Gefleckter Spatelwels",
+    "description": "Großer Lederfisch, wichtig in Flüssen und beim traditionellen Fischfang im Pantanal.",
+    "physicalCharacteristics": "Langgestreckter Körper, flacher Kopf, Kehllappen und dunkel gestreifte Flecken.",
+    "habitat": "Flusskanäle, Brunnen und Abschnitte mit Strömungen.",
+    "behavior": "Aktiver Raubfisch, besonders beim Aufspüren von Fischen in Bewegung.",
+    "diet": "Fische und andere Wasserorganismen.",
+    "curiosities": [
+      "Die Kehllappen helfen bei der Wahrnehmung der Umgebung.",
+      "Die Fortpflanzung folgt dem Puls von Überschwemmungen und Migration durch Flüsse."
+    ],
+    "distribution": "Paraná-Paraguay- und São Francisco-Becken, einschließlich des Pantanal.",
+    "ecologicalImportance": "Es ist ein relevantes Raubtier und ein Indikator für die Konnektivität von Flussumgebungen."
+  },
+  "pacu": {
+    "commonName": "Pacu",
+    "description": "Fruchtfressender und allesfressender Fisch, der Flüsse, Buchten und überschwemmte Gebiete des Pantanal nutzt.",
+    "physicalCharacteristics": "Hoher und zusammengedrückter Körper, kräftige Zähne und silberne bis dunkle Farbe.",
+    "habitat": "Flüsse, Buchten, Bäche und Wälder werden bei Hochwasser überschwemmt.",
+    "behavior": "Es bildet Schwärme und verwertet Früchte und Samen, die ins Wasser fallen.",
+    "diet": "Früchte, Samen, Pflanzen, Algen und Kleintiere.",
+    "curiosities": [
+      "Das Hochwasser verbindet Nahrungs- und Brutgebiete.",
+      "Kann Samen von Flusspflanzen verbreiten."
+    ],
+    "distribution": "Paraguay-Becken und andere Becken in Südamerika.",
+    "ecologicalImportance": "Transportiert Saatgut und Energie zwischen überfluteten Landgebieten und Flüssen."
+  },
+  "piraputanga": {
+    "commonName": "Piraputanga-Salmler",
+    "description": "Flinke Süßwasserfische, die mit schnell fließenden Flüssen und durch Überschwemmungen verbundenen Umgebungen in Verbindung gebracht werden.",
+    "physicalCharacteristics": "Silberner Körper, dunkler Rücken, bunte Flossen und Mund, angepasst an verschiedene Gegenstände.",
+    "habitat": "Flüsse, Bäche, Bäche und Auwaldgebiete.",
+    "behavior": "Es schwimmt in Schwärmen und sucht in der Wassersäule und in Ufernähe nach Nahrung.",
+    "diet": "Früchte, Samen, Insekten und kleine Fische.",
+    "curiosities": [
+      "Der Auwald bietet Früchten und Schatten für Gewässer.",
+      "Während der Fortpflanzungszeit kann die Färbung intensiver werden."
+    ],
+    "distribution": "Paraguay-Becken, einschließlich Pantanal-Flüsse.",
+    "ecologicalImportance": "Verbindet die Pflanzenproduktion von den Ufern mit Wasserketten und verteilt Samen."
+  },
+  "caranguejo-agua-doce": {
+    "commonName": "Süßwasserkrabbe",
+    "description": "Süßwasserkrabben kommen in Lentic-Umgebungen und Flussufern im Paraguay-Becken vor.",
+    "physicalCharacteristics": "Flacher Panzer, entwickelte Zangen und braune bis rötliche Farbe.",
+    "habitat": "Lagunen, Buchten, Bäche, Ufer und Wasservegetation.",
+    "behavior": "Es nutzt den Boden und die Vegetation, um nach Nahrung und Unterschlupf zu suchen.",
+    "diet": "Schmutz, Algen, Pflanzenmaterial und kleine Organismen.",
+    "curiosities": [
+      "Die Art ist an der Zersetzung aquatischer organischer Stoffe beteiligt.",
+      "Die Verfügbarkeit von Unterkünften variiert je nach Überschwemmung und Dürre."
+    ],
+    "distribution": "Binnenbecken Südamerikas, einschließlich des Paraguay-Beckens.",
+    "ecologicalImportance": "Es recycelt organische Stoffe und dient als Nahrung für Fische und Wasservögel."
+  },
+  "camarao-agua-doce": {
+    "commonName": "Amazonas-Flussgarnele",
+    "description": "Süßwassergarnelen, die in Flüssen, Seen und überschwemmungsgefährdeten Gebieten in mehreren brasilianischen Becken vorkommen.",
+    "physicalCharacteristics": "Segmentierter Körper, verlängertes Rostrum und erstes Chelae-Paar entwickelt.",
+    "habitat": "Flüsse, Lagunen, Buchten und Gebiete mit Wasservegetation.",
+    "behavior": "Es sucht am Boden und zwischen Pflanzen nach Nahrung, wobei die Aktivität im Laufe des Tages unterschiedlich ist.",
+    "diet": "Schmutz, Algen, kleine Wirbellose und organische Stoffe.",
+    "curiosities": [
+      "Der Lebenszyklus kann Süßwasser und Umgebungen mit höherem Salzgehalt in verschiedenen Populationen nutzen.",
+      "Es handelt sich um eine relevante Art für Nahrungsketten und Flussufergemeinschaften."
+    ],
+    "distribution": "Weit verbreitet in Südamerika, mit Nachweisen in brasilianischen Becken.",
+    "ecologicalImportance": "Überträgt Energie von Trümmern und Vegetation auf Fische und Wasservögel."
+  },
+  "bugio-preto": {
+    "commonName": "Schwarzer Brüllaffe",
+    "description": "Primat mit kraftvoller Lautäußerung, assoziiert mit Auwäldern und Grasland im Pantanal.",
+    "physicalCharacteristics": "Dunkles Fell bei Männern, markiertes Gesicht und Greifschwanz.",
+    "habitat": "Auwälder, Dickichte und Waldränder.",
+    "behavior": "Er lebt in Gruppen und stößt im Morgengrauen Revierrufe aus.",
+    "diet": "Blätter, Früchte, Blüten und Knospen.",
+    "curiosities": [
+      "Lautäußerungen sind über weite Entfernungen hörbar.",
+      "Der Schwanz hilft beim Bewegen zwischen Ästen."
+    ],
+    "distribution": "Mittel- und Ostsüdamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Verbreitet Samen und beeinflusst die Waldregeneration."
+  },
+  "ariranha": {
+    "commonName": "Riesenotter",
+    "description": "Soziales und semi-aquatisches Säugetier, das in Flüssen, Buchten und Bächen im Pantanal jagt.",
+    "physicalCharacteristics": "Langgestreckter Körper, Schwimmhäute an den Pfoten, kräftiger Schwanz und helle Flecken am Hals.",
+    "habitat": "Flüsse, Lagunen, Buchten und Ufer mit Pflanzenschutz.",
+    "behavior": "Er lebt in Familienverbänden, macht laute Laute und jagt hauptsächlich Fische.",
+    "diet": "Fische, Krebstiere und kleine Wasserwirbeltiere.",
+    "curiosities": [
+      "Jedes Individuum kann deutliche helle Markierungen am Hals haben.",
+      "Die Art ist auf relativ erhaltene und angeschlossene Gewässer angewiesen."
+    ],
+    "distribution": "Flusseinzugsgebiete in Südamerika mit einer bedeutenden Population im Pantanal.",
+    "ecologicalImportance": "Es ist ein Top-Raubtier in Gewässern und ein Indikator für die Qualität von Flüssen."
+  },
+  "lontra-neotropical": {
+    "commonName": "Südamerikanischer Fischotter",
+    "description": "Otter mit diskretem Verhalten, der Flüsse, Bäche und Seen mit bewachsenen Ufern nutzt.",
+    "physicalCharacteristics": "Spindelförmiger Körper, teilweise mit Schwimmhäuten versehene Pfoten und dichtes braunes Fell.",
+    "habitat": "Wasserläufe, Lagunen und Auwälder.",
+    "behavior": "Frei oder in kleinen Gruppen schwimmt er schnell und ruht sich in Löchern und Schluchten aus.",
+    "diet": "Fische, Krebstiere, Amphibien und kleine Wirbeltiere.",
+    "curiosities": [
+      "An Übergangsstellen am Ufer kann es Spuren und Kot hinterlassen.",
+      "Ufervegetation bietet Schutz- und Rastplätze."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es beteiligt sich an der Kontrolle aquatischer Organismen und verbindet terrestrische und aquatische Umgebungen."
+  },
+  "queixada": {
+    "commonName": "Weißbartpekari",
+    "description": "Soziales Wildschwein, das Gruppen bildet und durch Waldgebiete und Vegetationsmosaike streift.",
+    "physicalCharacteristics": "Dunkles Fell, heller Streifen am Kinn und kompakter Körper mit kräftigen Beinen.",
+    "habitat": "Wälder, Auwälder, bewaldete Savannen und Gebiete mit Obst- und Wasservorkommen.",
+    "behavior": "Es lebt in Gruppen, legt weite Strecken zurück und kann Lautäußerungen und chemische Signale nutzen, um den sozialen Zusammenhalt aufrechtzuerhalten.",
+    "diet": "Früchte, Samen, Wurzeln, Blätter und kleine Organismen im Boden.",
+    "curiosities": [
+      "Große Gruppen können sich über große Gebiete bewegen.",
+      "Zur Nahrungssuche nutzt die Art Vegetation und Boden."
+    ],
+    "distribution": "Von Südmexiko bis Nordargentinien, in verschiedenen Wald- und Savannenformationen in Südamerika.",
+    "ecologicalImportance": "Es wirkt auf die Bodenbewegung und die Samenverbreitung bzw. -prädation und verbindet Wald- und Waldbodenprozesse."
+  },
+  "mutum-de-penacho": {
+    "commonName": "Nacktgesichthokko",
+    "description": "Großer Waldvogel, der den Boden und die niedrige Vegetation als Nahrung nutzt.",
+    "physicalCharacteristics": "Vorwiegend dunkle Männchen mit weißem Bauch und Weibchen mit eher kryptischem Gefieder, mit auffälligem Gefieder.",
+    "habitat": "Wälder, Flusswälder und Vegetationsmosaike in Zentralsüdamerika.",
+    "behavior": "Es sucht am Boden nach Nahrung, bewegt sich paarweise oder in kleinen Gruppen und nutzt Bäume und dichte Vegetation als Unterschlupf.",
+    "diet": "Auf dem Waldboden gefundene Früchte, Samen, Blätter und kleine Wirbellose.",
+    "curiosities": [
+      "Männchen und Weibchen weisen deutliche Unterschiede im Gefieder auf.",
+      "Waldverlust und Jagddruck können sich auf die lokale Bevölkerung auswirken."
+    ],
+    "distribution": "Zentral- und Südbrasilien, Bolivien, Paraguay und angrenzende Regionen Südamerikas.",
+    "ecologicalImportance": "Es verzehrt und transportiert Früchte und Samen und trägt so zur Dynamik von Wäldern und Auwäldern bei."
+  },
+  "carau": {
+    "commonName": "Rallenkranich",
+    "description": "Vogel aus feuchten Gebieten, bekannt für seinen lauten Ruf und die Suche nach Schnecken in der Vegetation.",
+    "physicalCharacteristics": "Gestreiftes braunes Gefieder, lange Beine und gebogener Schnabel.",
+    "habitat": "Sümpfe, überflutete Felder, Buchten und Ufer mit Makrophyten.",
+    "behavior": "Es bewegt sich langsam in seichten Gewässern und gibt im Morgen- und Abendlicht Laute von sich.",
+    "diet": "Hauptsächlich Schnecken und andere wirbellose Wassertiere.",
+    "curiosities": [
+      "Der gebogene Schnabel hilft dabei, Mollusken aus den Schalen zu entfernen.",
+      "Es wird oft vor der Sichtung durch Gesang erkannt."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich des gesamten Pantanal.",
+    "ecologicalImportance": "Reguliert die Molluskenpopulationen in überschwemmten Gebieten."
+  },
+  "seriema": {
+    "commonName": "Rotfußseriema",
+    "description": "Langbeiniger Landvogel, der mit offenen Feldern und Formationen in Südamerika in Verbindung gebracht wird.",
+    "physicalCharacteristics": "Braunes Gefieder, rötliche Beine, kräftiger Schnabel und Federkamm an der Schnabelbasis.",
+    "habitat": "Felder, Savannen, Savannen und Ränder von Waldformationen.",
+    "behavior": "Es geht und rennt auf dem Boden, macht laute Laute und fängt Beute während der Nahrungssuche an Land.",
+    "diet": "In der Umwelt vorkommende Insekten, kleine Wirbeltiere, Eier und andere Tiere.",
+    "curiosities": [
+      "Die Vokalisierung ist über weite Entfernungen hörbar.",
+      "Es handelt sich überwiegend um einen Landvogel, obwohl er sich niederlassen kann."
+    ],
+    "distribution": "Offene Regionen in Mittel- und Ostsüdamerika, einschließlich Brasilien.",
+    "ecologicalImportance": "Es jagt Wirbellose und kleine Wirbeltiere und ist an den Nahrungsketten im Grünland beteiligt."
+  },
+  "teiú": {
+    "commonName": "Schwarzweißer Teju",
+    "description": "Große Eidechse, die Felder, Ränder und Bereiche in der Nähe ländlicher Siedlungen bewohnt.",
+    "physicalCharacteristics": "Robuster Körper, langer Schwanz, dunkle Färbung mit hellen Flecken und gespaltene Zunge.",
+    "habitat": "Felder, Waldränder, Sandböden und Störflächen.",
+    "behavior": "Tagsüber ist er aktiv, erkundet den Boden und sucht in Höhlen Schutz.",
+    "diet": "Früchte, Eier, Insekten, kleine Wirbeltiere und Aas.",
+    "curiosities": [
+      "Es ist ein opportunistischer Allesfresser.",
+      "Die Zunge hilft beim Sammeln chemischer Informationen aus der Umgebung."
+    ],
+    "distribution": "Ost- und Mittelsüdamerika, einschließlich des Pantanal.",
+    "ecologicalImportance": "Trägt zur Samenverbreitung und Kontrolle kleiner Tiere bei."
+  },
+  "dourado": {
+    "commonName": "Goldener Dorado",
+    "description": "Raubfisch aus dem Fluss, bekannt für seine goldene Farbe und seine Bedeutung in der Nahrungskette im Wasser.",
+    "physicalCharacteristics": "Langgestreckter Körper, goldene Schuppen, breites Maul und ausgeprägte Flossen.",
+    "habitat": "Flüsse, Bäche und angeschlossene Gebiete während der Hochwasserperiode.",
+    "behavior": "Als aktiver Schwimmer reist er auf der Suche nach Beute durch verschiedene Flussabschnitte.",
+    "diet": "Fische, Krebstiere und andere Wassertiere.",
+    "curiosities": [
+      "Die Hochwasserdynamik beeinflusst den Zugang zu Nahrungsgebieten.",
+      "Es handelt sich um eine Art, die in Studien zur Flusskonnektivität geschätzt wird."
+    ],
+    "distribution": "Paraná, Paraguay und andere südamerikanische Becken.",
+    "ecologicalImportance": "Mittleres und großes Raubtier, das die Fischgemeinschaften reguliert."
+  },
+  "jaguatirica": {
+    "commonName": "Ozelot",
+    "description": "Mittelgroße Katze, nachtaktiv und diskret, assoziiert mit Wäldern und Vegetationskorridoren.",
+    "physicalCharacteristics": "Gelbliches Fell mit Flecken und Rosetten, kurzer Schwanz und an schwaches Licht angepasste Augen.",
+    "habitat": "Auwälder, Kapaune, Savannen und Waldränder.",
+    "behavior": "Einzelgänger, territorial und hauptsächlich nachtaktiv.",
+    "diet": "Kleine Säugetiere, Vögel, Reptilien und Amphibien.",
+    "curiosities": [
+      "Die Flecken helfen bei der Tarnung zwischen Schatten und Laub.",
+      "Sie können Waldkorridore nutzen, um sich zwischen Gebieten zu bewegen."
+    ],
+    "distribution": "Weit verbreitet in Amerika, einschließlich des Pantanal.",
+    "ecologicalImportance": "Kontrolliert Populationen kleiner Wirbeltiere."
+  },
+  "mao-pelada": {
+    "commonName": "Krabbenwaschbär",
+    "description": "Nachtaktives Säugetier, das Flussufer, feuchte Gebiete und Wälder auf der Suche nach Nahrung erkundet.",
+    "physicalCharacteristics": "Dunkle Gesichtsmaske, beringter Schwanz und lange Finger.",
+    "habitat": "Auwälder, Feuchtgebiete, Flüsse und Überschwemmungsgebiete.",
+    "behavior": "Nachtaktiv, einzelgängerisch und geschickt darin, Nahrung mit seinen Pfoten zu manipulieren.",
+    "diet": "Krebstiere, Früchte, Insekten, Amphibien und kleine Wirbeltiere.",
+    "curiosities": [
+      "Die sensiblen Pfoten helfen bei der Nahrungssuche im flachen Wasser.",
+      "Der beringte Schwanz ist ein charakteristisches visuelles Zeichen."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an der Bekämpfung von Wirbellosen und der Samenverbreitung."
+  },
+  "cachorro-do-mato": {
+    "commonName": "Maikong",
+    "description": "Generalistischer Canid, der Felder, Savannen und Waldränder im Pantanal bewohnt.",
+    "physicalCharacteristics": "Braungraues Fell, kurze Beine und schmale Schnauze.",
+    "habitat": "Felder, Savannen, offene Wälder und veränderte Gebiete.",
+    "behavior": "Dämmerungs- und nächtliche Aktivität, im Allgemeinen allein oder zu zweit.",
+    "diet": "Früchte, Insekten, kleine Wirbeltiere und Aas.",
+    "curiosities": [
+      "Passt sich an unterschiedliche Umgebungen und Nahrungsressourcen an.",
+      "Es kann als Samenverteiler einheimischer Früchte dienen."
+    ],
+    "distribution": "Ein Großteil Südamerikas, einschließlich des Pantanal.",
+    "ecologicalImportance": "Verbindet Nahrungsketten und verbreitet Samen."
+  },
+  "macaco-prego": {
+    "commonName": "Azara-Kapuzineraffe",
+    "description": "Intelligenter Baumprimat, häufig in Waldfragmenten und Korridoren des Pantanal.",
+    "physicalCharacteristics": "Robuster Körper, geschickte Hände, halbgreifbarer Schwanz und ausdrucksstarkes Gesicht.",
+    "habitat": "Auwälder, Dickichte und Waldränder.",
+    "behavior": "Tagaktiv, sozial und aktiv im Blätterdach und im Unterholz.",
+    "diet": "Früchte, Samen, Blätter, Insekten und Kleintiere.",
+    "curiosities": [
+      "Benutzt die Hände, um Lebensmittel und Gegenstände zu erkunden.",
+      "Lebt in Gruppen mit komplexen sozialen Beziehungen."
+    ],
+    "distribution": "Zentral-südliches Südamerika, kommt im Pantanal vor.",
+    "ecologicalImportance": "Verteilt Samen und bekämpft Wirbellose."
+  },
+  "anhuma": {
+    "commonName": "Hornwehrvogel",
+    "description": "Großer Wasservogel, der in feuchten Gebieten lebt, mit einem charakteristischen Hornfortsatz am Kopf.",
+    "physicalCharacteristics": "Dunkler Körper mit hellen Flecken, kräftigen Beinen und einer dünnen Hornstruktur, die auf die Stirn projiziert wird.",
+    "habitat": "Sümpfe, Seeränder, Überschwemmungsgebiete und Wasservegetation.",
+    "behavior": "Es ernährt sich von Wasser und bewegt sich in dessen Nähe, wobei es in der Lage ist, zwischen miteinander verbundenen feuchten Gebieten zu vokalisieren und zu fliegen.",
+    "diet": "An den Ufern sind Blätter, Triebe, Wasserpflanzen und andere Pflanzenteile vorhanden.",
+    "curiosities": [
+      "Der volkstümliche Name bezieht sich auf die Hornstruktur am Kopf.",
+      "Die Art bleibt normalerweise in der Nähe feuchter Umgebungen mit Vegetation."
+    ],
+    "distribution": "Tropisches Südamerika, insbesondere in Becken und Feuchtgebieten im Norden und in der Mitte des Kontinents.",
+    "ecologicalImportance": "Beteiligt sich am Verzehr und Transport von Pflanzenmaterial in überfluteten Umgebungen."
+  },
+  "urubu-rei": {
+    "commonName": "Königsgeier",
+    "description": "Großer Aasvogel, der auf der Suche nach Kadavern bewaldete und offene Gebiete nutzt.",
+    "physicalCharacteristics": "Bunter Kopf, weiß-schwarzer Körper, robuster Schnabel und breite Flügel.",
+    "habitat": "Wälder, Lichtungen, Waldränder und offene Flächen in Waldnähe.",
+    "behavior": "Es fliegt weite Strecken und nutzt thermische Strömungen, um Nahrung zu finden.",
+    "diet": "Tierkadaver unterschiedlicher Größe.",
+    "curiosities": [
+      "Sein kräftiger Schnabel ermöglicht es ihm, widerstandsfähige Stoffe zu öffnen.",
+      "Die Entfernung von Kadavern reduziert die für Krankheitserreger verfügbare organische Substanz."
+    ],
+    "distribution": "Mittel- und Südamerika, mit Nachweisen im Pantanal.",
+    "ecologicalImportance": "Es recycelt Nährstoffe und fungiert als wichtiger Umweltreiniger."
+  },
+  "jacare-coroa": {
+    "commonName": "Brauen-Glattstirnkaiman",
+    "description": "Kleiner Süßwasser-Alligator, der mit Bächen, Flüssen und Waldgebieten assoziiert ist.",
+    "physicalCharacteristics": "Kurze Schnauze, ausgeprägte Osteoderme und kompakter Körper.",
+    "habitat": "Bäche, Bäche, kleinere Flüsse und schattige Ufer.",
+    "behavior": "Diskret, hauptsächlich nachtaktiv und auf Unterstände in der Nähe von Wasser angewiesen.",
+    "diet": "Fische, Krebstiere, Insekten und kleine Wirbeltiere.",
+    "curiosities": [
+      "Es handelt sich um eine der kleinsten Alligatorarten.",
+      "Die knöcherne Hülle schützt den Rücken vor Stößen und Raubtieren."
+    ],
+    "distribution": "Südamerikanische Becken, einschließlich Gebiete des Pantanal.",
+    "ecologicalImportance": "Es jagt Wasserorganismen und hilft dabei, die Flussketten auszugleichen."
+  },
+  "traira": {
+    "commonName": "Raubsalmler",
+    "description": "Raubfische in ruhigen Gewässern, häufig in Lagunen, Bächen und Gebieten mit Wasservegetation.",
+    "physicalCharacteristics": "Langgestreckter Körper, breites Maul und getarnte braune Farbe.",
+    "habitat": "Lagunen, Buchten, Bäche, langsame Flüsse und überschwemmte Gebiete.",
+    "behavior": "Raubtier aus dem Hinterhalt, bleibt zwischen untergetauchten Strukturen zurück.",
+    "diet": "Fische, Krebstiere, Insekten und kleine Wasserwirbeltiere.",
+    "curiosities": [
+      "Tarnung begünstigt schnelle Angriffe aus der Deckung.",
+      "Toleriert saisonale Schwankungen des Sauerstoffgehalts in flachen Gewässern."
+    ],
+    "distribution": "Weit verbreitet in südamerikanischen Becken, einschließlich des Pantanal.",
+    "ecologicalImportance": "Reguliert Populationen kleiner Fische und wirbelloser Wassertiere."
+  },
+  "cutia": {
+    "commonName": "Azara-Aguti",
+    "description": "Tagaktives Nagetier, das im Unterholz umherstreift und in Waldgebieten Samen vergräbt.",
+    "physicalCharacteristics": "Kompakter Körper, lange Beine und braunes Fell.",
+    "habitat": "Auwälder, Dickichte und Waldränder.",
+    "behavior": "Tagaktiv, wachsam und im Allgemeinen einzeln oder paarweise.",
+    "diet": "Früchte, Samen, Triebe und Wurzeln.",
+    "curiosities": [
+      "Sie können die Samen für den späteren Verzehr verstecken.",
+      "Ihr Verhalten hilft dabei, Samen von der Mutterpflanze wegzutransportieren."
+    ],
+    "distribution": "Südmittelsüdamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es verteilt und vergräbt Samen und trägt so zur Regeneration der Wälder bei."
+  },
+  "paca": {
+    "commonName": "Paka",
+    "description": "Nagetier mit dämmerungs- und nachtaktivem Verhalten, das mit Wäldern in der Nähe von Gewässern in Verbindung gebracht wird.",
+    "physicalCharacteristics": "Robuster Körper, leichte Seitenflecken und breiter Kopf.",
+    "habitat": "Auwälder, Kapaune und Flussufer.",
+    "behavior": "Diskret gräbt er Löcher und sucht im Boden nach Früchten.",
+    "diet": "Früchte, Samen und zarte Pflanzenteile.",
+    "curiosities": [
+      "Die Nähe zum Wasser bietet Fluchtwege und Schutz.",
+      "Es ist ein wichtiges Beutetier für Großkatzen und Alligatoren."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es verbreitet Samen und ist an der terrestrischen Nahrungskette beteiligt."
+  },
+  "gato-mourisco": {
+    "commonName": "Jaguarundi",
+    "description": "Katze mit länglichem Körper, die Felder, Savannen und Waldränder nutzt.",
+    "physicalCharacteristics": "Schlanker Körper, kurze Beine, kleiner Kopf und unterschiedliches, gleichmäßiges Fell.",
+    "habitat": "Felder, Savannen, offene Wälder und Waldränder.",
+    "behavior": "Einzelgänger, zu unterschiedlichen Zeiten aktiv und in der Lage, verschiedene Bereiche zu besetzen.",
+    "diet": "Kleine Säugetiere, Vögel, Reptilien und Wirbellose.",
+    "curiosities": [
+      "Das Fell kann zwischen rötlichen, grauen oder dunklen Tönen variieren.",
+      "Sein länglicher Körper erleichtert die Fortbewegung durch dichte Vegetation."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft kleine Wirbeltiere und Wirbellose."
+  },
+  "aracua": {
+    "commonName": "Chakotschatschalaka",
+    "description": "Sozialer Vogel der Waldränder und offener Wälder, erkennbar an seinem lauten Sammelruf.",
+    "physicalCharacteristics": "Schlanker Körper, langer Schwanz und braunes Gefieder mit heller Kehle.",
+    "habitat": "Auwälder, Dickichte und Waldränder.",
+    "behavior": "Er lebt in Gruppen und bewegt sich auf der Suche nach Nahrung zwischen Bäumen und Büschen.",
+    "diet": "Früchte, Samen, Blätter und Blüten.",
+    "curiosities": [
+      "Gruppen können im Morgengrauen im Chor singen.",
+      "Man sieht ihn häufig an Obstbäumen."
+    ],
+    "distribution": "Zentrales Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Verteilt Samen von Baum- und Straucharten."
+  },
+  "soco-boi": {
+    "commonName": "Marmorreiher",
+    "description": "Reiher mit diskretem Verhalten, der in seichten Gewässern und Vegetationsbänken jagt.",
+    "physicalCharacteristics": "Langer Hals, gestreiftes Gefieder und spitzer Schnabel.",
+    "habitat": "Sümpfe, Buchten, Bäche und Flussufer.",
+    "behavior": "Es bleibt bewegungslos und wartet auf Beute und ist in der Dämmerung am aktivsten.",
+    "diet": "Fische, Amphibien, Krebstiere und Wasserinsekten.",
+    "curiosities": [
+      "Unbeweglichkeit hilft ihnen, sich der Wasserbeute zu nähern.",
+      "Das Gefieder von Jungtieren unterscheidet sich deutlich vom Gefieder von Erwachsenen."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Kontrolliert Organismen in überschwemmten Gebieten und integriert Wasserketten."
+  },
+  "jacana": {
+    "commonName": "Rotstirn-Blatthühnchen",
+    "description": "Vogel aus überschwemmten Gebieten, der mit sehr langen Fingern auf schwimmenden Blättern läuft.",
+    "physicalCharacteristics": "Verlängerte Finger und Nägel, dunkler Körper und gelbe und rote Details.",
+    "habitat": "Flache Lagunen, Sümpfe und Felder mit schwimmenden Wasserpflanzen.",
+    "behavior": "Es läuft auf der Vegetation und sucht zwischen Blättern und Wasser nach Wirbellosen.",
+    "diet": "Insekten, kleine Wirbellose, Samen und Pflanzenmaterial.",
+    "curiosities": [
+      "Die Finger verteilen das Gewicht auf die schwimmenden Blätter.",
+      "Bei Alarm kann es kurze Rufe abgeben."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Wirbellose und transportiert Nährstoffe in flache Bereiche."
+  },
+  "martim-pescador-grande": {
+    "commonName": "Rotbrustfischer",
+    "description": "Flussvogel, der das Wasser von Sitzstangen aus beobachtet und taucht, um Fische zu fangen.",
+    "physicalCharacteristics": "Großer Schnabel, robuster Körper und deutlich sichtbarer Kamm.",
+    "habitat": "Flüsse, Lagunen, Buchten und offene Ufer.",
+    "behavior": "Beobachten Sie von Ästen aus und führen Sie schnelle Tauchgänge durch.",
+    "diet": "Fische, Krebstiere und kleine Wassertiere.",
+    "curiosities": [
+      "Die Position des Barsches hilft bei der Berechnung des Tauchgangs.",
+      "Es kann in offenen Gewässern bei guter Sicht beobachtet werden."
+    ],
+    "distribution": "Amerika, einschließlich des gesamten Pantanal.",
+    "ecologicalImportance": "Integriert aquatische und terrestrische Nahrungsketten."
+  },
+  "curimbata": {
+    "commonName": "Gestreifter Prochilodus",
+    "description": "Wanderfische aus südamerikanischen Flüssen, wichtig für die Dynamik von Überschwemmungen und Wasserketten.",
+    "physicalCharacteristics": "Spindelförmiger Körper, zum Schaben geeigneter Mund und silberne Schuppen.",
+    "habitat": "Flüsse, Kanäle, Bäche und Gebiete, die bei Hochwasser überschwemmt werden.",
+    "behavior": "Es bildet Schwärme und führt saisonale Bewegungen zur Fortpflanzung und Nahrungsaufnahme durch.",
+    "diet": "Schmutz, Algen und organische Stoffe vom Boden.",
+    "curiosities": [
+      "Migration hängt von der Konnektivität der Flüsse ab.",
+      "Die Bodenfütterung bewegt Sedimente und Nährstoffe."
+    ],
+    "distribution": "Paraná-, Paraguay- und Uruguay-Becken.",
+    "ecologicalImportance": "Transportiert Energie und Nährstoffe zwischen Flüssen und Auen."
+  },
+  "cagado-de-barbicha": {
+    "commonName": "Geoffroy-Krötenkopfschildkröte",
+    "description": "Süßwasserschildkröte, die Flüsse, Seen und Ufer mit verfügbaren Unterständen bewohnt.",
+    "physicalCharacteristics": "Ovaler Panzer, breiter Kopf und Kehllappen unter dem Kinn.",
+    "habitat": "Flüsse, Bäche, Lagunen und Ufer langsamer Gewässer.",
+    "behavior": "Aquatisch, opportunistisch und oft beim Sonnen auf Baumstämmen beobachtet.",
+    "diet": "Kleine Fische, Wirbellose, Kadaver und Pflanzenteile.",
+    "curiosities": [
+      "Barben helfen bei der Wahrnehmung der Wasserumgebung.",
+      "Die Qualität der Banken beeinflusst ihre Schutzstandorte."
+    ],
+    "distribution": "Becken in Mittel- und Ostsüdamerika, einschließlich des Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an der Kontrolle von Wasserorganismen und dem Recycling von Stoffen."
+  },
+  "cobra-verde": {
+    "commonName": "Grüne Strauchnatter",
+    "description": "Grüne Baumschlange, die in Wäldern, Büschen und bewachsenen Rändern vorkommt.",
+    "physicalCharacteristics": "Schlanker Körper, grüne Schuppen und langer Schwanz.",
+    "habitat": "Wälder, Dickichte, Büsche und Waldränder mit dichter Vegetation.",
+    "behavior": "Tagaktiv, beweglich und überwiegend baumbewohnend.",
+    "diet": "Kleine Wirbeltiere, Amphibien, Eidechsen und Vögel.",
+    "curiosities": [
+      "Die Färbung bietet Tarnung zwischen den Blättern.",
+      "Wie alle Schlangen muss sie beobachtet werden, ohne dass versucht wird, sie zu fangen."
+    ],
+    "distribution": "Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es kontrolliert kleine Wirbeltiere und integriert die Nahrungskette des Waldes."
+  },
+  "perereca-cabecuda": {
+    "commonName": "Chaco-Laubfrosch",
+    "description": "Amphibie in feuchten Gebieten und bewachsenen Rändern, hauptsächlich nachts aktiv.",
+    "physicalCharacteristics": "Schlanker Körper, große Augen, Klebescheiben an den Fingern und variable Farbgebung.",
+    "habitat": "Sümpfe, temporäre Lagunen, überschwemmte Gebiete und Vegetation in Wassernähe.",
+    "behavior": "Es ist nachtaktiv, gibt während der Regenzeit Laute von sich und ruht sich in der Vegetation aus.",
+    "diet": "Insekten und andere kleine Wirbellose.",
+    "curiosities": [
+      "Das Lied hilft dabei, Personen während der Regenzeit zu finden.",
+      "Empfindliche Haut macht die Art anfällig für Wasserverschmutzung."
+    ],
+    "distribution": "Mittel- und Ostsüdamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Insekten und dient als Indikator für die Umweltqualität."
+  },
+  "ra-quatro-olhos": {
+    "commonName": "Vieraugenfrosch",
+    "description": "Kleiner Landfrosch, der sich vorübergehend durch Regen gebildete Pfützen zunutze macht.",
+    "physicalCharacteristics": "Kompakter Körper, Rückenflecken und augenähnliche Drüsen im hinteren Bereich.",
+    "habitat": "Felder, Sandböden und temporäre Pfützen.",
+    "behavior": "Nachtaktiv und explosiv nach starkem Regen, wenn es sich schnell vermehrt.",
+    "diet": "Insekten und kleine Wirbellose.",
+    "curiosities": [
+      "Temporäre Pfützen sind für ihren Fortpflanzungszyklus unerlässlich.",
+      "Die hinteren Markierungen können Raubtiere verwirren."
+    ],
+    "distribution": "Offene Regionen Südamerikas, mit Vorkommen in Zentralbrasilien.",
+    "ecologicalImportance": "Es bekämpft Wirbellose und dient als Nahrung für Vögel, Reptilien und Säugetiere."
+  },
+  "piranha-vermelha": {
+    "commonName": "Roter Piranha",
+    "description": "Fisch mit scharfen Zähnen, der in langsamen Gewässern, Buchten, Bächen und Lagunen im Pantanal vorkommt.",
+    "physicalCharacteristics": "Großer Körper, silbrige Farbe mit rötlichem Bauch und kräftigen Zähnen.",
+    "habitat": "Langsame Flüsse, Buchten, Bäche und Auenlagunen.",
+    "behavior": "Es bildet Schulen und reagiert auf Möglichkeiten für Nahrung und Unterkunft.",
+    "diet": "Fische, Wirbellose, Früchte und tierische Stoffe.",
+    "curiosities": [
+      "Die Art ist an komplexen Nahrungsnetzen beteiligt und zeichnet sich nicht ausschließlich durch aggressives Verhalten aus.",
+      "Die Hochwasserdynamik beeinflusst ihre lokale Verbreitung."
+    ],
+    "distribution": "Becken im nördlichen und mittleren Südamerika, einschließlich des Pantanal.",
+    "ecologicalImportance": "Reguliert den Fischbestand und recycelt organische Stoffe."
+  },
+  "tuvira": {
+    "commonName": "Gebänderter Messerfisch",
+    "description": "Elektrischer Fisch ruhiger Gewässer, aktiv zwischen Wurzeln, Pflanzen und Unterwasserstrukturen.",
+    "physicalCharacteristics": "Langgestreckter Körper, ohne Rückenflosse und gewellter Analregion.",
+    "habitat": "Corixos, Lagunen, Buchten und Ufer mit Wasservegetation.",
+    "behavior": "Nachtaktiv, nutzt schwache elektrische Signale zur Orientierung und Kommunikation.",
+    "diet": "Wirbellose Wassertiere und kleine Fische.",
+    "curiosities": [
+      "Elektrische Signale unterstützen die Navigation in trübem Wasser.",
+      "Die Dynamik von Überschwemmungen erweitert ihren verfügbaren Lebensraum."
+    ],
+    "distribution": "Paraguay-Becken und zugehörige Regionen in Zentral-Südamerika.",
+    "ecologicalImportance": "Es integriert Nahrungsketten und kontrolliert kleine Wasserorganismen."
+  },
+  "morfoborboleta": {
+    "commonName": "Blauer Morphofalter",
+    "description": "Schmetterling mit blauen Flügeln, der häufig Lichtungen, Waldränder und Waldwege besucht.",
+    "physicalCharacteristics": "Breite Flügel mit metallisch-blauem Glanz bei den Männchen und Ocelli-Muster auf dem Rücken.",
+    "habitat": "Auwälder, Dickichte, Lichtungen und Waldränder.",
+    "behavior": "Es fliegt auf breiten Flugbahnen und besucht sonnige Gebiete zur Wärmeregulierung.",
+    "diet": "Erwachsene konsumieren Fruchtflüssigkeiten und organische Stoffe; Raupen nutzen Wirtspflanzen.",
+    "curiosities": [
+      "Der blaue Schimmer entsteht durch die Struktur der Schuppen, nicht durch einfaches Pigment.",
+      "Die Rückseite der Flügel ist dezenter und begünstigt die Tarnung."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an der Bestäubung und den Nahrungsketten des Waldes."
+  },
+  "besouro-rola-bosta": {
+    "commonName": "Mistkäfer",
+    "description": "Scarabee-Käfer, der organisches Material nutzt und zum Nährstoffkreislauf beiträgt.",
+    "physicalCharacteristics": "Kompakter Körper, zum Graben geeignete Beine und kräftige Kiefer.",
+    "habitat": "Felder, offene Wälder und Böden mit Verfügbarkeit organischer Substanz.",
+    "behavior": "Lokalisiert Ressourcen anhand des Geruchs, formt und transportiert kleine Materialkügelchen.",
+    "diet": "Organisches Material und Wirbeltierkot.",
+    "curiosities": [
+      "Durch das Vergraben der Ressource wird die Nährstoffeinbindung in den Boden verbessert.",
+      "Die Aktivität variiert je nach Luftfeuchtigkeit und Temperatur."
+    ],
+    "distribution": "Südamerika, mit Aufzeichnungen in brasilianischen Umgebungen.",
+    "ecologicalImportance": "Recycelt Nährstoffe, belüftet den Boden und verteilt die im organischen Material vorhandenen Samen."
+  },
+  "biguá": {
+    "commonName": "Humboldtscharbe",
+    "description": "Wasservogel, der in Flüssen, Buchten und Bächen taucht, um Fische zu fangen.",
+    "physicalCharacteristics": "Dunkles Gefieder, langer Hals und Schnabel mit gebogener Spitze.",
+    "habitat": "Flüsse, Lagunen, Buchten, Bäche und offene Ufer.",
+    "behavior": "Er taucht und schwimmt effizient und trocknet seine Flügel nach dem Angeln.",
+    "diet": "Fische, Krebstiere und kleine Wassertiere.",
+    "curiosities": [
+      "Nach dem Tauchen kann das Gefieder der Sonne ausgesetzt werden.",
+      "Es ist ein visueller Indikator für das Vorhandensein von Fischen in offenen Gewässern."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es ist an der Fischbekämpfung und der Nährstoffübertragung zwischen Wasser und Land beteiligt."
+  },
+  "garca-moura": {
+    "commonName": "Cocoireiher",
+    "description": "Großer Reiher, der regungslos an Ufern, überschwemmten Feldern und seichten Gewässern jagt.",
+    "physicalCharacteristics": "Langer Hals, lange Beine, grauer Rücken und helle Brust.",
+    "habitat": "Flüsse, Buchten, Sümpfe, Bäche und überflutete Felder.",
+    "behavior": "Geht langsam oder bleibt bewegungslos und wartet auf Beute.",
+    "diet": "Fische, Amphibien, Reptilien, Krebstiere und kleine Säugetiere.",
+    "curiosities": [
+      "Die unbewegliche Haltung verringert die Aufmerksamkeit der Beute.",
+      "Sie können hohe Bäume zum Rasten und Nisten nutzen."
+    ],
+    "distribution": "Südamerika, einschließlich des gesamten Pantanal.",
+    "ecologicalImportance": "Integriert aquatische und terrestrische Nahrungsketten."
+  },
+  "soco-dorminhoco": {
+    "commonName": "Nachtreiher",
+    "description": "Reiher mit dämmerungs- und nachtaktivem Verhalten, der Ufer und Wasservegetation nutzt.",
+    "physicalCharacteristics": "Kompakter Körper, rote Augen bei Erwachsenen und robuster Schnabel.",
+    "habitat": "Sümpfe, Lagunen, Flüsse, Kanäle und überschwemmte Gebiete mit Schutz.",
+    "behavior": "Tagsüber ruht es und geht in der Dämmerung und in der Nacht auf die Jagd.",
+    "diet": "Fische, Amphibien, Insekten, Krebstiere und kleine Wirbeltiere.",
+    "curiosities": [
+      "Junge Menschen haben ein braun gestreiftes Gefieder, das sich stark von dem der Erwachsenen unterscheidet.",
+      "Es kann Brutkolonien in Bäumen in der Nähe von Wasser bilden."
+    ],
+    "distribution": "Amerika und andere Regionen, mit weitverbreitetem Vorkommen im Pantanal.",
+    "ecologicalImportance": "Bekämpft Wasser- und Landorganismen in feuchten Gebieten."
+  },
+  "coruja-buraqueira": {
+    "commonName": "Kaninchenkauz",
+    "description": "Eine Landeule, die offene Felder bewohnt und Höhlen als Schutz und Fortpflanzung nutzt.",
+    "physicalCharacteristics": "Kleiner Körper, gelbe Augen, lange Beine und aufrechte Haltung.",
+    "habitat": "Felder, Weiden, Freiflächen und ländliche Wegränder.",
+    "behavior": "Er ist Tag und Nacht aktiv und beobachtet seine Umgebung vom Boden oder von niedrigen Sitzstangen aus.",
+    "diet": "Insekten, kleine Nagetiere, Eidechsen und Amphibien.",
+    "curiosities": [
+      "Es kann von Säugetieren verlassene Höhlen besetzen.",
+      "Bewegt Kopf und Körper schnell, wenn er Bedrohungen untersucht."
+    ],
+    "distribution": "Amerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Insekten und kleine Wirbeltiere in offenen Gebieten."
+  },
+  "lambari-do-pantanal": {
+    "commonName": "Pantanal-Salmler",
+    "description": "Kleine Schwarmfische kommen in ruhigen, fließenden Gewässern der Aue vor.",
+    "physicalCharacteristics": "Silberner Körper, kleine Schuppen und zarte Flossen.",
+    "habitat": "Flüsse, Bäche, Lagunen und überflutete Felder.",
+    "behavior": "Es bildet Schulen und sucht in Pflanzen und Ufern nach Nahrung.",
+    "diet": "Insekten, Algen, Früchte und kleine Wirbellose.",
+    "curiosities": [
+      "Schulen reagieren schnell auf Schatten und Bewegungen am Ufer.",
+      "Kleine Fische sind für größere Raubtiere wichtig."
+    ],
+    "distribution": "Becken in Zentral- und Südbrasilien, einschließlich des Paraguay-Systems.",
+    "ecologicalImportance": "Überträgt Energie von kleinen Ressourcen auf Raubfische, Vögel und Reptilien."
+  },
+  "mandi": {
+    "commonName": "Gefleckter Antennenwels",
+    "description": "Grundwels, der zwischen Felsen, Baumstämmen und Flusssedimenten nach Nahrung sucht.",
+    "physicalCharacteristics": "Lange Barteln, Flecken am Körper und Flossen mit Stacheln.",
+    "habitat": "Flüsse, Kanäle, Bäche und Strecken mit abwechslungsreichem Hintergrund.",
+    "behavior": "Am aktivsten ist er in der Dämmerung und in der Nacht, wenn er den Grund erkundet.",
+    "diet": "Wirbellose Tiere, kleine Fische und organische Stoffe.",
+    "curiosities": [
+      "Barben helfen bei der Nahrungssuche in trübem Wasser.",
+      "Die Konnektivität der Flüsse begünstigt ihre Bewegung."
+    ],
+    "distribution": "Paraná, Paraguay und andere südamerikanische Becken.",
+    "ecologicalImportance": "Es recycelt organische Stoffe und nimmt an der aquatischen Nahrungskette teil."
+  },
+  "pitu": {
+    "commonName": "Amazonas-Flussgarnele",
+    "description": "Süßwassergarnelen, die Flüsse, Seen und überschwemmte Gebiete besiedeln und Pflanzenschutz bieten.",
+    "physicalCharacteristics": "Segmentierter Körper, lange Antennen und entwickelte Chelae.",
+    "habitat": "Flüsse, Bäche, Lagunen, versunkene Wurzeln und bewachsene Ufer.",
+    "behavior": "Erkunden Sie den Boden und die Vegetation, besonders nachts.",
+    "diet": "Schmutz, Algen, Kleintiere und organische Stoffe.",
+    "curiosities": [
+      "Die Form seines Körpers ermöglicht es ihm, sich in untergetauchten Wurzeln und Blättern zu verstecken.",
+      "Durch Überschwemmungen erweitern sich die Nahrungs- und Ausbreitungsflächen."
+    ],
+    "distribution": "Südamerikanische Becken mit Aufzeichnungen in brasilianischen Süßwasserumgebungen.",
+    "ecologicalImportance": "Es recycelt organische Stoffe und dient als Nahrung für Fische und Vögel."
+  },
+  "libelula-pantaneira": {
+    "commonName": "Wanderlibelle",
+    "description": "Wandernde Libelle, beobachtet über offenen Flächen und temporären Gewässern.",
+    "physicalCharacteristics": "Lange Flügel, schmaler Bauch und gelbliche bis braune Färbung.",
+    "habitat": "Temporäre Teiche, Sümpfe, Felder und offene Flächen in Wassernähe.",
+    "behavior": "Es fliegt weite Strecken und jagt tagsüber Insekten.",
+    "diet": "Mücken, Fliegen und andere Fluginsekten.",
+    "curiosities": [
+      "Die Art ist für ihre Langstreckenbewegung bekannt.",
+      "Nymphen leben vor der Metamorphose im Wasser."
+    ],
+    "distribution": "Weit verbreitet in tropischen und subtropischen Regionen, einschließlich des Pantanal.",
+    "ecologicalImportance": "Bekämpft fliegende Insekten und verbindet Wasser- und Landumgebungen."
+  },
+  "tamandua-mirim": {
+    "commonName": "Südlicher Tamandua",
+    "description": "Mittelgroßer Ameisenbär, der den Boden und Bäume auf der Suche nach Ameisen und Termiten erkundet.",
+    "physicalCharacteristics": "Verlängerte Schnauze, starke Krallen, Greifschwanz und variabler dunkler Streifen.",
+    "habitat": "Auwälder, Dickichte, Savannen und Felder mit Schutz.",
+    "behavior": "Einzelgänger, Tag und Nacht aktiv und in der Lage, auf Bäume zu klettern.",
+    "diet": "Ameisen, Termiten und andere kleine Wirbellose.",
+    "curiosities": [
+      "Die lange Zunge erreicht Insektenkolonien in Ritzen.",
+      "Die Krallen werden auch zur Verteidigung und zum Graben verwendet."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Kontrolliert Ameisen- und Termitenpopulationen."
+  },
+  "irara": {
+    "commonName": "Tayra",
+    "description": "Flinker Marder, der durch Bäume und Erde in Wäldern und an den Rändern des Pantanal läuft.",
+    "physicalCharacteristics": "Langgestreckter Körper, kräftige Beine, langer Schwanz und heller oder dunkler Kopf.",
+    "habitat": "Auwälder, Kapaune, bewaldete Savannen und Waldränder.",
+    "behavior": "Tagaktiv, neugierig, einzeln oder in kleinen Familiengruppen beobachtet.",
+    "diet": "Früchte, kleine Wirbeltiere, Insekten und Honig.",
+    "curiosities": [
+      "Lässt sich leicht zwischen Erde und Bäumen bewegen.",
+      "Sein populärer Name taucht auch in Aufzeichnungen aus anderen brasilianischen Regionen auf."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Es jagt kleine Tiere und verbreitet Samen."
+  },
+  "quati": {
+    "commonName": "Südamerikanischer Nasenbär",
+    "description": "Säugetier mit beweglicher Schnauze, das auf dem Boden und in Bäumen nach Früchten und Kleintieren sucht.",
+    "physicalCharacteristics": "Verlängerte Schnauze, beringter Schwanz und Krallen zum Graben.",
+    "habitat": "Wälder, Dickichte, Ränder und Bereiche in der Nähe von Wasserläufen.",
+    "behavior": "Weibchen und Jungtiere leben in Gruppen; Erwachsene Männchen sind oft Einzelgänger.",
+    "diet": "Früchte, Insekten, Eier, kleine Wirbeltiere und organische Stoffe.",
+    "curiosities": [
+      "Die flexible Schnauze hilft ihm beim Erkunden von Blättern und Stämmen.",
+      "Der erhobene Schwanz unterstützt die visuelle Kommunikation der Gruppe."
+    ],
+    "distribution": "Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Verteilt Samen und bekämpft Wirbellose."
+  },
+  "carrapateiro": {
+    "commonName": "Gelbkopfkarakara",
+    "description": "Generalistischer Greifvogel, häufig in offenen Gebieten und an Waldrändern.",
+    "physicalCharacteristics": "Heller Kopf, dunkler Rücken und breite Flügel.",
+    "habitat": "Felder, Weiden, Ränder und Bereiche in der Nähe der Viehwirtschaft.",
+    "behavior": "Es landet in hohen Lagen und sucht am Boden oder bei anderen Tieren nach Nahrung.",
+    "diet": "Zecken, Insekten, Aas, kleine Wirbeltiere und Nahrungsreste.",
+    "curiosities": [
+      "Es kann Ektoparasiten von großen Säugetieren entfernen.",
+      "Nutzen Sie veränderte Umgebungen, ohne natürliche Gebiete aufzugeben."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Wirbellose und entfernt organische Stoffe."
+  },
+  "gaviao-caramujeiro": {
+    "commonName": "Schneckenweih",
+    "description": "Greifvogel, der sich auf die Suche nach Schnecken und anderen Ressourcen in feuchten Gebieten spezialisiert hat.",
+    "physicalCharacteristics": "Gebogener Schnabel, breite Flügel und zum Fangen geeignete Krallen.",
+    "habitat": "Sümpfe, Buchten, überflutete Felder und Ufer mit Makrophyten.",
+    "behavior": "Er fliegt über feuchte Gebiete und landet auf Vegetation in der Nähe des Wassers.",
+    "diet": "Wasserschnecken und andere Wirbellose.",
+    "curiosities": [
+      "Der gebogene Schnabel eignet sich zum Entfernen von Weichtieren aus ihren Schalen.",
+      "Die Präsenz richtet sich nach der Verfügbarkeit überschwemmter Gebiete."
+    ],
+    "distribution": "Mittel- und Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Reguliert die Molluskenpopulationen in überfluteten Umgebungen."
+  },
+  "pica-pau-do-campo": {
+    "commonName": "Feldspecht",
+    "description": "Erdspecht, der auf Baumstämmen, im Boden und auf offenen Flächen nach Insekten sucht.",
+    "physicalCharacteristics": "Kontrastierendes Gefieder, kräftiger Schnabel und steifer Schwanz als Halt.",
+    "habitat": "Felder, Savannen, Weiden und Ränder mit spärlichem Baumbestand.",
+    "behavior": "Es wechselt zwischen Boden und Sitzstangen und erkundet mit seinem Schnabel Holz und Erde.",
+    "diet": "Ameisen, Termiten, Larven und andere Wirbellose.",
+    "curiosities": [
+      "Er frisst möglicherweise mehr am Boden als viele andere Spechte.",
+      "Der starre Schwanz hilft beim Klettern am Baumstamm."
+    ],
+    "distribution": "Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Insekten und schafft Hohlräume, die von anderen Arten genutzt werden können."
+  },
+  "tesourinha": {
+    "commonName": "Gabelschwanz-Königstyrann",
+    "description": "Insektenfressender Sperlingsvogel mit gegabeltem Schwanz, der auf Feldern und offenen Flächen zu sehen ist.",
+    "physicalCharacteristics": "Langer, tief gegabelter Schwanz, dunkler Rücken und heller Bauch.",
+    "habitat": "Felder, Weiden, Savannen und Waldränder.",
+    "behavior": "Es fliegt schnell von Sitzstangen aus, um Insekten zu fangen.",
+    "diet": "Fluginsekten und kleine Früchte.",
+    "curiosities": [
+      "Die Schwanzgröße kann je nach Alter und Geschlecht variieren.",
+      "Es führt in einem großen Teil der Verbreitung saisonale Bewegungen durch."
+    ],
+    "distribution": "Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Insekten in offenen Bereichen."
+  },
+  "sucuri-amarela": {
+    "commonName": "Gelbe Anakonda",
+    "description": "Große semiaquatische Schlange, die in Flüssen, Buchten und saisonal überschwemmten Gebieten vorkommt.",
+    "physicalCharacteristics": "Robuster Körper, dunkle Flecken und gelbliche oder olivfarbene Farbe.",
+    "habitat": "Sümpfe, Ufer, Buchten und langsam fließende Wasserläufe.",
+    "behavior": "Es schwimmt gut, jagt aus dem Hinterhalt und nutzt Wasser zur Wärmeregulierung.",
+    "diet": "Fische, Vögel, Säugetiere und andere Wirbeltiere.",
+    "curiosities": [
+      "Es hat kein Gift und unterwirft seine Beute durch Zwang.",
+      "Überschwemmungen erhöhen die Konnektivität zwischen ihren Umgebungen."
+    ],
+    "distribution": "Paraguay-Becken und andere Gebiete Südamerikas, einschließlich des Pantanal.",
+    "ecologicalImportance": "Top-Raubtier in Wasser- und Uferumgebungen."
+  },
+  "teiu": {
+    "commonName": "Schwarzweißer Teju",
+    "description": "Große Landechse, die offene Gebiete, Ränder und bewaldete Umgebungen nutzt.",
+    "physicalCharacteristics": "Robuster Körper, langer Schwanz, dunkle Färbung mit hellen Flecken und kräftige Gliedmaßen.",
+    "habitat": "Felder, Savannen, Waldränder und Lichtungen mit Unterschlupf und Nahrungsangebot.",
+    "behavior": "Die Nahrungssuche findet hauptsächlich am Boden statt, wobei sich Aktivitätsperioden und Unterschlupf in Löchern und Höhlen abwechseln.",
+    "diet": "Früchte, Eier, Insekten, kleine Wirbeltiere und andere Gegenstände, die bei der Nahrungssuche gefunden werden.",
+    "curiosities": [
+      "Der lange Schwanz hilft beim Gleichgewicht und bei der Fortbewegung.",
+      "Kann zum Schutz Höhlen und Bodenunterstände nutzen."
+    ],
+    "distribution": "Regionen im östlichen und mittleren Südamerika, einschließlich eines Großteils Brasiliens.",
+    "ecologicalImportance": "Beteiligt sich an der Bekämpfung von Wirbellosen und der Bewegung von Samen und organischem Material im Boden."
+  },
+  "perereca-de-cera": {
+    "commonName": "Wachslaubfrosch",
+    "description": "Baumbewohnender Laubfrosch, der an heiße und saisonal trockene Umgebungen im Pantanal angepasst ist.",
+    "physicalCharacteristics": "Grüner Körper, vertikale Pupillen und Haut mit wachsartigem Sekret.",
+    "habitat": "Strauchvegetation, lichte Wälder und Gebiete in der Nähe von temporären Gewässern.",
+    "behavior": "Nachtaktiv, baumartig und hauptsächlich nach Regenfällen aktiv.",
+    "diet": "Insekten und andere kleine Wirbellose.",
+    "curiosities": [
+      "Das wachsartige Sekret hilft, den Wasserverlust zu reduzieren.",
+      "Es legt Eier auf Blättern ab, die über dem Wasser liegen."
+    ],
+    "distribution": "Zentrales Südamerika, einschließlich Gebiete des Pantanal.",
+    "ecologicalImportance": "Bekämpft Insekten und zeigt die Verfügbarkeit feuchter Mikrohabitate an."
+  },
+  "ra-pimenta-pantanal": {
+    "commonName": "Pfefferfrosch",
+    "description": "Großer Frosch, der in temporären Teichen und feuchten Ufern brütet.",
+    "physicalCharacteristics": "Robuster Körper, gefleckter Rücken und muskulöse Hinterbeine.",
+    "habitat": "Pfützen, Sümpfe, überflutbare Felder und Waldränder.",
+    "behavior": "Es ist nachtaktiv, gibt nach Regen laute Laute und kann seinen Unterschlupf verteidigen.",
+    "diet": "Insekten, Spinnen und kleine Wirbeltiere.",
+    "curiosities": [
+      "Baut Schaumnester zum Schutz der Fortpflanzung.",
+      "Es ist einer der größten Frösche, die in offenen brasilianischen Umgebungen vorkommen."
+    ],
+    "distribution": "Zentral- und Südbrasilien, einschließlich Pantanal.",
+    "ecologicalImportance": "Bekämpft Wirbellose und integriert die Nahrungskette in Feuchtgebieten."
+  },
+  "traira-pantanal": {
+    "commonName": "Raubsalmler",
+    "description": "Raubfisch in langsamen Gewässern, resistent gegen saisonale Schwankungen und geringe Sauerstoffzufuhr.",
+    "physicalCharacteristics": "Langgestreckter Körper, breites Maul, kräftige Zähne und kryptische Färbung.",
+    "habitat": "Buchten, Bäche, Lagunen, Sümpfe und bewachsene Ufer.",
+    "behavior": "Es lauert zwischen Pflanzen und greift Beute mit schnellen Bewegungen an.",
+    "diet": "Fische, Krebstiere und andere Wassertiere.",
+    "curiosities": [
+      "Es kann in Umgebungen mit wenig Sauerstoff überleben.",
+      "Die Färbung hilft beim Überfallen zwischen untergetauchten Blättern und Zweigen."
+    ],
+    "distribution": "Südamerika, einschließlich des Pantanalbeckens.",
+    "ecologicalImportance": "Reguliert Populationen kleiner Fische und verbindet verschiedene trophische Ebenen."
+  },
+  "piau-tres-pintas": {
+    "commonName": "Dreipunkt-Leporinus",
+    "description": "Fische mit Schuppen, die durch dunkle Flecken gekennzeichnet sind, kommen häufig in Flüssen und Umgebungen vor, die durch Überschwemmungen verbunden sind.",
+    "physicalCharacteristics": "Spindelförmiger Körper, ausgeprägte Flossen und drei charakteristische seitliche Flecken.",
+    "habitat": "Flüsse, Bäche, Buchten und verbundene Feuchtgebiete.",
+    "behavior": "Es bildet Schwärme und sucht in Boden- und Vegetationsnähe nach Nahrung.",
+    "diet": "Früchte, Samen, Algen und kleine Wirbellose.",
+    "curiosities": [
+      "Die Migration zwischen Flüssen und Überschwemmungsgebieten folgt dem Hochwasserimpuls.",
+      "Fallobst kann bei Überschwemmungen wichtig sein."
+    ],
+    "distribution": "Südamerikanische Becken, darunter das Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an der Samenverbreitung und dem Energiefluss im Wasser."
+  },
+  "caranguejo-de-agua-doce": {
+    "commonName": "Süßwasserkrabbe",
+    "description": "Süßwasserkrabben kommen an Ufern, in der Wasservegetation und am Boden von Sumpfgebieten vor.",
+    "physicalCharacteristics": "Abgeflachter Panzer, entwickelte Chelae und an Süßwasser angepasste Beine.",
+    "habitat": "Flüsse, Buchten, Bäche und überschwemmte Gebiete mit Pflanzenschutz.",
+    "behavior": "Erkunden Sie den Grund und die Ufer, besonders in der Dämmerung und in der Nacht.",
+    "diet": "Trümmer, Algen, Pflanzen und kleine Wirbellose.",
+    "curiosities": [
+      "Die Häutung ist eine Zeit größerer Verletzlichkeit.",
+      "Sie können Schutzräume zwischen untergetauchten Wurzeln und Blättern nutzen."
+    ],
+    "distribution": "Paraguay-Becken und andere Süßwassergebiete Südamerikas.",
+    "ecologicalImportance": "Es recycelt organische Stoffe und dient als Nahrung für Fische und Vögel."
+  },
+  "lobo-guara": {
+    "commonName": "Mähnenwolf",
+    "description": "Langbeiniger Canid, der in offenen Umgebungen und Savannenformationen in Südamerika vorkommt.",
+    "physicalCharacteristics": "Überwiegend orangefarbenes Fell, dunkle Beine, Rückenmähne und große Ohren.",
+    "habitat": "Felder, Savannen, Savannen und offene Flächen mit eingestreuter Vegetationsdecke.",
+    "behavior": "Im Allgemeinen einzelgängerisch und dämmerungs- oder nachtaktiv, auf der Suche nach Nahrung über weite Gebiete ziehend.",
+    "diet": "Früchte, kleine Wirbeltiere und Wirbellose, wobei die Lobeira-Frucht einen wichtigen Anteil an ihrer Ernährung hat.",
+    "curiosities": [
+      "Die Art ist der größte Canide in Südamerika.",
+      "Ihre Kommunikation umfasst Duftmarkierungen und Lautäußerungen."
+    ],
+    "distribution": "Zentralsüdamerika, hauptsächlich in Cerrado-Gebieten und offenen Formationen in Brasilien, Bolivien, Paraguay, Peru und Argentinien.",
+    "ecologicalImportance": "Es fungiert als Raubtier kleiner Tiere und als Samenverteiler in offenen Umgebungen."
+  },
+  "cateto": {
+    "commonName": "Halsbandpekari",
+    "description": "Kleines Wildschwein mit weiter Verbreitung, das in bewaldeten und offenen Umgebungen mit Unterschlupf vorkommt.",
+    "physicalCharacteristics": "Graues oder braunes Fell, heller, kragenartiger Streifen am Hals und robuster Körper.",
+    "habitat": "Wälder, Savannen, Waldränder und Gebiete mit Schutz und Zugang zu Wasser.",
+    "behavior": "Es lebt in kleinen Gruppen oder Familienverbänden, nutzt Lautäußerungen und Duftmarkierungen und erkundet den Boden auf der Suche nach Nahrung.",
+    "diet": "Früchte, Samen, Wurzeln, Blätter, Kakteen und kleine Wirbellose.",
+    "curiosities": [
+      "Der helle Streifen am Hals hilft, das Pekari von anderen Wildschweinen zu unterscheiden.",
+      "Duftdrüsen sind an der Kommunikation zwischen Individuen beteiligt."
+    ],
+    "distribution": "Vom Südwesten der USA bis nach Südamerika, einschließlich eines Großteils Brasiliens.",
+    "ecologicalImportance": "Es verändert den Boden, beeinflusst die Verfügbarkeit von Saatgut und nimmt als Verbraucher und Beute an Nahrungsketten teil."
+  },
+  "cobra-cipo": {
+    "commonName": "Braune Lianennatter",
+    "description": "Schlanke Baumschlange, die sich in tropischen Umgebungen zwischen Ästen und Blättern bewegt.",
+    "physicalCharacteristics": "Sehr schlanker Körper, länglicher Kopf und eine Färbung, die die Tarnung zwischen Zweigen und Blättern begünstigt.",
+    "habitat": "Wälder, Waldränder und Strauchvegetation mit Strukturen zur Baumfortbewegung.",
+    "behavior": "Es bleibt in der Vegetation, beobachtet seine Umgebung und fängt Beute, indem es sich nähert und schnell zugreift.",
+    "diet": "Kleine Wirbeltiere, insbesondere Eidechsen und andere Tiere kompatibler Größe.",
+    "curiosities": [
+      "Der dünne Körper erzeugt eine zweigartige Silhouette.",
+      "Der längliche Kopf ist ein auffälliges Merkmal der Gattung."
+    ],
+    "distribution": "Weit verbreitet im tropischen Amerika, kommt in verschiedenen Wald- und Savannenumgebungen vor.",
+    "ecologicalImportance": "Als Raubtier kleiner Wirbeltiere integriert es baumbewohnende Nahrungsketten."
+  },
+  "perereca-do-banheiro": {
+    "commonName": "Weißgefleckter Laubfrosch",
+    "description": "Laubfrosch mit Baumlebensstil, der mit feuchten Umgebungen und Vegetation in der Nähe von Gewässern verbunden ist.",
+    "physicalCharacteristics": "Kompakter Körper, Haftscheiben an den Fingern und variable Farbgebung in gelblichen und bräunlichen Tönen.",
+    "habitat": "Sümpfe, Seeränder, Ufervegetation und feuchte Gebiete mit vertikalem Schutz.",
+    "behavior": "Es gibt vor allem während der Fortpflanzungszeit Laute von sich und nutzt die Vegetation zur Ruhe und Bewegung.",
+    "diet": "Kleine Arthropoden, die während der nächtlichen Nahrungssuche gefangen wurden.",
+    "curiosities": [
+      "Die Haftscheiben helfen beim Klettern an Blättern und Ästen.",
+      "Die Fortpflanzung hängt von der Verfügbarkeit von Wasser und feuchten Mikroumgebungen ab."
+    ],
+    "distribution": "Südamerika, mit Aufzeichnungen in verschiedenen Gebieten Brasiliens und den Nachbarländern.",
+    "ecologicalImportance": "Es beteiligt sich an der Bekämpfung kleiner Wirbelloser und integriert die Nahrungsketten feuchter Gebiete."
+  },
+  "perereca-macaco": {
+    "commonName": "Wachslaubfrosch",
+    "description": "Baumbewohnender Laubfrosch mit nachtaktivem Verhalten, der in saisonalen tropischen Umgebungen Äste und Blätter besetzt.",
+    "physicalCharacteristics": "Grüner Körper, große Augen, Finger mit Klebescheiben und Anpassungen für das Leben in der Vegetation.",
+    "habitat": "Wälder, bewaldete Savannen und Ränder mit Sträuchern und Bäumen, die für das Leben auf Bäumen geeignet sind.",
+    "behavior": "Es bleibt auf der Vegetation und vermehrt sich in über dem Wasser gefalteten Blättern, wo die Kaulquappen ihre Entwicklung abschließen.",
+    "diet": "In der Vegetation gefangene Arthropoden und andere kleine Wirbellose.",
+    "curiosities": [
+      "Durch das Ablegen auf gefalteten Blättern wird die direkte Exposition der Eier verringert.",
+      "Wachsige Haut trägt dazu bei, den Wasserverlust in saisonalen Umgebungen zu reduzieren."
+    ],
+    "distribution": "Trockene, saisonale Regionen in Zentral-Südamerika, darunter Gebiete in Brasilien, Bolivien, Paraguay und Argentinien.",
+    "ecologicalImportance": "Kontrolliert kleine Wirbellose und überträgt Energie zwischen Vegetation und nachtaktiven Raubtieren."
+  },
+  "gaviao-belo": {
+    "commonName": "Fischbussard",
+    "description": "Greifvogel, der mit Flüssen, Buchten und überschwemmten Gebieten in Verbindung gebracht wird und auf den Fang von Wasserbeute spezialisiert ist.",
+    "physicalCharacteristics": "Braunes Gefieder, heller Kopf, breite Flügel und starke Krallen.",
+    "habitat": "Flussufer, Lagunen, Buchten und Wasservegetation.",
+    "behavior": "Es landet in der Nähe des Wassers und taucht oder sinkt schnell ab, um Beute zu fangen.",
+    "diet": "Fische und andere kleine Wassertiere.",
+    "curiosities": [
+      "Das Sehen hilft dabei, Beute in seichten Gewässern zu lokalisieren.",
+      "Die Landung auf Ästen über dem Wasser begünstigt die Jagd aus dem Hinterhalt."
+    ],
+    "distribution": "Tropisches Amerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an der Fischkontrolle und Nahrungsdynamik in Feuchtgebieten."
+  },
+  "cachara": {
+    "commonName": "Gebänderter Spatelwels",
+    "description": "Großer Wels mit netzartigem Muster, wichtig in den Flüssen und Buchten des Pantanal.",
+    "physicalCharacteristics": "Langgestreckter Körper, Sinneslappen, abgeflachter Kopf und netzartige Flecken.",
+    "habitat": "Flusskanäle, Buchten, Bäche und tief miteinander verbundene Gebiete.",
+    "behavior": "Hauptsächlich ein nachtaktives Raubtier, das seine Barteln zum Aufspüren von Beute nutzt.",
+    "diet": "Fische und andere Wassertiere.",
+    "curiosities": [
+      "Die Barteln helfen bei der Orientierung in trüben Gewässern.",
+      "Die Konnektivität von Flüssen ist wichtig für den Lebenszyklus."
+    ],
+    "distribution": "Paraguay-Becken und andere südamerikanische Becken.",
+    "ecologicalImportance": "Top-Raubtier in Süßwasserumgebungen und Indikator für die Flussanbindung."
+  },
+  "veado-campeiro": {
+    "commonName": "Pampashirsch",
+    "description": "Hirsche aus Freilandhaltung, die saisonal überflutete Felder und Vegetationsränder nutzen.",
+    "physicalCharacteristics": "Schlanker Körper, hellbraunes Fell und Geweih bei erwachsenen Männchen.",
+    "habitat": "Felder, Savannen, Savannen und offene Gebiete des Pantanal.",
+    "behavior": "Es bewegt sich in kleinen Gruppen und wechselt zwischen Fressen, Beobachten und Ausruhen.",
+    "diet": "Gräser, Blätter, Triebe und andere Pflanzen vorhanden.",
+    "curiosities": [
+      "Das Geweih wird bei Männern regelmäßig erneuert.",
+      "Die Offenheit der Landschaft begünstigt die Entdeckung von Raubtieren."
+    ],
+    "distribution": "Mittel- und Ostsüdamerika, einschließlich Gebiete des Pantanal.",
+    "ecologicalImportance": "Es beteiligt sich an Pflanzenfressern und transportiert Samen zwischen offenen Umgebungen."
+  },
+  "morcego-pescador": {
+    "commonName": "Großes Hasenmaul",
+    "description": "Mit Gewässern assoziierte Fledermäuse, die in der Lage sind, Beute auf der Wasseroberfläche zu lokalisieren.",
+    "physicalCharacteristics": "Robuster Körper, große Füße und Krallen zum Fangen von Wasserbeute.",
+    "habitat": "Ufer von Flüssen, Lagunen, Buchten und Feuchtgebieten.",
+    "behavior": "Nachts aktiv, fliegt er nah am Wasser und nutzt die Echoortung zur Nahrungssuche.",
+    "diet": "Kleine Fische, Krebstiere und Wasserinsekten.",
+    "curiosities": [
+      "Sensorische Strukturen helfen dabei, Wellen im Wasser zu erkennen.",
+      "Unterstände können in Mulden, Laubwerken und Strukturen in der Nähe von Flüssen entstehen."
+    ],
+    "distribution": "Tropisches Amerika, mit Aufzeichnungen in brasilianischen Becken.",
+    "ecologicalImportance": "Bekämpft Wirbellose und kleine Fische und verbindet aquatische und terrestrische Ketten."
+  },
+  "ourico-cacheiro": {
+    "commonName": "Brasilianischer Greifstachler",
+    "description": "Baumlebendes Nagetier mit nachtaktiven Gewohnheiten, das Baumkronen und Waldränder erkundet.",
+    "physicalCharacteristics": "Der Körper ist mit Stacheln bedeckt, der Greifschwanz und die Pfoten sind zum Klettern geeignet.",
+    "habitat": "Auwälder, Wälder und Waldränder mit Bäumen und Weinreben.",
+    "behavior": "Es bewegt sich langsam durch die Bäume und bleibt tagsüber verborgen.",
+    "diet": "Blätter, Früchte, Rinde, Triebe und Samen.",
+    "curiosities": [
+      "Der Schwanz hilft beim Klettern.",
+      "Die Stacheln dienen der Abwehr von Fressfeinden."
+    ],
+    "distribution": "Tropisches Südamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Beteiligt sich an Pflanzenfressern und der Bewegung von Samen in der Vegetation."
+  },
+  "arara-caninde": {
+    "commonName": "Gelbbrustara",
+    "description": "Großer Ara mit blauem und gelbem Gefieder, assoziiert mit Wäldern und offenen Gebieten mit hohen Bäumen.",
+    "physicalCharacteristics": "Blaue Flügel, gelbe Brust, kräftiger Schnabel und langer Schwanz.",
+    "habitat": "Auwälder, lichte Wälder, Waldränder und Palmenhaine.",
+    "behavior": "Er lebt paarweise oder in Gruppen und nutzt hohle Bäume zur Ruhe und Fortpflanzung.",
+    "diet": "Früchte, Samen, Nüsse und Pflanzenteile.",
+    "curiosities": [
+      "Der Schnabel zerbricht harte Samen.",
+      "Gruppenreisen können verschiedene Waldfragmente verbinden."
+    ],
+    "distribution": "Tropisches Südamerika, einschließlich Gebiete des Pantanal.",
+    "ecologicalImportance": "Es verbreitet Samen und ist auf alte Bäume als Schutz und Nistplatz angewiesen."
+  },
+  "urubu-de-cabeca-preta": {
+    "commonName": "Rabengeier",
+    "description": "Aasfresser, der häufig in offenen Gebieten, Städten, Flussufern und Waldrändern vorkommt.",
+    "physicalCharacteristics": "Dunkles Gefieder, Kopf ohne Federn, breite Flügel und Gleitflug.",
+    "habitat": "Felder, Ränder, urbanisierte Gebiete und Ränder von Gewässern.",
+    "behavior": "Es bildet Gruppen, nutzt thermische Strömungen und lokalisiert Kadaver durch Sicht und kollektives Verhalten.",
+    "diet": "Kadaver, organische Überreste und kleine tote Tiere.",
+    "curiosities": [
+      "Gleiten reduziert den Energieaufwand.",
+      "Die Entfernung von Schlachtkörpern trägt zum Nährstoffkreislauf bei."
+    ],
+    "distribution": "Amerika, mit weitem Vorkommen in Brasilien und im Pantanal.",
+    "ecologicalImportance": "Recycelt organisches Material und hilft, exponierte Zersetzungsquellen zu reduzieren."
+  },
+  "tucano-toco": {
+    "commonName": "Riesentukan",
+    "description": "Tukan mit großem Schnabel, der Obstbäume, Savannen und Waldränder erkundet.",
+    "physicalCharacteristics": "Großer orangefarbener Schnabel, schwarzes Gefieder und weißer Hals.",
+    "habitat": "Offene Wälder, Savannen, Waldränder und Walddickichte.",
+    "behavior": "Es bewegt sich zwischen Bäumen und verschluckt ganze Früchte, wobei es Paare oder kleine Gruppen bildet.",
+    "diet": "Früchte, Eier, Küken anderer Vögel und kleiner Wirbeltiere.",
+    "curiosities": [
+      "Der Schnabel ist an der Thermoregulation und der Nahrungsaufnahme beteiligt.",
+      "Die Art kann natürliche Höhlen zum Nisten nutzen."
+    ],
+    "distribution": "Mittel- und Ostsüdamerika, einschließlich Pantanal.",
+    "ecologicalImportance": "Verbreitet Samen und beeinflusst die Regeneration von Pflanzenarten."
+  },
+  "cangapara": {
+    "commonName": "Pantanal-Plattschildkröte",
+    "description": "Süßwasserchelon, der mit überschwemmten Gebieten, bewachsenen Ufern und sich langsam bewegenden Umgebungen in Verbindung gebracht wird.",
+    "physicalCharacteristics": "Dunkler und robuster Panzer, breiter Kopf und an Süßwasser angepasste Gliedmaßen.",
+    "habitat": "Buchten, Bäche, Lagunen und Ufer mit Wasservegetation.",
+    "behavior": "Abwechselnde Zeit im Wasser und an Rastplätzen am Ufer.",
+    "diet": "Wirbellose Tiere, Kleintiere, Pflanzen und organische Stoffe.",
+    "curiosities": [
+      "Der Panzer bietet Schutz vor Fressfeinden.",
+      "Die Qualität der Ufer beeinflusst Unterkunft und Nahrung."
+    ],
+    "distribution": "Paraguay-Becken und feuchte Gebiete in Zentral-Südamerika.",
+    "ecologicalImportance": "Es beteiligt sich am Stofffluss zwischen Böden, Ufern und Flachwasser."
+  },
+  "cobra-dagua": {
+    "commonName": "Wassernatter",
+    "description": "Wasserschlange, die Gewässer und bewachsene Ufer zur Jagd und als Unterschlupf nutzt.",
+    "physicalCharacteristics": "Langgestreckter Körper, glatte Schuppen und Muster, das bei der Tarnung in der Vegetation hilft.",
+    "habitat": "Lagunen, Corixos, Sümpfe und Flussufer.",
+    "behavior": "Er schwimmt leicht und sucht in seichten Gewässern und zwischen Pflanzen nach Beute.",
+    "diet": "Fische, Kaulquappen und kleine Wassertiere.",
+    "curiosities": [
+      "Der hydrodynamische Körper erleichtert das Schwimmen.",
+      "Die Farbgebung kann die Kontur zwischen Schatten und Vegetation aufbrechen."
+    ],
+    "distribution": "Feuchte Regionen im südlichen und mittleren Südamerika.",
+    "ecologicalImportance": "Bekämpft kleine Wasserwirbeltiere und integriert die Nahrungskette in Feuchtgebieten."
+  },
+  "jacare-pagua": {
+    "commonName": "Brillenkaiman des Pantanals",
+    "description": "Alligatoren kommen in Flüssen, Buchten und Bächen häufig vor und sind an den jährlichen Zyklus von Überschwemmungen und Dürren angepasst.",
+    "physicalCharacteristics": "Langgestreckter Körper, breite Schnauze, Hautplatten und muskulöser Schwanz.",
+    "habitat": "Flüsse, Lagunen, Buchten, Bäche und überflutbare Felder.",
+    "behavior": "Es sonnt sich an Ufern, jagt im Wasser und kann in saisonalen Perioden Konzentrationen bilden.",
+    "diet": "Fische, Krebstiere, Insekten und kleine Wirbeltiere.",
+    "curiosities": [
+      "Die Temperatur beeinflusst Aktivität und Fortpflanzung.",
+      "Niedrigwassergebiete konzentrieren die Nahrung während der Dürre."
+    ],
+    "distribution": "Paraguay-Becken und andere feuchte Gebiete in Zentral-Südamerika.",
+    "ecologicalImportance": "Wasserräuber und Indikator für die Integrität feuchter Umgebungen."
+  },
+  "tei-de-cauda-vermelha": {
+    "commonName": "Roter Teju",
+    "description": "Große Landechse, die offene Flächen, Kanten und Unterstände im Boden erkundet.",
+    "physicalCharacteristics": "Robuster Körper, langer Schwanz, starke Krallen und rötliche Farbe.",
+    "habitat": "Felder, Savannen, Waldränder und Flächen mit Bodenaushub.",
+    "behavior": "Tagaktiv, opportunistisch und in der Lage, Höhlen als Unterschlupf und zur Wärmeregulierung zu nutzen.",
+    "diet": "Früchte, Eier, Insekten, kleine Wirbeltiere und Aas.",
+    "curiosities": [
+      "Die breite Ernährung ermöglicht es ihnen, saisonale Umgebungen zu erkunden.",
+      "Durch Ausgrabungen werden Zufluchtsorte geschaffen, die in Zeiten der Hitze oder Bedrohung genutzt werden."
+    ],
+    "distribution": "Zentral-südliches Südamerika, kommt in offenen Formationen vor.",
+    "ecologicalImportance": "Es jagt, entfernt organisches Material und kann Samen verbreiten."
+  },
+  "sapinho-cururu": {
+    "commonName": "Schneider-Kröte",
+    "description": "Großer Frosch, der offene Flächen und Kanten einnimmt, besonders in der Nähe von feuchten Unterständen.",
+    "physicalCharacteristics": "Raue Haut, entwickelte Ohrspeicheldrüsen und robuster Körper.",
+    "habitat": "Felder, Gärten, Waldränder und Ränder von Feuchtgebieten.",
+    "behavior": "Aktiv hauptsächlich nachts und nach Regen, auf der Suche nach Nahrung und Partnern.",
+    "diet": "Insekten, Spinnen und andere kleine Wirbellose.",
+    "curiosities": [
+      "Raue Haut hilft bei der Tarnung und dem Schutz.",
+      "Die Fortpflanzung erfolgt normalerweise nach dem Einsetzen des Regens."
+    ],
+    "distribution": "Südamerika, mit weitem Vorkommen in brasilianischen Gebieten.",
+    "ecologicalImportance": "Es bekämpft Wirbellose und dient als Nahrung für spezialisierte Raubtiere."
+  },
+  "rã-pimenta": {
+    "commonName": "Cei-Weißlippenfrosch",
+    "description": "Landfrosch aus offenen und feuchten Gebieten, verbunden mit temporären Teichen und bewachsenen Ufern.",
+    "physicalCharacteristics": "Robuster Körper, braune Färbung und kräftige Hinterbeine.",
+    "habitat": "Überflutbare Felder, Sümpfe, temporäre Pfützen und Seeufer.",
+    "behavior": "In Trockenperioden bleibt es verborgen und gibt nach Regen Laute von sich.",
+    "diet": "Insekten, Larven, Spinnen und kleine Wirbellose.",
+    "curiosities": [
+      "Temporäre Pfützen können für die Fortpflanzung wichtig sein.",
+      "Bei günstiger Luftfeuchtigkeit und Temperatur nimmt die Aktivität zu."
+    ],
+    "distribution": "Paraguay-Becken und andere feuchte Regionen Zentralsüdamerikas.",
+    "ecologicalImportance": "Kontrolliert Wirbellose und zeigt die Verfügbarkeit feuchter Mikrohabitate an."
+  },
+  "perereca-fuscomarginata": {
+    "commonName": "Dunkelrand-Laubfrosch",
+    "description": "Kleiner Laubfrosch, der niedrige Vegetation und feuchte Gebiete in der Nähe von Gewässern nutzt.",
+    "physicalCharacteristics": "Kleiner Körper, Klebescheiben an den Fingern und dunkler Seitenstreifen.",
+    "habitat": "Gras, Sträucher, Ränder und Vegetation rund um Pfützen.",
+    "behavior": "Stimmt während der Regenzeit über Blättern und Zweigen.",
+    "diet": "Kleine Insekten und andere Arthropoden.",
+    "curiosities": [
+      "Die Haftscheiben ermöglichen das Klettern auf glatten Blechen.",
+      "Die Lautgebung hilft dabei, Individuen inmitten der Vegetation zu lokalisieren."
+    ],
+    "distribution": "Zentralbrasilien und andere Gebiete im tropischen Südamerika.",
+    "ecologicalImportance": "Bekämpft kleine Arthropoden und integriert die Fauna temporärer Becken."
+  },
+  "perereca-folhagem-azul": {
+    "commonName": "Azurblauer Blattfrosch",
+    "description": "Baumbewohnender Laubfrosch mit nachtaktivem Verhalten, der Blätter und Äste in Waldumgebungen nutzt.",
+    "physicalCharacteristics": "Grüner Körper, lange Gliedmaßen, Klebescheiben und kontrastierende Farbe an den Innenteilen.",
+    "habitat": "Auwälder, Büsche, Dickichte und wassernahe Ränder.",
+    "behavior": "Es bewegt sich langsam durch die Vegetation und bleibt tagsüber bewegungslos.",
+    "diet": "Insekten und andere kleine Arthropoden.",
+    "curiosities": [
+      "Stillstand verringert die Wahrscheinlichkeit, entdeckt zu werden.",
+      "Die Fortpflanzung hängt von Blättern und Wasser in der näheren Umgebung ab."
+    ],
+    "distribution": "Zentrales Südamerika, einschließlich der Regionen Chaco und Pantanal.",
+    "ecologicalImportance": "Es beteiligt sich an der Insektenbekämpfung und zeigt die Qualität der Ufervegetation an."
+  },
+  "jau": {
+    "commonName": "Jaú-Riesenwels",
+    "description": "Großer Süßwasserwels, der tiefe Flussabschnitte und durch Überschwemmungen verbundene Umgebungen bewohnt.",
+    "physicalCharacteristics": "Robuster Körper, breiter Kopf, sensorische Kehllappen und starke Schwanzflosse.",
+    "habitat": "Tiefe Rinnen, Flussgruben, Bäche und verbundene Buchten.",
+    "behavior": "Grundraubtier, aktiver in Zeiten mit geringerem Lichteinfall.",
+    "diet": "Fische, Krebstiere und andere Wassertiere.",
+    "curiosities": [
+      "Die Barteln helfen bei der Orientierung in trüben Gewässern.",
+      "Die Konnektivität von Flüssen ist wichtig für Bewegung und Fortpflanzung."
+    ],
+    "distribution": "Paraguay-Becken und andere Becken in Zentral-Südamerika.",
+    "ecologicalImportance": "Großes Raubtier und Indikator für die Integrität tiefer Flüsse."
+  },
+  "peixe-cachorro": {
+    "commonName": "Pantanal-Hundssalmler",
+    "description": "Raubfisch mit länglichem Körper, der in offenen Gewässern und Flussufern jagt.",
+    "physicalCharacteristics": "Silbriger Körper, Eckzähne und Schwanzflosse, angepasst an schnelles Schwimmen.",
+    "habitat": "Flüsse, Bäche, Lagunen und Altwassergebiete.",
+    "behavior": "Es bildet kleine Gruppen und greift schnell kleinere Beutetiere an.",
+    "diet": "Kleine Fische und wirbellose Wassertiere.",
+    "curiosities": [
+      "Das Gebiss ist ein auffälliges Merkmal der Gruppe.",
+      "Die Randvegetation bietet Schutz für Beutetiere und Raubtiere."
+    ],
+    "distribution": "Paraguay-Becken und angrenzende Regionen Südamerikas.",
+    "ecologicalImportance": "Reguliert kleine Fischgemeinschaften in Süßwasserumgebungen."
+  },
+  "pacupeva": {
+    "commonName": "Tietê-Pacu",
+    "description": "Kleiner bis mittelgroßer Fisch, der Vegetation, Früchte und Samen in Süßwasserumgebungen erkundet.",
+    "physicalCharacteristics": "Hoher und gedrungener Körper, kräftige Zähne und silbrige Farbe.",
+    "habitat": "Flüsse, Lagunen, Buchten und bewachsene Ufer.",
+    "behavior": "Es erkundet Schulen und nutzt flache Bereiche während der Fütterungszeiten.",
+    "diet": "Früchte, Samen, Pflanzen, Algen und kleine Wirbellose.",
+    "curiosities": [
+      "Die Ernährung richtet sich nach der saisonalen Versorgung mit Früchten und Samen.",
+      "Überflutete Gebiete verbessern den Zugang zu terrestrischer Nahrung."
+    ],
+    "distribution": "Becken im südlichen und mittleren Südamerika.",
+    "ecologicalImportance": "Überträgt Pflanzenmaterial in die Wasserkette und kann Samen verbreiten."
+  },
+  "abelha-jatai": {
+    "commonName": "Stachellose Jataí-Biene",
+    "description": "Eine soziale stachellose Biene, die in Kolonien lebt und Blumen aus verschiedenen Umgebungen im Pantanal besucht.",
+    "physicalCharacteristics": "Kleiner, dunkler Körper mit gelblichen Abzeichen und transparenten Flügeln.",
+    "habitat": "Mulden, Hohlräume, Stämme und geschützte Strukturen in Vegetationsgebieten.",
+    "behavior": "Es lebt in Kolonien, sammelt Blumenressourcen und verteidigt den Eingang zum Nest.",
+    "diet": "Nektar, Pollen und Pflanzenharze.",
+    "curiosities": [
+      "Die Art wird traditionell in Meliponarien gezüchtet.",
+      "Der Eingang zum Nest kann eine charakteristische Cerumenstruktur aufweisen."
+    ],
+    "distribution": "Weit verbreitet im tropischen Amerika, einschließlich Brasilien.",
+    "ecologicalImportance": "Bestäubt einheimische und landwirtschaftliche Pflanzen und trägt so zur Pflanzenregeneration bei."
+  },
+  "formiga-cortadeira": {
+    "commonName": "Blattschneiderameise",
+    "description": "Soziale Ameise, die Blätter schneidet und in unterirdischen Nestern Pilze züchtet.",
+    "physicalCharacteristics": "Kasten mit unterschiedlichen Größen, kräftigen Kiefern und zahlreichen Kolonien.",
+    "habitat": "Boden von Feldern, Rändern, Lichtungen und Vegetationsflächen.",
+    "behavior": "Es organisiert Wanderwege, transportiert Pflanzenfragmente und betreibt Pilzzucht.",
+    "diet": "Pilz, der mit von der Kolonie gesammeltem Pflanzenmaterial kultiviert wird.",
+    "curiosities": [
+      "Die Kasten teilen sich Schneid-, Transport-, Verteidigungs- und Pflegeaufgaben.",
+      "Nester verändern die Bodenstruktur und den Kreislauf."
+    ],
+    "distribution": "Südamerika, mit weitem Vorkommen in brasilianischen Gebieten.",
+    "ecologicalImportance": "Es bewegt Pflanzenmaterial und verändert den Boden, indem es Zersetzung und Nährstoffe beeinflusst."
+  },
+  "aranha-armadeira": {
+    "commonName": "Brasilianische Wanderspinne",
+    "description": "Nachtaktive Wanderspinne, die Laubstreu, Stämme und Vegetation als Unterschlupf und für die Jagd nutzt.",
+    "physicalCharacteristics": "Robuster Körper, lange Beine und charakteristische Abwehrhaltung bei Bedrohung.",
+    "habitat": "Laubstreu, Stämme, Palmen, Ränder und Umgebungen mit Pflanzenschutz.",
+    "behavior": "Nachts jagt es ohne Netz und reagiert bei Störungen defensiv.",
+    "diet": "Insekten, Spinnen und Kleintiere.",
+    "curiosities": [
+      "Die Abwehrhaltung erklärt den populären Namen.",
+      "Es darf nicht manipuliert werden; Beim Beobachten muss ein Sicherheitsabstand eingehalten werden."
+    ],
+    "distribution": "Tropische und subtropische Regionen Südamerikas.",
+    "ecologicalImportance": "Kontrolliert Arthropodenpopulationen im Unterholz und in der Laubstreu."
+  }
+}

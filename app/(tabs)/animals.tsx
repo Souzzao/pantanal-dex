@@ -1,19 +1,22 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups } from "@/shared/pantanal";
-import { catalogCoverage, filterSpeciesCatalog, sortSpeciesCatalog } from "@/shared/catalog";
+import { catalogCoverage, localizedSpeciesCatalog, sortSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 import { RemoteImage } from "@/components/RemoteImage";
 
 export default function AnimalsScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState("");
   const [environment, setEnvironment] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "group">("name");
-  const filtered = useMemo(() => sortSpeciesCatalog(filterSpeciesCatalog({ query, group: group as any, environment: environment as any }), sortBy), [query, group, environment, sortBy]);
+  const filtered = useMemo(() => sortSpeciesCatalog(localizedSpeciesCatalog(locale, { query, group: group as any, environment: environment as any }), sortBy), [query, group, environment, sortBy, locale]);
   const chip = (label: string, active: boolean, onPress: () => void) => <Pressable onPress={onPress} accessibilityRole="radio" accessibilityState={{ selected: active }} accessibilityLabel={label} style={{ backgroundColor: active ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 9 }}><Text style={{ color: active ? "#fff" : colors.foreground, fontWeight: "700", fontSize: 12 }}>{label}</Text></Pressable>;
   return <ScreenContainer className="px-5">
     <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>Animais</Text>

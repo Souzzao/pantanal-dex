@@ -1,19 +1,22 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useCallback, useMemo, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { View } from "react-native";
+import { Pressable, Text } from "@/components/Localized";
 import { router } from "expo-router";
 import { PantanalMap } from "./PantanalMap";
 import { StreetMap } from "./StreetMap";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import { roundToPublicLocationGrid } from "@/shared/location";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
 
 export default function NativeMapView() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings } = useApp();
   const [mapKind, setMapKind] = useState<"streets" | "offline">("streets");
-  const catalog = useMemo(() => new Map(filterSpeciesCatalog().map(item => [item.id, item.commonName])), []);
+  const catalog = useMemo(() => new Map(localizedSpeciesCatalog(locale, ).map(item => [item.id, item.commonName])), [locale]);
   const points = useMemo(() => sightings.filter(item => item.latitude !== undefined && item.longitude !== undefined).map(item => {
     const exact = item.visibility === "private" && item.locationPrecision === "exact";
     return { id: item.id, label: catalog.get(item.speciesId) ?? "Espécie não identificada", latitude: exact ? item.latitude! : roundToPublicLocationGrid(item.latitude!), longitude: exact ? item.longitude! : roundToPublicLocationGrid(item.longitude!) };

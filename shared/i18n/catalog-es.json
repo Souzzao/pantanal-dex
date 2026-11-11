@@ -1,0 +1,1430 @@
+{
+  "tuiuiu": {
+    "commonName": "Jabirú",
+    "description": "Gran ave zancuda, símbolo del Pantanal, frecuentemente observada en áreas abiertas e inundadas.",
+    "physicalCharacteristics": "De plumaje blanco, cabeza negra y buche rojo, con patas largas y pico robusto.",
+    "habitat": "Campos, bahías, reflujos y riberas de ríos inundables.",
+    "behavior": "Construye nidos altos y se le puede ver buscando alimento en aguas poco profundas.",
+    "diet": "Peces, anfibios, reptiles, insectos y pequeños vertebrados.",
+    "curiosities": [
+      "Es una de las aves voladoras más grandes de Sudamérica.",
+      "Tu nido se puede reutilizar durante varios años."
+    ],
+    "distribution": "Centro y Sudamérica, incluyendo todo el Pantanal.",
+    "ecologicalImportance": "Ayuda a indicar la disponibilidad de alimentos y la salud de los humedales."
+  },
+  "arara-azul": {
+    "commonName": "Guacamayo jacinto",
+    "description": "Guacamayo de gran tamaño, reconocido por su plumaje azul cobalto y su poderoso pico.",
+    "physicalCharacteristics": "Anillo azul intenso, amarillo alrededor de los ojos y base del pico.",
+    "habitat": "Bosques ribereños, zonas de carandazal y bordes de bosque.",
+    "behavior": "Vive en parejas o grupos familiares y utiliza árboles huecos para anidar.",
+    "diet": "Principalmente frutos de palma, como acuri y bocaiúva.",
+    "curiosities": [
+      "El pico rompe frutos muy resistentes.",
+      "La conservación depende del suministro de palmeras y árboles huecos."
+    ],
+    "distribution": "Centro de Brasil, Bolivia y Paraguay, con importante población en el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas y participa en la regeneración de las palmeras del Pantanal."
+  },
+  "onca-pintada": {
+    "commonName": "Jaguar",
+    "description": "El felino más grande de América y máximo depredador en ambientes pantanosos.",
+    "physicalCharacteristics": "Pelaje dorado con rosetas, cuerpo musculoso y mordida muy potente.",
+    "habitat": "Bosques cercanos a ríos, arroyos y zonas con buena oferta de presas.",
+    "behavior": "Solitario, territorial y excelente nadador.",
+    "diet": "Carpinchos, caimanes, pecaríes, venados y otros vertebrados.",
+    "curiosities": [
+      "Las rosetas pueden tener pequeños puntos centrales.",
+      "Los ríos y bahías son corredores importantes para la especie."
+    ],
+    "distribution": "Desde México hasta el norte de Argentina, con una población relevante en el Pantanal.",
+    "ecologicalImportance": "Regula las poblaciones de presas y ayuda a mantener el equilibrio en las cadenas alimentarias."
+  },
+  "capivara": {
+    "commonName": "Capibara",
+    "description": "El roedor vivo más grande del mundo, estrechamente asociado con las orillas de los cuerpos de agua.",
+    "physicalCharacteristics": "Cuerpo robusto, patas parcialmente palmeadas y pelaje marrón rojizo.",
+    "habitat": "Riberas de ríos, lagunas, bahías y campos húmedos.",
+    "behavior": "Social, vive en grupos y busca refugio en el agua cuando se siente amenazado.",
+    "diet": "Hierbas y plantas acuáticas.",
+    "curiosities": [
+      "Puede permanecer sumergido durante varios minutos.",
+      "Los grupos tienden a tener una fuerte organización social."
+    ],
+    "distribution": "Gran parte de Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Es una presa importante para los grandes depredadores e influye en la vegetación de las orillas."
+  },
+  "jacare-do-pantanal": {
+    "commonName": "Yacaré negro",
+    "description": "Caimán abundante en las aguas del Pantanal, adaptado a la dinámica estacional de las inundaciones.",
+    "physicalCharacteristics": "Cuerpo alargado, hocico estrecho y bandas claras en la mandíbula.",
+    "habitat": "Bahías, arroyos, lagunas y ríos de caudal lento.",
+    "behavior": "Toma el sol en las orillas y caza principalmente durante el período de actividad nocturna.",
+    "diet": "Peces, crustáceos, anfibios y pequeños vertebrados.",
+    "curiosities": [
+      "Los humedales proporcionan refugio y alimento durante las sequías.",
+      "Los cachorros utilizan la vegetación marginal para protegerse."
+    ],
+    "distribution": "Centroamérica del Sur, especialmente Brasil, Bolivia y Paraguay.",
+    "ecologicalImportance": "Participa en el control de las poblaciones acuáticas y transporta nutrientes entre el agua y los bancos."
+  },
+  "anta": {
+    "commonName": "Tapir amazónico",
+    "description": "Gran mamífero herbívoro que deambula por bosques, senderos y riberas de ríos en el Pantanal.",
+    "physicalCharacteristics": "Cuerpo voluminoso, hocico alargado y pelaje corto de color marrón.",
+    "habitat": "Bosques ribereños, capones y zonas cercanas al agua.",
+    "behavior": "Solitario, generalmente más activo al anochecer y por la noche.",
+    "diet": "Hojas, frutos, brotes y otras partes de las plantas.",
+    "curiosities": [
+      "Es un importante dispersor de semillas.",
+      "Nada bien y utiliza el agua para escapar de las amenazas."
+    ],
+    "distribution": "América del Sur al este de los Andes, incluido el Pantanal.",
+    "ecologicalImportance": "Transporta semillas entre diferentes ambientes y contribuye a la regeneración forestal."
+  },
+  "tamandua-bandeira": {
+    "commonName": "Oso hormiguero gigante",
+    "description": "Mamífero especializado en capturar hormigas y termitas con su lengua larga y pegajosa.",
+    "physicalCharacteristics": "Hocico tubular, cola muy voluminosa y raya diagonal oscura en el cuerpo.",
+    "habitat": "Campos, sabanas y bordes de bosques con suelo apto para excavar.",
+    "behavior": "Camina largas distancias y puede estar activo de día o de noche.",
+    "diet": "Hormigas y termitas.",
+    "curiosities": [
+      "No tiene dientes funcionales.",
+      "La lengua se puede proyectar repetidamente para sacar insectos de los nidos."
+    ],
+    "distribution": "América Central y del Sur, incluidas las zonas abiertas del Pantanal.",
+    "ecologicalImportance": "Controla poblaciones de insectos sociales y revuelve el suelo abriendo hormigueros y termiteros."
+  },
+  "cervo-do-pantanal": {
+    "commonName": "Ciervo de los pantanos",
+    "description": "Venado más grande de Sudamérica, asociado a llanuras aluviales, pantanos y campos inundables.",
+    "physicalCharacteristics": "Patas largas, pelaje marrón rojizo y astas ramificadas en los machos.",
+    "habitat": "Pantanos, bahías, campos inundables y riberas de ríos.",
+    "behavior": "Utiliza zonas inundadas como refugio y se desplaza en busca de vegetación acuática.",
+    "diet": "Hierbas, plantas acuáticas, hojas y brotes.",
+    "curiosities": [
+      "Las adaptaciones de las piernas favorecen el movimiento en terrenos húmedos.",
+      "La especie depende del mantenimiento de humedales conectados."
+    ],
+    "distribution": "Centro y sur de América del Sur, presente en el Pantanal.",
+    "ecologicalImportance": "Participa en la dinámica de la vegetación de los humedales y dispersa semillas."
+  },
+  "ema": {
+    "commonName": "Ñandú común",
+    "description": "Ave corredora de gran tamaño que ocupa campos y áreas abiertas del Pantanal.",
+    "physicalCharacteristics": "Cuello largo, alas reducidas, patas fuertes y plumaje pardo.",
+    "habitat": "Campos, sabanas y áreas abiertas con vegetación baja.",
+    "behavior": "Vive en grupos y corre rápidamente cuando se le molesta.",
+    "diet": "Frutos, semillas, hojas y pequeños animales.",
+    "curiosities": [
+      "El macho participa en la incubación y el cuidado de las crías.",
+      "Las alas ayudan con el equilibrio mientras corres."
+    ],
+    "distribution": "América del Sur, que se encuentra en áreas abiertas del Pantanal.",
+    "ecologicalImportance": "Dispersa semillas e integra las cadenas alimentarias de los campos."
+  },
+  "colhereiro": {
+    "commonName": "Espátula rosada",
+    "description": "Ave acuática de pico espatulado, observada en aguas poco profundas y bancos fangosos.",
+    "physicalCharacteristics": "Plumaje rosado, cuello ligero y pico largo con punta en forma de cuchara.",
+    "habitat": "Lagunas, bahías, marismas y riberas de ríos.",
+    "behavior": "Mueve su pico de lado a lado en el agua para localizar comida.",
+    "diet": "Pequeños peces, crustáceos, insectos y otros invertebrados acuáticos.",
+    "curiosities": [
+      "El color rosa está relacionado con la comida.",
+      "Suele buscar alimento en grupos en zonas poco profundas."
+    ],
+    "distribution": "América, principalmente humedales costeros y continentales.",
+    "ecologicalImportance": "Conecta las cadenas alimentarias de invertebrados y peces pequeños en los humedales."
+  },
+  "garca-branca": {
+    "commonName": "Garza blanca",
+    "description": "Garza grande y pálida, común en orillas, llanuras aluviales y cuerpos de agua del Pantanal.",
+    "physicalCharacteristics": "Plumaje blanco, cuello largo, pico amarillo y patas oscuras.",
+    "habitat": "Ríos, bahías, arroyos, pantanos y campos inundados.",
+    "behavior": "Camina lentamente en aguas poco profundas y captura a sus presas con un rápido golpe de su pico.",
+    "diet": "Peces, anfibios, pequeños reptiles, crustáceos e insectos.",
+    "curiosities": [
+      "Puede permanecer inmóvil durante largos periodos mientras caza.",
+      "Se reúne en colonias para reproducirse."
+    ],
+    "distribution": "Amplia distribución mundial, con presencia en todo Brasil.",
+    "ecologicalImportance": "Se alimenta de varios organismos acuáticos e indica la disponibilidad de alimento en las orillas."
+  },
+  "sucuri-verde": {
+    "commonName": "Anaconda verde",
+    "description": "Serpiente semiacuática de gran tamaño que utiliza ríos, bahías y zonas inundadas para cazar.",
+    "physicalCharacteristics": "Cuerpo robusto, color verde oliva con manchas oscuras y ojos situados en la parte superior de la cabeza.",
+    "habitat": "Pantanos, lagunas, bahías, arroyos y riberas de ríos.",
+    "behavior": "Permanece parcialmente sumergido y captura a sus presas por constricción.",
+    "diet": "Peces, aves, mamíferos y otros vertebrados de tamaño compatible.",
+    "curiosities": [
+      "Las fosas nasales y los ojos ayudan a observar el entorno con el cuerpo sumergido.",
+      "Es una de las serpientes más grandes del mundo por masa corporal."
+    ],
+    "distribution": "Regiones tropicales de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Actúa como un depredador superior en ambientes acuáticos y ribereños."
+  },
+  "jabuti-piranga": {
+    "commonName": "Tortuga de patas rojas",
+    "description": "Tortuga terrestre de hábitos predominantemente diurnos, que se encuentra en zonas boscosas y sus alrededores.",
+    "physicalCharacteristics": "Caparazón oscuro con manchas amarillas o anaranjadas y escamas de colores en las patas.",
+    "habitat": "Bosques, matorrales, bordes de bosques y zonas con hojarasca.",
+    "behavior": "Se desplaza por el suelo y busca alimento entre hojas y frutos caídos.",
+    "diet": "Frutos, hojas, flores, hongos y pequeños invertebrados.",
+    "curiosities": [
+      "Puede contribuir a la dispersión de semillas de los frutos que consume.",
+      "El caparazón ofrece protección, pero no hace que la especie sea inmune a los incendios y la pérdida de hábitat."
+    ],
+    "distribution": "Norte y centro de América del Sur, incluidas áreas del centro de Brasil.",
+    "ecologicalImportance": "Dispersa semillas y participa en el ciclo de la materia orgánica del suelo."
+  },
+  "sapo-cururu": {
+    "commonName": "Sapo cururú",
+    "description": "Rana de gran tamaño, adaptable a áreas abiertas y frecuentemente observada después de la lluvia.",
+    "physicalCharacteristics": "Piel rugosa, glándulas parotoides evidentes y coloración variable en tonos terrosos.",
+    "habitat": "Campos, bordes de bosques, humedales temporales y ambientes modificados.",
+    "behavior": "Es más activo durante la noche y se reproduce en cuerpos de agua temporales o permanentes.",
+    "diet": "Insectos y otros pequeños invertebrados.",
+    "curiosities": [
+      "Las glándulas cutáneas producen sustancias defensivas.",
+      "Los renacuajos dependen del agua para completar su desarrollo."
+    ],
+    "distribution": "Brasil central y otras zonas de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Controla los invertebrados y sirve de alimento a los depredadores."
+  },
+  "ra-pimenta": {
+    "commonName": "Rana pimienta",
+    "description": "Rana de gran tamaño asociada a zonas húmedas, charcos y bancos de vegetación.",
+    "physicalCharacteristics": "Cuerpo robusto, dorso marrón con diseños contrastantes y extremidades traseras fuertes.",
+    "habitat": "Pantanos, estanques temporales, campos húmedos y riberas de arroyos.",
+    "behavior": "Puede construir nidos de espuma y vocaliza principalmente durante el período reproductivo.",
+    "diet": "Insectos, arañas y otros animales pequeños.",
+    "curiosities": [
+      "La espuma ayuda a proteger los huevos en ambientes sujetos a fluctuaciones en los niveles del agua.",
+      "La especie es conocida por sus fuertes vocalizaciones durante las lluvias."
+    ],
+    "distribution": "Brasil y países vecinos, presentándose en zonas abiertas y húmedas del centro-sur.",
+    "ecologicalImportance": "Participa en el control de los invertebrados y es sensible a cambios en las zonas reproductivas."
+  },
+  "pintado": {
+    "commonName": "Surubí pintado",
+    "description": "Pez de cuero de gran tamaño, importante en los ríos y en la pesca tradicional del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alargado, cabeza plana, barbas y manchas rayadas oscuras.",
+    "habitat": "Cauces fluviales, pozos y tramos con corrientes.",
+    "behavior": "Depredador activo, especialmente cuando localiza peces en movimiento.",
+    "diet": "Peces y otros organismos acuáticos.",
+    "curiosities": [
+      "Las barbas ayudan a percibir el entorno.",
+      "La reproducción sigue el pulso de las inundaciones y la migración a través de los ríos."
+    ],
+    "distribution": "Cuencas Paraná-Paraguay y São Francisco, incluido el Pantanal.",
+    "ecologicalImportance": "Es un depredador relevante y un indicador de la conectividad de los ambientes fluviales."
+  },
+  "pacu": {
+    "commonName": "Pacú",
+    "description": "Pez frugívoro y omnívoro que utiliza ríos, bahías y zonas inundadas del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alto y comprimido, dientes fuertes y color plateado a oscuro.",
+    "habitat": "Durante las inundaciones se inundaron ríos, bahías, arroyos y bosques.",
+    "behavior": "Forma cardúmenes y explota frutos y semillas que caen al agua.",
+    "diet": "Frutas, semillas, plantas, algas y pequeños animales.",
+    "curiosities": [
+      "La inundación conecta las zonas de alimentación y reproducción.",
+      "Puede dispersar semillas de plantas ribereñas."
+    ],
+    "distribution": "Cuenca del Paraguay y otras cuencas de América del Sur.",
+    "ecologicalImportance": "Transporta semillas y energía entre ambientes terrestres inundados y ríos."
+  },
+  "piraputanga": {
+    "commonName": "Piraputanga",
+    "description": "Pez ágil de agua dulce, asociado a ríos de corriente rápida y entornos conectados por inundaciones.",
+    "physicalCharacteristics": "Cuerpo plateado, dorso oscuro, aletas coloridas y boca adaptada a diversos elementos.",
+    "habitat": "Ríos, arroyos, arroyos y zonas de bosque de ribera.",
+    "behavior": "Nada en cardúmenes y busca alimento en la columna de agua y cerca de las orillas.",
+    "diet": "Frutas, semillas, insectos y peces pequeños.",
+    "curiosities": [
+      "El bosque ribereño proporciona frutos y sombra a los ambientes acuáticos.",
+      "La coloración puede volverse más intensa durante los períodos reproductivos."
+    ],
+    "distribution": "Cuenca del Paraguay, incluidos los ríos Pantanal.",
+    "ecologicalImportance": "Conecta la producción vegetal de las orillas a las cadenas acuáticas y dispersa las semillas."
+  },
+  "caranguejo-agua-doce": {
+    "commonName": "Cangrejo de agua dulce",
+    "description": "Cangrejo de agua dulce que se encuentra en ambientes lénticos y riberas de ríos en la cuenca del Paraguay.",
+    "physicalCharacteristics": "Caparazón plano, pinzas desarrolladas y color marrón a rojizo.",
+    "habitat": "Lagunas, bahías, arroyos, riberas y vegetación acuática.",
+    "behavior": "Utiliza el fondo y la vegetación para buscar alimento y refugio.",
+    "diet": "Detritos, algas, materia vegetal y pequeños organismos.",
+    "curiosities": [
+      "La especie participa en la descomposición de la materia orgánica acuática.",
+      "La disponibilidad de refugio varía según las inundaciones y las sequías."
+    ],
+    "distribution": "Cuencas interiores de América del Sur, incluida la cuenca del Paraguay.",
+    "ecologicalImportance": "Recicla materia orgánica y sirve de alimento a peces y aves acuáticas."
+  },
+  "camarao-agua-doce": {
+    "commonName": "Camarón amazónico",
+    "description": "Camarón de agua dulce asociado a ríos, lagos y zonas inundables en varias cuencas brasileñas.",
+    "physicalCharacteristics": "Se desarrolló el cuerpo segmentado, la tribuna alargada y el primer par de quelas.",
+    "habitat": "Ríos, lagunas, bahías y áreas de vegetación acuática.",
+    "behavior": "Busca alimento en el fondo y entre las plantas, con actividad variable a lo largo del día.",
+    "diet": "Detritos, algas, pequeños invertebrados y materia orgánica.",
+    "curiosities": [
+      "El ciclo de vida puede utilizar aguas dulces y ambientes con mayor salinidad en diferentes poblaciones.",
+      "Es una especie relevante para las cadenas alimentarias y las comunidades ribereñas."
+    ],
+    "distribution": "Amplia distribución en América del Sur, con registros en cuencas brasileñas.",
+    "ecologicalImportance": "Transfiere energía de los escombros y la vegetación a los peces y aves acuáticas."
+  },
+  "bugio-preto": {
+    "commonName": "Mono aullador negro",
+    "description": "Primate de potente vocalización, asociado a bosques ribereños y pastizales del Pantanal.",
+    "physicalCharacteristics": "Pelaje oscuro en los machos, cara marcada y cola prensil.",
+    "habitat": "Bosques de ribera, matorrales y bordes de bosque.",
+    "behavior": "Vive en grupos y emite llamados territoriales al amanecer.",
+    "diet": "Hojas, frutos, flores y capullos.",
+    "curiosities": [
+      "Las vocalizaciones se pueden escuchar a grandes distancias.",
+      "La cola ayuda a moverse entre las ramas."
+    ],
+    "distribution": "Centro y este de Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas e influye en la regeneración del bosque."
+  },
+  "ariranha": {
+    "commonName": "Nutria gigante",
+    "description": "Mamífero social y semiacuático que caza en ríos, bahías y arroyos del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alargado, patas palmeadas, cola fuerte y manchas claras en el cuello.",
+    "habitat": "Ríos, lagunas, bahías y riberas con refugio vegetal.",
+    "behavior": "Vive en grupos familiares, vocaliza y caza principalmente peces.",
+    "diet": "Peces, crustáceos y pequeños vertebrados acuáticos.",
+    "curiosities": [
+      "Cada individuo puede tener marcas claras distintas en el cuello.",
+      "La especie depende de aguas relativamente preservadas y conectadas."
+    ],
+    "distribution": "Cuencas fluviales de América del Sur, con importante población en el Pantanal.",
+    "ecologicalImportance": "Es un depredador superior en ambientes acuáticos e indica la calidad de los ríos."
+  },
+  "lontra-neotropical": {
+    "commonName": "Nutria neotropical",
+    "description": "Nutria de hábitos discretos que utiliza ríos, arroyos y lagos con riberas con vegetación.",
+    "physicalCharacteristics": "Cuerpo fusiforme, patas parcialmente palmeadas y pelaje marrón denso.",
+    "habitat": "Cursos de agua, lagunas y bosques ribereños.",
+    "behavior": "Suelto o en pequeños grupos, nada rápidamente y descansa en agujeros y barrancos.",
+    "diet": "Peces, crustáceos, anfibios y pequeños vertebrados.",
+    "curiosities": [
+      "Puede dejar marcas y heces en los cruces de las orillas.",
+      "La vegetación ribereña ofrece refugio y lugares de descanso."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en el control de los organismos acuáticos y conecta los ambientes terrestres y acuáticos."
+  },
+  "queixada": {
+    "commonName": "Pecarí de labios blancos",
+    "description": "Cerdo salvaje social que forma grupos y deambula por zonas boscosas y mosaicos de vegetación.",
+    "physicalCharacteristics": "Pelaje oscuro, raya clara en el mentón y cuerpo compacto con patas fuertes.",
+    "habitat": "Bosques, bosques ribereños, sabanas arboladas y zonas con disponibilidad de frutos y agua.",
+    "behavior": "Vive en grupos, viaja largas distancias y puede utilizar vocalizaciones y señales químicas para mantener la cohesión social.",
+    "diet": "Frutos, semillas, raíces, hojas y pequeños organismos que se encuentran en el suelo.",
+    "curiosities": [
+      "Los grupos grandes pueden moverse a través de grandes áreas.",
+      "La especie utiliza la vegetación y el suelo en busca de alimento."
+    ],
+    "distribution": "Desde el sur de México hasta el norte de Argentina, en diferentes formaciones de bosques y sabanas de Sudamérica.",
+    "ecologicalImportance": "Actúa sobre el movimiento del suelo y la dispersión o depredación de semillas, conectando los procesos del bosque y el suelo forestal."
+  },
+  "mutum-de-penacho": {
+    "commonName": "Pavón de cara pelada",
+    "description": "Ave de bosque de gran tamaño que utiliza el suelo y la vegetación baja para alimentarse.",
+    "physicalCharacteristics": "Macho predominantemente oscuro con vientre blanco y hembras de plumaje más críptico, con plumaje evidente.",
+    "habitat": "Bosques, bosques ribereños y mosaicos de vegetación en el centro de Sudamérica.",
+    "behavior": "Se alimenta en el suelo, se mueve en parejas o en pequeños grupos y utiliza árboles y vegetación densa como refugio.",
+    "diet": "Frutos, semillas, hojas y pequeños invertebrados que se encuentran en el suelo del bosque.",
+    "curiosities": [
+      "Machos y hembras tienen marcadas diferencias en el plumaje.",
+      "La pérdida de bosques y la presión de la caza pueden afectar a las poblaciones locales."
+    ],
+    "distribution": "Centro y sur de Brasil, Bolivia, Paraguay y regiones adyacentes de América del Sur.",
+    "ecologicalImportance": "Consume y transporta frutos y semillas, contribuyendo a la dinámica de los bosques y bosques ribereños."
+  },
+  "carau": {
+    "commonName": "Carrao",
+    "description": "Ave de zonas húmedas, conocida por su fuerte canto y búsqueda de caracoles entre la vegetación.",
+    "physicalCharacteristics": "Plumaje marrón estriado, patas largas y pico curvo.",
+    "habitat": "Pantanos, campos inundados, bahías y riberas con macrófitos.",
+    "behavior": "Camina lentamente en aguas poco profundas y vocaliza al amanecer y al anochecer.",
+    "diet": "Principalmente caracoles y otros invertebrados acuáticos.",
+    "curiosities": [
+      "El pico curvo ayuda a sacar los moluscos de las conchas.",
+      "A menudo se detecta cantando antes de avistarlo."
+    ],
+    "distribution": "Centro y Sudamérica, incluyendo todo el Pantanal.",
+    "ecologicalImportance": "Regula las poblaciones de moluscos en zonas inundadas."
+  },
+  "seriema": {
+    "commonName": "Chuña de patas rojas",
+    "description": "Ave terrestre de patas largas asociada con campos abiertos y formaciones en América del Sur.",
+    "physicalCharacteristics": "Plumaje pardo, patas rojizas, pico fuerte y cresta de plumas en la base del pico.",
+    "habitat": "Campos, sabanas, sabanas y bordes de formaciones forestales.",
+    "behavior": "Camina y corre por el suelo, vocaliza intensamente y captura presas durante la búsqueda de alimento terrestre.",
+    "diet": "Insectos, pequeños vertebrados, huevos y otros animales disponibles en el medio ambiente.",
+    "curiosities": [
+      "La vocalización se puede escuchar a larga distancia.",
+      "Es un ave predominantemente terrestre, aunque puede posarse."
+    ],
+    "distribution": "Regiones abiertas del centro y este de América del Sur, incluido Brasil.",
+    "ecologicalImportance": "Se alimenta de invertebrados y pequeños vertebrados y participa en las cadenas alimentarias de los pastizales."
+  },
+  "teiú": {
+    "commonName": "Lagarto overo",
+    "description": "Lagarto de gran tamaño que ocupa campos, lindes y zonas cercanas a viviendas rurales.",
+    "physicalCharacteristics": "Cuerpo robusto, cola larga, coloración oscura con manchas claras y lengua bifurcada.",
+    "habitat": "Campos, bordes de bosques, suelos arenosos y zonas perturbadas.",
+    "behavior": "Activo durante el día, explora el suelo y se refugia en madrigueras.",
+    "diet": "Frutas, huevos, insectos, pequeños vertebrados y carroña.",
+    "curiosities": [
+      "Es un omnívoro oportunista.",
+      "La lengua ayuda a recopilar información química del medio ambiente."
+    ],
+    "distribution": "Sudamérica oriental y central, incluido el Pantanal.",
+    "ecologicalImportance": "Contribuye a la dispersión de semillas y al control de pequeños animales."
+  },
+  "dourado": {
+    "commonName": "Dorado",
+    "description": "Pez depredador de río, conocido por su color dorado y su importancia en las cadenas alimentarias acuáticas.",
+    "physicalCharacteristics": "Cuerpo alargado, escamas doradas, boca ancha y aletas desarrolladas.",
+    "habitat": "Ríos, arroyos y áreas conectadas durante el período de inundación.",
+    "behavior": "Nadador activo, recorre distintos tramos de ríos en busca de presas.",
+    "diet": "Peces, crustáceos y otros animales acuáticos.",
+    "curiosities": [
+      "La dinámica de las inundaciones influye en el acceso a las zonas de alimentación.",
+      "Es una especie valorada en estudios de conectividad fluvial."
+    ],
+    "distribution": "Paraná, Paraguay y otras cuencas sudamericanas.",
+    "ecologicalImportance": "Depredador mediano y grande que regula las comunidades de peces."
+  },
+  "jaguatirica": {
+    "commonName": "Ocelote",
+    "description": "Felino de tamaño mediano, nocturno y discreto, asociado a bosques y corredores de vegetación.",
+    "physicalCharacteristics": "Pelaje amarillento con manchas y rosetas, cola corta y ojos adaptados a la poca luz.",
+    "habitat": "Bosques ribereños, capones, sabanas y bordes de bosque.",
+    "behavior": "Solitario, territorial y principalmente nocturno.",
+    "diet": "Pequeños mamíferos, aves, reptiles y anfibios.",
+    "curiosities": [
+      "Las manchas ayudan a camuflarse entre las sombras y el follaje.",
+      "Puedes utilizar corredores forestales para moverte entre áreas."
+    ],
+    "distribution": "Amplia distribución en América, incluido el Pantanal.",
+    "ecologicalImportance": "Controla poblaciones de pequeños vertebrados."
+  },
+  "mao-pelada": {
+    "commonName": "Mapache cangrejero",
+    "description": "Mamífero nocturno que explora riberas de ríos, zonas húmedas y bosques en busca de alimento.",
+    "physicalCharacteristics": "Máscara facial oscura, cola anillada y dedos largos.",
+    "habitat": "Bosques ribereños, humedales, ríos y zonas inundables.",
+    "behavior": "Nocturno, solitario y hábil manipulando alimentos con sus patas.",
+    "diet": "Crustáceos, frutos, insectos, anfibios y pequeños vertebrados.",
+    "curiosities": [
+      "Las sensibles patas ayudan a buscar comida en aguas poco profundas.",
+      "La cola anillada es una marca visual característica."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en el control de invertebrados y dispersión de semillas."
+  },
+  "cachorro-do-mato": {
+    "commonName": "Zorro cangrejero",
+    "description": "Cánido generalista que ocupa campos, sabanas y bordes de bosques en el Pantanal.",
+    "physicalCharacteristics": "Pelaje gris pardusco, patas cortas y hocico estrecho.",
+    "habitat": "Campos, sabanas, bosques abiertos y áreas alteradas.",
+    "behavior": "Actividad crepuscular y nocturna, generalmente solo o en parejas.",
+    "diet": "Frutas, insectos, pequeños vertebrados y carroña.",
+    "curiosities": [
+      "Se adapta a diferentes entornos y recursos alimentarios.",
+      "Puede actuar como dispersor de semillas de frutos nativos."
+    ],
+    "distribution": "Gran parte de Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Conecta cadenas alimentarias y dispersa semillas."
+  },
+  "macaco-prego": {
+    "commonName": "Mono capuchino de Azara",
+    "description": "Primate arbóreo inteligente, común en fragmentos de bosque y corredores del Pantanal.",
+    "physicalCharacteristics": "Cuerpo robusto, manos diestras, cola semiprensil y rostro expresivo.",
+    "habitat": "Bosques de ribera, matorrales y bordes de bosque.",
+    "behavior": "Diurna, social y activa en el dosel y el sotobosque.",
+    "diet": "Frutas, semillas, hojas, insectos y pequeños animales.",
+    "curiosities": [
+      "Utiliza las manos para explorar alimentos y objetos.",
+      "Vive en grupos con relaciones sociales complejas."
+    ],
+    "distribution": "Centro-sur de América del Sur, presente en el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas y controla invertebrados."
+  },
+  "anhuma": {
+    "commonName": "Chajá cornudo",
+    "description": "Ave acuática de gran tamaño asociada a zonas húmedas, con una característica extensión córnea en la cabeza.",
+    "physicalCharacteristics": "Cuerpo oscuro con manchas claras, patas fuertes y una fina estructura córnea proyectada en la frente.",
+    "habitat": "Pantanos, márgenes de lagos, zonas inundadas y vegetación acuática.",
+    "behavior": "Se alimenta y se desplaza cerca del agua, pudiendo vocalizar y volar entre zonas húmedas conectadas.",
+    "diet": "Hojas, brotes, plantas acuáticas y otros elementos vegetales disponibles en las orillas.",
+    "curiosities": [
+      "El nombre popular hace referencia a la estructura córnea de la cabeza.",
+      "La especie suele permanecer cerca de ambientes húmedos con vegetación."
+    ],
+    "distribution": "América del Sur tropical, especialmente en cuencas y zonas húmedas del norte y centro del continente.",
+    "ecologicalImportance": "Participa en el consumo y transporte de materia vegetal en ambientes inundados."
+  },
+  "urubu-rei": {
+    "commonName": "Zopilote rey",
+    "description": "Gran ave carroñera que utiliza áreas boscosas y abiertas en busca de cadáveres.",
+    "physicalCharacteristics": "Cabeza colorida, cuerpo blanco y negro, pico robusto y alas anchas.",
+    "habitat": "Bosques, claros, bordes y áreas abiertas cercanas a bosques.",
+    "behavior": "Vuela largas distancias y aprovecha las corrientes térmicas para localizar alimento.",
+    "diet": "Cadáveres de animales de diferentes tamaños.",
+    "curiosities": [
+      "Su fuerte pico le permite abrir tejidos resistentes.",
+      "La eliminación de cadáveres reduce la materia orgánica disponible para los patógenos."
+    ],
+    "distribution": "Centro y Sudamérica, con registros en el Pantanal.",
+    "ecologicalImportance": "Recicla nutrientes y actúa como un importante agente de limpieza ambiental."
+  },
+  "jacare-coroa": {
+    "commonName": "Caimán enano de Cuvier",
+    "description": "Pequeño caimán de agua dulce asociado con arroyos, ríos y zonas boscosas.",
+    "physicalCharacteristics": "Hocico corto, osteodermos marcados y cuerpo compacto.",
+    "habitat": "Arroyos, arroyos, ríos más pequeños y orillas sombreadas.",
+    "behavior": "Discreto, principalmente nocturno y dependiente de refugios cercanos al agua.",
+    "diet": "Peces, crustáceos, insectos y pequeños vertebrados.",
+    "curiosities": [
+      "Es una de las especies de caimanes más pequeñas.",
+      "La cubierta ósea protege la espalda contra impactos y depredadores."
+    ],
+    "distribution": "Cuencas sudamericanas, incluidas áreas del Pantanal.",
+    "ecologicalImportance": "Se alimenta de organismos acuáticos y ayuda a equilibrar las cadenas de corrientes."
+  },
+  "traira": {
+    "commonName": "Tararira",
+    "description": "Pez depredador de aguas tranquilas, común en lagunas, arroyos y zonas de vegetación acuática.",
+    "physicalCharacteristics": "Cuerpo alargado, boca ancha y color marrón camuflado.",
+    "habitat": "Lagunas, bahías, arroyos, ríos lentos y zonas inundadas.",
+    "behavior": "Depredador de emboscada, restos entre estructuras sumergidas.",
+    "diet": "Peces, crustáceos, insectos y pequeños vertebrados acuáticos.",
+    "curiosities": [
+      "El camuflaje favorece los ataques rápidos desde la cobertura.",
+      "Tolera variaciones estacionales de oxígeno en aguas poco profundas."
+    ],
+    "distribution": "Amplia distribución en cuencas sudamericanas, incluido el Pantanal.",
+    "ecologicalImportance": "Regula poblaciones de pequeños peces e invertebrados acuáticos."
+  },
+  "cutia": {
+    "commonName": "Agutí de Azara",
+    "description": "Roedor diurno que deambula por el sotobosque y entierra semillas en zonas boscosas.",
+    "physicalCharacteristics": "Cuerpo compacto, patas largas y pelaje marrón.",
+    "habitat": "Bosques de ribera, matorrales y bordes de bosque.",
+    "behavior": "Diurno, alerta y generalmente solitario o en parejas.",
+    "diet": "Frutos, semillas, brotes y raíces.",
+    "curiosities": [
+      "Puedes esconder semillas para su posterior consumo.",
+      "Su comportamiento ayuda a transportar las semillas lejos de la planta madre."
+    ],
+    "distribution": "Centro-sur de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa y entierra semillas, contribuyendo a la regeneración de los bosques."
+  },
+  "paca": {
+    "commonName": "Paca común",
+    "description": "Roedor de hábitos crepusculares y nocturnos, asociado a bosques cercanos al agua.",
+    "physicalCharacteristics": "Cuerpo robusto, manchas laterales claras y cabeza ancha.",
+    "habitat": "Bosques de ribera, capones y riberas de ríos.",
+    "behavior": "Discreto, cava hoyos y busca frutos en el suelo.",
+    "diet": "Frutos, semillas y partes tiernas de plantas.",
+    "curiosities": [
+      "La proximidad del agua ofrece rutas de escape y refugio.",
+      "Es una presa importante para los grandes felinos y caimanes."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas y participa en la cadena alimentaria terrestre."
+  },
+  "gato-mourisco": {
+    "commonName": "Yaguarundí",
+    "description": "Felino de cuerpo alargado que utiliza campos, sabanas y bordes de bosques.",
+    "physicalCharacteristics": "Cuerpo esbelto, patas cortas, cabeza pequeña y pelaje uniforme variable.",
+    "habitat": "Campos, sabanas, bosques abiertos y bordes.",
+    "behavior": "Solitario, activo en distintos momentos y capaz de ocupar zonas alteradas.",
+    "diet": "Pequeños mamíferos, aves, reptiles e invertebrados.",
+    "curiosities": [
+      "El pelaje puede variar entre tonos rojizos, grises u oscuros.",
+      "Su cuerpo alargado facilita su desplazamiento entre la densa vegetación."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla pequeños vertebrados e invertebrados."
+  },
+  "aracua": {
+    "commonName": "Charata",
+    "description": "Ave social de linderos y bosques abiertos, reconocida por su ruidoso llamado colectivo.",
+    "physicalCharacteristics": "Cuerpo esbelto, cola larga y plumaje marrón con garganta clara.",
+    "habitat": "Bosques de ribera, matorrales y bordes de bosque.",
+    "behavior": "Vive en grupos y se desplaza entre árboles y arbustos en busca de alimento.",
+    "diet": "Frutos, semillas, hojas y flores.",
+    "curiosities": [
+      "Los grupos podrán vocalizar a coro al amanecer.",
+      "Se ve frecuentemente en árboles frutales."
+    ],
+    "distribution": "Centroamérica del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas de especies de árboles y arbustos."
+  },
+  "soco-boi": {
+    "commonName": "Garza tigre colorada",
+    "description": "Garza de hábitos discretos que caza en aguas poco profundas y bancos de vegetación.",
+    "physicalCharacteristics": "Cuello largo, plumaje estriado y pico puntiagudo.",
+    "habitat": "Pantanos, bahías, arroyos y riberas de ríos.",
+    "behavior": "Permanece inmóvil esperando a su presa y es más activo al anochecer.",
+    "diet": "Peces, anfibios, crustáceos e insectos acuáticos.",
+    "curiosities": [
+      "La inmovilidad les ayuda a acercarse a las presas acuáticas.",
+      "El plumaje juvenil es bastante diferente al plumaje adulto."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla organismos en zonas inundadas e integra cadenas acuáticas."
+  },
+  "jacana": {
+    "commonName": "Jacana común",
+    "description": "Ave de zonas inundadas que camina sobre hojas flotantes con dedos muy largos.",
+    "physicalCharacteristics": "Dedos y uñas alargados, cuerpo oscuro y detalles amarillos y rojos.",
+    "habitat": "Lagunas poco profundas, pantanos y campos con plantas acuáticas flotantes.",
+    "behavior": "Camina sobre la vegetación y busca invertebrados entre hojas y agua.",
+    "diet": "Insectos, pequeños invertebrados, semillas y materia vegetal.",
+    "curiosities": [
+      "Los dedos distribuyen el peso sobre las hojas flotantes.",
+      "Puede emitir llamadas cortas cuando está alarmado."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla invertebrados y mueve nutrientes en zonas poco profundas."
+  },
+  "martim-pescador-grande": {
+    "commonName": "Martín pescador gigante",
+    "description": "Ave ribereña que observa el agua desde posaderos y se zambulle para pescar.",
+    "physicalCharacteristics": "Pico grande, cuerpo robusto y cresta evidente.",
+    "habitat": "Ríos, lagunas, bahías y riberas abiertas.",
+    "behavior": "Observa desde las ramas y realiza inmersiones rápidas.",
+    "diet": "Peces, crustáceos y pequeños animales acuáticos.",
+    "curiosities": [
+      "La posición de la percha ayuda a calcular la inmersión.",
+      "Se puede observar en aguas abiertas con buena visibilidad."
+    ],
+    "distribution": "América, incluyendo todo el Pantanal.",
+    "ecologicalImportance": "Integra las cadenas alimentarias acuáticas y terrestres."
+  },
+  "curimbata": {
+    "commonName": "Sábalo",
+    "description": "Peces migratorios de ríos sudamericanos, importantes para la dinámica de inundaciones y cadenas acuáticas.",
+    "physicalCharacteristics": "Cuerpo fusiforme, boca adaptada al raspado y escamas plateadas.",
+    "habitat": "Ríos, canales, arroyos y áreas inundadas durante las inundaciones.",
+    "behavior": "Forma cardúmenes y realiza movimientos estacionales para reproducción y alimentación.",
+    "diet": "Restos, algas y materia orgánica del fondo.",
+    "curiosities": [
+      "La migración depende de la conectividad fluvial.",
+      "La alimentación del fondo mueve sedimentos y nutrientes."
+    ],
+    "distribution": "Cuencas del Paraná, Paraguay y Uruguay.",
+    "ecologicalImportance": "Transporta energía y nutrientes entre ríos y llanuras aluviales."
+  },
+  "cagado-de-barbicha": {
+    "commonName": "Tortuga de Geoffroy",
+    "description": "Tortuga de agua dulce que ocupa ríos, lagos y riberas con refugios disponibles.",
+    "physicalCharacteristics": "Caparazón ovalado, cabeza ancha y barbas debajo del mentón.",
+    "habitat": "Ríos, arroyos, lagunas y riberas de aguas lentas.",
+    "behavior": "Acuático, oportunista y a menudo observado tomando el sol sobre troncos.",
+    "diet": "Peces pequeños, invertebrados, cadáveres y materia vegetal.",
+    "curiosities": [
+      "Las barbillas ayudan con la percepción del medio acuático.",
+      "La calidad de los bancos influye en la ubicación de sus refugios."
+    ],
+    "distribution": "Cuencas del centro y este de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en el control de organismos acuáticos y reciclaje de materia."
+  },
+  "cobra-verde": {
+    "commonName": "Culebra verde",
+    "description": "Serpiente arbórea verde, que se encuentra en bosques, matorrales y bordes de vegetación.",
+    "physicalCharacteristics": "Cuerpo esbelto, escamas verdes y cola larga.",
+    "habitat": "Bosques, matorrales, matorrales y bordes con densa vegetación.",
+    "behavior": "Diurna, ágil y predominantemente arbórea.",
+    "diet": "Pequeños vertebrados, anfibios, lagartos y aves.",
+    "curiosities": [
+      "La coloración ofrece camuflaje entre las hojas.",
+      "Como todas las serpientes, hay que observarla sin intentar capturarla."
+    ],
+    "distribution": "América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Controla pequeños vertebrados e integra la cadena alimentaria forestal."
+  },
+  "perereca-cabecuda": {
+    "commonName": "Rana arborícola chaqueña",
+    "description": "Anfibio de zonas húmedas y bordes vegetados, activo principalmente de noche.",
+    "physicalCharacteristics": "Cuerpo esbelto, ojos grandes, discos adhesivos en los dedos y coloración variable.",
+    "habitat": "Pantanos, lagunas temporales, zonas inundables y vegetación cercana al agua.",
+    "behavior": "De forma nocturna, vocaliza durante la época de lluvias y descansa en la vegetación.",
+    "diet": "Insectos y otros pequeños invertebrados.",
+    "curiosities": [
+      "La canción ayuda a localizar individuos durante la temporada de lluvias.",
+      "La piel sensible hace que la especie sea vulnerable a la contaminación del agua."
+    ],
+    "distribution": "Centro y este de Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla insectos y funciona como indicador de calidad ambiental."
+  },
+  "ra-quatro-olhos": {
+    "commonName": "Rana de cuatro ojos",
+    "description": "Pequeña rana terrestre que aprovecha los charcos temporales formados por la lluvia.",
+    "physicalCharacteristics": "Cuerpo compacto, manchas dorsales y glándulas que se asemejan a ojos en la región posterior.",
+    "habitat": "Campos, suelos arenosos y charcos temporales.",
+    "behavior": "Nocturno y explosivo después de fuertes lluvias, cuando se reproduce rápidamente.",
+    "diet": "Insectos y pequeños invertebrados.",
+    "curiosities": [
+      "Los charcos temporales son fundamentales para su ciclo reproductivo.",
+      "Las marcas posteriores pueden confundir a los depredadores."
+    ],
+    "distribution": "Regiones abiertas de América del Sur, con registros en el centro de Brasil.",
+    "ecologicalImportance": "Controla los invertebrados y sirve de alimento a aves, reptiles y mamíferos."
+  },
+  "piranha-vermelha": {
+    "commonName": "Piraña de vientre rojo",
+    "description": "Pez de dientes afilados que ocupa aguas tranquilas, bahías, arroyos y lagunas del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alto, color plateado con vientre rojizo y dientes fuertes.",
+    "habitat": "Ríos lentos, bahías, arroyos y lagunas de llanura aluvial.",
+    "behavior": "Forma escuelas y responde a las oportunidades de alimentación y refugio.",
+    "diet": "Peces, invertebrados, frutos y materia animal.",
+    "curiosities": [
+      "La especie participa en redes alimentarias complejas y no se define únicamente por un comportamiento agresivo.",
+      "La dinámica de las inundaciones influye en su distribución local."
+    ],
+    "distribution": "Cuencas del norte y centro de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Regula las poblaciones de peces y recicla la materia orgánica."
+  },
+  "tuvira": {
+    "commonName": "Morena de bandas",
+    "description": "Pez eléctrico de aguas tranquilas, activo entre raíces, plantas y estructuras sumergidas.",
+    "physicalCharacteristics": "Cuerpo alargado, ausencia de aleta dorsal y región anal ondulante.",
+    "habitat": "Corixos, lagunas, bahías y riberas con vegetación acuática.",
+    "behavior": "Nocturno, utiliza señales eléctricas débiles para orientarse y comunicarse.",
+    "diet": "Invertebrados acuáticos y peces pequeños.",
+    "curiosities": [
+      "Las señales eléctricas ayudan a la navegación en aguas turbias.",
+      "La dinámica de las inundaciones amplía su hábitat disponible."
+    ],
+    "distribution": "Cuenca del Paraguay y regiones asociadas del centro de América del Sur.",
+    "ecologicalImportance": "Integra cadenas alimentarias y controla pequeños organismos acuáticos."
+  },
+  "morfoborboleta": {
+    "commonName": "Mariposa morfo azul",
+    "description": "Mariposa de alas azules que frecuenta claros, bordes y senderos forestales.",
+    "physicalCharacteristics": "Alas anchas con brillo azul metálico en los machos y patrones de ocelos en la espalda.",
+    "habitat": "Bosques de ribera, matorrales, claros y bordes de bosque.",
+    "behavior": "Vuela en amplias trayectorias y visita zonas soleadas para termorregularse.",
+    "diet": "Los adultos consumen líquidos de frutas y materia orgánica; las orugas utilizan plantas hospedantes.",
+    "curiosities": [
+      "El brillo azul resulta de la estructura de las escamas, no de un simple pigmento.",
+      "La parte posterior de las alas es más discreta y favorece el camuflaje."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en la polinización y en las cadenas alimentarias forestales."
+  },
+  "besouro-rola-bosta": {
+    "commonName": "Escarabajo pelotero",
+    "description": "Escarabajo escarabajo que utiliza materia orgánica y contribuye al ciclo de nutrientes.",
+    "physicalCharacteristics": "Cuerpo compacto, patas adaptadas a la excavación y mandíbulas fuertes.",
+    "habitat": "Campos, bosques abiertos y suelos con disponibilidad de materia orgánica.",
+    "behavior": "Localiza recursos por olor, forma y transporta pequeñas bolas de material.",
+    "diet": "Materia orgánica y heces de vertebrados.",
+    "curiosities": [
+      "Enterrar el recurso mejora la incorporación de nutrientes al suelo.",
+      "La actividad varía con la humedad y la temperatura."
+    ],
+    "distribution": "América del Sur, con registros en ambientes brasileños.",
+    "ecologicalImportance": "Recicla nutrientes, aireando el suelo y dispersando semillas presentes en la materia orgánica."
+  },
+  "biguá": {
+    "commonName": "Cormorán neotropical",
+    "description": "Ave acuática que se zambulle para capturar peces en ríos, bahías y arroyos.",
+    "physicalCharacteristics": "Plumaje oscuro, cuello largo y pico con punta curva.",
+    "habitat": "Ríos, lagunas, bahías, arroyos y riberas abiertas.",
+    "behavior": "Bucea y nada eficientemente, secándose las alas después de pescar.",
+    "diet": "Peces, crustáceos y pequeños animales acuáticos.",
+    "curiosities": [
+      "El plumaje puede quedar expuesto al sol después de bucear.",
+      "Es un indicador visual de la presencia de peces en aguas abiertas."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en el control de peces y la transferencia de nutrientes entre el agua y la tierra."
+  },
+  "garca-moura": {
+    "commonName": "Garza mora",
+    "description": "Garza de gran tamaño que caza inmóvil en riberas, campos inundados y aguas poco profundas.",
+    "physicalCharacteristics": "Cuello largo, piernas largas, espalda gris y pecho claro.",
+    "habitat": "Ríos, bahías, pantanos, arroyos y campos inundados.",
+    "behavior": "Camina lentamente o permanece inmóvil esperando a su presa.",
+    "diet": "Peces, anfibios, reptiles, crustáceos y pequeños mamíferos.",
+    "curiosities": [
+      "La postura inmóvil reduce el estado de alerta de la presa.",
+      "Puedes utilizar árboles altos para descansar y anidar."
+    ],
+    "distribution": "América del Sur, incluyendo todo el Pantanal.",
+    "ecologicalImportance": "Integra las cadenas alimentarias acuáticas y terrestres."
+  },
+  "soco-dorminhoco": {
+    "commonName": "Martinete común",
+    "description": "Garza de hábitos crepusculares y nocturnos que utiliza bancos y vegetación acuática.",
+    "physicalCharacteristics": "Cuerpo compacto, ojos rojos en los adultos y pico robusto.",
+    "habitat": "Pantanos, lagunas, ríos, canales y zonas inundadas con refugio.",
+    "behavior": "Descansa durante el día y sale a cazar al anochecer y por la noche.",
+    "diet": "Peces, anfibios, insectos, crustáceos y pequeños vertebrados.",
+    "curiosities": [
+      "Los jóvenes tienen un plumaje marrón estriado muy diferente al de los adultos.",
+      "Puede formar colonias reproductoras en árboles cerca del agua."
+    ],
+    "distribution": "América y otras regiones, con presencia generalizada en el Pantanal.",
+    "ecologicalImportance": "Controla organismos acuáticos y terrestres en zonas húmedas."
+  },
+  "coruja-buraqueira": {
+    "commonName": "Lechucita vizcachera",
+    "description": "Un búho terrestre que ocupa campos abiertos y utiliza madrigueras para refugiarse y reproducirse.",
+    "physicalCharacteristics": "Cuerpo pequeño, ojos amarillos, piernas largas y postura erguida.",
+    "habitat": "Campos, pastos, áreas abiertas y bordes de caminos rurales.",
+    "behavior": "Está activo día y noche, observando su entorno desde el suelo o desde posiciones bajas.",
+    "diet": "Insectos, pequeños roedores, lagartos y anfibios.",
+    "curiosities": [
+      "Puede ocupar madrigueras abandonadas por mamíferos.",
+      "Mueve la cabeza y el cuerpo rápidamente cuando investiga amenazas."
+    ],
+    "distribution": "América, incluido el Pantanal.",
+    "ecologicalImportance": "Controla insectos y pequeños vertebrados en áreas abiertas."
+  },
+  "lambari-do-pantanal": {
+    "commonName": "Mojarra del Pantanal",
+    "description": "Pequeños bancos de peces presentes en aguas tranquilas y fluidas de la llanura aluvial.",
+    "physicalCharacteristics": "Cuerpo plateado, escamas pequeñas y aletas delicadas.",
+    "habitat": "Ríos, arroyos, lagunas y campos inundados.",
+    "behavior": "Forma escuelas y busca alimento entre plantas y bancos.",
+    "diet": "Insectos, algas, frutos y pequeños invertebrados.",
+    "curiosities": [
+      "Las escuelas responden rápidamente a las sombras y al movimiento en la orilla.",
+      "Los peces pequeños son importantes para los depredadores más grandes."
+    ],
+    "distribution": "Cuencas del centro y sur de Brasil, incluido el sistema del Paraguay.",
+    "ecologicalImportance": "Transfiere energía de pequeños recursos a peces, aves y reptiles depredadores."
+  },
+  "mandi": {
+    "commonName": "Bagre amarillo",
+    "description": "Bagre de fondo que busca alimento entre rocas, troncos y sedimentos de ríos.",
+    "physicalCharacteristics": "Barbillas largas, manchas en el cuerpo y aletas con espinas.",
+    "habitat": "Ríos, canales, arroyos y tramos de variado fondo.",
+    "behavior": "Más activo al anochecer y por la noche, explorando el fondo.",
+    "diet": "Invertebrados, peces pequeños y materia orgánica.",
+    "curiosities": [
+      "Las barbillas ayudan a encontrar comida en aguas turbias.",
+      "La conectividad de los ríos favorece su movimiento."
+    ],
+    "distribution": "Paraná, Paraguay y otras cuencas sudamericanas.",
+    "ecologicalImportance": "Recicla materia orgánica y participa en la cadena alimentaria acuática."
+  },
+  "pitu": {
+    "commonName": "Camarón amazónico",
+    "description": "Camarón de agua dulce que ocupa ríos, lagos y zonas inundadas con refugio vegetal.",
+    "physicalCharacteristics": "Cuerpo segmentado, antenas largas y quelas desarrolladas.",
+    "habitat": "Ríos, arroyos, lagunas, raíces sumergidas y riberas con vegetación.",
+    "behavior": "Explora el fondo y la vegetación, especialmente de noche.",
+    "diet": "Restos, algas, pequeños animales y materia orgánica.",
+    "curiosities": [
+      "La forma de su cuerpo le permite esconderse entre raíces y hojas sumergidas.",
+      "Las inundaciones amplían los lugares disponibles para la alimentación y la dispersión."
+    ],
+    "distribution": "Cuencas sudamericanas, con registros en ambientes de agua dulce brasileños.",
+    "ecologicalImportance": "Recicla materia orgánica y sirve de alimento a peces y pájaros."
+  },
+  "libelula-pantaneira": {
+    "commonName": "Libélula rayadora",
+    "description": "Libélula migratoria observada sobre áreas abiertas y cuerpos de agua temporales.",
+    "physicalCharacteristics": "Alas largas, abdomen estrecho y coloración amarillenta a marrón.",
+    "habitat": "Estanques temporales, marismas, campos y áreas abiertas cercanas al agua.",
+    "behavior": "Vuela largas distancias y caza insectos durante el día.",
+    "diet": "Mosquitos, moscas y otros insectos voladores.",
+    "curiosities": [
+      "La especie es conocida por sus movimientos de larga distancia.",
+      "Las ninfas viven en el agua antes de la metamorfosis."
+    ],
+    "distribution": "Ampliamente distribuido en regiones tropicales y subtropicales, incluido el Pantanal.",
+    "ecologicalImportance": "Controla insectos voladores y conecta ambientes acuáticos y terrestres."
+  },
+  "tamandua-mirim": {
+    "commonName": "Tamandúa sureño",
+    "description": "Oso hormiguero de tamaño mediano que explora el suelo y los árboles en busca de hormigas y termitas.",
+    "physicalCharacteristics": "Hocico alargado, garras fuertes, cola prensil y raya oscura variable.",
+    "habitat": "Bosques de ribera, matorrales, sabanas y campos con abrigo.",
+    "behavior": "Solitario, activo de día o de noche y capaz de trepar a los árboles.",
+    "diet": "Hormigas, termitas y otros pequeños invertebrados.",
+    "curiosities": [
+      "La larga lengua llega a las colonias de insectos en las grietas.",
+      "Las garras también se utilizan para defenderse y cavar."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla las poblaciones de hormigas y termitas."
+  },
+  "irara": {
+    "commonName": "Tayra",
+    "description": "Mustélido ágil que corre entre árboles y suelo en bosques y bordes del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alargado, patas fuertes, cola larga y cabeza clara u oscura.",
+    "habitat": "Bosques ribereños, capones, sabanas y bordes arbolados.",
+    "behavior": "Diurno, curioso, solitario u observado en pequeños grupos familiares.",
+    "diet": "Frutas, pequeños vertebrados, insectos y miel.",
+    "curiosities": [
+      "Se mueve fácilmente entre el suelo y los árboles.",
+      "Su nombre popular también aparece en registros de otras regiones brasileñas."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Se alimenta de animales pequeños y dispersa semillas."
+  },
+  "quati": {
+    "commonName": "Coatí sudamericano",
+    "description": "Mamífero con hocico móvil que busca frutos y pequeños animales en el suelo y en los árboles.",
+    "physicalCharacteristics": "Hocico alargado, cola anillada y garras adaptadas para cavar.",
+    "habitat": "Bosques, matorrales, bordes y zonas cercanas a cursos de agua.",
+    "behavior": "Las hembras y las crías viven en grupos; Los machos adultos suelen ser solitarios.",
+    "diet": "Frutas, insectos, huevos, pequeños vertebrados y materia orgánica.",
+    "curiosities": [
+      "El hocico flexible le ayuda a explorar hojas y troncos.",
+      "La cola levantada ayuda a la comunicación visual del grupo."
+    ],
+    "distribution": "América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas y controla invertebrados."
+  },
+  "carrapateiro": {
+    "commonName": "Chimachimá",
+    "description": "Ave rapaz generalista, común en zonas abiertas y bordes de bosques.",
+    "physicalCharacteristics": "Cabeza clara, dorso oscuro y alas anchas.",
+    "habitat": "Campos, pastos, linderos y zonas próximas a la ganadería.",
+    "behavior": "Se posa en lugares altos y busca alimento en el suelo o en otros animales.",
+    "diet": "Garrapatas, insectos, carroña, pequeños vertebrados y restos de comida.",
+    "curiosities": [
+      "Puede eliminar ectoparásitos de grandes mamíferos.",
+      "Aprovecha los ambientes modificados sin abandonar las áreas naturales."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Controla los invertebrados y elimina la materia orgánica."
+  },
+  "gaviao-caramujeiro": {
+    "commonName": "Caracolero",
+    "description": "Ave rapaz especializada en la búsqueda de caracoles y otros recursos en zonas húmedas.",
+    "physicalCharacteristics": "Pico curvo, alas anchas y garras adaptadas para la captura.",
+    "habitat": "Pantanos, bahías, campos inundados y riberas con macrófitos.",
+    "behavior": "Vuela sobre zonas húmedas y se posa sobre vegetación cercana al agua.",
+    "diet": "Caracoles acuáticos y otros invertebrados.",
+    "curiosities": [
+      "El pico curvo es adecuado para sacar los moluscos de sus caparazones.",
+      "La presencia sigue la disponibilidad de áreas inundadas."
+    ],
+    "distribution": "Centro y Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Regula las poblaciones de moluscos en ambientes inundados."
+  },
+  "pica-pau-do-campo": {
+    "commonName": "Carpintero campestre",
+    "description": "Pájaro carpintero terrestre que busca insectos en troncos, suelo y áreas abiertas.",
+    "physicalCharacteristics": "Plumaje contrastante, pico fuerte y cola rígida para apoyo.",
+    "habitat": "Campos, sabanas, pastizales y lindes con escasa arboleda.",
+    "behavior": "Alterna entre el suelo y se posa, utilizando su pico para explorar la madera y la tierra.",
+    "diet": "Hormigas, termitas, larvas y otros invertebrados.",
+    "curiosities": [
+      "Puede buscar más alimento en el suelo que muchos otros pájaros carpinteros.",
+      "La cola rígida ayuda a trepar por los troncos."
+    ],
+    "distribution": "América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Controla insectos y crea cavidades que pueden ser utilizadas por otras especies."
+  },
+  "tesourinha": {
+    "commonName": "Tijereta sabanera",
+    "description": "Paseriforme insectívoro con cola bifurcada, visto en campos y áreas abiertas.",
+    "physicalCharacteristics": "Cola larga y profundamente bifurcada, dorso oscuro y vientre claro.",
+    "habitat": "Campos, pastos, sabanas y bordes de bosques.",
+    "behavior": "Realiza vuelos rápidos desde perchas para capturar insectos.",
+    "diet": "Insectos voladores y frutos pequeños.",
+    "curiosities": [
+      "La cola puede variar de tamaño según la edad y el sexo.",
+      "Realiza movimientos estacionales en gran parte de la distribución."
+    ],
+    "distribution": "América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Controla insectos en áreas abiertas."
+  },
+  "sucuri-amarela": {
+    "commonName": "Anaconda amarilla",
+    "description": "Gran serpiente semiacuática asociada con ríos, bahías y áreas inundadas estacionalmente.",
+    "physicalCharacteristics": "De cuerpo robusto, manchas oscuras y color amarillento u oliva.",
+    "habitat": "Pantanos, riberas, bahías y cursos de agua de corriente lenta.",
+    "behavior": "Nada bien, caza al acecho y utiliza el agua para termorregularse.",
+    "diet": "Peces, aves, mamíferos y otros vertebrados.",
+    "curiosities": [
+      "No tiene veneno y somete a sus presas por constricción.",
+      "Las inundaciones aumentan la conectividad entre sus entornos."
+    ],
+    "distribution": "Cuenca del Paraguay y otras zonas de América del Sur, incluido el Pantanal.",
+    "ecologicalImportance": "Principal depredador en ambientes acuáticos y ribereños."
+  },
+  "teiu": {
+    "commonName": "Lagarto overo",
+    "description": "Lagarto terrestre de gran tamaño que utiliza áreas abiertas, bordes y ambientes boscosos.",
+    "physicalCharacteristics": "Cuerpo robusto, cola larga, coloración oscura con manchas claras y extremidades fuertes.",
+    "habitat": "Campos, sabanas, bordes de bosques y claros con refugio y suministro de alimentos.",
+    "behavior": "Se alimenta principalmente en el suelo, alternando períodos de actividad con refugio en agujeros y cavidades.",
+    "diet": "Frutas, huevos, insectos, pequeños vertebrados y otros elementos que se encuentran mientras busca alimento.",
+    "curiosities": [
+      "La cola larga ayuda con el equilibrio y la locomoción.",
+      "Puede utilizar madrigueras y refugios en el suelo para protegerse."
+    ],
+    "distribution": "Regiones del este y centro de América del Sur, incluida gran parte de Brasil.",
+    "ecologicalImportance": "Participa en el control de invertebrados y el movimiento de semillas y materia orgánica en el suelo."
+  },
+  "perereca-de-cera": {
+    "commonName": "Rana mono encerada",
+    "description": "Rana arborícola adaptada a ambientes cálidos y estacionalmente secos en el Pantanal.",
+    "physicalCharacteristics": "Cuerpo verde, pupilas verticales y piel con secreciones cerosas.",
+    "habitat": "Vegetación arbustiva, bosques abiertos y zonas cercanas a cuerpos de agua temporales.",
+    "behavior": "Nocturno, arbóreo y activo principalmente después de la lluvia.",
+    "diet": "Insectos y otros pequeños invertebrados.",
+    "curiosities": [
+      "La secreción cerosa ayuda a reducir la pérdida de agua.",
+      "Pone huevos en las hojas que están por encima del agua."
+    ],
+    "distribution": "Centroamérica del Sur, incluidas áreas del Pantanal.",
+    "ecologicalImportance": "Controla insectos e indica la disponibilidad de microhábitats húmedos."
+  },
+  "ra-pimenta-pantanal": {
+    "commonName": "Rana pimienta",
+    "description": "Rana grande que se reproduce en charcas temporales y bancos húmedos.",
+    "physicalCharacteristics": "Cuerpo robusto, espalda moteada y extremidades posteriores musculosas.",
+    "habitat": "Charcos, pantanos, campos inundables y bordes de bosques.",
+    "behavior": "De noche, vocaliza después de la lluvia y puede defender su refugio.",
+    "diet": "Insectos, arañas y pequeños vertebrados.",
+    "curiosities": [
+      "Construye nidos de espuma para proteger la reproducción.",
+      "Es una de las ranas más grandes que se encuentran en ambientes abiertos brasileños."
+    ],
+    "distribution": "Centro y sur de Brasil, incluido el Pantanal.",
+    "ecologicalImportance": "Controla invertebrados e integra la cadena alimentaria en humedales."
+  },
+  "traira-pantanal": {
+    "commonName": "Tararira",
+    "description": "Pez depredador de aguas lentas, resistente a las variaciones estacionales y de baja oxigenación.",
+    "physicalCharacteristics": "Cuerpo alargado, boca ancha, dientes fuertes y coloración críptica.",
+    "habitat": "Bahías, arroyos, lagunas, marismas y riberas con vegetación.",
+    "behavior": "Acecha entre las plantas y ataca a sus presas con movimientos rápidos.",
+    "diet": "Peces, crustáceos y otros animales acuáticos.",
+    "curiosities": [
+      "Puede sobrevivir en ambientes con poco oxígeno.",
+      "La coloración ayuda a emboscar entre hojas y ramas sumergidas."
+    ],
+    "distribution": "América del Sur, incluidas las cuencas del Pantanal.",
+    "ecologicalImportance": "Regula poblaciones de peces pequeños y conecta diferentes niveles tróficos."
+  },
+  "piau-tres-pintas": {
+    "commonName": "Boga de tres manchas",
+    "description": "Pez con escamas marcadas por manchas oscuras, común en ríos y ambientes conectados por inundaciones.",
+    "physicalCharacteristics": "Cuerpo fusiforme, aletas desarrolladas y tres manchas laterales características.",
+    "habitat": "Ríos, arroyos, bahías y humedales conectados.",
+    "behavior": "Forma cardúmenes y busca alimento cerca del fondo y de la vegetación.",
+    "diet": "Frutos, semillas, algas y pequeños invertebrados.",
+    "curiosities": [
+      "La migración entre ríos y zonas inundadas sigue el pulso de las inundaciones.",
+      "La fruta caída puede ser importante durante las inundaciones."
+    ],
+    "distribution": "Cuencas sudamericanas, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en la dispersión de semillas y el flujo de energía acuática."
+  },
+  "caranguejo-de-agua-doce": {
+    "commonName": "Cangrejo de agua dulce",
+    "description": "Cangrejo de agua dulce que se encuentra en orillas, vegetación acuática y fondos de ambientes pantanosos.",
+    "physicalCharacteristics": "Caparazón aplanado, quelas desarrolladas y patas adaptadas al agua dulce.",
+    "habitat": "Ríos, bahías, arroyos y zonas inundadas con refugio vegetal.",
+    "behavior": "Explora el fondo y los bancos, especialmente al atardecer y de noche.",
+    "diet": "Restos, algas, plantas y pequeños invertebrados.",
+    "curiosities": [
+      "La muda es un período de mayor vulnerabilidad.",
+      "Puedes aprovechar refugios entre raíces y hojas sumergidas."
+    ],
+    "distribution": "Cuenca del Paraguay y otras zonas de agua dulce de América del Sur.",
+    "ecologicalImportance": "Recicla materia orgánica y sirve de alimento a peces y pájaros."
+  },
+  "lobo-guara": {
+    "commonName": "Aguará guazú",
+    "description": "Cánido de patas largas asociado a ambientes abiertos y formaciones de sabana en Sudamérica.",
+    "physicalCharacteristics": "Pelaje predominantemente naranja, patas oscuras, melena dorsal y orejas grandes.",
+    "habitat": "Campos, sabanas, sabanas y áreas abiertas con cobertura vegetal intercalada.",
+    "behavior": "Generalmente solitario y crepuscular o nocturno, desplazándose por grandes áreas en busca de alimento.",
+    "diet": "Frutales, pequeños vertebrados e invertebrados, con una importante participación del fruto de la lobeira en su dieta.",
+    "curiosities": [
+      "La especie es el cánido más grande de América del Sur.",
+      "Su comunicación incluye marcas olfativas y vocalizaciones."
+    ],
+    "distribution": "Centroamérica del Sur, principalmente en áreas de cerrado y formaciones abiertas en Brasil, Bolivia, Paraguay, Perú y Argentina.",
+    "ecologicalImportance": "Actúa como depredador de pequeños animales y dispersor de semillas en ambientes abiertos."
+  },
+  "cateto": {
+    "commonName": "Pecarí de collar",
+    "description": "Pequeño cerdo salvaje de amplia distribución, que se encuentra en ambientes boscosos y abiertos con refugio.",
+    "physicalCharacteristics": "Pelaje gris o marrón, raya clara similar a un collar en el cuello y cuerpo robusto.",
+    "habitat": "Bosques, sabanas, bordes de bosque y áreas con refugio y acceso al agua.",
+    "behavior": "Vive en pequeños grupos o grupos familiares, utiliza vocalizaciones y marcas olfativas y explora el suelo en busca de alimento.",
+    "diet": "Frutos, semillas, raíces, hojas, cactus y pequeños invertebrados.",
+    "curiosities": [
+      "La raya clara en el cuello ayuda a distinguir al pecarí de otros cerdos salvajes.",
+      "Las glándulas odoríferas participan en la comunicación entre individuos."
+    ],
+    "distribution": "Desde el suroeste de Estados Unidos hasta Sudamérica, incluyendo gran parte de Brasil.",
+    "ecologicalImportance": "Remueve el suelo, influye en la disponibilidad de semillas y participa en las cadenas alimentarias como consumidor y presa."
+  },
+  "cobra-cipo": {
+    "commonName": "Culebra bejuquilla café",
+    "description": "Serpiente esbelta y arbórea que se mueve entre ramas y follaje en ambientes tropicales.",
+    "physicalCharacteristics": "Cuerpo muy esbelto, cabeza alargada y coloración que favorece el camuflaje entre ramas y hojas.",
+    "habitat": "Bosques, bordes de bosques y vegetación arbustiva con estructuras para la locomoción arbórea.",
+    "behavior": "Permanece entre la vegetación, observando su entorno y capturando presas acercándose y arremetiendo rápidamente.",
+    "diet": "Pequeños vertebrados, especialmente lagartos y otros animales de tamaño compatible.",
+    "curiosities": [
+      "El cuerpo delgado produce una silueta parecida a una ramita.",
+      "La cabeza alargada es una característica llamativa del género."
+    ],
+    "distribution": "Amplia distribución en las Américas tropicales, ocurriendo en diferentes ambientes de bosque y sabana.",
+    "ecologicalImportance": "Integra cadenas alimentarias arbóreas como depredador de pequeños vertebrados."
+  },
+  "perereca-do-banheiro": {
+    "commonName": "Rana arborícola de manchas blancas",
+    "description": "Rana arborícola de hábitos arbóreos asociados a ambientes húmedos y vegetación cercana a cuerpos de agua.",
+    "physicalCharacteristics": "Cuerpo compacto, discos adhesivos en los dedos y coloración variable en tonos amarillentos y pardos.",
+    "habitat": "Pantanos, márgenes de lagos, vegetación de ribera y zonas húmedas con abrigo vertical.",
+    "behavior": "Vocaliza principalmente durante los períodos reproductivos y utiliza la vegetación para descansar y moverse.",
+    "diet": "Pequeños artrópodos capturados durante la búsqueda de alimento nocturna.",
+    "curiosities": [
+      "Los discos adhesivos ayudan a trepar hojas y ramas.",
+      "La reproducción depende de la disponibilidad de agua y microambientes húmedos."
+    ],
+    "distribution": "América del Sur, con registros en diferentes zonas de Brasil y países vecinos.",
+    "ecologicalImportance": "Participa en el control de pequeños invertebrados e integra las cadenas alimentarias de zonas húmedas."
+  },
+  "perereca-macaco": {
+    "commonName": "Rana mono encerada",
+    "description": "Rana arborícola arbórea de hábitos nocturnos que ocupa ramas y hojas en ambientes tropicales estacionales.",
+    "physicalCharacteristics": "Cuerpo verde, ojos grandes, dedos con discos adhesivos y adaptaciones para la vida en la vegetación.",
+    "habitat": "Bosques, sabanas arboladas y borduras con arbustos y árboles aptos para la vida arbórea.",
+    "behavior": "Permanece sobre la vegetación y se reproduce en hojas plegadas sobre el agua, donde los renacuajos completan su desarrollo.",
+    "diet": "Artrópodos y otros pequeños invertebrados capturados en la vegetación.",
+    "curiosities": [
+      "La puesta sobre hojas plegadas reduce la exposición directa de los huevos.",
+      "La piel cerosa ayuda a reducir la pérdida de agua en ambientes estacionales."
+    ],
+    "distribution": "Regiones secas y estacionales del centro de América del Sur, incluidas áreas de Brasil, Bolivia, Paraguay y Argentina.",
+    "ecologicalImportance": "Controla pequeños invertebrados y transfiere energía entre la vegetación y los depredadores nocturnos."
+  },
+  "gaviao-belo": {
+    "commonName": "Gavilán pescador",
+    "description": "Ave rapaz asociada a ríos, bahías y zonas inundadas, especializada en capturar presas acuáticas.",
+    "physicalCharacteristics": "Plumaje marrón, cabeza clara, alas anchas y garras fuertes.",
+    "habitat": "Riberas de ríos, lagunas, bahías y vegetación acuática.",
+    "behavior": "Aterriza cerca del agua y se sumerge o desciende rápidamente para capturar a sus presas.",
+    "diet": "Peces y otros pequeños animales acuáticos.",
+    "curiosities": [
+      "La visión ayuda a localizar presas en aguas poco profundas.",
+      "El aterrizaje en ramas sobre el agua favorece la caza al acecho."
+    ],
+    "distribution": "América tropical, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en el control de peces y dinámica alimentaria en humedales."
+  },
+  "cachara": {
+    "commonName": "Surubí atigrado",
+    "description": "Bagre de gran tamaño con patrón reticulado, importante en los ríos y bahías del Pantanal.",
+    "physicalCharacteristics": "Cuerpo alargado, barbas sensoriales, cabeza aplanada y manchas en forma de telaraña.",
+    "habitat": "Canales fluviales, bahías, arroyos y áreas profundas conectadas.",
+    "behavior": "Depredador principalmente nocturno, que utiliza sus barbillas para localizar a sus presas.",
+    "diet": "Peces y otros animales acuáticos.",
+    "curiosities": [
+      "Las barbillas ayudan a orientarse en aguas turbias.",
+      "La conectividad fluvial es importante para el ciclo de vida."
+    ],
+    "distribution": "Cuenca del Paraguay y otras cuencas sudamericanas.",
+    "ecologicalImportance": "Principal depredador en ambientes de agua dulce e indicador de conectividad fluvial."
+  },
+  "veado-campeiro": {
+    "commonName": "Venado de las pampas",
+    "description": "Venado de campo abierto que utiliza campos y bordes de vegetación inundados estacionalmente.",
+    "physicalCharacteristics": "Cuerpo esbelto, pelaje y astas de color marrón claro en machos adultos.",
+    "habitat": "Campos, sabanas, sabanas y áreas abiertas del Pantanal.",
+    "behavior": "Se mueve en pequeños grupos y alterna entre alimentarse, observar y descansar.",
+    "diet": "Hierbas, hojas, brotes y otras plantas disponibles.",
+    "curiosities": [
+      "Las astas se renuevan periódicamente en los machos.",
+      "La apertura del paisaje favorece la detección de depredadores."
+    ],
+    "distribution": "Centro y este de América del Sur, incluidas áreas del Pantanal.",
+    "ecologicalImportance": "Participa en la herbivoría y transporta semillas entre ambientes abiertos."
+  },
+  "morcego-pescador": {
+    "commonName": "Murciélago pescador grande",
+    "description": "Murciélago asociado a ambientes acuáticos, capaz de localizar presas en la superficie del agua.",
+    "physicalCharacteristics": "Cuerpo robusto, patas grandes y garras adaptadas para capturar presas acuáticas.",
+    "habitat": "Riberas de ríos, lagunas, bahías y humedales.",
+    "behavior": "Activo por la noche, vuela cerca del agua y utiliza la ecolocalización para alimentarse.",
+    "diet": "Pequeños peces, crustáceos e insectos acuáticos.",
+    "curiosities": [
+      "Las estructuras sensoriales ayudan a detectar ondas en el agua.",
+      "Los refugios pueden encontrarse en hondonadas, follaje y estructuras cercanas a los ríos."
+    ],
+    "distribution": "América tropical, con registros en cuencas brasileñas.",
+    "ecologicalImportance": "Controla invertebrados y peces pequeños, conectando cadenas acuáticas y terrestres."
+  },
+  "ourico-cacheiro": {
+    "commonName": "Puercoespín brasileño",
+    "description": "Roedor arbóreo de hábitos nocturnos que explora las copas y bordes de los bosques.",
+    "physicalCharacteristics": "Cuerpo cubierto de espinas, cola prensil y patas adaptadas para trepar.",
+    "habitat": "Bosques de ribera, bosques y bordes con árboles y vides.",
+    "behavior": "Se mueve lentamente entre los árboles y permanece oculto durante el día.",
+    "diet": "Hojas, frutos, corteza, brotes y semillas.",
+    "curiosities": [
+      "La cola ayuda con el apoyo mientras trepa.",
+      "Las espinas funcionan como defensa contra los depredadores."
+    ],
+    "distribution": "América del Sur tropical, incluido el Pantanal.",
+    "ecologicalImportance": "Participa en la herbivoría y movimiento de semillas en la vegetación."
+  },
+  "arara-caninde": {
+    "commonName": "Guacamayo azul y amarillo",
+    "description": "Guacamaya grande de plumaje azul y amarillo, asociada a bosques y áreas abiertas con árboles altos.",
+    "physicalCharacteristics": "Alas azules, pecho amarillo, pico fuerte y cola larga.",
+    "habitat": "Bosques de ribera, bosques abiertos, bordes y palmerales.",
+    "behavior": "Vive en parejas o grupos y utiliza árboles huecos para descansar y reproducirse.",
+    "diet": "Frutas, semillas, nueces y partes de plantas.",
+    "curiosities": [
+      "El pico rompe semillas duras.",
+      "Los viajes en grupo pueden conectar diferentes fragmentos de bosque."
+    ],
+    "distribution": "América del Sur tropical, incluidas áreas del Pantanal.",
+    "ecologicalImportance": "Dispersa semillas y depende de árboles maduros para refugiarse y anidar."
+  },
+  "urubu-de-cabeca-preta": {
+    "commonName": "Zopilote negro",
+    "description": "Ave carroñera común en áreas abiertas, ciudades, riberas de ríos y bordes de bosques.",
+    "physicalCharacteristics": "Plumaje oscuro, cabeza sin plumas, alas anchas y vuelo planeador.",
+    "habitat": "Campos, bordes, áreas urbanizadas y márgenes de ambientes acuáticos.",
+    "behavior": "Forma grupos, utiliza corrientes térmicas y localiza cadáveres mediante la visión y el comportamiento colectivo.",
+    "diet": "Cadáveres, restos orgánicos y pequeños animales muertos.",
+    "curiosities": [
+      "Deslizarse reduce el gasto de energía.",
+      "La eliminación de los cadáveres contribuye al ciclo de nutrientes."
+    ],
+    "distribution": "América, con amplia presencia en Brasil y el Pantanal.",
+    "ecologicalImportance": "Recicla la materia orgánica y ayuda a reducir las fuentes de descomposición expuestas."
+  },
+  "tucano-toco": {
+    "commonName": "Tucán toco",
+    "description": "Tucán de pico grande que explora árboles frutales, sabanas y bordes de bosques.",
+    "physicalCharacteristics": "Pico grande anaranjado, plumaje negro y garganta blanca.",
+    "habitat": "Bosques abiertos, sabanas, bordes y matorrales de bosques.",
+    "behavior": "Se desplaza entre los árboles y traga frutos enteros, formando parejas o pequeños grupos.",
+    "diet": "Frutos, huevos, polluelos de otras aves y pequeños vertebrados.",
+    "curiosities": [
+      "El pico participa en la termorregulación y la obtención de alimento.",
+      "La especie puede utilizar huecos naturales para anidar."
+    ],
+    "distribution": "Centro y este de Sudamérica, incluido el Pantanal.",
+    "ecologicalImportance": "Dispersa semillas e influye en la regeneración de especies vegetales."
+  },
+  "cangapara": {
+    "commonName": "Tortuga cabezona del Pantanal",
+    "description": "Quelón de agua dulce asociado con áreas inundadas, bancos con vegetación y ambientes de movimiento lento.",
+    "physicalCharacteristics": "Caparazón oscuro y robusto, cabeza ancha y extremidades adaptadas al agua dulce.",
+    "habitat": "Bahías, arroyos, lagunas y riberas con vegetación acuática.",
+    "behavior": "Períodos alternos en el agua y en lugares de descanso en las orillas.",
+    "diet": "Invertebrados, pequeños animales, plantas y materia orgánica.",
+    "curiosities": [
+      "El caparazón ofrece protección contra los depredadores.",
+      "La calidad de los bancos influye en el alojamiento y la alimentación."
+    ],
+    "distribution": "Cuenca del Paraguay y zonas húmedas del centro de Sudamérica.",
+    "ecologicalImportance": "Participa en el flujo de materia entre fondos, riberas y aguas poco profundas."
+  },
+  "cobra-dagua": {
+    "commonName": "Culebra de agua",
+    "description": "Serpiente acuática que utiliza cuerpos de agua y bancos de vegetación para cazar y refugiarse.",
+    "physicalCharacteristics": "Cuerpo alargado, escamas suaves y patrón que le ayuda a camuflarse entre la vegetación.",
+    "habitat": "Lagunas, corixos, marismas y riberas de ríos.",
+    "behavior": "Nada con facilidad y busca presas en aguas poco profundas y entre plantas.",
+    "diet": "Peces, renacuajos y pequeños animales acuáticos.",
+    "curiosities": [
+      "El cuerpo hidrodinámico facilita la natación.",
+      "La coloración puede romper el contorno entre las sombras y la vegetación."
+    ],
+    "distribution": "Regiones húmedas del sur y centro de América del Sur.",
+    "ecologicalImportance": "Controla pequeños vertebrados acuáticos e integra la cadena alimentaria en humedales."
+  },
+  "jacare-pagua": {
+    "commonName": "Yacaré negro",
+    "description": "Caimán abundante en ríos, bahías y arroyos, adaptado al ciclo anual de inundaciones y sequías.",
+    "physicalCharacteristics": "Cuerpo alargado, hocico ancho, placas dérmicas y cola musculosa.",
+    "habitat": "Ríos, lagunas, bahías, arroyos y campos inundables.",
+    "behavior": "Toma el sol en las orillas, caza en el agua y puede formar concentraciones durante los períodos estacionales.",
+    "diet": "Peces, crustáceos, insectos y pequeños vertebrados.",
+    "curiosities": [
+      "La temperatura influye en la actividad y la reproducción.",
+      "Las zonas con niveles bajos de agua concentran alimentos durante la sequía."
+    ],
+    "distribution": "Cuenca del Paraguay y otras zonas húmedas del centro de Sudamérica.",
+    "ecologicalImportance": "Depredador acuático e indicador de la integridad de ambientes húmedos."
+  },
+  "tei-de-cauda-vermelha": {
+    "commonName": "Lagarto colorado",
+    "description": "Lagarto terrestre de gran tamaño que explora áreas abiertas, bordes y refugios en el suelo.",
+    "physicalCharacteristics": "Cuerpo robusto, cola larga, garras fuertes y color rojizo.",
+    "habitat": "Campos, sabanas, bordes de bosques y áreas con suelo para excavación.",
+    "behavior": "Diurno, oportunista y capaz de utilizar madrigueras como refugio y termorregulación.",
+    "diet": "Frutas, huevos, insectos, pequeños vertebrados y carroña.",
+    "curiosities": [
+      "La amplia dieta les permite explorar ambientes estacionales.",
+      "La excavación crea refugios utilizados en épocas de calor o amenaza."
+    ],
+    "distribution": "Centro-sur de América del Sur, que se presenta en formaciones abiertas.",
+    "ecologicalImportance": "Caza, elimina materia orgánica y puede dispersar semillas."
+  },
+  "sapinho-cururu": {
+    "commonName": "Sapo de Schneider",
+    "description": "Rana de gran tamaño que ocupa zonas abiertas y bordes, especialmente cerca de refugios húmedos.",
+    "physicalCharacteristics": "Piel áspera, glándulas parotoides desarrolladas y cuerpo robusto.",
+    "habitat": "Campos, jardines, bordes de bosques y bordes de humedales.",
+    "behavior": "Activo principalmente de noche y después de la lluvia, cuando busca comida y pareja.",
+    "diet": "Insectos, arañas y otros pequeños invertebrados.",
+    "curiosities": [
+      "La piel áspera ayuda con el camuflaje y la protección.",
+      "La reproducción suele seguir al inicio de la lluvia."
+    ],
+    "distribution": "América del Sur, con amplia presencia en zonas brasileñas.",
+    "ecologicalImportance": "Controla los invertebrados y sirve de alimento a depredadores especializados."
+  },
+  "rã-pimenta": {
+    "commonName": "Rana de labios blancos de Cei",
+    "description": "Rana terrestre de zonas abiertas y húmedas, asociada a charcas temporales y bancos de vegetación.",
+    "physicalCharacteristics": "Cuerpo robusto, coloración parda y extremidades posteriores fuertes.",
+    "habitat": "Campos inundables, marismas, charcos temporales y orillas de lagos.",
+    "behavior": "Permanece escondido durante los períodos secos y vocaliza después de la lluvia.",
+    "diet": "Insectos, larvas, arañas y pequeños invertebrados.",
+    "curiosities": [
+      "Los charcos temporales pueden ser importantes para la reproducción.",
+      "La actividad aumenta con humedad y temperatura favorables."
+    ],
+    "distribution": "Cuenca del Paraguay y otras regiones húmedas del centro de Sudamérica.",
+    "ecologicalImportance": "Controla los invertebrados e indica la disponibilidad de microhábitats húmedos."
+  },
+  "perereca-fuscomarginata": {
+    "commonName": "Ranita de bordes oscuros",
+    "description": "Pequeña ranita arborícola que utiliza vegetación baja y zonas húmedas cercanas a cuerpos de agua.",
+    "physicalCharacteristics": "Cuerpo pequeño, discos adhesivos en los dedos y franja lateral oscura.",
+    "habitat": "Hierba, arbustos, bordes y vegetación alrededor de los charcos.",
+    "behavior": "Vocaliza sobre hojas y ramas durante la temporada de lluvias.",
+    "diet": "Pequeños insectos y otros artrópodos.",
+    "curiosities": [
+      "Los discos adhesivos permiten trepar sobre láminas lisas.",
+      "La vocalización ayuda a localizar a los individuos en medio de la vegetación."
+    ],
+    "distribution": "Brasil central y otras zonas de América del Sur tropical.",
+    "ecologicalImportance": "Controla pequeños artrópodos e integra la fauna de estanques temporales."
+  },
+  "perereca-folhagem-azul": {
+    "commonName": "Rana de follaje azul",
+    "description": "Rana arbórea arbórea de hábitos nocturnos que utiliza hojas y ramas en ambientes forestales.",
+    "physicalCharacteristics": "Cuerpo verde, extremidades largas, discos adhesivos y color contrastante en las partes internas.",
+    "habitat": "Bosques de ribera, matorrales, matorrales y bordes cercanos al agua.",
+    "behavior": "Se mueve lentamente entre la vegetación y permanece inmóvil durante el día.",
+    "diet": "Insectos y otros pequeños artrópodos.",
+    "curiosities": [
+      "Quedarse quieto reduce la posibilidad de ser detectado.",
+      "La reproducción depende de las hojas y el agua en ambientes cercanos."
+    ],
+    "distribution": "Centroamérica del Sur, incluidas las regiones del Chaco y Pantanal.",
+    "ecologicalImportance": "Participa en el control de insectos e indica la calidad de la vegetación ribereña."
+  },
+  "jau": {
+    "commonName": "Manguruyú",
+    "description": "Bagre de gran tamaño de agua dulce que ocupa tramos profundos de ríos y ambientes conectados por inundaciones.",
+    "physicalCharacteristics": "Cuerpo robusto, cabeza ancha, barbas sensoriales y aleta caudal fuerte.",
+    "habitat": "Canalones profundos, pozos de ríos, arroyos y bahías conectadas.",
+    "behavior": "Depredador de fondo, más activo en periodos de poca luz.",
+    "diet": "Peces, crustáceos y otros animales acuáticos.",
+    "curiosities": [
+      "Las barbillas ayudan a orientarse en aguas turbias.",
+      "La conectividad fluvial es importante para el movimiento y la reproducción."
+    ],
+    "distribution": "Cuenca del Paraguay y otras cuencas del centro de Sudamérica.",
+    "ecologicalImportance": "Gran depredador e indicador de la integridad de los ríos profundos."
+  },
+  "peixe-cachorro": {
+    "commonName": "Dientudo del Pantanal",
+    "description": "Pez depredador de cuerpo alargado que caza en aguas abiertas y riberas de ríos.",
+    "physicalCharacteristics": "Cuerpo plateado, dientes caniniformes y aleta caudal adaptada a la natación rápida.",
+    "habitat": "Ríos, arroyos, lagunas y zonas de remanso.",
+    "behavior": "Forma pequeños grupos y ataca rápidamente a presas más pequeñas.",
+    "diet": "Peces pequeños e invertebrados acuáticos.",
+    "curiosities": [
+      "La dentición es una característica llamativa del grupo.",
+      "La vegetación marginal proporciona refugio a presas y depredadores."
+    ],
+    "distribution": "Cuenca del Paraguay y regiones vecinas de América del Sur.",
+    "ecologicalImportance": "Regula pequeñas comunidades de peces en ambientes de agua dulce."
+  },
+  "pacupeva": {
+    "commonName": "Pacú del Tietê",
+    "description": "Pez de tamaño pequeño a mediano que explora vegetación, frutos y semillas en ambientes de agua dulce.",
+    "physicalCharacteristics": "Cuerpo alto y comprimido, dientes fuertes y color plateado.",
+    "habitat": "Ríos, lagunas, bahías y riberas con vegetación.",
+    "behavior": "Explora escuelas y utiliza áreas poco profundas durante los períodos de alimentación.",
+    "diet": "Frutas, semillas, plantas, algas y pequeños invertebrados.",
+    "curiosities": [
+      "La dieta sigue el suministro estacional de frutas y semillas.",
+      "Las zonas inundadas aumentan el acceso a los alimentos terrestres."
+    ],
+    "distribution": "Cuencas del sur y centro de Sudamérica.",
+    "ecologicalImportance": "Transfiere materia vegetal a la cadena acuática y puede dispersar semillas."
+  },
+  "abelha-jatai": {
+    "commonName": "Abeja sin aguijón jataí",
+    "description": "Abeja social sin aguijón que vive en colonias y visita flores de diferentes ambientes del Pantanal.",
+    "physicalCharacteristics": "Cuerpo pequeño, oscuro con manchas amarillentas y alas transparentes.",
+    "habitat": "Huecos, cavidades, troncos y estructuras protegidas en zonas de vegetación.",
+    "behavior": "Vive en colonias, recolecta recursos florales y defiende la entrada al nido.",
+    "diet": "Néctar, polen y resinas vegetales.",
+    "curiosities": [
+      "La especie se cría tradicionalmente en meliponarios.",
+      "La entrada al nido puede tener una estructura de cerumen característica."
+    ],
+    "distribution": "Amplia distribución en América tropical, incluido Brasil.",
+    "ecologicalImportance": "Poliniza plantas nativas y agrícolas, contribuyendo a la regeneración vegetal."
+  },
+  "formiga-cortadeira": {
+    "commonName": "Hormiga cortadora de hojas",
+    "description": "Hormiga social que corta hojas y cultiva hongos dentro de nidos subterráneos.",
+    "physicalCharacteristics": "Castas con diferentes tamaños, mandíbulas fuertes y numerosas colonias.",
+    "habitat": "Suelos de campos, linderos, claros y zonas de vegetación.",
+    "behavior": "Organiza senderos, transporta fragmentos de plantas y mantiene la agricultura de hongos.",
+    "diet": "Hongo cultivado con material vegetal recolectado por la colonia.",
+    "curiosities": [
+      "Las castas comparten tareas de corte, transporte, defensa y cuidados.",
+      "Los nidos alteran la estructura del suelo y el ciclo."
+    ],
+    "distribution": "América del Sur, con amplia presencia en zonas brasileñas.",
+    "ecologicalImportance": "Mueve la materia vegetal y modifica el suelo, influyendo en la descomposición y los nutrientes."
+  },
+  "aranha-armadeira": {
+    "commonName": "Araña errante brasileña",
+    "description": "Araña errante nocturna que utiliza hojarasca, troncos y vegetación para refugiarse y cazar.",
+    "physicalCharacteristics": "Cuerpo robusto, patas largas y postura defensiva característica ante amenazas.",
+    "habitat": "Hojarasca, troncos, palmeras, bordes y ambientes con refugio vegetal.",
+    "behavior": "Caza sin red por la noche y reacciona a la defensiva cuando se le molesta.",
+    "diet": "Insectos, arañas y animales pequeños.",
+    "curiosities": [
+      "La postura defensiva explica el nombre popular.",
+      "No debe ser manipulado; La observación debe mantener una distancia segura."
+    ],
+    "distribution": "Regiones tropicales y subtropicales de América del Sur.",
+    "ecologicalImportance": "Controla las poblaciones de artrópodos en el sotobosque y la hojarasca."
+  }
+}

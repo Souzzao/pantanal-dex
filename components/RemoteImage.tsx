@@ -1,10 +1,12 @@
 import { Image as ExpoImage } from "expo-image";
-import { ActivityIndicator, StyleSheet, Text, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { ActivityIndicator, StyleSheet, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { Text } from "@/components/Localized";
 import { useRef, useState } from "react";
 
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { buildImageFallbackPlan } from "@/shared/image-fallback";
+import { speciesAssetByUri } from "@/shared/species-assets";
 
 type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
 
@@ -16,7 +18,8 @@ for (const animal of filterSpeciesCatalog()) {
 
 export function RemoteImage(props: RemoteImageProps) {
   const uri = props.source && !Array.isArray(props.source) && typeof props.source === "object" ? props.source.uri : undefined;
-  const next = buildImageFallbackPlan(props.source, [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
+  const bundled = uri ? speciesAssetByUri[uri] : undefined;
+  const next = buildImageFallbackPlan(bundled ?? props.source, bundled ? [] : [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
   const plan = useRef(next);
   if (plan.current.key !== next.key) plan.current = next;
   return <ImageAttempts key={plan.current.key} {...props} candidates={plan.current.candidates} />;

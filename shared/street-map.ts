@@ -1,3 +1,5 @@
+import { getActiveLocale, translateUi, type Locale } from './i18n';
+
 /**
  * Mapa de ruas (OpenStreetMap) desenhado com Leaflet dentro de uma WebView (Android/iOS) ou de um
  * iframe (web). Sem chave de API. Precisa de internet para baixar os "azulejos" (tiles) do mapa;
@@ -70,7 +72,7 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 }
 
 /** Estado serializável para a página (as funções de texto viram valores prontos). */
-export function serializeState(state: StreetMapState): string {
+export function serializeState(state: StreetMapState, locale: Locale = getActiveLocale()): string {
   return JSON.stringify({
     mode: state.mode,
     points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true })),
@@ -78,7 +80,7 @@ export function serializeState(state: StreetMapState): string {
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
     fitKey: state.fitKey,
-    labels: { high: state.labels.high, one: state.labels.records(1), many: state.labels.records(2).replace(/\d+/, "{n}"), pickHint: state.labels.pickHint },
+    labels: { high: translateUi(state.labels.high, locale), one: translateUi(state.labels.records(1), locale), many: translateUi(state.labels.records(2), locale).replace(/\d+/, "{n}"), pickHint: translateUi(state.labels.pickHint, locale), layers: translateUi('Nomes', locale), satellite: translateUi('Satélite', locale), borders: translateUi('Nomes e divisas', locale), zoomIn: translateUi('Zoom in', locale), zoomOut: translateUi('Zoom out', locale) },
   });
 }
 
@@ -228,6 +230,16 @@ const PAGE_SCRIPT = String.raw`
 
   window.__pantanalSetState = function (next) {
     state = typeof next === "string" ? JSON.parse(next) : next;
+    var toggle = document.querySelector('.leaflet-control-layers-toggle');
+    if (toggle) { toggle.setAttribute('data-label', state.labels.layers); toggle.title = state.labels.layers; }
+    var zoomIn = document.querySelector('.leaflet-control-zoom-in'), zoomOut = document.querySelector('.leaflet-control-zoom-out');
+    if (zoomIn) { zoomIn.title = state.labels.zoomIn; zoomIn.setAttribute('aria-label', state.labels.zoomIn); }
+    if (zoomOut) { zoomOut.title = state.labels.zoomOut; zoomOut.setAttribute('aria-label', state.labels.zoomOut); }
+    document.querySelectorAll('.leaflet-control-layers label span span').forEach(function (label) {
+      var value = label.textContent.trim();
+      if (value === 'Satélite') label.textContent = state.labels.satellite;
+      if (value === 'Nomes e divisas') label.textContent = state.labels.borders;
+    });
     document.getElementById("hint").textContent = state.labels.pickHint;
     if (state.mode !== "pick") document.getElementById("hint").style.display = "none";
     render();
@@ -250,7 +262,7 @@ html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
 #hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(25,89,70,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
 .leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#195946;font-weight:800;font-size:13px;text-decoration:none}
-.leaflet-control-layers-toggle::after{content:"Nomes"}
+.leaflet-control-layers-toggle::after{content:attr(data-label)}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
 .leaflet-control-attribution{font-size:9px;line-height:1.25;max-width:100%;background:rgba(255,255,255,.75)!important}
 .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px;font-size:20px}

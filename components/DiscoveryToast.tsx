@@ -1,12 +1,14 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AccessibilityInfo, Animated, Platform, Pressable, Text, View } from "react-native";
+import { AccessibilityInfo, Animated, Platform, View } from "react-native";
+import { Pressable, Text } from "@/components/Localized";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import { computeCollection, findNewDiscoveries, formatCollectionNumber } from "@/shared/collection";
 import type { Sighting } from "@/shared/pantanal";
 
@@ -40,10 +42,11 @@ const TEXT = {
  * Observa apenas o estado do caderno (useApp), sem depender do formulário de registro.
  */
 export function DiscoveryToast() {
+  const { locale } = useI18n();
   const { sightings, ready, settings } = useApp();
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const catalog = useMemo(() => filterSpeciesCatalog(), []);
+  const catalog = useMemo(() => localizedSpeciesCatalog(locale, ), [locale]);
   const previous = useRef<Sighting[] | null>(null);
   const opacity = useRef(new Animated.Value(0)).current;
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);

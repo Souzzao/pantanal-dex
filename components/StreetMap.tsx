@@ -1,3 +1,4 @@
+import { useI18n } from '@/contexts/LanguageContext';
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Linking, View, type StyleProp, type ViewStyle } from "react-native";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";
@@ -18,9 +19,10 @@ const pageHtml = () => (cachedHtml ??= buildStreetMapHtml({ js: LEAFLET_JS, css:
 
 /** Mapa de ruas (OpenStreetMap via Leaflet) numa WebView. Android/iOS. */
 export function StreetMap({ state, onEvent, style, accessibilityLabel }: StreetMapProps) {
+  const { locale } = useI18n();
   const ref = useRef<WebView>(null);
   const ready = useRef(false);
-  const serialized = useMemo(() => serializeState(state), [state]);
+  const serialized = useMemo(() => serializeState(state, locale), [state, locale]);
   const latest = useRef(serialized);
   latest.current = serialized;
 

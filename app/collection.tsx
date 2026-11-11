@@ -1,12 +1,14 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
+import { FlatList, ScrollView, View, useWindowDimensions } from "react-native";
+import { Pressable, Text } from "@/components/Localized";
 import { router } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import {
   computeCollection,
   filterCollectionEntries,
@@ -79,6 +81,7 @@ function ProgressBar({ percent, color, track, height = 8 }: { percent: number; c
 }
 
 export default function CollectionScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, settings } = useApp();
   const lang: Lang = settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt";
@@ -91,7 +94,7 @@ export default function CollectionScreen() {
   const [filter, setFilter] = useState<CollectionFilter>("all");
   const [group, setGroup] = useState<SpeciesGroup | "all">("all");
 
-  const catalog = useMemo(() => filterSpeciesCatalog(), []);
+  const catalog = useMemo(() => localizedSpeciesCatalog(locale, ), [locale]);
   const summary = useMemo(() => computeCollection(catalog, sightings), [catalog, sightings]);
   const visible = useMemo(() => filterCollectionEntries(summary.entries, { filter, group }), [summary, filter, group]);
 

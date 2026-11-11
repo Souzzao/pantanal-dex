@@ -1,15 +1,18 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 import { router } from "expo-router";
 
 import { ScreenContainer } from "@/components/screen-container";
-import { filterSpeciesCatalog, catalogCoverage } from "@/shared/catalog";
+import { localizedSpeciesCatalog, catalogCoverage } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 import { useApp } from "@/contexts/AppContext";
 import { RemoteImage } from "@/components/RemoteImage";
 import { computeCollection } from "@/shared/collection";
 
 export default function HomeScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { settings, sightings } = useApp();
   const english = settings.defaultLanguage === "English";
@@ -20,8 +23,8 @@ export default function HomeScreen() {
       ? { tagline: "GUÍA DE CAMPO", subtitle: "Conoce y registra los animales del Pantanal", offline: "Catálogo disponible sin conexión", offlineDetail: "Busca especies y consulta fichas sin conexión.", search: "Buscar animal por nombre", explore: "Explorar animales", sightings: "Mis avistamientos", featured: "Destacados", all: "Ver todos", collection: "Mi colección", localSpecies: "especies locales", publicMap: "Mapa público", publicMapDetail: "Registros públicos y áreas de alta incidencia", discovered: "descubiertas", level: "Nivel" }
       : { tagline: "GUIA DE CAMPO", subtitle: "Conheça e registre os animais do Pantanal", offline: "Catálogo disponível offline", offlineDetail: "Pesquise espécies e consulte as fichas mesmo sem conexão.", search: "Buscar animal pelo nome", explore: "Explorar animais", sightings: "Meus avistamentos", featured: "Em destaque", all: "Ver todos", collection: "Minha coleção", localSpecies: "espécies locais", publicMap: "Mapa público", publicMapDetail: "Registros públicos e áreas de alta incidência", discovered: "descobertas", level: "Nível" };
   const [query, setQuery] = useState("");
-  const collection = useMemo(() => computeCollection(filterSpeciesCatalog(), sightings), [sightings]);
-  const highlights = useMemo(() => filterSpeciesCatalog({ query }).slice(0, 4), [query]);
+  const collection = useMemo(() => computeCollection(localizedSpeciesCatalog(locale, ), sightings), [sightings, locale]);
+  const highlights = useMemo(() => localizedSpeciesCatalog(locale, { query }).slice(0, 4), [query, locale]);
 
   return <ScreenContainer className="px-5" containerClassName="bg-background">
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>

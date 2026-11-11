@@ -1,15 +1,18 @@
-import { Alert, Linking, Pressable, Text, View } from "react-native";
+import { useI18n } from "@/contexts/LanguageContext";
+import { Linking, View } from "react-native";
+import { Alert, Pressable, Text } from "@/components/Localized";
 import { router } from "expo-router";
 
 import NativeMapView from "@/components/NativeMapView";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import { roundToPublicLocationGrid } from "@/shared/location";
 import { useColors } from "@/hooks/use-colors";
 
 export default function MapScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, ready, settings } = useApp();
   const english = settings.defaultLanguage === "English";
@@ -80,7 +83,7 @@ export default function MapScreen() {
             "Não foi possível abrir o mapa. Seus registros permanecem salvos no aparelho.",
         };
   const catalogById = new Map(
-    filterSpeciesCatalog().map((item) => [item.id, item.commonName]),
+    localizedSpeciesCatalog(locale, ).map((item) => [item.id, item.commonName]),
   );
   const located = sightings.filter(
     (item) => item.latitude !== undefined && item.longitude !== undefined,

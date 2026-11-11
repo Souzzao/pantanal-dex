@@ -1,23 +1,18 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useMemo, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, ScrollView, View } from "react-native";
+import { Pressable, Text, TextInput } from "@/components/Localized";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups } from "@/shared/pantanal";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SightingsScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, ready, settings } = useApp();
   const english = settings.defaultLanguage === "English";
@@ -63,8 +58,8 @@ export default function SightingsScreen() {
   const [onlyLocated, setOnlyLocated] = useState(false);
 
   const catalogById = useMemo(
-    () => new Map(filterSpeciesCatalog().map((item) => [item.id, item])),
-    [],
+    () => new Map(localizedSpeciesCatalog(locale, ).map((item) => [item.id, item])),
+    [locale],
   );
   const summary = useMemo(
     () => ({
@@ -112,16 +107,7 @@ export default function SightingsScreen() {
           `${a.date}T${a.time || "00:00"}`,
         ),
       );
-  }, [
-    catalogById,
-    environmentFilter,
-    groupFilter,
-    onlyLocated,
-    periodFilter,
-    query,
-    sightings,
-    speciesFilter,
-  ]);
+  }, [catalogById, environmentFilter, groupFilter, onlyLocated, periodFilter, query, sightings, speciesFilter, ]);
 
   const clearFilters = () => {
     setQuery("");

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { Pressable, Text } from "@/components/Localized";
 import { useColors } from "@/hooks/use-colors";
 
 type CollabState = {

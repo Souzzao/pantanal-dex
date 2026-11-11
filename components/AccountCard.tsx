@@ -1,5 +1,6 @@
 import { router } from "expo-router";
-import { Alert, Platform, Pressable, Text, View } from "react-native";
+import { Platform, View } from "react-native";
+import { Alert, Pressable, Text } from "@/components/Localized";
 
 import { useApp } from "@/contexts/AppContext";
 import { useAuth } from "@/contexts/AuthContext";

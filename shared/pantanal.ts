@@ -43,7 +43,7 @@ export type Sighting = {
 
 export const groups: SpeciesGroup[] = ["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"];
 export const environments: Environment[] = ["Rios e corixos", "Áreas alagadas", "Campos", "Matas", "Bordas de mata"];
-export const languages = ["Português", "English", "Español"];
+export const languages = ["Português", "English", "Español", "Deutsch"];
 
 const commons = (file: string, author: string, license: string) => ({
   uri: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=900`,

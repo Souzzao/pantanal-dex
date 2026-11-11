@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Platform } from "react-native";
 
@@ -149,7 +150,7 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
     },
   }), [sightings, creationLedger, canWriteSightings, settings, ready, storage]);
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={value}><LanguageProvider language={settings.defaultLanguage}>{children}</LanguageProvider></AppContext.Provider>;
 }
 
 export function useApp() { const context = useContext(AppContext); if (!context) throw new Error("useApp must be used within AppProvider"); return context; }

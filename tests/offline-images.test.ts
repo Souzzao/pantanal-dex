@@ -16,7 +16,7 @@ describe("fotos do catálogo para uso offline", () => {
   it("inclui todas as fotos das galerias no modo completo", () => {
     const all = catalogImageUrls(catalog, "all");
     const covers = catalogImageUrls(catalog, "covers");
-    expect(all.length).toBeGreaterThan(covers.length);
+    expect(all).toEqual([...new Set(catalog.flatMap(animal => animal.images.map(image => image.uri)))]);
     expect(covers.every((uri) => all.includes(uri))).toBe(true);
     expect(all.every((uri) => uri.startsWith("https://"))).toBe(true);
   });

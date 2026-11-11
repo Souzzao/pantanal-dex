@@ -1,12 +1,14 @@
+import { useI18n } from "@/contexts/LanguageContext";
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Image, Platform, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, Platform, ScrollView, View } from "react-native";
+import { Alert, Pressable, Text, TextInput } from "@/components/Localized";
 import { router, useLocalSearchParams } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { getLocalTodayISODate, UNKNOWN_SPECIES_ID, type Sighting, type Visibility } from "@/shared/pantanal";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { localizedSpeciesCatalog } from "@/shared/catalog";
 import { getNativePermissionCopy, type NativeLanguage } from "@/shared/native-permissions";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
@@ -16,6 +18,7 @@ import { persistSightingPhoto, SightingPhotoError, MAX_SIGHTING_PHOTO_BYTES, typ
 import { SightingLocationModal } from "@/components/SightingLocationModal";
 
 export default function NewSightingScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { id, speciesId } = useLocalSearchParams<{ id?: string; speciesId?: string }>();
   const { sightings, settings, ready, canWriteSightings, creationLedger, addSighting, updateSighting } = useApp();
@@ -59,8 +62,8 @@ export default function NewSightingScreen() {
 
   const visibleSpecies = useMemo(() => {
     const normalized = speciesQuery.trim().toLocaleLowerCase("pt-BR");
-    return filterSpeciesCatalog({ query: normalized });
-  }, [speciesQuery]);
+    return localizedSpeciesCatalog(locale, { query: normalized });
+  }, [speciesQuery, locale]);
 
   useEffect(() => {
     let active = true;

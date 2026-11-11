@@ -1,5 +1,8 @@
+import Constants from 'expo-constants';
+import { useI18n } from "@/contexts/LanguageContext";
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { Alert, Pressable, Text } from "@/components/Localized";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
@@ -11,10 +14,11 @@ import { createExportGeoJson } from "@/shared/geojson";
 import { OfflineImagesCard } from "@/components/OfflineImagesCard";
 import { AccountCard } from "@/components/AccountCard";
 import { languages, validateSpeciesCatalog } from "@/shared/pantanal";
-import { catalogCoverage, catalogLicenseAudit, catalogReview, filterSpeciesCatalog } from "@/shared/catalog";
+import { catalogCoverage, catalogLicenseAudit, catalogReview, localizedSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SettingsScreen() {
+  const { locale } = useI18n();
   const colors = useColors();
   const { sightings, settings, ready, storage, setSettings, importSightings, clearSightings } = useApp();
   const english = settings.defaultLanguage === "English";
@@ -24,7 +28,7 @@ export default function SettingsScreen() {
   const [importing, setImporting] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const catalogIssues = useMemo(() => validateSpeciesCatalog(), []);
-  const catalogById = useMemo(() => new Map(filterSpeciesCatalog().map((item) => [item.id, item.commonName])), []);
+  const catalogById = useMemo(() => new Map(localizedSpeciesCatalog(locale, ).map((item) => [item.id, item.commonName])), [locale]);
 
   useEffect(() => {
     setSelectedIds((current) => current.filter((id) => sightings.some((item) => item.id === id)).length ? current.filter((id) => sightings.some((item) => item.id === id)) : sightings.map((item) => item.id));
@@ -55,7 +59,7 @@ export default function SettingsScreen() {
     }
     setExporting(true);
     try {
-      const content = format === "json" ? createExportJson(selectedSightings) : format === "geojson" ? createExportGeoJson(selectedSightings, filterSpeciesCatalog()) : createExportCsv(selectedSightings);
+      const content = format === "json" ? createExportJson(selectedSightings) : format === "geojson" ? createExportGeoJson(selectedSightings, localizedSpeciesCatalog(locale, )) : createExportCsv(selectedSightings);
       const uri = `${FileSystem.cacheDirectory}pantanal-dex-avistamentos.${format}`;
       await FileSystem.writeAsStringAsync(uri, content);
       if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri);
@@ -74,7 +78,8 @@ export default function SettingsScreen() {
     }
     setImporting(true);
     try {
-      const pickResult = await DocumentPicker.getDocumentAsync({ type: "application/json", copyToCacheDirectory: true });
+      // Android providers may report JSON backups as octet-stream. Validate their contents below.
+      const pickResult = await DocumentPicker.getDocumentAsync({ type: "*/*", copyToCacheDirectory: true });
       if (pickResult.canceled) return;
       const asset = pickResult.assets[0];
       const content = await FileSystem.readAsStringAsync(asset.uri);
@@ -121,6 +126,8 @@ export default function SettingsScreen() {
     {ready && (storage.readError || storage.writeError || storage.sightings === "corrupted" || storage.sightings === "unsupported-version" || storage.settings === "corrupted" || storage.settings === "unsupported-version") && <View style={{ backgroundColor: colors.surface, borderColor: colors.warning, borderWidth: 1, borderRadius: 14, padding: 13, marginBottom: 22 }} accessibilityRole="alert" accessibilityLiveRegion="polite"><Text style={{ color: colors.foreground, fontWeight: "800" }}>{english ? "Local storage warning" : spanish ? "Aviso del almacenamiento local" : "Atenção ao armazenamento local"}</Text><Text style={{ color: colors.muted, marginTop: 5 }}>{labels.storageIssue}</Text></View>}
     <View style={{ backgroundColor: colors.surface, borderColor: catalogIssues.length || catalogReview.pendingBatches ? colors.warning : colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginBottom: 22 }} accessibilityRole="summary"><Text style={{ color: colors.foreground, fontWeight: "800" }}>{catalogIssues.length ? "Revisão do catálogo necessária" : catalogReview.pendingBatches ? labels.reviewTitle : "Catálogo local íntegro"}</Text><Text style={{ color: colors.muted, marginTop: 4 }}>{catalogIssues.length ? `${catalogIssues.length} pendência(s) editorial(is) detectada(s).` : catalogReview.pendingBatches ? labels.reviewDetail(catalogReview.pendingSpecies, catalogReview.pendingBatches) : `${catalogCoverage.species} espécies com imagens, créditos e fontes estruturadas.`}</Text><Text style={{ color: colors.muted, marginTop: 5 }}>{labels.licenseDetail(catalogLicenseAudit.commercialImages, catalogLicenseAudit.images)}</Text></View>
     <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>Idioma padrão</Text>
+    <Text style={{ color: colors.muted, marginTop: 6, marginBottom: 4 }}>Telas e fichas disponíveis sem internet em português, inglês, espanhol e alemão.</Text>
+    <Text style={{ color: colors.muted, fontSize: 12 }}>Tradução automática; nomes científicos e créditos são preservados.</Text>
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 12, marginBottom: 24 }}>{languages.map((language) => <Pressable key={language} onPress={() => setSettings({ ...settings, defaultLanguage: language })} accessibilityRole="radio" accessibilityState={{ selected: settings.defaultLanguage === language }} style={{ backgroundColor: settings.defaultLanguage === language ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 14, paddingVertical: 10 }}><Text style={{ color: settings.defaultLanguage === language ? "#fff" : colors.foreground, fontWeight: "700" }}>{language}</Text></Pressable>)}</View>
     <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>Idiomas na barra rápida</Text>
     <Text style={{ color: colors.muted, marginTop: 5, marginBottom: 12 }}>Toque para ativar e use as setas para definir a ordem.</Text>
@@ -135,6 +142,6 @@ export default function SettingsScreen() {
     <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>GeoJSON inclui só os registros com localização e abre em programas de mapa (QGIS, geojson.io, Google Earth).</Text>
     <Pressable onPress={importData} disabled={!ready || importing || exporting} accessibilityRole="button" accessibilityLabel="Importar JSON do PantanalDex" accessibilityState={{ disabled: !ready || importing || exporting, busy: importing }} style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting ? 0.6 : 1 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{importing ? "Lendo arquivo…" : "Importar JSON do PantanalDex"}</Text></Pressable>
     <Pressable onPress={clearLocalSightings} disabled={!ready || importing || exporting || sightings.length === 0} accessibilityRole="button" accessibilityLabel="Apagar caderno local" accessibilityState={{ disabled: !ready || importing || exporting || sightings.length === 0 }} style={{ borderColor: colors.error, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting || sightings.length === 0 ? 0.5 : 1 }}><Text style={{ color: colors.error, textAlign: "center", fontWeight: "800" }}>Apagar caderno local</Text></Pressable>
-    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex 1.0</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Catálogo local e caderno de campo para conhecer e registrar os animais do Pantanal.</Text></View>
+    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex {Constants.expoConfig?.version ?? '1.3.0'}</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Catálogo local e caderno de campo para conhecer e registrar os animais do Pantanal.</Text></View>
   </ScrollView></ScreenContainer>;
 }
