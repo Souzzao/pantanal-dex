@@ -1,14 +1,24 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
+import { getLanguageCode, localizeSpecies } from "./i18n";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
 
 const catalogLoader = createCatalogLoader([species, catalogSpecies]);
 
+const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+/** Catálogo no idioma escolhido. A busca aceita o nome em português, no idioma atual ou o nome científico. */
 export function filterSpeciesCatalog(filters: CatalogFilters = {}): Species[] {
-  return catalogLoader.search(filters);
+  if (getLanguageCode() === "pt") return catalogLoader.search(filters);
+  const { query, ...rest } = filters;
+  const localized = catalogLoader.search(rest).map((item) => localizeSpecies(item));
+  const wanted = normalizeQuery(query ?? "");
+  if (!wanted) return localized;
+  const matchedInPortuguese = new Set(catalogLoader.search(filters).map((item) => item.id));
+  return localized.filter((item) => matchedInPortuguese.has(item.id) || normalizeQuery(item.commonName).includes(wanted));
 }
 
 export function sortSpeciesCatalog(items: Species[], sort: CatalogSort = "name"): Species[] {
