@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
 
 import { ScreenContainer } from "@/components/screen-container";

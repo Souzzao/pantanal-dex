@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Alert, FlatList, Pressable, Text, View } from "react-native";
+import { Alert, FlatList, Pressable, View } from "react-native";
+import { Text } from "@/components/T";
 import { router } from "expo-router";
 
 import { ScreenContainer } from "@/components/screen-container";

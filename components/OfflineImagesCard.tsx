@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
+import { Text } from "@/components/T";
 import { Image as ExpoImage } from "expo-image";
 
 import { useColors } from "@/hooks/use-colors";

@@ -1,4 +1,5 @@
-import { Alert, Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
+import { Text } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
@@ -7,6 +8,7 @@ import { useApp } from "@/contexts/AppContext";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
 import { computeCollection, formatCollectionNumber } from "@/shared/collection";
+import { hasSpeciesTranslation } from "@/shared/i18n";
 
 export default function SpeciesDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -37,7 +39,7 @@ export default function SpeciesDetailScreen() {
     <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar para animais"><Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text></Pressable>
     <Text accessibilityRole="header" style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Idioma da ficha</Text>
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingBottom: 4 }}>{settings.quickLanguages.map((language) => <Pressable key={language} onPress={() => setSettings({ ...settings, defaultLanguage: language })} accessibilityRole="radio" accessibilityState={{ selected: selectedLanguage === language }} style={{ backgroundColor: selectedLanguage === language ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 8 }}><Text style={{ color: selectedLanguage === language ? colors.background : colors.foreground, fontWeight: "700", fontSize: 12 }}>{language}</Text></Pressable>)}</ScrollView>
-    {selectedLanguage !== "Português" && <Text style={{ color: colors.warning, fontSize: 12, lineHeight: 18, marginTop: 8 }}>Esta ficha ainda está disponível em Português. Você pode adicionar novos idiomas em Configurações.</Text>}
+    {!hasSpeciesTranslation(animal.id) && <Text style={{ color: colors.warning, fontSize: 12, lineHeight: 18, marginTop: 8 }}>Esta ficha ainda está disponível só em português.</Text>}
     <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20, marginTop: 14 }} contentContainerStyle={{ gap: 8 }}>{animal.images.map((image, index) => <RemoteImage key={image.uri} source={{ uri: image.uri }} label={animal.commonName} accessibilityLabel={`Imagem ${index + 1} de ${animal.images.length} de ${animal.commonName}`} style={{ width: 340, height: 230, backgroundColor: colors.border }} />)}</ScrollView>
     <Text style={{ color: colors.muted, fontSize: 12, marginTop: 8 }}>{animal.images.length} imagens · deslize para explorar</Text>
     {collectionEntry && <Pressable onPress={() => router.push("/collection" as any)} accessibilityRole="button" accessibilityLabel={`Espécie ${formatCollectionNumber(collectionEntry.number)} da coleção, ${collectionEntry.discovered ? "descoberta" : "ainda não avistada"}. Abrir minha coleção`} style={{ flexDirection: "row", alignItems: "center", gap: 8, marginTop: 18 }}><Text style={{ color: colors.muted, fontWeight: "800" }}>{formatCollectionNumber(collectionEntry.number)}</Text><Text style={{ color: collectionEntry.discovered ? colors.background : colors.muted, backgroundColor: collectionEntry.discovered ? colors.primary : colors.surface, borderColor: collectionEntry.discovered ? colors.primary : colors.border, borderWidth: 1, borderRadius: 12, overflow: "hidden", paddingHorizontal: 10, paddingVertical: 4, fontSize: 12, fontWeight: "800" }}>{collectionEntry.discovered ? `Descoberta${collectionEntry.firstSeenDate ? ` em ${collectionEntry.firstSeenDate.split("-").reverse().join("/")}` : ""}` : "Ainda não avistada"}</Text></Pressable>}

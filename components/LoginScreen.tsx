@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";

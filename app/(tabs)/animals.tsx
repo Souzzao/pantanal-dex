@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups } from "@/shared/pantanal";

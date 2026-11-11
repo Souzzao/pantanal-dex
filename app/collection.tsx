@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
+import { FlatList, Pressable, ScrollView, View, useWindowDimensions } from "react-native";
+import { Text } from "@/components/T";
 import { router } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";

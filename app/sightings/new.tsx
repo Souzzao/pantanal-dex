@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Image, Platform, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Alert, Image, Platform, Pressable, ScrollView, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";

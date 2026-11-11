@@ -1,13 +1,6 @@
 import { useMemo, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, Pressable, ScrollView, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";

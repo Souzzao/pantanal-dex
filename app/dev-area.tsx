@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";

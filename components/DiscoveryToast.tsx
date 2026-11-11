@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AccessibilityInfo, Animated, Platform, Pressable, Text, View } from "react-native";
+import { AccessibilityInfo, Animated, Platform, Pressable, View } from "react-native";
+import { Text } from "@/components/T";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

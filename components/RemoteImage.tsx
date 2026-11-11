@@ -1,5 +1,6 @@
 import { Image as ExpoImage } from "expo-image";
-import { ActivityIndicator, StyleSheet, Text, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { ActivityIndicator, StyleSheet, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { Text } from "@/components/T";
 import { useRef, useState } from "react";
 
 import { useColors } from "@/hooks/use-colors";

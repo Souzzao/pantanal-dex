@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
+import { Text } from "@/components/T";
 import Svg, { Path, Rect } from "react-native-svg";
 
 import { useColors } from "@/hooks/use-colors";

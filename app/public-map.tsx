@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import { Pressable, ScrollView, Switch, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, Switch, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
 
 import { PublicMap, type PublicMapLabels } from "@/components/PublicMap";

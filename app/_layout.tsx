@@ -9,7 +9,7 @@ import { ActivityIndicator, Platform, View } from "react-native";
 import { useColors } from "@/hooks/use-colors";
 import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
-import { AppProvider } from "@/contexts/AppContext";
+import { AppProvider, useApp } from "@/contexts/AppContext";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { LoginScreen } from "@/components/LoginScreen";
 import { DevCollabPanel } from "@/components/DevCollabPanel";
@@ -24,6 +24,7 @@ import {
 import type { EdgeInsets, Metrics, Rect } from "react-native-safe-area-context";
 
 import { trpc, createTRPCClient } from "@/lib/trpc";
+import { installAlertTranslation } from "@/lib/translate-alerts";
 import {
   initManusRuntime,
   subscribeSafeAreaInsets,
@@ -35,6 +36,8 @@ const DEFAULT_WEB_FRAME: Rect = { x: 0, y: 0, width: 0, height: 0 };
 export const unstable_settings = {
   anchor: "(tabs)",
 };
+
+installAlertTranslation();
 
 export default function RootLayout() {
   const initialInsets = initialWindowMetrics?.insets ?? DEFAULT_WEB_INSETS;
@@ -100,10 +103,12 @@ export default function RootLayout() {
           {/* in order for ios apps tab switching to work properly, use presentation: "fullScreenModal" for login page, whenever you decide to use presentation: "modal*/}
           <AuthGate>
             <PublicationsProvider>
+            <LanguageScope>
             <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen name="oauth/callback" />
             </Stack>
+            </LanguageScope>
             <DiscoveryToast />
             </PublicationsProvider>
           </AuthGate>
@@ -152,6 +157,12 @@ function AccountScopedApp({ children }: { children: React.ReactNode }) {
   const { account } = useAuth();
   const namespace = account?.id;
   return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}>{children}</AppProvider>;
+}
+
+/** Trocar o idioma remonta as telas, para que todos os textos e fichas saiam no idioma novo. */
+function LanguageScope({ children }: { children: React.ReactNode }) {
+  const { settings } = useApp();
+  return <React.Fragment key={settings.defaultLanguage}>{children}</React.Fragment>;
 }
 
 /** Login obrigatório: sem conta aberta, mostra a tela de entrar. */
