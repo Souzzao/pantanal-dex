@@ -75,7 +75,7 @@ export default function SettingsScreen() {
     }
     setImporting(true);
     try {
-      const pickResult = await DocumentPicker.getDocumentAsync({ type: "application/json", copyToCacheDirectory: true });
+      const pickResult = await DocumentPicker.getDocumentAsync({ type: ["application/json", "text/plain", "application/octet-stream", "*/*"], copyToCacheDirectory: true });
       if (pickResult.canceled) return;
       const asset = pickResult.assets[0];
       const content = await FileSystem.readAsStringAsync(asset.uri);
