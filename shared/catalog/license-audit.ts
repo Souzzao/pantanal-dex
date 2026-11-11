@@ -28,7 +28,7 @@ export function createLicenseAuditReport(items: Species[]): LicenseAuditReport {
     const blockedImages = item.images.filter((image) => BLOCKED_LICENSE.test(image.license) || !COMMERCIAL_LICENSE.test(image.license)).length;
     const invalidImageUrls = item.images.filter((image) => !/^https?:\/\//i.test(image.uri) || !/^https?:\/\//i.test(image.sourceUrl)).length;
     const blockers: string[] = [];
-    if (item.images.length !== 3) blockers.push("quantidade de imagens diferente de três");
+    if (item.images.length < 1 || item.images.length > 3) blockers.push("quantidade de imagens fora de um a três");
     if (missingCredits) blockers.push(`${missingCredits} imagem(ns) sem crédito/licença`);
     if (blockedImages) blockers.push(`${blockedImages} imagem(ns) com licença incompatível ou não confirmada`);
     if (invalidImageUrls) blockers.push(`${invalidImageUrls} imagem(ns) com URL inválida`);

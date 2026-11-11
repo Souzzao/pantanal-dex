@@ -13,9 +13,9 @@ function sourceFiles(dir: string): string[] {
 }
 
 describe("espécies sem foto não derrubam as telas", () => {
-  it("o catálogo tem espécies sem nenhuma imagem (ex.: Jaú, sem foto com licença segura)", () => {
+  it("toda espécie do catálogo tem pelo menos uma imagem", () => {
     const withoutImages = filterSpeciesCatalog().filter((item) => item.images.length === 0).map((item) => item.id);
-    expect(withoutImages).toContain("jau");
+    expect(withoutImages).toEqual([]);
   });
 
   it("nenhuma tela acessa images[0].uri sem verificar se a imagem existe", () => {
