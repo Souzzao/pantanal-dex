@@ -46,7 +46,7 @@ export const environments: Environment[] = ["Rios e corixos", "Áreas alagadas",
 export const languages = ["Português", "English", "Español", "Deutsch"];
 
 const commons = (file: string, author: string, license: string) => ({
-  uri: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=900`,
+  uri: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=500`,
   author,
   license,
   sourceUrl: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file.replace(/ /g, "_"))}`,

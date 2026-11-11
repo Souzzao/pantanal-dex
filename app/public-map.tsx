@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useEffect, useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, Switch, View } from "react-native";
 import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
@@ -11,6 +11,8 @@ import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
+import * as Location from "expo-location";
+import { commonsThumb } from "@/shared/image-url";
 import {
   buildSampleRecords,
   filterByDate,
@@ -108,6 +110,21 @@ export default function PublicMapScreen() {
   const [noTiles, setNoTiles] = useState(false);
   const [fitKey, setFitKey] = useState(1);
 
+  // Onde a pessoa está: o mapa abre ali, sem precisar procurar.
+  const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const permission = await Location.requestForegroundPermissionsAsync();
+        if (!permission.granted) return;
+        const current = (await Location.getLastKnownPositionAsync()) ?? (await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }));
+        if (!cancelled && current) { setMyLocation({ latitude: current.coords.latitude, longitude: current.coords.longitude }); setFitKey((k) => k + 1); }
+      } catch { /* sem GPS: o mapa enquadra os registros */ }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+  const coverBySpecies = useMemo(() => new Map(catalog.flatMap((item) => (item.images[0] ? [[item.id, commonsThumb(item.images[0].uri, 120)] as const] : []))), [catalog]);
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
   const records = useMemo(() => {
@@ -131,13 +148,14 @@ export default function PublicMapScreen() {
 
   const mapState = useMemo<StreetMapState>(() => ({
     mode: "public",
-    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending" })),
+    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending", kind: item.speciesId, image: coverBySpecies.get(item.speciesId) })),
+    center: myLocation,
     pick: null,
     selectedIds,
     highIncidenceMin: HIGH_INCIDENCE_MIN,
     fitKey,
     labels: { high: x.high, records: x.records, pickHint: "" },
-  }), [records, selectedIds, fitKey, x]);
+  }), [records, selectedIds, fitKey, x, coverBySpecies, myLocation]);
 
   const onMapEvent = useCallback((event: StreetMapEvent) => {
     if (event.type === "select") setSelectedIds(event.ids);
@@ -218,7 +236,6 @@ export default function PublicMapScreen() {
                 {showSamples && <Text style={{ color: colors.muted, fontSize: 12 }}>{t.samplesHint}</Text>}
                 <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
                   {chip(x.streets, mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); clearSelection(); })}
-                  {chip(x.offlineMap, mapKind === "offline", () => { setMapKind("offline"); clearSelection(); })}
                   {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>

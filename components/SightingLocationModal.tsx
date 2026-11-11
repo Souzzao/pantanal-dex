@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";
+import * as Location from "expo-location";
 import { PantanalMap } from "./PantanalMap";
 import { ScreenContainer } from "./screen-container";
 import { StreetMap } from "./StreetMap";
@@ -22,6 +23,22 @@ export function SightingLocationModal({ visible, initial, onClose, onConfirm }: 
     setLatitude(initial ? String(initial.latitude) : "");
     setLongitude(initial ? String(initial.longitude) : "");
     setFitKey((k) => k + 1);
+    setMapKind("streets");
+    if (initial) return;
+    // Sem ponto escolhido: abre o mapa onde a pessoa está e já marca ali (ela ajusta se quiser).
+    let cancelled = false;
+    (async () => {
+      try {
+        const permission = await Location.requestForegroundPermissionsAsync();
+        if (!permission.granted) return;
+        const current = (await Location.getLastKnownPositionAsync()) ?? (await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }));
+        if (cancelled || !current) return;
+        setLatitude(current.coords.latitude.toFixed(6));
+        setLongitude(current.coords.longitude.toFixed(6));
+        setFitKey((k) => k + 1);
+      } catch { /* sem GPS: a pessoa toca no mapa */ }
+    })();
+    return () => { cancelled = true; };
   }, [visible, initial?.latitude, initial?.longitude]); // eslint-disable-line react-hooks/exhaustive-deps
   const parse = (value: string) => value.trim() ? Number(value.replace(",", ".")) : NaN;
   const point = { latitude: parse(latitude), longitude: parse(longitude) };
@@ -44,17 +61,12 @@ export function SightingLocationModal({ visible, initial, onClose, onConfirm }: 
     else if (event.type === "tiles" && !event.ok) { setNoTiles(true); setMapKind("offline"); }
   }, []);
 
-  const toggle = (label: string, active: boolean, onPress: () => void) => <Pressable onPress={onPress} accessibilityRole="button" accessibilityState={{ selected: active }} style={{ paddingHorizontal: 12, minHeight: 36, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: active ? colors.primary : colors.border, backgroundColor: active ? colors.primary : colors.surface }}><Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "700", fontSize: 13 }}>{label}</Text></Pressable>;
 
   return <Modal visible={visible} animationType="slide" onRequestClose={onClose}><ScreenContainer edges={["top", "left", "right", "bottom"]}><View style={{ flex: 1 }}>
     <View style={{ paddingHorizontal: 16 }}>
       <Pressable onPress={onClose} accessibilityRole="button" style={{ paddingVertical: 10 }}><Text style={{ color: colors.primary, fontWeight: "800" }}>‹ Voltar ao registro</Text></Pressable>
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 22, fontWeight: "800" }}>Onde foi o avistamento?</Text>
       <Text style={{ color: colors.muted, marginBottom: 8 }}>Toque no mapa (ou arraste o marcador). Pode ser em qualquer lugar do mundo.</Text>
-      <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
-        {toggle("Satélite", mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); })}
-        {toggle("Mapa offline", mapKind === "offline", () => setMapKind("offline"))}
-      </View>
       {noTiles && mapKind === "offline" && <Text style={{ color: colors.warning, marginBottom: 6 }}>Sem internet para o satélite: usando o mapa offline.</Text>}
     </View>
     <View style={{ flex: 1, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.border }}>

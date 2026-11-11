@@ -10,7 +10,7 @@
 export type MapMode = "public" | "pick" | "points";
 
 /** Ponto enviado ao mapa. No modo público as coordenadas já vêm generalizadas (célula de 0,1°). */
-export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean };
+export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean; /** Foto pequena do animal, mostrada dentro da bolinha. */ image?: string; /** Agrupa registros do mesmo animal. */ kind?: string };
 
 export type StreetMapState = {
   mode: MapMode;
@@ -23,6 +23,8 @@ export type StreetMapState = {
   highIncidenceMin: number;
   /** Mude o número para pedir ao mapa que enquadre todos os pontos de novo. */
   fitKey: number;
+  /** Onde a pessoa está (GPS): o mapa abre ali e mostra um ponto azul. */
+  center?: { latitude: number; longitude: number } | null;
   /** Textos curtos usados dentro do mapa (idioma do app). */
   labels: { high: string; records: (count: number) => string; pickHint: string };
 };
@@ -73,11 +75,12 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
-    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true })),
+    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "" })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
     fitKey: state.fitKey,
+    center: state.center && Number.isFinite(state.center.latitude) && Number.isFinite(state.center.longitude) ? { lat: state.center.latitude, lon: state.center.longitude } : null,
     labels: { high: state.labels.high, one: state.labels.records(1), many: state.labels.records(2).replace(/\d+/, "{n}"), pickHint: state.labels.pickHint },
   });
 }
@@ -145,6 +148,7 @@ const PAGE_SCRIPT = String.raw`
 
   function fitAll() {
     var pts = state.mode === "pick" && state.pick ? [[state.pick.lat, state.pick.lon]] : state.points.map(function (p) { return [p.lat, p.lon]; });
+    if (state.center && (state.mode === "pick" ? !state.pick : true)) { map.setView([state.center.lat, state.center.lon], state.mode === "pick" ? 15 : 11); return; }
     if (!pts.length) return;
     if (pts.length === 1) map.setView(pts[0], state.mode === "pick" ? 14 : 9);
     else map.fitBounds(L.latLngBounds(pts).pad(0.25), { maxZoom: 11 });
@@ -154,10 +158,10 @@ const PAGE_SCRIPT = String.raw`
   // célula pública de 0,1° vira um quadrado (o registro nunca aparece como ponto exato).
   function drawPublic() {
     var zoom = map.getZoom();
-    var radius = 56, groups = {};
-    var cellMode = zoom >= 10;
+    var radius = 46, groups = {};
+    var cellMode = zoom >= 12;
     if (cellMode) {
-      state.points.forEach(function (p) { var key = p.lat.toFixed(1) + ":" + p.lon.toFixed(1); (groups[key] = groups[key] || []).push(p); });
+      state.points.forEach(function (p) { var key = p.lat.toFixed(2) + ":" + p.lon.toFixed(2); (groups[key] = groups[key] || []).push(p); });
     } else {
       var clusters = [];
       state.points.forEach(function (p) {
@@ -179,13 +183,24 @@ const PAGE_SCRIPT = String.raw`
       var ids = items.map(function (p) { return p.id; });
       var title = countLabel(items.length) + (high ? " · " + state.labels.high : "");
       if (cellMode) {
-        var c = items[0], h = 0.05;
-        L.rectangle([[c.lat - h, c.lon - h], [c.lat + h, c.lon + h]], { color: isSelected ? "#FACC15" : "#ffffff", weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.45 : 0.32 })
+        var c = items[0];
+        L.circle([c.lat, c.lon], { radius: 600, color: isSelected ? "#FACC15" : "#ffffff", weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.45 : 0.32 })
           .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
       }
-      var size = Math.min(58, 30 + Math.round(Math.sqrt(items.length) * 6));
       var allPending = items.every(function (p) { return p.pending; });
-      var html = '<div class="bubble' + (high ? " high" : "") + (allPending ? " pending" : "") + (isSelected ? " sel" : "") + '" style="width:' + size + "px;height:" + size + "px;line-height:" + size + 'px">' + items.length + "</div>";
+      var kinds = {}; items.forEach(function (p) { kinds[p.kind || p.id] = true; });
+      var sameAnimal = Object.keys(kinds).length === 1 && items[0].img;
+      var size = sameAnimal ? 52 : Math.min(62, 44 + Math.round(Math.sqrt(items.length) * 4));
+      var cls = "bubble" + (high ? " high" : "") + (allPending ? " pending" : "") + (isSelected ? " sel" : "");
+      var box = 'style="width:' + size + "px;height:" + size + "px;line-height:" + (size - 6) + 'px"';
+      var html;
+      if (sameAnimal) {
+        // Um animal só neste ponto: a bolinha mostra a foto dele (com a contagem, se houver mais de um registro).
+        html = '<div class="' + cls + ' photo" ' + box + '><img src="' + esc(items[0].img) + '" alt="" onerror="this.style.display=\'none\'">' + (items.length > 1 ? '<span class="count">' + items.length + "</span>" : "") + "</div>";
+      } else {
+        // Vários animais no mesmo ponto: ícone de grupo com a contagem.
+        html = '<div class="' + cls + ' multi" ' + box + '><span class="paws">&#128062;</span><span class="count">' + items.length + "</span></div>";
+      }
       L.marker([lat, lon], { icon: L.divIcon({ html: html, className: "", iconSize: [size, size] }), title: title, keyboard: true })
         .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
     });
@@ -216,6 +231,7 @@ const PAGE_SCRIPT = String.raw`
     if (state.mode === "public") drawPublic();
     else if (state.mode === "points") drawPoints();
     if (state.mode === "pick") drawPick();
+    if (state.center) L.circleMarker([state.center.lat, state.center.lon], { radius: 8, color: "#fff", weight: 3, fillColor: "#2563EB", fillOpacity: 1, interactive: false }).addTo(overlay);
     if (lastFit !== state.fitKey) { lastFit = state.fitKey; fitAll(); }
   }
 
@@ -245,6 +261,12 @@ const PAGE_CSS = `
 html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
 .bubble{border-radius:50%;background:#195946;color:#fff;font-weight:800;font-size:14px;text-align:center;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
 .bubble.high{background:#C2410C}
+.bubble{position:relative}
+.bubble.photo{padding:0;overflow:visible;background:#195946}
+.bubble.photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.bubble .count{position:absolute;right:-6px;top:-6px;min-width:20px;height:20px;line-height:20px;padding:0 4px;border-radius:10px;background:#C2410C;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;box-sizing:content-box}
+.bubble.multi .paws{font-size:22px}
+.bubble.multi.high .count{background:#195946}
 .bubble.pending{border-style:dashed;opacity:.85}
 .bubble.sel{border-color:#FACC15;border-width:4px}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
