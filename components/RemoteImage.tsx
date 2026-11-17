@@ -7,18 +7,27 @@ import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { buildImageFallbackPlan } from "@/shared/image-fallback";
 import { displayImageUri } from "@/shared/image-url";
+import { speciesCovers } from "@/shared/species-covers";
 
 type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
 
 const alternativesByUri = new Map<string, { uri: string }[]>();
+const bundledCoversByUri = new Map<string, number>();
 for (const animal of filterSpeciesCatalog()) {
   const images = animal.images.map(image => ({ uri: displayImageUri(image.uri) }));
   for (const image of animal.images) { alternativesByUri.set(image.uri, images); alternativesByUri.set(displayImageUri(image.uri), images); }
+  const coverUri = animal.images[0]?.uri;
+  const bundled = speciesCovers[animal.id];
+  if (coverUri && typeof bundled === "number") {
+    bundledCoversByUri.set(coverUri, bundled);
+    bundledCoversByUri.set(displayImageUri(coverUri), bundled);
+  }
 }
 
 export function RemoteImage(props: RemoteImageProps) {
   const uri = props.source && !Array.isArray(props.source) && typeof props.source === "object" ? props.source.uri : undefined;
-  const light = uri ? { ...(props.source as { uri: string }), uri: displayImageUri(uri) } : props.source;
+  const bundled = uri ? bundledCoversByUri.get(uri) ?? bundledCoversByUri.get(displayImageUri(uri)) : undefined;
+  const light = bundled ?? (uri ? { ...(props.source as { uri: string }), uri: displayImageUri(uri) } : props.source);
   const next = buildImageFallbackPlan(light, [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
   const plan = useRef(next);
   if (plan.current.key !== next.key) plan.current = next;
