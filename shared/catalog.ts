@@ -4,6 +4,7 @@ import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/in
 import { generatedSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
 import baseAreas from "./catalog/base-areas.json";
+import baseTraits from "./catalog/base-traits.json";
 export { resolveSpeciesId, SPECIES_ID_ALIASES } from "./species-aliases";
 import { getLanguageCode, localizeSpecies } from "./i18n";
 
@@ -24,8 +25,23 @@ const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAlias
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
+type TraitLines = { diet: string; physical: string };
+const traitsById = baseTraits as Record<string, Partial<Record<"pt" | "en" | "es" | "de", TraitLines>>>;
+const joinText = (a: string | undefined, b: string) => (!b ? a ?? "" : a?.trim() ? `${a.trim()}\n\n${b}` : b);
+
+/** Fichas escritas à mão ganham, no fim, a dieta medida (EltonTraits/AmphiBIO) e a massa média, com fonte. */
+function withTraits(item: Species): Species {
+  const extra = traitsById[item.id]?.[getLanguageCode()];
+  if (!extra) return item;
+  return { ...item, diet: joinText(item.diet, extra.diet), physicalCharacteristics: joinText(item.physicalCharacteristics, extra.physical) };
+}
+
 /** Catálogo no idioma escolhido. A busca aceita o nome em português, no idioma atual ou o nome científico. */
 export function filterSpeciesCatalog(filters: CatalogFilters = {}): Species[] {
+  return searchCatalog(filters).map(withTraits);
+}
+
+function searchCatalog(filters: CatalogFilters): Species[] {
   if (getLanguageCode() === "pt") return catalogLoader.search(filters);
   const { query, ...rest } = filters;
   const localized = catalogLoader.search(rest).map((item) => localizeSpecies(item));
