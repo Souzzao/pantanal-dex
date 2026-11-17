@@ -1,0 +1,4 @@
+# Preserve original dataset bytes (including CRLF and Windows-1252).
+*.txt -text
+*.csv -text
+*.pdf binary
