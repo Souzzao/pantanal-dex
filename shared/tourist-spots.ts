@@ -7,12 +7,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  */
 export type SpotKind = "parque" | "estrada" | "historico" | "cidade" | "natureza";
 type L4 = { pt: string; en: string; es: string; de: string };
-export type TouristSpot = { id: string; name: L4; about: L4; kind: SpotKind; latitude: number; longitude: number; radiusM: number; icon: string; source: string };
+export type TouristSpot = { id: string; name: L4; about: L4; kind: SpotKind; latitude: number; longitude: number; radiusM: number; icon: string; source: string; /** Um dos 16 municípios do Pantanal (Embrapa). */ city?: boolean };
 
 const W = (q: string) => `https://www.wikidata.org/wiki/${q}`;
 
 export const TOURIST_SPOTS: TouristSpot[] = [
-  { id: "pocone", kind: "cidade", icon: "🛣️", latitude: -16.2569, longitude: -56.6228, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Pocon%C3%A9",
+  { id: "pocone", kind: "cidade", city: true, icon: "🛣️", latitude: -16.2569, longitude: -56.6228, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Pocon%C3%A9",
     name: { pt: "Poconé, porta da Transpantaneira", en: "Poconé, gateway to the Transpantaneira", es: "Poconé, puerta de la Transpantaneira", de: "Poconé, Tor zur Transpantaneira" },
     about: { pt: "Cidade de onde sai a Transpantaneira (MT-060), a estrada de terra que corta o Pantanal norte rumo a Porto Jofre.", en: "Town where the Transpantaneira (MT-060) begins, the dirt road crossing the northern Pantanal to Porto Jofre.", es: "Ciudad donde empieza la Transpantaneira (MT-060), el camino de tierra que cruza el Pantanal norte hasta Porto Jofre.", de: "Stadt am Beginn der Transpantaneira (MT-060), der Schotterstraße durch das nördliche Pantanal bis Porto Jofre." } },
   { id: "transpantaneira", kind: "estrada", icon: "🌉", latitude: -16.8174, longitude: -56.8454, radiusM: 6000, source: W("Q7834764"),
@@ -30,7 +30,7 @@ export const TOURIST_SPOTS: TouristSpot[] = [
   { id: "chacorore", kind: "natureza", icon: "🦆", latitude: -16.3, longitude: -55.9333, radiusM: 6000, source: W("Q22046016"),
     name: { pt: "Baía de Chacororé", en: "Chacororé Bay", es: "Bahía de Chacororé", de: "Chacororé-Bucht" },
     about: { pt: "Grande lagoa ligada ao rio Cuiabá, perto de Barão de Melgaço, conhecida pela pesca e pelas aves aquáticas.", en: "Large lagoon linked to the Cuiabá River near Barão de Melgaço, known for fishing and waterbirds.", es: "Gran laguna unida al río Cuiabá cerca de Barão de Melgaço, conocida por la pesca y las aves acuáticas.", de: "Große Lagune am Cuiabá-Fluss bei Barão de Melgaço, bekannt für Fischfang und Wasservögel." } },
-  { id: "caceres", kind: "cidade", icon: "🎣", latitude: -16.0711, longitude: -57.6789, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/C%C3%A1ceres_(Mato_Grosso)",
+  { id: "caceres", kind: "cidade", city: true, icon: "🎣", latitude: -16.0711, longitude: -57.6789, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/C%C3%A1ceres_(Mato_Grosso)",
     name: { pt: "Cáceres e o rio Paraguai", en: "Cáceres and the Paraguay River", es: "Cáceres y el río Paraguay", de: "Cáceres und der Paraguay-Fluss" },
     about: { pt: "Cidade histórica às margens do rio Paraguai, porta de entrada do Pantanal pelo oeste de Mato Grosso.", en: "Historic town on the Paraguay River, a western gateway to the Mato Grosso Pantanal.", es: "Ciudad histórica a orillas del río Paraguay, puerta de entrada al Pantanal por el oeste de Mato Grosso.", de: "Historische Stadt am Paraguay-Fluss, westliches Tor zum Pantanal von Mato Grosso." } },
   { id: "taiama", kind: "parque", icon: "🐟", latitude: -16.853, longitude: -57.505, radiusM: 10000, source: W("Q7675867"),
@@ -60,17 +60,70 @@ export const TOURIST_SPOTS: TouristSpot[] = [
   { id: "rio-negro", kind: "parque", icon: "🦜", latitude: -19.6228, longitude: -56.7083, radiusM: 15000, source: W("Q10345082"),
     name: { pt: "Parque Estadual do Pantanal do Rio Negro", en: "Rio Negro Pantanal State Park", es: "Parque Estatal del Pantanal del Río Negro", de: "Staatspark Pantanal do Rio Negro" },
     about: { pt: "Unidade de conservação de Mato Grosso do Sul no Pantanal do Rio Negro, região de lagoas, cordilheiras e salinas.", en: "Mato Grosso do Sul protected area in the Rio Negro Pantanal, a region of lagoons, forest ridges and salt pans.", es: "Área protegida de Mato Grosso do Sul en el Pantanal del Río Negro, región de lagunas, cordilleras y salinas.", de: "Schutzgebiet in Mato Grosso do Sul im Pantanal do Rio Negro, mit Lagunen, Waldrücken und Salzseen." } },
-  { id: "aquidauana", kind: "cidade", icon: "🚪", latitude: -20.4708, longitude: -55.7869, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Aquidauana",
+  { id: "aquidauana", kind: "cidade", city: true, icon: "🚪", latitude: -20.4708, longitude: -55.7869, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Aquidauana",
     name: { pt: "Aquidauana, portal do Pantanal", en: "Aquidauana, Pantanal gateway", es: "Aquidauana, portal del Pantanal", de: "Aquidauana, Tor zum Pantanal" },
     about: { pt: "Cidade sul-mato-grossense conhecida como Portal do Pantanal, ponto de partida para o Pantanal do Rio Negro e do Aquidauana.", en: "Mato Grosso do Sul town known as the Pantanal Gateway, starting point for the Rio Negro and Aquidauana Pantanal.", es: "Ciudad de Mato Grosso do Sul conocida como Portal del Pantanal, punto de partida al Pantanal del Río Negro y del Aquidauana.", de: "Stadt in Mato Grosso do Sul, bekannt als Tor zum Pantanal und Ausgangspunkt für das Pantanal des Rio Negro und Aquidauana." } },
-  { id: "porto-murtinho", kind: "cidade", icon: "🛶", latitude: -21.6989, longitude: -57.8828, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Porto_Murtinho",
+  { id: "porto-murtinho", kind: "cidade", city: true, icon: "🛶", latitude: -21.6989, longitude: -57.8828, radiusM: 4000, source: "https://pt.wikipedia.org/wiki/Porto_Murtinho",
     name: { pt: "Porto Murtinho", en: "Porto Murtinho", es: "Porto Murtinho", de: "Porto Murtinho" },
     about: { pt: "Cidade no extremo sul do Pantanal, às margens do rio Paraguai, na fronteira com o Paraguai.", en: "Town at the southern tip of the Pantanal on the Paraguay River, on the border with Paraguay.", es: "Ciudad en el extremo sur del Pantanal, a orillas del río Paraguay, en la frontera con Paraguay.", de: "Stadt an der Südspitze des Pantanal am Paraguay-Fluss, an der Grenze zu Paraguay." } },
+  { id: "corumba", kind: "cidade", city: true, icon: "🏘️", latitude: -19.0089, longitude: -57.6528, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Corumb%C3%A1",
+    name: { pt: "Corumbá", en: "Corumbá", es: "Corumbá", de: "Corumbá" },
+    about: { pt: "Maior município do Pantanal, às margens do rio Paraguai, na fronteira com a Bolívia.", en: "Largest municipality in the Pantanal, on the Paraguay River at the Bolivian border.", es: "Mayor municipio del Pantanal, a orillas del río Paraguay, en la frontera con Bolivia.", de: "Größte Gemeinde im Pantanal, am Paraguay-Fluss an der Grenze zu Bolivien." } },
+  { id: "ladario", kind: "cidade", city: true, icon: "🏘️", latitude: -19.005, longitude: -57.6019, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Lad%C3%A1rio",
+    name: { pt: "Ladário", en: "Ladário", es: "Ladário", de: "Ladário" },
+    about: { pt: "Cidade vizinha de Corumbá, sede de base da Marinha no rio Paraguai.", en: "Town next to Corumbá, home to a Brazilian Navy base on the Paraguay River.", es: "Ciudad vecina de Corumbá, sede de una base de la Marina en el río Paraguay.", de: "Nachbarstadt von Corumbá mit einem Marinestützpunkt am Paraguay-Fluss." } },
+  { id: "miranda", kind: "cidade", city: true, icon: "🏘️", latitude: -20.2408, longitude: -56.3778, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Miranda_(Mato_Grosso_do_Sul)",
+    name: { pt: "Miranda", en: "Miranda", es: "Miranda", de: "Miranda" },
+    about: { pt: "Município do Pantanal sul às margens do rio Miranda, porta de entrada para fazendas de ecoturismo.", en: "Southern Pantanal town on the Miranda River, gateway to ecotourism ranches.", es: "Municipio del Pantanal sur a orillas del río Miranda, puerta a estancias de ecoturismo.", de: "Stadt im südlichen Pantanal am Miranda-Fluss, Tor zu Ökotourismus-Farmen." } },
+  { id: "coxim", kind: "cidade", city: true, icon: "🏘️", latitude: -18.5069, longitude: -54.76, radiusM: 5000, source: "https://www.wikidata.org/wiki/Q1793013",
+    name: { pt: "Coxim", en: "Coxim", es: "Coxim", de: "Coxim" },
+    about: { pt: "Município na borda leste do Pantanal, junto ao rio Taquari.", en: "Town on the eastern edge of the Pantanal, by the Taquari River.", es: "Municipio en el borde este del Pantanal, junto al río Taquari.", de: "Stadt am Ostrand des Pantanal am Taquari-Fluss." } },
+  { id: "rio-verde-mt", kind: "cidade", city: true, icon: "🏘️", latitude: -18.9178, longitude: -54.8439, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Rio_Verde_de_Mato_Grosso",
+    name: { pt: "Rio Verde de Mato Grosso", en: "Rio Verde de Mato Grosso", es: "Rio Verde de Mato Grosso", de: "Rio Verde de Mato Grosso" },
+    about: { pt: "Município sul-mato-grossense com parte do território no Pantanal, conhecido por cachoeiras.", en: "Mato Grosso do Sul town partly within the Pantanal, known for waterfalls.", es: "Municipio de Mato Grosso do Sul con parte en el Pantanal, conocido por sus cascadas.", de: "Gemeinde in Mato Grosso do Sul, teils im Pantanal, bekannt für Wasserfälle." } },
+  { id: "sonora", kind: "cidade", city: true, icon: "🏘️", latitude: -17.5769, longitude: -54.7578, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Sonora_(Mato_Grosso_do_Sul)",
+    name: { pt: "Sonora", en: "Sonora", es: "Sonora", de: "Sonora" },
+    about: { pt: "Município no norte de Mato Grosso do Sul com área no Pantanal.", en: "Town in northern Mato Grosso do Sul with land in the Pantanal.", es: "Municipio del norte de Mato Grosso do Sul con área en el Pantanal.", de: "Gemeinde im Norden von Mato Grosso do Sul mit Flächen im Pantanal." } },
+  { id: "bodoquena", kind: "cidade", city: true, icon: "🏘️", latitude: -20.5389, longitude: -56.715, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Bodoquena",
+    name: { pt: "Bodoquena", en: "Bodoquena", es: "Bodoquena", de: "Bodoquena" },
+    about: { pt: "Município entre a Serra da Bodoquena e a planície do Pantanal.", en: "Town between the Bodoquena range and the Pantanal plain.", es: "Municipio entre la Sierra de Bodoquena y la llanura del Pantanal.", de: "Gemeinde zwischen der Serra da Bodoquena und der Pantanal-Ebene." } },
+  { id: "barao-de-melgaco", kind: "cidade", city: true, icon: "🏘️", latitude: -16.1953, longitude: -55.9678, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Bar%C3%A3o_de_Melga%C3%A7o",
+    name: { pt: "Barão de Melgaço", en: "Barão de Melgaço", es: "Barão de Melgaço", de: "Barão de Melgaço" },
+    about: { pt: "Cidade ribeirinha às margens do rio Cuiabá, no Pantanal norte.", en: "Riverside town on the Cuiabá River in the northern Pantanal.", es: "Ciudad ribereña a orillas del río Cuiabá, en el Pantanal norte.", de: "Flussstadt am Cuiabá im nördlichen Pantanal." } },
+  { id: "leverger", kind: "cidade", city: true, icon: "🏘️", latitude: -15.8658, longitude: -56.0769, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Santo_Ant%C3%B4nio_de_Leverger",
+    name: { pt: "Santo Antônio de Leverger", en: "Santo Antônio de Leverger", es: "Santo Antônio de Leverger", de: "Santo Antônio de Leverger" },
+    about: { pt: "Município às margens do rio Cuiabá, perto da capital, com grande área de Pantanal.", en: "Town on the Cuiabá River near the state capital, with a large Pantanal area.", es: "Municipio a orillas del río Cuiabá, cerca de la capital, con gran área de Pantanal.", de: "Gemeinde am Cuiabá nahe der Hauptstadt mit großem Pantanal-Anteil." } },
+  { id: "livramento", kind: "cidade", city: true, icon: "🏘️", latitude: -15.775, longitude: -56.3458, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Nossa_Senhora_do_Livramento_(Mato_Grosso)",
+    name: { pt: "Nossa Senhora do Livramento", en: "Nossa Senhora do Livramento", es: "Nossa Senhora do Livramento", de: "Nossa Senhora do Livramento" },
+    about: { pt: "Município histórico de Mato Grosso com parte do território no Pantanal.", en: "Historic Mato Grosso town partly within the Pantanal.", es: "Municipio histórico de Mato Grosso con parte de su territorio en el Pantanal.", de: "Historische Gemeinde in Mato Grosso, teils im Pantanal." } },
+  { id: "itiquira", kind: "cidade", city: true, icon: "🏘️", latitude: -17.2089, longitude: -54.15, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Itiquira",
+    name: { pt: "Itiquira", en: "Itiquira", es: "Itiquira", de: "Itiquira" },
+    about: { pt: "Município no sul de Mato Grosso com parte do território no Pantanal.", en: "Town in southern Mato Grosso partly within the Pantanal.", es: "Municipio del sur de Mato Grosso con parte en el Pantanal.", de: "Gemeinde im Süden von Mato Grosso, teils im Pantanal." } },
+  { id: "lambari-doeste", kind: "cidade", city: true, icon: "🏘️", latitude: -15.3228, longitude: -58.0039, radiusM: 5000, source: "https://pt.wikipedia.org/wiki/Lambari_d%27Oeste",
+    name: { pt: "Lambari d'Oeste", en: "Lambari d'Oeste", es: "Lambari d'Oeste", de: "Lambari d'Oeste" },
+    about: { pt: "Município do oeste de Mato Grosso com área no Pantanal de Cáceres.", en: "Western Mato Grosso town with land in the Cáceres Pantanal.", es: "Municipio del oeste de Mato Grosso con área en el Pantanal de Cáceres.", de: "Gemeinde im Westen von Mato Grosso mit Flächen im Pantanal von Cáceres." } },
+  { id: "urucum", kind: "natureza", icon: "⛰️", latitude: -19.2, longitude: -57.6, radiusM: 6000, source: "https://www.wikidata.org/wiki/Q6724175",
+    name: { pt: "Maciço do Urucum", en: "Urucum Massif", es: "Macizo del Urucum", de: "Urucum-Massiv" },
+    about: { pt: "Conjunto de morros na zona rural de Corumbá, o ponto mais alto do Pantanal, rico em minério de ferro e manganês.", en: "Group of hills in rural Corumbá, the highest point of the Pantanal, rich in iron and manganese ore.", es: "Conjunto de cerros en la zona rural de Corumbá, el punto más alto del Pantanal, rico en hierro y manganeso.", de: "Hügelgruppe bei Corumbá, höchster Punkt des Pantanal, reich an Eisen- und Manganerz." } },
+  { id: "mandiore", kind: "natureza", icon: "🏝️", latitude: -18.1333, longitude: -57.55, radiusM: 8000, source: "https://www.wikidata.org/wiki/Q3176332",
+    name: { pt: "Lagoa Mandioré", en: "Mandioré Lake", es: "Laguna Mandioré", de: "Mandioré-See" },
+    about: { pt: "Grande lagoa na fronteira entre Brasil e Bolívia, ligada ao rio Paraguai.", en: "Large lake on the Brazil–Bolivia border, linked to the Paraguay River.", es: "Gran laguna en la frontera entre Brasil y Bolivia, unida al río Paraguay.", de: "Großer See an der Grenze Brasilien–Bolivien, mit dem Paraguay-Fluss verbunden." } },
+  { id: "abobral", kind: "natureza", icon: "🐊", latitude: -19.317, longitude: -57.2586, radiusM: 6000, source: "https://www.wikidata.org/wiki/Q4668201",
+    name: { pt: "Rio Abobral", en: "Abobral River", es: "Río Abobral", de: "Abobral-Fluss" },
+    about: { pt: "Rio da região do Abobral, cortado pela Estrada Parque, área muito procurada para ver jacarés e aves.", en: "River in the Abobral region crossed by the Estrada Parque, popular for watching caimans and birds.", es: "Río de la región del Abobral, cruzado por la Estrada Parque, muy buscado para ver yacarés y aves.", de: "Fluss in der Abobral-Region an der Estrada Parque, beliebt zur Kaiman- und Vogelbeobachtung." } },
+  { id: "nhecolandia", kind: "natureza", icon: "🐎", latitude: -19.25, longitude: -57.0232, radiusM: 15000, source: "https://pt.wikipedia.org/wiki/Nhecol%C3%A2ndia",
+    name: { pt: "Nhecolândia", en: "Nhecolândia", es: "Nhecolândia", de: "Nhecolândia" },
+    about: { pt: "Sub-região do Pantanal famosa pelas milhares de lagoas, salinas e pela criação de gado pantaneiro.", en: "Pantanal sub-region famous for thousands of lagoons, salt lakes and traditional cattle ranching.", es: "Subregión del Pantanal famosa por miles de lagunas, salinas y la ganadería pantanera.", de: "Teilregion des Pantanal, berühmt für Tausende Lagunen, Salzseen und traditionelle Rinderzucht." } },
+  { id: "paiaguas", kind: "natureza", icon: "🌾", latitude: -18.4472, longitude: -57.0408, radiusM: 15000, source: "https://www.wikidata.org/wiki/Q10343579",
+    name: { pt: "Paiaguás", en: "Paiaguás", es: "Paiaguás", de: "Paiaguás" },
+    about: { pt: "Sub-região do Pantanal em Corumbá, entre os rios Taquari e Paraguai, de grandes campos alagáveis.", en: "Pantanal sub-region in Corumbá between the Taquari and Paraguay rivers, with vast floodable fields.", es: "Subregión del Pantanal en Corumbá, entre los ríos Taquari y Paraguay, con grandes campos inundables.", de: "Teilregion des Pantanal bei Corumbá zwischen Taquari und Paraguay mit weiten Überschwemmungsflächen." } },
 ];
+
+export const PANTANAL_CITIES = TOURIST_SPOTS.filter((s) => s.city);
 
 export const EXPLORER_TIERS = [
   { id: "bronze", need: 3, icon: "🥉" },
-  { id: "prata", need: 8, icon: "🥈" },
+  { id: "prata", need: 12, icon: "🥈" },
   { id: "ouro", need: TOURIST_SPOTS.length, icon: "🥇" },
 ] as const;
 
@@ -117,10 +170,12 @@ export async function saveVisit(id: string, at = new Date()): Promise<SpotVisits
   return visits;
 }
 
-export type ExplorerProgress = { visited: number; total: number; tier: (typeof EXPLORER_TIERS)[number] | null; next: (typeof EXPLORER_TIERS)[number] | null };
+export type ExplorerProgress = { visited: number; total: number; tier: (typeof EXPLORER_TIERS)[number] | null; next: (typeof EXPLORER_TIERS)[number] | null; cities: number; citiesTotal: number; allCities: boolean };
 
 export function explorerProgress(visits: SpotVisits): ExplorerProgress {
   const visited = Object.keys(sanitizeVisits(visits)).length;
   const reached = EXPLORER_TIERS.filter((t) => visited >= t.need);
-  return { visited, total: TOURIST_SPOTS.length, tier: reached[reached.length - 1] ?? null, next: EXPLORER_TIERS.find((t) => visited < t.need) ?? null };
+  const clean = sanitizeVisits(visits);
+  const cities = PANTANAL_CITIES.filter((c) => clean[c.id]).length;
+  return { visited, total: TOURIST_SPOTS.length, tier: reached[reached.length - 1] ?? null, next: EXPLORER_TIERS.find((t) => visited < t.need) ?? null, cities, citiesTotal: PANTANAL_CITIES.length, allCities: cities === PANTANAL_CITIES.length };
 }

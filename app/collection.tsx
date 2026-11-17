@@ -22,10 +22,10 @@ import { getLanguageCode } from "@/shared/i18n";
 import { EXPLORER_TIERS, explorerProgress, loadVisits, TOURIST_SPOTS, type SpotVisits } from "@/shared/tourist-spots";
 
 const EXPLORER = {
-  pt: { title: "Explorador do Pantanal", hint: "Visite os pontos turísticos no mapa público e faça check-in para ganhar as insígnias.", tiers: { bronze: "Bronze", prata: "Prata", ouro: "Ouro" }, need: (n: number) => `${n} lugares`, open: "Abrir o mapa" },
-  en: { title: "Pantanal Explorer", hint: "Visit the landmarks on the public map and check in to earn badges.", tiers: { bronze: "Bronze", prata: "Silver", ouro: "Gold" }, need: (n: number) => `${n} places`, open: "Open the map" },
-  es: { title: "Explorador del Pantanal", hint: "Visita los puntos turísticos del mapa público y haz check-in para ganar insignias.", tiers: { bronze: "Bronce", prata: "Plata", ouro: "Oro" }, need: (n: number) => `${n} lugares`, open: "Abrir el mapa" },
-  de: { title: "Pantanal-Entdecker", hint: "Besuche die Sehenswürdigkeiten auf der öffentlichen Karte und checke ein, um Abzeichen zu erhalten.", tiers: { bronze: "Bronze", prata: "Silber", ouro: "Gold" }, need: (n: number) => `${n} Orte`, open: "Karte öffnen" },
+  pt: { title: "Explorador do Pantanal", cities: (v: number, t: number) => `Todas as cidades pantaneiras: ${v}/${t}`, citiesHint: "Visite os 16 municípios do Pantanal para ganhar a insígnia Pantaneiro.", spots: "Lugares", towns: "Cidades", hint: "Visite os pontos turísticos no mapa público e faça check-in para ganhar as insígnias.", tiers: { bronze: "Bronze", prata: "Prata", ouro: "Ouro" }, need: (n: number) => `${n} lugares`, open: "Abrir o mapa" },
+  en: { title: "Pantanal Explorer", cities: (v: number, t: number) => `All Pantanal towns: ${v}/${t}`, citiesHint: "Visit the 16 Pantanal municipalities to earn the Pantaneiro badge.", spots: "Places", towns: "Towns", hint: "Visit the landmarks on the public map and check in to earn badges.", tiers: { bronze: "Bronze", prata: "Silver", ouro: "Gold" }, need: (n: number) => `${n} places`, open: "Open the map" },
+  es: { title: "Explorador del Pantanal", cities: (v: number, t: number) => `Todas las ciudades pantaneras: ${v}/${t}`, citiesHint: "Visita los 16 municipios del Pantanal para ganar la insignia Pantanero.", spots: "Lugares", towns: "Ciudades", hint: "Visita los puntos turísticos del mapa público y haz check-in para ganar insignias.", tiers: { bronze: "Bronce", prata: "Plata", ouro: "Oro" }, need: (n: number) => `${n} lugares`, open: "Abrir el mapa" },
+  de: { title: "Pantanal-Entdecker", cities: (v: number, t: number) => `Alle Pantanal-Städte: ${v}/${t}`, citiesHint: "Besuche die 16 Pantanal-Gemeinden für das Abzeichen Pantaneiro.", spots: "Orte", towns: "Städte", hint: "Besuche die Sehenswürdigkeiten auf der öffentlichen Karte und checke ein, um Abzeichen zu erhalten.", tiers: { bronze: "Bronze", prata: "Silber", ouro: "Gold" }, need: (n: number) => `${n} Orte`, open: "Karte öffnen" },
 } as const;
 
 type Lang = "pt" | "en" | "es";
@@ -198,8 +198,18 @@ export default function CollectionScreen() {
           );
         })}
       </View>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
-        {TOURIST_SPOTS.map((spot) => {
+      <View accessible style={{ flexDirection: "row", alignItems: "center", gap: 10, padding: 12, borderRadius: 14, borderWidth: 1, borderColor: explorer.allCities ? colors.primary : colors.border, backgroundColor: colors.surface, marginBottom: 12 }}>
+        <Text style={{ fontSize: 28, opacity: explorer.allCities ? 1 : 0.35 }}>🏘️</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={{ color: colors.foreground, fontWeight: "800" }}>{ex.cities(explorer.cities, explorer.citiesTotal)}</Text>
+          <Text style={{ color: colors.muted, fontSize: 12 }}>{ex.citiesHint}</Text>
+        </View>
+      </View>
+      {[[ex.spots, TOURIST_SPOTS.filter((s) => !s.city)], [ex.towns, TOURIST_SPOTS.filter((s) => s.city)]].map(([label, list]) => (
+      <View key={label as string}>
+      <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800", letterSpacing: 1, marginBottom: 8 }}>{(label as string).toUpperCase()}</Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+        {(list as typeof TOURIST_SPOTS).map((spot) => {
           const done = !!visits[spot.id];
           const name = spot.name[spotLang] ?? spot.name.pt;
           return (
@@ -212,6 +222,8 @@ export default function CollectionScreen() {
           );
         })}
       </View>
+      </View>
+      ))}
       <Pressable onPress={() => router.push("/public-map" as any)} accessibilityRole="button" style={({ pressed }) => [{ marginTop: 10, borderColor: colors.primary, borderWidth: 1, borderRadius: 12, padding: 10 }, pressed && { opacity: 0.8 }]}>
         <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>🗺️ {ex.open}</Text>
       </Pressable>

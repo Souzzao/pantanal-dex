@@ -168,6 +168,44 @@ def area_km(group, family, t, fam_area):
         return round(min(max(r, 0.02), 8.0), 3 if r < 1 else 2)
     return AREA_KM.get(fam_area or "s", 0.6)
 
+GBIF_LANG = {"pt": "por", "en": "eng", "es": "spa", "de": "deu"}
+
+
+def nice(name):
+    """'Cobra-de-Duas-Cabeças' -> 'Cobra-de-duas-cabeças' (padrão dos nomes populares em pt)."""
+    name = name.strip()
+    parts = re.split(r"([- ])", name)
+    return "".join([parts[0][:1].upper() + parts[0][1:]] + [p.lower() if i % 2 == 0 else p for i, p in enumerate(parts[1:], 1)]) if name else name
+
+
+def gbif_names():
+    """Nomes populares do GBIF (vernacularNames) para espécies sem nome no iNaturalist: escolhe o mais citado
+    que não seja de outra espécie; nomes genéricos repetidos (ex.: 'Acará') ficam para a mais específica."""
+    path = os.path.join(ROOT, "data", "inat", "gbif-vernaculares.json")
+    if not os.path.exists(path):
+        return {}
+    raw = json.load(open(path, encoding="utf8"))
+    out = {}
+    for lang, code in GBIF_LANG.items():
+        options = {}
+        for sci, rows in raw.items():
+            names = [nice(r[1]) for r in rows if r[0] == code and r[1] and len(r[1]) < 40]
+            if names:
+                counts = {}
+                for n in names:
+                    counts[n] = counts.get(n, 0) + 1
+                options[sci] = sorted(counts, key=lambda n: (-counts[n], -len(n)))
+        used = {}
+        for sci, opts in options.items():
+            for n in opts:
+                used[n] = used.get(n, 0) + 1
+        for sci, opts in options.items():
+            unique = [n for n in opts if used[n] == 1]
+            pick = unique[0] if unique else max(opts, key=len)
+            out.setdefault(sci, {})[lang] = pick
+    return out
+
+
 def main():
     raw = json.load(open(os.path.join(ROOT, "data", "inat", "pantanal-vertebrados-raw.json"), encoding="utf8"))
     extra_path = os.path.join(ROOT, "data", "inat", "pantanal-vertebrados-gbif-extra.json")
@@ -176,6 +214,7 @@ def main():
         raw += [x for x in json.load(open(extra_path, encoding="utf8")) if x["sci"].lower() not in known]
     current = json.load(open(os.path.join(ROOT, "data", "inat", "catalogo-atual.json"), encoding="utf8"))
     traits = load_traits()
+    gnames = gbif_names()
     tpath = os.path.join(ROOT, "data", "inat", "traducoes-descricoes.json")
     translated = json.load(open(tpath, encoding="utf8")) if os.path.exists(tpath) else {}
     have_sci = {c["sci"].lower() for c in current}
@@ -237,7 +276,7 @@ def main():
         mass = (t or {}).get("mass_g")
         texts = {}
         for i, lang in enumerate(LANGS):
-            name = names.get(INAT_LOC[lang]) or (pt_name if lang == "pt" else names.get("en") or pt_name)
+            name = names.get(INAT_LOC[lang]) or (gnames.get(sci) or {}).get(lang) or (pt_name if lang == "pt" else names.get("en") or pt_name)
             wiki = sentences((item.get("wiki") or {}).get(INAT_LOC[lang], ""), 460)
             gword = GROUP_T[group][i]
             fam_label = f"{family_pt} ({family})" if (lang == "pt" and family_pt and family_pt != family) else family

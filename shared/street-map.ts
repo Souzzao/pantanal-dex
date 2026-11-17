@@ -29,7 +29,7 @@ export type StreetMapState = {
   /** Onde a pessoa está (GPS): o mapa abre ali e mostra um ponto azul. */
   center?: { latitude: number; longitude: number } | null;
   /** Pontos turísticos (estilo Pokéstop). visited = já fez check-in. */
-  spots?: { id: string; latitude: number; longitude: number; name: string; icon: string; visited: boolean }[];
+  spots?: { id: string; latitude: number; longitude: number; name: string; icon: string; visited: boolean; city?: boolean }[];
   /** Textos curtos usados dentro do mapa (idioma do app). */
   labels: { high: string; records: (count: number) => string; pickHint: string };
 };
@@ -84,7 +84,7 @@ export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
     points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, MAX_AREA_KM) : 0.6 })),
-    spots: (state.spots ?? []).filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, name: p.name, icon: p.icon, visited: p.visited === true })),
+    spots: (state.spots ?? []).filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, name: p.name, icon: p.icon, visited: p.visited === true, city: p.city === true })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
@@ -238,9 +238,9 @@ const PAGE_SCRIPT = String.raw`
   // Pontos turísticos: losango amarelo (já visitado fica preenchido, com o ícone do lugar).
   function drawSpots() {
     (state.spots || []).forEach(function (s) {
-      var html = '<div class="stop' + (s.visited ? " done" : "") + '"><span>' + esc(s.icon) + "</span></div>";
+      var html = '<div class="stop' + (s.visited ? " done" : "") + (s.city ? " city" : "") + '"><span>' + esc(s.icon) + "</span></div>";
       L.marker([s.lat, s.lon], { icon: L.divIcon({ html: html, className: "", iconSize: [40, 40], iconAnchor: [20, 20] }), title: s.name, keyboard: true, zIndexOffset: 500 })
-        .bindTooltip(esc(s.name), { direction: "top", offset: [0, -18] })
+        .bindTooltip(esc(s.name), { permanent: map.getZoom() >= 7, direction: "bottom", offset: [0, 16], className: "spot-label" + (s.city ? " city" : "") })
         .on("click", function () { send({ type: "spot", id: s.id }); }).addTo(overlay);
     });
   }
@@ -311,6 +311,11 @@ html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font
 .stop{width:34px;height:34px;margin:3px;transform:rotate(45deg);border-radius:8px;background:#0B0B0B;border:3px solid #FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.35),0 2px 8px rgba(0,0,0,.5);box-sizing:border-box;display:flex;align-items:center;justify-content:center}
 .stop span{transform:rotate(-45deg);font-size:16px;line-height:1}
 .stop.done{background:#FFC400;border-color:#fff}
+.stop.city{border-radius:50%;transform:none;width:30px;height:30px;margin:5px}
+.stop.city span{transform:none;font-size:14px}
+.spot-label{background:rgba(11,11,11,.85);color:#FFC400;border:1px solid #FFC400;border-radius:8px;font-weight:800;font-size:11px;padding:2px 6px;box-shadow:none}
+.spot-label.city{color:#fff;border-color:#fff}
+.spot-label:before{display:none}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
 #hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(11,11,11,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
 .leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#0B0B0B;font-weight:800;font-size:13px;text-decoration:none}

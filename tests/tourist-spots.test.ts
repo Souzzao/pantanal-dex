@@ -7,8 +7,8 @@ describe("pontos turísticos (Pokéstops)", () => {
     const ids = new Set<string>();
     for (const s of TOURIST_SPOTS) {
       expect(ids.has(s.id)).toBe(false); ids.add(s.id);
-      expect(s.latitude).toBeGreaterThan(-22.5); expect(s.latitude).toBeLessThan(-15.5);
-      expect(s.longitude).toBeGreaterThan(-58.5); expect(s.longitude).toBeLessThan(-55.0);
+      expect(s.latitude).toBeGreaterThan(-22.5); expect(s.latitude).toBeLessThan(-15.0);
+      expect(s.longitude).toBeGreaterThan(-58.5); expect(s.longitude).toBeLessThan(-54.0);
       for (const l of ["pt", "en", "es", "de"] as const) { expect(s.name[l].length).toBeGreaterThan(2); expect(s.about[l].length).toBeGreaterThan(20); }
       expect(s.source).toMatch(/^https:\/\//);
     }
@@ -34,5 +34,7 @@ describe("pontos turísticos (Pokéstops)", () => {
     const all = Object.fromEntries(TOURIST_SPOTS.map((s) => [s.id, at]));
     expect(explorerProgress(all).tier?.id).toBe("ouro");
     expect(EXPLORER_TIERS[2].need).toBe(TOURIST_SPOTS.length);
+    expect(explorerProgress(all).allCities).toBe(true);
+    expect(explorerProgress(three).citiesTotal).toBe(16);
   });
 });

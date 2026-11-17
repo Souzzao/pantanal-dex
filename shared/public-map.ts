@@ -173,7 +173,7 @@ export function isRecordActive(record: PublicRecord, now: Date): boolean {
 
 // ───────────────────────────── Filtro por data ─────────────────────────────
 
-export type DatePreset = "7d" | "30d" | "365d" | "all";
+export type DatePreset = "1d" | "7d" | "30d" | "90d" | "365d" | "all";
 export type DateFilter = { preset: DatePreset } | { from?: string; to?: string };
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -184,7 +184,7 @@ export function filterByDate<T extends { date: string }>(records: readonly T[], 
   let to: string | undefined;
   if ("preset" in filter) {
     if (filter.preset !== "all") {
-      const days = filter.preset === "7d" ? 7 : filter.preset === "30d" ? 30 : 365;
+      const days = { "1d": 1, "7d": 7, "30d": 30, "90d": 90, "365d": 365 }[filter.preset];
       from = getLocalTodayISODate(new Date(now.getTime() - (days - 1) * DAY_MS));
       to = getLocalTodayISODate(now);
     }
