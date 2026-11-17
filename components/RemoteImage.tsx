@@ -12,13 +12,13 @@ import { speciesCovers } from "@/shared/species-covers";
 type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
 
 const alternativesByUri = new Map<string, { uri: string }[]>();
-const bundledCoversByUri = new Map<string, number>();
+const bundledCoversByUri = new Map<string, number>(); // no web o require vira objeto; serve igual para o Image
 for (const animal of filterSpeciesCatalog()) {
   const images = animal.images.map(image => ({ uri: displayImageUri(image.uri) }));
   for (const image of animal.images) { alternativesByUri.set(image.uri, images); alternativesByUri.set(displayImageUri(image.uri), images); }
   const coverUri = animal.images[0]?.uri;
   const bundled = speciesCovers[animal.id];
-  if (coverUri && typeof bundled === "number") {
+  if (coverUri && bundled != null) {
     bundledCoversByUri.set(coverUri, bundled);
     bundledCoversByUri.set(displayImageUri(coverUri), bundled);
   }

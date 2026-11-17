@@ -25,7 +25,7 @@ const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAlias
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
-type TraitLines = { diet: string; physical: string };
+type TraitLines = { diet: string; physical: string; status?: string };
 const traitsById = baseTraits as Record<string, Partial<Record<"pt" | "en" | "es" | "de", TraitLines>>>;
 const joinText = (a: string | undefined, b: string) => (!b ? a ?? "" : a?.trim() ? `${a.trim()}\n\n${b}` : b);
 
@@ -33,7 +33,12 @@ const joinText = (a: string | undefined, b: string) => (!b ? a ?? "" : a?.trim()
 function withTraits(item: Species): Species {
   const extra = traitsById[item.id]?.[getLanguageCode()];
   if (!extra) return item;
-  return { ...item, diet: joinText(item.diet, extra.diet), physicalCharacteristics: joinText(item.physicalCharacteristics, extra.physical) };
+  return {
+    ...item,
+    diet: joinText(item.diet, extra.diet),
+    physicalCharacteristics: joinText(item.physicalCharacteristics, extra.physical),
+    conservationStatus: item.conservationStatus?.trim() ? item.conservationStatus : extra.status || item.conservationStatus,
+  };
 }
 
 /** Catálogo no idioma escolhido. A busca aceita o nome em português, no idioma atual ou o nome científico. */
