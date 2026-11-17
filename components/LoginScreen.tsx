@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
+import { Image } from "react-native";
 import { Text, TextInput } from "@/components/T";
 
 import { ScreenContainer } from "@/components/screen-container";
@@ -78,7 +79,8 @@ export function LoginScreen() {
     <ScreenContainer edges={["top", "left", "right", "bottom"]}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24 }} keyboardShouldPersistTaps="handled">
-          <Text accessibilityRole="header" style={{ color: colors.primary, fontSize: 34, fontWeight: "900", textAlign: "center" }}>PantanalDex</Text>
+          <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 112, height: 112, borderRadius: 30, alignSelf: "center", marginBottom: 14, borderWidth: 3, borderColor: colors.primary }} />
+          <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 34, fontWeight: "900", textAlign: "center" }}>Pantanal<Text style={{ color: colors.primary }}>Dex</Text></Text>
           <Text style={{ color: colors.muted, textAlign: "center", marginTop: 6, marginBottom: 28 }}>{t.tagline}</Text>
 
           <View style={{ gap: 12 }}>
