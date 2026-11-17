@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, View, useWindowDimensions } from "react-native";
 import { Text } from "@/components/T";
 import { router } from "expo-router";
@@ -18,6 +18,15 @@ import {
   type CollectionFilter,
 } from "@/shared/collection";
 import { groups, type SpeciesGroup } from "@/shared/pantanal";
+import { getLanguageCode } from "@/shared/i18n";
+import { EXPLORER_TIERS, explorerProgress, loadVisits, TOURIST_SPOTS, type SpotVisits } from "@/shared/tourist-spots";
+
+const EXPLORER = {
+  pt: { title: "Explorador do Pantanal", hint: "Visite os pontos turísticos no mapa público e faça check-in para ganhar as insígnias.", tiers: { bronze: "Bronze", prata: "Prata", ouro: "Ouro" }, need: (n: number) => `${n} lugares`, open: "Abrir o mapa" },
+  en: { title: "Pantanal Explorer", hint: "Visit the landmarks on the public map and check in to earn badges.", tiers: { bronze: "Bronze", prata: "Silver", ouro: "Gold" }, need: (n: number) => `${n} places`, open: "Open the map" },
+  es: { title: "Explorador del Pantanal", hint: "Visita los puntos turísticos del mapa público y haz check-in para ganar insignias.", tiers: { bronze: "Bronce", prata: "Plata", ouro: "Oro" }, need: (n: number) => `${n} lugares`, open: "Abrir el mapa" },
+  de: { title: "Pantanal-Entdecker", hint: "Besuche die Sehenswürdigkeiten auf der öffentlichen Karte und checke ein, um Abzeichen zu erhalten.", tiers: { bronze: "Bronze", prata: "Silber", ouro: "Gold" }, need: (n: number) => `${n} Orte`, open: "Karte öffnen" },
+} as const;
 
 type Lang = "pt" | "en" | "es";
 
@@ -94,6 +103,11 @@ export default function CollectionScreen() {
 
   const catalog = useMemo(() => filterSpeciesCatalog(), []);
   const summary = useMemo(() => computeCollection(catalog, sightings), [catalog, sightings]);
+  const [visits, setVisits] = useState<SpotVisits>({});
+  useEffect(() => { void loadVisits().then(setVisits); }, []);
+  const explorer = explorerProgress(visits);
+  const spotLang = getLanguageCode();
+  const ex = EXPLORER[spotLang] ?? EXPLORER.pt;
   const visible = useMemo(() => filterCollectionEntries(summary.entries, { filter, group }), [summary, filter, group]);
 
   const chip = (label: string, active: boolean, onPress: () => void, key: string) => (
@@ -169,6 +183,38 @@ export default function CollectionScreen() {
           );
         })}
       </ScrollView>
+
+      <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800", marginTop: 22, marginBottom: 6 }}>{explorer.tier?.icon ?? "🧭"} {ex.title} · {explorer.visited}/{explorer.total}</Text>
+      <Text style={{ color: colors.muted, fontSize: 13, marginBottom: 10 }}>{ex.hint}</Text>
+      <View style={{ flexDirection: "row", gap: 8, marginBottom: 10 }}>
+        {EXPLORER_TIERS.map((tier) => {
+          const done = explorer.visited >= tier.need;
+          return (
+            <View key={tier.id} accessible accessibilityLabel={`${ex.tiers[tier.id]}: ${ex.need(tier.need)}`} style={{ flex: 1, alignItems: "center", padding: 10, borderRadius: 14, borderWidth: 1, borderColor: done ? colors.primary : colors.border, backgroundColor: colors.surface }}>
+              <Text style={{ fontSize: 26, opacity: done ? 1 : 0.3 }}>{tier.icon}</Text>
+              <Text style={{ color: colors.foreground, fontWeight: "800" }}>{ex.tiers[tier.id]}</Text>
+              <Text style={{ color: colors.muted, fontSize: 11 }}>{ex.need(tier.need)}</Text>
+            </View>
+          );
+        })}
+      </View>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
+        {TOURIST_SPOTS.map((spot) => {
+          const done = !!visits[spot.id];
+          const name = spot.name[spotLang] ?? spot.name.pt;
+          return (
+            <View key={spot.id} accessible accessibilityLabel={name + (done ? " ✓" : "")} style={{ width: 72, alignItems: "center" }}>
+              <View style={{ width: 44, height: 44, borderRadius: 10, transform: [{ rotate: "45deg" }], borderWidth: 3, borderColor: done ? "#FFFFFF" : colors.primary, backgroundColor: done ? colors.primary : colors.background, alignItems: "center", justifyContent: "center", opacity: done ? 1 : 0.55 }}>
+                <Text style={{ fontSize: 18, transform: [{ rotate: "-45deg" }] }}>{spot.icon}</Text>
+              </View>
+              <Text numberOfLines={2} style={{ color: done ? colors.foreground : colors.muted, fontSize: 10, textAlign: "center", marginTop: 6 }}>{name}</Text>
+            </View>
+          );
+        })}
+      </View>
+      <Pressable onPress={() => router.push("/public-map" as any)} accessibilityRole="button" style={({ pressed }) => [{ marginTop: 10, borderColor: colors.primary, borderWidth: 1, borderRadius: 12, padding: 10 }, pressed && { opacity: 0.8 }]}>
+        <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>🗺️ {ex.open}</Text>
+      </Pressable>
 
       <View style={{ flexDirection: "row", gap: 8, marginTop: 22 }}>
         {chip(t.all, filter === "all", () => setFilter("all"), "all")}

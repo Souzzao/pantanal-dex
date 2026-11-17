@@ -25,6 +25,8 @@ export type StreetMapState = {
   fitKey: number;
   /** Onde a pessoa está (GPS): o mapa abre ali e mostra um ponto azul. */
   center?: { latitude: number; longitude: number } | null;
+  /** Pontos turísticos (estilo Pokéstop). visited = já fez check-in. */
+  spots?: { id: string; latitude: number; longitude: number; name: string; icon: string; visited: boolean }[];
   /** Textos curtos usados dentro do mapa (idioma do app). */
   labels: { high: string; records: (count: number) => string; pickHint: string };
 };
@@ -35,6 +37,7 @@ export type StreetMapEvent =
   | { type: "select"; ids: string[] }
   | { type: "pick"; latitude: number; longitude: number }
   | { type: "open"; id: string }
+  | { type: "spot"; id: string }
   | { type: "tiles"; ok: boolean };
 
 export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
@@ -66,6 +69,8 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
       return typeof event.id === "string" ? { type: "open", id: event.id } : null;
     case "tiles":
       return { type: "tiles", ok: event.ok === true };
+    case "spot":
+      return typeof event.id === "string" ? { type: "spot", id: event.id } : null;
     default:
       return null;
   }
@@ -76,6 +81,7 @@ export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
     points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, 20) : 0.6 })),
+    spots: (state.spots ?? []).filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, name: p.name, icon: p.icon, visited: p.visited === true })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
@@ -204,7 +210,7 @@ const PAGE_SCRIPT = String.raw`
       lat /= items.length; lon /= items.length;
       var high = items.length >= state.highMin;
       var isSelected = items.some(function (p) { return selected[p.id]; });
-      var color = high ? "#C2410C" : "#195946";
+      var color = high ? "#FF6B5E" : "#FFC400";
       var ids = items.map(function (p) { return p.id; });
       var title = countLabel(items.length) + (high ? " · " + state.labels.high : "");
       var allPending = items.every(function (p) { return p.pending; });
@@ -226,9 +232,19 @@ const PAGE_SCRIPT = String.raw`
     });
   }
 
+  // Pontos turísticos: losango amarelo (já visitado fica preenchido, com o ícone do lugar).
+  function drawSpots() {
+    (state.spots || []).forEach(function (s) {
+      var html = '<div class="stop' + (s.visited ? " done" : "") + '"><span>' + esc(s.icon) + "</span></div>";
+      L.marker([s.lat, s.lon], { icon: L.divIcon({ html: html, className: "", iconSize: [40, 40], iconAnchor: [20, 20] }), title: s.name, keyboard: true, zIndexOffset: 500 })
+        .bindTooltip(esc(s.name), { direction: "top", offset: [0, -18] })
+        .on("click", function () { send({ type: "spot", id: s.id }); }).addTo(overlay);
+    });
+  }
+
   function drawPoints() {
     state.points.forEach(function (p) {
-      L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 2, fillColor: "#195946", fillOpacity: 1 })
+      L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 2, fillColor: "#FFC400", fillOpacity: 1 })
         .bindTooltip(esc(p.label || ""), { direction: "top" })
         .on("click", function () { send({ type: "open", id: p.id }); }).addTo(overlay);
     });
@@ -248,7 +264,7 @@ const PAGE_SCRIPT = String.raw`
   function render() {
     if (!state) return;
     overlay.clearLayers();
-    if (state.mode === "public") drawPublic();
+    if (state.mode === "public") { drawPublic(); drawSpots(); }
     else if (state.mode === "points") drawPoints();
     if (state.mode === "pick") drawPick();
     if (state.center) L.circleMarker([state.center.lat, state.center.lon], { radius: 8, color: "#fff", weight: 3, fillColor: "#2563EB", fillOpacity: 1, interactive: false }).addTo(overlay);
@@ -279,19 +295,22 @@ const PAGE_SCRIPT = String.raw`
 
 const PAGE_CSS = `
 html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
-.bubble{border-radius:50%;background:#195946;color:#fff;font-weight:800;font-size:14px;text-align:center;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
-.bubble.high{background:#C2410C}
+.bubble{border-radius:50%;background:#0B0B0B;color:#FFC400;font-weight:800;font-size:14px;text-align:center;border:3px solid #FFC400;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
+.bubble.high{background:#FF6B5E}
 .bubble{position:relative}
-.bubble.photo{padding:0;overflow:visible;background:#195946}
+.bubble.photo{padding:0;overflow:visible;background:#0B0B0B}
 .bubble.photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
-.bubble .count{position:absolute;right:-6px;top:-6px;min-width:20px;height:20px;line-height:20px;padding:0 4px;border-radius:10px;background:#C2410C;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;box-sizing:content-box}
+.bubble .count{position:absolute;right:-6px;top:-6px;min-width:20px;height:20px;line-height:20px;padding:0 4px;border-radius:10px;background:#FF6B5E;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;box-sizing:content-box}
 .bubble.multi .paws{font-size:22px}
-.bubble.multi.high .count{background:#195946}
+.bubble.multi.high .count{background:#0B0B0B}
 .bubble.pending{border-style:dashed;opacity:.85}
 .bubble.sel{border-color:#FACC15;border-width:4px}
+.stop{width:34px;height:34px;margin:3px;transform:rotate(45deg);border-radius:8px;background:#0B0B0B;border:3px solid #FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.35),0 2px 8px rgba(0,0,0,.5);box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+.stop span{transform:rotate(-45deg);font-size:16px;line-height:1}
+.stop.done{background:#FFC400;border-color:#fff}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
-#hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(25,89,70,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
-.leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#195946;font-weight:800;font-size:13px;text-decoration:none}
+#hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(11,11,11,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
+.leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#0B0B0B;font-weight:800;font-size:13px;text-decoration:none}
 .leaflet-control-layers-toggle::after{content:"Nomes"}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
 .leaflet-control-attribution{font-size:9px;line-height:1.25;max-width:100%;background:rgba(255,255,255,.75)!important}

@@ -13,6 +13,9 @@ import { filterSpeciesCatalog, speciesAreaKm } from "@/shared/catalog";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
 import * as Location from "expo-location";
 import { commonsThumb } from "@/shared/image-url";
+import { SpotCard } from "@/components/SpotCard";
+import { getLanguageCode } from "@/shared/i18n";
+import { loadVisits, TOURIST_SPOTS, type SpotVisits } from "@/shared/tourist-spots";
 import {
   buildSampleRecords,
   filterByDate,
@@ -124,6 +127,13 @@ export default function PublicMapScreen() {
     })();
     return () => { cancelled = true; };
   }, []);
+  // Pontos turísticos (Pokéstops) e as insígnias já ganhas neste aparelho.
+  const [visits, setVisits] = useState<SpotVisits>({});
+  const [spotId, setSpotId] = useState<string | null>(null);
+  useEffect(() => { void loadVisits().then(setVisits); }, []);
+  const spot = TOURIST_SPOTS.find((item) => item.id === spotId) ?? null;
+  const spotLang = getLanguageCode();
+  const spots = useMemo(() => TOURIST_SPOTS.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, name: item.name[spotLang] ?? item.name.pt, icon: item.icon, visited: !!visits[item.id] })), [visits, spotLang]);
   const areaBySpecies = useMemo(() => new Map(catalog.map((item) => [item.id, speciesAreaKm(item)] as const)), [catalog]);
   const coverBySpecies = useMemo(() => new Map(catalog.flatMap((item) => (item.images[0] ? [[item.id, commonsThumb(item.images[0].uri, 120)] as const] : []))), [catalog]);
   const now = useMemo(() => new Date(), []);
@@ -151,15 +161,17 @@ export default function PublicMapScreen() {
     mode: "public",
     points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending", kind: item.speciesId, image: coverBySpecies.get(item.speciesId), areaKm: areaBySpecies.get(item.speciesId) })),
     center: myLocation,
+    spots,
     pick: null,
     selectedIds,
     highIncidenceMin: HIGH_INCIDENCE_MIN,
     fitKey,
     labels: { high: x.high, records: x.records, pickHint: "" },
-  }), [records, selectedIds, fitKey, x, coverBySpecies, areaBySpecies, myLocation]);
+  }), [records, selectedIds, fitKey, x, coverBySpecies, areaBySpecies, myLocation, spots]);
 
   const onMapEvent = useCallback((event: StreetMapEvent) => {
-    if (event.type === "select") setSelectedIds(event.ids);
+    if (event.type === "select") { setSelectedIds(event.ids); setSpotId(null); }
+    else if (event.type === "spot") { setSpotId(event.id); setSelectedIds([]); }
     else if (event.type === "tiles" && !event.ok) { setNoTiles(true); setMapKind("offline"); }
     else if (event.type === "tiles" && event.ok) setNoTiles(false);
   }, []);
@@ -240,8 +252,8 @@ export default function PublicMapScreen() {
                   {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#195946" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#C2410C" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FFC400" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FF6B5E" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
                 </View>
                 <Pressable onPress={() => router.push("/public-records" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 12, padding: 10 }, pressed && { opacity: 0.8 }]}>
                   <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{t.manage}</Text>
@@ -260,6 +272,8 @@ export default function PublicMapScreen() {
               <Text style={{ color: colors.muted, textAlign: "center" }}>{t.empty}</Text>
             </View>
           )}
+
+          {spot && <SpotCard spot={spot} visits={visits} onVisits={setVisits} onClose={() => setSpotId(null)} />}
 
           {/* Painel da área selecionada, por cima da parte de baixo do mapa */}
           {selectedRecords.length > 0 && (
