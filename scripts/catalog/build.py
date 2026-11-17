@@ -143,16 +143,30 @@ def diet_text(t, lang_i, family, fam_diet):
 
 
 def area_km(group, family, t, fam_area):
-    """Raio do círculo do mapa (km): pela massa corporal quando conhecida, senão pela família."""
-    mass_g = (t or {}).get("mass_g")
-    carnivore = bool(t and t.get("diet") and (t["diet"].get("Vend", 0) + t["diet"].get("Vect", 0) + t["diet"].get("Vfish", 0) + t["diet"].get("Vunk", 0)) >= 50)
+    """Raio da elipse do mapa (km), da própria espécie sempre que há dado:
+    - aves e mamíferos: área de vida cresce com a massa (raio ∝ √massa, ou seja área ∝ massa, como nas
+      relações alométricas de área de vida); quanto mais vertebrados na dieta (EltonTraits), maior;
+    - anfíbios: massa ou comprimento do AmphiBIO;
+    - répteis e peixes: massa/comprimento quando houver base (traits), senão a classe da família.
+    """
+    t = t or {}
+    mass_g, size_mm = t.get("mass_g"), t.get("size_mm")
+    diet = t.get("diet") or {}
+    vert = sum(diet.get(k, 0) for k in ("Vend", "Vect", "Vfish", "Vunk")) / 100.0
     if mass_g and group in ("Mamíferos", "Aves"):
         kg = mass_g / 1000
-        # Área de vida cresce com a massa (relação alométrica); carnívoros usam áreas maiores.
-        base = (0.35 if group == "Aves" else 0.6) * math.pow(max(kg, 0.005), 0.5) * (2.5 if carnivore else 1.0)
-        return round(min(max(base, 0.2), 15.0), 2)
+        base = (0.35 if group == "Aves" else 0.6) * math.pow(max(kg, 0.002), 0.5) * (1 + 1.5 * vert)
+        return round(min(max(base, 0.03), 15.0), 3 if base < 1 else 2)
+    if group == "Anfíbios" and (mass_g or size_mm):
+        r = 0.04 * math.sqrt(mass_g) if mass_g else 0.004 * size_mm
+        return round(min(max(r, 0.02), 1.0), 3)
+    if group in ("Répteis", "Peixes") and (mass_g or size_mm):
+        if mass_g:
+            r = (0.25 if group == "Répteis" else 0.4) * math.pow(max(mass_g / 1000, 0.001), 0.5)
+        else:
+            r = (0.003 if group == "Répteis" else 0.004) * size_mm
+        return round(min(max(r, 0.02), 8.0), 3 if r < 1 else 2)
     return AREA_KM.get(fam_area or "s", 0.6)
-
 
 def main():
     raw = json.load(open(os.path.join(ROOT, "data", "inat", "pantanal-vertebrados-raw.json"), encoding="utf8"))

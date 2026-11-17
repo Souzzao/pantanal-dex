@@ -16,7 +16,7 @@ for s in base:
     fam = fam_by_sci.get(s["sci"])
     t = traits.get(s["sci"])
     info = FAMILIES.get(fam) if fam else None
-    if (t and t.get("mass_g") and s["group"] in ("Aves", "Mamíferos")) or info:
+    if (t and (t.get("mass_g") or t.get("size_mm"))) or info:
         out[s["id"]] = area_km(s["group"], fam, t, info[2] if info else None)
     else:
         out[s["id"]] = GROUP_DEFAULT.get(s["group"], 0.3)
