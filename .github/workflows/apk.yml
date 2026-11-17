@@ -1,0 +1,50 @@
+name: APK Android
+
+# Gera o APK (release, assinado com a chave de debug do prebuild) a cada push na claude/v2
+# ou manualmente. O endereço e a chave pública do Supabase vêm dos segredos do repositório
+# (Settings → Secrets and variables → Actions); sem eles o app sai sem login (modo local).
+on:
+  push:
+    branches: [claude/v2]
+  workflow_dispatch:
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+      NODE_OPTIONS: --max-old-space-size=6144
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      - run: pnpm install --frozen-lockfile
+      - name: Login configurado?
+        run: |
+          if [ -n "$EXPO_PUBLIC_SUPABASE_URL" ] && [ -n "$EXPO_PUBLIC_SUPABASE_ANON_KEY" ]; then echo "Supabase: sim (login ativo)"; else echo "::warning::Sem segredos do Supabase: APK sai sem login"; fi
+      - run: npx expo prebuild --platform android --no-install
+      - name: Gradle assembleRelease
+        working-directory: android
+        run: ./gradlew assembleRelease -x lint -PreactNativeArchitectures=armeabi-v7a,arm64-v8a --no-daemon
+      - name: Renomeia
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk "PantanalDex-1.3.0-${GITHUB_SHA::7}.apk"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PantanalDex-APK
+          path: PantanalDex-*.apk
+          retention-days: 30
