@@ -1,12 +1,16 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
+import { generatedSpecies } from "./catalog/generated";
+import { SPECIES_ID_ALIASES } from "./species-aliases";
+export { resolveSpeciesId, SPECIES_ID_ALIASES } from "./species-aliases";
 import { getLanguageCode, localizeSpecies } from "./i18n";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
 
-const catalogLoader = createCatalogLoader([species, catalogSpecies]);
+const withoutAliases = (items: Species[]) => items.filter((item) => !(item.id in SPECIES_ID_ALIASES));
+const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAliases(catalogSpecies), generatedSpecies]);
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 

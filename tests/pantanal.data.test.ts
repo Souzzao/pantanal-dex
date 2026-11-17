@@ -357,7 +357,11 @@ describe("PantanalDex data contracts", () => {
 
   it("drops malformed stored sightings without crashing the app", () => {
     expect(sanitizeStoredSightings(null)).toEqual([]);
-    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "species-inexistente" }, sighting, { broken: true }])).toEqual([sighting]);
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "id com espaço e / barra" }, sighting, { broken: true }])).toEqual([sighting]);
+    // Registros de espécies fora da lista base (lotes, vertebrados gerados) não somem ao reabrir o app.
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "lobo-guara" }])).toHaveLength(1);
+    // Espécie repetida que saiu do catálogo vira a que ficou.
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "traira-pantanal" }])[0].speciesId).toBe("traira");
   });
 
   it("repairs invalid settings and preserves only supported languages", () => {

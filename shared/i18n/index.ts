@@ -1,4 +1,5 @@
 import type { Species } from "../pantanal";
+import { generatedTranslation } from "../catalog/generated";
 import { speciesDe } from "./species.de";
 import { speciesEn } from "./species.en";
 import { speciesEs } from "./species.es";
@@ -83,12 +84,13 @@ export function tr(pt: string, vars?: Record<string, string | number>, code: Lan
 }
 
 export function hasSpeciesTranslation(id: string, code: LanguageCode = current): boolean {
-  return code === "pt" || Boolean(speciesTables[code][id]);
+  return code === "pt" || Boolean(speciesTables[code][id]) || Boolean(generatedTranslation(id, code));
 }
 
 /** Devolve a ficha no idioma atual; campos sem tradução continuam em português. */
 export function localizeSpecies(item: Species, code: LanguageCode = current): Species {
   if (code === "pt") return item;
+  if (item.generated) return generatedTranslation(item.id, code) ?? item;
   const t = speciesTables[code][item.id];
   if (!t) return item;
   return { ...item, commonName: t[0], description: t[1], physicalCharacteristics: t[2], habitat: t[3], behavior: t[4], diet: t[5], curiosities: t[6], distribution: t[7], ecologicalImportance: t[8] };

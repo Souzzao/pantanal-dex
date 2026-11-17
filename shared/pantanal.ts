@@ -1,3 +1,5 @@
+import { SPECIES_ID_ALIASES } from "./species-aliases";
+
 export type SpeciesGroup = "Mamíferos" | "Aves" | "Répteis" | "Anfíbios" | "Peixes" | "Invertebrados";
 export type Environment = "Rios e corixos" | "Áreas alagadas" | "Campos" | "Matas" | "Bordas de mata";
 export type LocationPrecision = "exact" | "approximate" | "municipality" | "none";
@@ -22,6 +24,14 @@ export type Species = {
   conservationSource?: { title: string; url: string };
   images: { uri: string; author: string; license: string; sourceUrl: string; credit: string }[];
   sources: { title: string; url: string }[];
+  /** Raio (km) do círculo que marca a área do avistamento no mapa público; varia com a área de vida da espécie. */
+  areaKm?: number;
+  /** Família (nome científico). */
+  family?: string;
+  /** Espécie introduzida que vive solta no Pantanal. */
+  exotic?: boolean;
+  /** Ficha montada automaticamente a partir de fontes (iNaturalist, Wikipédia, bases de traços), sem revisão manual. */
+  generated?: boolean;
 };
 
 export type Sighting = {
@@ -414,14 +424,18 @@ export function isValidCoordinatePair(latitude: unknown, longitude: unknown): bo
 
 export function sanitizeStoredSightings(value: unknown): Sighting[] {
   if (!Array.isArray(value)) return [];
-  return value.filter((item): item is Sighting => {
+  // Ids de espécies repetidas que saíram do catálogo passam para o id que ficou.
+  const migrated = value.map((item) => (item && typeof item === "object" && typeof (item as Sighting).speciesId === "string" && (item as Sighting).speciesId in SPECIES_ID_ALIASES
+    ? { ...(item as Sighting), speciesId: SPECIES_ID_ALIASES[(item as Sighting).speciesId] }
+    : item));
+  return migrated.filter((item): item is Sighting => {
     if (!item || typeof item !== "object") return false;
     const sighting = item as Partial<Sighting>;
     const quantityIsValid = sighting.quantity === undefined ||
       (typeof sighting.quantity === "number" && Number.isInteger(sighting.quantity) && sighting.quantity > 0);
     const timeIsValid = sighting.time === undefined || (typeof sighting.time === "string" && isValidSightingTime(sighting.time));
     return typeof sighting.id === "string" && sighting.id.length > 0 &&
-      typeof sighting.speciesId === "string" && (sighting.speciesId === UNKNOWN_SPECIES_ID || species.some((entry) => entry.id === sighting.speciesId)) &&
+      typeof sighting.speciesId === "string" && /^[\p{L}\p{N}-]{1,80}$/u.test(sighting.speciesId) &&
       typeof sighting.date === "string" && isValidSightingDate(sighting.date) &&
       typeof sighting.createdAt === "string" && typeof sighting.updatedAt === "string" &&
       ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&

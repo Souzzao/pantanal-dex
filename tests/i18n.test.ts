@@ -18,8 +18,13 @@ describe("traduções embutidas (offline)", () => {
     for (const name of languages) expect(languageCodes[name]).toBeTruthy();
   });
 
-  it("todas as espécies do catálogo têm ficha completa em inglês, espanhol e alemão", () => {
-    const ids = filterSpeciesCatalog().map((item) => item.id);
+  it("todas as espécies do catálogo têm ficha em inglês, espanhol e alemão", () => {
+    const all = filterSpeciesCatalog();
+    for (const code of ["en", "es", "de"] as const) expect(all.filter((item) => !hasSpeciesTranslation(item.id, code)).map((item) => item.id)).toEqual([]);
+  });
+
+  it("as fichas escritas à mão têm todos os campos traduzidos", () => {
+    const ids = filterSpeciesCatalog().filter((item) => !item.generated).map((item) => item.id);
     for (const table of [speciesEn, speciesEs, speciesDe]) {
       expect(ids.filter((id) => !table[id])).toEqual([]);
       for (const id of ids) {
