@@ -27,6 +27,8 @@ for s in base:
         status = IUCN[st][i] if st in IUCN else ""
         if diet or phys or status:
             row[lang] = {"diet": diet, "physical": phys, "status": status}
+    if st:
+        row["code"] = st
     if row:
         out[s["id"]] = row
 json.dump(out, open(os.path.join(ROOT, "shared", "catalog", "base-traits.json"), "w", encoding="utf8"), ensure_ascii=False)

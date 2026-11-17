@@ -7,6 +7,9 @@
  * trocadas entre o app e a página do mapa.
  */
 
+/** Raio máximo do círculo de área de um animal no mapa (km). */
+export const MAX_AREA_KM = 3;
+
 export type MapMode = "public" | "pick" | "points";
 
 /** Ponto enviado ao mapa. No modo público as coordenadas já vêm generalizadas (célula de 0,1°). */
@@ -80,7 +83,7 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
-    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, 20) : 0.6 })),
+    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, MAX_AREA_KM) : 0.6 })),
     spots: (state.spots ?? []).filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, name: p.name, icon: p.icon, visited: p.visited === true })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
@@ -162,10 +165,10 @@ const PAGE_SCRIPT = String.raw`
 
   // Agrupa registros próximos na tela (raio de ~56 px, muda com o zoom). Com zoom alto, cada
   // célula pública de 0,1° vira um quadrado (o registro nunca aparece como ponto exato).
-  // Elipse da área de vida: cada animal tem o seu tamanho (raio em km vindo do catálogo). Fica centrada na
+  // Círculo da área de vida: cada animal tem o seu tamanho (até 3 km) (raio em km vindo do catálogo). Fica centrada na
   // célula pública de ~1 km, nunca no ponto exato. A maior vai embaixo para as menores continuarem clicáveis.
   function ellipse(lat, lon, km) {
-    var a = km * 1000 * 1.25, b = km * 1000 * 0.8, pts = [];
+    var a = km * 1000, b = km * 1000, pts = [];
     var mLat = 111320, mLon = 111320 * Math.cos(lat * Math.PI / 180);
     for (var i = 0; i < 48; i++) { var t = (i / 48) * 2 * Math.PI; pts.push([lat + (b * Math.sin(t)) / mLat, lon + (a * Math.cos(t)) / mLon]); }
     return pts;

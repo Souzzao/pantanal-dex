@@ -71,7 +71,7 @@ describe("área de cada animal no mapa", () => {
       { id: "y", latitude: -16, longitude: -57, areaKm: -1 },
     ] } as never);
     const areas = JSON.parse(raw).points.map((p: { area: number }) => p.area);
-    expect(areas).toEqual([15, 20, 0.6]);
+    expect(areas).toEqual([3, 3, 0.6]);
   });
 });
 

@@ -1,5 +1,5 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
-import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
+import { createCatalogLoader, sortItems, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
 import { generatedSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
@@ -16,7 +16,7 @@ const GROUP_AREA_KM: Record<string, number> = { Mamíferos: 1.2, Aves: 0.6, Rép
 
 /** Raio (km) da área desenhada no mapa para a espécie: cada animal tem o seu, pela área de vida típica. */
 export function speciesAreaKm(item: Pick<Species, "id" | "group"> & { areaKm?: number }): number {
-  return item.areaKm ?? areas[item.id] ?? GROUP_AREA_KM[item.group] ?? 0.3;
+  return Math.min(item.areaKm ?? areas[item.id] ?? GROUP_AREA_KM[item.group] ?? 0.3, 3);
 }
 
 const withoutAliases = (items: Species[]) =>
@@ -26,18 +26,20 @@ const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAlias
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
 type TraitLines = { diet: string; physical: string; status?: string };
-const traitsById = baseTraits as Record<string, Partial<Record<"pt" | "en" | "es" | "de", TraitLines>>>;
+const traitsById = baseTraits as unknown as Record<string, Partial<Record<"pt" | "en" | "es" | "de", TraitLines>> & { code?: string }>;
 const joinText = (a: string | undefined, b: string) => (!b ? a ?? "" : a?.trim() ? `${a.trim()}\n\n${b}` : b);
 
 /** Fichas escritas à mão ganham, no fim, a dieta medida (EltonTraits/AmphiBIO) e a massa média, com fonte. */
 function withTraits(item: Species): Species {
-  const extra = traitsById[item.id]?.[getLanguageCode()];
-  if (!extra) return item;
+  const row = traitsById[item.id];
+  const extra = row?.[getLanguageCode()];
+  if (!extra) return row?.code && !item.iucn ? { ...item, iucn: row.code } : item;
   return {
     ...item,
     diet: joinText(item.diet, extra.diet),
     physicalCharacteristics: joinText(item.physicalCharacteristics, extra.physical),
     conservationStatus: item.conservationStatus?.trim() ? item.conservationStatus : extra.status || item.conservationStatus,
+    iucn: item.iucn ?? row?.code,
   };
 }
 
@@ -56,8 +58,9 @@ function searchCatalog(filters: CatalogFilters): Species[] {
   return localized.filter((item) => matchedInPortuguese.has(item.id) || normalizeQuery(item.commonName).includes(wanted));
 }
 
+/** Ordena a lista inteira (antes passava pela paginação e cortava em 200 espécies). */
 export function sortSpeciesCatalog(items: Species[], sort: CatalogSort = "name"): Species[] {
-  return createCatalogLoader([items]).page({}, 0, Math.max(items.length, 1), sort);
+  return sortItems(items, sort);
 }
 
 export function paginateSpeciesCatalog(items: Species[], page: number, pageSize = 60): Species[] {

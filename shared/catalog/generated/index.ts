@@ -39,6 +39,7 @@ const toSpecies = (row: GeneratedRow, lang: "pt" | "en" | "es" | "de"): Species 
     family: row.family ?? undefined,
     exotic: row.exotic,
     generated: true,
+    iucn: row.status ?? undefined,
   };
 };
 

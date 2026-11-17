@@ -21,6 +21,8 @@ export type Species = {
   distribution: string;
   ecologicalImportance: string;
   conservationStatus?: string;
+  /** Categoria IUCN global (LC, NT, VU, EN, CR, DD), quando conhecida. */
+  iucn?: string;
   conservationSource?: { title: string; url: string };
   images: { uri: string; author: string; license: string; sourceUrl: string; credit: string }[];
   sources: { title: string; url: string }[];

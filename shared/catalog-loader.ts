@@ -22,7 +22,7 @@ export type CatalogLoader = {
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
 
-const sortItems = (items: Species[], sort: CatalogLoaderSort) => [...items].sort((a, b) => (
+export const sortItems = (items: Species[], sort: CatalogLoaderSort) => [...items].sort((a, b) => (
   sort === "group"
     ? a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR")
     : a.commonName.localeCompare(b.commonName, "pt-BR") || a.scientificName.localeCompare(b.scientificName, "pt-BR")
