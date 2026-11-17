@@ -55,9 +55,32 @@ describe("mensagens do mapa", () => {
 
   it("serializa o estado sem pontos inválidos e com os textos prontos", () => {
     const parsed = JSON.parse(serializeState(state));
-    expect(parsed.points).toEqual([{ id: "a", lat: -16.4, lon: -56.9, label: "", pending: false, img: "", kind: "" }]);
+    expect(parsed.points).toEqual([{ id: "a", lat: -16.4, lon: -56.9, label: "", pending: false, img: "", kind: "", area: 0.6 }]);
     expect(parsed.labels.one).toBe("1 registro");
     expect(parsed.labels.many).toBe("{n} registros");
     expect(parsed.fitKey).toBe(3);
+  });
+});
+
+describe("área de cada animal no mapa", () => {
+  it("usa o raio da espécie e limita valores absurdos", async () => {
+    const { serializeState } = await import("../shared/street-map");
+    const raw = serializeState({ ...state, points: [
+      { id: "onca", latitude: -16, longitude: -57, areaKm: 15 },
+      { id: "x", latitude: -16, longitude: -57, areaKm: 500 },
+      { id: "y", latitude: -16, longitude: -57, areaKm: -1 },
+    ] } as never);
+    const areas = JSON.parse(raw).points.map((p: { area: number }) => p.area);
+    expect(areas).toEqual([15, 20, 0.6]);
+  });
+});
+
+describe("raio por espécie no catálogo", () => {
+  it("toda espécie tem um raio próprio e a onça usa área maior que o sapo", async () => {
+    const { filterSpeciesCatalog, speciesAreaKm } = await import("../shared/catalog");
+    const all = filterSpeciesCatalog();
+    expect(all.every((s) => speciesAreaKm(s) > 0)).toBe(true);
+    const byId = new Map(all.map((s) => [s.id, speciesAreaKm(s)]));
+    expect(byId.get("onca-pintada")!).toBeGreaterThan(byId.get("sapo-cururu")!);
   });
 });

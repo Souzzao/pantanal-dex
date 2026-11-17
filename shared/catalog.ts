@@ -3,13 +3,23 @@ import { createCatalogLoader, type CatalogLoaderFilters, type CatalogLoaderSort 
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
 import { generatedSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
+import baseAreas from "./catalog/base-areas.json";
 export { resolveSpeciesId, SPECIES_ID_ALIASES } from "./species-aliases";
 import { getLanguageCode, localizeSpecies } from "./i18n";
 
 export type CatalogFilters = CatalogLoaderFilters;
 export type CatalogSort = CatalogLoaderSort;
 
-const withoutAliases = (items: Species[]) => items.filter((item) => !(item.id in SPECIES_ID_ALIASES));
+const areas = baseAreas as Record<string, number>;
+const GROUP_AREA_KM: Record<string, number> = { Mamíferos: 1.2, Aves: 0.6, Répteis: 0.6, Anfíbios: 0.3, Peixes: 1.2 };
+
+/** Raio (km) da área desenhada no mapa para a espécie: cada animal tem o seu, pela área de vida típica. */
+export function speciesAreaKm(item: Pick<Species, "id" | "group"> & { areaKm?: number }): number {
+  return item.areaKm ?? areas[item.id] ?? GROUP_AREA_KM[item.group] ?? 0.3;
+}
+
+const withoutAliases = (items: Species[]) =>
+  items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
 const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAliases(catalogSpecies), generatedSpecies]);
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();

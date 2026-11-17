@@ -9,7 +9,7 @@ import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { filterSpeciesCatalog, speciesAreaKm } from "@/shared/catalog";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
 import * as Location from "expo-location";
 import { commonsThumb } from "@/shared/image-url";
@@ -124,6 +124,7 @@ export default function PublicMapScreen() {
     })();
     return () => { cancelled = true; };
   }, []);
+  const areaBySpecies = useMemo(() => new Map(catalog.map((item) => [item.id, speciesAreaKm(item)] as const)), [catalog]);
   const coverBySpecies = useMemo(() => new Map(catalog.flatMap((item) => (item.images[0] ? [[item.id, commonsThumb(item.images[0].uri, 120)] as const] : []))), [catalog]);
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
@@ -148,14 +149,14 @@ export default function PublicMapScreen() {
 
   const mapState = useMemo<StreetMapState>(() => ({
     mode: "public",
-    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending", kind: item.speciesId, image: coverBySpecies.get(item.speciesId) })),
+    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending", kind: item.speciesId, image: coverBySpecies.get(item.speciesId), areaKm: areaBySpecies.get(item.speciesId) })),
     center: myLocation,
     pick: null,
     selectedIds,
     highIncidenceMin: HIGH_INCIDENCE_MIN,
     fitKey,
     labels: { high: x.high, records: x.records, pickHint: "" },
-  }), [records, selectedIds, fitKey, x, coverBySpecies, myLocation]);
+  }), [records, selectedIds, fitKey, x, coverBySpecies, areaBySpecies, myLocation]);
 
   const onMapEvent = useCallback((event: StreetMapEvent) => {
     if (event.type === "select") setSelectedIds(event.ids);

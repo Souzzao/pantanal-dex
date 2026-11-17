@@ -10,7 +10,7 @@
 export type MapMode = "public" | "pick" | "points";
 
 /** Ponto enviado ao mapa. No modo público as coordenadas já vêm generalizadas (célula de 0,1°). */
-export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean; /** Foto pequena do animal, mostrada dentro da bolinha. */ image?: string; /** Agrupa registros do mesmo animal. */ kind?: string };
+export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean; /** Foto pequena do animal, mostrada dentro da bolinha. */ image?: string; /** Agrupa registros do mesmo animal. */ kind?: string; /** Raio da área de vida do animal, em km (desenha a elipse). */ areaKm?: number };
 
 export type StreetMapState = {
   mode: MapMode;
@@ -75,7 +75,7 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
-    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "" })),
+    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, 20) : 0.6 })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
@@ -156,6 +156,30 @@ const PAGE_SCRIPT = String.raw`
 
   // Agrupa registros próximos na tela (raio de ~56 px, muda com o zoom). Com zoom alto, cada
   // célula pública de 0,1° vira um quadrado (o registro nunca aparece como ponto exato).
+  // Elipse da área de vida: cada animal tem o seu tamanho (raio em km vindo do catálogo). Fica centrada na
+  // célula pública de ~1 km, nunca no ponto exato. A maior vai embaixo para as menores continuarem clicáveis.
+  function ellipse(lat, lon, km) {
+    var a = km * 1000 * 1.25, b = km * 1000 * 0.8, pts = [];
+    var mLat = 111320, mLon = 111320 * Math.cos(lat * Math.PI / 180);
+    for (var i = 0; i < 48; i++) { var t = (i / 48) * 2 * Math.PI; pts.push([lat + (b * Math.sin(t)) / mLat, lon + (a * Math.cos(t)) / mLon]); }
+    return pts;
+  }
+  function drawAreas(selected) {
+    var cells = {};
+    state.points.forEach(function (p) {
+      var key = p.lat.toFixed(2) + ":" + p.lon.toFixed(2) + ":" + (p.kind || p.id);
+      (cells[key] = cells[key] || []).push(p);
+    });
+    Object.keys(cells).map(function (k) { return cells[k]; })
+      .sort(function (x, y) { return y[0].area - x[0].area; })
+      .forEach(function (items) {
+        var p = items[0], ids = items.map(function (i) { return i.id; });
+        var high = items.length >= state.highMin, isSelected = items.some(function (i) { return selected[i.id]; });
+        L.polygon(ellipse(p.lat, p.lon, p.area), { color: isSelected ? "#FFC400" : "#ffffff", weight: isSelected ? 4 : 1.5, fillColor: high ? "#FF6B5E" : "#FFC400", fillOpacity: high ? 0.3 : 0.18 })
+          .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
+      });
+  }
+
   function drawPublic() {
     var zoom = map.getZoom();
     var radius = 46, groups = {};
@@ -173,6 +197,7 @@ const PAGE_SCRIPT = String.raw`
       clusters.forEach(function (c, index) { groups["c" + index] = c.items; });
     }
     var selected = {}; state.selectedIds.forEach(function (id) { selected[id] = true; });
+    if (zoom >= 9) drawAreas(selected);
     Object.keys(groups).forEach(function (key) {
       var items = groups[key];
       var lat = 0, lon = 0; items.forEach(function (p) { lat += p.lat; lon += p.lon; });
@@ -182,11 +207,6 @@ const PAGE_SCRIPT = String.raw`
       var color = high ? "#C2410C" : "#195946";
       var ids = items.map(function (p) { return p.id; });
       var title = countLabel(items.length) + (high ? " · " + state.labels.high : "");
-      if (cellMode) {
-        var c = items[0];
-        L.circle([c.lat, c.lon], { radius: 600, color: isSelected ? "#FACC15" : "#ffffff", weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.45 : 0.32 })
-          .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
-      }
       var allPending = items.every(function (p) { return p.pending; });
       var kinds = {}; items.forEach(function (p) { kinds[p.kind || p.id] = true; });
       var sameAnimal = Object.keys(kinds).length === 1 && items[0].img;
