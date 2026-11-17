@@ -240,7 +240,7 @@ const PAGE_SCRIPT = String.raw`
     (state.spots || []).forEach(function (s) {
       var html = '<div class="stop' + (s.visited ? " done" : "") + (s.city ? " city" : "") + '"><span>' + esc(s.icon) + "</span></div>";
       L.marker([s.lat, s.lon], { icon: L.divIcon({ html: html, className: "", iconSize: [40, 40], iconAnchor: [20, 20] }), title: s.name, keyboard: true, zIndexOffset: 500 })
-        .bindTooltip(esc(s.name), { permanent: map.getZoom() >= 7, direction: "bottom", offset: [0, 16], className: "spot-label" + (s.city ? " city" : "") })
+        .bindTooltip(esc(s.name), { permanent: map.getZoom() >= 9 || (s.city && map.getZoom() >= 7), direction: "bottom", offset: [0, 16], className: "spot-label" + (s.city ? " city" : "") })
         .on("click", function () { send({ type: "spot", id: s.id }); }).addTo(overlay);
     });
   }
