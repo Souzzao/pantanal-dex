@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Image, Platform, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
@@ -98,27 +98,45 @@ export default function NewSightingScreen() {
     }
   };
 
-  const takePhoto = async () => {
+  const takePhoto = async (automatic = false) => {
     try {
       const permission = await ImagePicker.requestCameraPermissionsAsync();
       if (permission.status !== "granted") {
         const copy = getNativePermissionCopy(nativeLanguage, "camera", "denied");
-        Alert.alert(copy.title, copy.detail);
+        // Sem câmera: oferece a galeria na hora, para o registro não travar.
+        Alert.alert(copy.title, copy.detail, [
+          { text: nativeLanguage === "English" ? "Pick from gallery" : nativeLanguage === "Español" ? "Elegir de la galería" : "Escolher da galeria", onPress: () => void pickPhoto() },
+          { text: "OK", style: "cancel" },
+        ]);
         return;
       }
       const result = await ImagePicker.launchCameraAsync({
         mediaTypes: ["images"],
-        allowsEditing: true,
+        allowsEditing: !automatic,
         aspect: [4, 3],
         quality: 0.8,
         base64: Platform.OS === "web",
       });
       applyPickerResult(result);
+      // Foto tirada na abertura: já pega a localização junto (o formulário pede as duas).
+      if (automatic && !result.canceled && !coords) void useLocation();
     } catch {
+      if (automatic) return; // aparelho sem câmera (emulador): segue para o formulário
       const copy = getNativePermissionCopy(nativeLanguage, "camera", "error");
       Alert.alert(copy.title, copy.detail);
     }
   };
+
+  // Novo avistamento abre direto na câmera (uma vez). Ao voltar dela, o formulário já tem a foto;
+  // quem preferir a galeria ou não quiser foto usa os botões normais.
+  const openedCamera = useRef(false);
+  useEffect(() => {
+    if (id || existing || photoUri || openedCamera.current || Platform.OS === "web") return;
+    openedCamera.current = true;
+    const timer = setTimeout(() => void takePhoto(true), 350);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [existing]);
 
   const useLocation = async () => {
     try {
@@ -234,7 +252,7 @@ export default function NewSightingScreen() {
           <Pressable onPress={pickPhoto} accessibilityRole="button" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
             <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{photoUri ? "Trocar da galeria" : "Galeria"}</Text>
           </Pressable>
-          <Pressable onPress={takePhoto} accessibilityRole="button" style={{ flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14 }}>
+          <Pressable onPress={() => void takePhoto()} accessibilityRole="button" style={{ flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14 }}>
             <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Tirar foto</Text>
           </Pressable>
         </View>
