@@ -10,3 +10,8 @@ export function commonsThumb(uri: string, width: 120 | 250 | 330 | 500 | 960 = 5
   if (special) return `${special[1]}?width=${width}`;
   return uri;
 }
+
+/** Endereço que as telas usam para mostrar uma foto (e que o download offline precisa salvar). */
+export function displayImageUri(uri: string): string {
+  return commonsThumb(uri, 500);
+}

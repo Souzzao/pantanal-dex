@@ -1,14 +1,23 @@
-/** @type {const} */
-const themeColors = {
-  primary: { light: '#1F5D46', dark: '#65B58A' },
-  background: { light: '#F7F3E8', dark: '#17231F' },
-  surface: { light: '#FFFDF7', dark: '#21332B' },
-  foreground: { light: '#26332E', dark: '#F2F5EF' },
-  muted: { light: '#66756B', dark: '#B9C8BE' },
-  border: { light: '#D9E2D9', dark: '#385044' },
-  success: { light: '#2F7A4B', dark: '#7BCE9A' },
-  warning: { light: '#946112', dark: '#E7B84B' },
-  error: { light: '#B4473E', dark: '#F28B82' },
+/**
+ * Identidade PantanalDex (17/11/2026): preto, branco e amarelo.
+ * O app usa a mesma paleta escura nos dois modos do sistema, para manter a identidade
+ * (fundo preto, texto branco, amarelo para ações e destaques).
+ * @type {const}
+ */
+const brand = {
+  primary: '#FFC400',
+  background: '#0B0B0B',
+  surface: '#181818',
+  foreground: '#FFFFFF',
+  muted: '#B5B5B5',
+  border: '#2C2C2C',
+  success: '#4ADE80',
+  warning: '#FFC400',
+  error: '#FF6B5E',
+  accent: '#FFC400',
+  onAccent: '#0B0B0B',
 };
+
+const themeColors = Object.fromEntries(Object.entries(brand).map(([name, value]) => [name, { light: value, dark: value }]));
 
 module.exports = { themeColors };

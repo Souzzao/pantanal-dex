@@ -112,7 +112,7 @@ export default function RootLayout() {
             <DiscoveryToast />
             </PublicationsProvider>
           </AuthGate>
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
           {__DEV__ && Platform.OS !== "web" && typeof window !== "undefined" && <DevCollabPanel />}
         </QueryClientProvider>
       </trpc.Provider>

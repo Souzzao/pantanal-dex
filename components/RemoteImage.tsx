@@ -6,19 +6,19 @@ import { useRef, useState } from "react";
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { buildImageFallbackPlan } from "@/shared/image-fallback";
-import { commonsThumb } from "@/shared/image-url";
+import { displayImageUri } from "@/shared/image-url";
 
 type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
 
 const alternativesByUri = new Map<string, { uri: string }[]>();
 for (const animal of filterSpeciesCatalog()) {
-  const images = animal.images.map(image => ({ uri: commonsThumb(image.uri) }));
-  for (const image of animal.images) { alternativesByUri.set(image.uri, images); alternativesByUri.set(commonsThumb(image.uri), images); }
+  const images = animal.images.map(image => ({ uri: displayImageUri(image.uri) }));
+  for (const image of animal.images) { alternativesByUri.set(image.uri, images); alternativesByUri.set(displayImageUri(image.uri), images); }
 }
 
 export function RemoteImage(props: RemoteImageProps) {
   const uri = props.source && !Array.isArray(props.source) && typeof props.source === "object" ? props.source.uri : undefined;
-  const light = uri ? { ...(props.source as { uri: string }), uri: commonsThumb(uri) } : props.source;
+  const light = uri ? { ...(props.source as { uri: string }), uri: displayImageUri(uri) } : props.source;
   const next = buildImageFallbackPlan(light, [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
   const plan = useRef(next);
   if (plan.current.key !== next.key) plan.current = next;
