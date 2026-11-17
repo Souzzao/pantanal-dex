@@ -126,6 +126,11 @@ def diet_text(t, lang_i, family, fam_diet):
             if strata:
                 text += " " + {"pt": "Procura alimento principalmente ", "en": "Forages mainly ", "es": "Busca alimento sobre todo ", "de": "Sucht Nahrung vor allem "}[lang] + join_list(strata, lang) + "."
             return text
+    if t and t.get("dietItems"):
+        pieces = [DIET_PARTS[k][lang_i] for k in t["dietItems"] if k in DIET_PARTS]
+        if pieces:
+            lead = {"pt": "Itens da dieta registrados", "en": "Recorded diet items", "es": "Elementos de la dieta registrados", "de": "Nachgewiesene Nahrung"}[lang]
+            return f"{lead} ({t.get('source', 'AmphiBIO')}): {join_list(pieces, lang)}."
     if fam_diet:
         food = DIETS[fam_diet][lang_i]
         return {
@@ -236,8 +241,14 @@ def main():
                                 "es": " Especie exótica: introducida por el ser humano, vive en libertad en el Pantanal.",
                                 "de": " Gebietsfremde Art: vom Menschen eingeführt, lebt heute frei im Pantanal."}[lang]
             physical = ""
+            size = (t or {}).get("size_mm")
+            if size and not mass:
+                physical = {"pt": f"Comprimento corporal de cerca de {size:.0f} mm.", "en": f"Body length of about {size:.0f} mm.",
+                            "es": f"Longitud corporal de unos {size:.0f} mm.", "de": f"Körperlänge von etwa {size:.0f} mm."}[lang]
             if mass:
                 weight = f"{mass/1000:.1f} kg" if mass >= 1000 else f"{mass:.0f} g"
+                if lang != "en":
+                    weight = weight.replace(".", ",")
                 physical = {"pt": f"Massa corporal média de cerca de {weight}.", "en": f"Average body mass of about {weight}.",
                             "es": f"Masa corporal media de unos {weight}.", "de": f"Durchschnittliche Körpermasse von etwa {weight}."}[lang]
             habitat = {"pt": f"No Pantanal, típico de {envs}.", "en": f"In the Pantanal, typical of {envs}.",
