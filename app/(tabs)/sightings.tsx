@@ -52,7 +52,7 @@ export default function SightingsScreen() {
   const [speciesFilter, setSpeciesFilter] = useState(speciesId ?? "");
   const [groupFilter, setGroupFilter] = useState<string>("");
   const [environmentFilter, setEnvironmentFilter] = useState<string>("");
-  const [periodFilter, setPeriodFilter] = useState<"" | "30" | "365">("");
+  const [periodFilter, setPeriodFilter] = useState<"" | "1" | "7" | "30" | "365">("");
   const [onlyLocated, setOnlyLocated] = useState(false);
 
   const catalogById = useMemo(
@@ -365,6 +365,12 @@ export default function SightingsScreen() {
           marginBottom: 14,
         }}
       >
+        {renderChip("Hoje", periodFilter === "1", () =>
+          setPeriodFilter(periodFilter === "1" ? "" : "1"),
+        )}
+        {renderChip("Últimos 7 dias", periodFilter === "7", () =>
+          setPeriodFilter(periodFilter === "7" ? "" : "7"),
+        )}
         {renderChip("Últimos 30 dias", periodFilter === "30", () =>
           setPeriodFilter(periodFilter === "30" ? "" : "30"),
         )}
