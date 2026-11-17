@@ -29,7 +29,7 @@ export default function SpeciesDetailScreen() {
       Alert.alert("Não foi possível abrir a fonte", "Verifique a conexão e tente novamente.");
     }
   };
-  const block = (title: string, content: string) => <View style={{ marginTop: 20 }}><Text accessibilityRole="header" style={{ color: colors.primary, fontWeight: "800", fontSize: 15, textTransform: "uppercase", letterSpacing: 0.7 }}>{title}</Text><Text style={{ color: colors.foreground, fontSize: 15, lineHeight: 23, marginTop: 6 }}>{content}</Text></View>;
+  const block = (title: string, content: string | undefined | null) => !content?.trim() ? null : <View style={{ marginTop: 20 }}><Text accessibilityRole="header" style={{ color: colors.primary, fontWeight: "800", fontSize: 15, textTransform: "uppercase", letterSpacing: 0.7 }}>{title}</Text><Text style={{ color: colors.foreground, fontSize: 15, lineHeight: 23, marginTop: 6 }}>{content}</Text></View>;
 
   if (!animal) {
     return <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5"><Pressable onPress={() => router.replace("/(tabs)/animals" as any)} accessibilityRole="button"><Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>‹ Animais</Text></Pressable><Text style={{ color: colors.foreground, fontSize: 22, fontWeight: "800", marginTop: 24 }}>Espécie não encontrada.</Text><Text style={{ color: colors.muted, marginTop: 6 }}>Volte ao catálogo para escolher outra ficha.</Text></ScreenContainer>;
