@@ -36,6 +36,14 @@ jobs:
       - name: Login configurado?
         run: |
           if [ -n "$EXPO_PUBLIC_SUPABASE_URL" ] && [ -n "$EXPO_PUBLIC_SUPABASE_ANON_KEY" ]; then echo "Supabase: sim (login ativo)"; else echo "::warning::Sem segredos do Supabase: APK sai sem login"; fi
+      - name: NDK (baixa antes, com repetição)
+        run: |
+          for i in 1 2 3; do
+            rm -rf "$ANDROID_HOME/ndk/27.1.12297006"
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.1.12297006" > /dev/null && exit 0
+            echo "NDK falhou ($i); de novo em 20 s"; sleep 20
+          done
+          exit 1
       - run: npx expo prebuild --platform android --no-install
       - name: Gradle assembleRelease
         working-directory: android
