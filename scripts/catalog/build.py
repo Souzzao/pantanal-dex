@@ -162,6 +162,8 @@ def main():
         raw += [x for x in json.load(open(extra_path, encoding="utf8")) if x["sci"].lower() not in known]
     current = json.load(open(os.path.join(ROOT, "data", "inat", "catalogo-atual.json"), encoding="utf8"))
     traits = load_traits()
+    tpath = os.path.join(ROOT, "data", "inat", "traducoes-descricoes.json")
+    translated = json.load(open(tpath, encoding="utf8")) if os.path.exists(tpath) else {}
     have_sci = {c["sci"].lower() for c in current}
     used_ids = {c["id"] for c in current}
     missing_family = set()
@@ -226,6 +228,8 @@ def main():
             gword = GROUP_T[group][i]
             fam_label = f"{family_pt} ({family})" if (lang == "pt" and family_pt and family_pt != family) else family
             envs = join_list([ENV_T[e][i] for e in environments], lang)
+            if not wiki and (translated.get(sid) or {}).get(lang):
+                wiki = translated[sid][lang].strip()
             if wiki:
                 description = wiki
             else:
