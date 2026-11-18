@@ -1,0 +1,35 @@
+name: Fotos do catálogo
+
+# Busca mais fotos das espécies no iNaturalist e salva em data/inat/fotos-v2.json
+# na própria branch (o build do catálogo usa esse arquivo depois). Roda em push nas
+# branches claude/fotos* ou manualmente.
+on:
+  push:
+    branches: ["claude/fotos*"]
+    paths: ["scripts/catalog/fetch_photos.py", ".github/workflows/fotos.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fotos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/catalog/fetch_photos.py
+      - name: Salvar resultado na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add data/inat/fotos-v2.json
+          git commit -m "Fotos do catálogo: resultado da busca no iNaturalist" || echo "sem mudanças"
+          git push
