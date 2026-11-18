@@ -4,8 +4,8 @@
 
 | Versão | Suporte |
 |---|---|
-| 1.3.x | ✅ |
-| < 1.3 | ❌ |
+| 3.8.x | ✅ |
+| < 3.8 | ❌ |
 
 ## Como relatar uma vulnerabilidade
 
@@ -33,5 +33,9 @@ Inclua o que encontrou, como reproduzir e o impacto possível. A resposta inicia
 - O mapa público mostra apenas uma área arredondada, nunca o ponto exato do avistamento.
 - Publicações têm limite diário, data não pode ser futura e o ponto precisa estar no Pantanal.
 - Registros só ficam públicos depois de auditados.
+
+## Dependências
+
+Na versão 3.8 as dependências foram revisadas: dos 186 alertas conhecidos (npm advisories) restaram 10, todos em ferramentas de desenvolvimento e build (Metro, Expo CLI, Jest/Vite) que não rodam dentro do app instalado e ainda não têm versão corrigida compatível (`picomatch`, `minimatch`, `glob`, `uuid`, `image-size`, `decode-uri-component`, `diff`, `ts-deepmerge`). As correções usam `pnpm.overrides` em `package.json`, sempre dentro da mesma versão principal para não quebrar o build.
 
 Detalhes técnicos em [`docs/SEGURANCA.md`](docs/SEGURANCA.md).

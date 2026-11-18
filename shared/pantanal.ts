@@ -56,6 +56,8 @@ export type Sighting = {
   visibility: Visibility;
   createdAt: string;
   updatedAt: string;
+  /** Caderno do registro (ver shared/notebooks.ts); ausente = caderno Principal. */
+  notebookId?: string;
 };
 
 export const groups: SpeciesGroup[] = ["Mamíferos", "Aves", "Répteis", "Anfíbios", "Peixes", "Invertebrados"];
@@ -447,7 +449,8 @@ export function sanitizeStoredSightings(value: unknown): Sighting[] {
       typeof sighting.createdAt === "string" && typeof sighting.updatedAt === "string" &&
       ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&
       ["private", "shareable"].includes(sighting.visibility ?? "") &&
-      timeIsValid && isValidCoordinatePair(sighting.latitude, sighting.longitude) && quantityIsValid;
+      timeIsValid && isValidCoordinatePair(sighting.latitude, sighting.longitude) && quantityIsValid &&
+      (sighting.notebookId === undefined || (typeof sighting.notebookId === "string" && sighting.notebookId.length <= 80));
   });
 }
 

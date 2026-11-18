@@ -55,25 +55,26 @@ const csvCell = (value: string | number | undefined) => `"${String(value ?? "").
  */
 const csvText = (value: string | undefined) => csvCell(value && /^[=+\-@\t\r]/.test(value) ? `'${value}` : value);
 
+/** Uma linha do CSV para um avistamento já preparado para exportação. */
+export function csvRowOf(sighting: Sighting): string {
+  return [
+    csvCell(sighting.id),
+    csvCell(sighting.speciesId),
+    csvCell(sighting.date),
+    csvCell(sighting.time),
+    csvText(sighting.locationLabel),
+    csvCell(sighting.latitude),
+    csvCell(sighting.longitude),
+    csvCell(sighting.locationPrecision),
+    csvCell(sighting.quantity),
+    csvText(sighting.notes),
+    csvCell(sighting.visibility),
+  ].join(",");
+}
+
 /**
  * Gera o caderno em CSV (planilha), com campos escapados para evitar injeção de fórmulas.
  */
 export function createExportCsv(sightings: Sighting[]) {
-  const header = EXPORT_CSV_HEADER;
-  const rows = sightings.map(toExportableSighting).map((sighting) =>
-    [
-      csvCell(sighting.id),
-      csvCell(sighting.speciesId),
-      csvCell(sighting.date),
-      csvCell(sighting.time),
-      csvText(sighting.locationLabel),
-      csvCell(sighting.latitude),
-      csvCell(sighting.longitude),
-      csvCell(sighting.locationPrecision),
-      csvCell(sighting.quantity),
-      csvText(sighting.notes),
-      csvCell(sighting.visibility),
-    ].join(","),
-  );
-  return [header, ...rows].join("\n");
+  return [EXPORT_CSV_HEADER, ...sightings.map(toExportableSighting).map(csvRowOf)].join("\n");
 }

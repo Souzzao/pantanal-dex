@@ -1,6 +1,6 @@
 # Arquitetura
 
-> Autor: Felipe de Souza Aquino · Versão 1.3.0
+> Autor: Felipe de Souza Aquino · Versão 3.8
 
 ## Visão geral
 
@@ -26,7 +26,7 @@ flowchart LR
 |---|---|---|
 | Telas | `app/` | Rotas do Expo Router. Só cuidam de exibição e interação. |
 | Componentes | `components/` | Peças reutilizáveis: mapa (`StreetMap`), cartão de ponto turístico (`SpotCard`), login, imagens com fallback. |
-| Estado | `contexts/` | `AuthContext` (sessão e perfil), `AppContext` (preferências e caderno, por conta), `PublicationsContext` (fila e registros públicos). |
+| Estado | `contexts/` | `AuthContext` (sessão e perfil), `AppContext` (preferências, avistamentos e cadernos, por conta), `PublicationsContext` (fila e registros públicos). |
 | Regras de negócio | `shared/` | Funções puras, sem React, cobertas por testes: validação de avistamentos, limites diários, geometria do Pantanal, check-in, filtros, i18n. |
 | Integrações | `lib/` | Cliente Supabase, cópia permanente das fotos, tema. |
 | Servidor | `supabase/migrations/` | Tabelas, políticas RLS e funções `SECURITY DEFINER` que validam cada operação. |
@@ -50,6 +50,10 @@ A regra principal é: **tela não decide regra**. Toda decisão (um ponto está 
 2. A função `publish_my_sighting` roda no servidor: confere o usuário, a data, o limite diário e arredonda a posição.
 3. O registro fica **pendente** até um auditor chamar `review_sighting` (aprovar, corrigir ou recusar).
 4. O mapa público só lê registros ativos e não recusados, exibidos como círculos (`shared/street-map.ts`).
+
+### Cadernos
+
+`shared/notebooks.ts` separa os avistamentos em cadernos (Principal, Teste, criados e importados) pelo campo opcional `notebookId`; registros antigos, sem o campo, ficam no Principal. `shared/notebook-files.ts` exporta um ou mais cadernos em JSON, CSV ou GeoJSON levando o nome do caderno e importa os três formatos, reconhecendo o formato pelo conteúdo. Juntar cadernos move os registros para o destino e pode remover duplicatas (mesma espécie, data, hora e local). O caderno Teste traz exemplos que não contam para a coleção nem para o limite diário.
 
 ### Check-in turístico
 

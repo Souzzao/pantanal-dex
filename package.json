@@ -1,6 +1,6 @@
 {
   "name": "pantanal-dex",
-  "version": "1.3.0",
+  "version": "3.8.0",
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
@@ -72,7 +72,8 @@
     "prettier": "^3.7.4",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.3",
-    "vitest": "^2.1.9"
+    "vite": "^7.3.1",
+    "vitest": "^4.1.12"
   },
   "packageManager": "pnpm@9.12.0",
   "description": "PantanalDex — guia de campo offline e caderno de avistamentos da fauna do Pantanal.",
@@ -81,5 +82,48 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Souzzao/pantanal-dex.git"
+  },
+  "pnpm": {
+    "overrides": {
+      "@babel/core@7": "^7.29.6",
+      "@humanfs/node@~0.16": "~0.16.8",
+      "@isaacs/brace-expansion@5": "^5.0.1",
+      "@xmldom/xmldom@~0.8": "~0.8.15",
+      "ajv@6": "^6.14.0",
+      "ajv@8": "^8.18.0",
+      "baseline-browser-mapping@2": "^2.11.0",
+      "brace-expansion@1": "^1.1.21",
+      "brace-expansion@2": "^2.1.7",
+      "browserslist@4": "^4.28.7",
+      "compression@1": "^1.8.2",
+      "fast-uri@3": "^3.1.9",
+      "flatted@3": "^3.4.2",
+      "form-data@4": "^4.0.6",
+      "joi@17": "^17.13.9",
+      "js-yaml@3": "^3.15.2",
+      "js-yaml@4": "^4.3.2",
+      "minimatch@3": "^3.1.4",
+      "minimatch@5": "^5.1.8",
+      "minimatch@9": "^9.0.7",
+      "minimatch@10": "^10.2.3",
+      "picomatch@2": "^2.3.2",
+      "picomatch@3": "^3.0.2",
+      "picomatch@4": "^4.0.7",
+      "nanoid@3": "^3.3.18",
+      "node-forge@1": "^1.4.3",
+      "postcss-selector-parser@6": "^6.1.5",
+      "postcss@8": "^8.5.23",
+      "rollup@4": "^4.59.0",
+      "shell-quote@1": "^1.9.0",
+      "source-map-js@1": "^1.2.2",
+      "tar@7": "^7.5.21",
+      "undici@6": "^6.29.1",
+      "ws@6": "^6.2.4",
+      "ws@7": "^7.5.11",
+      "ws@8": "^8.21.0",
+      "yaml@1": "^1.10.3",
+      "yaml@2": "^2.8.3",
+      "zod@4": "^4.6.6"
+    }
   }
 }

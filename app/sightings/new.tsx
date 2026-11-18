@@ -15,6 +15,8 @@ import { getLocalTodayISODate, UNKNOWN_SPECIES_ID, type Sighting, type Visibilit
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { getNativePermissionCopy, type NativeLanguage } from "@/shared/native-permissions";
 import { useApp } from "@/contexts/AppContext";
+import { NOTEBOOK_ICON } from "@/components/NotebookBar";
+import { MAIN_NOTEBOOK_ID, notebookOf } from "@/shared/notebooks";
 import { useColors } from "@/hooks/use-colors";
 import { countSightingCreations, validateSightingOperation } from "@/shared/sighting-rules";
 import { isInsidePantanal } from "@/shared/pantanal-boundary";
@@ -24,7 +26,7 @@ import { SightingLocationModal } from "@/components/SightingLocationModal";
 export default function NewSightingScreen() {
   const colors = useColors();
   const { id, speciesId } = useLocalSearchParams<{ id?: string; speciesId?: string }>();
-  const { sightings, settings, ready, canWriteSightings, creationLedger, addSighting, updateSighting } = useApp();
+  const { sightings, settings, ready, canWriteSightings, creationLedger, addSighting, updateSighting, notebooks, activeNotebookId } = useApp();
   const nativeLanguage = (settings.defaultLanguage === "English" || settings.defaultLanguage === "Español" ? settings.defaultLanguage : "Português") as NativeLanguage;
   const existing = id ? sightings.find((item) => item.id === id) : undefined;
   const [selected, setSelected] = useState(speciesId ?? existing?.speciesId ?? UNKNOWN_SPECIES_ID);
@@ -36,6 +38,7 @@ export default function NewSightingScreen() {
   const [notes, setNotes] = useState(existing?.notes ?? "");
   const [quantity, setQuantity] = useState(existing?.quantity ? String(existing.quantity) : "");
   const [photoUri, setPhotoUri] = useState<string | undefined>(existing?.photoUri);
+  const [notebookId, setNotebookId] = useState<string>(existing ? notebookOf(existing) : activeNotebookId);
   const [photoInput, setPhotoInput] = useState<SightingPhotoInput>();
   const [pickingLocation, setPickingLocation] = useState(false);
   const [visibility, setVisibility] = useState<Visibility>(existing?.visibility ?? "private");
@@ -55,6 +58,7 @@ export default function NewSightingScreen() {
     setNotes(existing.notes ?? "");
     setQuantity(existing.quantity ? String(existing.quantity) : "");
     setPhotoUri(existing.photoUri);
+    setNotebookId(notebookOf(existing));
     setVisibility(existing.visibility);
     setCoords(
       existing.latitude !== undefined && existing.longitude !== undefined
@@ -190,6 +194,7 @@ export default function NewSightingScreen() {
       visibility,
       createdAt: existing?.createdAt ?? now,
       updatedAt: now,
+      notebookId: notebookId === MAIN_NOTEBOOK_ID ? undefined : notebookId,
     };
     try {
       const validation = validateSightingOperation(sighting, { operation: existing ? "update" : "create", now: currentTime, ledger: creationLedger });
@@ -220,6 +225,16 @@ export default function NewSightingScreen() {
         <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
         <Text style={{ color: colors.muted, marginBottom: 16 }}>Foto e localização são obrigatórias. {ready && canWriteSightings ? `${countSightingCreations(creationLedger, new Date())}/30 novos registros hoje neste aparelho.` : "Carregando o caderno…"}</Text>
+
+        <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Caderno</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 16 }}>
+          {notebooks.map((item) => (
+            <Pressable key={item.id} onPress={() => setNotebookId(item.id)} accessibilityRole="radio" accessibilityState={{ selected: notebookId === item.id }} accessibilityLabel={`Salvar no caderno ${item.name}`}
+              style={{ backgroundColor: notebookId === item.id ? colors.primary : colors.surface, borderColor: notebookId === item.id ? colors.primary : colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 8, marginRight: 8 }}>
+              <Text style={{ color: notebookId === item.id ? colors.background : colors.foreground, fontWeight: "800", fontSize: 12 }}>{NOTEBOOK_ICON[item.kind]} {item.name}</Text>
+            </Pressable>
+          ))}
+        </ScrollView>
 
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Espécie</Text>
         <TextInput

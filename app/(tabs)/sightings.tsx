@@ -13,11 +13,15 @@ import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups } from "@/shared/pantanal";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { useApp } from "@/contexts/AppContext";
+import { NotebookBar } from "@/components/NotebookBar";
+import { sightingsIn } from "@/shared/notebooks";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SightingsScreen() {
   const colors = useColors();
-  const { sightings, ready, settings } = useApp();
+  const { sightings: allSightings, ready, settings } = useApp();
+  const [notebookFilter, setNotebookFilter] = useState<string>("all");
+  const sightings = useMemo(() => sightingsIn(allSightings, notebookFilter), [allSightings, notebookFilter]);
   const english = settings.defaultLanguage === "English";
   const spanish = settings.defaultLanguage === "Español";
   const labels = english
@@ -200,8 +204,9 @@ export default function SightingsScreen() {
           <Text style={{ color: "#fff", fontWeight: "800" }}>+ Novo</Text>
         </Pressable>
       </View>
+      <NotebookBar selected={notebookFilter} onSelect={setNotebookFilter} />
       <View
-        style={{ flexDirection: "row", gap: 8, marginTop: 14, marginBottom: 2 }}
+        style={{ flexDirection: "row", gap: 8, marginTop: 12, marginBottom: 2 }}
         accessibilityRole="summary"
       >
         <View
