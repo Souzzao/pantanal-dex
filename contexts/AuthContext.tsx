@@ -29,6 +29,8 @@ type AuthContextValue = {
   signIn: (email: string, password: string) => Promise<{ error: ReturnType<typeof authErrorKey> | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: ReturnType<typeof authErrorKey> | null; needsConfirmation: boolean }>;
   signOut: () => Promise<void>;
+  /** Apaga a conta no servidor (fotos, publicações e perfil) e sai. Os avistamentos do aparelho ficam. */
+  deleteAccount: () => Promise<{ error: string | null }>;
   refreshAccount: () => Promise<void>;
   getAccessToken: () => Promise<string | null>;
 };
@@ -177,6 +179,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setStatus("signedOut");
   }, [applyAccount]);
 
+  const deleteAccount = useCallback(async (): Promise<{ error: string | null }> => {
+    if (!supabase) return { error: "Servidor não configurado." };
+    const { data } = await supabase.auth.getSession();
+    const uid = data.session?.user.id;
+    if (!uid) return { error: "Entre na conta para apagá-la." };
+    try {
+      // 1) Fotos enviadas (pasta <uid>/ do bucket). O Storage não aceita apagar por SQL.
+      const bucket = supabase.storage.from("sighting-photos");
+      for (let round = 0; round < 20; round += 1) {
+        const { data: files, error } = await bucket.list(uid, { limit: 100 });
+        if (error) throw error;
+        if (!files || files.length === 0) break;
+        const { error: removeError } = await bucket.remove(files.map((file) => `${uid}/${file.name}`));
+        if (removeError) throw removeError;
+      }
+      // 2) Conta, perfil e publicações (cascata no banco).
+      const { error } = await supabase.rpc("delete_my_account");
+      if (error) throw error;
+    } catch (error) {
+      return { error: (error as Error).message || "Sem conexão. Tente de novo com internet." };
+    }
+    await signOut();
+    return { error: null };
+  }, [signOut]);
+
   const refreshAccount = useCallback(async () => {
     if (session) await loadProfile(session);
   }, [session, loadProfile]);
@@ -188,8 +215,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo<AuthContextValue>(() => ({
-    status, account, accessToken: session?.access_token ?? null, offline, signIn, signUp, signOut, refreshAccount, getAccessToken,
-  }), [status, account, session, offline, signIn, signUp, signOut, refreshAccount, getAccessToken]);
+    status, account, accessToken: session?.access_token ?? null, offline, signIn, signUp, signOut, deleteAccount, refreshAccount, getAccessToken,
+  }), [status, account, session, offline, signIn, signUp, signOut, deleteAccount, refreshAccount, getAccessToken]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
