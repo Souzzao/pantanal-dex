@@ -38,10 +38,11 @@ O **PantanalDex** resolve isso em um único app que funciona **sem internet**:
 | **Catálogo** | 1.018 espécies (mamíferos, aves, répteis, anfíbios, peixes e invertebrados), busca por nome popular ou científico, filtros por grupo, ambiente e ameaça. |
 | **Ficha da espécie** | Descrição, dieta medida (EltonTraits/AmphiBIO), massa corporal, status IUCN, curiosidades, fontes e créditos de imagem, em 4 idiomas. |
 | **Novo avistamento** | Abre a câmera na hora, lê o GPS, confere se o ponto está no Pantanal e salva no caderno local. Alternativas: galeria e marcação manual no mapa. |
-| **Caderno** | Lista com filtros de período, edição, exclusão e exportação CSV/JSON. |
+| **Cadernos** | Avistamentos separados em cadernos (Principal, Teste, criados e importados). Juntar cadernos removendo repetidos, importar e exportar em JSON, CSV ou GeoJSON, com histórico dos cadernos exportados. |
 | **Mapa público** | Registros auditados exibidos como círculos de até 3 km (o tamanho depende do animal), filtros por espécie, grupo e data. Nunca mostra o ponto exato. |
 | **Pontos turísticos** | 19 atrativos e 16 municípios pantaneiros, check-in validado por distância (Haversine) e precisão do GPS. |
 | **Coleção** | XP, nível, progresso por grupo, conquistas e insígnias Bronze, Prata e Ouro. |
+| **Auditoria** | Fila em cartões (arrastar para aprovar ou recusar), correção de espécie e histórico. Modo demonstração simula publicações e o processo completo, sem enviar nada ao servidor. |
 | **Contas e perfis** | Login com Supabase Auth e três perfis: **usuário** (registra), **auditor** (aprova, corrige ou recusa registros públicos) e **dev** (gerencia contas e papéis). |
 | **Offline** | Catálogo, caderno e mapa funcionam sem rede; fotos do catálogo podem ser baixadas para uso offline. |
 

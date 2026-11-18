@@ -18,6 +18,7 @@ import { canAudit } from "@/shared/auth";
 import { normalizeAuditRow, REJECT_REASONS, type AuditItem, type LogItem, normalizeLogRow } from "@/shared/audit";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapState } from "@/shared/street-map";
+import { AUDIT_PROCESS, createDemoQueue, demoScenario, DEMO_PREFIX, simulatePublication, type PublishSimulation } from "@/shared/audit-demo";
 
 const TEXT = {
   pt: {
@@ -73,12 +74,24 @@ export default function AuditScreen() {
   const [query, setQuery] = useState("");
   const [rejectOpen, setRejectOpen] = useState(false);
   const [reason, setReason] = useState("");
+  // Modo demonstração: pilha e decisões simuladas, sem servidor.
+  const [demo, setDemo] = useState(!supabase);
+  const [sim, setSim] = useState<PublishSimulation | null>(null);
+  const [simStep, setSimStep] = useState(0);
+  const simSeq = useRef(0);
 
   const current = items[0] ?? null;
   const speciesId = speciesOverride ?? current?.speciesId ?? "";
   const species = byId.get(speciesId);
 
   const load = useCallback(async () => {
+    if (demo) {
+      setItems(createDemoQueue());
+      setLog([]);
+      setFailed(false);
+      setLoading(false);
+      return;
+    }
     if (!supabase) return;
     setLoading(true);
     setFailed(false);
@@ -92,15 +105,36 @@ export default function AuditScreen() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [demo]);
 
   useEffect(() => { void load(); }, [load]);
+
+  const runSimulation = (kind: "valid" | "invalid") => {
+    simSeq.current += 1;
+    const pick = catalog[(simSeq.current * 37) % catalog.length];
+    const result = simulatePublication({ ...demoScenario(kind, pick.id), ownerName: account?.displayName ? `${account.displayName} (simulação)` : undefined }, new Date(), simSeq.current);
+    setSim(result);
+    setSimStep(0);
+  };
+
+  // Revela as verificações uma a uma, como se o servidor estivesse conferindo.
+  useEffect(() => {
+    if (!sim || simStep > sim.checks.length) return;
+    const timer = setTimeout(() => setSimStep((step) => step + 1), 650);
+    return () => clearTimeout(timer);
+  }, [sim, simStep]);
+
+  const finishSimulation = () => {
+    if (sim?.item) { setItems((list) => [sim.item!, ...list]); setTab("stack"); }
+    setSim(null);
+  };
 
   // Foto enviada: link temporário (10 min) do Storage privado.
   useEffect(() => {
     setPhotoUrl(null);
     setSpeciesOverride(null);
     setError(null);
+    if (current?.id.startsWith(DEMO_PREFIX)) { setPhotoUrl(byId.get(current.speciesId)?.images[0]?.uri ?? null); return; }
     if (!supabase || !current?.photoPath) return;
     let alive = true;
     void supabase.storage.from("sighting-photos").createSignedUrl(current.photoPath, 600).then(({ data }) => {
@@ -113,13 +147,15 @@ export default function AuditScreen() {
   const resetCard = () => Animated.spring(position, { toValue: { x: 0, y: 0 }, useNativeDriver: false }).start();
 
   const decide = useCallback(async (decision: "approved" | "rejected", note?: string) => {
-    if (!supabase || !current || busy) return;
+    if (!current || busy || (!supabase && !demo)) return;
     setBusy(true);
     setError(null);
-    const { error: rpcError } = await supabase.rpc("review_sighting", {
-      p_id: current.id, p_decision: decision, p_note: note ?? null,
-      p_species_id: speciesOverride && speciesOverride !== current.speciesId ? speciesOverride : null,
-    });
+    const { error: rpcError } = demo || !supabase
+      ? { error: null }
+      : await supabase.rpc("review_sighting", {
+        p_id: current.id, p_decision: decision, p_note: note ?? null,
+        p_species_id: speciesOverride && speciesOverride !== current.speciesId ? speciesOverride : null,
+      });
     setBusy(false);
     if (rpcError) {
       setError(t.saveError);
@@ -134,7 +170,7 @@ export default function AuditScreen() {
     });
     setRejectOpen(false);
     setReason("");
-  }, [current, busy, speciesOverride, account, position, t]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current, busy, speciesOverride, account, position, t, demo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const panResponder = useMemo(() => PanResponder.create({
     onMoveShouldSetPanResponder: (_event, gesture) => Math.abs(gesture.dx) > 12 && Math.abs(gesture.dx) > Math.abs(gesture.dy),
@@ -172,6 +208,10 @@ export default function AuditScreen() {
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
         <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontWeight: "800" }}>{t.title}</Text>
         <View style={{ flexDirection: "row", gap: 6 }}>
+          <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
+            style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.warning, backgroundColor: demo ? colors.warning : colors.surface }}>
+            <Text style={{ color: demo ? colors.background : colors.warning, fontWeight: "800", fontSize: 13 }}>Demo</Text>
+          </Pressable>
           {(["stack", "history"] as const).map((key) => (
             <Pressable key={key} onPress={() => setTab(key)} accessibilityRole="button" accessibilityState={{ selected: tab === key }}
               style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: tab === key ? colors.primary : colors.surface }}>
@@ -181,6 +221,33 @@ export default function AuditScreen() {
         </View>
       </View>
       {tab === "stack" && !loading && !failed && <Text style={{ color: colors.muted, marginTop: 2 }}>{t.queue(items.length)}</Text>}
+      {demo && (
+        <View style={{ marginTop: 8, borderColor: colors.warning, borderWidth: 1, borderRadius: 14, padding: 10, backgroundColor: colors.surface }}>
+          <Text style={{ color: colors.warning, fontWeight: "900", fontSize: 12 }}>MODO DEMONSTRAÇÃO · nada é enviado ao servidor</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 8 }}>
+            {AUDIT_PROCESS.map((step, index) => (
+              <View key={step.title} style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ width: 150, backgroundColor: colors.background, borderRadius: 10, padding: 8 }}>
+                  <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 12 }}>{step.icon} {index + 1}. {step.title}</Text>
+                  <Text style={{ color: colors.muted, fontSize: 11, marginTop: 2 }}>{step.text}</Text>
+                </View>
+                {index < AUDIT_PROCESS.length - 1 && <Text style={{ color: colors.primary, fontWeight: "900", marginHorizontal: 4 }}>→</Text>}
+              </View>
+            ))}
+          </ScrollView>
+          <View style={{ flexDirection: "row", gap: 8, marginTop: 8 }}>
+            <Pressable onPress={() => runSimulation("valid")} accessibilityRole="button" style={{ flex: 1, backgroundColor: colors.primary, borderRadius: 10, paddingVertical: 10, alignItems: "center" }}>
+              <Text style={{ color: colors.background, fontWeight: "800", fontSize: 12 }}>Simular publicação</Text>
+            </Pressable>
+            <Pressable onPress={() => runSimulation("invalid")} accessibilityRole="button" style={{ flex: 1, borderColor: colors.error, borderWidth: 1, borderRadius: 10, paddingVertical: 10, alignItems: "center" }}>
+              <Text style={{ color: colors.error, fontWeight: "800", fontSize: 12 }}>Simular publicação inválida</Text>
+            </Pressable>
+            <Pressable onPress={() => void load()} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10, alignItems: "center" }}>
+              <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 12 }}>↺</Text>
+            </Pressable>
+          </View>
+        </View>
+      )}
     </View>
   );
 
@@ -262,6 +329,35 @@ export default function AuditScreen() {
           <Text style={{ color: colors.muted, fontSize: 11, textAlign: "center", marginTop: 6 }}>{t.swipe}</Text>
         </View>
       )}
+
+      {/* Simulação de publicação (modo demonstração) */}
+      <Modal visible={!!sim} transparent animationType="fade" onRequestClose={() => setSim(null)}>
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,.6)", justifyContent: "center", padding: 20 }}>
+          <View style={{ backgroundColor: colors.background, borderRadius: 20, padding: 18, borderColor: colors.primary, borderWidth: 1 }}>
+            <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>Publicando no mapa…</Text>
+            <Text style={{ color: colors.muted, marginTop: 2, marginBottom: 10 }}>{sim?.item ? nameOf(sim.item.speciesId) : "Registro de teste"} · o servidor confere cada regra</Text>
+            {sim?.checks.map((check, index) => (
+              <View key={check.label} style={{ flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7, opacity: index < simStep ? 1 : 0.25 }}>
+                <Text style={{ fontSize: 18, width: 24, textAlign: "center", color: index < simStep ? (check.ok ? colors.success : colors.error) : colors.muted }}>{index < simStep ? (check.ok ? "✓" : "✕") : "…"}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ color: colors.foreground, fontWeight: "800" }}>{check.label}</Text>
+                  <Text style={{ color: colors.muted, fontSize: 12 }}>{check.detail}</Text>
+                </View>
+              </View>
+            ))}
+            {sim && simStep > sim.checks.length && (
+              <View style={{ marginTop: 10, borderRadius: 12, padding: 12, backgroundColor: sim.accepted ? colors.success : colors.error }}>
+                <Text style={{ color: colors.background, fontWeight: "900" }}>{sim.accepted ? "Aceito: entrou na pilha como PENDENTE" : "Recusado pelo servidor"}</Text>
+                <Text style={{ color: colors.background, fontSize: 12, marginTop: 2 }}>{sim.accepted ? "Agora o auditor decide se ele aparece no mapa público." : "O registro não fica público e a pessoa vê o motivo."}</Text>
+              </View>
+            )}
+            <Pressable onPress={finishSimulation} disabled={!sim || simStep <= sim.checks.length} accessibilityRole="button"
+              style={{ marginTop: 14, backgroundColor: colors.primary, borderRadius: 14, padding: 14, alignItems: "center", opacity: sim && simStep > sim.checks.length ? 1 : 0.4 }}>
+              <Text style={{ color: colors.background, fontWeight: "800" }}>{sim?.accepted ? "Ver na pilha" : "Fechar"}</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
 
       {/* Motivo da reprovação */}
       <Modal visible={rejectOpen} transparent animationType="fade" onRequestClose={() => setRejectOpen(false)}>

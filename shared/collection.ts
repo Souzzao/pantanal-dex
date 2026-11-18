@@ -3,6 +3,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isTestSighting } from "./notebooks";
 import { groups, type Sighting, type Species, type SpeciesGroup } from "./pantanal";
 
 /**
@@ -88,7 +89,9 @@ export function formatCollectionNumber(value: number): string {
 /**
  * Monta a coleção a partir do catálogo e do caderno: espécies descobertas, XP, nível, progresso por grupo e conquistas.
  */
-export function computeCollection(catalog: readonly Species[], sightings: readonly Sighting[]): CollectionSummary {
+export function computeCollection(catalog: readonly Species[], allSightings: readonly Sighting[]): CollectionSummary {
+  // Exemplos do caderno Teste não contam para a coleção.
+  const sightings = allSightings.filter((item) => !isTestSighting(item));
   const bySpecies = new Map<string, { count: number; first?: string; last?: string }>();
   const knownIds = new Set(catalog.map((item) => item.id));
   const days = new Set<string>();
@@ -181,8 +184,8 @@ export function findNewDiscoveries(
   previous: readonly Sighting[],
   next: readonly Sighting[],
 ): CollectionEntry[] {
-  const before = new Set(previous.map((item) => item.speciesId));
-  const after = new Set(next.map((item) => item.speciesId));
+  const before = new Set(previous.filter((item) => !isTestSighting(item)).map((item) => item.speciesId));
+  const after = new Set(next.filter((item) => !isTestSighting(item)).map((item) => item.speciesId));
   if (![...after].some((id) => !before.has(id))) return [];
   return computeCollection(catalog, next).entries.filter((entry) => entry.discovered && !before.has(entry.species.id));
 }

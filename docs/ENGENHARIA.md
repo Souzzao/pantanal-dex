@@ -60,6 +60,7 @@ flowchart LR
 | RF11 | Coleção com XP, níveis e conquistas |
 | RF12 | Check-in em pontos turísticos e insígnias de Explorador |
 | RF13 | Download das fotos do catálogo para uso offline |
+| RF14 | Cadernos: criar, renomear, apagar, juntar, importar e exportar (JSON, CSV, GeoJSON) |
 
 ### Não funcionais
 
@@ -196,6 +197,7 @@ flowchart TD
 | 1.1 | Mapa público, login e auditoria |
 | 1.2 | Fotos offline e 4 idiomas |
 | 1.3 | 1.018 espécies, pontos turísticos e insígnias |
+| 3.8 | Cadernos de avistamentos e modo demonstração da auditoria |
 
 ## 9. Qualidade
 

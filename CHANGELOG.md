@@ -2,6 +2,20 @@
 
 Todas as mudanças relevantes do PantanalDex. Mantido por Felipe de Souza Aquino.
 
+## [3.8.0] — 2026-11-18
+
+### Adicionado
+- **Cadernos de avistamentos**: Principal, Teste (com exemplos), cadernos criados pela pessoa e importados.
+- Seletor de cadernos em Meus registros e no Novo avistamento; caderno ativo para os novos registros.
+- Tela **Cadernos**: criar, renomear, apagar (movendo ou apagando os registros), juntar cadernos com remoção de repetidos.
+- Importação de cadernos em **JSON, CSV ou GeoJSON** (caderno novo, separado pelos cadernos do arquivo ou no caderno ativo).
+- Exportação por caderno nos três formatos, com o nome do caderno no arquivo, e histórico de **cadernos exportados**.
+- **Modo demonstração da auditoria**: pilha simulada, simulação de publicação passo a passo e explicação do processo, sem enviar nada ao servidor.
+
+### Alterado
+- Exemplos do caderno Teste não contam para a coleção nem para o limite diário.
+- Tela de Ajustes mais limpa, com atalho para os cadernos e a versão 3.8.
+
 ## [1.3.0] — 2026-11-17
 
 ### Adicionado
