@@ -9,9 +9,10 @@ on:
     paths-ignore: ["**.md", "docs/**"]
   workflow_dispatch:
 
-# Permissão mínima: o job só lê o código. Nenhum segredo chega a PRs de forks.
+# Permissão mínima: lê o código e, só no push da main, publica a release do APK.
+# Nenhum segredo chega a PRs de forks.
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: apk-${{ github.ref }}
@@ -67,3 +68,16 @@ jobs:
           name: PantanalDex-APK
           path: PantanalDex-*.apk
           retention-days: 30
+      # Publica o APK como "release" pública: o link de download não exige conta no GitHub
+      # (usado pelo QR code da apresentação). Só roda em push na main, nunca em PR.
+      - name: Publicar release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          cp PantanalDex-*.apk PantanalDex.apk
+          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk \
+            --title "PantanalDex ${VERSION}" \
+            --notes "APK gerado automaticamente a partir de ${GITHUB_SHA::7}. Instale no Android (permita apps de fontes desconhecidas)." \
+            --latest
