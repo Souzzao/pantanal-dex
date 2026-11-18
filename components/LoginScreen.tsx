@@ -4,7 +4,8 @@
  * @author Felipe de Souza Aquino
  */
 import { useState } from "react";
-import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
+import { PRIVACY_POLICY_URL } from "@/shared/version";
+import { ActivityIndicator, KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, View } from "react-native";
 import { Image } from "react-native";
 import { Text, TextInput } from "@/components/T";
 
@@ -16,21 +17,21 @@ import { validateSignUp } from "@/shared/auth";
 
 const TEXT = {
   pt: {
-    tagline: "Guia de campo e caderno de avistamentos", signIn: "Entrar", signUp: "Criar conta", name: "Seu nome (aparece para os auditores)", email: "E-mail", password: "Senha (mínimo 8 caracteres)", show: "Mostrar", hide: "Ocultar",
+    terms: "Li e aceito a ", policy: "Política de Privacidade", tagline: "Guia de campo e caderno de avistamentos", signIn: "Entrar", signUp: "Criar conta", name: "Seu nome (aparece para os auditores)", email: "E-mail", password: "Senha (mínimo 8 caracteres)", show: "Mostrar", hide: "Ocultar",
     toSignUp: "Ainda não tem conta? Criar conta", toSignIn: "Já tem conta? Entrar", offlineHint: "Depois do primeiro acesso, sua conta continua aberta sem internet: o caderno e o catálogo funcionam offline.",
-    errors: { email: "Confira o e-mail.", password: "A senha precisa ter pelo menos 8 caracteres.", name: "Escreva um nome de 2 a 40 letras.", invalid: "E-mail ou senha incorretos.", exists: "Já existe uma conta com esse e-mail. Use Entrar.", network: "Sem internet. Para o primeiro acesso é preciso estar conectado.", confirm: "Confirme o e-mail antes de entrar (veja sua caixa de entrada).", weak: "Senha fraca: use pelo menos 8 caracteres, misturando letras e números.", rate: "Muitas tentativas. Espere um minuto e tente de novo.", unknown: "Não foi possível entrar agora. Tente de novo." },
+    errors: { terms: "Marque que leu e aceita a Política de Privacidade.", email: "Confira o e-mail.", password: "A senha precisa ter pelo menos 8 caracteres.", name: "Escreva um nome de 2 a 40 letras.", invalid: "E-mail ou senha incorretos.", exists: "Já existe uma conta com esse e-mail. Use Entrar.", network: "Sem internet. Para o primeiro acesso é preciso estar conectado.", confirm: "Confirme o e-mail antes de entrar (veja sua caixa de entrada).", weak: "Senha fraca: use pelo menos 8 caracteres, misturando letras e números.", rate: "Muitas tentativas. Espere um minuto e tente de novo.", unknown: "Não foi possível entrar agora. Tente de novo." },
     confirmSent: "Conta criada. Confirme o e-mail que enviamos e depois entre.",
   },
   en: {
-    tagline: "Field guide and sightings notebook", signIn: "Sign in", signUp: "Create account", name: "Your name (shown to reviewers)", email: "Email", password: "Password (at least 8 characters)", show: "Show", hide: "Hide",
+    terms: "I have read and accept the ", policy: "Privacy Policy", tagline: "Field guide and sightings notebook", signIn: "Sign in", signUp: "Create account", name: "Your name (shown to reviewers)", email: "Email", password: "Password (at least 8 characters)", show: "Show", hide: "Hide",
     toSignUp: "No account yet? Create account", toSignIn: "Already have an account? Sign in", offlineHint: "After the first sign-in, your account stays open without internet: the notebook and catalog work offline.",
-    errors: { email: "Check the email.", password: "The password needs at least 8 characters.", name: "Type a name with 2 to 40 letters.", invalid: "Wrong email or password.", exists: "An account with this email already exists. Use Sign in.", network: "No internet. The first sign-in needs a connection.", confirm: "Confirm your email before signing in (check your inbox).", weak: "Weak password: use at least 8 characters with letters and numbers.", rate: "Too many attempts. Wait a minute and try again.", unknown: "Could not sign in now. Try again." },
+    errors: { terms: "Please confirm you accept the Privacy Policy.", email: "Check the email.", password: "The password needs at least 8 characters.", name: "Type a name with 2 to 40 letters.", invalid: "Wrong email or password.", exists: "An account with this email already exists. Use Sign in.", network: "No internet. The first sign-in needs a connection.", confirm: "Confirm your email before signing in (check your inbox).", weak: "Weak password: use at least 8 characters with letters and numbers.", rate: "Too many attempts. Wait a minute and try again.", unknown: "Could not sign in now. Try again." },
     confirmSent: "Account created. Confirm the email we sent, then sign in.",
   },
   es: {
-    tagline: "Guía de campo y cuaderno de avistamientos", signIn: "Entrar", signUp: "Crear cuenta", name: "Tu nombre (lo ven los auditores)", email: "Correo", password: "Contraseña (mínimo 8 caracteres)", show: "Mostrar", hide: "Ocultar",
+    terms: "Leí y acepto la ", policy: "Política de Privacidad", tagline: "Guía de campo y cuaderno de avistamientos", signIn: "Entrar", signUp: "Crear cuenta", name: "Tu nombre (lo ven los auditores)", email: "Correo", password: "Contraseña (mínimo 8 caracteres)", show: "Mostrar", hide: "Ocultar",
     toSignUp: "¿No tienes cuenta? Crear cuenta", toSignIn: "¿Ya tienes cuenta? Entrar", offlineHint: "Después del primer acceso, tu cuenta sigue abierta sin internet: el cuaderno y el catálogo funcionan sin conexión.",
-    errors: { email: "Revisa el correo.", password: "La contraseña necesita al menos 8 caracteres.", name: "Escribe un nombre de 2 a 40 letras.", invalid: "Correo o contraseña incorrectos.", exists: "Ya existe una cuenta con ese correo. Usa Entrar.", network: "Sin internet. El primer acceso necesita conexión.", confirm: "Confirma tu correo antes de entrar (revisa tu bandeja).", weak: "Contraseña débil: usa al menos 8 caracteres con letras y números.", rate: "Demasiados intentos. Espera un minuto e inténtalo de nuevo.", unknown: "No se pudo entrar ahora. Inténtalo de nuevo." },
+    errors: { terms: "Marca que leíste y aceptas la Política de Privacidad.", email: "Revisa el correo.", password: "La contraseña necesita al menos 8 caracteres.", name: "Escribe un nombre de 2 a 40 letras.", invalid: "Correo o contraseña incorrectos.", exists: "Ya existe una cuenta con ese correo. Usa Entrar.", network: "Sin internet. El primer acceso necesita conexión.", confirm: "Confirma tu correo antes de entrar (revisa tu bandeja).", weak: "Contraseña débil: usa al menos 8 caracteres con letras y números.", rate: "Demasiados intentos. Espera un minuto e inténtalo de nuevo.", unknown: "No se pudo entrar ahora. Inténtalo de nuevo." },
     confirmSent: "Cuenta creada. Confirma el correo que enviamos y luego entra.",
   },
 } as const;
@@ -47,6 +48,7 @@ export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [accepted, setAccepted] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<ErrorKey | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -57,6 +59,7 @@ export function LoginScreen() {
     if (mode === "signUp") {
       const invalid = validateSignUp({ email, password, displayName: name });
       if (invalid) return setError(invalid as ErrorKey);
+      if (!accepted) return setError("terms"); // LGPD: consentimento com a política antes de criar a conta
     } else if (!email.trim() || !password) {
       return setError(!email.trim() ? "email" : "password");
     }
@@ -98,6 +101,16 @@ export function LoginScreen() {
               </Pressable>
             </View>
           </View>
+
+          {mode === "signUp" && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginTop: 14 }}>
+              <Pressable onPress={() => setAccepted((v) => !v)} accessibilityRole="checkbox" accessibilityState={{ checked: accepted }} accessibilityLabel={`${t.terms}${t.policy}`} hitSlop={8}
+                style={{ width: 26, height: 26, borderRadius: 6, borderWidth: 2, borderColor: colors.primary, backgroundColor: accepted ? colors.primary : "transparent", alignItems: "center", justifyContent: "center" }}>
+                {accepted && <Text style={{ color: colors.background, fontWeight: "900" }}>✓</Text>}
+              </Pressable>
+              <Text style={{ color: colors.foreground, flex: 1, flexWrap: "wrap" }}>{t.terms}<Text onPress={() => void Linking.openURL(PRIVACY_POLICY_URL)} accessibilityRole="link" style={{ color: colors.primary, fontWeight: "700", textDecorationLine: "underline" }}>{t.policy}</Text></Text>
+            </View>
+          )}
 
           {error && <Text accessibilityLiveRegion="assertive" style={{ color: colors.error, marginTop: 12, fontWeight: "600" }}>{t.errors[error]}</Text>}
           {info && <Text accessibilityLiveRegion="polite" style={{ color: colors.success, marginTop: 12, fontWeight: "600" }}>{info}</Text>}
