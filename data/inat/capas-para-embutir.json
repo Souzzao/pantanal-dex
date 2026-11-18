@@ -5938,5 +5938,1413 @@
       "https://inaturalist-open-data.s3.amazonaws.com/photos/56192127/medium.jpeg",
       "https://inaturalist-open-data.s3.amazonaws.com/photos/555236658/medium.jpg"
     ]
+  },
+  {
+    "id": "carcara",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/344678876/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/230212815/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/10212/medium.jpg"
+    ]
+  },
+  {
+    "id": "tacha",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/244230211/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/99127209/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/533895070/medium.jpg"
+    ]
+  },
+  {
+    "id": "canario-da-terra",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/220765971/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/1465116/medium.JPG",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/263906709/medium.jpg"
+    ]
+  },
+  {
+    "id": "urubu-de-cabeca-amarela",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/260941303/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/75971180/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/254277476/medium.jpg"
+    ]
+  },
+  {
+    "id": "pipira-vermelha",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/121438781/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/104388238/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/114357910/medium.jpeg"
+    ]
+  },
+  {
+    "id": "sabia-laranjeira",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1507197/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/31977/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/2767207/medium.JPG"
+    ]
+  },
+  {
+    "id": "rolinha-roxa",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/7250/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/4973789/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/4973791/medium.jpg"
+    ]
+  },
+  {
+    "id": "chupim",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/708094271/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/169148636/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/4580479/medium.jpeg"
+    ]
+  },
+  {
+    "id": "sanhaco-do-coqueiro",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/347058041/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/347058044/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/347058050/medium.jpg"
+    ]
+  },
+  {
+    "id": "aratinga-de-testa-azul",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/3931867/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/159005939/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/159005937/medium.jpg"
+    ]
+  },
+  {
+    "id": "choca-barrada",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2029462/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/27162/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/8536816/medium.jpeg"
+    ]
+  },
+  {
+    "id": "tico-tico-rei",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/225603443/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/1813482/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/26408652/medium.jpeg"
+    ]
+  },
+  {
+    "id": "bem-te-vi-rajado",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620371179/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/335247149/medium.png",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/755438/medium.jpg"
+    ]
+  },
+  {
+    "id": "pipira-da-taoca",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/84311/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/229447841/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/565833/medium.jpg"
+    ]
+  },
+  {
+    "id": "psomophis-genimaculatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/189606047/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/91831472/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/734496919/medium.jpg"
+    ]
+  },
+  {
+    "id": "choca-do-planalto",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/342795939/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/473405412/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/342795929/medium.jpeg"
+    ]
+  },
+  {
+    "id": "policia-inglesa-do-sul",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/438451603/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/59119038/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/790015/medium.jpg"
+    ]
+  },
+  {
+    "id": "rabo-branco-de-barriga-fulva",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/140800810/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/140800850/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/590094811/medium.jpg"
+    ]
+  },
+  {
+    "id": "pseudis-limellum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/352592622/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/240061383/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/351986966/medium.jpg"
+    ]
+  },
+  {
+    "id": "esquilo-amazonico-do-sul",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/8534914/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/17426912/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/19920582/medium.jpg"
+    ]
+  },
+  {
+    "id": "plecturocebus-pallescens",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/73724372/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/664928733/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/216320671/medium.jpeg"
+    ]
+  },
+  {
+    "id": "leptodactylus-bufonius",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/465149004/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/465158006/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/465149009/medium.jpg"
+    ]
+  },
+  {
+    "id": "morcego-vampiro-comum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/149104034/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/245746350/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/3793445/medium.jpg"
+    ]
+  },
+  {
+    "id": "morcego-pescador-pequeno",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/244049423/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/284951824/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/295462174/medium.jpeg"
+    ]
+  },
+  {
+    "id": "pyrrhulina-australis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/61166490/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/733328525/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/578632836/medium.jpg"
+    ]
+  },
+  {
+    "id": "calango-liso",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/109193409/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/109193407/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/109193408/medium.jpg"
+    ]
+  },
+  {
+    "id": "pombo-das-rochas",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/466776975/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/66637915/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/466776981/medium.jpg"
+    ]
+  },
+  {
+    "id": "cachorra-facao",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/10153827/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/4641658/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/10153828/medium.jpeg"
+    ]
+  },
+  {
+    "id": "pia-cobra-do-sul",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/39057074/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/244576071/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/17292149/medium.jpg"
+    ]
+  },
+  {
+    "id": "lagarto-do-rabo-vermelho",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/354465079/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/362586204/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/354789576/medium.jpeg"
+    ]
+  },
+  {
+    "id": "irre",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/436950508/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/34436811/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/31667078/medium.jpeg"
+    ]
+  },
+  {
+    "id": "raia-olho-de-pavao",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130754408/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/94817522/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/758060674/medium.jpg"
+    ]
+  },
+  {
+    "id": "jeju",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/97717536/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/24267/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/31697809/medium.jpeg"
+    ]
+  },
+  {
+    "id": "cachorro-vinagre",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/260793478/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/77972971/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/177484065/medium.jpeg"
+    ]
+  },
+  {
+    "id": "mussum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/46536194/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/406075005/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/406075108/medium.jpeg"
+    ]
+  },
+  {
+    "id": "ra-oval",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/175244926/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/175244935/medium.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Distribution_map_of_Elachistocleis_corumbaensis.png/500px-Distribution_map_of_Elachistocleis_corumbaensis.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "peitica-de-chapeu-preto",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/55234361/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/55234362/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/55234363/medium.jpg"
+    ]
+  },
+  {
+    "id": "papa-terra-de-barriga-dourada",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/734490435/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/63965128/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/131761416/medium.jpg"
+    ]
+  },
+  {
+    "id": "neofundulus-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/349213896/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/349213571/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/3a/66/3a66e127-91ad-42c2-b4fd-637eb3f9a05d.jpg"
+    ]
+  },
+  {
+    "id": "rabo-branco-de-sobre-amarelo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/603895640/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/434384693/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/740161917/medium.jpg"
+    ]
+  },
+  {
+    "id": "rafael-listrado",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/322297849/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/430676764/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/322297864/medium.jpg"
+    ]
+  },
+  {
+    "id": "ameerega-picta",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/174740397/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/349728226/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/742964997/medium.jpg"
+    ]
+  },
+  {
+    "id": "calango-bandeira",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/169574040/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/88526805/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/169574023/medium.jpeg"
+    ]
+  },
+  {
+    "id": "apistogramma-borellii",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/18885671/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/18885672/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/18885673/medium.jpg"
+    ]
+  },
+  {
+    "id": "tetra-de-forest",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/579376741/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/64044026/medium.jpeg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Moenkhausia_forestii_%281895.5.17.181%29.jpg/500px-Moenkhausia_forestii_%281895.5.17.181%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "ciclasoma-de-santiago",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/297693744/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130843150/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/107457135/medium.jpg"
+    ]
+  },
+  {
+    "id": "ctenobrycon-kennedyi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/579376872/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/624807763/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467466447/medium.jpeg"
+    ]
+  },
+  {
+    "id": "platyrrhinus-incarum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/488226757/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/411659852/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/658894301/medium.jpg"
+    ]
+  },
+  {
+    "id": "prionobrama-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/586119267/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/113220089/medium.jpeg",
+      "https://data.nhm.ac.uk/media/efd75007-75c8-4ff3-aff8-ce538ba16c61"
+    ]
+  },
+  {
+    "id": "cobra-cadarco",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/563699152/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/735120582/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/342115123/medium.jpeg"
+    ]
+  },
+  {
+    "id": "serrapinnus-kriegi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/299986596/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/63953501/medium.jpeg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%282_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%282_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "thylamys-velutinus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/351995812/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/351995823/medium.jpg",
+      "https://specify-media.science.ku.dk/fileget?coll=NHMD+Mammalogy&type=O&filename=sp67503986010711765974.att.jpg"
+    ]
+  },
+  {
+    "id": "aphyocharax-rathbuni",
+    "url": "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.21_252.70739f0e-03b1-4058-ba6f-4ea88044270f.jpg?subunit=1024.jpg",
+    "alternativas": [
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.11_222.53eba4c5-874a-4352-be53-68a19654ed4e.jpg?subunit=1024.jpg",
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM30599b.jpg"
+    ]
+  },
+  {
+    "id": "bryconops-melanurus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/584370501/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/217204163/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/647216730/medium.jpg"
+    ]
+  },
+  {
+    "id": "cerradomys-maracajuensis",
+    "url": "https://collections.nmnh.si.edu/media/?i=13907601&h=2000",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14397493&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14397527&h=2000"
+    ]
+  },
+  {
+    "id": "cynopotamus-argenteus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130776490/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467495703/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/0e/38/0e38350b-3452-4f7c-8f84-dbc809449f50.jpg"
+    ]
+  },
+  {
+    "id": "dendropsophus-elianeae",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618472594/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/253656005/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/349236746/medium.jpeg"
+    ]
+  },
+  {
+    "id": "morcego-vampiro-de-asas-brancas",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/61730397/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/61730387/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/196313290/medium.jpeg"
+    ]
+  },
+  {
+    "id": "erythrolamprus-maryellenae",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444074896/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/106919803/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/600347282/medium.jpg"
+    ]
+  },
+  {
+    "id": "graomys-griseoflavus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/351355577/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/592349595/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/64666387/medium.jpg"
+    ]
+  },
+  {
+    "id": "gymnocorymbus-ternetzi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/532067249/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/504511788/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/420359621/medium.jpeg"
+    ]
+  },
+  {
+    "id": "hemigrammus-ulreyi",
+    "url": "https://data.nhm.ac.uk/media/17cadb66-ccd4-4682-a20a-b929d11f9e5e",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/8a1bcf0f-5dce-4dd9-8e50-d2140443c57f",
+      "https://data.nhm.ac.uk/media/3e77b377-a49b-4bfa-bf64-1740e4345258"
+    ]
+  },
+  {
+    "id": "hoplias-lacerdae",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/515870664/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/568180723/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/173193333/medium.jpeg"
+    ]
+  },
+  {
+    "id": "rato-do-arrozal",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/250925444/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/763967538/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/763967973/medium.jpg"
+    ]
+  },
+  {
+    "id": "hypostomus-boulengeri",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130786495/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/468414059/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/4c/28/4c287980-0a79-4fef-9313-7fcc9da83cae.jpg"
+    ]
+  },
+  {
+    "id": "cascudo-espinhoso-rigido",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130734467/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130734435/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130734521/medium.jpeg"
+    ]
+  },
+  {
+    "id": "leporinus-lacustris",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467470589/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/436726529/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/f0/8e/f08e81f8-cc35-4882-814a-33e438e29168.jpg"
+    ]
+  },
+  {
+    "id": "ra-vinho-novo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/451386674/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/450935429/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/343604323/medium.jpeg"
+    ]
+  },
+  {
+    "id": "topetinho-do-brasil-central",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/2813637/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/435300453/medium.jpg",
+      "https://collections.nmnh.si.edu/media/?i=15824713&h=2000"
+    ]
+  },
+  {
+    "id": "micronycteris-sanborni",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/332148862/medium.jpeg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=16300899&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=16300885&h=2000"
+    ]
+  },
+  {
+    "id": "pacu-lua",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/160520425/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467473171/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/2a/57/2a5766c2-8a9b-4700-9bae-4192320a635f.jpg"
+    ]
+  },
+  {
+    "id": "morcego-borboleta-negro",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/46733168/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/346011441/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/602372337/medium.jpg"
+    ]
+  },
+  {
+    "id": "rato-d-agua",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/462572813/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/462572814/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/465387775/medium.jpeg"
+    ]
+  },
+  {
+    "id": "marrecao",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/602507637/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/53158627/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/39027073/medium.jpg"
+    ]
+  },
+  {
+    "id": "razinha-ana",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/459437481/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/107379565/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/659182878/medium.jpg"
+    ]
+  },
+  {
+    "id": "pacu-brachypomus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/261096293/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/168435271/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/261096305/medium.jpeg"
+    ]
+  },
+  {
+    "id": "psectrogaster-curviventris",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/313835304/medium.jpeg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/c4/06/c4066379-44cf-4fbf-9ef8-8f23213c63cc.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/f8/72/f87240b6-fcba-4354-a330-cbd5147355ef.jpg"
+    ]
+  },
+  {
+    "id": "caparari",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/668728/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/242503829/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/80662935/medium.jpg"
+    ]
+  },
+  {
+    "id": "pterolebias-longipinnis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/292679579/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/472373965/medium.jpeg",
+      "https://data.nhm.ac.uk/media/96f1892f-ce5c-43f7-8254-c46ddb890dfb"
+    ]
+  },
+  {
+    "id": "tiriba-de-testa-vermelha",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/158992021/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/158992020/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/259133763/medium.jpg"
+    ]
+  },
+  {
+    "id": "bico-duro",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/44934727/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/34438590/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/44927202/medium.jpeg"
+    ]
+  },
+  {
+    "id": "alegrinho-trinador",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/39028786/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/710624661/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/57093902/medium.jpg"
+    ]
+  },
+  {
+    "id": "punare-do-pantanal",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661134924/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/659172642/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/661134584/medium.jpg"
+    ]
+  },
+  {
+    "id": "acara-de-meia-agua",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/576086270/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/575238254/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/553698330/medium.jpg"
+    ]
+  },
+  {
+    "id": "fidalgo",
+    "url": "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.16_202.3d5c3da4-fbb3-4d75-b1b1-9daca9eeb0b2.jpg?subunit=1024.jpg",
+    "alternativas": [
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.17_277.a5b8d2bb-ee85-4b03-aae8-9fc8027678c4.jpg?subunit=1024.jpg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.25_267.1059bcb1-0660-4380-a814-b146038385dd.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "anadoras-weddellii",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611651894/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/349732234/medium.jpg",
+      "https://data.nhm.ac.uk/media/f9cf1f56-f933-4c8f-a5ff-d107fbf18d6c"
+    ]
+  },
+  {
+    "id": "aphyocharax-nattereri",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467252256/medium.png",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467252231/medium.png",
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM29953.jpg"
+    ]
+  },
+  {
+    "id": "aphyocharax-pusillus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467227860/medium.png",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/2e/bb/2ebb3f6c-d971-47d9-b118-4dadfc38d329.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/68/8c/688c6e33-271a-42e4-912e-00502e154261.jpg"
+    ]
+  },
+  {
+    "id": "itui-cavalo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/34294593/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/188478702/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/86093037/medium.jpg"
+    ]
+  },
+  {
+    "id": "astyanax-lineatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/107457215/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/650355299/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/702342054/medium.jpg"
+    ]
+  },
+  {
+    "id": "auchenipterus-nigripinnis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/441745545/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/313834908/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/413212381/medium.jpg"
+    ]
+  },
+  {
+    "id": "auchenipterus-osteomystax",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/362101987/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/362101943/medium.jpeg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.25_130.358c5a51-5a40-4675-8947-c2981e12b617.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "bagropsis-paranaensis",
+    "url": "https://data.nhm.ac.uk/media/b7921c95-e4f3-469f-b22c-6b516ed98223",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/bfeeba23-3340-43de-ab48-64aa11482ae9",
+      "https://data.nhm.ac.uk/media/1a234ff1-8c0b-463b-9513-cf6e812402be"
+    ]
+  },
+  {
+    "id": "brochis-splendens",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/135723125/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/135723126/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/135723127/medium.jpg"
+    ]
+  },
+  {
+    "id": "bagre-banjo-argentino",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/103747599/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/351346145/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/351346238/medium.jpeg"
+    ]
+  },
+  {
+    "id": "tatu-de-rabo-mole-pequeno",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/303120769/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/211583177/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/53244249/medium.png"
+    ]
+  },
+  {
+    "id": "calomys-callosus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/424281187/medium.jpeg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=13907596&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14124257&h=2000"
+    ]
+  },
+  {
+    "id": "rato-bolinha-da-caatinga",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/473159025/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/739060226/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/689368977/medium.jpg"
+    ]
+  },
+  {
+    "id": "piranha-ana",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/53592630/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/111209152/medium.jpg",
+      "https://data.nhm.ac.uk/media/a8313ff5-7069-4ae9-ae1d-826918e724ec"
+    ]
+  },
+  {
+    "id": "cercosaura-parkeri",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/33674579/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/33674602/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/33348513/medium.jpeg"
+    ]
+  },
+  {
+    "id": "cerradomys-scotti",
+    "url": "https://collections.nmnh.si.edu/media/?i=14397564&h=2000",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14397498&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14508940&h=2000"
+    ]
+  },
+  {
+    "id": "canivete-raposa",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/139859390/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/139859391/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/250270540/medium.jpeg"
+    ]
+  },
+  {
+    "id": "characidium-laterale",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/650344024/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/651652550/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/650344025/medium.jpg"
+    ]
+  },
+  {
+    "id": "clyomys-laticeps",
+    "url": "https://collections.nmnh.si.edu/media/?i=14124183&h=2000",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14397616&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14301061&h=2000"
+    ]
+  },
+  {
+    "id": "crenicichla-semifasciata",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/130775663/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/113220675/medium.jpeg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/cd/9c/cd9cabfd-bb8f-468e-811a-4555ee0ec552.jpg"
+    ]
+  },
+  {
+    "id": "cryptonanus-chacoensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/415570879/medium.jpeg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14603349&h=2000",
+      "https://data.nhm.ac.uk/media/0d86b853-e795-4cf9-aa23-9b6e1487b69b"
+    ]
+  },
+  {
+    "id": "curimatella-dorsalis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467472164/medium.jpeg",
+    "alternativas": [
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.12_256.59c310f6-9387-457e-af29-d0b61316005c.jpg?subunit=1024.jpg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-ord-1.23_110.014af9f4-c41e-43ca-8bc4-cd60acd93b95.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "cyphocharax-gillii",
+    "url": "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-ord-1.24_293.1ee237c7-97d9-4e9a-80b4-86668b98fcc7.jpg?subunit=1024.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/42/8a/428a537c-8224-440f-9054-b9faa09307a6.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/da/30/da30f089-221e-4e40-b8c8-71ae266c9569.jpg"
+    ]
+  },
+  {
+    "id": "cyphocharax-spilurus",
+    "url": "https://mediaphoto.mnhn.fr/media/1650875725681gkirQFONkAhbCCJj",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=10944636&h=1977",
+      "https://data.nhm.ac.uk/media/97ebc9e6-50bf-4ef4-ba3c-e001577a56c8"
+    ]
+  },
+  {
+    "id": "eigenmannia-trilineata",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/759104691/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/345586529/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/180007323/medium.jpeg"
+    ]
+  },
+  {
+    "id": "elachistocleis-ovalis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/649945714/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/712101210/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/507624473/medium.jpg"
+    ]
+  },
+  {
+    "id": "moroba",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467226758/medium.png",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/10151674/medium.jpeg",
+      "https://mediaphoto.mnhn.fr/media/1726139428226SMRSGQwEN8piFiCg"
+    ]
+  },
+  {
+    "id": "eumops-patagonicus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/26459159/medium.jpeg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14124066&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14482068&h=2000"
+    ]
+  },
+  {
+    "id": "euryoryzomys-nitidus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/701968151/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/701968185/medium.jpg",
+      "https://collections.nmnh.si.edu/media/?i=13940727&h=2000"
+    ]
+  },
+  {
+    "id": "galeocharax-humeralis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/113220509/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/504083053/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/135905815/medium.jpeg"
+    ]
+  },
+  {
+    "id": "peixe-eletrico-listrado",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/438343445/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/278970127/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/81586113/medium.jpeg"
+    ]
+  },
+  {
+    "id": "gymnotus-omarorum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/214136422/medium.jpeg",
+    "alternativas": [
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM55841.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Gymnotus_Carapo_en_aquarium.jpg/500px-Gymnotus_Carapo_en_aquarium.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "hemigrammus-lunatus",
+    "url": "https://ibss-images.calacademy.org/static/ichthyology/originals/78/03/78039720-617d-4f75-86cc-c425838d881e.jpg",
+    "alternativas": [
+      "https://media.leibniz-lib.de/eaurls/image/272cbc17-6b9d-4e50-a0aa-9a4182aef022/full/full/0/ICH_8234-8414_E.jpg",
+      "https://media.leibniz-lib.de/eaurls/image/30e43a6f-250a-4f78-9e34-382172a06495/full/full/0/ICH_8234-8414_S3.jpg"
+    ]
+  },
+  {
+    "id": "hemigrammus-tridens",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/647188764/medium.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/7a/21/7a2182ab-3dfa-4263-bb4d-4e9400c8f17b.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/de/37/de37733c-4e2e-446f-b20f-abf368364223.jpg"
+    ]
+  },
+  {
+    "id": "hemiodontichthys-acipenserinus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/319695570/medium.jpg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/a3d04d3f-b69c-4c23-85c0-e4b7ec3beaef",
+      "https://data.nhm.ac.uk/media/1a548783-e22a-4a2a-a1a7-65acb0c39b3f"
+    ]
+  },
+  {
+    "id": "hemiodus-orthonops",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/325924351/medium.jpeg",
+    "alternativas": [
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.12_299.ac527061-ba90-469f-ad48-9bea8e35c3bc.jpg?subunit=1024.jpg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-ord-1.22_278.9d6480dc-bfa5-4e3d-ac4b-3e2bcbd6b0b7.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "holochilus-brasiliensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/98969269/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/268642970/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/339119793/medium.jpeg"
+    ]
+  },
+  {
+    "id": "holochilus-chacarius",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/351986526/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/176894576/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/176766184/medium.jpg"
+    ]
+  },
+  {
+    "id": "rato-do-brejo-do-cerrado",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/284952194/medium.jpeg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14120780&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14431609&h=2000"
+    ]
+  },
+  {
+    "id": "holoshesthes-pequira",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/519000246/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/584282799/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/170682864/medium.jpeg"
+    ]
+  },
+  {
+    "id": "hyphessobrycon-elachys",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/476467038/medium.png",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/bf4676e6-5450-47a8-839d-516c5835cd06",
+      "https://data.nhm.ac.uk/media/40c700ca-a3c2-4c33-99c6-e7001c9a3891"
+    ]
+  },
+  {
+    "id": "hypostomus-ancistroides",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613631272/medium.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Actinopterygii_in_the_Guare%C3%AD_River_basin_04_%281676-0611-BN-2020-1031%29.jpg/500px-Actinopterygii_in_the_Guare%C3%AD_River_basin_04_%281676-0611-BN-2020-1031%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_8.jpg/500px-Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_8.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "hypostomus-cochliodon",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/336538717/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/504078060/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/636701268/medium.jpg"
+    ]
+  },
+  {
+    "id": "hypostomus-latirostris",
+    "url": "https://data.nhm.ac.uk/media/b4066f1f-4e71-43c3-8038-bf22b4f90647",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/f661dc7d-5a01-48bd-bff7-372ffc27581e",
+      "https://data.nhm.ac.uk/media/0f75cf6a-4ad3-4ac0-8802-f1be2f9ef8ed"
+    ]
+  },
+  {
+    "id": "tamboata",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/345586453/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130814824/medium.jpg",
+      "https://data.nhm.ac.uk/media/deb54e7e-083c-419a-81d8-aa71be0f36b0"
+    ]
+  },
+  {
+    "id": "loricaria-simillima",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/127033104/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/351346351/medium.jpeg",
+      "https://data.nhm.ac.uk/media/9ee5716e-ab2e-4526-b4eb-d9e2402523c5"
+    ]
+  },
+  {
+    "id": "loricariichthys-labialis",
+    "url": "https://data.nhm.ac.uk/media/9c7fc1f0-ed14-4244-8cc5-213ba0bf2941",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/309ccba8-ada8-4f92-913a-d1b51aefebe1",
+      "https://data.nhm.ac.uk/media/ff93e09e-ebc4-4eef-a6c3-35ee4349d24b"
+    ]
+  },
+  {
+    "id": "loricariichthys-platymetopon",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467226455/medium.png",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/279878573/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467225713/medium.png"
+    ]
+  },
+  {
+    "id": "lambari-campo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60517880/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/347461115/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/346059139/medium.jpeg"
+    ]
+  },
+  {
+    "id": "cuica-lanosa-de-pelo-longo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/52695807/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/417123381/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/342307907/medium.jpg"
+    ]
+  },
+  {
+    "id": "marmosops-ocellatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/202808101/medium.jpg",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14843327&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=13907720&h=2000"
+    ]
+  },
+  {
+    "id": "tetra-fantasma",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/80655203/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/90782506/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/90782507/medium.jpeg"
+    ]
+  },
+  {
+    "id": "megalonema-platanum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/72344935/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/347872354/medium.jpeg",
+      "https://data.nhm.ac.uk/media/8b660f37-873c-44bb-a75a-1a22c15af71c"
+    ]
+  },
+  {
+    "id": "melanorivulus-punctatus",
+    "url": "https://data.nhm.ac.uk/media/29ff3d45-96ec-4d33-8e4d-226ef0462af3",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/1421c656-b401-43f4-807e-e442dc5cc60e",
+      "https://data.nhm.ac.uk/media/819839c4-f47d-42bc-84da-aff217421c94"
+    ]
+  },
+  {
+    "id": "pacu-maculatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/127178050/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/296041442/medium.jpeg",
+      "https://mediaphoto.mnhn.fr/media/17410951703550MbAIZPlG1AqoLiI"
+    ]
+  },
+  {
+    "id": "lambari-cauda-de-tesoura",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5587910/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467226721/medium.png",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130788402/medium.jpg"
+    ]
+  },
+  {
+    "id": "molosso-de-temincki",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/658893449/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/546807592/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/490807498/medium.jpeg"
+    ]
+  },
+  {
+    "id": "cuica-de-rabo-curto",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1122004/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/199823820/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/726564485/medium.jpg"
+    ]
+  },
+  {
+    "id": "odontostilbe-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60517900/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/60517895/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467252521/medium.png"
+    ]
+  },
+  {
+    "id": "oligoryzomys-chacoensis",
+    "url": "https://collections.nmnh.si.edu/media/?i=14194121&h=2000",
+    "alternativas": [
+      "https://collections.nmnh.si.edu/media/?i=14481960&h=2000",
+      "https://collections.nmnh.si.edu/media/?i=14482013&h=2000"
+    ]
+  },
+  {
+    "id": "ossancora-eigenmanni",
+    "url": "https://data.nhm.ac.uk/media/1a548783-e22a-4a2a-a1a7-65acb0c39b3f",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/554c66ec-3dda-429f-b746-0f9f7b5341a0",
+      "https://data.nhm.ac.uk/media/a1a0311d-30bb-461c-ae1c-1021c6f3d82e"
+    ]
+  },
+  {
+    "id": "osteopilus-ocellatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/278882193/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/278882326/medium.jpg",
+      "https://medialib.naturalis.nl/file/id/RMNH.RENA.50205_2/format/large"
+    ]
+  },
+  {
+    "id": "otocinclus-vittatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/271075125/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/1565327/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/325240362/medium.jpeg"
+    ]
+  },
+  {
+    "id": "corvina-de-rio",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/70853489/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/71241628/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/444066898/medium.jpeg"
+    ]
+  },
+  {
+    "id": "candiru-do-pantanal",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/638414207/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/735662997/medium.jpg",
+      "https://data.nhm.ac.uk/media/2e73f0f5-422e-4ad7-8f28-9418bef8f3d1"
+    ]
+  },
+  {
+    "id": "pelona-fluvial",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/205525126/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/313835455/medium.jpeg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.14_219.5d170de5-3962-4837-9488-7464571d911a.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "piabucus-melanostoma",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/332204306/medium.png",
+    "alternativas": [
+      "https://media.leibniz-lib.de/eaurls/image/5cb0f02d-9174-403e-9d6c-c19798a657ae/full/full/0/ICH-18040_S.jpg",
+      "https://media.leibniz-lib.de/eaurls/image/c5bbf1da-1cf1-415f-93af-f79ec182e7fd/full/full/0/ICH-18040_E.jpg"
+    ]
+  },
+  {
+    "id": "mandiu",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/10151593/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/205038743/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/520976700/medium.jpg"
+    ]
+  },
+  {
+    "id": "bacu",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/251881974/medium.jpg",
+    "alternativas": [
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM32368a.jpg",
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM32368b.jpg"
+    ]
+  },
+  {
+    "id": "poptella-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/285782872/medium.jpeg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/21082241-ce03-4f71-af32-639e235a46ba",
+      "https://data.nhm.ac.uk/media/efd75007-75c8-4ff3-aff8-ce538ba16c61"
+    ]
+  },
+  {
+    "id": "peixe-agulha-do-paduiri",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/443294170/medium.jpeg",
+    "alternativas": [
+      "https://mediaphoto.mnhn.fr/media/1650875691916JsvUMQXb00wjToYV",
+      "https://mediaphoto.mnhn.fr/media/1650875693200QizdqQTzC5WdZJ70"
+    ]
+  },
+  {
+    "id": "raia-colmeia-de-agua-doce",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/255049027/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/266807189/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/14700680/medium.jpeg"
+    ]
+  },
+  {
+    "id": "proechimys-longicaudatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/763998329/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/221603470/medium.jpg",
+      "https://collections.nmnh.si.edu/media/?i=13907720&h=2000"
+    ]
+  },
+  {
+    "id": "pseudopaludicola-boliviana",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/462612591/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/463366989/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/457259628/medium.jpeg"
+    ]
+  },
+  {
+    "id": "pseudostegophilus-nemurus",
+    "url": "https://data.nhm.ac.uk/media/0c9047e4-4d2c-41d4-9a33-9a8c91125a46",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/2d8ea273-fdc0-4e69-8b78-0e7f7d5516cd",
+      "https://data.nhm.ac.uk/media/e62ea40d-c98d-4122-8ac8-5ee4d47b928c"
+    ]
+  },
+  {
+    "id": "viola",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/440365191/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467226084/medium.png",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/637699514/medium.jpg"
+    ]
+  },
+  {
+    "id": "roeboides-descalvadensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/135904918/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467226753/medium.png",
+      "https://media.leibniz-lib.de/eaurls/image/34249e8d-7c0b-4b66-bf01-949a0026b8ee/full/full/0/ICH-043971-043972_S.jpg"
+    ]
+  },
+  {
+    "id": "serrapinnus-calliurus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63953596/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467227549/medium.png",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467227554/medium.png"
+    ]
+  },
+  {
+    "id": "piquira",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/698524166/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/698524214/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/698524279/medium.jpg"
+    ]
+  },
+  {
+    "id": "piaba-piaba",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/713189502/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/713189363/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/730370681/medium.jpg"
+    ]
+  },
+  {
+    "id": "piranha-de-orelha-preta",
+    "url": "https://data.nhm.ac.uk/media/047745c4-ba25-4208-a008-6075fdff8500",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/dac1bb15-7da0-4a74-8c24-1a01dfa15644",
+      "https://data.nhm.ac.uk/media/69589c7a-e2f0-4c3f-b9c8-4d7aaaa32aac"
+    ]
+  },
+  {
+    "id": "piranha-dourada",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1499362/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/205176431/medium.jpg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-ord-1.22_187.f25dd27d-e08d-4928-9485-209ddadd4b9c.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "steindachnerina-brevipinna",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444066788/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/615862353/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/1565334/medium.jpg"
+    ]
+  },
+  {
+    "id": "steindachnerina-conspersa",
+    "url": "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.17_239.f15b776b-cd7f-47f2-b218-3aa8d4a3d4dc.jpg?subunit=1024.jpg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/efd75007-75c8-4ff3-aff8-ce538ba16c61",
+      "https://data.nhm.ac.uk/media/6b8566ca-806e-404c-b1f9-5acbf61c0454"
+    ]
+  },
+  {
+    "id": "steindachnerina-insculpta",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/454911086/medium.jpeg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/3f/34/3f3472f6-886a-48b9-a2a5-de4e62ba3096.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/6e/d0/6ed02e29-ab86-4b3b-b832-6305e4ce6dab.jpg"
+    ]
+  },
+  {
+    "id": "matupiri",
+    "url": "https://mediaphoto.mnhn.fr/media/1711374532508NeIcy9ULss27AYCV",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/a5b0ebb5-cb1d-4ab0-a0ac-e6c1aaac87a6",
+      "https://data.nhm.ac.uk/media/1d426fb5-9a38-4b9c-9f45-11fb6e22dcec"
+    ]
+  },
+  {
+    "id": "trachelyopterus-coriaceus",
+    "url": "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM32902.jpg",
+    "alternativas": [
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM33587.jpg",
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM30405.jpg"
+    ]
+  },
+  {
+    "id": "pacu-galeatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/185500126/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/130822815/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/162686418/medium.jpeg"
+    ]
+  },
+  {
+    "id": "trachydoras-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/149535673/medium.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/2d/c0/2dc0563a-247c-44b5-b315-9b0ff5c29410.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/50/cd/50cd74e8-9a49-4f93-842c-1212f3a3c614.jpg"
+    ]
+  },
+  {
+    "id": "sardinha-papuda",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/494683817/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/293657591/medium.jpeg",
+      "https://caos.boldsystems.org/api/objects/caos-cloud.linode-us-east.14_208.b62cbf78-806d-48b5-97fe-adb6583a8218.jpg?subunit=1024.jpg"
+    ]
+  },
+  {
+    "id": "jau-sapo",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/11540383/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/346822464/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/164565489/medium.jpeg"
+    ]
   }
 ]
