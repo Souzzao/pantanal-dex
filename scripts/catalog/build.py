@@ -49,6 +49,10 @@ IUCN = {
 }
 LICENSE = {"cc0": "CC0", "cc-by": "CC BY 4.0", "cc-by-sa": "CC BY-SA 4.0", "cc-by-nc": "CC BY-NC 4.0", "cc-by-nc-sa": "CC BY-NC-SA 4.0", "cc-by-nd": "CC BY-ND 4.0", "cc-by-nc-nd": "CC BY-NC-ND 4.0"}
 COMMERCIAL = {"cc0", "cc-by", "cc-by-sa"}
+MAX_PHOTOS = 6  # fotos por espécie (galeria da ficha)
+# O app é vendido: só entram fotos que permitem uso comercial (CC0, CC BY, CC BY-SA).
+# Fotos CC BY-NC / BY-ND ficam de fora mesmo que sejam as únicas da espécie.
+COMMERCIAL_ONLY = True
 
 
 def slug(text):
@@ -216,6 +220,9 @@ def main():
         raw += [x for x in json.load(open(extra_path, encoding="utf8")) if x["sci"].lower() not in known]
     current = json.load(open(os.path.join(ROOT, "data", "inat", "catalogo-atual.json"), encoding="utf8"))
     traits = load_traits()
+    # Fotos extras buscadas pelo GitHub Actions (scripts/catalog/fetch_photos.py), por id do táxon.
+    v2_path = os.path.join(ROOT, "data", "inat", "fotos-v2.json")
+    fotos_v2 = json.load(open(v2_path, encoding="utf8")) if os.path.exists(v2_path) else {}
     gnames = gbif_names()
     tpath = os.path.join(ROOT, "data", "inat", "traducoes-descricoes.json")
     translated = json.load(open(tpath, encoding="utf8")) if os.path.exists(tpath) else {}
@@ -251,11 +258,17 @@ def main():
         t = traits.get(sci) or traits.get(sci.lower())
 
         photos = item.get("photos") or []
-        photos = [p for p in photos if p and p[0] and p[1] in LICENSE] + [p for p in (item.get("obsPhotos") or []) if p and p[0] and p[1] in LICENSE]
-        commercial = [p for p in photos if p[1] in COMMERCIAL]
-        chosen = (commercial + [p for p in photos if p[1] not in COMMERCIAL])[:3]
-        if not chosen:
+        photos = [p for p in photos + (item.get("obsPhotos") or []) + fotos_v2.get(str(item["id"]), []) if p and p[0] and p[1] in LICENSE]
+        seen, unique = set(), []
+        for p in photos:  # a mesma foto pode vir das duas buscas
+            key = (re.search(r"/photos/(\d+)/", p[0]) or re.search(r".*", p[0])).group(0)
+            if key not in seen:
+                seen.add(key); unique.append(p)
+        commercial = [p for p in unique if p[1] in COMMERCIAL]
+        chosen = (commercial if COMMERCIAL_ONLY else commercial + [p for p in unique if p[1] not in COMMERCIAL])[:MAX_PHOTOS]
+        if not chosen and not COMMERCIAL_ONLY:
             continue  # sem nenhuma foto com licença aberta: fica de fora até haver foto
+        # Com COMMERCIAL_ONLY a espécie fica no catálogo mesmo sem foto (a ficha mostra um aviso).
         images = []
         for url, lic, attribution in chosen:
             if not url or not lic:
@@ -338,6 +351,23 @@ def main():
     dest = os.path.join(ROOT, "shared", "catalog", "generated")
     os.makedirs(dest, exist_ok=True)
     json.dump(out, open(os.path.join(dest, "vertebrados.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+    # Capas embutidas no app (scripts/catalog/embed_covers.py baixa e reduz): primeira foto + reservas.
+    covers_path = os.path.join(ROOT, "data", "inat", "capas-para-embutir.json")
+    if os.path.exists(covers_path):
+        generated = {x["id"]: x for x in out}
+        covers = []
+        for entry in json.load(open(covers_path, encoding="utf8")):
+            sp = generated.get(entry["id"])
+            if sp is None:
+                covers.append(entry)  # espécie curada à mão: mantém a capa escolhida
+            elif sp["images"]:
+                urls = [img["uri"] for img in sp["images"]]
+                covers.append({"id": sp["id"], "url": urls[0], "alternativas": urls[1:3]})
+        known = {c["id"] for c in covers}
+        covers += [{"id": x["id"], "url": x["images"][0]["uri"], "alternativas": [i["uri"] for i in x["images"][1:3]]}
+                   for x in out if x["images"] and x["id"] not in known]
+        json.dump(covers, open(covers_path, "w", encoding="utf8"), ensure_ascii=False, indent=2)
+        print("capas para embutir:", len(covers), "| espécies sem foto comercial:", sum(1 for x in out if not x["images"]))
     by = {}
     for x in out:
         by[x["group"]] = by.get(x["group"], 0) + 1

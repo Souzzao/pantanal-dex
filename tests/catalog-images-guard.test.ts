@@ -13,9 +13,16 @@ function sourceFiles(dir: string): string[] {
 }
 
 describe("espécies sem foto não derrubam as telas", () => {
-  it("toda espécie do catálogo tem pelo menos uma imagem", () => {
-    const withoutImages = filterSpeciesCatalog().filter((item) => item.images.length === 0).map((item) => item.id);
-    expect(withoutImages).toEqual([]);
+  it("toda foto do catálogo permite uso comercial (o app é pago)", () => {
+    const blocked = filterSpeciesCatalog().flatMap((item) => item.images.filter((image) => /\b(NC|ND)\b/i.test(image.license)).map(() => item.id));
+    expect(blocked).toEqual([]);
+  });
+
+  it("espécies sem foto são poucas e as curadas à mão sempre têm foto", () => {
+    const all = filterSpeciesCatalog();
+    const withoutImages = all.filter((item) => item.images.length === 0);
+    expect(withoutImages.length).toBeLessThan(all.length * 0.25);
+    expect(withoutImages.every((item) => !item.id.startsWith("tuiuiu") && item.id !== "onca-pintada")).toBe(true);
   });
 
   it("nenhuma tela acessa images[0].uri sem verificar se a imagem existe", () => {
