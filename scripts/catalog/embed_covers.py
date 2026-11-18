@@ -138,6 +138,10 @@ def main():
                 write_json(REPORT, [success[x["id"]] for x in items if x["id"] in success])
                 write_json(FAILURES, [failures[x["id"]] for x in items if x["id"] in failures])
                 print(f"{done}/{len(items)}: {len(success)} covers, {len(failures)} failures", flush=True)
+    # Remove capas que não estão mais na lista (ex.: foto com licença não comercial retirada).
+    for stale in OUTPUT.glob("*.jpg"):
+        if stale.stem not in success:
+            stale.unlink()
     total = sum(p.stat().st_size for p in OUTPUT.glob("*.jpg"))
     if total >= LIMIT:
         for item in success.values():

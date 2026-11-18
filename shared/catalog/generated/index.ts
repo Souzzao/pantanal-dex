@@ -11,6 +11,8 @@ type GeneratedRow = {
   id: string; sci: string; group: SpeciesGroup; env: Environment[]; family: string | null; familyPt: string | null; order: string | null;
   inat: number; count: number; exotic: boolean; areaKm: number; status: string | null; statusText: string[] | null;
   images: Species["images"]; sources: Species["sources"]; t: Record<"pt" | "en" | "es" | "de", LangText>;
+  /** Rara demais (menos de 5 fotos de uso livre): fora do catálogo, só para abrir avistamentos antigos. */
+  retired?: boolean;
 };
 
 const rows = data as unknown as GeneratedRow[];
@@ -43,7 +45,10 @@ const toSpecies = (row: GeneratedRow, lang: "pt" | "en" | "es" | "de"): Species 
   };
 };
 
-export const generatedSpecies: Species[] = rows.map((row) => toSpecies(row, "pt"));
+export const generatedSpecies: Species[] = rows.filter((row) => !row.retired).map((row) => toSpecies(row, "pt"));
+
+/** Espécies que saíram do catálogo. Não aparecem na busca; servem para mostrar avistamentos antigos. */
+export const retiredSpecies: Species[] = rows.filter((row) => row.retired).map((row) => toSpecies(row, "pt"));
 
 /** Mesma tupla usada pelas traduções das fichas escritas à mão (shared/i18n). */
 export function generatedTranslation(id: string, lang: "en" | "es" | "de"): Species | undefined {

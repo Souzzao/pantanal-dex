@@ -13,6 +13,13 @@ export const SPECIES_ID_ALIASES: Readonly<Record<string, string>> = {
   "traira-pantanal": "traira",
   "perereca-macaco": "perereca-de-cera",
   "sapinho-cururu": "sapo-cururu",
+  "jabuti-piranga-carbonarius": "jabuti-piranga",
+  "cachara-fasciatum": "cachara",
+  "jacutinga-de-garganta-azul-cumanensis": "jacutinga-de-garganta-azul",
+  "veado-mateiro-americana": "veado-mateiro",
+  "sapo-cururu-marina": "sapo-cururu",
+  "gaviao-carrapateiro": "carrapateiro",
+  "pithecopus-azureus": "perereca-folhagem-azul",
 };
 
 export function resolveSpeciesId(id: string): string {

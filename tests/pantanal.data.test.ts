@@ -151,7 +151,7 @@ describe("PantanalDex data contracts", () => {
 
   it("audits the second amphibian batch and keeps incomplete image sets blocked", () => {
     const secondAmphibianBatch = catalogBatches.find((batch) => batch.batchId === "catalog-amphibians-02");
-    expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-pimenta", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
+    expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-do-chaco", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
     expect(secondAmphibianBatch?.status).toBe("pending-review");
     expect(secondAmphibianBatch?.species).toHaveLength(4);
     expect(secondAmphibianBatch?.species[0].images).toHaveLength(3);
@@ -222,9 +222,9 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("reports incomplete species records", () => {
-    const broken = [{ ...species[0], id: species[0].id, images: Array.from({ length: 4 }, () => species[0].images[0]), sources: [] }];
+    const broken = [{ ...species[0], id: species[0].id, images: Array.from({ length: 7 }, () => species[0].images[0]), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images deve ter no máximo 3 imagens");
+    expect(errors).toContain("species[0](tuiuiu).images deve ter no máximo 6 imagens");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 

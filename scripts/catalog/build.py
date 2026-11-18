@@ -14,7 +14,7 @@ espécies da família…".
 
 Autor: Felipe de Souza Aquino (PantanalDex)
 """
-import json, math, os, re, sys, unicodedata
+import json, math, os, re, sys, unicodedata, urllib.parse
 
 sys.path.insert(0, os.path.dirname(__file__))
 from families import AREA_KM, DIETS, DOMESTIC, EXOTIC, FAMILIES  # noqa: E402
@@ -49,6 +49,43 @@ IUCN = {
 }
 LICENSE = {"cc0": "CC0", "cc-by": "CC BY 4.0", "cc-by-sa": "CC BY-SA 4.0", "cc-by-nc": "CC BY-NC 4.0", "cc-by-nc-sa": "CC BY-NC-SA 4.0", "cc-by-nd": "CC BY-ND 4.0", "cc-by-nc-nd": "CC BY-NC-ND 4.0"}
 COMMERCIAL = {"cc0", "cc-by", "cc-by-sa"}
+MAX_PHOTOS = 6  # fotos por espécie (galeria da ficha)
+# O app é vendido: só entram fotos que permitem uso comercial (CC0, CC BY, CC BY-SA).
+# Fotos CC BY-NC / BY-ND ficam de fora mesmo que sejam as únicas da espécie.
+COMMERCIAL_ONLY = True
+# Espécies com menos fotos de uso livre que isso são raras demais para o app: saem do catálogo e da
+# busca ("retired"), mas continuam no arquivo para abrir avistamentos antigos delas.
+MIN_PHOTOS = 5
+
+# Mesma espécie com nome científico antigo/de outra região: fica só a versão do Pantanal.
+# (o id que sai é redirecionado em shared/species-aliases.ts)
+SYNONYM_DROP = {
+    "Chelonoidis carbonarius": "Chelonoidis carbonaria",
+    "Pseudoplatystoma fasciatum": "Pseudoplatystoma reticulatum",  # cachara do Pantanal é P. reticulatum
+    "Pipile cumanensis": "Pipile grayi",          # a forma do Pantanal foi separada como P. grayi
+    "Mazama americana": "Mazama rufa",            # veado-mateiro do Pantanal após a revisão do gênero
+    "Rhinella marina": "Rhinella diptycha",       # o cururu do Pantanal é R. diptycha
+    "Daptrius chimachima": "Milvago chimachima",  # carrapateiro (gênero mudou)
+    "Pithecopus azureus": "Phyllomedusa azurea",  # perereca-de-folhagem-azul (gênero mudou)
+}
+
+# Nomes populares próprios para espécies que o iNaturalist chama pelo nome do grupo.
+NAME_FIX = {
+    "Piaractus brachypomus": "Pirapitinga",
+    "Metynnis maculatus": "Pacu-peva",
+    "Trachelyopterus galeatus": "Cangati",
+    "Galeocharax humeralis": "Saicanga",
+    "Pimelodus pantaneiro": "Mandi-pantaneiro",
+    "Philodryas nattereri": "Corre-campo",
+    "Pithecopus hypochondrialis": "Perereca-de-pernas-laranja",
+    "Metynnis mola": "Pacu-peva",
+    "Bothrops neuwiedi": "Jararaca-pintada",
+    "Clelia clelia": "Muçurana",
+    "Synbranchus marmoratus": "Mussum",
+    "Xenodon merremii": "Boipeva",
+    "Scinax fuscovarius": "Perereca-de-banheiro",
+    "Leptodactylus latrans": "Rã-manteiga",
+}
 
 
 def slug(text):
@@ -208,6 +245,42 @@ def gbif_names():
     return out
 
 
+def make_images(item, fotos_v2):
+    """Fotos de uso livre da espécie (até MAX_PHOTOS), com crédito e link da fonte."""
+    photos = item.get("photos") or []
+    photos = [p for p in photos + (item.get("obsPhotos") or []) + fotos_v2.get(str(item["id"]), []) if p and p[0] and p[1] in LICENSE]
+    seen, unique = set(), []
+    for p in photos:  # a mesma foto pode vir das duas buscas
+        key = (re.search(r"/photos/(\d+)/", p[0]) or re.search(r".*", p[0])).group(0)
+        if key not in seen:
+            seen.add(key); unique.append(p)
+    commercial = [p for p in unique if p[1] in COMMERCIAL]
+    chosen = (commercial if COMMERCIAL_ONLY else commercial + [p for p in unique if p[1] not in COMMERCIAL])[:MAX_PHOTOS]
+    # Com COMMERCIAL_ONLY a espécie fica no catálogo mesmo sem foto (a ficha mostra um aviso).
+    images = []
+    for url, lic, attribution in chosen:
+        if not url or not lic:
+            continue
+        author = re.sub(r"^\(c\)\s*", "", attribution or "").split(", some rights")[0].split(" (")[0].strip() or "iNaturalist"
+        photo_id = re.search(r"/photos/(\d+)/", url)
+        if "wikimedia.org" in url:
+            author = author.replace(", Wikimedia Commons", "")
+            file_name = urllib.parse.unquote(url.split("/")[-2] if "/thumb/" in url else url.split("/")[-1])
+            source_url, site = f"https://commons.wikimedia.org/wiki/File:{urllib.parse.quote(file_name)}", "Wikimedia Commons"
+        elif photo_id or "inaturalist" in url:
+            source_url = f"https://www.inaturalist.org/photos/{photo_id.group(1)}" if photo_id else f"https://www.inaturalist.org/taxa/{item['id']}"
+            site = "iNaturalist"
+        else:
+            author = author.replace(", GBIF", "")
+            source_url, site = url, "GBIF"
+        license_name = LICENSE.get(lic, lic.upper())
+        if site != "iNaturalist":
+            license_name = license_name.replace(" 4.0", "")  # Commons/GBIF: a versão varia, fica a família da licença
+        images.append({"uri": url, "author": author, "license": license_name,
+                       "sourceUrl": source_url, "credit": f"{author} / {site}"})
+    return images
+
+
 def main():
     raw = json.load(open(os.path.join(ROOT, "data", "inat", "pantanal-vertebrados-raw.json"), encoding="utf8"))
     extra_path = os.path.join(ROOT, "data", "inat", "pantanal-vertebrados-gbif-extra.json")
@@ -216,16 +289,35 @@ def main():
         raw += [x for x in json.load(open(extra_path, encoding="utf8")) if x["sci"].lower() not in known]
     current = json.load(open(os.path.join(ROOT, "data", "inat", "catalogo-atual.json"), encoding="utf8"))
     traits = load_traits()
+    # Fotos extras buscadas pelo GitHub Actions (scripts/catalog/fetch_photos.py), por id do táxon.
+    v2_path = os.path.join(ROOT, "data", "inat", "fotos-v2.json")
+    fotos_v2 = json.load(open(v2_path, encoding="utf8")) if os.path.exists(v2_path) else {}
     gnames = gbif_names()
     tpath = os.path.join(ROOT, "data", "inat", "traducoes-descricoes.json")
     translated = json.load(open(tpath, encoding="utf8")) if os.path.exists(tpath) else {}
     have_sci = {c["sci"].lower() for c in current}
+    curated_ids = {}
+    for c in current:  # várias fichas podem ter o mesmo nome científico (ids antigos redirecionados)
+        curated_ids.setdefault(c["sci"].lower(), []).append(c["id"])
+    for old_sci, new_sci in SYNONYM_DROP.items():  # sinônimo descartado: as fotos dele vão para a ficha certa
+        if new_sci.lower() in curated_ids:
+            curated_ids.setdefault(old_sci.lower(), []).extend(curated_ids[new_sci.lower()])
+    curated_by_sci = curated_ids
+    curated_extra = {}
     used_ids = {c["id"] for c in current}
     missing_family = set()
     out = []
     for item in sorted(raw, key=lambda x: (-x.get("count", 0), x["sci"])):
         sci = item["sci"]
+        if sci in SYNONYM_DROP:
+            for cid in curated_by_sci.get(sci.lower(), []):
+                curated_extra[cid] = curated_extra.get(cid) or make_images(item, fotos_v2)
+            continue
         if sci in DOMESTIC or sci.lower() in have_sci or any(s for s in item.get("synAll", []) if s.lower() in have_sci):
+            cids = curated_by_sci.get(sci.lower()) or next((curated_by_sci[s.lower()] for s in item.get("synAll", []) if s.lower() in curated_by_sci), [])
+            for cid in cids:
+                if not curated_extra.get(cid):
+                    curated_extra[cid] = make_images(item, fotos_v2)  # fotos extras para as fichas escritas à mão
             continue
         group = GROUP.get(item["cls"])
         if not group:
@@ -240,7 +332,9 @@ def main():
         environments = [ENV[c] for c in env_codes.split()]
         names = item.get("names") or {}
         pt_name = names.get("pt-BR") or names.get("pt") or sci
-        base_id = slug(pt_name) if names.get("pt-BR") else slug(sci)
+        id_name = pt_name  # o id não muda quando o nome é corrigido (registros antigos usam o id)
+        pt_name = NAME_FIX.get(sci, pt_name)
+        base_id = slug(id_name) if names.get("pt-BR") else slug(sci)
         sid = base_id
         if sid in used_ids:
             sid = f"{base_id}-{slug(sci.split()[-1])}"
@@ -250,21 +344,7 @@ def main():
         used_ids.add(sid)
         t = traits.get(sci) or traits.get(sci.lower())
 
-        photos = item.get("photos") or []
-        photos = [p for p in photos if p and p[0] and p[1] in LICENSE] + [p for p in (item.get("obsPhotos") or []) if p and p[0] and p[1] in LICENSE]
-        commercial = [p for p in photos if p[1] in COMMERCIAL]
-        chosen = (commercial + [p for p in photos if p[1] not in COMMERCIAL])[:3]
-        if not chosen:
-            continue  # sem nenhuma foto com licença aberta: fica de fora até haver foto
-        images = []
-        for url, lic, attribution in chosen:
-            if not url or not lic:
-                continue
-            author = re.sub(r"^\(c\)\s*", "", attribution or "").split(", some rights")[0].split(" (")[0].strip() or "iNaturalist"
-            photo_id = re.search(r"/photos/(\d+)/", url)
-            images.append({"uri": url, "author": author, "license": LICENSE.get(lic, lic.upper()),
-                           "sourceUrl": f"https://www.inaturalist.org/photos/{photo_id.group(1)}" if photo_id else f"https://www.inaturalist.org/taxa/{item['id']}",
-                           "credit": f"{author} / iNaturalist"})
+        images = make_images(item, fotos_v2)
 
         sources = [{"title": f"iNaturalist — {sci}", "url": f"https://www.inaturalist.org/taxa/{item['id']}"}]
         if item.get("wikiUrl"):
@@ -278,7 +358,7 @@ def main():
         mass = (t or {}).get("mass_g")
         texts = {}
         for i, lang in enumerate(LANGS):
-            name = names.get(INAT_LOC[lang]) or (gnames.get(sci) or {}).get(lang) or (pt_name if lang == "pt" else names.get("en") or pt_name)
+            name = NAME_FIX[sci] if lang == "pt" and sci in NAME_FIX else (names.get(INAT_LOC[lang]) or (gnames.get(sci) or {}).get(lang) or (pt_name if lang == "pt" else names.get("en") or pt_name))
             wiki = sentences((item.get("wiki") or {}).get(INAT_LOC[lang], ""), 460)
             gword = GROUP_T[group][i]
             fam_label = f"{family_pt} ({family})" if (lang == "pt" and family_pt and family_pt != family) else family
@@ -334,14 +414,63 @@ def main():
             "order": (item.get("order") or [None])[0], "inat": item["id"], "count": count, "exotic": exotic,
             "areaKm": area_km(group, family, t, fam_area), "status": status, "statusText": list(IUCN[status]) if status in IUCN else None,
             "images": images, "sources": sources, "t": texts,
+            **({"retired": True} if len(images) < MIN_PHOTOS else {}),
         })
+    # Nomes repetidos: cada espécie precisa de um nome que dê para distinguir na busca.
+    # Fica com o nome puro a espécie curada à mão ou, se não houver, a mais observada; as outras ganham
+    # o epíteto entre parênteses, ex.: "Tuvira (omarorum)".
+    import unicodedata
+    norm = lambda n: re.sub(r"[\s’'-]+", "", "".join(c for c in unicodedata.normalize("NFD", n.strip().lower()) if unicodedata.category(c) != "Mn"))
+    for x in out:  # padroniza: inicial maiúscula e apóstrofo reto ("Cobra-D’água" → "Cobra-d'água")
+        name = x["t"]["pt"]["name"].replace("’", "'").replace("-D'", "-d'")
+        x["t"]["pt"]["name"] = name[:1].upper() + name[1:]
+    taken = {norm(c["name"]) for c in current if c.get("name")}
+    renamed = 0
+    for x in sorted((x for x in out if not x.get("retired")), key=lambda x: (x["sci"] not in NAME_FIX, -x["count"])):
+        name = x["t"]["pt"]["name"]
+        if norm(name) in taken:
+            name = f"{name} ({x['sci'].split()[-1]})"
+            x["t"]["pt"]["name"] = name
+            renamed += 1
+        taken.add(norm(name))
+    print("nomes desambiguados:", renamed)
+
     dest = os.path.join(ROOT, "shared", "catalog", "generated")
     os.makedirs(dest, exist_ok=True)
     json.dump(out, open(os.path.join(dest, "vertebrados.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+    for c in current:  # fichas fora das listas de vertebrados: fotos achadas pelo nome científico
+        tid = (fotos_v2.get("_curated_taxa") or {}).get(c["sci"])
+        if tid and not curated_extra.get(c["id"]):
+            curated_extra[c["id"]] = make_images({"id": tid, "photos": []}, fotos_v2)
+    json.dump(curated_extra, open(os.path.join(dest, "fotos-curadas.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+    print("fichas curadas com fotos extras:", sum(1 for v in curated_extra.values() if v), "de", len(current))
+    # Capas embutidas no app (scripts/catalog/embed_covers.py baixa e reduz): primeira foto + reservas.
+    covers_path = os.path.join(ROOT, "data", "inat", "capas-para-embutir.json")
+    if os.path.exists(covers_path):
+        generated = {x["id"]: x for x in out}
+        aliases_ts = open(os.path.join(ROOT, "shared", "species-aliases.ts"), encoding="utf8").read()
+        redirected = set(re.findall(r'^\s*"?([^\s":]+)"?:\s*"', aliases_ts, re.M))
+        covers = []
+        for entry in json.load(open(covers_path, encoding="utf8")):
+            sp = generated.get(entry["id"])
+            if entry["id"] in redirected:
+                continue  # espécie repetida que saiu do catálogo
+            if sp is None:
+                covers.append(entry)  # espécie curada à mão: mantém a capa escolhida
+            elif sp["images"] and not sp.get("retired"):
+                urls = [img["uri"] for img in sp["images"]]
+                covers.append({"id": sp["id"], "url": urls[0], "alternativas": urls[1:3]})
+        known = {c["id"] for c in covers}
+        covers += [{"id": x["id"], "url": x["images"][0]["uri"], "alternativas": [i["uri"] for i in x["images"][1:3]]}
+                   for x in out if x["images"] and not x.get("retired") and x["id"] not in known]
+        json.dump(covers, open(covers_path, "w", encoding="utf8"), ensure_ascii=False, indent=2)
+        print("capas para embutir:", len(covers), "| espécies fora do app (menos de", MIN_PHOTOS, "fotos):", sum(1 for x in out if x.get("retired")))
     by = {}
     for x in out:
+        if x.get("retired"):
+            continue
         by[x["group"]] = by.get(x["group"], 0) + 1
-    print(len(out), "espécies geradas", by, "| com traits:", sum(1 for x in out if x["t"]["pt"]["physical"]))
+    print(sum(1 for x in out if not x.get("retired")), "espécies no app de", len(out), "geradas", by, "| com traits:", sum(1 for x in out if x["t"]["pt"]["physical"]))
     if missing_family:
         print("famílias sem mapa:", sorted(missing_family))
 

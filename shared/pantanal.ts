@@ -393,7 +393,7 @@ export function validateSpeciesCatalog(items: Species[] = species): string[] {
       if (!item[field]?.trim()) errors.push(`${prefix}.${field} ausente`);
     }
     if (item.curiosities.length === 0 || item.curiosities.some((curiosity) => !curiosity.trim())) errors.push(`${prefix}.curiosities inválido`);
-    if (item.images.length > 3) errors.push(`${prefix}.images deve ter no máximo 3 imagens`);
+    if (item.images.length > 6) errors.push(`${prefix}.images deve ter no máximo 6 imagens`);
     item.images.forEach((image, imageIndex) => {
       if (!image.uri || !isHttpUrl(image.uri) || !image.author || !image.license || !isCommercialImageLicense(image.license) || !isHttpUrl(image.sourceUrl) || !image.credit) errors.push(`${prefix}.images[${imageIndex}] sem licença comercial, crédito ou fonte completos`);
     });

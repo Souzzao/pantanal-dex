@@ -11,7 +11,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { environments, groups } from "@/shared/pantanal";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { filterSpeciesCatalog, findSpeciesById } from "@/shared/catalog";
 import { useApp } from "@/contexts/AppContext";
 import { NotebookBar } from "@/components/NotebookBar";
 import { sightingsIn } from "@/shared/notebooks";
@@ -85,7 +85,7 @@ export default function SightingsScreen() {
       : undefined;
     return sightings
       .filter((sighting) => {
-        const animal = catalogById.get(sighting.speciesId);
+        const animal = catalogById.get(sighting.speciesId) ?? findSpeciesById(sighting.speciesId);
         const searchable = [
           animal?.commonName,
           animal?.scientificName,
@@ -474,7 +474,7 @@ export default function SightingsScreen() {
           ) : null
         }
         renderItem={({ item }) => {
-          const animal = catalogById.get(item.speciesId);
+          const animal = catalogById.get(item.speciesId) ?? findSpeciesById(item.speciesId);
           return (
             <Pressable
               onPress={() =>
