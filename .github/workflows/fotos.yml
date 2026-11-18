@@ -43,6 +43,7 @@ jobs:
           python3 scripts/catalog/embed_covers.py --workers 6
       - name: Salvar catálogo e capas na branch
         run: |
-          git add data/inat/ shared/catalog/generated/ shared/species-covers.ts assets/images/species/
+          # O catálogo (vertebrados.json) é refeito localmente: os traços dos animais (data/traits) não ficam no git.
+          git add data/inat/capas-embutidas.json data/inat/capas-falhas.json shared/species-covers.ts assets/images/species/
           git commit -m "Fotos do catálogo: busca de fotos de uso livre, catálogo e capas refeitos" || echo "sem mudanças"
           git push
