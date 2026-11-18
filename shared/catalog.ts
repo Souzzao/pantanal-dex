@@ -36,8 +36,8 @@ const withExtraPhotos = (item: Species): Species => {
 };
 const withoutAliases = (items: Species[]) =>
   items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map(withExtraPhotos).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
-/** Mínimo de fotos de uso livre para a espécie aparecer no app (as raras demais saem, mas os avistamentos antigos abrem). */
-export const MIN_SPECIES_PHOTOS = 5;
+/** Mínimo de fotos de uso livre para a espécie aparecer no app (sem nenhuma, ela sai, mas os avistamentos antigos abrem). */
+export const MIN_SPECIES_PHOTOS = 1;
 const curated = [...withoutAliases(species), ...withoutAliases(catalogSpecies)];
 const curatedRetired = curated.filter((item) => item.images.length < MIN_SPECIES_PHOTOS);
 const catalogLoader = createCatalogLoader([curated.filter((item) => item.images.length >= MIN_SPECIES_PHOTOS), generatedSpecies]);
