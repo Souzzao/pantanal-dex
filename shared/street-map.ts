@@ -5,12 +5,17 @@
  *
  * Este arquivo é puro (sem React) para poder ser testado: monta o HTML e define as mensagens
  * trocadas entre o app e a página do mapa.
+ *
+ * @author Felipe de Souza Aquino
  */
+
+/** Raio máximo do círculo de área de um animal no mapa (km). */
+export const MAX_AREA_KM = 3;
 
 export type MapMode = "public" | "pick" | "points";
 
 /** Ponto enviado ao mapa. No modo público as coordenadas já vêm generalizadas (célula de 0,1°). */
-export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean };
+export type StreetMapPoint = { id: string; latitude: number; longitude: number; label?: string; /** Ainda não verificado por um auditor. */ pending?: boolean; /** Foto pequena do animal, mostrada dentro da bolinha. */ image?: string; /** Agrupa registros do mesmo animal. */ kind?: string; /** Raio da área de vida do animal, em km (desenha a elipse). */ areaKm?: number };
 
 export type StreetMapState = {
   mode: MapMode;
@@ -23,6 +28,10 @@ export type StreetMapState = {
   highIncidenceMin: number;
   /** Mude o número para pedir ao mapa que enquadre todos os pontos de novo. */
   fitKey: number;
+  /** Onde a pessoa está (GPS): o mapa abre ali e mostra um ponto azul. */
+  center?: { latitude: number; longitude: number } | null;
+  /** Pontos turísticos (estilo Pokéstop). visited = já fez check-in. */
+  spots?: { id: string; latitude: number; longitude: number; name: string; icon: string; visited: boolean; city?: boolean }[];
   /** Textos curtos usados dentro do mapa (idioma do app). */
   labels: { high: string; records: (count: number) => string; pickHint: string };
 };
@@ -33,6 +42,7 @@ export type StreetMapEvent =
   | { type: "select"; ids: string[] }
   | { type: "pick"; latitude: number; longitude: number }
   | { type: "open"; id: string }
+  | { type: "spot"; id: string }
   | { type: "tiles"; ok: boolean };
 
 export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
@@ -64,6 +74,8 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
       return typeof event.id === "string" ? { type: "open", id: event.id } : null;
     case "tiles":
       return { type: "tiles", ok: event.ok === true };
+    case "spot":
+      return typeof event.id === "string" ? { type: "spot", id: event.id } : null;
     default:
       return null;
   }
@@ -73,11 +85,13 @@ export function parseStreetMapEvent(raw: unknown): StreetMapEvent | null {
 export function serializeState(state: StreetMapState): string {
   return JSON.stringify({
     mode: state.mode,
-    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true })),
+    points: state.points.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, label: p.label ?? "", pending: p.pending === true, img: p.image ?? "", kind: p.kind ?? "", area: Number.isFinite(p.areaKm) && (p.areaKm as number) > 0 ? Math.min(p.areaKm as number, MAX_AREA_KM) : 0.6 })),
+    spots: (state.spots ?? []).filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p) => ({ id: p.id, lat: p.latitude, lon: p.longitude, name: p.name, icon: p.icon, visited: p.visited === true, city: p.city === true })),
     pick: state.pick ? { lat: state.pick.latitude, lon: state.pick.longitude } : null,
     selectedIds: state.selectedIds,
     highMin: state.highIncidenceMin,
     fitKey: state.fitKey,
+    center: state.center && Number.isFinite(state.center.latitude) && Number.isFinite(state.center.longitude) ? { lat: state.center.latitude, lon: state.center.longitude } : null,
     labels: { high: state.labels.high, one: state.labels.records(1), many: state.labels.records(2).replace(/\d+/, "{n}"), pickHint: state.labels.pickHint },
   });
 }
@@ -145,6 +159,7 @@ const PAGE_SCRIPT = String.raw`
 
   function fitAll() {
     var pts = state.mode === "pick" && state.pick ? [[state.pick.lat, state.pick.lon]] : state.points.map(function (p) { return [p.lat, p.lon]; });
+    if (state.center && (state.mode === "pick" ? !state.pick : true)) { map.setView([state.center.lat, state.center.lon], state.mode === "pick" ? 15 : 11); return; }
     if (!pts.length) return;
     if (pts.length === 1) map.setView(pts[0], state.mode === "pick" ? 14 : 9);
     else map.fitBounds(L.latLngBounds(pts).pad(0.25), { maxZoom: 11 });
@@ -152,12 +167,36 @@ const PAGE_SCRIPT = String.raw`
 
   // Agrupa registros próximos na tela (raio de ~56 px, muda com o zoom). Com zoom alto, cada
   // célula pública de 0,1° vira um quadrado (o registro nunca aparece como ponto exato).
+  // Círculo da área de vida: cada animal tem o seu tamanho (até 3 km) (raio em km vindo do catálogo). Fica centrada na
+  // célula pública de ~1 km, nunca no ponto exato. A maior vai embaixo para as menores continuarem clicáveis.
+  function ellipse(lat, lon, km) {
+    var a = km * 1000, b = km * 1000, pts = [];
+    var mLat = 111320, mLon = 111320 * Math.cos(lat * Math.PI / 180);
+    for (var i = 0; i < 48; i++) { var t = (i / 48) * 2 * Math.PI; pts.push([lat + (b * Math.sin(t)) / mLat, lon + (a * Math.cos(t)) / mLon]); }
+    return pts;
+  }
+  function drawAreas(selected) {
+    var cells = {};
+    state.points.forEach(function (p) {
+      var key = p.lat.toFixed(2) + ":" + p.lon.toFixed(2) + ":" + (p.kind || p.id);
+      (cells[key] = cells[key] || []).push(p);
+    });
+    Object.keys(cells).map(function (k) { return cells[k]; })
+      .sort(function (x, y) { return y[0].area - x[0].area; })
+      .forEach(function (items) {
+        var p = items[0], ids = items.map(function (i) { return i.id; });
+        var high = items.length >= state.highMin, isSelected = items.some(function (i) { return selected[i.id]; });
+        L.polygon(ellipse(p.lat, p.lon, p.area), { color: isSelected ? "#FFC400" : "#ffffff", weight: isSelected ? 4 : 1.5, fillColor: high ? "#FF6B5E" : "#FFC400", fillOpacity: high ? 0.3 : 0.18 })
+          .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
+      });
+  }
+
   function drawPublic() {
     var zoom = map.getZoom();
-    var radius = 56, groups = {};
-    var cellMode = zoom >= 10;
+    var radius = 46, groups = {};
+    var cellMode = zoom >= 12;
     if (cellMode) {
-      state.points.forEach(function (p) { var key = p.lat.toFixed(1) + ":" + p.lon.toFixed(1); (groups[key] = groups[key] || []).push(p); });
+      state.points.forEach(function (p) { var key = p.lat.toFixed(2) + ":" + p.lon.toFixed(2); (groups[key] = groups[key] || []).push(p); });
     } else {
       var clusters = [];
       state.points.forEach(function (p) {
@@ -169,31 +208,48 @@ const PAGE_SCRIPT = String.raw`
       clusters.forEach(function (c, index) { groups["c" + index] = c.items; });
     }
     var selected = {}; state.selectedIds.forEach(function (id) { selected[id] = true; });
+    if (zoom >= 9) drawAreas(selected);
     Object.keys(groups).forEach(function (key) {
       var items = groups[key];
       var lat = 0, lon = 0; items.forEach(function (p) { lat += p.lat; lon += p.lon; });
       lat /= items.length; lon /= items.length;
       var high = items.length >= state.highMin;
       var isSelected = items.some(function (p) { return selected[p.id]; });
-      var color = high ? "#C2410C" : "#195946";
+      var color = high ? "#FF6B5E" : "#FFC400";
       var ids = items.map(function (p) { return p.id; });
       var title = countLabel(items.length) + (high ? " · " + state.labels.high : "");
-      if (cellMode) {
-        var c = items[0], h = 0.05;
-        L.rectangle([[c.lat - h, c.lon - h], [c.lat + h, c.lon + h]], { color: isSelected ? "#FACC15" : "#ffffff", weight: isSelected ? 4 : 2, fillColor: color, fillOpacity: high ? 0.45 : 0.32 })
-          .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
-      }
-      var size = Math.min(58, 30 + Math.round(Math.sqrt(items.length) * 6));
       var allPending = items.every(function (p) { return p.pending; });
-      var html = '<div class="bubble' + (high ? " high" : "") + (allPending ? " pending" : "") + (isSelected ? " sel" : "") + '" style="width:' + size + "px;height:" + size + "px;line-height:" + size + 'px">' + items.length + "</div>";
+      var kinds = {}; items.forEach(function (p) { kinds[p.kind || p.id] = true; });
+      var sameAnimal = Object.keys(kinds).length === 1 && items[0].img;
+      var size = sameAnimal ? 52 : Math.min(62, 44 + Math.round(Math.sqrt(items.length) * 4));
+      var cls = "bubble" + (high ? " high" : "") + (allPending ? " pending" : "") + (isSelected ? " sel" : "");
+      var box = 'style="width:' + size + "px;height:" + size + "px;line-height:" + (size - 6) + 'px"';
+      var html;
+      if (sameAnimal) {
+        // Um animal só neste ponto: a bolinha mostra a foto dele (com a contagem, se houver mais de um registro).
+        html = '<div class="' + cls + ' photo" ' + box + '><img src="' + esc(items[0].img) + '" alt="" onerror="this.style.display=\'none\'">' + (items.length > 1 ? '<span class="count">' + items.length + "</span>" : "") + "</div>";
+      } else {
+        // Vários animais no mesmo ponto: ícone de grupo com a contagem.
+        html = '<div class="' + cls + ' multi" ' + box + '><span class="paws">&#128062;</span><span class="count">' + items.length + "</span></div>";
+      }
       L.marker([lat, lon], { icon: L.divIcon({ html: html, className: "", iconSize: [size, size] }), title: title, keyboard: true })
         .on("click", function () { send({ type: "select", ids: ids }); }).addTo(overlay);
     });
   }
 
+  // Pontos turísticos: losango amarelo (já visitado fica preenchido, com o ícone do lugar).
+  function drawSpots() {
+    (state.spots || []).forEach(function (s) {
+      var html = '<div class="stop' + (s.visited ? " done" : "") + (s.city ? " city" : "") + '"><span>' + esc(s.icon) + "</span></div>";
+      L.marker([s.lat, s.lon], { icon: L.divIcon({ html: html, className: "", iconSize: [40, 40], iconAnchor: [20, 20] }), title: s.name, keyboard: true, zIndexOffset: 500 })
+        .bindTooltip(esc(s.name), { permanent: map.getZoom() >= 9 || (s.city && map.getZoom() >= 7), direction: "bottom", offset: [0, 16], className: "spot-label" + (s.city ? " city" : "") })
+        .on("click", function () { send({ type: "spot", id: s.id }); }).addTo(overlay);
+    });
+  }
+
   function drawPoints() {
     state.points.forEach(function (p) {
-      L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 2, fillColor: "#195946", fillOpacity: 1 })
+      L.circleMarker([p.lat, p.lon], { radius: 9, color: "#fff", weight: 2, fillColor: "#FFC400", fillOpacity: 1 })
         .bindTooltip(esc(p.label || ""), { direction: "top" })
         .on("click", function () { send({ type: "open", id: p.id }); }).addTo(overlay);
     });
@@ -213,9 +269,10 @@ const PAGE_SCRIPT = String.raw`
   function render() {
     if (!state) return;
     overlay.clearLayers();
-    if (state.mode === "public") drawPublic();
+    if (state.mode === "public") { drawPublic(); drawSpots(); }
     else if (state.mode === "points") drawPoints();
     if (state.mode === "pick") drawPick();
+    if (state.center) L.circleMarker([state.center.lat, state.center.lon], { radius: 8, color: "#fff", weight: 3, fillColor: "#2563EB", fillOpacity: 1, interactive: false }).addTo(overlay);
     if (lastFit !== state.fitKey) { lastFit = state.fitKey; fitAll(); }
   }
 
@@ -243,13 +300,27 @@ const PAGE_SCRIPT = String.raw`
 
 const PAGE_CSS = `
 html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font-family:-apple-system,Roboto,"Segoe UI",sans-serif}
-.bubble{border-radius:50%;background:#195946;color:#fff;font-weight:800;font-size:14px;text-align:center;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
-.bubble.high{background:#C2410C}
+.bubble{border-radius:50%;background:#0B0B0B;color:#FFC400;font-weight:800;font-size:14px;text-align:center;border:3px solid #FFC400;box-shadow:0 2px 6px rgba(0,0,0,.35);box-sizing:border-box}
+.bubble.high{background:#FF6B5E}
+.bubble{position:relative}
+.bubble.photo{padding:0;overflow:visible;background:#0B0B0B}
+.bubble.photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.bubble .count{position:absolute;right:-6px;top:-6px;min-width:20px;height:20px;line-height:20px;padding:0 4px;border-radius:10px;background:#FF6B5E;color:#fff;font-size:12px;font-weight:800;border:2px solid #fff;box-sizing:content-box}
+.bubble.multi .paws{font-size:22px}
+.bubble.multi.high .count{background:#0B0B0B}
 .bubble.pending{border-style:dashed;opacity:.85}
 .bubble.sel{border-color:#FACC15;border-width:4px}
+.stop{width:34px;height:34px;margin:3px;transform:rotate(45deg);border-radius:8px;background:#0B0B0B;border:3px solid #FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.35),0 2px 8px rgba(0,0,0,.5);box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+.stop span{transform:rotate(-45deg);font-size:16px;line-height:1}
+.stop.done{background:#FFC400;border-color:#fff}
+.stop.city{border-radius:50%;transform:none;width:30px;height:30px;margin:5px}
+.stop.city span{transform:none;font-size:14px}
+.spot-label{background:rgba(11,11,11,.85);color:#FFC400;border:1px solid #FFC400;border-radius:8px;font-weight:800;font-size:11px;padding:2px 6px;box-shadow:none}
+.spot-label.city{color:#fff;border-color:#fff}
+.spot-label:before{display:none}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
-#hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(25,89,70,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
-.leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#195946;font-weight:800;font-size:13px;text-decoration:none}
+#hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(11,11,11,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
+.leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#0B0B0B;font-weight:800;font-size:13px;text-decoration:none}
 .leaflet-control-layers-toggle::after{content:"Nomes"}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
 .leaflet-control-attribution{font-size:9px;line-height:1.25;max-width:100%;background:rgba(255,255,255,.75)!important}

@@ -1,0 +1,26 @@
+name: Problema no app
+description: Algo não funciona como deveria
+labels: [bug]
+body:
+  - type: textarea
+    id: o-que
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema e o que você esperava.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: "1. Abri a aba Animais\n2. Toquei em Filtros\n3. ..."
+    validations:
+      required: true
+  - type: input
+    id: aparelho
+    attributes:
+      label: Aparelho e versão do app
+      placeholder: "Ex.: Android 13, PantanalDex 1.3.0"
+  - type: markdown
+    attributes:
+      value: "⚠️ Não cole e-mails, senhas, chaves ou localização exata de pessoas nesta issue."

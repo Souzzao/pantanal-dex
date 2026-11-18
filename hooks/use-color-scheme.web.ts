@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Esquema de cores do sistema (web, após hidratação).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useState } from "react";
 import { useColorScheme as useRNColorScheme } from "react-native";
 

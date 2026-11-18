@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Botão de aba com vibração leve ao tocar (iOS).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { BottomTabBarButtonProps } from "@react-navigation/bottom-tabs";
 import { PlatformPressable } from "@react-navigation/elements";
 import * as Haptics from "expo-haptics";

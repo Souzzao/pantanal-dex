@@ -1,5 +1,11 @@
+/**
+ * PantanalDex — Ajustes: conta, idioma padrão, barra rápida de idiomas, fotos offline e acesso às áreas de auditor e dev.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, View } from "react-native";
+import { Text } from "@/components/T";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import * as DocumentPicker from "expo-document-picker";
@@ -74,7 +80,7 @@ export default function SettingsScreen() {
     }
     setImporting(true);
     try {
-      const pickResult = await DocumentPicker.getDocumentAsync({ type: "application/json", copyToCacheDirectory: true });
+      const pickResult = await DocumentPicker.getDocumentAsync({ type: ["application/json", "text/plain", "application/octet-stream", "*/*"], copyToCacheDirectory: true });
       if (pickResult.canceled) return;
       const asset = pickResult.assets[0];
       const content = await FileSystem.readAsStringAsync(asset.uri);

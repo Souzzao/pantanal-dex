@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Contêiner de tela com área segura e fundo do tema.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { View, type ViewProps } from "react-native";
 import { SafeAreaView, type Edge } from "react-native-safe-area-context";
 

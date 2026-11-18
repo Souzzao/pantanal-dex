@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Publicações no mapa: fila de envio, sincronização com o servidor e feed público.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 

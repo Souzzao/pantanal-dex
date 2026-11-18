@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Aba Registrar: atalho que leva direto ao formulário de novo avistamento.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Redirect } from "expo-router";
 
 /**

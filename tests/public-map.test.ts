@@ -100,17 +100,18 @@ describe("publicações com prazo", () => {
 });
 
 describe("registros públicos", () => {
-  it("nunca expõem a coordenada exata: só a célula de 0,1°", () => {
+  it("nunca expõem a coordenada exata: só a célula de 0,01° (~1 km)", () => {
     const store = publishSighting(createPublicationStore(), "s1", "30d", now);
     const result = toPublicRecord(sighting(), store.items.s1, now);
-    expect(result).toMatchObject({ latitude: -16.4, longitude: -56.9, owner: "me" });
-    expect(toPublicCell(-16.45)).toBe(-16.4);
-    expect(toPublicCell(0.06)).toBe(0.1);
+    expect(result).toMatchObject({ latitude: toPublicCell(sighting().latitude as number), longitude: toPublicCell(sighting().longitude as number), owner: "me" });
+    expect(result?.latitude).not.toBe(sighting().latitude);
+    expect(toPublicCell(-16.454)).toBe(-16.45);
+    expect(toPublicCell(0.006)).toBe(0.01);
   });
 
   it("funciona fora do Pantanal (o app é para o mundo todo)", () => {
     const store = publishSighting(createPublicationStore(), "s1", "30d", now);
-    expect(toPublicRecord(sighting({ latitude: 48.8566, longitude: 2.3522 }), store.items.s1, now)).toMatchObject({ latitude: 48.9, longitude: 2.4 });
+    expect(toPublicRecord(sighting({ latitude: 48.8566, longitude: 2.3522 }), store.items.s1, now)).toMatchObject({ latitude: 48.86, longitude: 2.35 });
   });
 
   it("lista só os publicados e ativos do caderno", () => {
@@ -220,8 +221,8 @@ describe("mudanças no caderno que afetam o mapa público", () => {
   });
 
   it("mexer na coordenada dentro da mesma célula pública não conta como mudança", () => {
-    const before = diffPublicNotebook(null, [sighting({ id: "a", latitude: -16.41 })]).signatures;
-    expect(diffPublicNotebook(before, [sighting({ id: "a", latitude: -16.42 })]).changed).toEqual([]);
+    const before = diffPublicNotebook(null, [sighting({ id: "a", latitude: -16.411 })]).signatures;
+    expect(diffPublicNotebook(before, [sighting({ id: "a", latitude: -16.412 })]).changed).toEqual([]);
     expect(diffPublicNotebook(before, [sighting({ id: "a", latitude: -16.52 })]).changed).toEqual(["a"]);
   });
 });

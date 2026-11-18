@@ -34,9 +34,9 @@ describe("exportação GeoJSON", () => {
     expect(result.pantanalDex).toMatchObject({ exportedAt: "2026-11-06T22:00:00.000Z", total: 1, withoutLocation: 0 });
   });
 
-  it("aplica a proteção de localização a registros compartilháveis (grade de 0,1°)", () => {
+  it("aplica a proteção de localização a registros compartilháveis (grade de 0,01°)", () => {
     const result = createExportGeoJsonObject([sighting({ visibility: "shareable", latitude: -16.4321, longitude: -56.8765 })], catalog, now);
-    expect(result.features[0].geometry.coordinates).toEqual([-56.9, -16.4]);
+    expect(result.features[0].geometry.coordinates).toEqual([-56.88, -16.43]);
     expect(result.features[0].properties.locationPrecision).toBe("approximate");
   });
 

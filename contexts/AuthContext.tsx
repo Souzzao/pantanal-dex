@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Sessão do Supabase, perfil e papel do usuário; modo local quando o servidor não está configurado.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { Session } from "@supabase/supabase-js";
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";

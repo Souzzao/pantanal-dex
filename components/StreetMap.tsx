@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa de ruas/satélite (Leaflet em WebView) com círculos por espécie, pontos turísticos e cidades.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Linking, View, type StyleProp, type ViewStyle } from "react-native";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";

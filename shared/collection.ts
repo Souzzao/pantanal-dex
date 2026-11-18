@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Regras da coleção: XP por registro e por espécie nova, níveis, progresso por grupo e conquistas.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { groups, type Sighting, type Species, type SpeciesGroup } from "./pantanal";
 
 /**
@@ -73,10 +78,16 @@ const percentOf = (part: number, total: number) => (total > 0 ? Math.round((part
 
 const isValidDate = (value: unknown): value is string => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
 
+/**
+ * Formata o número da espécie na coleção (ex.: #007).
+ */
 export function formatCollectionNumber(value: number): string {
   return `#${String(Math.max(0, Math.trunc(value))).padStart(3, "0")}`;
 }
 
+/**
+ * Monta a coleção a partir do catálogo e do caderno: espécies descobertas, XP, nível, progresso por grupo e conquistas.
+ */
 export function computeCollection(catalog: readonly Species[], sightings: readonly Sighting[]): CollectionSummary {
   const bySpecies = new Map<string, { count: number; first?: string; last?: string }>();
   const knownIds = new Set(catalog.map((item) => item.id));
@@ -176,6 +187,9 @@ export function findNewDiscoveries(
   return computeCollection(catalog, next).entries.filter((entry) => entry.discovered && !before.has(entry.species.id));
 }
 
+/**
+ * Filtra as entradas da coleção por situação (todas, descobertas, faltando) e por grupo.
+ */
 export function filterCollectionEntries(
   entries: readonly CollectionEntry[],
   options: { filter?: CollectionFilter; group?: SpeciesGroup | "all" } = {},

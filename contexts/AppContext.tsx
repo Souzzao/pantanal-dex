@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Estado do aparelho por conta: preferências, caderno de avistamentos e limite diário.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Platform } from "react-native";
@@ -8,6 +13,7 @@ import { createExportCsv, createExportJson } from "@/shared/exports";
 import { mergeSightings, readStorageWithRetry, restoreSettingsWithStatus, serializeSettings, withStorageRetry, type RestoreStatus } from "@/shared/persistence";
 import type { Settings } from "@/shared/contracts";
 import { restoreNotebook, serializeNotebook } from "@/shared/notebook";
+import { setLanguage } from "@/shared/i18n";
 import { createSightingCreationLedger, recordSightingCreation, validateSightingOperation, type SightingCreationLedger } from "@/shared/sighting-rules";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
@@ -34,6 +40,8 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
   const notebookKey = notebookKeyFor(storageNamespace);
   const [sightings, setSightings] = useState<Sighting[]>([]);
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
+  // Idioma global das telas e das fichas (traduções embutidas, sem internet).
+  setLanguage(settings.defaultLanguage);
   const [storage, setStorage] = useState<StorageDiagnostics>({ sightings: "empty", settings: "empty", readError: false, writeError: false });
   const [ready, setReady] = useState(false);
   const [creationLedger, setCreationLedger] = useState(createSightingCreationLedger);

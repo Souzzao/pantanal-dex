@@ -1,3 +1,4 @@
+# PantanalDex · Autor: Felipe de Souza Aquino
 from PIL import Image
 from pathlib import Path
 

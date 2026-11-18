@@ -1,5 +1,12 @@
+/**
+ * PantanalDex — Tela inicial: busca rápida, atalhos para catálogo, caderno, coleção e mapa público, e espécies em destaque.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
+import { Image } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
 
 import { ScreenContainer } from "@/components/screen-container";
@@ -25,7 +32,7 @@ export default function HomeScreen() {
 
   return <ScreenContainer className="px-5" containerClassName="bg-background">
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
-      <View style={{ paddingTop: 18, paddingBottom: 20 }}><Text style={{ color: colors.primary, fontSize: 15, fontWeight: "700", letterSpacing: 1.5 }}>{labels.tagline}</Text><Text style={{ color: colors.foreground, fontSize: 36, fontWeight: "800", marginTop: 4 }}>Pantanal<Text style={{ color: colors.primary }}>Dex</Text></Text><Text style={{ color: colors.muted, fontSize: 16, marginTop: 6 }}>{labels.subtitle}</Text></View>
+      <View style={{ paddingTop: 18, paddingBottom: 20 }}><View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}><Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 64, height: 64, borderRadius: 18, borderWidth: 2, borderColor: colors.primary }} /><View style={{ flex: 1 }}><Text style={{ color: colors.primary, fontSize: 13, fontWeight: "800", letterSpacing: 2 }}>{labels.tagline}</Text><Text style={{ color: colors.foreground, fontSize: 34, fontWeight: "900", marginTop: 2 }}>Pantanal<Text style={{ color: colors.primary }}>Dex</Text></Text></View></View><Text style={{ color: colors.muted, fontSize: 16, marginTop: 6 }}>{labels.subtitle}</Text></View>
       <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginBottom: 12 }} accessibilityRole="summary"><Text style={{ color: colors.foreground, fontWeight: "800" }}>{labels.offline}</Text><Text style={{ color: colors.muted, marginTop: 3 }}>{labels.offlineDetail}</Text><Text style={{ color: colors.primary, marginTop: 6, fontWeight: "700" }}>{catalogCoverage.species} {labels.localSpecies}</Text></View>
       <TextInput accessibilityLabel={labels.search} value={query} onChangeText={setQuery} placeholder={labels.search} placeholderTextColor={colors.muted} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, paddingHorizontal: 16, paddingVertical: 14, color: colors.foreground, fontSize: 15 }} />
       <View style={{ flexDirection: "row", gap: 10, marginTop: 16 }}><Pressable onPress={() => router.push("/(tabs)/animals" as any)} accessibilityRole="button" accessibilityLabel={labels.explore} style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, padding: 16, borderRadius: 16 }, pressed && { opacity: .8 }]}><Text style={{ color: colors.background, fontWeight: "700", textAlign: "center" }}>{labels.explore}</Text></Pressable><Pressable onPress={() => router.push("/(tabs)/sightings" as any)} accessibilityRole="button" accessibilityLabel={labels.sightings} style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, padding: 16, borderRadius: 16 }, pressed && { opacity: .8 }]}><Text style={{ color: colors.background, fontWeight: "700", textAlign: "center" }}>{labels.sightings}</Text></Pressable></View>

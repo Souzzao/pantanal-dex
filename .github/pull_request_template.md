@@ -1,30 +1,19 @@
-## Frente
+## O que muda
 
-- [ ] Conta 2 — conteúdo e catálogo
-- [ ] Conta 3 — avistamentos, interface e qualidade
-- [ ] Outra: descreva
+<!-- Descreva o problema e a solução em poucas linhas. -->
 
-## Resumo
+## Como testar
 
-Descreva o problema e a solução.
-
-## Arquivos principais alterados
-
-Liste os caminhos mais importantes.
+<!-- Passos para conferir no app ou nos testes. -->
 
 ## Verificações
 
-- [ ] `pnpm check`
-- [ ] `pnpm test`
-- [ ] `pnpm lint` quando aplicável
-- [ ] Preview revisado quando houve alteração visual
+- [ ] `pnpm check` (TypeScript) sem erros
+- [ ] `pnpm test` passando
+- [ ] Tela conferida no celular ou emulador, quando houve mudança visual
 
-## Pendências e riscos
+## Segurança
 
-Registre decisões necessárias, fontes ainda pendentes, limitações de plataforma ou conflitos.
-
-## Checklist de segurança
-
-- [ ] Não incluí tokens, senhas, `.env` ou `.project-config.json`
-- [ ] Não fiz push direto em `main`
-- [ ] Preservei os contratos compartilhados ou documentei a mudança
+- [ ] Nenhum token, senha, `.env` ou chave do Supabase no código
+- [ ] Nenhuma localização exata de avistamento exposta publicamente
+- [ ] Mudanças no banco (`supabase/migrations`) mantêm o RLS ativo

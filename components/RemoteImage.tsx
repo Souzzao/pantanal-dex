@@ -1,22 +1,39 @@
+/**
+ * PantanalDex — Imagem com capa embutida no app, cache e sequência de alternativas quando a remota falha.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Image as ExpoImage } from "expo-image";
-import { ActivityIndicator, StyleSheet, Text, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { ActivityIndicator, StyleSheet, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
+import { Text } from "@/components/T";
 import { useRef, useState } from "react";
 
 import { useColors } from "@/hooks/use-colors";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { buildImageFallbackPlan } from "@/shared/image-fallback";
+import { displayImageUri } from "@/shared/image-url";
+import { speciesCovers } from "@/shared/species-covers";
 
 type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
 
 const alternativesByUri = new Map<string, { uri: string }[]>();
+const bundledCoversByUri = new Map<string, number>(); // no web o require vira objeto; serve igual para o Image
 for (const animal of filterSpeciesCatalog()) {
-  const images = animal.images.map(image => ({ uri: image.uri }));
-  for (const image of images) alternativesByUri.set(image.uri, images);
+  const images = animal.images.map(image => ({ uri: displayImageUri(image.uri) }));
+  for (const image of animal.images) { alternativesByUri.set(image.uri, images); alternativesByUri.set(displayImageUri(image.uri), images); }
+  const coverUri = animal.images[0]?.uri;
+  const bundled = speciesCovers[animal.id];
+  if (coverUri && bundled != null) {
+    bundledCoversByUri.set(coverUri, bundled);
+    bundledCoversByUri.set(displayImageUri(coverUri), bundled);
+  }
 }
 
 export function RemoteImage(props: RemoteImageProps) {
   const uri = props.source && !Array.isArray(props.source) && typeof props.source === "object" ? props.source.uri : undefined;
-  const next = buildImageFallbackPlan(props.source, [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
+  const bundled = uri ? bundledCoversByUri.get(uri) ?? bundledCoversByUri.get(displayImageUri(uri)) : undefined;
+  const light = bundled ?? (uri ? { ...(props.source as { uri: string }), uri: displayImageUri(uri) } : props.source);
+  const next = buildImageFallbackPlan(light, [...(props.fallbackSources ?? []), ...(uri ? alternativesByUri.get(uri) ?? [] : [])]);
   const plan = useRef(next);
   if (plan.current.key !== next.key) plan.current = next;
   return <ImageAttempts key={plan.current.key} {...props} candidates={plan.current.candidates} />;

@@ -196,11 +196,11 @@ describe("PantanalDex data contracts", () => {
       "Myloplus tiete",
     ]);
     expect(secondFishBatch?.status).toBe("pending-review");
-    expect(secondFishBatch?.species[0].images).toHaveLength(0);
+    expect(secondFishBatch?.species[0].images).toHaveLength(1);
     expect(secondFishBatch?.species[1].images).toHaveLength(3);
     expect(secondFishBatch?.species[2].images).toHaveLength(1);
     expect(secondFishBatch?.species.flatMap((item) => item.images).map((image) => image.license)).toEqual([
-      "CC0", "CC BY 4.0", "CC0", "CC BY 4.0",
+      "CC BY-SA 4.0", "CC0", "CC BY 4.0", "CC0", "CC BY 4.0",
     ]);
     expect(secondFishBatch?.species.flatMap((item) => item.images).every((image) => image.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"))).toBe(true);
     expect(validateEditorialCatalogBatch(secondFishBatch!)).toEqual([
@@ -222,9 +222,9 @@ describe("PantanalDex data contracts", () => {
   });
 
   it("reports incomplete species records", () => {
-    const broken = [{ ...species[0], id: species[0].id, images: species[0].images.slice(0, 2), sources: [] }];
+    const broken = [{ ...species[0], id: species[0].id, images: Array.from({ length: 4 }, () => species[0].images[0]), sources: [] }];
     const errors = validateSpeciesCatalog(broken);
-    expect(errors).toContain("species[0](tuiuiu).images deve ter pelo menos 3 imagens");
+    expect(errors).toContain("species[0](tuiuiu).images deve ter no máximo 3 imagens");
     expect(errors).toContain("species[0](tuiuiu).sources inválido");
   });
 
@@ -295,8 +295,8 @@ describe("PantanalDex data contracts", () => {
 
   it("audits commercial image licensing without promoting pending batches", () => {
     const clean = createLicenseAuditReport([species[0]]);
-    expect(clean.images).toBe(3);
-    expect(clean.commercialImages).toBe(3);
+    expect(clean.images).toBe(species[0].images.length);
+    expect(clean.commercialImages).toBe(species[0].images.length);
     expect(clean.speciesWithBlockers).toBe(0);
     const blocked = createLicenseAuditReport([{ ...species[0], images: [{ ...species[0].images[0], license: "CC BY-NC 4.0" }, ...species[0].images.slice(1)] }]);
     expect(blocked.speciesWithBlockers).toBe(1);
@@ -357,7 +357,11 @@ describe("PantanalDex data contracts", () => {
 
   it("drops malformed stored sightings without crashing the app", () => {
     expect(sanitizeStoredSightings(null)).toEqual([]);
-    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "species-inexistente" }, sighting, { broken: true }])).toEqual([sighting]);
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "id com espaço e / barra" }, sighting, { broken: true }])).toEqual([sighting]);
+    // Registros de espécies fora da lista base (lotes, vertebrados gerados) não somem ao reabrir o app.
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "lobo-guara" }])).toHaveLength(1);
+    // Espécie repetida que saiu do catálogo vira a que ficou.
+    expect(sanitizeStoredSightings([{ ...sighting, speciesId: "traira-pantanal" }])[0].speciesId).toBe("traira");
   });
 
   it("repairs invalid settings and preserves only supported languages", () => {
@@ -428,14 +432,14 @@ describe("PantanalDex data contracts", () => {
     expect(source).toEqual([sighting]);
   });
 
-  it("masks exact coordinates to a 0.1-degree cell for shareable records", () => {
+  it("masks exact coordinates to a 0.01-degree cell for shareable records", () => {
     const shareable = { ...sighting, visibility: "shareable" as const, locationPrecision: "exact" as const, latitude: -16.2537, longitude: -56.6519 };
     const exportable = toExportableSighting(shareable);
-    expect(exportable.latitude).toBe(-16.3);
-    expect(exportable.longitude).toBe(-56.7);
+    expect(exportable.latitude).toBe(-16.25);
+    expect(exportable.longitude).toBe(-56.65);
     expect(exportable.locationPrecision).toBe("approximate");
-    expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.3);
-    expect(createExportCsv([shareable])).toContain('"-16.3","-56.7","approximate"');
+    expect(JSON.parse(createExportJson([shareable])).sightings[0].latitude).toBe(-16.25);
+    expect(createExportCsv([shareable])).toContain('"-16.25","-56.65","approximate"');
   });
 
   it("validates exported JSON and preserves the CSV header contract", () => {

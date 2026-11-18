@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Regras do mapa público: prazos de publicação, células aproximadas, filtros por data e espécie.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import type { Sighting, Species } from "./pantanal";
 
 /** Data local AAAA-MM-DD (mesma regra do caderno; local para não depender da ordem dos merges). */
@@ -44,6 +49,9 @@ export type Publication = {
 export type PublicationStore = { version: 1; items: Record<string, Publication> };
 export const PUBLICATION_STORE_VERSION = 1;
 
+/**
+ * Cria o armazenamento vazio de publicações do aparelho.
+ */
 export function createPublicationStore(): PublicationStore {
   return { version: PUBLICATION_STORE_VERSION, items: {} };
 }
@@ -52,6 +60,10 @@ function isIsoDateTime(value: unknown): value is string {
   return typeof value === "string" && Number.isFinite(new Date(value).getTime());
 }
 
+/**
+ * Data de expiração de uma publicação pelo prazo escolhido; `null` quando não expira.
+ * @throws RangeError se o prazo não existir.
+ */
 export function expiryFor(durationId: PublicDurationId, now: Date): string | null {
   const duration = PUBLIC_DURATIONS.find((item) => item.id === durationId);
   if (!duration) throw new RangeError(`Duração desconhecida: ${durationId}`);
@@ -78,10 +90,16 @@ export function prunePublications(store: PublicationStore, existingIds: Iterable
   return Object.keys(items).length === Object.keys(store.items).length ? store : { ...store, items };
 }
 
+/**
+ * Converte as publicações em texto para o AsyncStorage.
+ */
 export function serializePublicationStore(store: PublicationStore): string {
   return JSON.stringify(store);
 }
 
+/**
+ * Restaura as publicações salvas, indicando se o conteúdo estava vazio, íntegro ou corrompido.
+ */
 export function restorePublicationStore(raw: string | null): { store: PublicationStore; status: "empty" | "restored" | "corrupted" } {
   if (!raw) return { store: createPublicationStore(), status: "empty" };
   try {
@@ -105,6 +123,9 @@ export function restorePublicationStore(raw: string | null): { store: Publicatio
 
 export type PublicationStatus = "private" | "no-location" | "not-published" | "active" | "expired" | "ended";
 
+/**
+ * Situação de um avistamento no mapa público: privado, sem local, não publicado, encerrado, expirado ou ativo.
+ */
 export function publicationStatus(sighting: Sighting, publication: Publication | undefined, now: Date): PublicationStatus {
   if (sighting.visibility !== "shareable") return "private";
   if (!hasValidCoordinates(sighting)) return "no-location";
@@ -116,7 +137,8 @@ export function publicationStatus(sighting: Sighting, publication: Publication |
 
 // ───────────────────────────── Registros públicos ─────────────────────────────
 
-export const PUBLIC_CELL_DEGREES = 0.1;
+/** Grade pública: 0,01° (cerca de 1 km). O ponto exato nunca é publicado. */
+export const PUBLIC_CELL_DEGREES = 0.01;
 
 export type PublicRecord = {
   id: string;
@@ -144,9 +166,12 @@ function hasValidCoordinates(sighting: Pick<Sighting, "latitude" | "longitude">)
 
 /** Arredonda para a grade pública de 0,1° sem ruído de ponto flutuante. */
 export function toPublicCell(value: number): number {
-  return Number((Math.round(value / PUBLIC_CELL_DEGREES) * PUBLIC_CELL_DEGREES).toFixed(1));
+  return Number((Math.round(value / PUBLIC_CELL_DEGREES) * PUBLIC_CELL_DEGREES).toFixed(2));
 }
 
+/**
+ * Converte um avistamento publicado e ativo no registro exibido no mapa; `null` se não estiver ativo.
+ */
 export function toPublicRecord(sighting: Sighting, publication: Publication | undefined, now: Date): PublicRecord | null {
   if (publicationStatus(sighting, publication, now) !== "active" || !publication || !hasValidCoordinates(sighting)) return null;
   return {
@@ -162,17 +187,23 @@ export function toPublicRecord(sighting: Sighting, publication: Publication | un
   };
 }
 
+/**
+ * Lista os registros públicos ativos do próprio usuário.
+ */
 export function myPublicRecords(sightings: readonly Sighting[], store: PublicationStore, now: Date): PublicRecord[] {
   return sightings.map((item) => toPublicRecord(item, store.items[item.id], now)).filter((item): item is PublicRecord => item !== null);
 }
 
+/**
+ * Indica se um registro público ainda está dentro do prazo.
+ */
 export function isRecordActive(record: PublicRecord, now: Date): boolean {
   return record.expiresAt === null || new Date(record.expiresAt).getTime() > now.getTime();
 }
 
 // ───────────────────────────── Filtro por data ─────────────────────────────
 
-export type DatePreset = "7d" | "30d" | "365d" | "all";
+export type DatePreset = "1d" | "7d" | "30d" | "90d" | "365d" | "all";
 export type DateFilter = { preset: DatePreset } | { from?: string; to?: string };
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -183,7 +214,7 @@ export function filterByDate<T extends { date: string }>(records: readonly T[], 
   let to: string | undefined;
   if ("preset" in filter) {
     if (filter.preset !== "all") {
-      const days = filter.preset === "7d" ? 7 : filter.preset === "30d" ? 30 : 365;
+      const days = { "1d": 1, "7d": 7, "30d": 30, "90d": 90, "365d": 365 }[filter.preset];
       from = getLocalTodayISODate(new Date(now.getTime() - (days - 1) * DAY_MS));
       to = getLocalTodayISODate(now);
     }
@@ -210,7 +241,7 @@ export type RecordCluster = {
   highIncidence: boolean;
 };
 
-const NICE_CELL_STEPS = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 45];
+const NICE_CELL_STEPS = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 45];
 
 /** Tamanho da célula de agrupamento para a largura visível do mapa (em graus de longitude). */
 export function clusterCellForSpan(lonSpan: number, columns = 10): number {
@@ -218,6 +249,11 @@ export function clusterCellForSpan(lonSpan: number, columns = 10): number {
   return NICE_CELL_STEPS.find((step) => step >= target) ?? NICE_CELL_STEPS[NICE_CELL_STEPS.length - 1];
 }
 
+/**
+ * Agrupa registros em células da grade pública e marca as áreas de alta incidência.
+ * @param cellDegrees Tamanho da célula em graus (nunca menor que a célula pública).
+ * @param highIncidenceMin Quantidade mínima para considerar alta incidência.
+ */
 export function clusterRecords(records: readonly PublicRecord[], cellDegrees: number, highIncidenceMin = HIGH_INCIDENCE_MIN): RecordCluster[] {
   const cell = Math.max(PUBLIC_CELL_DEGREES, cellDegrees);
   const groups = new Map<string, PublicRecord[]>();
@@ -315,8 +351,9 @@ export function buildSampleRecords(catalog: readonly Pick<Species, "id">[], now:
       id: `exemplo-${index + 1}`,
       speciesId: catalog[(index * 7) % catalog.length].id,
       date: getLocalTodayISODate(observed),
-      latitude: toPublicCell(spot.latitude + offset * 0.1),
-      longitude: toPublicCell(spot.longitude + ((index % 2) * 0.1)),
+      // Espalha os exemplos: alguns sozinhos (aparecem com a foto do animal) e alguns no mesmo ponto (ícone de vários animais).
+      latitude: toPublicCell(spot.latitude + offset * 0.04 + (index % 4 === 0 ? 0 : (index % 5) * 0.03)),
+      longitude: toPublicCell(spot.longitude + (index % 2) * 0.05 + (index % 4 === 0 ? 0 : (index % 7) * 0.03)),
       publishedAt: observed.toISOString(),
       expiresAt: null,
       owner: "others",

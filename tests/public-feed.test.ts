@@ -55,7 +55,7 @@ describe("leitura do mapa público", () => {
     ];
     const fetchImpl = vi.fn(async () => response(200, rows)) as unknown as FetchLike;
     const records = await fetchPublicFeed(config, fetchImpl, token, new Set(["meu"]));
-    expect(records.map((item) => [item.id, item.owner, item.latitude, item.longitude, item.status])).toEqual([["meu", "me", -16.4, -56.9, "approved"], ["outro", "others", -17.4, -56.8, "pending"]]);
+    expect(records.map((item) => [item.id, item.owner, item.latitude, item.longitude, item.status])).toEqual([["meu", "me", -16.4, -56.9, "approved"], ["outro", "others", -17.43, -56.77, "pending"]]);
     const call = (fetchImpl as unknown as ReturnType<typeof vi.fn>).mock.calls[0];
     expect(call[0]).toContain("/rest/v1/public_feed?");
     expect(call[1].headers.Authorization).toBe(`Bearer ${token}`);

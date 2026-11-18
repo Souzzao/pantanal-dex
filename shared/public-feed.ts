@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Leitura do feed público no Supabase e conversão das linhas em registros do mapa.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { toPublicCell, type PublicRecord } from "./public-map";
 
 /**

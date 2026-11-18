@@ -1,0 +1,66 @@
+{
+  "downloadedAt": "2026-11-17",
+  "files": [
+    {
+      "file": "BirdFuncDat.txt",
+      "bytes": 2199507,
+      "sha256": "97216eb1797da077169ebb1ebea275db293b09fc62f8bb8911f9beb98c50d321",
+      "md5": "d6197b2cd90ca3ece0a7393abbf8b7fc",
+      "source": "https://www.esapubs.org/archive/ecol/E095/178/BirdFuncDat.txt",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "MamFuncDat.txt",
+      "bytes": 579107,
+      "sha256": "51acbe6215b3c1f742463ff3fb37ef607150c052e0f7a9dc0d97fcaca61d3f76",
+      "md5": "59c3eee29d3ed0a33a002975a5a8cc75",
+      "source": "https://www.esapubs.org/archive/ecol/E095/178/MamFuncDat.txt",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "BirdFuncDatSources.txt",
+      "bytes": 7667,
+      "sha256": "b2b06482f1c189ff094ea33a66fbe8b45342048fb6b5661df59b887f1fd6736b",
+      "md5": "e4793ab8baa813bba7d168a3d2d6b6a7",
+      "source": "https://www.esapubs.org/archive/ecol/E095/178/BirdFuncDatSources.txt",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "MamFuncDatSources.txt",
+      "bytes": 31927,
+      "sha256": "2fa49c7e493355201e2be5b1cc1402d3d1009f5d15c03644d54bbf87e6447c64",
+      "md5": "0c67fa8bf6b6ccb7a38fc5229f84508b",
+      "source": "https://www.esapubs.org/archive/ecol/E095/178/MamFuncDatSources.txt",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "AmphiBIO_v1.csv",
+      "bytes": 1062319,
+      "sha256": "6ca9c3d0b2c35b58c9dd784c9a5b8debd38f03fcfa7b0f9e475de2806026c09d",
+      "md5": "ea842aef1ca7e211fd119b33adacf904",
+      "source": "https://ndownloader.figshare.com/files/8828578",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "AmphiBIO_v1_references.csv",
+      "bytes": 744367,
+      "sha256": "2b2d5c22807e5faf58f5211658310ae404ed95ab1b22fd018ac37e53434cf650",
+      "md5": "a5922fb82bf01f06baf7355b1aceae90",
+      "source": "https://ndownloader.figshare.com/files/8828578",
+      "license": "CC BY 4.0"
+    },
+    {
+      "file": "Metadata.pdf",
+      "bytes": 151797,
+      "sha256": "e735ff9695c55e447ada7e4b69abb5af4911321f9fe63e5e5f4e9c7e0bb8cbc0",
+      "md5": "4b47c11350bcf73de8b3cf8b349100a6",
+      "source": "https://ndownloader.figshare.com/files/8828578",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "amphibioArchive": {
+    "file": "AmphiBIO_v1.zip",
+    "figshareVersion": 5,
+    "md5": "3d2c8f3371516209f190fc842f26e32b"
+  }
+}

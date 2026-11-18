@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Utilitário para combinar classes do Tailwind.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

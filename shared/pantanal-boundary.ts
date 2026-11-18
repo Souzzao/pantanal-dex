@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Contorno oficial do Pantanal (IBGE) e teste de ponto dentro do bioma (RN04).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import pantanal from "./geography/pantanal-ibge-2025.json";
 
 /** This boundary covers the Brazilian Pantanal biome, rather than the whole river basin. */

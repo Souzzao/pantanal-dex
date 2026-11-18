@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Carregamento paginado, filtros e ordenação do catálogo de espécies.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import type { Environment, Species, SpeciesGroup } from "./pantanal";
 
 export type CatalogLoaderFilters = {
@@ -22,12 +27,15 @@ export type CatalogLoader = {
 
 const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
 
-const sortItems = (items: Species[], sort: CatalogLoaderSort) => [...items].sort((a, b) => (
+export const sortItems = (items: Species[], sort: CatalogLoaderSort) => [...items].sort((a, b) => (
   sort === "group"
     ? a.group.localeCompare(b.group, "pt-BR") || a.commonName.localeCompare(b.commonName, "pt-BR")
     : a.commonName.localeCompare(b.commonName, "pt-BR") || a.scientificName.localeCompare(b.scientificName, "pt-BR")
 ));
 
+/**
+ * Cria o carregador do catálogo a partir dos lotes, com filtros, ordenação e paginação.
+ */
 export function createCatalogLoader(batches: readonly Species[][]): CatalogLoader {
   const items = Array.from(new Map(batches.flat().map((item) => [item.id, item])).values());
   const index: IndexedSpecies[] = items.map((item) => ({

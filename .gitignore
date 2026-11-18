@@ -67,3 +67,21 @@ Thumbs.db
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
 .project-config.json
+data/traits/traits-by-species.json
+
+# Segredos e credenciais (nunca versionar)
+.env.*
+!.env.example
+*.keystore
+google-services.json
+GoogleService-Info.plist
+service-account*.json
+credentials*.json
+supabase/.temp/
+supabase/.branches/
+
+# Saídas de build e mídia gerada
+*.apk
+*.aab
+*.ipa
+coverage/

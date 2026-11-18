@@ -52,7 +52,7 @@ O MVP validou primeiro o **fluxo do observador em campo** (funciona sozinho no a
 - **"Por que só animais do Pantanal?"** — O app registra avistamentos em qualquer lugar do mundo; o catálogo começa pelo Pantanal para validar o MVP sem catalogar todas as espécies de uma vez. A regra E3 (recusar fora do Pantanal) da especificação original foi retirada por decisão de escopo.
 - **"Como protege espécies ameaçadas?"** — O público só vê a célula de 0,1° (~11 km). A coordenada exata fica no aparelho e, se a pessoa publicar, vai ao servidor apenas para o auditor conferir.
 - **"Quem valida os registros?"** — Contas com papel de auditor, pela pilha de auditoria; toda decisão fica no histórico com quem decidiu, quando e o motivo.
-- **"Qual metodologia vocês usaram?"** — Incremental, com quadro Kanban (a fazer / em andamento / concluído) e testes automatizados (190 testes automatizados rodando a cada mudança) e revisão cruzada entre dois agentes de IA antes de cada merge.
+- **"Qual metodologia vocês usaram?"** — Incremental, com quadro Kanban (a fazer / em andamento / concluído) e testes automatizados (200+ testes rodando a cada mudança no GitHub Actions) e revisão de cada pull request antes do merge.
 
 ## Plano B
 

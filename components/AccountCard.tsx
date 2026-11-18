@@ -1,5 +1,11 @@
+/**
+ * PantanalDex — Cartão da conta em Ajustes: nome, papel e atalhos de auditoria, área dev e saída.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { router } from "expo-router";
-import { Alert, Platform, Pressable, Text, View } from "react-native";
+import { Alert, Platform, Pressable, View } from "react-native";
+import { Text } from "@/components/T";
 
 import { useApp } from "@/contexts/AppContext";
 import { useAuth } from "@/contexts/AuthContext";

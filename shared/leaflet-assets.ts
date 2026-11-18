@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Leaflet embutido (CSS e JS) para o mapa funcionar sem internet.
+ *
+ * @author Felipe de Souza Aquino
+ */
 // Arquivo gerado por scripts/build-leaflet-assets.mjs — não editar à mão.
 // Leaflet 1.9.4 · BSD-2-Clause · © Volodymyr Agafonkin, © CloudMade · https://leafletjs.com
 export const LEAFLET_VERSION = "1.9.4";

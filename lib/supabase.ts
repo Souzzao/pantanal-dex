@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Cliente Supabase configurado pelas variáveis EXPO_PUBLIC_*; nulo em modo local.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import "react-native-url-polyfill/auto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
@@ -7,7 +12,7 @@ import { readFeedConfig } from "@/shared/public-feed";
 
 /**
  * Cliente do Supabase (login e servidor). Só existe quando o `.env.local`/EAS tem
- * EXPO_PUBLIC_SUPABASE_URL e EXPO_PUBLIC_SUPABASE_ANON_KEY (ver docs/SUPABASE-PASSO-A-PASSO.md).
+ * EXPO_PUBLIC_SUPABASE_URL e EXPO_PUBLIC_SUPABASE_ANON_KEY (ver docs/COMO-RODAR.md).
  *
  * A sessão fica guardada no aparelho (AsyncStorage). Sem internet, a sessão guardada continua
  * valendo para o que é offline (caderno e catálogo), como o "modo offline" de um app de música;

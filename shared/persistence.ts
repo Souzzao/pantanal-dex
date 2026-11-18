@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Leitura e gravação no AsyncStorage com novas tentativas e restauração tolerante a falhas.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { sanitizeSettings, sanitizeStoredSightings, type Sighting } from "./pantanal";
 import type { Settings } from "./contracts";
 

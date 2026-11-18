@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Textos de permissão (câmera, galeria, localização) nos 4 idiomas.
+ *
+ * @author Felipe de Souza Aquino
+ */
 export type NativeLanguage = "Português" | "English" | "Español";
 export type NativeFeature = "camera" | "location";
 export type PermissionState = "denied" | "services-disabled" | "error";

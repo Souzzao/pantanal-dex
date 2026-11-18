@@ -1,9 +1,17 @@
+/**
+ * PantanalDex — Exportação e importação do caderno em JSON e CSV, sem dados sensíveis desnecessários.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { sanitizeStoredSightings, type Sighting } from "./pantanal";
 import { roundToPublicLocationGrid } from "./location";
 
 export const EXPORT_VERSION = "1.0";
 export const EXPORT_CSV_HEADER = "id,speciesId,date,time,locationLabel,latitude,longitude,locationPrecision,quantity,notes,visibility";
 
+/**
+ * Prepara um avistamento para exportação: registros compartilháveis saem com a posição arredondada à grade pública.
+ */
 export function toExportableSighting(sighting: Sighting): Sighting {
   if (sighting.visibility !== "shareable" || sighting.latitude === undefined || sighting.longitude === undefined) {
     return { ...sighting };
@@ -16,10 +24,17 @@ export function toExportableSighting(sighting: Sighting): Sighting {
   };
 }
 
+/**
+ * Gera o backup do caderno em JSON versionado.
+ */
 export function createExportJson(sightings: Sighting[]) {
   return JSON.stringify({ version: EXPORT_VERSION, exportedAt: new Date().toISOString(), sightings: sightings.map(toExportableSighting) }, null, 2);
 }
 
+/**
+ * Lê um backup JSON e valida cada avistamento antes de importar.
+ * @throws Error se o arquivo for inválido.
+ */
 export function parseExportJson(value: string): Sighting[] {
   try {
     const parsed = JSON.parse(value) as { version?: unknown; sightings?: unknown };
@@ -40,6 +55,9 @@ const csvCell = (value: string | number | undefined) => `"${String(value ?? "").
  */
 const csvText = (value: string | undefined) => csvCell(value && /^[=+\-@\t\r]/.test(value) ? `'${value}` : value);
 
+/**
+ * Gera o caderno em CSV (planilha), com campos escapados para evitar injeção de fórmulas.
+ */
 export function createExportCsv(sightings: Sighting[]) {
   const header = EXPORT_CSV_HEADER;
   const rows = sightings.map(toExportableSighting).map((sighting) =>

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Exportação dos avistamentos em GeoJSON.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { toExportableSighting, EXPORT_VERSION } from "./exports";
 import type { Sighting, Species } from "./pantanal";
 
@@ -49,7 +54,7 @@ const isCoordinate = (value: unknown, limit: number): value is number =>
   typeof value === "number" && Number.isFinite(value) && Math.abs(value) <= limit;
 
 /** Remove ruído de ponto flutuante das coordenadas já arredondadas para a grade de 0,1° (ex.: -16.400000000000002). */
-const tidy = (value: number, precision: Sighting["locationPrecision"]) => (precision === "approximate" ? Number(value.toFixed(1)) : value);
+const tidy = (value: number, precision: Sighting["locationPrecision"]) => (precision === "approximate" ? Number(value.toFixed(2)) : value);
 
 export function createExportGeoJsonObject(
   sightings: readonly Sighting[],

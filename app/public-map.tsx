@@ -1,5 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
-import { Pressable, ScrollView, Switch, Text, TextInput, View } from "react-native";
+/**
+ * PantanalDex — Mapa público (UC08): registros auditados como áreas aproximadas, pontos turísticos e filtros por espécie, grupo e data.
+ *
+ * @author Felipe de Souza Aquino
+ */
+import { useEffect, useCallback, useMemo, useState } from "react";
+import { Pressable, ScrollView, Switch, View } from "react-native";
+import { Text, TextInput } from "@/components/T";
 import { router } from "expo-router";
 
 import { PublicMap, type PublicMapLabels } from "@/components/PublicMap";
@@ -8,8 +14,13 @@ import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
 import { usePublications } from "@/contexts/PublicationsContext";
 import { useColors } from "@/hooks/use-colors";
-import { filterSpeciesCatalog } from "@/shared/catalog";
+import { filterSpeciesCatalog, speciesAreaKm } from "@/shared/catalog";
 import type { StreetMapEvent, StreetMapState } from "@/shared/street-map";
+import * as Location from "expo-location";
+import { commonsThumb } from "@/shared/image-url";
+import { SpotCard } from "@/components/SpotCard";
+import { getLanguageCode } from "@/shared/i18n";
+import { loadVisits, TOURIST_SPOTS, type SpotVisits } from "@/shared/tourist-spots";
 import {
   buildSampleRecords,
   filterByDate,
@@ -28,7 +39,7 @@ const TEXT = {
     back: "‹ Voltar", title: "Mapa público",
     subtitle: "Registros públicos das pessoas, sempre com localização aproximada (~11 km). Áreas com muitos registros aparecem juntas como área de alta incidência.",
     local: "Somente neste aparelho: seus registros públicos", connecting: "Conectando ao servidor…", online: "Online: registros públicos de todas as pessoas", offline: "Sem conexão: mostrando seus registros e os últimos dados recebidos", pending: (n: number) => `${n} ${n === 1 ? "envio pendente" : "envios pendentes"} (vai quando houver internet)`, synced: (time: string) => `Atualizado às ${time}`, refresh: "Atualizar", samples: "Mostrar registros de exemplo", samplesHint: "Exemplos de demonstração, até o servidor ser ligado. Aparecem marcados como exemplo.",
-    period: "Período", presets: { "7d": "7 dias", "30d": "30 dias", "365d": "12 meses", all: "Tudo" } as Record<DatePreset, string>, custom: "Escolher datas",
+    period: "Período", presets: { "1d": "Hoje", "7d": "7 dias", "30d": "30 dias", "90d": "3 meses", "365d": "12 meses", all: "Tudo" } as Record<DatePreset, string>, custom: "Escolher datas",
     from: "De (AAAA-MM-DD)", to: "Até (AAAA-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "registro" : "registros"} em ${areas} ${areas === 1 ? "área" : "áreas"}`,
     legendNormal: "Registros na área", legendHigh: `Alta incidência (${HIGH_INCIDENCE_MIN}+ registros)`,
@@ -45,7 +56,7 @@ const TEXT = {
     back: "‹ Back", title: "Public map",
     subtitle: "People's public records, always with an approximate location (~11 km). Areas with many records are grouped as high-incidence areas.",
     local: "This device only: your public records", connecting: "Connecting to the server…", online: "Online: everyone's public records", offline: "Offline: showing your records and the last data received", pending: (n: number) => `${n} pending ${n === 1 ? "upload" : "uploads"} (sent when online)`, synced: (time: string) => `Updated at ${time}`, refresh: "Refresh", samples: "Show sample records", samplesHint: "Demo examples until the server is connected. They are labeled as samples.",
-    period: "Period", presets: { "7d": "7 days", "30d": "30 days", "365d": "12 months", all: "All" } as Record<DatePreset, string>, custom: "Pick dates",
+    period: "Period", presets: { "1d": "Today", "7d": "7 days", "30d": "30 days", "90d": "3 months", "365d": "12 months", all: "All" } as Record<DatePreset, string>, custom: "Pick dates",
     from: "From (YYYY-MM-DD)", to: "To (YYYY-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "record" : "records"} in ${areas} ${areas === 1 ? "area" : "areas"}`,
     legendNormal: "Records in the area", legendHigh: `High incidence (${HIGH_INCIDENCE_MIN}+ records)`,
@@ -62,7 +73,7 @@ const TEXT = {
     back: "‹ Volver", title: "Mapa público",
     subtitle: "Registros públicos de las personas, siempre con ubicación aproximada (~11 km). Las áreas con muchos registros se agrupan como áreas de alta incidencia.",
     local: "Solo en este dispositivo: tus registros públicos", connecting: "Conectando al servidor…", online: "En línea: registros públicos de todas las personas", offline: "Sin conexión: mostrando tus registros y los últimos datos recibidos", pending: (n: number) => `${n} ${n === 1 ? "envío pendiente" : "envíos pendientes"} (se envían con internet)`, synced: (time: string) => `Actualizado a las ${time}`, refresh: "Actualizar", samples: "Mostrar registros de ejemplo", samplesHint: "Ejemplos de demostración hasta conectar el servidor. Aparecen marcados como ejemplo.",
-    period: "Período", presets: { "7d": "7 días", "30d": "30 días", "365d": "12 meses", all: "Todo" } as Record<DatePreset, string>, custom: "Elegir fechas",
+    period: "Período", presets: { "1d": "Hoy", "7d": "7 días", "30d": "30 días", "90d": "3 meses", "365d": "12 meses", all: "Todo" } as Record<DatePreset, string>, custom: "Elegir fechas",
     from: "Desde (AAAA-MM-DD)", to: "Hasta (AAAA-MM-DD)",
     summary: (records: number, areas: number) => `${records} ${records === 1 ? "registro" : "registros"} en ${areas} ${areas === 1 ? "área" : "áreas"}`,
     legendNormal: "Registros en el área", legendHigh: `Alta incidencia (${HIGH_INCIDENCE_MIN}+ registros)`,
@@ -83,6 +94,12 @@ const EXTRA = {
   es: { pending: "esperando verificación", filters: "Filtros", hideFilters: "Ocultar filtros", streets: "Satélite", offlineMap: "Mapa sin conexión", noTiles: "Sin internet para el satélite: mostrando el mapa sin conexión.", fitAll: "Ver todo", close: "Cerrar", high: "alta incidencia", records: (n: number) => `${n} ${n === 1 ? "registro" : "registros"}`, mapLabel: "Mapa público satelital. Toca un círculo para ver sus registros." },
 } as const;
 
+const FX = {
+  pt: { group: "GRUPO", species: "ESPÉCIE", speciesHint: "Filtrar por espécie (digite o nome)", all: "Todos" },
+  en: { group: "GROUP", species: "SPECIES", speciesHint: "Filter by species (type a name)", all: "All" },
+  es: { group: "GRUPO", species: "ESPECIE", speciesHint: "Filtrar por especie (escribe el nombre)", all: "Todos" },
+} as const;
+
 export default function PublicMapScreen() {
   const colors = useColors();
   const { sightings, settings } = useApp();
@@ -93,11 +110,17 @@ export default function PublicMapScreen() {
 
   const catalog = useMemo(() => filterSpeciesCatalog(), []);
   const names = useMemo(() => new Map(catalog.map((item) => [item.id, item.commonName])), [catalog]);
+  const groupBySpecies = useMemo(() => new Map(catalog.map((item) => [item.id, item.group as string])), [catalog]);
+  const groupList = useMemo(() => Array.from(new Set(catalog.map((item) => item.group as string))), [catalog]);
   // Exemplos ligados de início só quando não há servidor; com servidor, o mapa mostra os registros reais.
   const [showSamples, setShowSamples] = useState(feedStatus === "off");
   const [filter, setFilter] = useState<DateFilter>({ preset: "all" });
   const [customOpen, setCustomOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  // Filtros extras: espécie e grupo (além do período).
+  const [speciesFilter, setSpeciesFilter] = useState("");
+  const [groupFilter, setGroupFilter] = useState("");
+  const [speciesQuery, setSpeciesQuery] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -107,6 +130,29 @@ export default function PublicMapScreen() {
   const [noTiles, setNoTiles] = useState(false);
   const [fitKey, setFitKey] = useState(1);
 
+  // Onde a pessoa está: o mapa abre ali, sem precisar procurar.
+  const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const permission = await Location.requestForegroundPermissionsAsync();
+        if (!permission.granted) return;
+        const current = (await Location.getLastKnownPositionAsync()) ?? (await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }));
+        if (!cancelled && current) { setMyLocation({ latitude: current.coords.latitude, longitude: current.coords.longitude }); setFitKey((k) => k + 1); }
+      } catch { /* sem GPS: o mapa enquadra os registros */ }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+  // Pontos turísticos (Pokéstops) e as insígnias já ganhas neste aparelho.
+  const [visits, setVisits] = useState<SpotVisits>({});
+  const [spotId, setSpotId] = useState<string | null>(null);
+  useEffect(() => { void loadVisits().then(setVisits); }, []);
+  const spot = TOURIST_SPOTS.find((item) => item.id === spotId) ?? null;
+  const spotLang = getLanguageCode();
+  const spots = useMemo(() => TOURIST_SPOTS.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, name: item.name[spotLang] ?? item.name.pt, icon: item.icon, visited: !!visits[item.id], city: !!item.city })), [visits, spotLang]);
+  const areaBySpecies = useMemo(() => new Map(catalog.map((item) => [item.id, speciesAreaKm(item)] as const)), [catalog]);
+  const coverBySpecies = useMemo(() => new Map(catalog.flatMap((item) => (item.images[0] ? [[item.id, commonsThumb(item.images[0].uri, 120)] as const] : []))), [catalog]);
   const now = useMemo(() => new Date(), []);
   const samples = useMemo(() => buildSampleRecords(catalog, now), [catalog, now]);
   const records = useMemo(() => {
@@ -118,8 +164,9 @@ export default function PublicMapScreen() {
       return [{ ...item, status: remote === "approved" ? ("approved" as const) : ("pending" as const) }];
     });
     const all = [...mine, ...remoteRecords, ...(showSamples ? samples : [])].filter((item) => isRecordActive(item, now));
-    return filterByDate(all, filter, now);
-  }, [sightings, store, now, remoteRecords, showSamples, samples, filter, remoteStatus]);
+    return filterByDate(all, filter, now).filter((item) =>
+      (!speciesFilter || item.speciesId === speciesFilter) && (!groupFilter || groupBySpecies.get(item.speciesId) === groupFilter));
+  }, [sightings, store, now, remoteRecords, showSamples, samples, filter, remoteStatus, speciesFilter, groupFilter, groupBySpecies]);
 
   // A área selecionada é refeita a partir dos registros filtrados atuais, para não mostrar dados desatualizados.
   const selectedRecords = useMemo(() => records.filter((record) => selectedIds.includes(record.id)), [records, selectedIds]);
@@ -130,16 +177,19 @@ export default function PublicMapScreen() {
 
   const mapState = useMemo<StreetMapState>(() => ({
     mode: "public",
-    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending" })),
+    points: records.map((item) => ({ id: item.id, latitude: item.latitude, longitude: item.longitude, pending: item.status === "pending", kind: item.speciesId, image: coverBySpecies.get(item.speciesId), areaKm: areaBySpecies.get(item.speciesId) })),
+    center: myLocation,
+    spots,
     pick: null,
     selectedIds,
     highIncidenceMin: HIGH_INCIDENCE_MIN,
     fitKey,
     labels: { high: x.high, records: x.records, pickHint: "" },
-  }), [records, selectedIds, fitKey, x]);
+  }), [records, selectedIds, fitKey, x, coverBySpecies, areaBySpecies, myLocation, spots]);
 
   const onMapEvent = useCallback((event: StreetMapEvent) => {
-    if (event.type === "select") setSelectedIds(event.ids);
+    if (event.type === "select") { setSelectedIds(event.ids); setSpotId(null); }
+    else if (event.type === "spot") { setSpotId(event.id); setSelectedIds([]); }
     else if (event.type === "tiles" && !event.ok) { setNoTiles(true); setMapKind("offline"); }
     else if (event.type === "tiles" && event.ok) setNoTiles(false);
   }, []);
@@ -152,7 +202,10 @@ export default function PublicMapScreen() {
     </Pressable>
   );
 
-  const applyCustom = (nextFrom: string, nextTo: string) => {
+  // Digita só números e o app põe os traços: 20261117 -> 2026-11-17.
+  const maskDate = (v: string) => { const d = v.replace(/\D/g, "").slice(0, 8); return [d.slice(0, 4), d.slice(4, 6), d.slice(6, 8)].filter(Boolean).join("-"); };
+  const applyCustom = (rawFrom: string, rawTo: string) => {
+    const nextFrom = maskDate(rawFrom), nextTo = maskDate(rawTo);
     setFrom(nextFrom);
     setTo(nextTo);
     setFilter({ from: nextFrom, to: nextTo });
@@ -197,16 +250,16 @@ export default function PublicMapScreen() {
           <View pointerEvents="box-none" style={{ position: "absolute", top: 8, left: 8, right: 8 }}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingRight: 8 }}>
               {chip(filtersOpen ? x.hideFilters : x.filters, filtersOpen, () => setFiltersOpen((open) => !open))}
-              {(["7d", "30d", "365d", "all"] as DatePreset[]).map((preset) => chip(t.presets[preset], presetActive(preset), () => { setFilter({ preset }); setCustomOpen(false); clearSelection(); setFitKey((k) => k + 1); }))}
+              {(["1d", "7d", "30d", "90d", "365d", "all"] as DatePreset[]).map((preset) => chip(t.presets[preset], presetActive(preset), () => { setFilter({ preset }); setCustomOpen(false); clearSelection(); setFitKey((k) => k + 1); }))}
             </ScrollView>
             {filtersOpen && (
               <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 14, padding: 12, marginTop: 8, gap: 8 }}>
                 {chip(t.custom, customOpen || !("preset" in filter), () => setCustomOpen((open) => !open))}
                 {customOpen && (
                   <View style={{ flexDirection: "row", gap: 8 }}>
-                    <TextInput value={from} onChangeText={(value) => applyCustom(value, to)} placeholder={t.from} accessibilityLabel={t.from} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
+                    <TextInput value={from} onChangeText={(value) => applyCustom(value, to)} placeholder={t.from} accessibilityLabel={t.from} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="number-pad" maxLength={10}
                       style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.background }} />
-                    <TextInput value={to} onChangeText={(value) => applyCustom(from, value)} placeholder={t.to} accessibilityLabel={t.to} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="numbers-and-punctuation"
+                    <TextInput value={to} onChangeText={(value) => applyCustom(from, value)} placeholder={t.to} accessibilityLabel={t.to} placeholderTextColor={colors.muted} autoCapitalize="none" keyboardType="number-pad" maxLength={10}
                       style={{ flex: 1, borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.background }} />
                   </View>
                 )}
@@ -215,14 +268,35 @@ export default function PublicMapScreen() {
                   <Switch value={showSamples} onValueChange={(value) => { setShowSamples(value); clearSelection(); setFitKey((k) => k + 1); }} accessibilityLabel={t.samples} trackColor={{ true: colors.primary, false: colors.border }} />
                 </View>
                 {showSamples && <Text style={{ color: colors.muted, fontSize: 12 }}>{t.samplesHint}</Text>}
+                <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800", letterSpacing: 1 }}>{FX[lang].group}</Text>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+                  {chip(FX[lang].all, !groupFilter, () => { setGroupFilter(""); clearSelection(); })}
+                  {groupList.map((g) => chip(g, groupFilter === g, () => { setGroupFilter(g); setSpeciesFilter(""); clearSelection(); setFitKey((k) => k + 1); }))}
+                </ScrollView>
+                <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800", letterSpacing: 1 }}>{FX[lang].species}</Text>
+                {speciesFilter ? (
+                  <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+                    {chip(`${names.get(speciesFilter) ?? speciesFilter} ✕`, true, () => { setSpeciesFilter(""); clearSelection(); setFitKey((k) => k + 1); })}
+                  </View>
+                ) : (
+                  <>
+                    <TextInput value={speciesQuery} onChangeText={setSpeciesQuery} placeholder={FX[lang].speciesHint} accessibilityLabel={FX[lang].speciesHint} placeholderTextColor={colors.muted}
+                      style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 12, padding: 10, color: colors.foreground, backgroundColor: colors.background }} />
+                    {speciesQuery.trim().length >= 2 && (
+                      <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+                        {catalog.filter((item) => item.commonName.toLowerCase().includes(speciesQuery.trim().toLowerCase()) || item.scientificName.toLowerCase().includes(speciesQuery.trim().toLowerCase())).slice(0, 8)
+                          .map((item) => chip(item.commonName, false, () => { setSpeciesFilter(item.id); setSpeciesQuery(""); clearSelection(); setFitKey((k) => k + 1); }))}
+                      </View>
+                    )}
+                  </>
+                )}
                 <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
                   {chip(x.streets, mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); clearSelection(); })}
-                  {chip(x.offlineMap, mapKind === "offline", () => { setMapKind("offline"); clearSelection(); })}
                   {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#195946" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#C2410C" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FFC400" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FF6B5E" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendHigh}</Text></View>
                 </View>
                 <Pressable onPress={() => router.push("/public-records" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 12, padding: 10 }, pressed && { opacity: 0.8 }]}>
                   <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{t.manage}</Text>
@@ -241,6 +315,8 @@ export default function PublicMapScreen() {
               <Text style={{ color: colors.muted, textAlign: "center" }}>{t.empty}</Text>
             </View>
           )}
+
+          {spot && <SpotCard spot={spot} visits={visits} onVisits={setVisits} onClose={() => setSpotId(null)} />}
 
           {/* Painel da área selecionada, por cima da parte de baixo do mapa */}
           {selectedRecords.length > 0 && (

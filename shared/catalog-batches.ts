@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Validação e mesclagem dos lotes do catálogo (IDs únicos, fontes e licenças).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { species, validateSpeciesCatalog, type Species } from "./pantanal";
 
 export type CatalogBatch = {
