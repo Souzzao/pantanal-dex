@@ -270,9 +270,14 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
         const at = new Date().toISOString();
         store = { ...store, notebooks: [...store.notebooks, { id: TEST_NOTEBOOK_ID, name: uniqueNotebookName(store, "Teste"), kind: "test", createdAt: at, updatedAt: at }] };
       }
-      const samples = createTestSightings();
+      // Recria os exemplos no Teste. Se algum exemplo já foi movido para outro caderno, ele fica lá
+      // e o novo exemplo ganha outro id, para nunca tirar registros de outro caderno.
+      const stamp = Date.now().toString(36);
+      const elsewhere = new Set(currentSightings.current.filter((item) => item.notebookId !== TEST_NOTEBOOK_ID).map((item) => item.id));
+      const samples = createTestSightings().map((item) => (elsewhere.has(item.id) ? { ...item, id: `${item.id}-${stamp}` } : item));
       const sampleIds = new Set(samples.map((item) => item.id));
-      await persistSightings([...samples, ...currentSightings.current.filter((item) => !sampleIds.has(item.id))]);
+      const keep = currentSightings.current.filter((item) => !(item.notebookId === TEST_NOTEBOOK_ID && item.id.startsWith("teste-")) && !sampleIds.has(item.id));
+      await persistSightings([...samples, ...keep]);
       await persistStore(store);
       return samples.length;
     }),
