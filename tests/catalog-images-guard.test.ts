@@ -37,3 +37,21 @@ describe("espécies sem foto não derrubam as telas", () => {
     expect(offenders).toEqual([]);
   });
 });
+
+describe("espécies raras demais saem do catálogo sem perder avistamentos", () => {
+  it("nenhuma espécie gerada no catálogo tem menos de 5 fotos", async () => {
+    const { generatedSpecies, retiredSpecies } = await import("../shared/catalog/generated");
+    expect(generatedSpecies.every((item) => item.images.length >= 5)).toBe(true);
+    const ids = new Set(filterSpeciesCatalog().map((item) => item.id));
+    expect(retiredSpecies.every((item) => !ids.has(item.id))).toBe(true);
+  });
+
+  it("avistamento antigo de espécie aposentada, gerada ou com id antigo ainda acha a espécie", async () => {
+    const { findSpeciesById } = await import("../shared/catalog");
+    const { retiredSpecies, generatedSpecies } = await import("../shared/catalog/generated");
+    if (retiredSpecies[0]) expect(findSpeciesById(retiredSpecies[0].id)?.id).toBe(retiredSpecies[0].id);
+    expect(findSpeciesById(generatedSpecies[0].id)?.id).toBe(generatedSpecies[0].id);
+    expect(findSpeciesById("sapo-cururu-marina")?.id).toBe("sapo-cururu");
+    expect(findSpeciesById("nao-existe")).toBeUndefined();
+  });
+});

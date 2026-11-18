@@ -6,7 +6,7 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, sortItems, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
-import { generatedSpecies } from "./catalog/generated";
+import { generatedSpecies, retiredSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
 import baseAreas from "./catalog/base-areas.json";
 import baseTraits from "./catalog/base-traits.json";
@@ -86,6 +86,17 @@ export function paginateSpeciesCatalog(items: Species[], page: number, pageSize 
   const safePage = Number.isInteger(page) && page >= 0 ? page : 0;
   const safePageSize = Number.isInteger(pageSize) && pageSize > 0 ? Math.min(pageSize, 200) : 60;
   return items.slice(safePage * safePageSize, (safePage + 1) * safePageSize);
+}
+
+let speciesIndex: Map<string, Species> | null = null;
+/**
+ * Acha a espécie de um avistamento: catálogo completo (curadas, lotes e geradas) e, se não estiver mais
+ * no catálogo, a lista de espécies aposentadas. Ids antigos passam por SPECIES_ID_ALIASES.
+ */
+export function findSpeciesById(id: string | undefined): Species | undefined {
+  if (!id) return undefined;
+  speciesIndex ??= new Map([...retiredSpecies, ...filterSpeciesCatalog()].map((item) => [item.id, item]));
+  return speciesIndex.get(SPECIES_ID_ALIASES[id] ?? id);
 }
 
 export const catalogCoverage = { species: catalogLoader.size, groups: groups.length, environments: environments.length };

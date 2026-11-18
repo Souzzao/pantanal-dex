@@ -53,6 +53,9 @@ MAX_PHOTOS = 6  # fotos por espécie (galeria da ficha)
 # O app é vendido: só entram fotos que permitem uso comercial (CC0, CC BY, CC BY-SA).
 # Fotos CC BY-NC / BY-ND ficam de fora mesmo que sejam as únicas da espécie.
 COMMERCIAL_ONLY = True
+# Espécies com menos fotos de uso livre que isso são raras demais para o app: saem do catálogo e da
+# busca ("retired"), mas continuam no arquivo para abrir avistamentos antigos delas.
+MIN_PHOTOS = 5
 
 # Mesma espécie com nome científico antigo/de outra região: fica só a versão do Pantanal.
 # (o id que sai é redirecionado em shared/species-aliases.ts)
@@ -399,6 +402,7 @@ def main():
             "order": (item.get("order") or [None])[0], "inat": item["id"], "count": count, "exotic": exotic,
             "areaKm": area_km(group, family, t, fam_area), "status": status, "statusText": list(IUCN[status]) if status in IUCN else None,
             "images": images, "sources": sources, "t": texts,
+            **({"retired": True} if len(images) < MIN_PHOTOS else {}),
         })
     # Nomes repetidos: cada espécie precisa de um nome que dê para distinguir na busca.
     # Fica com o nome puro a espécie curada à mão ou, se não houver, a mais observada; as outras ganham
@@ -410,7 +414,7 @@ def main():
         x["t"]["pt"]["name"] = name[:1].upper() + name[1:]
     taken = {norm(c["name"]) for c in current if c.get("name")}
     renamed = 0
-    for x in sorted(out, key=lambda x: (x["sci"] not in NAME_FIX, -x["count"])):
+    for x in sorted((x for x in out if not x.get("retired")), key=lambda x: (x["sci"] not in NAME_FIX, -x["count"])):
         name = x["t"]["pt"]["name"]
         if norm(name) in taken:
             name = f"{name} ({x['sci'].split()[-1]})"
@@ -437,18 +441,20 @@ def main():
             sp = generated.get(entry["id"])
             if sp is None:
                 covers.append(entry)  # espécie curada à mão: mantém a capa escolhida
-            elif sp["images"]:
+            elif sp["images"] and not sp.get("retired"):
                 urls = [img["uri"] for img in sp["images"]]
                 covers.append({"id": sp["id"], "url": urls[0], "alternativas": urls[1:3]})
         known = {c["id"] for c in covers}
         covers += [{"id": x["id"], "url": x["images"][0]["uri"], "alternativas": [i["uri"] for i in x["images"][1:3]]}
-                   for x in out if x["images"] and x["id"] not in known]
+                   for x in out if x["images"] and not x.get("retired") and x["id"] not in known]
         json.dump(covers, open(covers_path, "w", encoding="utf8"), ensure_ascii=False, indent=2)
-        print("capas para embutir:", len(covers), "| espécies sem foto comercial:", sum(1 for x in out if not x["images"]))
+        print("capas para embutir:", len(covers), "| espécies fora do app (menos de", MIN_PHOTOS, "fotos):", sum(1 for x in out if x.get("retired")))
     by = {}
     for x in out:
+        if x.get("retired"):
+            continue
         by[x["group"]] = by.get(x["group"], 0) + 1
-    print(len(out), "espécies geradas", by, "| com traits:", sum(1 for x in out if x["t"]["pt"]["physical"]))
+    print(sum(1 for x in out if not x.get("retired")), "espécies no app de", len(out), "geradas", by, "| com traits:", sum(1 for x in out if x["t"]["pt"]["physical"]))
     if missing_family:
         print("famílias sem mapa:", sorted(missing_family))
 

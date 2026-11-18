@@ -12,7 +12,8 @@ import { router, useLocalSearchParams } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
-import { species, UNKNOWN_SPECIES_ID } from "@/shared/pantanal";
+import { UNKNOWN_SPECIES_ID } from "@/shared/pantanal";
+import { findSpeciesById } from "@/shared/catalog";
 import { createExportJson, toExportableSighting } from "@/shared/exports";
 import { roundToPublicLocationGrid } from "@/shared/location";
 import { useApp } from "@/contexts/AppContext";
@@ -24,7 +25,7 @@ export default function SightingDetailScreen() {
   const { sightings, deleteSighting } = useApp();
   const [sharing, setSharing] = useState(false);
   const sighting = sightings.find((item) => item.id === id);
-  const animal = species.find((item) => item.id === sighting?.speciesId) ?? (sighting?.speciesId === UNKNOWN_SPECIES_ID ? { commonName: "Espécie não identificada", scientificName: "Registrada como “Não sei”", images: [] } : undefined);
+  const animal = findSpeciesById(sighting?.speciesId) ?? (sighting?.speciesId === UNKNOWN_SPECIES_ID ? { commonName: "Espécie não identificada", scientificName: "Registrada como “Não sei”", images: [] } : undefined);
 
   if (!sighting || !animal) {
     return (
