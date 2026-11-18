@@ -29,15 +29,20 @@ jobs:
         run: test -f data/inat/fotos-v2.json || python3 scripts/catalog/fetch_photos.py
       - name: Busca extra (iNaturalist, GBIF e Commons) para quem tem menos de 6
         run: python3 scripts/catalog/fetch_photos_extra.py
+      - name: Salvar as fotos achadas (antes de refazer o catálogo)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add data/inat/fotos-v2.json
+          git commit -m "Fotos do catálogo: resultado da busca de fotos de uso livre" || echo "sem mudanças"
+          git push
       - name: Refaz o catálogo e as capas embutidas
         run: |
           pip install --quiet pillow
           python3 scripts/catalog/build.py
           python3 scripts/catalog/embed_covers.py --workers 6
-      - name: Salvar resultado na branch
+      - name: Salvar catálogo e capas na branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add data/inat/ shared/catalog/generated/ shared/species-covers.ts assets/images/species/
           git commit -m "Fotos do catálogo: busca de fotos de uso livre, catálogo e capas refeitos" || echo "sem mudanças"
           git push

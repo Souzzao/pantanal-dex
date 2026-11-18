@@ -14,7 +14,7 @@ espécies da família…".
 
 Autor: Felipe de Souza Aquino (PantanalDex)
 """
-import json, math, os, re, sys, unicodedata
+import json, math, os, re, sys, unicodedata, urllib.parse
 
 sys.path.insert(0, os.path.dirname(__file__))
 from families import AREA_KM, DIETS, DOMESTIC, EXOTIC, FAMILIES  # noqa: E402
@@ -273,7 +273,10 @@ def make_images(item, fotos_v2):
         else:
             author = author.replace(", GBIF", "")
             source_url, site = url, "GBIF"
-        images.append({"uri": url, "author": author, "license": LICENSE.get(lic, lic.upper()),
+        license_name = LICENSE.get(lic, lic.upper())
+        if site != "iNaturalist":
+            license_name = license_name.replace(" 4.0", "")  # Commons/GBIF: a versão varia, fica a família da licença
+        images.append({"uri": url, "author": author, "license": license_name,
                        "sourceUrl": source_url, "credit": f"{author} / {site}"})
     return images
 
