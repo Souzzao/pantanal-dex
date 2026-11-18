@@ -3,6 +3,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isImportSizeOk } from "@/shared/safe-url";
 import { useEffect, useMemo, useState } from "react";
 import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
@@ -86,6 +87,7 @@ export default function SettingsScreen() {
       const pickResult = await DocumentPicker.getDocumentAsync({ type: ["application/json", "text/plain", "application/octet-stream", "*/*"], copyToCacheDirectory: true });
       if (pickResult.canceled) return;
       const asset = pickResult.assets[0];
+      if (!isImportSizeOk(asset.size)) { Alert.alert("Arquivo grande demais", "O limite é 5 MB."); return; }
       const content = await FileSystem.readAsStringAsync(asset.uri);
       const imported = parseExportJson(content);
       if (!imported.length) {

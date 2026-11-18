@@ -10,6 +10,7 @@
  */
 import { createExportJson, csvRowOf, EXPORT_CSV_HEADER, EXPORT_VERSION, toExportableSighting } from "./exports";
 import { createExportGeoJsonObject } from "./geojson";
+import { MAX_IMPORT_BYTES } from "./safe-url";
 import { notebookOf, type Notebook, type NotebookFileFormat } from "./notebooks";
 import { sanitizeStoredSightings, type Sighting, type Species } from "./pantanal";
 
@@ -162,6 +163,7 @@ function finish(format: NotebookFileFormat, raw: Sighting[], notebookByRecord: R
  * @throws Error com a mensagem para a pessoa quando o formato não é reconhecido.
  */
 export function parseNotebookFile(content: string, now: Date = new Date()): ParsedNotebookFile {
+  if (content.length > MAX_IMPORT_BYTES) throw new Error("O arquivo é grande demais (limite de 5 MB).");
   const text = content.trim();
   if (text.startsWith("{")) {
     let parsed: Record<string, unknown>;

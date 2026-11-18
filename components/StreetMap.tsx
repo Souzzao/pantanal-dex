@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Linking, View, type StyleProp, type ViewStyle } from "react-native";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";
+import { isSafeExternalUrl } from "@/shared/safe-url";
 
 import { LEAFLET_CSS, LEAFLET_JS } from "@/shared/leaflet-assets";
 import { buildStreetMapHtml, parseStreetMapEvent, serializeState, type StreetMapEvent, type StreetMapState } from "@/shared/street-map";
@@ -60,10 +61,15 @@ export function StreetMap({ state, onEvent, style, accessibilityLabel }: StreetM
         javaScriptEnabled
         domStorageEnabled
         setSupportMultipleWindows={false}
+        // Página do mapa não lê arquivos do aparelho nem mistura http com https.
+        allowFileAccess={false}
+        allowFileAccessFromFileURLs={false}
+        allowUniversalAccessFromFileURLs={false}
+        mixedContentMode="never"
         // Links do crédito do mapa abrem fora do app, nunca dentro da WebView.
         onShouldStartLoadWithRequest={(request) => {
           const internal = request.url.startsWith("about:") || request.url.startsWith("data:") || request.url.startsWith("https://github.com/Souzzao/pantanal-dex");
-          if (!internal && request.url.startsWith("https://")) void Linking.openURL(request.url).catch(() => undefined);
+          if (!internal && isSafeExternalUrl(request.url)) void Linking.openURL(request.url).catch(() => undefined);
           return internal;
         }}
         style={{ flex: 1, backgroundColor: "#e8eef0" }}

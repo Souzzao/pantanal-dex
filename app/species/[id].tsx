@@ -7,6 +7,7 @@ import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
 
+import { isSafeExternalUrl } from "@/shared/safe-url";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { useApp } from "@/contexts/AppContext";
@@ -24,7 +25,7 @@ export default function SpeciesDetailScreen() {
   const collectionEntry = animal ? computeCollection(filterSpeciesCatalog(), sightings).entries.find((entry) => entry.species.id === animal.id) : undefined;
   const personalSightings = animal ? sightings.filter((item) => item.speciesId === animal.id).length : 0;
   const openSource = async (url: string) => {
-    if (!/^https?:\/\/\S+$/i.test(url)) {
+    if (!isSafeExternalUrl(url)) {
       Alert.alert("Fonte indisponível", "Este endereço não pode ser aberto com segurança.");
       return;
     }

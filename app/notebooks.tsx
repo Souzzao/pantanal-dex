@@ -4,6 +4,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isImportSizeOk } from "@/shared/safe-url";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import { router } from "expo-router";
@@ -66,6 +67,7 @@ export default function NotebooksScreen() {
     const pick = await DocumentPicker.getDocumentAsync({ type: ["application/json", "application/geo+json", "text/csv", "text/plain", "*/*"], copyToCacheDirectory: true });
     if (pick.canceled) return;
     const asset = pick.assets[0];
+    if (!isImportSizeOk(asset.size)) { Alert.alert("Arquivo grande demais", "O limite é 5 MB. Exporte cadernos menores e importe um por vez."); return; }
     const parsed = parseNotebookFile(await FileSystem.readAsStringAsync(asset.uri));
     if (!parsed.sightings.length) { Alert.alert("Nada para importar", "O arquivo não tem registros válidos."); return; }
     const options: { text: string; mode: NotebookImportMode }[] = [{ text: "Criar caderno novo", mode: "new" }];
