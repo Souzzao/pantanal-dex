@@ -257,6 +257,7 @@ begin
     raise exception 'não autenticado' using errcode = '28000';
   end if;
   for t in select team_id from team_members where user_id = uid and role = 'owner' loop
+    heir := null;
     select user_id into heir from team_members
       where team_id = t.team_id and user_id <> uid
       order by (role = 'admin') desc, joined_at
