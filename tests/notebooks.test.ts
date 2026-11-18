@@ -65,6 +65,10 @@ describe("cadernos", () => {
     const list = [base("a"), ...assignNotebook([base("b")], "imp")];
     expect(sightingsIn(list, "imp").map((s) => s.id)).toEqual(["b"]);
     expect(sightingsIn(list, "all")).toHaveLength(2);
+    // O caderno Teste fica à parte: não entra em "Todos".
+    const comTeste = [...list, base("t", { notebookId: TEST_NOTEBOOK_ID })];
+    expect(sightingsIn(comTeste, "all").map((s) => s.id)).toEqual(["a", "b"]);
+    expect(sightingsIn(comTeste, TEST_NOTEBOOK_ID).map((s) => s.id)).toEqual(["t"]);
     const store = recordExport(createNotebookStore(NOW), [MAIN_NOTEBOOK_ID], "csv", 2, NOW);
     expect(store.exports[0]).toMatchObject({ format: "csv", count: 2, notebookNames: ["Principal"] });
   });

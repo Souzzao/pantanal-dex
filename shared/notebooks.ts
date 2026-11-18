@@ -106,9 +106,12 @@ export function notebookOf(sighting: Pick<Sighting, "notebookId">): string {
   return sighting.notebookId || MAIN_NOTEBOOK_ID;
 }
 
-/** Avistamentos de um caderno, ou de todos com `"all"`. */
+/**
+ * Avistamentos de um caderno, ou de todos com `"all"`.
+ * O caderno Teste fica à parte: não entra em "Todos", só aparece quando é escolhido.
+ */
 export function sightingsIn<T extends Pick<Sighting, "notebookId">>(sightings: readonly T[], notebookId: string | "all"): T[] {
-  return notebookId === "all" ? [...sightings] : sightings.filter((item) => notebookOf(item) === notebookId);
+  return notebookId === "all" ? sightings.filter((item) => notebookOf(item) !== TEST_NOTEBOOK_ID) : sightings.filter((item) => notebookOf(item) === notebookId);
 }
 
 /** Quantidade de avistamentos por caderno. */

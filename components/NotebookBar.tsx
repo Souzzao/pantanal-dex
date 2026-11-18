@@ -11,7 +11,7 @@ import { Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
-import { countByNotebook, type NotebookKind } from "@/shared/notebooks";
+import { countByNotebook, TEST_NOTEBOOK_ID, type NotebookKind } from "@/shared/notebooks";
 
 export const NOTEBOOK_ICON: Record<NotebookKind, string> = { main: "📔", test: "🧪", custom: "📒", imported: "📥" };
 
@@ -43,8 +43,14 @@ export function NotebookBar({ selected, onSelect }: { selected: string; onSelect
         </Pressable>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {chip("all", "Todos", sightings.length, selected === "all")}
-        {notebooks.map((item) => chip(item.id, `${NOTEBOOK_ICON[item.kind]} ${item.name}${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id))}
+        {chip("all", "Todos", sightings.length - (counts[TEST_NOTEBOOK_ID] ?? 0), selected === "all")}
+        {notebooks.filter((item) => item.id !== TEST_NOTEBOOK_ID).map((item) => chip(item.id, `${NOTEBOOK_ICON[item.kind]} ${item.name}${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id))}
+        {notebooks.filter((item) => item.id === TEST_NOTEBOOK_ID).map((item) => (
+          <View key={item.id} style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ width: 1, height: 26, backgroundColor: colors.border, marginRight: 8 }} />
+            {chip(item.id, `${NOTEBOOK_ICON[item.kind]} ${item.name} (à parte)${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id)}
+          </View>
+        ))}
       </ScrollView>
     </View>
   );
