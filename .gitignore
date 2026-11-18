@@ -85,3 +85,4 @@ supabase/.branches/
 *.aab
 *.ipa
 coverage/
+__pycache__/

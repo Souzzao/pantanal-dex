@@ -6,10 +6,11 @@
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, sortItems, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
-import { generatedSpecies } from "./catalog/generated";
+import { generatedSpecies, retiredSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
 import baseAreas from "./catalog/base-areas.json";
 import baseTraits from "./catalog/base-traits.json";
+import curatedPhotos from "./catalog/generated/fotos-curadas.json";
 export { resolveSpeciesId, SPECIES_ID_ALIASES } from "./species-aliases";
 import { getLanguageCode, localizeSpecies } from "./i18n";
 
@@ -24,9 +25,22 @@ export function speciesAreaKm(item: Pick<Species, "id" | "group"> & { areaKm?: n
   return Math.min(item.areaKm ?? areas[item.id] ?? GROUP_AREA_KM[item.group] ?? 0.3, 3);
 }
 
+const extraPhotos = curatedPhotos as unknown as Record<string, Species["images"]>;
+const MAX_PHOTOS = 6;
+/** Fichas escritas à mão: fotos próprias primeiro, completadas com as de uso livre achadas pelo build. */
+const withExtraPhotos = (item: Species): Species => {
+  const extra = extraPhotos[item.id];
+  if (!extra?.length || item.images.length >= MAX_PHOTOS) return item;
+  const seen = new Set(item.images.map((image) => image.uri));
+  return { ...item, images: [...item.images, ...extra.filter((image) => !seen.has(image.uri))].slice(0, MAX_PHOTOS) };
+};
 const withoutAliases = (items: Species[]) =>
-  items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
-const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAliases(catalogSpecies), generatedSpecies]);
+  items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map(withExtraPhotos).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
+/** Mínimo de fotos de uso livre para a espécie aparecer no app (as raras demais saem, mas os avistamentos antigos abrem). */
+export const MIN_SPECIES_PHOTOS = 5;
+const curated = [...withoutAliases(species), ...withoutAliases(catalogSpecies)];
+const curatedRetired = curated.filter((item) => item.images.length < MIN_SPECIES_PHOTOS);
+const catalogLoader = createCatalogLoader([curated.filter((item) => item.images.length >= MIN_SPECIES_PHOTOS), generatedSpecies]);
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
@@ -76,6 +90,17 @@ export function paginateSpeciesCatalog(items: Species[], page: number, pageSize 
   const safePage = Number.isInteger(page) && page >= 0 ? page : 0;
   const safePageSize = Number.isInteger(pageSize) && pageSize > 0 ? Math.min(pageSize, 200) : 60;
   return items.slice(safePage * safePageSize, (safePage + 1) * safePageSize);
+}
+
+let speciesIndex: Map<string, Species> | null = null;
+/**
+ * Acha a espécie de um avistamento: catálogo completo (curadas, lotes e geradas) e, se não estiver mais
+ * no catálogo, a lista de espécies aposentadas. Ids antigos passam por SPECIES_ID_ALIASES.
+ */
+export function findSpeciesById(id: string | undefined): Species | undefined {
+  if (!id) return undefined;
+  speciesIndex ??= new Map([...retiredSpecies, ...curatedRetired, ...filterSpeciesCatalog()].map((item) => [item.id, item]));
+  return speciesIndex.get(SPECIES_ID_ALIASES[id] ?? id);
 }
 
 export const catalogCoverage = { species: catalogLoader.size, groups: groups.length, environments: environments.length };
