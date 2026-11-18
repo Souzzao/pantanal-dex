@@ -1264,14 +1264,6 @@
     "quality": 72
   },
   {
-    "id": "jabuti-piranga-carbonarius",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14368564/medium.jpeg",
-    "sha256": "bdaf8f7fd850facf6a6405beeb89e7169d017423cc15e813789db7f915f8740c",
-    "bytes": 20148,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
     "id": "arapacu-do-campo",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/565453/medium.jpeg",
     "sha256": "1fd07a3d4669bead65c3034936ff80afadb38b0f31f488e9d8234f874babf5d9",
@@ -2004,14 +1996,6 @@
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/334994710/medium.jpeg",
     "sha256": "113f2ac38e695a56fbc40e3a443224e7d155156580f23519845aa75ebc223acc",
     "bytes": 31219,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
-    "id": "pithecopus-azureus",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/16443041/medium.jpg",
-    "sha256": "879d45801a0faa3bb622212f5959934941f3d925f3f0f8a33537dbf398b5ed31",
-    "bytes": 17223,
     "maxSize": 360,
     "quality": 72
   },
@@ -3256,14 +3240,6 @@
     "quality": 72
   },
   {
-    "id": "sapo-cururu-marina",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/314305758/medium.jpg",
-    "sha256": "48e040755059bc64ca1404844021cfae40c6107ec6993e8fae2b8cbf657d1f0d",
-    "bytes": 24485,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
     "id": "surubim-bico-de-pato",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/122845620/medium.jpeg",
     "sha256": "c4f117ed940e19e79ed4e9b13c2da603c790a5aca6e1b7dd20bdcbf74106b877",
@@ -3720,14 +3696,6 @@
     "quality": 72
   },
   {
-    "id": "jacutinga-de-garganta-azul-cumanensis",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/32575522/medium.jpg",
-    "sha256": "fddce1a7af76a61c55d0ba1dec6227eec82800c4dc9d0c139afd2d38faa7f390",
-    "bytes": 11366,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
     "id": "raia-tigre-de-agua-doce",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/566692179/medium.jpg",
     "sha256": "eca684242f6d8aba41ccf01a16022d3228cf5005e54979b9e40c49c09e601362",
@@ -4016,14 +3984,6 @@
     "quality": 72
   },
   {
-    "id": "veado-mateiro-americana",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/107721413/medium.jpeg",
-    "sha256": "54c3c8c90d15f9e441ebe91500a6d2f009ce22c06e2dd50dd57881b577e7d48d",
-    "bytes": 17225,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
     "id": "tamuata-thoracata",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/179490715/medium.jpeg",
     "sha256": "a760de17889e3bc8f5f107792cf9cfa83acbd1dcf00198c0966dc248d9a0aa72",
@@ -4124,14 +4084,6 @@
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/60449844/medium.jpeg",
     "sha256": "3a2df3922a9e1db8c44f98bf712896e217851e940ffa04485856310b550e2b62",
     "bytes": 15041,
-    "maxSize": 360,
-    "quality": 72
-  },
-  {
-    "id": "cachara-fasciatum",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/106585040/medium.jpeg",
-    "sha256": "0116ba6ce711e4e7f427d52142510f8d3d1975e5b58483a5d0cb75db81b52b60",
-    "bytes": 12437,
     "maxSize": 360,
     "quality": 72
   },

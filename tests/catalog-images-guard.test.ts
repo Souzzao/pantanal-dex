@@ -18,11 +18,21 @@ describe("espécies sem foto não derrubam as telas", () => {
     expect(blocked).toEqual([]);
   });
 
-  it("espécies sem foto são poucas e as curadas à mão sempre têm foto", () => {
-    const all = filterSpeciesCatalog();
-    const withoutImages = all.filter((item) => item.images.length === 0);
-    expect(withoutImages.length).toBeLessThan(all.length * 0.25);
-    expect(withoutImages.every((item) => !item.id.startsWith("tuiuiu") && item.id !== "onca-pintada")).toBe(true);
+  it("toda espécie do app tem pelo menos 5 fotos (as raras demais saem do catálogo)", () => {
+    const low = filterSpeciesCatalog().filter((item) => item.images.length < 5).map((item) => item.id);
+    expect(low).toEqual([]);
+  });
+
+  it("nenhum nome popular se repete no catálogo", () => {
+    const norm = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[\s'’-]+/g, "");
+    const seen = new Map<string, string>();
+    const repeated: string[] = [];
+    for (const item of filterSpeciesCatalog()) {
+      const key = norm(item.commonName);
+      if (seen.has(key)) repeated.push(`${item.commonName}: ${seen.get(key)} / ${item.scientificName}`);
+      seen.set(key, item.scientificName);
+    }
+    expect(repeated).toEqual([]);
   });
 
   it("nenhuma tela acessa images[0].uri sem verificar se a imagem existe", () => {

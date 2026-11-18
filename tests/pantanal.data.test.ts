@@ -151,7 +151,7 @@ describe("PantanalDex data contracts", () => {
 
   it("audits the second amphibian batch and keeps incomplete image sets blocked", () => {
     const secondAmphibianBatch = catalogBatches.find((batch) => batch.batchId === "catalog-amphibians-02");
-    expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-pimenta", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
+    expect(secondAmphibianBatch?.species.map((item) => item.commonName)).toEqual(["Sapo-cururu", "Rã-do-chaco", "Perereca-de-margem-escura", "Perereca-de-folhagem-azul"]);
     expect(secondAmphibianBatch?.status).toBe("pending-review");
     expect(secondAmphibianBatch?.species).toHaveLength(4);
     expect(secondAmphibianBatch?.species[0].images).toHaveLength(3);

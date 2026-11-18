@@ -36,7 +36,11 @@ const withExtraPhotos = (item: Species): Species => {
 };
 const withoutAliases = (items: Species[]) =>
   items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map(withExtraPhotos).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
-const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAliases(catalogSpecies), generatedSpecies]);
+/** Mínimo de fotos de uso livre para a espécie aparecer no app (as raras demais saem, mas os avistamentos antigos abrem). */
+export const MIN_SPECIES_PHOTOS = 5;
+const curated = [...withoutAliases(species), ...withoutAliases(catalogSpecies)];
+const curatedRetired = curated.filter((item) => item.images.length < MIN_SPECIES_PHOTOS);
+const catalogLoader = createCatalogLoader([curated.filter((item) => item.images.length >= MIN_SPECIES_PHOTOS), generatedSpecies]);
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
@@ -95,7 +99,7 @@ let speciesIndex: Map<string, Species> | null = null;
  */
 export function findSpeciesById(id: string | undefined): Species | undefined {
   if (!id) return undefined;
-  speciesIndex ??= new Map([...retiredSpecies, ...filterSpeciesCatalog()].map((item) => [item.id, item]));
+  speciesIndex ??= new Map([...retiredSpecies, ...curatedRetired, ...filterSpeciesCatalog()].map((item) => [item.id, item]));
   return speciesIndex.get(SPECIES_ID_ALIASES[id] ?? id);
 }
 

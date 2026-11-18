@@ -296,7 +296,13 @@ def main():
     tpath = os.path.join(ROOT, "data", "inat", "traducoes-descricoes.json")
     translated = json.load(open(tpath, encoding="utf8")) if os.path.exists(tpath) else {}
     have_sci = {c["sci"].lower() for c in current}
-    curated_by_sci = {c["sci"].lower(): c["id"] for c in current}
+    curated_ids = {}
+    for c in current:  # várias fichas podem ter o mesmo nome científico (ids antigos redirecionados)
+        curated_ids.setdefault(c["sci"].lower(), []).append(c["id"])
+    for old_sci, new_sci in SYNONYM_DROP.items():  # sinônimo descartado: as fotos dele vão para a ficha certa
+        if new_sci.lower() in curated_ids:
+            curated_ids.setdefault(old_sci.lower(), []).extend(curated_ids[new_sci.lower()])
+    curated_by_sci = curated_ids
     curated_extra = {}
     used_ids = {c["id"] for c in current}
     missing_family = set()
@@ -304,11 +310,14 @@ def main():
     for item in sorted(raw, key=lambda x: (-x.get("count", 0), x["sci"])):
         sci = item["sci"]
         if sci in SYNONYM_DROP:
+            for cid in curated_by_sci.get(sci.lower(), []):
+                curated_extra[cid] = curated_extra.get(cid) or make_images(item, fotos_v2)
             continue
         if sci in DOMESTIC or sci.lower() in have_sci or any(s for s in item.get("synAll", []) if s.lower() in have_sci):
-            cid = curated_by_sci.get(sci.lower()) or next((curated_by_sci[s.lower()] for s in item.get("synAll", []) if s.lower() in curated_by_sci), None)
-            if cid and cid not in curated_extra:
-                curated_extra[cid] = make_images(item, fotos_v2)  # fotos extras para as fichas escritas à mão
+            cids = curated_by_sci.get(sci.lower()) or next((curated_by_sci[s.lower()] for s in item.get("synAll", []) if s.lower() in curated_by_sci), [])
+            for cid in cids:
+                if not curated_extra.get(cid):
+                    curated_extra[cid] = make_images(item, fotos_v2)  # fotos extras para as fichas escritas à mão
             continue
         group = GROUP.get(item["cls"])
         if not group:
@@ -439,9 +448,13 @@ def main():
     covers_path = os.path.join(ROOT, "data", "inat", "capas-para-embutir.json")
     if os.path.exists(covers_path):
         generated = {x["id"]: x for x in out}
+        aliases_ts = open(os.path.join(ROOT, "shared", "species-aliases.ts"), encoding="utf8").read()
+        redirected = set(re.findall(r'^\s*"?([^\s":]+)"?:\s*"', aliases_ts, re.M))
         covers = []
         for entry in json.load(open(covers_path, encoding="utf8")):
             sp = generated.get(entry["id"])
+            if entry["id"] in redirected:
+                continue  # espécie repetida que saiu do catálogo
             if sp is None:
                 covers.append(entry)  # espécie curada à mão: mantém a capa escolhida
             elif sp["images"] and not sp.get("retired"):

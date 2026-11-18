@@ -1071,14 +1071,6 @@
     ]
   },
   {
-    "id": "jabuti-piranga-carbonarius",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/14368564/medium.jpeg",
-    "alternativas": [
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/748687534/medium.jpg",
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/39312135/medium.jpg"
-    ]
-  },
-  {
     "id": "arapacu-do-campo",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/565453/medium.jpeg",
     "alternativas": [
@@ -1813,11 +1805,6 @@
       "https://inaturalist-open-data.s3.amazonaws.com/photos/334994715/medium.jpeg",
       "https://inaturalist-open-data.s3.amazonaws.com/photos/334994717/medium.jpeg"
     ]
-  },
-  {
-    "id": "pithecopus-azureus",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/16443041/medium.jpg",
-    "alternativas": []
   },
   {
     "id": "pilrito-de-sobre-branco",
@@ -3060,14 +3047,6 @@
     ]
   },
   {
-    "id": "sapo-cururu-marina",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/314305758/medium.jpg",
-    "alternativas": [
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/360658061/medium.jpg",
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/174487161/medium.jpg"
-    ]
-  },
-  {
     "id": "surubim-bico-de-pato",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/122845620/medium.jpeg",
     "alternativas": [
@@ -3524,14 +3503,6 @@
     ]
   },
   {
-    "id": "jacutinga-de-garganta-azul-cumanensis",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/32575522/medium.jpg",
-    "alternativas": [
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/245274047/medium.jpg",
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/5216878/medium.jpg"
-    ]
-  },
-  {
     "id": "raia-tigre-de-agua-doce",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/566692179/medium.jpg",
     "alternativas": [
@@ -3820,14 +3791,6 @@
     ]
   },
   {
-    "id": "veado-mateiro-americana",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/107721413/medium.jpeg",
-    "alternativas": [
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/435641461/medium.jpeg",
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/21357/medium.jpg"
-    ]
-  },
-  {
     "id": "tamuata-thoracata",
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/179490715/medium.jpeg",
     "alternativas": [
@@ -3929,14 +3892,6 @@
     "alternativas": [
       "https://inaturalist-open-data.s3.amazonaws.com/photos/60637189/medium.jpeg",
       "https://inaturalist-open-data.s3.amazonaws.com/photos/557881636/medium.jpg"
-    ]
-  },
-  {
-    "id": "cachara-fasciatum",
-    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/106585040/medium.jpeg",
-    "alternativas": [
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/244179924/medium.jpeg",
-      "https://inaturalist-open-data.s3.amazonaws.com/photos/106584463/medium.jpeg"
     ]
   },
   {
