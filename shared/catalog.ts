@@ -10,6 +10,7 @@ import { generatedSpecies } from "./catalog/generated";
 import { SPECIES_ID_ALIASES } from "./species-aliases";
 import baseAreas from "./catalog/base-areas.json";
 import baseTraits from "./catalog/base-traits.json";
+import curatedPhotos from "./catalog/generated/fotos-curadas.json";
 export { resolveSpeciesId, SPECIES_ID_ALIASES } from "./species-aliases";
 import { getLanguageCode, localizeSpecies } from "./i18n";
 
@@ -24,8 +25,17 @@ export function speciesAreaKm(item: Pick<Species, "id" | "group"> & { areaKm?: n
   return Math.min(item.areaKm ?? areas[item.id] ?? GROUP_AREA_KM[item.group] ?? 0.3, 3);
 }
 
+const extraPhotos = curatedPhotos as unknown as Record<string, Species["images"]>;
+const MAX_PHOTOS = 6;
+/** Fichas escritas à mão: fotos próprias primeiro, completadas com as de uso livre achadas pelo build. */
+const withExtraPhotos = (item: Species): Species => {
+  const extra = extraPhotos[item.id];
+  if (!extra?.length || item.images.length >= MAX_PHOTOS) return item;
+  const seen = new Set(item.images.map((image) => image.uri));
+  return { ...item, images: [...item.images, ...extra.filter((image) => !seen.has(image.uri))].slice(0, MAX_PHOTOS) };
+};
 const withoutAliases = (items: Species[]) =>
-  items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
+  items.filter((item) => !(item.id in SPECIES_ID_ALIASES)).map(withExtraPhotos).map((item) => (item.areaKm ? item : { ...item, areaKm: speciesAreaKm(item) }));
 const catalogLoader = createCatalogLoader([withoutAliases(species), withoutAliases(catalogSpecies), generatedSpecies]);
 
 const normalizeQuery = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();

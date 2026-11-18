@@ -1,12 +1,12 @@
 name: Fotos do catálogo
 
-# Busca mais fotos das espécies no iNaturalist e salva em data/inat/fotos-v2.json
-# na própria branch (o build do catálogo usa esse arquivo depois). Roda em push nas
-# branches claude/fotos* ou manualmente.
+# Busca fotos de uso comercial livre (iNaturalist, GBIF, Wikimedia Commons), refaz o catálogo e as
+# capas embutidas no app, e salva tudo na própria branch. Roda em push nas branches claude/fotos*
+# ou manualmente. O ambiente de desenvolvimento não acessa esses sites, por isso roda aqui.
 on:
   push:
     branches: ["claude/fotos*"]
-    paths: ["scripts/catalog/fetch_photos.py", ".github/workflows/fotos.yml"]
+    paths: ["scripts/catalog/fetch_photos*.py", ".github/workflows/fotos.yml"]
   workflow_dispatch:
 
 permissions:
@@ -19,17 +19,25 @@ concurrency:
 jobs:
   fotos:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 170
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python3 scripts/catalog/fetch_photos.py
+      - name: Busca no iNaturalist (só se ainda não houver resultado)
+        run: test -f data/inat/fotos-v2.json || python3 scripts/catalog/fetch_photos.py
+      - name: Busca extra (iNaturalist, GBIF e Commons) para quem tem menos de 6
+        run: python3 scripts/catalog/fetch_photos_extra.py
+      - name: Refaz o catálogo e as capas embutidas
+        run: |
+          pip install --quiet pillow
+          python3 scripts/catalog/build.py
+          python3 scripts/catalog/embed_covers.py --workers 6
       - name: Salvar resultado na branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add data/inat/fotos-v2.json
-          git commit -m "Fotos do catálogo: resultado da busca no iNaturalist" || echo "sem mudanças"
+          git add data/inat/ shared/catalog/generated/ shared/species-covers.ts assets/images/species/
+          git commit -m "Fotos do catálogo: busca de fotos de uso livre, catálogo e capas refeitos" || echo "sem mudanças"
           git push
