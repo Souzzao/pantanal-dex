@@ -23,6 +23,7 @@ na Google Play). Respondemos em até 15 dias.
 | Localização do aparelho | Só ao registrar um avistamento, se você permitir | Preencher o local do avistamento | Consentimento (I) — pedido pelo Android, pode ser negado | Fica no avistamento; não há rastreamento em segundo plano |
 | Câmera e fotos | Só quando você escolhe tirar ou anexar uma foto | Foto do avistamento | Consentimento (I) — pedido pelo Android | No aparelho; vai ao servidor só se você publicar |
 | Avistamentos que você decide publicar (espécie, data, hora, local exato, notas, foto) | Só quando você toca em publicar | Revisão por auditores e mapa público | Consentimento (I) — você escolhe cada publicação | Servidor |
+| Resumo para equipes: nome de exibição, espécies registradas, número de avistamentos e zonas de ~11 km | Só se você criar ou entrar numa equipe | Progresso, conquistas e estudo de zonas da equipe | Consentimento (I) — você escolhe entrar e pode sair quando quiser | Servidor; visível só para quem é da mesma equipe |
 | Registros técnicos de acesso (data/hora, endereço IP) | Ao usar login e publicação | Segurança e prevenção de abuso | Legítimo interesse (IX) | Servidor (Supabase) |
 
 Não usamos anúncios, não vendemos dados, não fazemos rastreamento entre apps nem análise de
@@ -39,6 +40,8 @@ públicos**: só você e os auditores do projeto veem.
 
 - **Supabase Inc.**, que hospeda o banco de dados e as fotos publicadas, apenas para operar o app.
   Os dados ficam em servidores na região **São Paulo (sa-east-1), Brasil**.
+- **Pessoas da mesma equipe** (se você participar de uma): veem seu nome de exibição, as espécies
+  que você registrou, quantos avistamentos fez e as zonas de ~11 km — nunca o local exato, notas ou fotos.
 - **Auditores do PantanalDex**: veem os avistamentos que você publicou e seu nome de exibição, para
   aprovar ou recusar.
 - Autoridades, somente quando a lei obrigar.
@@ -50,6 +53,7 @@ qualquer página da internet, mas não recebem dados da sua conta.
 ## Por quanto tempo guardamos
 
 - Conta e nome de exibição: enquanto a conta existir.
+- Resumo para equipes: enquanto você estiver em alguma equipe ou até a conta ser excluída.
 - Publicações: até você encerrar a publicação, até ela expirar ou até a conta ser excluída.
 - Histórico de revisões dos auditores: apagado junto com a publicação.
 - Registros técnicos de acesso: pelo tempo em que o Supabase os mantém (dias, no plano atual).
@@ -62,7 +66,7 @@ qualquer página da internet, mas não recebem dados da sua conta.
 - **Acessar, corrigir ou levar seus dados**: Cadernos → exportar em JSON, CSV ou GeoJSON. Para os
   dados do servidor, peça pelo canal acima.
 - **Revogar consentimentos**: negue a localização ou a câmera nas configurações do Android; encerre
-  publicações a qualquer momento.
+  publicações a qualquer momento; saia de uma equipe em Equipes → Sair da equipe.
 - Informação sobre compartilhamento, oposição e revisão: pelo canal acima.
 - Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD): https://www.gov.br/anpd
 

@@ -16,6 +16,7 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider, useApp } from "@/contexts/AppContext";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { LoginScreen } from "@/components/LoginScreen";
+import { TeamsProvider } from "@/contexts/TeamsContext";
 import { DiscoveryToast } from "@/components/DiscoveryToast";
 import { PublicationsProvider } from "@/contexts/PublicationsContext";
 import {
@@ -114,7 +115,7 @@ export default function RootLayout() {
 function AccountScopedApp({ children }: { children: React.ReactNode }) {
   const { account } = useAuth();
   const namespace = account?.id;
-  return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}>{children}</AppProvider>;
+  return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}><TeamsProvider>{children}</TeamsProvider></AppProvider>;
 }
 
 /** Trocar o idioma remonta as telas, para que todos os textos e fichas saiam no idioma novo. */

@@ -91,6 +91,8 @@ https://github.com/Souzzao/pantanal-dex/issues (informar em "URL para exclusão 
 | Informações pessoais → Endereço de e-mail | Sim | Obrigatório | Gerenciamento da conta |
 | Informações pessoais → Nome | Sim | Obrigatório | Funcionalidade do app, gerenciamento da conta |
 | Local → Local exato | Sim | Opcional (só ao publicar) | Funcionalidade do app |
+| Local → Local aproximado (zonas de ~11 km) | Sim | Opcional (só em equipes) | Funcionalidade do app |
+| Atividade no app → Outras ações (espécies registradas e número de avistamentos) | Sim | Opcional (só em equipes) | Funcionalidade do app |
 | Fotos e vídeos → Fotos | Sim | Opcional (só ao publicar) | Funcionalidade do app |
 | Mensagens/Conteúdo do usuário → Outro conteúdo gerado pelo usuário (notas) | Sim | Opcional (só ao publicar) | Funcionalidade do app |
 
