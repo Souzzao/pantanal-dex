@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Novo avistamento (UC05): abre a câmera na hora, lê o GPS, valida o ponto no Pantanal e salva no caderno.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Image, Platform, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";

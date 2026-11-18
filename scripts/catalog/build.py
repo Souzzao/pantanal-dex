@@ -11,6 +11,8 @@ Saída: shared/catalog/generated/vertebrados.json
 Regras: nada é inventado sobre a espécie. O que é da própria espécie vem de fonte citada
 (iNaturalist, Wikipédia, EltonTraits/AmphiBIO); o que vem da família é escrito como "como outras
 espécies da família…".
+
+Autor: Felipe de Souza Aquino (PantanalDex)
 """
 import json, math, os, re, sys, unicodedata
 

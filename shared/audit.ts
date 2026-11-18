@@ -1,4 +1,7 @@
-/** Tipos e conversões puras da auditoria (respostas das funções audit_queue e review_log). */
+/** Tipos e conversões puras da auditoria (respostas das funções audit_queue e review_log).
+ *
+ * @author Felipe de Souza Aquino
+ */
 
 export type AuditItem = {
   id: string; speciesId: string; observedOn: string; observedTime: string | null;

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Ficha da espécie (UC04): fotos, descrição, dieta, status IUCN, curiosidades e fontes.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";

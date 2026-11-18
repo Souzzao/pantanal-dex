@@ -1,5 +1,8 @@
 """Raio do círculo/elipse no mapa (km) para as 102 espécies escritas à mão, com a mesma regra do build.py:
-massa corporal (EltonTraits) para aves e mamíferos, senão a classe da família, senão o padrão do grupo."""
+massa corporal (EltonTraits) para aves e mamíferos, senão a classe da família, senão o padrão do grupo.
+
+Autor: Felipe de Souza Aquino (PantanalDex)
+"""
 import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build import area_km, ROOT, load_traits  # noqa: E402

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Aviso animado de nova espécie descoberta na coleção.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AccessibilityInfo, Animated, Platform, Pressable, View } from "react-native";
 import { Text } from "@/components/T";

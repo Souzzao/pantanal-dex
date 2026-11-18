@@ -1,4 +1,7 @@
-/** Public coordinates are rounded to the center of a 0.1° grid cell (~11 km). */
+/** Public coordinates are rounded to the center of a 0.1° grid cell (~11 km).
+ *
+ * @author Felipe de Souza Aquino
+ */
 export const PUBLIC_LOCATION_GRID_DEGREES = 0.01;
 
 export function roundToPublicLocationGrid(value: number): number {

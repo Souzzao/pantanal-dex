@@ -1,3 +1,4 @@
+// PantanalDex · Autor: Felipe de Souza Aquino
 // Gera shared/leaflet-assets.ts com o Leaflet 1.9.4 embutido (BSD-2-Clause), para o mapa
 // funcionar sem baixar código de CDN. Rodar de novo só se trocar a versão do Leaflet:
 //   node scripts/build-leaflet-assets.mjs

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa público (UC08): registros auditados como áreas aproximadas, pontos turísticos e filtros por espécie, grupo e data.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, Switch, View } from "react-native";
 import { Text, TextInput } from "@/components/T";

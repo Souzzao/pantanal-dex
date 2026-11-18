@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa nativo usado pelo seletor de localização no Android/iOS.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useCallback, useMemo, useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text } from "@/components/T";

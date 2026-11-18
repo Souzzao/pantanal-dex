@@ -1,26 +1,30 @@
-# Contribuindo com o PantanalDex
+# Como contribuir
 
-Leia `COLABORACAO-GITHUB.md` antes de editar. O projeto usa Pull Requests e não aceita push direto em `main` pelas contas colaboradoras.
+O PantanalDex é mantido por **Felipe de Souza Aquino** ([@Souzzao](https://github.com/Souzzao)). Sugestões e relatos de problemas são bem-vindos pelas [issues](https://github.com/Souzzao/pantanal-dex/issues).
 
-## Antes de começar
+> O código é público para consulta e avaliação (veja [LICENSE](LICENSE)). Pull requests externos só são aceitos após conversa prévia em uma issue.
 
-Confirme a branch atribuída, atualize a referência de `main` e evite editar arquivos de outra frente. Não inclua segredos ou arquivos de configuração locais.
+## Fluxo de trabalho
 
-## Antes do Pull Request
+1. Crie uma branch a partir da `main`: `feat/nome-curto`, `fix/nome-curto` ou `docs/nome-curto`.
+2. Faça commits pequenos e descritivos, em português.
+3. Rode as verificações:
+   ```bash
+   pnpm check
+   pnpm test
+   ```
+4. Abra um pull request preenchendo o modelo. A `main` é protegida: todo PR precisa da revisão do mantenedor e do CI verde.
 
-Execute:
+## Padrões de código
 
-```bash
-pnpm check
-pnpm test
-```
+- **Regras de negócio em `shared/`**, como funções puras com testes. Telas só exibem e chamam essas funções.
+- TypeScript estrito; evite `any`.
+- Textos visíveis passam pelo i18n (`shared/i18n/`) nos 4 idiomas.
+- Comentários e documentação em português.
+- Toda mudança no banco vira uma nova migração em `supabase/migrations/`, com RLS.
 
-Se o lint estiver disponível no ambiente, execute também `pnpm lint`. Para mudanças de interface, registre o caminho testado e inclua uma captura do preview quando possível.
+## Segurança
 
-## Pull Request
-
-Use o template do repositório. Explique o problema resolvido, o que foi alterado, os testes executados, as pendências e qualquer decisão que precise da Conta Coordenadora. Um PR incompleto deve permanecer aberto, não ser marcado como concluído.
-
-## Política de integração
-
-A Conta Coordenadora revisa contratos compartilhados, conflitos, segurança, privacidade e compatibilidade com Expo SDK 54. O merge só ocorre depois de TypeScript, testes e revisão visual passarem.
+- Nunca envie `.env`, chaves, tokens ou senhas. Use `.env.example` como modelo.
+- Falhas de segurança: siga [SECURITY.md](SECURITY.md), sem issue pública.
+- Não exponha localização exata de avistamentos em telas ou logs públicos.

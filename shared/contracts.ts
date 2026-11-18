@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Contratos compartilhados: preferências, filtros e envelope de exportação.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import type { Environment, Species, SpeciesGroup, Sighting } from "./pantanal";
 
 export type Settings = {

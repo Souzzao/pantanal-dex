@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Text e TextInput com a fonte e as cores do tema aplicadas por padrão.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import React from "react";
 import { Text as NativeText, TextInput as NativeTextInput, type TextInputProps, type TextProps } from "react-native";
 

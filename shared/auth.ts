@@ -1,5 +1,7 @@
 /**
  * Regras puras do login (sem React), para poder testar.
+ *
+ * @author Felipe de Souza Aquino
  */
 
 export type Role = "user" | "auditor" | "dev";

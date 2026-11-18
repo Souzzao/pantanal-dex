@@ -1,12 +1,17 @@
 name: APK Android
 
-# Gera o APK (release, assinado com a chave de debug do prebuild) a cada push na claude/v2
+# Gera o APK (release, assinado com a chave de debug do prebuild) a cada push na main ou na claude/v2
 # ou manualmente. O endereço e a chave pública do Supabase vêm dos segredos do repositório
 # (Settings → Secrets and variables → Actions); sem eles o app sai sem login (modo local).
 on:
   push:
-    branches: [claude/v2]
+    branches: [main, claude/v2]
+    paths-ignore: ["**.md", "docs/**"]
   workflow_dispatch:
+
+# Permissão mínima: o job só lê o código. Nenhum segredo chega a PRs de forks.
+permissions:
+  contents: read
 
 concurrency:
   group: apk-${{ github.ref }}

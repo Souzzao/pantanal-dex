@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Gera shared/i18n/species.<idioma>.ts a partir de arquivos .jsonl (uma espécie por linha)."""
+"""Gera shared/i18n/species.<idioma>.ts a partir de arquivos .jsonl (uma espécie por linha).
+
+Autor: Felipe de Souza Aquino (PantanalDex)
+"""
 import glob, json, sys
 src, ids_file = sys.argv[1], sys.argv[2]
 ids = [json.loads(l)[0] for l in open(ids_file, encoding="utf8") if l.strip()]

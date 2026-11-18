@@ -1,4 +1,4 @@
--- PantanalDex · correção da revisão do Codex (PR #16, 07/11)
+-- PantanalDex · publicação atômica (revisão do PR #16, 07/11)
 --
 -- 1) Dono conferido na própria gravação: se duas publicações com o mesmo id chegam juntas,
 --    a segunda cai no ON CONFLICT e só atualiza se o hash do dono for o mesmo. Senão, recusa.

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Pontos turísticos e cidades pantaneiras, distância Haversine, check-in (RN06) e insígnias de Explorador.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
@@ -150,6 +155,10 @@ export type SpotVisits = Record<string, string>;
 const KEY = "pantanal-dex:tourist-visits:v1";
 const known = new Set(TOURIST_SPOTS.map((s) => s.id));
 
+/**
+ * Limpa as visitas lidas do armazenamento: mantém só pontos conhecidos com data válida.
+ * @param raw Valor bruto vindo do AsyncStorage.
+ */
 export function sanitizeVisits(raw: unknown): SpotVisits {
   if (!raw || typeof raw !== "object") return {};
   const out: SpotVisits = {};
@@ -159,10 +168,18 @@ export function sanitizeVisits(raw: unknown): SpotVisits {
   return out;
 }
 
+/**
+ * Carrega as visitas (check-ins) salvas no aparelho.
+ */
 export async function loadVisits(): Promise<SpotVisits> {
   try { return sanitizeVisits(JSON.parse((await AsyncStorage.getItem(KEY)) ?? "{}")); } catch { return {}; }
 }
 
+/**
+ * Registra o check-in em um ponto e devolve o conjunto atualizado de visitas.
+ * @param id Identificador do ponto turístico.
+ * @param at Momento do check-in (padrão: agora).
+ */
 export async function saveVisit(id: string, at = new Date()): Promise<SpotVisits> {
   const visits = await loadVisits();
   if (known.has(id) && !visits[id]) visits[id] = at.toISOString();
@@ -172,6 +189,9 @@ export async function saveVisit(id: string, at = new Date()): Promise<SpotVisits
 
 export type ExplorerProgress = { visited: number; total: number; tier: (typeof EXPLORER_TIERS)[number] | null; next: (typeof EXPLORER_TIERS)[number] | null; cities: number; citiesTotal: number; allCities: boolean };
 
+/**
+ * Calcula o progresso de Explorador do Pantanal: lugares e cidades visitados, nível atual e próximo nível.
+ */
 export function explorerProgress(visits: SpotVisits): ExplorerProgress {
   const visited = Object.keys(sanitizeVisits(visits)).length;
   const reached = EXPLORER_TIERS.filter((t) => visited >= t.need);

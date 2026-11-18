@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Tela inicial: busca rápida, atalhos para catálogo, caderno, coleção e mapa público, e espécies em destaque.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Image } from "react-native";

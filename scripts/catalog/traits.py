@@ -3,6 +3,8 @@
 EltonTraits 1.0 (aves e mamíferos): dieta em % (estimativa semiquantitativa), estrato de forrageio,
 atividade noturna e massa corporal. AmphiBIO v1 (anfíbios): itens alimentares presentes (1), sem %.
 Cruzamento só por nome científico exato; nada é completado por suposição.
+
+Autor: Felipe de Souza Aquino (PantanalDex)
 """
 import csv, json, os
 

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Consultas ao catálogo: filtros, ordenação, paginação, traços (dieta/IUCN) e área da espécie no mapa (até 3 km).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { environments, groups, species, type Environment, type Species, type SpeciesGroup } from "./pantanal";
 import { createCatalogLoader, sortItems, type CatalogLoaderFilters, type CatalogLoaderSort } from "./catalog-loader";
 import { catalogLicenseAudit, catalogReview, catalogSpecies } from "./catalog/index";
@@ -63,6 +68,10 @@ export function sortSpeciesCatalog(items: Species[], sort: CatalogSort = "name")
   return sortItems(items, sort);
 }
 
+/**
+ * Devolve uma página do catálogo (começando em 0).
+ * @param pageSize Quantidade de espécies por página.
+ */
 export function paginateSpeciesCatalog(items: Species[], page: number, pageSize = 60): Species[] {
   const safePage = Number.isInteger(page) && page >= 0 ? page : 0;
   const safePageSize = Number.isInteger(pageSize) && pageSize > 0 ? Math.min(pageSize, 200) : 60;

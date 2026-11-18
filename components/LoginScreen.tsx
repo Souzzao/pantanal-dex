@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Tela de login e cadastro (UC01/UC02) com validação de e-mail, senha e nome.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native";
 import { Image } from "react-native";

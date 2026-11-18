@@ -4,6 +4,8 @@
 Uses Google's public translation endpoint (network required), no API key.
 Output is plain text. Scientific names are protected before translation.
 Review output before publishing; this does not update the generated catalog.
+
+Autor: Felipe de Souza Aquino (PantanalDex)
 """
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib

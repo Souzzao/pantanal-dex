@@ -1,3 +1,4 @@
+// PantanalDex · Autor: Felipe de Souza Aquino
 // Lista os textos em português das telas (para traduzir em shared/i18n/ui.*.ts).
 // Uso: node scripts/extract-ui-strings.js saida.json
 const ts = require("typescript"), fs = require("fs"), path = require("path");

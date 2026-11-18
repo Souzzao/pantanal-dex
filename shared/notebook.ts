@@ -1,9 +1,17 @@
+/**
+ * PantanalDex — Serialização e restauração segura do caderno de avistamentos.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { sanitizeStoredSightings, getLocalTodayISODate, type Sighting } from "./pantanal";
 import { restoreSightingsWithStatus, type RestoreStatus } from "./persistence";
 import { createSightingCreationLedger, restoreSightingCreationLedger, serializeSightingCreationLedger, type SightingCreationLedger } from "./sighting-rules";
 
 export type RestoredNotebook = { sightings: Sighting[]; ledger: SightingCreationLedger; status: RestoreStatus; canWrite: boolean };
 
+/**
+ * Converte o caderno e o registro de criações em texto para o AsyncStorage.
+ */
 export function serializeNotebook(sightings: Sighting[], ledger: SightingCreationLedger): string {
   return JSON.stringify({ version: 2, sightings, creationLedger: JSON.parse(serializeSightingCreationLedger(ledger)) });
 }

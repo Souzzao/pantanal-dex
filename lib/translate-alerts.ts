@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Traduz automaticamente os títulos dos alertas nativos para o idioma escolhido.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Alert, type AlertButton, type AlertOptions } from "react-native";
 
 import { tr } from "@/shared/i18n";

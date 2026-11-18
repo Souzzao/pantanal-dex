@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Auditoria (UC12): fila de registros públicos pendentes e histórico; o auditor aprova, corrige a espécie ou recusa.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ActivityIndicator, Animated, Image, Modal, PanResponder, Pressable, ScrollView, View } from "react-native";

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Área dev (UC13): métricas do sistema e gestão de papéis das contas (usuário, auditor, dev).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, View } from "react-native";

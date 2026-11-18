@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Paleta de cores do tema atual.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Colors, type ColorScheme, type ThemeColorPalette } from "@/constants/theme";
 import { useColorScheme } from "./use-color-scheme";
 

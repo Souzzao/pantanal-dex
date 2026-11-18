@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Modelo de domínio: espécie, avistamento, grupos, ambientes e validações do catálogo.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { SPECIES_ID_ALIASES } from "./species-aliases";
 
 export type SpeciesGroup = "Mamíferos" | "Aves" | "Répteis" | "Anfíbios" | "Peixes" | "Invertebrados";

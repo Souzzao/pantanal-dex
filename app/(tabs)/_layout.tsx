@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Barra de abas inferior: Início, Animais, Registrar, Meus registros e Ajustes.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { router, Tabs } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Platform } from "react-native";

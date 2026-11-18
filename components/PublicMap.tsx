@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa público: agrupa registros por área e exibe os rótulos traduzidos.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text } from "@/components/T";

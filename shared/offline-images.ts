@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Download das fotos do catálogo com 4 filas paralelas, novas tentativas e lista de falhas.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import type { Species } from "./pantanal";
 import { displayImageUri } from "./image-url";
 

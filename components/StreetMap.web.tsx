@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Versão web do mapa de ruas, renderizada em iframe.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { createElement, useCallback, useEffect, useMemo, useRef } from "react";
 import { View } from "react-native";
 

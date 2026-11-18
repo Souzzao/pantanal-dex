@@ -1,7 +1,9 @@
 /**
  * Custom environment loader that prioritizes system environment variables
- * over .env file values. This ensures that Manus platform-injected variables
- * are not overridden by placeholder values in .env
+ * over .env file values, so variables injected by CI (GitHub Actions/EAS)
+ * are never overridden by placeholder values in a local .env
+ *
+ * @author Felipe de Souza Aquino
  */
 import fs from "fs";
 import path from "path";

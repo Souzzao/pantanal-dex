@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Regras do avistamento: data não futura (RN03), limite de 30 por dia (RN05) e campos obrigatórios.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { filterSpeciesCatalog } from "./catalog";
 import { getLocalTodayISODate, isValidSightingTime, UNKNOWN_SPECIES_ID, type Sighting } from "./pantanal";
 
@@ -109,6 +114,9 @@ function assertLedger(ledger: SightingCreationLedger): SightingCreationLedger {
   return parsed.ledger;
 }
 
+/**
+ * Cria o registro vazio de criações por dia, usado para aplicar o limite diário (RN05).
+ */
 export function createSightingCreationLedger(): SightingCreationLedger {
   return { version: SIGHTING_CREATION_LEDGER_VERSION, days: {} };
 }
@@ -123,10 +131,16 @@ export function restoreSightingCreationLedger(raw: string | null): SightingLedge
   }
 }
 
+/**
+ * Converte o registro de criações em texto para o AsyncStorage.
+ */
 export function serializeSightingCreationLedger(ledger: SightingCreationLedger): string {
   return JSON.stringify(assertLedger(ledger));
 }
 
+/**
+ * Quantos avistamentos foram criados no dia local de `now`.
+ */
 export function countSightingCreations(ledger: SightingCreationLedger, now: Date): number {
   return assertLedger(ledger).days[localDay(now)]?.length ?? 0;
 }

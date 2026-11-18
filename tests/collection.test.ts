@@ -13,7 +13,7 @@ import {
 } from "../shared/collection";
 import type { Sighting } from "../shared/pantanal";
 
-/** Mesmo valor de `UNKNOWN_SPECIES_ID` ("Não sei"), da frente UC06 do Codex. Local para o teste não depender da ordem de merge. */
+/** Mesmo valor de `UNKNOWN_SPECIES_ID` ("Não sei"), definido no UC06. Local para o teste não depender da ordem de merge. */
 const UNKNOWN_SPECIES_ID = "unknown";
 
 const catalog = filterSpeciesCatalog();

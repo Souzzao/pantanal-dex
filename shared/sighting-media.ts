@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Validação das fotos dos avistamentos (tipo, tamanho máximo de 10 MB e armazenamento).
+ *
+ * @author Felipe de Souza Aquino
+ */
 export const MAX_SIGHTING_PHOTO_BYTES = 10 * 1024 * 1024;
 export const SIGHTING_PHOTO_DIRECTORY = "pantanal-dex/photos/";
 

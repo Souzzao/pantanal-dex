@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Cartão de ponto turístico com texto em 4 idiomas e check-in por GPS (UC09).
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useState } from "react";
 import { ActivityIndicator, Linking, Pressable, View } from "react-native";
 import * as Location from "expo-location";

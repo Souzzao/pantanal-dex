@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Estado do aparelho por conta: preferências, caderno de avistamentos e limite diário.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Platform } from "react-native";

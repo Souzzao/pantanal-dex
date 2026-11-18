@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa dos meus avistamentos sobre o contorno do Pantanal, com seleção de registro.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Alert, Linking, Pressable, View } from "react-native";
 import { Text } from "@/components/T";
 import { router } from "expo-router";

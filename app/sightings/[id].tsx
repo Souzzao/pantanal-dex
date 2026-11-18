@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Detalhe de um avistamento do caderno, com edição, exclusão e publicação.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useState } from "react";
 import { Alert, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";

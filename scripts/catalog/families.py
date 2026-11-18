@@ -3,6 +3,8 @@
 env: R = Rios e corixos, A = Áreas alagadas, C = Campos, M = Matas, B = Bordas de mata
 diet: chave de DIETS (o que a família come em geral)
 area: classe de área de vida (raio em km do círculo no mapa), ver AREA_KM
+
+Autor: Felipe de Souza Aquino (PantanalDex)
 """
 
 AREA_KM = {"xs": 0.3, "s": 0.6, "m": 1.2, "l": 2.5, "xl": 5.0, "xxl": 10.0}

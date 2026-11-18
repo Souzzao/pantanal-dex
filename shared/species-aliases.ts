@@ -1,6 +1,8 @@
 /**
  * Espécies que apareciam duas vezes no catálogo (mesmo nome científico ou sinônimo). O id da esquerda
  * sai do catálogo; registros antigos com ele passam a apontar para o da direita.
+ *
+ * @author Felipe de Souza Aquino
  */
 export const SPECIES_ID_ALIASES: Readonly<Record<string, string>> = {
   "jacare-pagua": "jacare-do-pantanal",

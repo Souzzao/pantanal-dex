@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Aba Animais: catálogo com busca, painel de filtros (grupo, ambiente, ameaça IUCN, ordenação) e lista paginada.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";

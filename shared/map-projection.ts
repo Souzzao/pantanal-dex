@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Projeção simples de coordenadas para o mapa regional offline.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { PANTANAL_BOUNDS } from "./pantanal-boundary";
 
 export type GeoPoint = { latitude: number; longitude: number };

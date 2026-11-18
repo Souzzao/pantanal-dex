@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Lista dos registros públicos da área selecionada no mapa.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { Alert, FlatList, Pressable, View } from "react-native";
 import { Text } from "@/components/T";

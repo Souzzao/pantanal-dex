@@ -5,6 +5,8 @@
  *
  * Este arquivo é puro (sem React) para poder ser testado: monta o HTML e define as mensagens
  * trocadas entre o app e a página do mapa.
+ *
+ * @author Felipe de Souza Aquino
  */
 
 /** Raio máximo do círculo de área de um animal no mapa (km). */

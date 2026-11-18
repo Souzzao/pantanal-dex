@@ -1,0 +1,63 @@
+# PantanalDex — Licenças, fontes e créditos
+
+## Finalidade
+
+O PantanalDex prevê distribuição comercial e licenciamento de dados e imagens. Nenhuma espécie, fotografia ou fonte deve entrar em um lote aprovado sem uma trilha editorial verificável. A validação automática do catálogo bloqueia imagens sem licença comercial identificável e rejeita licenças com restrições **NC** (uso não comercial) ou **ND** (sem derivados).
+
+## Imagens permitidas
+
+| Licença | Uso no produto | Obrigação de crédito |
+|---|---|---|
+| CC0 | Permitido | Registrar autor, origem e identificação da licença quando disponíveis |
+| Public Domain | Permitido quando a dedicação ao domínio público estiver confirmada | Registrar autor e origem |
+| CC BY | Permitido, inclusive comercial e com adaptações | Registrar autor, licença e URL de origem |
+| CC BY-SA | Permitido, inclusive comercial e com adaptações compatíveis | Registrar autor, licença e URL de origem; preservar a atribuição e a condição share-alike aplicável |
+
+São proibidas imagens **CC BY-NC**, **CC BY-NC-SA**, **CC BY-NC-ND**, **CC BY-ND**, qualquer licença com restrição comercial ou de derivados, licença ausente, licença ambígua e arquivo cuja página de origem não permita confirmar a licença. A licença deve ser conferida na página específica do arquivo; a licença geral da plataforma não substitui essa conferência.
+
+## Fontes aprovadas
+
+| Fonte | Regra de uso |
+|---|---|
+| [GBIF](https://www.gbif.org/) | Usar somente registros ou mídias marcados como CC0 ou CC BY; conferir o item específico |
+| [SiBBr](https://sibbr.gov.br/) e [ICMBio](https://www.gov.br/icmbio/) | Usar conteúdo compatível com CC BY 4.0 e registrar a página ou documento exato |
+| [Wikimedia Commons](https://commons.wikimedia.org/) | Usar somente o arquivo específico com CC0, CC BY ou CC BY-SA; conferir a licença na página do arquivo |
+| [Wikidata](https://www.wikidata.org/) | Dados sob CC0; registrar a consulta ou entidade utilizada |
+| [Wikipédia em português](https://pt.wikipedia.org/) | Usar apenas paráfrase, com atribuição CC BY-SA, sem copiar texto extensamente |
+| [iNaturalist](https://www.inaturalist.org/) | Usar somente fotografias individuais marcadas como CC0 ou CC BY |
+
+A **IUCN Red List API** e demais imagens ou dados com NC/ND estão proibidos neste produto. Referências informativas não aprovadas devem ser substituídas por fonte aprovada ou removidas antes do merge.
+
+## Conservação
+
+`Species.conservationStatus` deve permanecer vazio quando não houver confirmação em fonte oficial. Quando preenchido, `Species.conservationSource` deve apontar para o **Livro Vermelho do ICMBio** ou para uma **Portaria do MMA/ICMBio** em domínio `gov.br`, com título e URL do documento ou página exata. Não usar IUCN, agregadores ou inferência editorial como fonte de status.
+
+## Crédito mínimo por imagem
+
+Cada imagem precisa conter `author`, `license`, `sourceUrl`, `credit` e `uri` HTTP. O crédito exibido deve permitir identificar o autor, a licença e a origem. O registro deve permanecer associado ao arquivo específico, não somente ao domínio da plataforma.
+
+## Critérios de PR
+
+Um PR de catálogo é bloqueado quando houver ID duplicado, espécie sem fonte, imagem sem licença confirmada, licença NC/ND, crédito incompleto, URL insegura, status de conservação sem fonte oficial, ou alteração que remova créditos existentes. A pendência é registrada na descrição do PR, a origem é corrigida e um novo PR é aberto a partir da `main` atual.
+
+## Revisão e rastreabilidade
+
+Cada lote informa a quantidade planejada e a vazão real após a validação. Lotes pequenos permitem conferir manualmente todos os arquivos; a tabela completa de créditos por espécie (arquivo, autor, licença, URL e data de revisão) acompanha o catálogo gerado.
+
+## Auditoria automatizada atual
+
+Além da validação de lotes, o código mantém o relatório `catalogLicenseAudit`, calculado em `shared/catalog/license-audit.ts`. Ele mede por espécie a quantidade de imagens, imagens que passam o padrão comercial, créditos ausentes, URLs inválidas e bloqueios. O relatório é informativo e **não promove automaticamente** lotes `pending-review` para `verified`.
+
+A promoção editorial exige conferência individual das imagens, fontes, nomenclatura, ocorrência no recorte do Pantanal e situação de conservação. Cada lote deve permanecer em `pending-review` até que essa conferência seja registrada e revisada antes da aprovação. O relatório operacional distingue `verified`, `pending-review` e `invalid`, mantendo transparência entre volume catalogado e volume editorialmente aprovado.
+
+## Referências de cobertura do bioma
+
+A página oficial do [ICMBio sobre o Pantanal](https://www.gov.br/icmbio/pt-br/assuntos/unidade-de-conservacao/unidades-de-biomas/pantanal) informa números de referência para mamíferos, aves e peixes, mas esses números não substituem a conferência espécie a espécie. Os termos do [GBIF](https://www.gbif.org/terms) confirmam que datasets de ocorrência possuem licenças padronizadas, mas também alertam que a precisão dos dados não é garantida. O pipeline, portanto, registra dataset/registro específico, licença e fonte e não infere ocorrência ou conservação apenas pelo nome científico.
+
+## Mapas
+
+- **Mapa de satélite** (Mapa público, "Onde foi o avistamento?" e mapa dos avistamentos): desenhado com [Leaflet](https://leafletjs.com) 1.9.4 (BSD-2-Clause), embutido no app em `shared/leaflet-assets.ts` (gerado por `scripts/build-leaflet-assets.mjs`).
+- **Imagem:** "EOxCloudless https://cloudless.eox.at by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2024)", licença [CC BY-NC-SA 4.0](https://cloudless.eox.at/license-non-commercial): **uso não comercial** com crédito (projeto acadêmico). Resolução de 10 m.
+- **Nomes e divisas (camada opcional):** dados © colaboradores do [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL), desenho da EOX.
+- **Mapa offline:** continentes do [Natural Earth](https://www.naturalearthdata.com) (domínio público) e contorno do Pantanal do IBGE 2025.
+- O crédito aparece no canto do mapa e não pode ser removido. Para uso comercial, trocar a imagem por um provedor com contrato (ex.: Esri World Imagery com conta ArcGIS, MapTiler ou Mapbox): muda só a URL em `TILE_LAYERS`.

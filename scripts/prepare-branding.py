@@ -2,6 +2,8 @@
 
 Run from any directory: python scripts/prepare-branding.py
 Imagegen created the cutout and monochrome artwork; this only sizes/places it.
+
+Autor: Felipe de Souza Aquino (PantanalDex)
 """
 from pathlib import Path
 from math import hypot

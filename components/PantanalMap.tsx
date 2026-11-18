@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Mapa regional offline com o contorno oficial do Pantanal (IBGE) e os pontos do caderno.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text } from "@/components/T";

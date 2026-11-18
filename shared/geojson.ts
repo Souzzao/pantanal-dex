@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Exportação dos avistamentos em GeoJSON.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { toExportableSighting, EXPORT_VERSION } from "./exports";
 import type { Sighting, Species } from "./pantanal";
 

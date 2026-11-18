@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Copia a foto do avistamento para a pasta permanente e privada do app.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import * as FileSystem from "expo-file-system/legacy";
 
 import {

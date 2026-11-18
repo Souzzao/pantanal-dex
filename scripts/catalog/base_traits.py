@@ -1,5 +1,8 @@
 """Dados precisos para as 102 fichas escritas à mão: dieta (EltonTraits/AmphiBIO, com %) e massa,
-nos 4 idiomas. Vira shared/catalog/base-traits.json e é acrescentado ao fim da ficha."""
+nos 4 idiomas. Vira shared/catalog/base-traits.json e é acrescentado ao fim da ficha.
+
+Autor: Felipe de Souza Aquino (PantanalDex)
+"""
 import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build import ROOT, LANGS, IUCN, load_traits, diet_text  # noqa: E402

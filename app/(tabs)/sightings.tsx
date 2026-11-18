@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Meus registros: caderno de avistamentos com filtros de período, lista, mapa e exportação.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";

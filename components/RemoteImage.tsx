@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Imagem com capa embutida no app, cache e sequência de alternativas quando a remota falha.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { Image as ExpoImage } from "expo-image";
 import { ActivityIndicator, StyleSheet, View, type ImageProps, type ImageStyle, type StyleProp } from "react-native";
 import { Text } from "@/components/T";

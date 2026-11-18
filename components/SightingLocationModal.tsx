@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Modal para marcar manualmente o local do avistamento quando não há GPS.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Modal, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";

@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Minha coleção (UC10): XP, nível, progresso por grupo, conquistas e insígnias de Explorador do Pantanal.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, View, useWindowDimensions } from "react-native";
 import { Text } from "@/components/T";

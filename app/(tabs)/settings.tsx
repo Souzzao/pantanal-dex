@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Ajustes: conta, idioma padrão, barra rápida de idiomas, fotos offline e acesso às áreas de auditor e dev.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useEffect, useMemo, useState } from "react";
 import { Alert, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";

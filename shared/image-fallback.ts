@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Plano de alternativas quando a imagem principal de uma espécie não carrega.
+ *
+ * @author Felipe de Souza Aquino
+ */
 function stableValue(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(stableValue);
   if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, entry]) => [key, stableValue(entry)]));

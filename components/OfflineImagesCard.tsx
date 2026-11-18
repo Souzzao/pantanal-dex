@@ -1,3 +1,8 @@
+/**
+ * PantanalDex — Cartão de download das fotos do catálogo para uso offline, com progresso e falhas.
+ *
+ * @author Felipe de Souza Aquino
+ */
 import { useMemo, useRef, useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text } from "@/components/T";
