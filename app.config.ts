@@ -2,46 +2,29 @@
 import "./scripts/load-env.js";
 import type { ExpoConfig } from "expo/config";
 
-// Bundle ID format: space.manus.<project_name_dots>.<timestamp>
-// e.g., "my-app" created at 2024-01-15 10:30:45 -> "space.manus.my.app.t20240115103045"
-// Bundle ID can only contain letters, numbers, and dots
-// Android requires each dot-separated segment to start with a letter
-const rawBundleId = "com.app.pantanaldex";
-const bundleId =
-  rawBundleId
-    .replace(/[-_]/g, ".") // Replace hyphens/underscores with dots
-    .replace(/[^a-zA-Z0-9.]/g, "") // Remove invalid chars
-    .replace(/\.+/g, ".") // Collapse consecutive dots
-    .replace(/^\.+|\.+$/g, "") // Trim leading/trailing dots
-    .toLowerCase()
-    .split(".")
-    .map((segment) => {
-      // Android requires each segment to start with a letter
-      // Prefix with 'x' if segment starts with a digit
-      return /^[a-zA-Z]/.test(segment) ? segment : "x" + segment;
-    })
-    .join(".") || "space.manus.app";
-// Extract timestamp from bundle ID and prefix with "manus" for deep link scheme
-// e.g., "space.manus.my.app.t20240115103045" -> "manus20240115103045"
-const timestamp = bundleId.split(".").pop()?.replace(/^t/, "") ?? "";
-const schemeFromBundleId = `manus${timestamp}`;
+// Duas versões a partir do mesmo código (veja shared/variant.ts):
+//   APP_VARIANT=demo        → "PantanalDex Demo", pacote ...demo (instala junto da final), caderno Teste e auditoria simulada
+//   APP_VARIANT=production  → versão final para a Google Play (padrão quando a variável não existe)
+const variant = (process.env.APP_VARIANT ?? process.env.EXPO_PUBLIC_APP_VARIANT ?? "production").trim().toLowerCase() === "demo" ? "demo" : "production";
+process.env.EXPO_PUBLIC_APP_VARIANT = variant; // o Expo embute EXPO_PUBLIC_* no app
+const isDemo = variant === "demo";
+
+// Identificador do app na Play Store. Depois da primeira publicação NÃO pode mais mudar.
+const basePackage = "com.app.pantanaldex";
 
 const env = {
-  // App branding - update these values directly (do not use env vars)
-  appName: "PantanalDex",
+  appName: isDemo ? "PantanalDex Demo" : "PantanalDex",
   appSlug: "pantanal-dex",
-  // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
-  // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "/manus-storage/pantanal-dex-icon_7b591ca1.png",
-  scheme: schemeFromBundleId,
-  iosBundleId: bundleId,
-  androidPackage: bundleId,
+  // Esquema próprio para links que abrem o app (pantanaldex://...). Não usa curinga de domínio.
+  scheme: isDemo ? "pantanaldex-demo" : "pantanaldex",
+  iosBundleId: isDemo ? `${basePackage}.demo` : basePackage,
+  androidPackage: isDemo ? `${basePackage}.demo` : basePackage,
 };
 
 const config: ExpoConfig = {
   name: env.appName,
   slug: env.appSlug,
-  version: "3.8.0",
+  version: "3.9.0",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
   scheme: env.scheme,
@@ -55,7 +38,7 @@ const config: ExpoConfig = {
       }
   },
   android: {
-    versionCode: 5,
+    versionCode: 6,
     adaptiveIcon: {
       backgroundColor: "#0D0D0D",
       foregroundImage: "./assets/images/android-icon-foreground.png",
@@ -65,18 +48,18 @@ const config: ExpoConfig = {
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
     package: env.androidPackage,
-    intentFilters: [
-      {
-        action: "VIEW",
-        autoVerify: true,
-        data: [
-          {
-            scheme: env.scheme,
-            host: "*",
-          },
-        ],
-        category: ["BROWSABLE", "DEFAULT"],
-      },
+    // Backup automático do Android desligado: os avistamentos (com local exato) não vão para a nuvem
+    // do Google sem a pessoa escolher; para levar a outro aparelho, use Exportar.
+    allowBackup: false,
+    // Só as permissões que o app usa de fato; as que bibliotecas costumam trazer são removidas.
+    permissions: ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "CAMERA", "INTERNET"],
+    blockedPermissions: [
+      "android.permission.RECORD_AUDIO",
+      "android.permission.ACCESS_BACKGROUND_LOCATION",
+      "android.permission.SYSTEM_ALERT_WINDOW",
+      "android.permission.READ_PHONE_STATE",
+      "android.permission.WRITE_EXTERNAL_STORAGE",
+      "android.permission.READ_EXTERNAL_STORAGE",
     ],
   },
   web: {
@@ -123,6 +106,7 @@ const config: ExpoConfig = {
     ],
   ],
   extra: {
+    variant,
     eas: {
       projectId: "f8dd1e6d-bf7b-433b-bbb3-38e7e565b50b",
     },

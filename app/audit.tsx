@@ -18,6 +18,7 @@ import { canAudit } from "@/shared/auth";
 import { normalizeAuditRow, REJECT_REASONS, type AuditItem, type LogItem, normalizeLogRow } from "@/shared/audit";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapState } from "@/shared/street-map";
+import { IS_DEMO } from "@/shared/variant";
 import { AUDIT_PROCESS, createDemoQueue, demoScenario, DEMO_PREFIX, simulatePublication, type PublishSimulation } from "@/shared/audit-demo";
 
 const TEXT = {
@@ -75,7 +76,8 @@ export default function AuditScreen() {
   const [rejectOpen, setRejectOpen] = useState(false);
   const [reason, setReason] = useState("");
   // Modo demonstração: pilha e decisões simuladas, sem servidor.
-  const [demo, setDemo] = useState(!supabase);
+  // Modo demonstração só existe na versão Demo; na final a auditoria é sempre a real.
+  const [demo, setDemo] = useState(IS_DEMO && !supabase);
   const [sim, setSim] = useState<PublishSimulation | null>(null);
   const [simStep, setSimStep] = useState(0);
   const simSeq = useRef(0);
@@ -208,10 +210,10 @@ export default function AuditScreen() {
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
         <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontWeight: "800" }}>{t.title}</Text>
         <View style={{ flexDirection: "row", gap: 6 }}>
-          <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
+          {IS_DEMO && <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
             style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.warning, backgroundColor: demo ? colors.warning : colors.surface }}>
             <Text style={{ color: demo ? colors.background : colors.warning, fontWeight: "800", fontSize: 13 }}>Demo</Text>
-          </Pressable>
+          </Pressable>}
           {(["stack", "history"] as const).map((key) => (
             <Pressable key={key} onPress={() => setTab(key)} accessibilityRole="button" accessibilityState={{ selected: tab === key }}
               style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: tab === key ? colors.primary : colors.surface }}>

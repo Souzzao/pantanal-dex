@@ -4,7 +4,7 @@
  * @author Felipe de Souza Aquino
  */
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Pressable, ScrollView, View } from "react-native";
+import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
@@ -19,7 +19,8 @@ import { AccountCard } from "@/components/AccountCard";
 import { languages, validateSpeciesCatalog } from "@/shared/pantanal";
 import { catalogCoverage, catalogLicenseAudit, catalogReview, filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
-import { APP_VERSION } from "@/shared/version";
+import { APP_VERSION, PRIVACY_POLICY_URL } from "@/shared/version";
+import { IS_DEMO } from "@/shared/variant";
 import { router } from "expo-router";
 
 export default function SettingsScreen() {
@@ -143,6 +144,6 @@ export default function SettingsScreen() {
     <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>GeoJSON inclui só os registros com localização e abre em programas de mapa (QGIS, geojson.io, Google Earth).</Text>
     <Pressable onPress={importData} disabled={!ready || importing || exporting} accessibilityRole="button" accessibilityLabel="Importar JSON do PantanalDex" accessibilityState={{ disabled: !ready || importing || exporting, busy: importing }} style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting ? 0.6 : 1 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{importing ? "Lendo arquivo…" : "Importar JSON do PantanalDex"}</Text></Pressable>
     <Pressable onPress={clearLocalSightings} disabled={!ready || importing || exporting || sightings.length === 0} accessibilityRole="button" accessibilityLabel="Apagar caderno local" accessibilityState={{ disabled: !ready || importing || exporting || sightings.length === 0 }} style={{ borderColor: colors.error, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting || sightings.length === 0 ? 0.5 : 1 }}><Text style={{ color: colors.error, textAlign: "center", fontWeight: "800" }}>Apagar caderno local</Text></Pressable>
-    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex {APP_VERSION}</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Guia de campo offline e cadernos de avistamentos da fauna do Pantanal: 1.018 espécies, mapa, cadernos e insígnias.</Text><Text style={{ color: colors.muted, marginTop: 6, fontSize: 12 }}>Desenvolvido por Felipe de Souza Aquino</Text></View>
+    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex {APP_VERSION}{IS_DEMO ? " · Demo" : ""}</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Guia de campo offline e cadernos de avistamentos da fauna do Pantanal: {catalogCoverage.species.toLocaleString("pt-BR")} espécies, mapa, cadernos e insígnias.</Text>{IS_DEMO && <Text style={{ color: colors.warning, marginTop: 6, fontSize: 12, fontWeight: "700" }}>Versão de demonstração: inclui caderno Teste e auditoria simulada.</Text>}<Pressable onPress={() => void Linking.openURL(PRIVACY_POLICY_URL)} accessibilityRole="link"><Text style={{ color: colors.primary, marginTop: 8, fontSize: 13, fontWeight: "700" }}>Política de privacidade</Text></Pressable><Text style={{ color: colors.muted, marginTop: 6, fontSize: 12 }}>Desenvolvido por Felipe de Souza Aquino</Text></View>
   </ScrollView></ScreenContainer>;
 }

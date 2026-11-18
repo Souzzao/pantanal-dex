@@ -50,13 +50,14 @@ export type NotebookStore = {
 };
 
 /** Cria o conjunto inicial: Principal e Teste. */
-export function createNotebookStore(now: Date = new Date()): NotebookStore {
+/** Cria os cadernos iniciais. O Teste só existe na versão Demo (`includeTest`). */
+export function createNotebookStore(now: Date = new Date(), includeTest = true): NotebookStore {
   const at = now.toISOString();
   return {
     version: NOTEBOOK_STORE_VERSION,
     notebooks: [
       { id: MAIN_NOTEBOOK_ID, name: "Principal", kind: "main", createdAt: at, updatedAt: at },
-      { id: TEST_NOTEBOOK_ID, name: "Teste", kind: "test", createdAt: at, updatedAt: at },
+      ...(includeTest ? [{ id: TEST_NOTEBOOK_ID, name: "Teste", kind: "test" as const, createdAt: at, updatedAt: at }] : []),
     ],
     exports: [],
     activeId: MAIN_NOTEBOOK_ID,
@@ -279,4 +280,22 @@ export function createTestSightings(now: Date = new Date()): Sighting[] {
 /** Indica se o avistamento é de exemplo (caderno Teste) e deve ficar fora da coleção. */
 export function isTestSighting(sighting: Pick<Sighting, "notebookId">): boolean {
   return sighting.notebookId === TEST_NOTEBOOK_ID;
+}
+
+/**
+ * Versão final: tira o caderno Teste e os exemplos dele (ids "teste-..."). Registros que a pessoa
+ * criou ou moveu para o Teste não se perdem: voltam para o Principal.
+ */
+export function stripTestNotebook(store: NotebookStore, sightings: readonly Sighting[]): { store: NotebookStore; sightings: Sighting[]; changed: boolean } {
+  const hasTest = store.notebooks.some((item) => item.id === TEST_NOTEBOOK_ID);
+  const inTest = sightings.filter((item) => item.notebookId === TEST_NOTEBOOK_ID);
+  if (!hasTest && inTest.length === 0) return { store, sightings: [...sightings], changed: false };
+  const next = sightings
+    .filter((item) => !(item.notebookId === TEST_NOTEBOOK_ID && item.id.startsWith("teste-")))
+    .map((item) => (item.notebookId === TEST_NOTEBOOK_ID ? { ...item, notebookId: MAIN_NOTEBOOK_ID } : item));
+  return {
+    store: { ...store, notebooks: store.notebooks.filter((item) => item.id !== TEST_NOTEBOOK_ID), activeId: store.activeId === TEST_NOTEBOOK_ID ? MAIN_NOTEBOOK_ID : store.activeId },
+    sightings: next,
+    changed: true,
+  };
 }
