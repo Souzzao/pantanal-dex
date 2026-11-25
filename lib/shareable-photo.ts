@@ -22,6 +22,7 @@ export async function readShareablePhoto(uri: string): Promise<ArrayBuffer> {
   } finally {
     image?.release();
     context.release();
+    if (jpeg && Platform.OS === "web" && jpeg.startsWith("blob:")) URL.revokeObjectURL(jpeg);
     if (jpeg && Platform.OS !== "web") await FileSystem.deleteAsync(jpeg, { idempotent: true }).catch(() => undefined);
   }
 }

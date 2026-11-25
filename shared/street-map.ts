@@ -154,12 +154,15 @@ const PAGE_SCRIPT = String.raw`
   });
   satellite.on("tileerror", function () { failed++; });
   satellite.on("load", function () {
-    if (map.hasLayer(satellite) && failed > 0 && loaded === 0) {
+    // Leaflet still uses the layer after firing "load". Switch after that callback unwinds.
+    if (!map.hasLayer(satellite) || failed === 0 || loaded !== 0) return;
+    setTimeout(function () {
+      if (!map.hasLayer(satellite) || failed === 0 || loaded !== 0) return;
       map.removeLayer(satellite);
       map.removeLayer(names);
       offline.addTo(map);
       send({ type: "tiles", ok: false });
-    }
+    }, 0);
   });
   satellite.addTo(map);
   names.addTo(map);
@@ -303,6 +306,7 @@ const PAGE_SCRIPT = String.raw`
     render();
   };
   window.addEventListener("message", function (event) {
+    if (event.source !== window.parent) return;
     var data = event.data;
     try { if (typeof data === "string") data = JSON.parse(data); } catch (e) { return; }
     if (data && data.target === SOURCE && data.state) window.__pantanalSetState(data.state);
