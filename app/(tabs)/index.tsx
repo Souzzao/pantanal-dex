@@ -65,7 +65,7 @@ export default function HomeScreen() {
           <Reveal index={1}>
             <PressableScale onPress={() => open(today.id)} scaleTo={0.98} accessibilityRole="button" accessibilityLabel={`${t.today}: ${today.commonName}`}
               style={{ marginTop: 18, borderRadius: 28, overflow: "hidden", height: 250, backgroundColor: colors.surface }}>
-              <RemoteImage source={{ uri: today.images[0].uri }} label={today.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
+              <RemoteImage source={{ uri: today.images[0]?.uri }} label={today.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
               {/* degradê de baixo para cima, para o texto ler bem sobre qualquer foto */}
               <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 150, backgroundColor: "rgba(14,13,11,0.35)" }} />
               <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 95, backgroundColor: "rgba(14,13,11,0.55)" }} />
@@ -145,7 +145,7 @@ export default function HomeScreen() {
               <Reveal index={index}>
                 <PressableScale onPress={() => open(item.id)} accessibilityRole="button" accessibilityLabel={`Abrir ficha de ${item.commonName}`}
                   style={{ width: 140, height: 196, borderRadius: 20, overflow: "hidden", backgroundColor: colors.surface }}>
-                  <RemoteImage source={{ uri: item.images[0].uri }} label={item.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
+                  <RemoteImage source={{ uri: item.images[0]?.uri }} label={item.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
                   <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 72, backgroundColor: "rgba(14,13,11,0.7)" }} />
                   <View style={{ position: "absolute", left: 10, right: 10, bottom: 10 }}>
                     <Text style={{ color: "#FBF7EF", fontWeight: "800" }} numberOfLines={2}>{item.commonName}</Text>
