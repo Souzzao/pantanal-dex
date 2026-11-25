@@ -14,7 +14,7 @@ import { CameraView, useCameraPermissions, type CameraType } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useRef, useState } from "react";
 import { AccessibilityInfo, ActivityIndicator, Image, Platform, Pressable, ScrollView, StatusBar, View, useWindowDimensions } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSequence, withSpring, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Icon } from "@/components/Icon";
@@ -55,6 +55,11 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
   const { width, height } = useWindowDimensions();
   const [permission, requestPermission] = useCameraPermissions();
   const camera = useRef<CameraView>(null);
+  const reviewScroll = useRef<ScrollView>(null);
+  const operation = useRef(false);
+  const mounted = useRef(false);
+  const reducedMotion = useReducedMotion();
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   const [facing, setFacing] = useState<CameraType>("back");
   const [flash, setFlash] = useState(false);
   const [ready, setReady] = useState(false);
@@ -72,7 +77,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
   useEffect(() => {
     if (!permission || permission.granted || asked.current || !permission.canAskAgain) return;
     asked.current = true;
-    void requestPermission();
+    void requestPermission().catch(() => setCameraError("Não foi possível pedir acesso à câmera."));
   }, [permission, requestPermission]);
 
   useEffect(() => { if (!notice) return; const t = setTimeout(() => setNotice(undefined), 3200); return () => clearTimeout(t); }, [notice]);
@@ -85,30 +90,35 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
   const announce = (n: number) => AccessibilityInfo.announceForAccessibility(n === 1 ? "1 foto no registro" : `${n} fotos no registro`);
 
   const add = (items: DraftPhoto[]) => {
-    if (!items.length) return;
+    if (!mounted.current || !items.length) return;
     const next = [...photos, ...items].slice(0, MAX_PHOTOS_PER_SIGHTING);
     onChange(next);
     announce(next.length);
-    thumbPop.value = withSequence(withSpring(1.18, { damping: 8, stiffness: 320 }), withSpring(1));
+    if (!reducedMotion) thumbPop.value = withSequence(withSpring(1.18, { damping: 8, stiffness: 320 }), withSpring(1));
   };
 
   const capture = async () => {
-    if (busy || full || !camera.current) return;
+    if (operation.current || full || !camera.current) return;
+    operation.current = true;
     setBusy(true);
     tapFeedback("medium");
-    flashOverlay.value = withSequence(withTiming(0.85, { duration: 60 }), withTiming(0, { duration: 260 }));
+    if (!reducedMotion) flashOverlay.value = withSequence(withTiming(0.85, { duration: 60 }), withTiming(0, { duration: 260 }));
     try {
       const shot = await camera.current.takePictureAsync({ quality: 0.8, exif: false });
       if (shot?.uri) add([{ id: draftId(), uri: shot.uri, source: "capture", input: { uri: shot.uri, mimeType: "image/jpeg" } }]);
     } catch {
       setNotice("Não foi possível tirar a foto. Tente de novo ou importe da galeria.");
     } finally {
-      setBusy(false);
+      operation.current = false;
+      if (mounted.current) setBusy(false);
     }
   };
 
   const importFromGallery = async () => {
+    if (operation.current) return;
     if (full) { setNotice(`Limite de ${MAX_PHOTOS_PER_SIGHTING} fotos por registro.`); return; }
+    operation.current = true;
+    setBusy(true);
     tapFeedback("light");
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -127,6 +137,9 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
       if (refused) setNotice(refused === 1 ? "1 imagem acima de 10 MB ficou de fora. As outras foram adicionadas." : `${refused} imagens acima de 10 MB ficaram de fora. As outras foram adicionadas.`);
     } catch {
       setNotice("Não foi possível abrir a galeria. Tente novamente.");
+    } finally {
+      operation.current = false;
+      if (mounted.current) setBusy(false);
     }
   };
 
@@ -185,7 +198,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
           </Text>
           <View style={{ flexDirection: "row", gap: 10, marginTop: 18 }}>
             {(permission?.canAskAgain || cameraError) && (
-              <PressableScale onPress={() => { setCameraError(undefined); void requestPermission(); }} accessibilityRole="button" accessibilityLabel="Tentar abrir a câmera de novo"
+              <PressableScale onPress={() => { setCameraError(undefined); void requestPermission().catch(() => setCameraError("Não foi possível pedir acesso à câmera.")); }} accessibilityRole="button" accessibilityLabel="Tentar abrir a câmera de novo"
                 style={{ paddingHorizontal: 16, paddingVertical: 12, borderRadius: 999, borderWidth: 1, borderColor: "rgba(251,247,239,0.3)" }}>
                 <Text style={{ color: CREAM, fontWeight: "800" }}>Tentar de novo</Text>
               </PressableScale>
@@ -234,7 +247,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
 
           <View style={{ width: 92, alignItems: "flex-end" }}>
             {count > 0 && (
-              <PressableScale onPress={onContinue} accessibilityRole="button" accessibilityLabel="Continuar para os detalhes do registro" testID="camera-continue"
+              <PressableScale onPress={onContinue} disabled={busy} accessibilityRole="button" accessibilityLabel="Continuar para os detalhes do registro" testID="camera-continue"
                 style={{ flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: YELLOW, borderRadius: 999, paddingLeft: 14, paddingRight: 10, height: 46 }}>
                 <Text style={{ color: INK, fontWeight: "900" }}>Continuar</Text>
                 <Icon name="chevron-right" size={18} color={INK} mono strokeWidth={2.4} />
@@ -244,7 +257,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
         </View>
         {(count > 0 || unavailable) && (
           <View style={{ alignItems: "center", marginTop: 14 }}>
-            <PressableScale onPress={() => void importFromGallery()} accessibilityRole="button" accessibilityLabel="Importar fotos da galeria" testID="camera-import"
+            <PressableScale onPress={() => void importFromGallery()} disabled={busy} accessibilityRole="button" accessibilityLabel="Importar fotos da galeria" testID="camera-import"
               style={{ flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 16, height: 44, borderRadius: 999, backgroundColor: unavailable ? YELLOW : "rgba(14,13,11,0.62)", borderWidth: 1, borderColor: "rgba(251,247,239,0.2)" }}>
               <Icon name="image" size={20} color={unavailable ? INK : CREAM} mono={unavailable} />
               <Text style={{ color: unavailable ? INK : CREAM, fontWeight: "800" }}>Importar da galeria</Text>
@@ -261,7 +274,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
             <Text style={{ color: CREAM, fontWeight: "800" }}>{reviewIndex + 1} de {count}</Text>
             <GlassButton icon="trash" label={`Remover a foto ${reviewIndex + 1}`} onPress={() => remove(photos[reviewIndex].id)} testID="camera-review-remove" />
           </View>
-          <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} contentOffset={{ x: reviewIndex * width, y: 0 }}
+          <ScrollView ref={reviewScroll} horizontal pagingEnabled showsHorizontalScrollIndicator={false} contentOffset={{ x: reviewIndex * width, y: 0 }}
             onMomentumScrollEnd={(e) => setReviewIndex(Math.round(e.nativeEvent.contentOffset.x / width))} style={{ flex: 1 }}>
             {photos.map((p, i) => (
               <View key={p.id} style={{ width, alignItems: "center", justifyContent: "center", padding: 16 }}>
@@ -271,7 +284,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
           </ScrollView>
           <View style={{ flexDirection: "row", justifyContent: "center", gap: 8, paddingVertical: 12 }}>
             {photos.map((p, i) => (
-              <Pressable key={p.id} onPress={() => setReviewIndex(i)} accessibilityRole="button" accessibilityLabel={`Ver foto ${i + 1}`}
+              <Pressable key={p.id} onPress={() => { setReviewIndex(i); reviewScroll.current?.scrollTo({ x: i * width, animated: !reducedMotion }); }} accessibilityRole="button" accessibilityLabel={`Ver foto ${i + 1}`}
                 style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", borderWidth: 2, borderColor: i === reviewIndex ? YELLOW : "transparent" }}>
                 <Image source={{ uri: p.uri }} style={{ width: "100%", height: "100%" }} />
               </Pressable>

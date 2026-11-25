@@ -17,6 +17,7 @@ const mig = (f) => readFileSync(new URL(`../migrations/${f}`, import.meta.url), 
 await db.exec(mig("20261118120000_teams.sql"));
 await db.exec(mig("20261125000000_team_code_strong_random.sql"));
 await db.exec(mig("20261125100000_team_records.sql"));
+await db.exec(mig("20261125110000_team_media_attached.sql"));
 
 const uid = (n) => `00000000-0000-0000-0000-${String(n).padStart(12, "0")}`;
 const names = { 1: "Joana", 2: "Rafael", 3: "Clara", 4: "Joana" };
@@ -45,6 +46,8 @@ await expectErr("T06 C não lê os personagens da equipe", as(3, "select * from 
 
 // T03: A e B registram capivara com fotos e descrições diferentes.
 const pathA = `${team_id}/${uid(1)}/a1.jpg`, pathB = `${team_id}/${uid(2)}/b1.jpg`;
+check("Storage: rascunho ainda não pode ser lido por outro membro", (await as(2, "select can_read_team_media($1) ok", [pathA]))[0].ok === false);
+check("Storage: rascunho ainda pode ser enviado pelo autor", (await as(1, "select can_write_team_media($1) ok", [pathA]))[0].ok === true);
 const [ra] = await as(1, "select * from share_team_record($1,'op-joana-0001','capivara','Perto da vegetação na margem','2026-11-20',-16.523,-56.71,$2)", [team_id, [pathA]]);
 const [rb] = await as(2, "select * from share_team_record($1,'op-rafael-0001','capivara','Nadando no canal ao amanhecer','2026-11-21',-16.51,-56.73,$2)", [team_id, [pathB]]);
 let recs = await as(1, "select * from team_records($1)", [team_id]);
@@ -94,6 +97,8 @@ check("T10 mesmo nome, autores diferentes", recs.find((r) => r.id === r10.record
 await expectErr("Membro comum não apaga registro alheio", as(4, "select delete_team_record($1)", [ra.record_id]), "não permitida");
 const removed = await as(1, "select delete_team_record($1) paths", [r10.record_id]);
 check("Dono apaga (moderação) e recebe as fotos para limpar", Array.isArray(removed[0].paths));
+await as(1, "select delete_team_record($1)", [ra.record_id]);
+check("Storage: foto de registro excluído deixa de ser acessível", (await as(4, "select can_read_team_media($1) ok", [pathA]))[0].ok === false);
 await expectErr("Data no futuro recusada", as(1, "select * from share_team_record($1,'op-joana-0009','capivara','x','2099-01-01',null,null,'{}')", [team_id]), "data inválida");
 
 console.log(failures ? `\n${failures} FALHA(S)` : "\nTodos os critérios passaram.");

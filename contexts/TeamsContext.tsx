@@ -196,6 +196,10 @@ export function TeamsProvider({ children }: { children: React.ReactNode }) {
       if (result.error !== null) { setOffline(true); return; }
       setOffline(false);
       await save(mergeTeamsFromServer(cacheRef.current, result.data));
+      const ids = new Set(result.data.map((team) => team.id));
+      const revoked = Object.keys(recordsRef.current).filter((teamId) => !ids.has(teamId));
+      if (revoked.length) await saveRecords(Object.fromEntries(Object.entries(recordsRef.current).filter(([teamId]) => ids.has(teamId))));
+      for (const path of Object.keys(signed.current)) if (!ids.has(path.split("/")[0])) delete signed.current[path];
       await syncSummary();
       await Promise.all(result.data.map((team) => loadOverview(team.id)));
       await flushShares();
@@ -205,7 +209,7 @@ export function TeamsProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [available, save, syncSummary, loadOverview, flushShares, loadRecords, key]);
+  }, [available, save, syncSummary, loadOverview, flushShares, loadRecords, saveRecords, key]);
 
   useEffect(() => { void refresh(); }, [refresh]);
   // Volta para o app → atualiza.
@@ -298,7 +302,8 @@ export function TeamsProvider({ children }: { children: React.ReactNode }) {
     },
     photoUrls: async (paths) => {
       const now = Date.now();
-      const missing = paths.filter((p) => !(signed.current[p] && now - signed.current[p].at < 50 * 60 * 1000));
+      const missing = paths.filter((p) => !(signed.current[p] && now - signed.current[p].at < 8 * 60 * 1000));
+      for (const p of missing) delete signed.current[p];
       if (missing.length) {
         const fresh = await api.signTeamPhotos(missing);
         for (const [p, url] of Object.entries(fresh)) signed.current[p] = { url, at: now };

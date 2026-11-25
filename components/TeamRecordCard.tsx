@@ -29,7 +29,7 @@ export function TeamRecordCard({ record, onOpen }: { record: TeamRecord; onOpen?
         <Text style={{ color: colors.muted }}>{record.observedOn}</Text>
       </View>
     </View>
-    {paths.map((path, index) => <RemoteImage key={path} label={`Foto ${index + 1} de ${recordLabel(record)}`} source={urls[path] ? { uri: urls[path] } : undefined}
+    {paths.map((path, index) => <RemoteImage key={path} cachePolicy="none" label={`Foto ${index + 1} de ${recordLabel(record)}`} source={urls[path] ? { uri: urls[path] } : undefined}
       style={{ width: "100%", height: 180, borderRadius: 12 }} />)}
     <Text style={{ color: colors.foreground }}>{record.description || "Sem descrição."}</Text>
     {record.zone && <Text style={{ color: colors.muted }}>Zona aproximada (~11 km): {record.zone.lat.toFixed(1)}, {record.zone.lon.toFixed(1)}</Text>}

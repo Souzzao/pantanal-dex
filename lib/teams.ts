@@ -1,3 +1,4 @@
+import { readShareablePhoto } from "@/lib/shareable-photo";
 /**
  * PantanalDex — Conversa com o servidor sobre equipes. Cada função devolve null/erro em vez de lançar,
  * para a tela continuar funcionando com o cache quando não há internet.
@@ -100,12 +101,12 @@ export async function uploadTeamPhoto(teamId: string, userId: string, opId: stri
   const path = teamPhotoPath(teamId, userId, opId, index);
   let body: ArrayBuffer;
   try {
-    body = await (await fetch(uri)).arrayBuffer();
-    if (body.byteLength === 0 || body.byteLength > 10 * 1024 * 1024) throw new Error("tamanho");
+    body = await readShareablePhoto(uri);
   } catch {
     return { data: null, error: "foto local indisponível" };
   }
-  const { error } = await supabase.storage.from("team-media").upload(path, body, { contentType: "image/jpeg", upsert: true });
+  const { error } = await supabase.storage.from("team-media").upload(path, body, { contentType: "image/jpeg", upsert: false });
+  if (error && ("statusCode" in error && String(error.statusCode) === "409" || /already exists/i.test(error.message))) return { data: path, error: null };
   return error ? fail(error.message) : { data: path, error: null };
 }
 
@@ -119,11 +120,11 @@ export async function shareTeamRecord(request: ShareRequest, photoPaths: string[
   return row ? { data: { id: row.record_id, number: row.record_number }, error: null } : fail(undefined);
 }
 
-/** Endereços temporários (1 h) das fotos; o Storage confere se quem pede é da equipe. */
+/** Endereços temporários (10 min) das fotos; o Storage confere se quem pede é da equipe. */
 export async function signTeamPhotos(paths: string[]): Promise<Record<string, string>> {
   if (!supabase || paths.length === 0) return {};
   try {
-    const { data } = await supabase.storage.from("team-media").createSignedUrls(paths, 3600);
+    const { data } = await supabase.storage.from("team-media").createSignedUrls(paths, 600);
     const out: Record<string, string> = {};
     for (const item of data ?? []) if (item.path && item.signedUrl) out[item.path] = item.signedUrl;
     return out;

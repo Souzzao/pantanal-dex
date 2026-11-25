@@ -1,3 +1,4 @@
+import { readShareablePhoto } from "@/lib/shareable-photo";
 /**
  * PantanalDex — Publicações no mapa: fila de envio, sincronização com o servidor e feed público.
  *
@@ -80,10 +81,7 @@ async function uploadPhoto(userId: string, localId: string, uri: string): Promis
   const path = photoPathFor(userId, localId);
   let body: ArrayBuffer;
   try {
-    // Ler o arquivo do aparelho: se falhar, o arquivo sumiu (erro definitivo, não de rede).
-    const response = await fetch(uri);
-    body = await response.arrayBuffer();
-    if (body.byteLength === 0) throw new Error("foto vazia");
+    body = await readShareablePhoto(uri);
   } catch (cause) {
     throw Object.assign(new Error("foto local indisponível"), { permanentPhoto: true, cause });
   }

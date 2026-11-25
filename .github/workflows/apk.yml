@@ -51,6 +51,9 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - run: pnpm install --frozen-lockfile
+      - name: Verificar dependências antes da distribuição
+        if: github.event_name == 'workflow_dispatch' && inputs.publicar && matrix.variant == 'production'
+        run: pnpm audit --prod --audit-level high
       - name: Login configurado?
         run: |
           if [ -n "$EXPO_PUBLIC_SUPABASE_URL" ] && [ -n "$EXPO_PUBLIC_SUPABASE_ANON_KEY" ]; then echo "Supabase: sim (login ativo)"; else echo "::warning::Sem segredos do Supabase: APK sai sem login"; fi
@@ -132,7 +135,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk \
+          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk --target "$GITHUB_SHA" \
             --title "PantanalDex ${VERSION}" \
             --notes "PantanalDex.apk = versão final. O APK Demo para teste fica nos artefatos da execução. Gerado de ${GITHUB_SHA::7}. No Android, permita instalar apps desta fonte." \
             --latest
