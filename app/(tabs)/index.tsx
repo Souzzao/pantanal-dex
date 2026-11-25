@@ -1,3 +1,4 @@
+import { ArtIcon } from "@/components/ArtIcon";
 /**
  * PantanalDex — Tela inicial em estilo de guia de campo editorial: espécie do dia em destaque,
  * busca, atalhos em grade de tamanhos diferentes (bento) e carrossel de espécies.
@@ -95,7 +96,7 @@ export default function HomeScreen() {
 
         <Reveal index={2}>
           <View style={{ flexDirection: "row", alignItems: "center", marginTop: 16, backgroundColor: colors.surface, borderRadius: 18, borderWidth: 1, borderColor: colors.border, paddingHorizontal: 14 }}>
-            <Text style={{ fontSize: 16, marginRight: 8 }}>🔎</Text>
+            <ArtIcon name="lupa" size={16} style={{ marginRight: 8 }} />
             <TextInput accessibilityLabel={t.search} value={query} onChangeText={setQuery} placeholder={t.search} placeholderTextColor={colors.muted}
               style={{ flex: 1, paddingVertical: 14, color: colors.foreground, fontSize: 15 }} />
           </View>
@@ -108,7 +109,7 @@ export default function HomeScreen() {
               <BorderBeam radius={22} color="#FFFFFF" style={{ flex: 1.1 }}>
               <PressableScale onPress={() => router.push("/(tabs)/animals" as never)} accessibilityRole="button" accessibilityLabel={t.explore}
                 style={[tile, { flex: 1, minHeight: 196, backgroundColor: colors.primary, borderColor: colors.primary, justifyContent: "space-between" }]}>
-                <Text style={{ fontSize: 30 }}>🐾</Text>
+                <ArtIcon name="pegada" size={26} />
                 <View>
                   <NumberTicker value={catalogCoverage.species} style={{ color: colors.background, fontSize: 40, lineHeight: 44, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }} />
                   <Text style={{ color: colors.background, fontWeight: "700", opacity: 0.8 }}>{t.species}</Text>
@@ -134,11 +135,11 @@ export default function HomeScreen() {
             </View>
             <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
               <MagicCard onPress={() => router.push("/teams" as never)} accessibilityRole="button" accessibilityLabel={t.teams} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
-                <Text style={{ fontSize: 24 }}>👥</Text>
+                <ArtIcon name="equipe" size={26} />
                 <View style={{ flex: 1 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>{t.teams}</Text><Text style={{ color: colors.muted, fontSize: 12 }}>{t.teamsDetail}</Text></View>
               </MagicCard>
               <MagicCard onPress={() => router.push("/public-map" as never)} accessibilityRole="button" accessibilityLabel={t.map} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
-                <Text style={{ fontSize: 24 }}>🗺️</Text>
+                <ArtIcon name="mapa" size={26} />
                 <View style={{ flex: 1 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>{t.map}</Text><Text style={{ color: colors.muted, fontSize: 12 }}>{t.mapDetail}</Text></View>
               </MagicCard>
             </View>

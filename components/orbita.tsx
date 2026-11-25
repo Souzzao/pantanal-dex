@@ -22,6 +22,8 @@ import Animated, {
 } from "react-native-reanimated";
 import Svg, { Circle, Defs, LinearGradient, RadialGradient, Rect, Stop, Text as SvgText, Line } from "react-native-svg";
 
+import { ArtIcon } from "@/components/ArtIcon";
+import type { ArtName } from "@/shared/art-names";
 import { GrowBar, PulseDot } from "@/components/orbit-effects";
 import { tapFeedback } from "@/components/motion";
 import { Text } from "@/components/T";
@@ -232,7 +234,7 @@ export function MetricCard({ label, value, unit, percent, accent = "#FFC400", st
 const AnimatedLine = Animated.createAnimatedComponent(Line);
 
 /** Etapas ligadas por um feixe de luz que corre de uma para a outra (Animated Beam). */
-export function BeamFlow({ steps, color = "#FFC400" }: { steps: { icon: string; label: string }[]; color?: string }) {
+export function BeamFlow({ steps, color = "#FFC400" }: { steps: { art: ArtName; label: string }[]; color?: string }) {
   const reduced = useReducedMotion();
   const [width, setWidth] = useState(0);
   const offset = useSharedValue(0);
@@ -255,7 +257,7 @@ export function BeamFlow({ steps, color = "#FFC400" }: { steps: { icon: string; 
         {steps.map((step) => (
           <View key={step.label} style={{ flex: 1, alignItems: "center" }}>
             <View style={{ width: 56, height: 56, borderRadius: 28, backgroundColor: "#1A1815", borderWidth: 1.5, borderColor: color, alignItems: "center", justifyContent: "center" }}>
-              <Text style={{ fontSize: 24 }}>{step.icon}</Text>
+              <ArtIcon name={step.art} size={28} />
             </View>
             <Text style={{ color: "#FBF7EF", fontSize: 11, fontWeight: "800", marginTop: 6, textAlign: "center" }} numberOfLines={2}>{step.label}</Text>
           </View>

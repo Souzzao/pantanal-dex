@@ -9,8 +9,8 @@
 **Guia de campo offline, cadernos de avistamentos e equipes de campo da fauna do Pantanal.**
 Gratuito · sem anúncios · funciona sem internet
 
-### [⬇️ Baixar o APK para Android](https://github.com/Souzzao/pantanal-dex/releases/latest)
-<sub>`PantanalDex.apk` = versão final · `PantanalDex-Demo.apk` = demonstração (caderno Teste e auditoria simulada)</sub>
+### [Instalar PantanalDex no Android](https://github.com/Souzzao/pantanal-dex/releases/latest/download/PantanalDex.apk)
+[Notas da versão](https://github.com/Souzzao/pantanal-dex/releases/latest) · [Builds Demo para teste](https://github.com/Souzzao/pantanal-dex/actions/workflows/apk.yml)
 
 [![Verificação](https://github.com/Souzzao/pantanal-dex/actions/workflows/ci.yml/badge.svg)](https://github.com/Souzzao/pantanal-dex/actions/workflows/ci.yml)
 [![APK Android](https://github.com/Souzzao/pantanal-dex/actions/workflows/apk.yml/badge.svg)](https://github.com/Souzzao/pantanal-dex/actions/workflows/apk.yml)

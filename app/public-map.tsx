@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 /**
  * PantanalDex — Mapa público (UC08): registros auditados como áreas aproximadas, pontos turísticos e filtros por espécie, grupo e data.
  *
@@ -190,7 +191,7 @@ export default function PublicMapScreen() {
   const onMapEvent = useCallback((event: StreetMapEvent) => {
     if (event.type === "select") { setSelectedIds(event.ids); setSpotId(null); }
     else if (event.type === "spot") { setSpotId(event.id); setSelectedIds([]); }
-    else if (event.type === "tiles" && !event.ok) { setNoTiles(true); setMapKind("offline"); }
+    else if (event.type === "tiles" && !event.ok) { setNoTiles(true); }
     else if (event.type === "tiles" && event.ok) setNoTiles(false);
   }, []);
 
@@ -276,7 +277,7 @@ export default function PublicMapScreen() {
                 <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800", letterSpacing: 1 }}>{FX[lang].species}</Text>
                 {speciesFilter ? (
                   <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
-                    {chip(`${names.get(speciesFilter) ?? speciesFilter} ✕`, true, () => { setSpeciesFilter(""); clearSelection(); setFitKey((k) => k + 1); })}
+                    {chip(`${names.get(speciesFilter) ?? speciesFilter}`, true, () => { setSpeciesFilter(""); clearSelection(); setFitKey((k) => k + 1); })}
                   </View>
                 ) : (
                   <>
@@ -291,7 +292,8 @@ export default function PublicMapScreen() {
                   </>
                 )}
                 <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
-                  {chip(x.streets, mapKind === "streets", () => { setMapKind("streets"); setNoTiles(false); clearSelection(); })}
+                  {chip(x.streets, mapKind === "streets", () => { if (mapKind !== "streets") { setMapKind("streets"); setNoTiles(false); } })}
+                  {chip(x.offlineMap, mapKind === "offline", () => setMapKind("offline"))}
                   {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>
@@ -303,7 +305,7 @@ export default function PublicMapScreen() {
                 </Pressable>
               </View>
             )}
-            {noTiles && mapKind === "offline" && (
+            {noTiles && (
               <View style={{ backgroundColor: colors.surface, borderColor: colors.warning, borderWidth: 1, borderRadius: 12, padding: 10, marginTop: 8 }}>
                 <Text style={{ color: colors.foreground, fontSize: 13 }}>{x.noTiles}</Text>
               </View>
@@ -323,7 +325,7 @@ export default function PublicMapScreen() {
             <View style={{ position: "absolute", left: 8, right: 8, bottom: 8, maxHeight: "45%", backgroundColor: colors.surface, borderColor: selectedHigh ? "#C2410C" : colors.primary, borderWidth: 2, borderRadius: 16, padding: 12, elevation: 6, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 2 } }} accessibilityLiveRegion="polite">
               <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                 <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 15, flex: 1 }}>{t.area}: {t.count(selectedRecords.length)} · {t.species(new Set(selectedRecords.map((item) => item.speciesId)).size)}{selectedHigh ? ` · ${x.high}` : ""}</Text>
-                <Pressable onPress={clearSelection} accessibilityRole="button" accessibilityLabel={x.close} hitSlop={10}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>✕</Text></Pressable>
+                <Pressable onPress={clearSelection} accessibilityRole="button" accessibilityLabel={x.close} hitSlop={10}><Icon name="close" color={colors.primary} /></Pressable>
               </View>
               <ScrollView style={{ marginTop: 4 }}>
                 {selectedRecords.slice(0, 50).map((record) => (

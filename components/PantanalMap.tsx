@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 /**
  * PantanalDex — Mapa regional offline com o contorno oficial do Pantanal (IBGE) e os pontos do caderno.
  *
@@ -25,7 +26,7 @@ export function PantanalMap({ points = [], selected, onSelect, onOpenPoint }: { 
   const view = useMemo(() => createMapViewport(size.width, size.height, center, zoom), [size, center, zoom]);
   const lonSpan = view.east - view.west;
   const latSpan = view.north - view.south;
-  const control = (label: string, action: () => void, accessibilityLabel = label) => <Pressable onPress={action} accessibilityRole="button" accessibilityLabel={accessibilityLabel} style={{ minWidth: 42, minHeight: 42, padding: 10, borderRadius: 10, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, alignItems: "center", justifyContent: "center" }}><Text style={{ color: colors.primary, fontWeight: "800" }}>{label}</Text></Pressable>;
+  const control = (label: string, action: () => void, accessibilityLabel = label, direction?: "arrow-left" | "arrow-right" | "chevron-up" | "chevron-down") => <Pressable onPress={action} accessibilityRole="button" accessibilityLabel={accessibilityLabel} style={{ minWidth: 42, minHeight: 42, padding: 10, borderRadius: 10, backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, alignItems: "center", justifyContent: "center" }}>{direction ? <Icon name={direction} color={colors.primary} /> : <Text style={{ color: colors.primary, fontWeight: "800" }}>{label}</Text>}</Pressable>;
   const move = (dx: number, dy: number) => setCenter(c => ({ longitude: c.longitude + dx * lonSpan, latitude: c.latitude + dy * latSpan }));
   return <View>
     <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Mapa offline (contorno do Pantanal em destaque)</Text>
@@ -50,10 +51,10 @@ export function PantanalMap({ points = [], selected, onSelect, onOpenPoint }: { 
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
       {control("+", () => setZoom(z => Math.min(32, z * 2)), "Ampliar mapa")}
       {control("−", () => setZoom(z => Math.max(MIN_MAP_ZOOM, z / 2)), "Reduzir mapa")}
-      {control("←", () => move(-0.3, 0), "Mover mapa para oeste")}
-      {control("↑", () => move(0, 0.3), "Mover mapa para norte")}
-      {control("↓", () => move(0, -0.3), "Mover mapa para sul")}
-      {control("→", () => move(0.3, 0), "Mover mapa para leste")}
+      {control("←", () => move(-0.3, 0), "Mover mapa para oeste", "arrow-left")}
+      {control("↑", () => move(0, 0.3), "Mover mapa para norte", "chevron-up")}
+      {control("↓", () => move(0, -0.3), "Mover mapa para sul", "chevron-down")}
+      {control("→", () => move(0.3, 0), "Mover mapa para leste", "arrow-right")}
       {control("Enquadrar", () => { setCenter(PANTANAL_CENTER); setZoom(1); })}
       {selected && control("Ver ponto", () => setCenter(selected))}
     </View>

@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       publicar:
-        description: "Publicar os APKs como release pública (link do QR code)"
+        description: "Publicar somente o APK Final como release pública"
         type: boolean
         default: false
 
@@ -83,7 +83,7 @@ jobs:
           retention-days: 30
 
   release:
-    # Publica os dois APKs numa "release" pública: o link de download não exige conta no GitHub
+    # Publica o APK Final numa "release" pública: o link de download não exige conta no GitHub
     # (usado pelo QR code). Roda em push na main ou quando o dono dispara manualmente com "publicar";
     # nunca em PR.
     needs: apk
@@ -95,14 +95,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          pattern: APK-*
-          merge-multiple: true
+          name: APK-production
       - name: Publicar release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk PantanalDex-Demo.apk \
+          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk \
             --title "PantanalDex ${VERSION}" \
-            --notes "PantanalDex.apk = versão final. PantanalDex-Demo.apk = demonstração (caderno Teste e auditoria simulada; instala junto da final). Gerado de ${GITHUB_SHA::7}. No Android, permita instalar apps desta fonte." \
+            --notes "PantanalDex.apk = versão final. O APK Demo para teste fica nos artefatos da execução. Gerado de ${GITHUB_SHA::7}. No Android, permita instalar apps desta fonte." \
             --latest

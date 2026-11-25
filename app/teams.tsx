@@ -9,6 +9,10 @@ import { router } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, Alert, Modal, Pressable, ScrollView, Share, View } from "react-native";
 
+import { ArtIcon } from "@/components/ArtIcon";
+import { Avatar } from "@/components/Avatar";
+import { AVATAR_LABELS, teamSpeciesIndex } from "@/shared/team-records";
+import { type ArtName } from "@/shared/art-names";
 import { ScreenContainer } from "@/components/screen-container";
 import { Text, TextInput } from "@/components/T";
 import { useAuth } from "@/contexts/AuthContext";
@@ -23,12 +27,13 @@ import {
 } from "@/shared/teams";
 
 const ROLE_LABEL = { owner: "Dono", admin: "Admin", member: "Membro" } as const;
-const PRIVACY_NOTE = "A equipe vê seu nome, as espécies que você registrou, quantos avistamentos fez e as zonas de ~11 km onde viu cada uma. Nunca o local exato, notas ou fotos.";
+const PRIVACY_NOTE = "A equipe vê seu nome, as espécies que você registrou, quantos avistamentos fez e as zonas de ~11 km onde viu cada uma. Registros que você enviar à equipe incluem descrição, fotos e zona aproximada. O ponto exato fica no aparelho.";
 
 export default function TeamsScreen() {
   const colors = useColors();
   const { account } = useAuth();
   const teams = useTeams();
+  const [draftAvatar, setDraftAvatar] = useState<typeof teams.avatar | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mode, setMode] = useState<"none" | "create" | "join">("none");
   const [input, setInput] = useState("");
@@ -39,7 +44,7 @@ export default function TeamsScreen() {
   const selected = teams.teams.find((team) => team.id === selectedId) ?? teams.teams[0] ?? null;
   useEffect(() => { if (selected && !teams.overview[selected.id]) void teams.loadOverview(selected.id); }, [selected?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const members: TeamMember[] = selected ? teams.overview[selected.id]?.members ?? [] : [];
+  const members = useMemo(() => selected ? teams.overview[selected.id]?.members ?? [] : [], [selected, teams.overview]);
   const progress = useMemo(() => computeTeamProgress(members), [members]);
   const achievements = useMemo(() => teamAchievements(progress), [progress]);
   const me = members.find((member) => member.userId === account?.id);
@@ -102,9 +107,6 @@ export default function TeamsScreen() {
       <Text style={{ color: primary ? colors.background : colors.primary, fontWeight: "800", textAlign: "center" }}>{label}</Text>
     </Pressable>
   );
-  const stat = (value: number | string, label: string) => (
-    <View style={{ flex: 1, alignItems: "center" }}><Text style={{ color: colors.foreground, fontSize: 22, fontWeight: "900" }}>{value}</Text><Text style={{ color: colors.muted, fontSize: 12, textAlign: "center" }}>{label}</Text></View>
-  );
   const speciesName = (id: string) => findSpeciesById(id)?.commonName ?? id;
 
   return (
@@ -127,7 +129,7 @@ export default function TeamsScreen() {
                 return (
                   <Pressable key={team.id} onPress={() => setSelectedId(team.id)} accessibilityRole="tab" accessibilityState={{ selected: active }}
                     style={{ paddingHorizontal: 14, paddingVertical: 10, borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: active ? colors.primary : colors.surface }}>
-                    <Text style={{ color: active ? colors.background : colors.primary, fontWeight: "800" }}>👥 {team.name} · {team.members}</Text>
+                    <Text style={{ color: active ? colors.background : colors.primary, fontWeight: "800" }}>{team.name} · {team.members}</Text>
                   </Pressable>
                 );
               })}
@@ -136,8 +138,8 @@ export default function TeamsScreen() {
 
           {teams.teams.length === 0 && !teams.loading && mode === "none" && (
             <View style={{ alignItems: "center", marginTop: 8 }}>
-              <Orbit radius={78} items={["🦜", "🐊", "🐆", "🦦", "🐟", "🦩"].map((e) => <Text key={e} style={{ fontSize: 24 }}>{e}</Text>)}
-                center={<View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.primary, alignItems: "center", justifyContent: "center" }}><Text style={{ fontSize: 28 }}>👥</Text></View>} />
+              <Orbit radius={78} items={("arara jacare onca ariranha peixe tuiuiu".split(" ") as ArtName[]).map((name) => <ArtIcon key={name} name={name} />)}
+                center={<View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.primary, alignItems: "center", justifyContent: "center" }}><ArtIcon name="equipe" size={32} /></View>} />
               <Text style={{ color: colors.muted, textAlign: "center", marginTop: 4, lineHeight: 20 }}>Junte sua turma de campo: cada avistamento de cada pessoa soma no progresso da equipe.</Text>
             </View>
           )}
@@ -161,7 +163,49 @@ export default function TeamsScreen() {
 
           {teams.teams.length >= 5 && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>Limite de 5 equipes por pessoa.</Text>}
 
+          {card(<>
+            <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800" }}>Meu personagem</Text>
+            <View style={{ alignItems: "center", padding: 16 }}><Avatar avatar={draftAvatar ?? teams.avatar} size={68} /></View>
+            {(["tone", "eyes", "item"] as const).map((field) => (
+              <View key={field} style={{ marginBottom: 12, gap: 6 }}>
+                <Text style={{ color: colors.muted }}>{field === "tone" ? "Cor" : field === "eyes" ? "Olhos" : "Acessório"}</Text>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 6 }}>
+                  {Object.entries(AVATAR_LABELS[field]).map(([value, label]) => {
+                    const avatar = draftAvatar ?? teams.avatar;
+                    const active = avatar[field] === value;
+                    return <Pressable key={value} accessibilityRole="button" accessibilityState={{ selected: active }}
+                      onPress={() => setDraftAvatar({ ...avatar, [field]: value })}
+                      style={{ minHeight: 44, justifyContent: "center", paddingHorizontal: 12, borderRadius: 12, backgroundColor: active ? colors.primary : colors.background }}>
+                      <Text style={{ color: active ? colors.background : colors.foreground }}>{label}</Text>
+                    </Pressable>;
+                  })}
+                </View>
+              </View>
+            ))}
+            {button("Salvar personagem", () => void run(async () => {
+              if (!draftAvatar) return;
+              const result = await teams.saveAvatar(draftAvatar);
+              if (result.ok) setDraftAvatar(null);
+              Alert.alert("Personagem", result.message);
+            }), true, !draftAvatar)}
+          </>)}
+
           {selected && <>
+            {card(<>
+              <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800" }}>Coleção da equipe</Text>
+              {!teams.records[selected.id]?.items.length && <Text style={{ color: colors.muted, marginVertical: 8 }}>
+                {teams.records[selected.id] ? "Nenhum registro compartilhado." : "Coleção ainda indisponível."}
+              </Text>}
+              {teamSpeciesIndex(teams.records[selected.id]?.items ?? []).map(({ speciesId, count }) => (
+                <Pressable key={speciesId} accessibilityRole="button" onPress={() => router.push({ pathname: "/team-species", params: { teamId: selected.id, speciesId } })}
+                  style={{ minHeight: 48, justifyContent: "center", borderBottomWidth: 1, borderColor: colors.border }}>
+                  <Text style={{ color: colors.foreground, fontWeight: "700" }}>{speciesName(speciesId)} · {count} {count === 1 ? "registro" : "registros"}</Text>
+                </Pressable>
+              ))}
+              <View style={{ marginTop: 10 }}>{button("Atualizar coleção", () => void run(async () => {
+                if (await teams.loadRecords(selected.id) === null) Alert.alert("Coleção da equipe", "Não foi possível atualizar agora.");
+              }))}</View>
+            </>)}
             {card(<>
               <Text style={{ color: colors.foreground, fontSize: 20, fontWeight: "900" }}>{selected.name}</Text>
               <Text style={{ color: colors.muted, marginTop: 2 }}>Você é {ROLE_LABEL[selected.myRole].toLowerCase()} · {selected.members}/{TEAM_MAX_MEMBERS} pessoas</Text>
@@ -176,7 +220,7 @@ export default function TeamsScreen() {
             </>)}
 
             <View style={{ marginTop: 14 }}>
-              <BeamFlow steps={[{ icon: "📒", label: "Seus avistamentos" }, { icon: "👥", label: "Equipe" }, { icon: "🗺️", label: "Zonas" }, { icon: "🏆", label: "Conquistas" }]} />
+              <BeamFlow steps={[{ art: "caderno", label: "Seus avistamentos" }, { art: "equipe", label: "Equipe" }, { art: "mapa", label: "Zonas" }, { art: "trofeu", label: "Conquistas" }]} />
             </View>
             <View style={{ flexDirection: "row", gap: 10, marginTop: 6 }}>
               <MetricCard label="Espécies" value={<NumberTicker value={progress.speciesIds.length} style={{ color: "#FBF7EF", fontSize: 28, fontFamily: "Fraunces_700Bold" }} />} percent={Math.min(100, (progress.speciesIds.length / 300) * 100)} />
@@ -193,7 +237,7 @@ export default function TeamsScreen() {
               {achievements.map((item) => (
                 <View key={item.id} style={{ marginTop: 10 }} accessible accessibilityLabel={`${item.title}: ${item.current} de ${item.target}${item.unlocked ? ", conquistada" : ""}`}>
                   <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                    <Text style={{ color: item.unlocked ? colors.primary : colors.foreground, fontWeight: "800" }}>{item.unlocked ? "🏆 " : ""}{item.title}</Text>
+                    <Text style={{ color: item.unlocked ? colors.primary : colors.foreground, fontWeight: "800" }}>{item.title}</Text>
                     <Text style={{ color: colors.muted, fontSize: 12 }}>{item.current}/{item.target}</Text>
                   </View>
                   <Text style={{ color: colors.muted, fontSize: 12 }}>{item.description}</Text>
@@ -208,7 +252,7 @@ export default function TeamsScreen() {
               <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "800" }}>ZONAS ESTUDADAS (~11 KM)</Text>
               {progress.zones.slice(0, 12).map((zone) => (
                 <View key={`${zone.cellLat}|${zone.cellLon}`} style={{ marginTop: 10 }}>
-                  <Text style={{ color: colors.foreground, fontWeight: "800" }}>📍 {Math.abs(zone.cellLat).toFixed(1)}°S {Math.abs(zone.cellLon).toFixed(1)}°O — {zone.species} espécies, {zone.sightings} avistamentos</Text>
+                  <Text style={{ color: colors.foreground, fontWeight: "800" }}>{Math.abs(zone.cellLat).toFixed(1)}°S {Math.abs(zone.cellLon).toFixed(1)}°O — {zone.species} espécies, {zone.sightings} avistamentos</Text>
                   <Text style={{ color: colors.muted, fontSize: 12 }}>Mais vistas: {zone.topSpecies.map(speciesName).join(", ")}</Text>
                 </View>
               ))}
@@ -225,6 +269,7 @@ export default function TeamsScreen() {
                     <Text style={{ width: 28, color: colors.muted, fontWeight: "800" }}>{index + 1}º</Text>
                     <View style={{ flex: 1 }}>
                       <Text style={{ color: colors.foreground, fontWeight: "700" }}>{row.displayName}{row.userId === account?.id ? " (você)" : ""}</Text>
+                      <Avatar avatar={member.avatar} size={40} />
                       <Text style={{ color: colors.muted, fontSize: 12 }}>{ROLE_LABEL[member.role]} · {row.species} espécies · {row.sightings} avistamentos</Text>
                     </View>
                     {canManage && row.userId !== account?.id && <Text style={{ color: colors.primary }}>⋯</Text>}

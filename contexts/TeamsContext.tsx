@@ -267,10 +267,12 @@ export function TeamsProvider({ children }: { children: React.ReactNode }) {
     myUserId: account?.id ?? null,
     avatar,
     saveAvatar: async (next) => {
+      const result = await api.saveMyAvatar(next);
+      if (result.error !== null) return { ok: false, message: "Não foi possível salvar no perfil. Tente novamente quando estiver conectado." };
       setAvatar(next);
       if (key) await AsyncStorage.setItem(`${key}:avatar`, JSON.stringify(next)).catch(() => undefined);
-      const result = await api.saveMyAvatar(next);
-      if (result.error !== null) return { ok: false, message: "Personagem salvo neste aparelho. Ele vai para o perfil quando houver internet." };
+      await Promise.all(cacheRef.current.teams.map((team) => loadOverview(team.id)));
+
       return { ok: true, message: "Personagem salvo." };
     },
     records,

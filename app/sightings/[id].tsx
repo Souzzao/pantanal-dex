@@ -10,6 +10,8 @@ import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import { router, useLocalSearchParams } from "expo-router";
 
+import { useTeams } from "@/contexts/TeamsContext";
+import { photosOf } from "@/shared/photo-gallery";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { UNKNOWN_SPECIES_ID } from "@/shared/pantanal";
@@ -23,6 +25,9 @@ export default function SightingDetailScreen() {
   const colors = useColors();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { sightings, deleteSighting } = useApp();
+  const teams = useTeams();
+  const [teamPicker, setTeamPicker] = useState(false);
+  const [sendingTeam, setSendingTeam] = useState(false);
   const [sharing, setSharing] = useState(false);
   const sighting = sightings.find((item) => item.id === id);
   const animal = findSpeciesById(sighting?.speciesId) ?? (sighting?.speciesId === UNKNOWN_SPECIES_ID ? { commonName: "Espécie não identificada", scientificName: "Registrada como “Não sei”", images: [] } : undefined);
@@ -74,7 +79,9 @@ export default function SightingDetailScreen() {
         <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar">
           <Text style={{ color: colors.primary, fontWeight: "700", fontSize: 16, paddingVertical: 14 }}>‹ Voltar</Text>
         </Pressable>
-        <RemoteImage label={animal.commonName} source={sighting.photoUri || animal.images[0]?.uri ? { uri: sighting.photoUri || animal.images[0]?.uri } : undefined} style={{ width: "100%", height: 230, borderRadius: 18 }} />
+        {(photosOf(sighting).length ? photosOf(sighting) : [animal.images[0]?.uri]).map((uri, index) =>
+          <RemoteImage key={uri ?? "placeholder"} label={`Foto ${index + 1} · ${animal.commonName}`} source={uri ? { uri } : undefined}
+            style={{ width: "100%", height: 230, borderRadius: 18, marginBottom: 8 }} />)}
         <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5, marginTop: 18 }}>{animal.commonName}</Text>
         <Text style={{ color: colors.muted, fontStyle: "italic", marginTop: 3 }}>{animal.scientificName}</Text>
         <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 16, marginTop: 20 }}>
@@ -91,6 +98,29 @@ export default function SightingDetailScreen() {
           <Text style={{ color: colors.muted, lineHeight: 21, marginTop: 6 }}>{sighting.notes || "Nenhuma observação adicionada."}</Text>
         </View>
         {displayLatitude !== undefined && displayLongitude !== undefined && <Pressable onPress={() => router.push("/map" as any)} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 15, padding: 14, marginTop: 20 }, pressed && { opacity: 0.8 }]}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>Ver no mapa</Text></Pressable>}
+        {teams.available && teams.teams.length > 0 && <View style={{ marginTop: 14, gap: 8 }}>
+          <Pressable onPress={() => setTeamPicker(!teamPicker)} accessibilityRole="button" accessibilityState={{ expanded: teamPicker }}
+            style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 15, padding: 14 }}>
+            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Enviar para equipe</Text>
+          </Pressable>
+          {teamPicker && <>
+            <Text style={{ color: colors.muted }}>A equipe recebe as fotos, a descrição e a zona aproximada.</Text>
+            {teams.teams.map((team) => <Pressable key={team.id} accessibilityRole="button" disabled={sendingTeam}
+              style={{ minHeight: 44, justifyContent: "center", paddingHorizontal: 12 }}
+              onPress={async () => {
+                setSendingTeam(true);
+                try {
+                  const result = await teams.shareRecord(team.id, sighting);
+                  if (result.ok) setTeamPicker(false);
+                  Alert.alert("Coleção da equipe", result.message ?? "Registro compartilhado.");
+                } catch {
+                  Alert.alert("Coleção da equipe", "Não foi possível guardar o envio. Tente novamente.");
+                } finally { setSendingTeam(false); }
+              }}>
+              <Text style={{ color: colors.primary, fontWeight: "700" }}>{team.name}</Text>
+            </Pressable>)}
+          </>}
+        </View>}
         <Pressable onPress={shareSighting} disabled={sharing} accessibilityRole="button" style={({ pressed }) => [{ borderColor: colors.primary, borderWidth: 1, borderRadius: 15, padding: 15, marginTop: displayLatitude !== undefined && displayLongitude !== undefined ? 12 : 20, opacity: sharing ? 0.6 : 1 }, pressed && { opacity: 0.75 }]}>
           <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{sharing ? "Preparando arquivo…" : "Compartilhar registro"}</Text>
         </Pressable>

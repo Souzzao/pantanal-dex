@@ -1,3 +1,4 @@
+import { ArtIcon } from "@/components/ArtIcon";
 /**
  * PantanalDex — Ficha da espécie (UC04): fotos, descrição, dieta, status IUCN, curiosidades e fontes.
  *
@@ -74,7 +75,7 @@ export default function SpeciesDetailScreen() {
       <Text style={{ color: "#FBF7EF", fontSize: 22, fontWeight: "800", marginTop: -2 }}>‹</Text>
     </PressableScale>
     {animal.images.length === 0
-      ? <View accessibilityLabel={`Sem foto de ${animal.commonName}`} style={{ marginTop: 14, height: 160, borderRadius: 16, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, alignItems: "center", justifyContent: "center", padding: 16 }}><Text style={{ fontSize: 40 }}>📷</Text><Text style={{ color: colors.muted, fontSize: 13, textAlign: "center", marginTop: 6 }}>Ainda não temos uma foto de uso livre desta espécie.</Text></View>
+      ? <View accessibilityLabel={`Sem foto de ${animal.commonName}`} style={{ marginTop: 14, height: 160, borderRadius: 16, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, alignItems: "center", justifyContent: "center", padding: 16 }}><ArtIcon name="camera" size={40} /><Text style={{ color: colors.muted, fontSize: 13, textAlign: "center", marginTop: 6 }}>Ainda não temos uma foto de uso livre desta espécie.</Text></View>
       : null}
     {collectionEntry && <Pressable onPress={() => router.push("/collection" as any)} accessibilityRole="button" accessibilityLabel={`Espécie ${formatCollectionNumber(collectionEntry.number)} da coleção, ${collectionEntry.discovered ? "descoberta" : "ainda não avistada"}. Abrir minha coleção`} style={{ flexDirection: "row", alignItems: "center", gap: 8, marginTop: 18 }}><Text style={{ color: colors.muted, fontWeight: "800" }}>{formatCollectionNumber(collectionEntry.number)}</Text><Text style={{ color: collectionEntry.discovered ? colors.background : colors.muted, backgroundColor: collectionEntry.discovered ? colors.primary : colors.surface, borderColor: collectionEntry.discovered ? colors.primary : colors.border, borderWidth: 1, borderRadius: 12, overflow: "hidden", paddingHorizontal: 10, paddingVertical: 4, fontSize: 12, fontWeight: "800" }}>{collectionEntry.discovered ? `Descoberta${collectionEntry.firstSeenDate ? ` em ${collectionEntry.firstSeenDate.split("-").reverse().join("/")}` : ""}` : "Ainda não avistada"}</Text></Pressable>}
     <DisplayText accessibilityRole="header" style={{ color: colors.foreground, fontSize: 34, lineHeight: 38, marginTop: collectionEntry ? 8 : 18 }}>{animal.commonName}</DisplayText><Text style={{ color: colors.muted, fontStyle: "italic", fontSize: 16, marginTop: 3 }}>{animal.scientificName}</Text>

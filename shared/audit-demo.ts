@@ -17,11 +17,11 @@ export const DEMO_PREFIX = "demo-";
 
 /** Etapas do processo, na ordem em que acontecem. */
 export const AUDIT_PROCESS = [
-  { icon: "📷", title: "Registro", text: "A pessoa salva o avistamento no caderno e escolhe publicar." },
-  { icon: "🛡️", title: "Servidor confere", text: "Conta, data, ponto no Pantanal e limite de 30 por dia." },
-  { icon: "⏳", title: "Pendente", text: "O registro entra na pilha da auditoria. Ainda não aparece no mapa." },
-  { icon: "🔎", title: "Auditor decide", text: "Compara a foto com o catálogo e aprova, corrige a espécie ou recusa." },
-  { icon: "🗺️", title: "Mapa público", text: "Aprovado: aparece como área aproximada, nunca o ponto exato." },
+  { art: "camera", title: "Registro", text: "A pessoa salva o avistamento no caderno e escolhe publicar." },
+  { art: "escudo", title: "Servidor confere", text: "Conta, data, ponto no Pantanal e limite de 30 por dia." },
+  { art: "ampulheta", title: "Pendente", text: "O registro entra na pilha da auditoria. Ainda não aparece no mapa." },
+  { art: "lupa", title: "Auditor decide", text: "Compara a foto com o catálogo e aprova, corrige a espécie ou recusa." },
+  { art: "mapa", title: "Mapa público", text: "Aprovado: aparece como área aproximada, nunca o ponto exato." },
 ] as const;
 
 const PEOPLE = ["Ana Lima", "João Pereira", "Marina Costa", "Guia Rafael", "Turma 3º ano", "Pedro Alves"];

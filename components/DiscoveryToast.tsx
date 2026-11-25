@@ -1,3 +1,4 @@
+import { ArtIcon } from "@/components/ArtIcon";
 /**
  * PantanalDex — Aviso animado de nova espécie descoberta na coleção.
  *
@@ -126,7 +127,7 @@ export function DiscoveryToast() {
             elevation: 6,
           }, pressed && { opacity: 0.9 }]}
         >
-          <Text style={{ fontSize: 30 }}>✨</Text>
+          <ArtIcon name="brilho" size={30} />
           <View style={{ flex: 1 }}>
             <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>{notice.title}</Text>
             <Text style={{ color: colors.background, fontWeight: "700", marginTop: 3 }}>{notice.detail}</Text>
