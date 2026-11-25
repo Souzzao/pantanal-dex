@@ -3,8 +3,9 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isImportSizeOk } from "@/shared/safe-url";
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Pressable, ScrollView, View } from "react-native";
+import { Alert, Linking, Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/components/T";
 import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
@@ -19,7 +20,8 @@ import { AccountCard } from "@/components/AccountCard";
 import { languages, validateSpeciesCatalog } from "@/shared/pantanal";
 import { catalogCoverage, catalogLicenseAudit, catalogReview, filterSpeciesCatalog } from "@/shared/catalog";
 import { useColors } from "@/hooks/use-colors";
-import { APP_VERSION } from "@/shared/version";
+import { APP_VERSION, PRIVACY_POLICY_URL } from "@/shared/version";
+import { IS_DEMO } from "@/shared/variant";
 import { router } from "expo-router";
 
 export default function SettingsScreen() {
@@ -85,6 +87,7 @@ export default function SettingsScreen() {
       const pickResult = await DocumentPicker.getDocumentAsync({ type: ["application/json", "text/plain", "application/octet-stream", "*/*"], copyToCacheDirectory: true });
       if (pickResult.canceled) return;
       const asset = pickResult.assets[0];
+      if (!isImportSizeOk(asset.size)) { Alert.alert("Arquivo grande demais", "O limite é 5 MB."); return; }
       const content = await FileSystem.readAsStringAsync(asset.uri);
       const imported = parseExportJson(content);
       if (!imported.length) {
@@ -118,8 +121,8 @@ export default function SettingsScreen() {
     await setSettings({ ...settings, quickLanguages: next });
   };
 
-  return <ScreenContainer className="px-5"><ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-    <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>{labels.title}</Text>
+  return <ScreenContainer className="px-5"><ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+    <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5, paddingTop: 18 }}>{labels.title}</Text>
     <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 12 }}>{labels.subtitle}</Text>
     <View style={{ marginBottom: 12 }}><AccountCard /></View>
     <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 15, marginBottom: 24 }} accessibilityRole="summary">
@@ -131,11 +134,12 @@ export default function SettingsScreen() {
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 12, marginBottom: 24 }}>{languages.map((language) => <Pressable key={language} onPress={() => setSettings({ ...settings, defaultLanguage: language })} accessibilityRole="radio" accessibilityState={{ selected: settings.defaultLanguage === language }} style={{ backgroundColor: settings.defaultLanguage === language ? colors.primary : colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 14, paddingVertical: 10 }}><Text style={{ color: settings.defaultLanguage === language ? "#fff" : colors.foreground, fontWeight: "700" }}>{language}</Text></Pressable>)}</View>
     <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>Idiomas na barra rápida</Text>
     <Text style={{ color: colors.muted, marginTop: 5, marginBottom: 12 }}>Toque para ativar e use as setas para definir a ordem.</Text>
-    {settings.quickLanguages.map((language, index) => <View key={language} style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 10, marginBottom: 8 }}><Text style={{ color: colors.foreground, fontWeight: "700", flex: 1 }}>{index + 1}. {language}</Text><Pressable accessibilityLabel={`Mover ${language} para cima`} accessibilityRole="button" disabled={index === 0} onPress={() => moveLanguage(index, -1)} style={{ padding: 8, opacity: index === 0 ? 0.35 : 1 }}><Text style={{ color: colors.primary, fontSize: 18, fontWeight: "800" }}>↑</Text></Pressable><Pressable accessibilityLabel={`Mover ${language} para baixo`} accessibilityRole="button" disabled={index === settings.quickLanguages.length - 1} onPress={() => moveLanguage(index, 1)} style={{ padding: 8, opacity: index === settings.quickLanguages.length - 1 ? 0.35 : 1 }}><Text style={{ color: colors.primary, fontSize: 18, fontWeight: "800" }}>↓</Text></Pressable><Pressable accessibilityLabel={`Alternar ${language}`} accessibilityRole="button" onPress={() => toggleLanguage(language)} style={{ padding: 8 }}><Text style={{ color: colors.error, fontWeight: "800", fontSize: 12 }}>Remover</Text></Pressable></View>)}
+    {settings.quickLanguages.map((language, index) => <View key={language} style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 10, marginBottom: 8 }}><Text style={{ color: colors.foreground, fontWeight: "700", flex: 1 }}>{index + 1}. {language}</Text><Pressable accessibilityLabel={`Mover ${language} para cima`} accessibilityRole="button" disabled={index === 0} onPress={() => moveLanguage(index, -1)} style={{ minWidth: 44, minHeight: 44, alignItems: "center", justifyContent: "center", opacity: index === 0 ? 0.35 : 1 }}><Text style={{ color: colors.primary, fontSize: 18, fontWeight: "800" }}>↑</Text></Pressable><Pressable accessibilityLabel={`Mover ${language} para baixo`} accessibilityRole="button" disabled={index === settings.quickLanguages.length - 1} onPress={() => moveLanguage(index, 1)} style={{ minWidth: 44, minHeight: 44, alignItems: "center", justifyContent: "center", opacity: index === settings.quickLanguages.length - 1 ? 0.35 : 1 }}><Text style={{ color: colors.primary, fontSize: 18, fontWeight: "800" }}>↓</Text></Pressable><Pressable accessibilityLabel={`Alternar ${language}`} accessibilityRole="button" onPress={() => toggleLanguage(language)} style={{ padding: 8 }}><Text style={{ color: colors.error, fontWeight: "800", fontSize: 12 }}>Remover</Text></Pressable></View>)}
     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>{languages.filter((language) => !settings.quickLanguages.includes(language)).map((language) => <Pressable key={language} onPress={() => toggleLanguage(language)} accessibilityRole="button" style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 9 }}><Text style={{ color: colors.foreground, fontWeight: "700", fontSize: 12 }}>+ {language}</Text></Pressable>)}</View>
     <OfflineImagesCard />
     <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800", marginTop: 22, marginBottom: 12 }}>Exportar meus dados</Text>
     <Pressable onPress={() => router.push("/notebooks" as never)} accessibilityRole="button" accessibilityLabel="Abrir cadernos" style={{ backgroundColor: colors.primary, borderRadius: 14, padding: 14, marginBottom: 12, alignItems: "center" }}><Text style={{ color: colors.background, fontWeight: "800" }}>📒 Cadernos: separar, juntar, importar e exportar</Text></Pressable>
+    <Pressable onPress={() => router.push("/teams" as never)} accessibilityRole="button" accessibilityLabel="Abrir equipes" style={{ backgroundColor: colors.surface, borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginBottom: 12, alignItems: "center" }}><Text style={{ color: colors.primary, fontWeight: "800" }}>👥 Equipes: grupos de campo, conquistas e zonas</Text></Pressable>
     <Text style={{ color: colors.muted, marginBottom: 12 }}>Selecione quais registros serão copiados. Registros compartilháveis saem com localização aproximada para proteger pontos sensíveis.</Text>
     <Pressable onPress={toggleAll} accessibilityRole="checkbox" accessibilityState={{ checked: allSelected }} style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}><View style={{ width: 22, height: 22, borderRadius: 6, borderWidth: 1, borderColor: colors.primary, backgroundColor: allSelected ? colors.primary : colors.surface, marginRight: 8, alignItems: "center", justifyContent: "center" }}>{allSelected && <Text style={{ color: "#fff", fontWeight: "800" }}>✓</Text>}</View><Text style={{ color: colors.foreground, fontWeight: "800" }}>{allSelected ? "Desmarcar todos" : "Selecionar todos"} · {selectedSightings.length}/{sightings.length}</Text></Pressable>
     {sightings.map((item) => <Pressable key={item.id} onPress={() => toggleSelection(item.id)} accessibilityRole="checkbox" accessibilityState={{ checked: selectedIds.includes(item.id) }} style={{ flexDirection: "row", alignItems: "center", paddingVertical: 8 }}><View style={{ width: 18, height: 18, borderRadius: 5, borderWidth: 1, borderColor: colors.border, backgroundColor: selectedIds.includes(item.id) ? colors.primary : colors.surface, marginRight: 9, alignItems: "center", justifyContent: "center" }}>{selectedIds.includes(item.id) && <Text style={{ color: "#fff", fontSize: 12 }}>✓</Text>}</View><Text style={{ color: colors.foreground, flex: 1 }}>{item.date} · {catalogById.get(item.speciesId) ?? "Espécie não catalogada"}</Text></Pressable>)}
@@ -143,6 +147,6 @@ export default function SettingsScreen() {
     <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>GeoJSON inclui só os registros com localização e abre em programas de mapa (QGIS, geojson.io, Google Earth).</Text>
     <Pressable onPress={importData} disabled={!ready || importing || exporting} accessibilityRole="button" accessibilityLabel="Importar JSON do PantanalDex" accessibilityState={{ disabled: !ready || importing || exporting, busy: importing }} style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting ? 0.6 : 1 }}><Text style={{ color: colors.primary, textAlign: "center", fontWeight: "800" }}>{importing ? "Lendo arquivo…" : "Importar JSON do PantanalDex"}</Text></Pressable>
     <Pressable onPress={clearLocalSightings} disabled={!ready || importing || exporting || sightings.length === 0} accessibilityRole="button" accessibilityLabel="Apagar caderno local" accessibilityState={{ disabled: !ready || importing || exporting || sightings.length === 0 }} style={{ borderColor: colors.error, borderWidth: 1, borderRadius: 14, padding: 14, marginTop: 12, opacity: importing || exporting || sightings.length === 0 ? 0.5 : 1 }}><Text style={{ color: colors.error, textAlign: "center", fontWeight: "800" }}>Apagar caderno local</Text></Pressable>
-    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex {APP_VERSION}</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Guia de campo offline e cadernos de avistamentos da fauna do Pantanal: 1.018 espécies, mapa, cadernos e insígnias.</Text><Text style={{ color: colors.muted, marginTop: 6, fontSize: 12 }}>Desenvolvido por Felipe de Souza Aquino</Text></View>
+    <View style={{ backgroundColor: colors.surface, borderRadius: 16, padding: 16, marginTop: 26 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>PantanalDex {APP_VERSION}{IS_DEMO ? " · Demo" : ""}</Text><Text style={{ color: colors.muted, marginTop: 5, lineHeight: 20 }}>Guia de campo offline e cadernos de avistamentos da fauna do Pantanal: {catalogCoverage.species.toLocaleString("pt-BR")} espécies, mapa, cadernos e insígnias.</Text>{IS_DEMO && <Text style={{ color: colors.warning, marginTop: 6, fontSize: 12, fontWeight: "700" }}>Versão de demonstração: inclui caderno Teste e auditoria simulada.</Text>}<Pressable onPress={() => void Linking.openURL(PRIVACY_POLICY_URL)} accessibilityRole="link"><Text style={{ color: colors.primary, marginTop: 8, fontSize: 13, fontWeight: "700" }}>Política de privacidade</Text></Pressable><Text style={{ color: colors.muted, marginTop: 6, fontSize: 12 }}>Desenvolvido por Felipe de Souza Aquino</Text></View>
   </ScrollView></ScreenContainer>;
 }

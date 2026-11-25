@@ -1,19 +1,24 @@
-## O que muda
+## Mudança
 
-<!-- Descreva o problema e a solução em poucas linhas. -->
+<!-- Resultado e contexto da alteração. -->
 
-## Como testar
+## Issue
 
-<!-- Passos para conferir no app ou nos testes. -->
+<!-- Link ou referência (ex.: Fecha #12). -->
 
-## Verificações
+## Evidências
 
-- [ ] `pnpm check` (TypeScript) sem erros
-- [ ] `pnpm test` passando
-- [ ] Tela conferida no celular ou emulador, quando houve mudança visual
+| Critério de aceite | Verificação executada | Resultado | Evidência |
+| --- | --- | --- | --- |
+| <!-- aceite --> | <!-- comando ou passos --> | Passou / falhou / não testado / não aplicável | <!-- log, trace ou captura --> |
 
-## Segurança
+## Revisão
 
-- [ ] Nenhum token, senha, `.env` ou chave do Supabase no código
-- [ ] Nenhuma localização exata de avistamento exposta publicamente
-- [ ] Mudanças no banco (`supabase/migrations`) mantêm o RLS ativo
+- [ ] O diff cobre o escopo da issue e o estado do PR reflete as checagens executadas.
+- [ ] `pnpm check` e `pnpm test` passaram.
+- [ ] Telas: estados (carregando, vazio, erro, sucesso), toque, contraste e "reduzir movimento" conferidos.
+- [ ] Nenhum segredo, `.env` ou `.project-config.json` no diff.
+
+## Pendências e impacto
+
+<!-- O que resta verificar; mudanças em dependências, migrações do Supabase ou impacto operacional. -->

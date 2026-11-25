@@ -6,16 +6,17 @@
  */
 const brand = {
   primary: '#FFC400',
-  background: '#0B0B0B',
-  surface: '#181818',
-  foreground: '#FFFFFF',
-  muted: '#B5B5B5',
-  border: '#2C2C2C',
+  // Preto quente (tom de couro de caderno de campo) em vez de preto puro: mais sofisticado, mesma identidade.
+  background: '#0E0D0B',
+  surface: '#1A1815',
+  foreground: '#FBF7EF',
+  muted: '#B8B0A2',
+  border: '#2F2B25',
   success: '#4ADE80',
   warning: '#FFC400',
   error: '#FF6B5E',
   accent: '#FFC400',
-  onAccent: '#0B0B0B',
+  onAccent: '#0E0D0B',
 };
 
 const themeColors = Object.fromEntries(Object.entries(brand).map(([name, value]) => [name, { light: value, dark: value }]));

@@ -7301,5 +7301,459 @@
       "https://inaturalist-open-data.s3.amazonaws.com/photos/346822464/medium.jpeg",
       "https://inaturalist-open-data.s3.amazonaws.com/photos/164565489/medium.jpeg"
     ]
+  },
+  {
+    "id": "xenodon-matogrossensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/354792841/medium.jpeg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Distribui%C3%A7%C3%A3o_geogr%C3%A1fica_Xenodon_matogrossensis.jpg/500px-Distribui%C3%A7%C3%A3o_geogr%C3%A1fica_Xenodon_matogrossensis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/X._matogrossensis._Foto_por_Francisco_Severo_Neto.jpg/500px-X._matogrossensis._Foto_por_Francisco_Severo_Neto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "micrurus-tricolor",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Micrurus_tricolor_Map.jpg/500px-Micrurus_tricolor_Map.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": []
+  },
+  {
+    "id": "phalotris-matogrossensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/40340761/medium.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Phalotris_matogrossensis_40340761.jpg/500px-Phalotris_matogrossensis_40340761.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "rivulo-olho-de-ouro",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/349213561/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "hydrops-caesurus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/513809475/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "satanoperca-pappaterra",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/160520375/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467226203/medium.png",
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM17355.jpg"
+    ]
+  },
+  {
+    "id": "schizodon-isognathus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/332947369/medium.jpg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/cdf5634d-3197-48f7-83f0-222ad5124bc4"
+    ]
+  },
+  {
+    "id": "trigonectes-balzanii",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/285776971/medium.jpeg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%286_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%286_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "apteronotus-caudimaculosus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/518996713/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/504077561/medium.jpeg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/613759447/medium.jpg"
+    ]
+  },
+  {
+    "id": "coleodactylus-brachystoma",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/64846365/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/618472679/medium.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/46/%D0%A1oleodactylus_brachystoma.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    ]
+  },
+  {
+    "id": "epictia-vellardi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/662650567/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "manciola-guaporicola",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/331700193/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/331701927/medium.jpeg"
+    ]
+  },
+  {
+    "id": "piavucu",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/308574344/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "peixe-agulha-do-jauru",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/599885318/medium.jpg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/29c528e0-620e-4386-8a44-fdaab2c6489b",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Potamorrhaphis_eigenmanni.jpg/500px-Potamorrhaphis_eigenmanni.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "bagre-banjo-glutao",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/351346201/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/518996578/medium.jpg"
+    ]
+  },
+  {
+    "id": "ancistrus-claro",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/471209888/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/584371307/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/566735098/medium.jpg"
+    ]
+  },
+  {
+    "id": "apteronotus-ellisi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/518997334/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/613888061/medium.jpg"
+    ]
+  },
+  {
+    "id": "bachia-bresslaui",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/558690375/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/575750211/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/450776671/medium.jpeg"
+    ]
+  },
+  {
+    "id": "tetra-olho-de-sangue",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/331105854/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "charax-leticiae",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Charax_leticiae_%2819063%29.png/500px-Charax_leticiae_%2819063%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Charax_leticiae_%28MZUSP_89382%29.png/500px-Charax_leticiae_%28MZUSP_89382%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%282_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%282_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "chiasmocleis-mehelyi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/322196682/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "gastrodermus-hastatus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/196982283/medium.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Corydoras_hastatus.jpg/500px-Corydoras_hastatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "lygodactylus-wetzeli",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/527249119/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/333366142/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/527249121/medium.jpg"
+    ]
+  },
+  {
+    "id": "mucurana-quimi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/355878615/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "phalotris-nasutus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/363030135/medium.jpeg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Mapa_de_localiza%C3%A7%C3%A3o_da_Phalotris_nasutus.png/500px-Mapa_de_localiza%C3%A7%C3%A3o_da_Phalotris_nasutus.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Phalotris-nasutus.jpg/500px-Phalotris-nasutus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "piolhinho-do-grotao",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/256394760/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/429075359/medium.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Phyllomyias_reiseri_-_Reiser%27s_tyrannulet.jpg/500px-Phyllomyias_reiseri_-_Reiser%27s_tyrannulet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "lambari-de-allen",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467467296/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "pseudopaludicola-motorzinho",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/350338890/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "rhinelepis-strigosa",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/363514140/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/611212228/medium.jpg"
+    ]
+  },
+  {
+    "id": "piranha-de-bochecha-vermelha",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/412128210/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "triportheus-pantanensis",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%284_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%284_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Triportheus_pantanensis_%28MCP_35006%29.png/500px-Triportheus_pantanensis_%28MCP_35006%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Triportheus_pantanensis_%28R%C3%ADo_Pilcomayo_National_Park%29.png/500px-Triportheus_pantanensis_%28R%C3%ADo_Pilcomayo_National_Park%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "xenopholis-werdingorum",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/693596108/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "xenurobrycon-macropus",
+    "url": "https://media.leibniz-lib.de/eaurls/image/58d84e88-8eb3-49fb-a96d-46f2ce759f41/full/full/0/ICH-18004-18007_S.jpg",
+    "alternativas": [
+      "https://media.leibniz-lib.de/eaurls/image/d03db9b1-f934-4fc1-9c7d-98f10998704d/full/full/0/ICH-18004-18007_E.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Xenurobrycon_macropus.jpg/500px-Xenurobrycon_macropus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "brachyhypopomus-bombilla",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/311594958/medium.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Species_of_fishes_from_the_Chasqueiro_Stream_%28Mirim_Lagoon_system%29.jpg/500px-Species_of_fishes_from_the_Chasqueiro_Stream_%28Mirim_Lagoon_system%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "brochis-britskii",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/196983825/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "brochis-pantanalensis",
+    "url": "https://media-service.nrm.se/images?dataset=fish&id=Full_size/SOK_Peru_81-86_012.jpg",
+    "alternativas": [
+      "https://media-service.nrm.se/images?dataset=fish&id=Full_size/SOK_Peru_81-86_017.jpg",
+      "https://data.nhm.ac.uk/media/a38a56b8-7c1c-4cd2-9386-341387d3fd27"
+    ]
+  },
+  {
+    "id": "chaetobranchopsis-australis",
+    "url": "https://ibss-images.calacademy.org/static/ichthyology/originals/3b/47/3b4766e4-38e6-4d3c-9a1b-0ae0b8ff09ce.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/60/d8/60d81792-8539-421a-9ecb-73c1062a7815.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/FMIB_52384_Chaetobranchopsis_australe_Eigenmann_and_Ward.jpeg/500px-FMIB_52384_Chaetobranchopsis_australe_Eigenmann_and_Ward.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "corydoras-aurofrenatus",
+    "url": "https://ibss-images.calacademy.org/static/ichthyology/originals/6f/40/6f4004c1-90f0-4b0e-99d2-5e8ef48d93e2.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/7c/7e/7c7e2695-7134-4c8f-b3f0-5c9909f9b7f9.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/FMIB_52370_Corydoras_aurofrenatus_Eigenmann_and_Kennedy.jpeg/500px-FMIB_52370_Corydoras_aurofrenatus_Eigenmann_and_Kennedy.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "curimatopsis-myersi",
+    "url": "https://data.nhm.ac.uk/media/3a8f3f1d-8ed6-4b82-86ae-7df9964a1762",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/e96cfa92-e9b9-43aa-a8a8-9b05635937b1"
+    ]
+  },
+  {
+    "id": "cynopotamus-kincaidi",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/59924211/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/345586478/medium.jpeg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Cynopotamus_kincaidi_59924211.jpg/500px-Cynopotamus_kincaidi_59924211.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "farlowella-paraguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/467226132/medium.png",
+    "alternativas": []
+  },
+  {
+    "id": "gymnorhamphichthys-britskii",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/471088914/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467252182/medium.png"
+    ]
+  },
+  {
+    "id": "peixe-eletrico-do-pantanal",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Actinopterygii_in_the_Guare%C3%AD_River_basin_03_%281676-0611-BN-2020-1031%29.jpg/500px-Actinopterygii_in_the_Guare%C3%AD_River_basin_03_%281676-0611-BN-2020-1031%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": []
+  },
+  {
+    "id": "gymnotus-paraguensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/731201905/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "peixe-eletrico-ribeirinho",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/718777938/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/615856790/medium.jpg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_7.jpg/500px-Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "piaba-marginatus",
+    "url": "https://media.leibniz-lib.de/eaurls/image/433582d0-9f45-4c02-892c-f5e479f2c9ed/full/full/0/ICH-43796_S.jpg",
+    "alternativas": [
+      "https://media.leibniz-lib.de/eaurls/image/f9f85f9b-88c6-4d75-94a5-c2fd49e66ee9/full/full/0/ICH-43796_E.jpg"
+    ]
+  },
+  {
+    "id": "hemiodus-semitaeniatus",
+    "url": "https://data.nhm.ac.uk/media/69ad7648-0956-4521-8061-0af9b9d771fd",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/e2067198-8049-47d2-8594-c950144ecd01",
+      "https://data.nhm.ac.uk/media/3e77b377-a49b-4bfa-bf64-1740e4345258"
+    ]
+  },
+  {
+    "id": "hypostomus-khimaera",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/370205521/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/584508620/medium.jpg"
+    ]
+  },
+  {
+    "id": "hypostomus-uruguayensis",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/528024581/medium.jpg",
+    "alternativas": []
+  },
+  {
+    "id": "laetacara-dorsigera",
+    "url": "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM16420.jpg",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/309ccba8-ada8-4f92-913a-d1b51aefebe1"
+    ]
+  },
+  {
+    "id": "lepidobatrachus-asper",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Lepidobatrachus_asper.jpg/500px-Lepidobatrachus_asper.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Lepidobatrachus_asper_2.jpg/500px-Lepidobatrachus_asper_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "tamuata-picta",
+    "url": "https://media-service.nrm.se/images?dataset=fish&id=Full_size/NRM15427.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Megalechis_picta.jpg/500px-Megalechis_picta.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "pacu-mola",
+    "url": "https://ibss-images.calacademy.org/static/ichthyology/originals/7b/f8/7bf87f2c-58f0-4200-b98a-55e5f2e19c33.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/d6/4d/d64d0e1f-7f43-4f4c-9764-5b319967610e.jpg",
+      "https://data.nhm.ac.uk/media/003e7dd6-f7bc-4592-9968-42d4c5f1bd00"
+    ]
+  },
+  {
+    "id": "ossancora-punctata",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/160176513/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/160176563/medium.jpeg",
+      "https://data.nhm.ac.uk/media/613c83e9-491e-42f8-9d37-426cdcce43ba"
+    ]
+  },
+  {
+    "id": "phenacorhamdia-hoehnei",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/471089908/medium.jpeg",
+    "alternativas": []
+  },
+  {
+    "id": "pimelodella-taenioptera",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/452521573/medium.jpeg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/467226629/medium.png"
+    ]
+  },
+  {
+    "id": "raia-paraguaia",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/580930063/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/580930005/medium.jpg",
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/684219688/medium.jpg"
+    ]
+  },
+  {
+    "id": "lambari-branco",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/FMIB_52376_Astyanax_pellegrini_Eigenmann.jpg/500px-FMIB_52376_Astyanax_pellegrini_Eigenmann.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%283_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%283_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Psalidodon_pellegrini_%28Bah%C3%ADa_Negra_-_r%C3%ADo_Paraguay%29.png/500px-Psalidodon_pellegrini_%28Bah%C3%ADa_Negra_-_r%C3%ADo_Paraguay%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "peixe-agulha-sul-americano",
+    "url": "https://data.nhm.ac.uk/media/d29f414e-ebed-47fd-9a7f-15a58fbf80d5",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Aquatic_Biodiversity_in_the_Amazon_%281020205-f8%29.png/500px-Aquatic_Biodiversity_in_the_Amazon_%281020205-f8%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Fish_species_collected_from_sandy_beaches_of_the_Acre_river_Brazil_%285_of_5%29.png/500px-Fish_species_collected_from_sandy_beaches_of_the_Acre_river_Brazil_%285_of_5%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "rhamphichthys-hahni",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/518998371/medium.jpg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%286_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%286_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "scinax-constrictus",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/342114927/medium.jpeg",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Scinax_constrictus.jpg/500px-Scinax_constrictus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "synbranchus-madeirae",
+    "url": "https://ibss-images.calacademy.org/static/ichthyology/originals/1a/70/1a70589a-926e-4d9c-8ab2-9d5caeac4572.jpg",
+    "alternativas": [
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/41/13/4113b672-87ff-40ea-b116-fbef15c3c92e.jpg",
+      "https://ibss-images.calacademy.org/static/ichthyology/originals/53/5e/535ec6b5-c4df-49e0-affe-6b16fbc2cdea.jpg"
+    ]
+  },
+  {
+    "id": "tatia-neivai",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_7.jpg/500px-Fish_fauna_%2810.3897-zookeys.875.31977%29_Figure_7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Tatia_neivai.jpg/500px-Tatia_neivai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "peixe-cachorro-striatulus",
+    "url": "https://data.nhm.ac.uk/media/b524861e-c498-4cbf-9319-691849d2d364",
+    "alternativas": [
+      "https://data.nhm.ac.uk/media/a53d287e-b213-4aa3-aa9c-9488b4f26a4b",
+      "https://data.nhm.ac.uk/media/ae1fe231-e555-44a7-ad27-8ede334dbb6d"
+    ]
+  },
+  {
+    "id": "tridentopsis-cahuali",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "alternativas": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29_%28clipped%29.png/500px-Fish_fauna_from_R%C3%ADo_Pilcomayo_National_Park_%285_of_7%29_%28clipped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
+  },
+  {
+    "id": "tropidurus-guarani",
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/94416434/medium.jpg",
+    "alternativas": [
+      "https://inaturalist-open-data.s3.amazonaws.com/photos/235113517/medium.jpeg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Tropidurus_guarani.jpg/500px-Tropidurus_guarani.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    ]
   }
 ]

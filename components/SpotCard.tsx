@@ -5,6 +5,7 @@
  */
 import { useState } from "react";
 import { ActivityIndicator, Linking, Pressable, View } from "react-native";
+import { isSafeExternalUrl } from "@/shared/safe-url";
 import * as Location from "expo-location";
 import { Text } from "@/components/T";
 import { useColors } from "@/hooks/use-colors";
@@ -59,7 +60,7 @@ export function SpotCard({ spot, visits, onVisits, onClose }: { spot: TouristSpo
       {message && <Text style={{ color: message === t.got ? colors.success : colors.muted, fontSize: 13 }}>{message}</Text>}
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
         <Text style={{ color: colors.muted, fontSize: 12 }}>{progress.tier ? progress.tier.icon + " " : ""}{t.progress(progress.visited, progress.total)}</Text>
-        <Pressable onPress={() => void Linking.openURL(spot.source)} accessibilityRole="link" hitSlop={8}><Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{t.source}</Text></Pressable>
+        <Pressable onPress={() => { if (isSafeExternalUrl(spot.source)) void Linking.openURL(spot.source).catch(() => undefined); }} accessibilityRole="link" hitSlop={8}><Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{t.source}</Text></Pressable>
       </View>
     </View>
   );

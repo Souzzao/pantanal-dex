@@ -128,7 +128,7 @@ export default function NewSightingScreen() {
       });
       applyPickerResult(result);
       // Foto tirada na abertura: já pega a localização junto (o formulário pede as duas).
-      if (automatic && !result.canceled && !coords) void useLocation();
+      if (automatic && !result.canceled && !coords) void fillLocationFromDevice();
     } catch {
       if (automatic) return; // aparelho sem câmera (emulador): segue para o formulário
       const copy = getNativePermissionCopy(nativeLanguage, "camera", "error");
@@ -147,7 +147,7 @@ export default function NewSightingScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existing]);
 
-  const useLocation = async () => {
+  const fillLocationFromDevice = async () => {
     try {
       if (!(await Location.hasServicesEnabledAsync())) {
         const copy = getNativePermissionCopy(nativeLanguage, "location", "services-disabled");
@@ -222,7 +222,7 @@ export default function NewSightingScreen() {
         <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar">
           <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text>
         </Pressable>
-        <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
+        <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
         <Text style={{ color: colors.muted, marginBottom: 16 }}>Foto e localização são obrigatórias. {ready && canWriteSightings ? `${countSightingCreations(creationLedger, new Date())}/30 novos registros hoje neste aparelho.` : "Carregando o caderno…"}</Text>
 
@@ -278,7 +278,7 @@ export default function NewSightingScreen() {
         </View>
         {!!photoUri && <View style={{ marginBottom: 14 }}><Image source={{ uri: photoUri }} accessibilityLabel="Fotografia selecionada para o avistamento" style={{ width: "100%", height: 160, borderRadius: 12, marginBottom: 8 }} /><Text style={{ color: colors.success, fontWeight: "700" }}>Fotografia pronta para salvar.</Text><Pressable onPress={() => { setPhotoUri(undefined); setPhotoInput(undefined); }} accessibilityRole="button" accessibilityLabel="Remover fotografia" style={{ marginTop: 8 }}><Text style={{ color: colors.error, fontWeight: "800" }}>Remover fotografia</Text></Pressable></View>}
 
-        <Pressable onPress={useLocation} accessibilityRole="button" style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
+        <Pressable onPress={fillLocationFromDevice} accessibilityRole="button" style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{coords ? "Atualizar localização do aparelho" : "Usar localização do aparelho"}</Text>
         </Pressable>
         <Pressable onPress={() => setPickingLocation(true)} accessibilityRole="button" style={{ borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 10 }}><Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Escolher local no mapa</Text></Pressable>

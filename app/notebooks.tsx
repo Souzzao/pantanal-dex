@@ -4,6 +4,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isImportSizeOk } from "@/shared/safe-url";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import { router } from "expo-router";
@@ -66,6 +67,7 @@ export default function NotebooksScreen() {
     const pick = await DocumentPicker.getDocumentAsync({ type: ["application/json", "application/geo+json", "text/csv", "text/plain", "*/*"], copyToCacheDirectory: true });
     if (pick.canceled) return;
     const asset = pick.assets[0];
+    if (!isImportSizeOk(asset.size)) { Alert.alert("Arquivo grande demais", "O limite é 5 MB. Exporte cadernos menores e importe um por vez."); return; }
     const parsed = parseNotebookFile(await FileSystem.readAsStringAsync(asset.uri));
     if (!parsed.sightings.length) { Alert.alert("Nada para importar", "O arquivo não tem registros válidos."); return; }
     const options: { text: string; mode: NotebookImportMode }[] = [{ text: "Criar caderno novo", mode: "new" }];
@@ -150,7 +152,7 @@ export default function NotebooksScreen() {
         <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/sightings" as never))} accessibilityRole="button">
           <Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 10 }}>‹ Voltar</Text>
         </Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>Cadernos</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>Cadernos</Text>
         <Text style={{ color: colors.muted, marginTop: 4 }}>Separe seus avistamentos por viagem, projeto ou turma. Tudo funciona offline e viaja em JSON, CSV ou GeoJSON.</Text>
         {!ready ? <ActivityIndicator style={{ marginTop: 30 }} color={colors.primary} /> : null}
         {busy ? <ActivityIndicator style={{ marginTop: 12 }} color={colors.primary} /> : null}
@@ -195,7 +197,7 @@ export default function NotebooksScreen() {
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12 }}>
             <Text style={{ color: colors.foreground, flex: 1 }}>Remover registros repetidos (mesmo animal, data, hora e local)</Text>
-            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} />
+            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} accessibilityLabel="Remover registros repetidos ao juntar" />
           </View>
           <View style={{ marginTop: 12 }}>
             {button(toMove ? `Juntar ${toMove} registro(s) em "${notebooks.find((n) => n.id === mergeTarget)?.name ?? ""}"` : "Escolha cadernos de origem com registros", () => void run(async () => {

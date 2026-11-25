@@ -49,6 +49,9 @@ importers:
 
   .:
     dependencies:
+      '@expo-google-fonts/fraunces':
+        specifier: 0.4.1
+        version: 0.4.1
       '@expo/vector-icons':
         specifier: ^15.0.3
         version: 15.0.3(expo-font@14.0.10(expo@54.0.29)(react-native@0.81.5(@babel/core@7.29.13)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.13)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
@@ -1012,6 +1015,9 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@expo-google-fonts/fraunces@0.4.1':
+    resolution: {integrity: sha512-gYc9P92ObyWvz1rWPOeWSvVKyBFIuA8hgOdhvo4DSiPBaWLbFA6v8uLIEIBwW+0oWTlXbBzjeBReHQI2H7UNjQ==}
 
   '@expo/apple-utils@2.3.0':
     resolution: {integrity: sha512-DYL8IzacOz2RhX+8DwJS7qZZkcJEq5EiFipcYna45a0SxVFdbNBNawD+RrKNJSQS8oqvpZ6KXmuqIAWfLtN3Ug==}
@@ -7171,6 +7177,8 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@expo-google-fonts/fraunces@0.4.1': {}
 
   '@expo/apple-utils@2.3.0': {}
 

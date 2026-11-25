@@ -51,6 +51,27 @@
 | Atualizações de segurança automáticas | [`.github/dependabot.yml`](../.github/dependabot.yml) |
 | Modelo de variáveis sem segredos | [`.env.example`](../.env.example) |
 
+## Blindagem da versão 3.9
+
+**App (Android)**
+- Backup automático do Android desligado (`allowBackup: false`): avistamentos com local exato e a sessão não vão para a nuvem do Google sem a pessoa querer. Para trocar de aparelho: Exportar.
+- Permissões mínimas: localização (só durante o uso), câmera e internet. Bloqueadas as que bibliotecas costumam trazer (microfone, localização em segundo plano, telefone, armazenamento antigo, sobreposição de tela).
+- Sem link curinga (`autoVerify` com `host: *`); esquema próprio `pantanaldex://` (Demo: `pantanaldex-demo://`).
+- Links externos só abrem se forem `https` comuns (`shared/safe-url.ts`): bloqueia `intent:`, `file:`, `content:`, `javascript:` e endereços com usuário/senha.
+- Mapa (WebView): sem acesso a arquivos do aparelho, sem conteúdo misto http/https, links abrem fora do app.
+- Importação de cadernos e backups limitada a 5 MB (evita travar o app com arquivo gigante).
+- Versão final sem caderno Teste e sem auditoria simulada (`shared/variant.ts`); a Demo é outro pacote.
+
+**Servidor (Supabase)** — conferido com o Security Advisor em 18/11/2026
+- RLS em todas as tabelas; `sighting_reviews` sem política de propósito (ninguém lê direto, só pelas funções).
+- Funções `SECURITY DEFINER` chamáveis por quem está logado: são de propósito; cada uma confere `auth.uid()` e o papel (`my_role()`) antes de agir. `delete_my_account` só apaga a conta de quem chama.
+- ⚠️ Proteção contra senhas vazadas (HaveIBeenPwned) desligada: no Supabase ela só existe no plano Pro. Hoje vale a regra de mínimo de 8 caracteres.
+
+**Dependências**
+- `pnpm audit --prod`: 8 alertas (3 altos), todos dentro de `@expo/cli` (ferramenta de build: `image-size`, `decode-uri-component`, `glob`, `minimatch`, `uuid`). Não vão para dentro do app instalado. Somem ao atualizar o Expo SDK — fazer depois da publicação, testando.
+
+**Testes** — `tests/security-hardening.test.ts` e `tests/variant.test.ts` cobrem links, limite de importação, ausência de chaves secretas no código, WebView e as diferenças entre Demo e Final.
+
 ## Checklist antes de cada versão
 
 - [ ] `pnpm check` e `pnpm test` sem erros
