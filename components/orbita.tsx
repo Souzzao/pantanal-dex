@@ -6,7 +6,7 @@
  *  - Panel            · cartão do Órbita (degradê de 145° + contorno), opcionalmente com "brilho" (glint)
  *  - Starfield        · céu estrelado (Órbita `.sky`)
  *  - Meteors          · estrelas cadentes (Magic UI Meteors)
- *  - AuroraText       · título com degradê que se move (Magic UI Aurora Text)
+ *  - AuroraText       · título em degradê (inspirado no Magic UI Aurora Text)
  *  - MagicCard        · destaque de luz que acompanha o dedo (Magic UI Magic Card)
  *  - StatusPill       · indicador de status com ponto luminoso (Órbita `.status`)
  *  - MetricCard       · leitura grande + legenda + progresso (Órbita `.metric` + `progress`)
@@ -129,20 +129,10 @@ export function Meteors({ count = 4, height = 220 }: { count?: number; height?: 
   );
 }
 
-const AnimatedStop = Animated.createAnimatedComponent(Stop);
-
-/**
- * Título com degradê que "passeia" (Aurora Text). Desenhado em SVG para funcionar igual no Android,
- * iOS e web. `width`/`height` definem a caixa do texto.
- */
+/** Título em degradê em SVG, com paradas estáticas compatíveis com Fabric. */
 export function AuroraText({ text, width, height, fontSize, colors = ["#FFC400", "#FF8A3D", "#FFE38A", "#FFC400"], fontFamily = "Fraunces_700Bold", accessibilityLabel }: { text: string; width: number; height: number; fontSize: number; colors?: string[]; fontFamily?: string; accessibilityLabel?: string }) {
-  const reduced = useReducedMotion();
   const id = useId("au");
-  const shift = useSharedValue(0);
-  useEffect(() => {
-    if (reduced) return;
-    shift.value = withRepeat(withTiming(1, { duration: 4200, easing: Easing.inOut(Easing.sin) }), -1, true);
-    return () => cancelAnimation(shift);
+  return () => cancelAnimation(shift);
   }, [reduced, shift]);
   const stop1 = useAnimatedProps(() => ({ offset: 0.15 * shift.value }));
   const stop2 = useAnimatedProps(() => ({ offset: 0.35 + 0.3 * shift.value }));
@@ -151,8 +141,8 @@ export function AuroraText({ text, width, height, fontSize, colors = ["#FFC400",
       <Svg width={width} height={height}>
         <Defs>
           <LinearGradient id={id} x1="0" y1="0" x2="1" y2="0.4">
-            <AnimatedStop animatedProps={stop1} stopColor={colors[0]} />
-            <AnimatedStop animatedProps={stop2} stopColor={colors[1]} />
+            <Stop offset="0" stopColor={colors[0]} />
+            <Stop offset="0.5" stopColor={colors[1]} />
             <Stop offset="0.8" stopColor={colors[2]} />
             <Stop offset="1" stopColor={colors[3]} />
           </LinearGradient>
