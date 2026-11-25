@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { FlatList, Image, ScrollView, View } from "react-native";
 
 import { DisplayText, PressableScale, Reveal } from "@/components/motion";
+import { BorderBeam, BottomFade, Glint, GrowBar, HorizonGlow, NumberTicker, PulseDot } from "@/components/orbit-effects";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { Text, TextInput } from "@/components/T";
@@ -51,6 +52,7 @@ export default function HomeScreen() {
   return (
     <ScreenContainer className="px-5" containerClassName="bg-background">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }} keyboardShouldPersistTaps="handled">
+        <HorizonGlow height={150} style={{ top: -10 }} />
         <Reveal index={0}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 12, paddingTop: 14 }}>
             <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 44, height: 44, borderRadius: 14 }} />
@@ -66,9 +68,9 @@ export default function HomeScreen() {
             <PressableScale onPress={() => open(today.id)} scaleTo={0.98} accessibilityRole="button" accessibilityLabel={`${t.today}: ${today.commonName}`}
               style={{ marginTop: 18, borderRadius: 28, overflow: "hidden", height: 250, backgroundColor: colors.surface }}>
               <RemoteImage source={{ uri: today.images[0]?.uri }} label={today.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
+              <Glint every={7000} />
               {/* degradê de baixo para cima, para o texto ler bem sobre qualquer foto */}
-              <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 150, backgroundColor: "rgba(14,13,11,0.35)" }} />
-              <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 95, backgroundColor: "rgba(14,13,11,0.55)" }} />
+              <BottomFade height={170} />
               <View style={{ position: "absolute", top: 14, left: 14, backgroundColor: colors.primary, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 }}>
                 <Text style={{ color: colors.background, fontSize: 10, fontWeight: "900", letterSpacing: 1.5 }}>{t.today}</Text>
               </View>
@@ -92,19 +94,21 @@ export default function HomeScreen() {
           <Reveal index={3}>
             {/* Bento: um bloco alto à esquerda e dois empilhados à direita */}
             <View style={{ flexDirection: "row", gap: 10, marginTop: 14 }}>
+              <BorderBeam radius={22} color="#FFFFFF" style={{ flex: 1.1 }}>
               <PressableScale onPress={() => router.push("/(tabs)/animals" as never)} accessibilityRole="button" accessibilityLabel={t.explore}
-                style={[tile, { flex: 1.1, minHeight: 196, backgroundColor: colors.primary, borderColor: colors.primary, justifyContent: "space-between" }]}>
+                style={[tile, { flex: 1, minHeight: 196, backgroundColor: colors.primary, borderColor: colors.primary, justifyContent: "space-between" }]}>
                 <Text style={{ fontSize: 30 }}>🐾</Text>
                 <View>
-                  <DisplayText style={{ color: colors.background, fontSize: 40, lineHeight: 44 }}>{catalogCoverage.species.toLocaleString("pt-BR")}</DisplayText>
+                  <NumberTicker value={catalogCoverage.species} style={{ color: colors.background, fontSize: 40, lineHeight: 44, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }} />
                   <Text style={{ color: colors.background, fontWeight: "700", opacity: 0.8 }}>{t.species}</Text>
                   <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16, marginTop: 8 }}>{t.explore} →</Text>
                 </View>
               </PressableScale>
+              </BorderBeam>
               <View style={{ flex: 1, gap: 10 }}>
                 <PressableScale onPress={() => router.push("/(tabs)/sightings" as never)} accessibilityRole="button" accessibilityLabel={`${t.sightings}: ${real}`} style={[tile, { flex: 1 }]}>
                   <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700" }}>{t.sightings}</Text>
-                  <DisplayText style={{ color: colors.foreground, fontSize: 30, marginTop: 4 }}>{real}</DisplayText>
+                  <NumberTicker value={real} style={{ color: colors.foreground, fontSize: 30, marginTop: 4, fontFamily: "Fraunces_700Bold" }} />
                   <Text style={{ color: colors.muted, fontSize: 12 }}>{t.records}</Text>
                 </PressableScale>
                 <PressableScale onPress={() => router.push("/collection" as never)} accessibilityRole="button" accessibilityLabel={`${t.collection}: ${collection.discoveredSpecies} ${t.discovered}`} style={[tile, { flex: 1 }]}>
@@ -112,10 +116,8 @@ export default function HomeScreen() {
                     <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700" }}>{t.collection}</Text>
                     <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "900" }}>{t.level} {collection.level}</Text>
                   </View>
-                  <DisplayText style={{ color: colors.foreground, fontSize: 30, marginTop: 4 }}>{collection.discoveredSpecies}</DisplayText>
-                  <View style={{ height: 5, borderRadius: 3, backgroundColor: colors.border, marginTop: 6, overflow: "hidden" }}>
-                    <View style={{ width: `${Math.max(collection.percent, 2)}%`, height: 5, backgroundColor: colors.primary }} />
-                  </View>
+                  <NumberTicker value={collection.discoveredSpecies} style={{ color: colors.foreground, fontSize: 30, marginTop: 4, fontFamily: "Fraunces_700Bold" }} />
+                  <View style={{ marginTop: 6 }}><GrowBar percent={Math.max(collection.percent, 2)} color={colors.primary} track={colors.border} height={5} /></View>
                 </PressableScale>
               </View>
             </View>
@@ -146,7 +148,7 @@ export default function HomeScreen() {
                 <PressableScale onPress={() => open(item.id)} accessibilityRole="button" accessibilityLabel={`Abrir ficha de ${item.commonName}`}
                   style={{ width: 140, height: 196, borderRadius: 20, overflow: "hidden", backgroundColor: colors.surface }}>
                   <RemoteImage source={{ uri: item.images[0]?.uri }} label={item.commonName} style={{ position: "absolute", width: "100%", height: "100%" }} />
-                  <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 72, backgroundColor: "rgba(14,13,11,0.7)" }} />
+                  <BottomFade height={110} strength={0.9} />
                   <View style={{ position: "absolute", left: 10, right: 10, bottom: 10 }}>
                     <Text style={{ color: "#FBF7EF", fontWeight: "800" }} numberOfLines={2}>{item.commonName}</Text>
                     <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "700", marginTop: 2 }}>{item.group}</Text>
@@ -156,7 +158,10 @@ export default function HomeScreen() {
             )} />
         </Reveal>
 
-        <Text style={{ color: colors.muted, fontSize: 12, textAlign: "center", marginTop: 22 }}>📶 {t.offline}</Text>
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 22 }}>
+          <PulseDot color={colors.success} />
+          <Text style={{ color: colors.muted, fontSize: 12 }}>{t.offline}</Text>
+        </View>
       </ScrollView>
     </ScreenContainer>
   );

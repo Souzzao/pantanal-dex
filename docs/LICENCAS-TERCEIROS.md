@@ -700,3 +700,8 @@ Gerado por `pnpm licenses list --prod` em 18/11/2026.
 - Fotos das espécies: CC0, CC BY ou CC BY-SA, com autor e fonte em cada ficha (iNaturalist, GBIF, Wikimedia Commons). Regras em [LICENCAS-E-CREDITOS.md](LICENCAS-E-CREDITOS.md).
 - Descrições: trechos adaptados da Wikipédia, CC BY-SA 4.0; nomes e dados de ocorrência do iNaturalist e do GBIF.
 - Mapa: Leaflet (BSD-2-Clause); dados do OpenStreetMap (ODbL); contorno do Pantanal: IBGE; continentes: Natural Earth (domínio público).
+
+## Referências de interface
+
+- Efeitos de `components/orbit-effects.tsx` (borda luminosa, contador de números, faixa de brilho, órbita, horizonte) foram **recriados** em React Native a partir das ideias do kit **Órbita UI** e da biblioteca **[Magic UI](https://github.com/magicuidesign/magicui)** (licença MIT, © Magic UI). Nenhum arquivo da biblioteca foi copiado; os créditos ficam aqui por cortesia.
+- Fonte de títulos: **Fraunces** (SIL Open Font License 1.1), via `@expo-google-fonts/fraunces`.

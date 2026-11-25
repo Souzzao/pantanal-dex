@@ -14,6 +14,7 @@ import { Text, TextInput } from "@/components/T";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTeams } from "@/contexts/TeamsContext";
 import { useColors } from "@/hooks/use-colors";
+import { Orbit } from "@/components/orbit-effects";
 import { findSpeciesById } from "@/shared/catalog";
 import {
   computeTeamProgress, formatTeamCode, isValidTeamCode, normalizeTeamCode, TEAM_MAX_MEMBERS, teamAchievements, validateTeamName,
@@ -130,6 +131,14 @@ export default function TeamsScreen() {
                 );
               })}
             </ScrollView>
+          )}
+
+          {teams.teams.length === 0 && !teams.loading && mode === "none" && (
+            <View style={{ alignItems: "center", marginTop: 8 }}>
+              <Orbit radius={78} items={["🦜", "🐊", "🐆", "🦦", "🐟", "🦩"].map((e) => <Text key={e} style={{ fontSize: 24 }}>{e}</Text>)}
+                center={<View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.primary, alignItems: "center", justifyContent: "center" }}><Text style={{ fontSize: 28 }}>👥</Text></View>} />
+              <Text style={{ color: colors.muted, textAlign: "center", marginTop: 4, lineHeight: 20 }}>Junte sua turma de campo: cada avistamento de cada pessoa soma no progresso da equipe.</Text>
+            </View>
           )}
 
           {mode === "none" ? (

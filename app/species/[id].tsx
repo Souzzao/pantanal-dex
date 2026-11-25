@@ -8,6 +8,7 @@ import { Alert, Linking, Pressable, ScrollView, useWindowDimensions, View } from
 import Animated, { interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DisplayText, PressableScale } from "@/components/motion";
+import { BottomFade } from "@/components/orbit-effects";
 import { Text } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -65,7 +66,7 @@ export default function SpeciesDetailScreen() {
           {animal.images.map((image, index) => <RemoteImage key={image.uri} source={{ uri: image.uri }} label={animal.commonName} accessibilityLabel={`Imagem ${index + 1} de ${animal.images.length} de ${animal.commonName}`} style={{ width, height: HERO }} />)}
         </ScrollView>
       </Animated.View>
-      <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 110, backgroundColor: "rgba(14,13,11,0.45)" }} />
+      <BottomFade height={140} strength={0.9} />
       {animal.images.length > 1 && <View pointerEvents="none" style={{ position: "absolute", bottom: 14, alignSelf: "center", flexDirection: "row", gap: 6 }}>{animal.images.map((image, index) => <View key={image.uri} style={{ width: index === page ? 18 : 6, height: 6, borderRadius: 3, backgroundColor: index === page ? colors.primary : "rgba(251,247,239,0.6)" }} />)}</View>}
     </View>}
     <PressableScale onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/animals" as any))} accessibilityRole="button" accessibilityLabel="Voltar para animais"
