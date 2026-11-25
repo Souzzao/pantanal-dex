@@ -172,7 +172,7 @@ export default function PublicRecordsScreen() {
             <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as any))} accessibilityRole="button" accessibilityLabel={t.back}>
               <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>{t.back}</Text>
             </Pressable>
-            <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontWeight: "800" }}>{t.title}</Text>
+            <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{t.title}</Text>
             <Text style={{ color: colors.muted, fontSize: 15, marginTop: 4 }}>{t.subtitle}</Text>
             <Pressable onPress={() => router.push("/public-map" as any)} accessibilityRole="button" style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 14, padding: 14, marginTop: 14 }, pressed && { opacity: 0.85 }]}>
               <Text style={{ color: colors.background, textAlign: "center", fontWeight: "800" }}>{t.openMap}</Text>

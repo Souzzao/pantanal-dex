@@ -152,7 +152,7 @@ export default function NotebooksScreen() {
         <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/sightings" as never))} accessibilityRole="button">
           <Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 10 }}>‹ Voltar</Text>
         </Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>Cadernos</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>Cadernos</Text>
         <Text style={{ color: colors.muted, marginTop: 4 }}>Separe seus avistamentos por viagem, projeto ou turma. Tudo funciona offline e viaja em JSON, CSV ou GeoJSON.</Text>
         {!ready ? <ActivityIndicator style={{ marginTop: 30 }} color={colors.primary} /> : null}
         {busy ? <ActivityIndicator style={{ marginTop: 12 }} color={colors.primary} /> : null}

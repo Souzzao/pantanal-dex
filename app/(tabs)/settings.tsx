@@ -121,8 +121,8 @@ export default function SettingsScreen() {
     await setSettings({ ...settings, quickLanguages: next });
   };
 
-  return <ScreenContainer className="px-5"><ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-    <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", paddingTop: 18 }}>{labels.title}</Text>
+  return <ScreenContainer className="px-5"><ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+    <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5, paddingTop: 18 }}>{labels.title}</Text>
     <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 12 }}>{labels.subtitle}</Text>
     <View style={{ marginBottom: 12 }}><AccountCard /></View>
     <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 15, marginBottom: 24 }} accessibilityRole="summary">

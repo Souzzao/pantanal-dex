@@ -222,7 +222,7 @@ export default function NewSightingScreen() {
         <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar">
           <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text>
         </Pressable>
-        <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
+        <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
         <Text style={{ color: colors.muted, marginBottom: 16 }}>Foto e localização são obrigatórias. {ready && canWriteSightings ? `${countSightingCreations(creationLedger, new Date())}/30 novos registros hoje neste aparelho.` : "Carregando o caderno…"}</Text>
 

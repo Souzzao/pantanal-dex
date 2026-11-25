@@ -134,7 +134,7 @@ export default function CollectionScreen() {
       <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as any))} accessibilityRole="button" accessibilityLabel={t.back}>
         <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>{t.back}</Text>
       </Pressable>
-      <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>{t.title}</Text>
+      <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{t.title}</Text>
       <Text style={{ color: colors.muted, fontSize: 15, marginTop: 4 }}>{t.subtitle}</Text>
 
       <View accessible accessibilityLabel={`${summary.discoveredSpecies} / ${summary.totalSpecies} ${t.discovered}, ${summary.percent}%. ${t.level} ${summary.level}.`}

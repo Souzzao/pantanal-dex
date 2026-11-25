@@ -208,7 +208,7 @@ export default function AuditScreen() {
     <View style={{ paddingHorizontal: 16 }}>
       <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as never))} accessibilityRole="button"><Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 10 }}>{t.back}</Text></Pressable>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontWeight: "800" }}>{t.title}</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{t.title}</Text>
         <View style={{ flexDirection: "row", gap: 6 }}>
           {IS_DEMO && <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
             style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.warning, backgroundColor: demo ? colors.warning : colors.surface }}>

@@ -75,7 +75,7 @@ export default function SightingDetailScreen() {
           <Text style={{ color: colors.primary, fontWeight: "700", fontSize: 16, paddingVertical: 14 }}>‹ Voltar</Text>
         </Pressable>
         <RemoteImage label={animal.commonName} source={sighting.photoUri || animal.images[0]?.uri ? { uri: sighting.photoUri || animal.images[0]?.uri } : undefined} style={{ width: "100%", height: 230, borderRadius: 18 }} />
-        <Text style={{ color: colors.foreground, fontSize: 30, fontWeight: "800", marginTop: 18 }}>{animal.commonName}</Text>
+        <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5, marginTop: 18 }}>{animal.commonName}</Text>
         <Text style={{ color: colors.muted, fontStyle: "italic", marginTop: 3 }}>{animal.scientificName}</Text>
         <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 16, marginTop: 20 }}>
           <Text style={{ color: colors.foreground, fontWeight: "800" }}>Data e horário</Text>

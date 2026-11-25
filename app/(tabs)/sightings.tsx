@@ -178,7 +178,7 @@ export default function SightingsScreen() {
             style={{
               color: colors.foreground,
               fontSize: 30,
-              fontWeight: "800",
+              fontFamily: "Fraunces_700Bold", letterSpacing: -0.5,
             }}
           >
             Avistamentos
@@ -423,7 +423,7 @@ export default function SightingsScreen() {
       <FlatList
         data={ready ? visible : []}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 30, flexGrow: 1 }}
+        contentContainerStyle={{ paddingBottom: 120, flexGrow: 1 }}
         ListEmptyComponent={
           ready ? (
             <View

@@ -111,7 +111,7 @@ export default function TeamsScreen() {
         <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as never))} accessibilityRole="button">
           <Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 12 }}>‹ Voltar</Text>
         </Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontWeight: "900" }}>Equipes</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>Equipes</Text>
         <Text style={{ color: colors.muted, marginTop: 4, lineHeight: 20 }}>Grupos de campo e de estudo com até {TEAM_MAX_MEMBERS} pessoas: progresso em conjunto, conquistas e as zonas onde cada espécie foi vista.</Text>
 
         {!teams.available ? card(<Text style={{ color: colors.foreground }}>Entre na sua conta (com o servidor configurado) para usar equipes.</Text>) : <>
