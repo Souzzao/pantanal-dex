@@ -3,6 +3,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { LanguageContext } from "@/components/T";
 import "@/global.css";
 import { Stack } from "expo-router";
 import Head from "expo-router/head";
@@ -123,10 +124,13 @@ function AccountScopedApp({ children }: { children: React.ReactNode }) {
   return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}><TeamsProvider>{children}</TeamsProvider></AppProvider>;
 }
 
-/** Trocar o idioma remonta as telas, para que todos os textos e fichas saiam no idioma novo. */
+/**
+ * Trocar o idioma redesenha os textos (LanguageContext) sem remontar a navegação. Antes a árvore inteira
+ * era remontada com uma chave nova, e isso fechava o app ao trocar o idioma dentro da ficha de um animal.
+ */
 function LanguageScope({ children }: { children: React.ReactNode }) {
   const { settings } = useApp();
-  return <React.Fragment key={settings.defaultLanguage}>{children}</React.Fragment>;
+  return <LanguageContext.Provider value={settings.defaultLanguage}>{children}</LanguageContext.Provider>;
 }
 
 /** Login obrigatório: sem conta aberta, mostra a tela de entrar. */
