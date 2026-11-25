@@ -132,10 +132,6 @@ export function Meteors({ count = 4, height = 220 }: { count?: number; height?: 
 /** Título em degradê em SVG, com paradas estáticas compatíveis com Fabric. */
 export function AuroraText({ text, width, height, fontSize, colors = ["#FFC400", "#FF8A3D", "#FFE38A", "#FFC400"], fontFamily = "Fraunces_700Bold", accessibilityLabel }: { text: string; width: number; height: number; fontSize: number; colors?: string[]; fontFamily?: string; accessibilityLabel?: string }) {
   const id = useId("au");
-  return () => cancelAnimation(shift);
-  }, [reduced, shift]);
-  const stop1 = useAnimatedProps(() => ({ offset: 0.15 * shift.value }));
-  const stop2 = useAnimatedProps(() => ({ offset: 0.35 + 0.3 * shift.value }));
   return (
     <View accessible accessibilityRole="header" accessibilityLabel={accessibilityLabel ?? text} style={{ width, height }}>
       <Svg width={width} height={height}>
