@@ -54,7 +54,7 @@ export default function AnimalsScreen() {
   const row = (title: string, items: [string, string][], value: string, set: (v: string) => void) => (
     <View style={{ marginBottom: 10 }}>
       <Text style={{ color: colors.muted, fontSize: 11, fontWeight: "800", letterSpacing: 1, marginBottom: 6 }}>{title.toUpperCase()}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingRight: 8, alignItems: "center" }}>{items.map(([key, label]) => <View key={key || "all"} style={{ flexShrink: 0 }}>{chip(label, value === key, () => set(key))}</View>)}</ScrollView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0, minHeight: 46 }} contentContainerStyle={{ gap: 8, paddingRight: 8, alignItems: "center", minHeight: 46 }}>{items.map(([key, label]) => <View key={key || "all"} style={{ flexShrink: 0 }}>{chip(label, value === key, () => set(key))}</View>)}</ScrollView>
     </View>
   );
   return <ScreenContainer className="px-5">

@@ -288,10 +288,12 @@ export default function SightingsScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 2 }}
+        // Altura mínima explícita: no Android (Fabric) a lista horizontal encolhia e cortava o texto dos chips.
+        style={{ flexGrow: 0, minHeight: 48 }}
+        contentContainerStyle={{ paddingBottom: 2, alignItems: "center", minHeight: 48 }}
       >
         {["", ...groups].map((item) => (
-          <View key={item || "all-groups"}>
+          <View key={item || "all-groups"} style={{ flexShrink: 0 }}>
             {renderChip(item || "Todos", groupFilter === item, () =>
               setGroupFilter(item),
             )}
@@ -311,10 +313,12 @@ export default function SightingsScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 2 }}
+        // Altura mínima explícita: no Android (Fabric) a lista horizontal encolhia e cortava o texto dos chips.
+        style={{ flexGrow: 0, minHeight: 48 }}
+        contentContainerStyle={{ paddingBottom: 2, alignItems: "center", minHeight: 48 }}
       >
         {["", ...environments].map((item) => (
-          <View key={item || "all-environments"}>
+          <View key={item || "all-environments"} style={{ flexShrink: 0 }}>
             {renderChip(item || "Todos", environmentFilter === item, () =>
               setEnvironmentFilter(item),
             )}
