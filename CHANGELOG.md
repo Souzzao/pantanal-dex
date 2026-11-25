@@ -2,6 +2,21 @@
 
 Todas as mudanças relevantes do PantanalDex. Mantido por Felipe de Souza Aquino.
 
+## [3.9.0] — 2026-11-25
+
+### Adicionado
+- **Equipes de campo**: criar ou entrar por código de 8 letras, até 100 pessoas, até 5 equipes por pessoa, 9 conquistas, ranking e zonas de ~11 km estudadas. Funciona offline; sair exige digitar o nome da equipe; o dono que exclui a conta passa a equipe adiante.
+- **Duas versões**: PantanalDex (final) e PantanalDex Demo (caderno Teste e auditoria simulada), pelo `APP_VARIANT`; o GitHub publica os dois APKs.
+- **Excluir minha conta** no app e **aceite da Política de Privacidade** na criação da conta (LGPD).
+- Interface nova: barra flutuante com Registrar no centro, espécie do dia, grade de atalhos, ficha com foto em tela cheia, animações com mola e efeitos inspirados no kit Órbita UI / Magic UI; títulos em Fraunces.
+
+### Alterado
+- Catálogo só com fotos de **licença livre** (CC0, CC BY, CC BY-SA): 1.003 espécies, até 6 fotos cada; nomes populares sem repetição e espécies duplicadas unidas.
+- App definido como **gratuito e sem anúncios**.
+
+### Segurança
+- Backup automático do Android desligado, permissões mínimas, links externos só `https`, WebView do mapa sem acesso a arquivos, importação limitada a 5 MB.
+
 ## [3.8.0] — 2026-11-18
 
 ### Adicionado
