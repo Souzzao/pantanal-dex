@@ -6,7 +6,7 @@
  */
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Platform, Pressable, View, type LayoutChangeEvent } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -17,6 +17,14 @@ import { useColors } from "@/hooks/use-colors";
 
 const SPRING = { damping: 18, stiffness: 220, mass: 0.7 } as const;
 export const TAB_BAR_SPACE = 92; // espaço que as telas reservam embaixo para a barra flutuante
+
+/** Ícone com "ampliação" do Dock (Magic UI): a aba ativa cresce e sobe com mola. */
+function DockIcon({ focused, children }: { focused: boolean; children: React.ReactNode }) {
+  const v = useSharedValue(focused ? 1 : 0);
+  useEffect(() => { v.value = withSpring(focused ? 1 : 0, { damping: 14, stiffness: 240 }); }, [focused, v]);
+  const style = useAnimatedStyle(() => ({ transform: [{ scale: 1 + v.value * 0.18 }, { translateY: -v.value * 3 }] }));
+  return <Animated.View style={style}>{children}</Animated.View>;
+}
 
 export function FloatingTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const colors = useColors();
@@ -67,7 +75,7 @@ export function FloatingTabBar({ state, descriptors, navigation }: BottomTabBarP
           return (
             <Pressable key={route.key} onPress={onPress} accessibilityRole="tab" accessibilityState={{ selected: focused }} accessibilityLabel={label}
               style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 2 }}>
-              {options.tabBarIcon?.({ focused, color, size: 22 })}
+              <DockIcon focused={focused}>{options.tabBarIcon?.({ focused, color, size: 22 })}</DockIcon>
               <Text style={{ color, fontSize: 10, fontWeight: focused ? "800" : "600" }} numberOfLines={1}>{label}</Text>
             </Pressable>
           );

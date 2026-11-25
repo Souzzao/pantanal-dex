@@ -197,7 +197,7 @@ export default function NotebooksScreen() {
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12 }}>
             <Text style={{ color: colors.foreground, flex: 1 }}>Remover registros repetidos (mesmo animal, data, hora e local)</Text>
-            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} />
+            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} accessibilityLabel="Remover registros repetidos ao juntar" />
           </View>
           <View style={{ marginTop: 12 }}>
             {button(toMove ? `Juntar ${toMove} registro(s) em "${notebooks.find((n) => n.id === mergeTarget)?.name ?? ""}"` : "Escolha cadernos de origem com registros", () => void run(async () => {

@@ -44,6 +44,10 @@ export function HorizonGlow({ height = 260, color = "#FFC400", style }: { height
             <Stop offset="0.35" stopColor="#FF7A1A" stopOpacity="0.22" />
             <Stop offset="1" stopColor="#0E0D0B" stopOpacity="0" />
           </RadialGradient>
+          <LinearGradient id="hzfade" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0" stopColor="#0E0D0B" stopOpacity="0" />
+            <Stop offset="1" stopColor="#0E0D0B" stopOpacity="1" />
+          </LinearGradient>
           <RadialGradient id="planet" cx="50%" cy="0%" rx="60%" ry="60%">
             <Stop offset="0" stopColor="#3A2A12" stopOpacity="1" />
             <Stop offset="1" stopColor="#0E0D0B" stopOpacity="1" />
@@ -52,6 +56,8 @@ export function HorizonGlow({ height = 260, color = "#FFC400", style }: { height
         <Rect x="0" y="0" width="400" height="260" fill="url(#sun)" />
         {/* o "planeta": um arco grande cuja borda superior pega a luz */}
         <Circle cx="290" cy="560" r="380" fill="url(#planet)" stroke={color} strokeOpacity="0.75" strokeWidth="1.5" />
+        {/* esmaece a parte de baixo para não deixar borda reta */}
+        <Rect x="0" y="190" width="400" height="70" fill="url(#hzfade)" />
       </Svg>
     </Animated.View>
   );

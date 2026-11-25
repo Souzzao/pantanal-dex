@@ -6,10 +6,13 @@
  */
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
-import { FlatList, Image, ScrollView, View } from "react-native";
+import { FlatList, Image, ScrollView, useWindowDimensions, View } from "react-native";
 
 import { DisplayText, PressableScale, Reveal } from "@/components/motion";
 import { BorderBeam, BottomFade, Glint, GrowBar, HorizonGlow, NumberTicker, PulseDot } from "@/components/orbit-effects";
+import { AuroraText, GradientFill, MagicCard, Meteors, Starfield, StatusPill } from "@/components/orbita";
+import { gradientFor, groupIcon } from "@/constants/design";
+import { groups } from "@/shared/pantanal";
 import { RemoteImage } from "@/components/RemoteImage";
 import { ScreenContainer } from "@/components/screen-container";
 import { Text, TextInput } from "@/components/T";
@@ -20,9 +23,9 @@ import { computeCollection } from "@/shared/collection";
 import { hasBundledCover } from "@/shared/species-covers";
 
 const LABELS = {
-  pt: { tagline: "GUIA DE CAMPO DO PANTANAL", today: "ESPÉCIE DO DIA", search: "Buscar animal pelo nome", explore: "Explorar animais", species: "espécies", sightings: "Meus avistamentos", records: "registros", collection: "Coleção", discovered: "descobertas", level: "Nível", teams: "Equipes", teamsDetail: "grupos de campo", map: "Mapa público", mapDetail: "áreas de ~11 km", featured: "Para conhecer", all: "Ver todos", offline: "Tudo funciona sem internet", results: "resultados" },
-  en: { tagline: "PANTANAL FIELD GUIDE", today: "SPECIES OF THE DAY", search: "Search animal by name", explore: "Explore animals", species: "species", sightings: "My sightings", records: "records", collection: "Collection", discovered: "discovered", level: "Level", teams: "Teams", teamsDetail: "field groups", map: "Public map", mapDetail: "~11 km areas", featured: "Discover", all: "See all", offline: "Everything works offline", results: "results" },
-  es: { tagline: "GUÍA DE CAMPO DEL PANTANAL", today: "ESPECIE DEL DÍA", search: "Buscar animal por nombre", explore: "Explorar animales", species: "especies", sightings: "Mis avistamientos", records: "registros", collection: "Colección", discovered: "descubiertas", level: "Nivel", teams: "Equipos", teamsDetail: "grupos de campo", map: "Mapa público", mapDetail: "áreas de ~11 km", featured: "Para conocer", all: "Ver todos", offline: "Todo funciona sin internet", results: "resultados" },
+  pt: { heroA: "O Pantanal", heroB: "no seu bolso.", groups: "Explore por grupo", tagline: "GUIA DE CAMPO DO PANTANAL", today: "ESPÉCIE DO DIA", search: "Buscar animal pelo nome", explore: "Explorar animais", species: "espécies", sightings: "Meus avistamentos", records: "registros", collection: "Coleção", discovered: "descobertas", level: "Nível", teams: "Equipes", teamsDetail: "grupos de campo", map: "Mapa público", mapDetail: "áreas de ~11 km", featured: "Para conhecer", all: "Ver todos", offline: "Tudo funciona sem internet", results: "resultados" },
+  en: { heroA: "The Pantanal", heroB: "in your pocket.", groups: "Explore by group", tagline: "PANTANAL FIELD GUIDE", today: "SPECIES OF THE DAY", search: "Search animal by name", explore: "Explore animals", species: "species", sightings: "My sightings", records: "records", collection: "Collection", discovered: "discovered", level: "Level", teams: "Teams", teamsDetail: "field groups", map: "Public map", mapDetail: "~11 km areas", featured: "Discover", all: "See all", offline: "Everything works offline", results: "results" },
+  es: { heroA: "El Pantanal", heroB: "en tu bolsillo.", groups: "Explora por grupo", tagline: "GUÍA DE CAMPO DEL PANTANAL", today: "ESPECIE DEL DÍA", search: "Buscar animal por nombre", explore: "Explorar animales", species: "especies", sightings: "Mis avistamientos", records: "registros", collection: "Colección", discovered: "descubiertas", level: "Nivel", teams: "Equipos", teamsDetail: "grupos de campo", map: "Mapa público", mapDetail: "áreas de ~11 km", featured: "Para conocer", all: "Ver todos", offline: "Todo funciona sin internet", results: "resultados" },
 } as const;
 
 /** Mesma espécie o dia inteiro, outra amanhã (só espécies com foto embutida: aparece até offline). */
@@ -45,6 +48,9 @@ export default function HomeScreen() {
     return query ? all.slice(0, 12) : all.filter((item) => hasBundledCover(item.id) && item.id !== today?.id).slice(0, 12);
   }, [query, today]);
   const real = sightings.filter((item) => item.notebookId !== "teste").length;
+  const groupCounts = useMemo(() => filterSpeciesCatalog().reduce<Record<string, number>>((acc, item) => { acc[item.group] = (acc[item.group] ?? 0) + 1; return acc; }, {}), []);
+  const { width: screenWidth } = useWindowDimensions();
+  const groupTileWidth = Math.floor((Math.min(screenWidth, 520) - 40 - 20) / 3);
   const open = (id: string) => router.push({ pathname: "/species/[id]", params: { id } } as never);
 
   const tile = { borderRadius: 22, padding: 16, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface, overflow: "hidden" as const };
@@ -52,15 +58,20 @@ export default function HomeScreen() {
   return (
     <ScreenContainer className="px-5" containerClassName="bg-background">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }} keyboardShouldPersistTaps="handled">
-        <HorizonGlow height={150} style={{ top: -10 }} />
+        {/* Hero do Órbita: céu estrelado, estrelas cadentes e horizonte âmbar */}
+        <View pointerEvents="none" style={{ position: "absolute", left: -20, right: -20, top: -30, height: 260 }}>
+          <Starfield count={50} height={240} />
+          <Meteors count={3} height={200} />
+          <HorizonGlow height={240} style={{ top: 10 }} />
+        </View>
         <Reveal index={0}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 12, paddingTop: 14 }}>
-            <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 44, height: 44, borderRadius: 14 }} />
-            <View style={{ flex: 1 }}>
-              <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "800", letterSpacing: 2 }}>{t.tagline}</Text>
-              <DisplayText style={{ color: colors.foreground, fontSize: 30, lineHeight: 34 }}>PantanalDex</DisplayText>
-            </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10, paddingTop: 12 }}>
+            <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 34, height: 34, borderRadius: 10 }} />
+            <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "800", letterSpacing: 2, flex: 1 }}>{t.tagline}</Text>
+            <StatusPill label="Offline" color={colors.success} />
           </View>
+          <DisplayText style={{ color: colors.foreground, fontSize: 40, lineHeight: 42, marginTop: 14, letterSpacing: -1.2 }}>{t.heroA}</DisplayText>
+          <AuroraText text={t.heroB} width={360} height={48} fontSize={40} />
         </Reveal>
 
         {today && (
@@ -106,35 +117,58 @@ export default function HomeScreen() {
               </PressableScale>
               </BorderBeam>
               <View style={{ flex: 1, gap: 10 }}>
-                <PressableScale onPress={() => router.push("/(tabs)/sightings" as never)} accessibilityRole="button" accessibilityLabel={`${t.sightings}: ${real}`} style={[tile, { flex: 1 }]}>
+                <MagicCard onPress={() => router.push("/(tabs)/sightings" as never)} accessibilityRole="button" accessibilityLabel={`${t.sightings}: ${real}`} style={[tile, { flex: 1 }]}>
                   <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700" }}>{t.sightings}</Text>
                   <NumberTicker value={real} style={{ color: colors.foreground, fontSize: 30, marginTop: 4, fontFamily: "Fraunces_700Bold" }} />
                   <Text style={{ color: colors.muted, fontSize: 12 }}>{t.records}</Text>
-                </PressableScale>
-                <PressableScale onPress={() => router.push("/collection" as never)} accessibilityRole="button" accessibilityLabel={`${t.collection}: ${collection.discoveredSpecies} ${t.discovered}`} style={[tile, { flex: 1 }]}>
+                </MagicCard>
+                <MagicCard onPress={() => router.push("/collection" as never)} accessibilityRole="button" accessibilityLabel={`${t.collection}: ${collection.discoveredSpecies} ${t.discovered}`} style={[tile, { flex: 1 }]}>
                   <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700" }}>{t.collection}</Text>
                     <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "900" }}>{t.level} {collection.level}</Text>
                   </View>
                   <NumberTicker value={collection.discoveredSpecies} style={{ color: colors.foreground, fontSize: 30, marginTop: 4, fontFamily: "Fraunces_700Bold" }} />
                   <View style={{ marginTop: 6 }}><GrowBar percent={Math.max(collection.percent, 2)} color={colors.primary} track={colors.border} height={5} /></View>
-                </PressableScale>
+                </MagicCard>
               </View>
             </View>
             <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
-              <PressableScale onPress={() => router.push("/teams" as never)} accessibilityRole="button" accessibilityLabel={t.teams} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
+              <MagicCard onPress={() => router.push("/teams" as never)} accessibilityRole="button" accessibilityLabel={t.teams} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
                 <Text style={{ fontSize: 24 }}>👥</Text>
                 <View style={{ flex: 1 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>{t.teams}</Text><Text style={{ color: colors.muted, fontSize: 12 }}>{t.teamsDetail}</Text></View>
-              </PressableScale>
-              <PressableScale onPress={() => router.push("/public-map" as never)} accessibilityRole="button" accessibilityLabel={t.map} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
+              </MagicCard>
+              <MagicCard onPress={() => router.push("/public-map" as never)} accessibilityRole="button" accessibilityLabel={t.map} style={[tile, { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 }]}>
                 <Text style={{ fontSize: 24 }}>🗺️</Text>
                 <View style={{ flex: 1 }}><Text style={{ color: colors.foreground, fontWeight: "800" }}>{t.map}</Text><Text style={{ color: colors.muted, fontSize: 12 }}>{t.mapDetail}</Text></View>
-              </PressableScale>
+              </MagicCard>
             </View>
           </Reveal>
         )}
 
-        <Reveal index={4}>
+        {!query && (
+          <Reveal index={4}>
+            <DisplayText style={{ color: colors.foreground, fontSize: 22, marginTop: 26, marginBottom: 12 }}>{t.groups}</DisplayText>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10 }}>
+              {groups.map((group) => {
+                const g = gradientFor(group);
+                const count = groupCounts[group] ?? 0;
+                return (
+                  <MagicCard key={group} glow={g.glow} onPress={() => router.push({ pathname: "/(tabs)/animals", params: { group } } as never)} accessibilityRole="button" accessibilityLabel={`${group}: ${count} ${t.species}`}
+                    style={{ width: groupTileWidth, height: 104, borderRadius: 20, padding: 12, justifyContent: "space-between" }}>
+                    <GradientFill g={g} />
+                    <Text style={{ fontSize: 24 }}>{groupIcon[group]}</Text>
+                    <View>
+                      <Text style={{ color: g.ink, fontWeight: "900", fontSize: 14 }} numberOfLines={1}>{group}</Text>
+                      <Text style={{ color: g.ink, opacity: 0.8, fontSize: 11, fontWeight: "700" }}>{count} {t.species}</Text>
+                    </View>
+                  </MagicCard>
+                );
+              })}
+            </View>
+          </Reveal>
+        )}
+
+        <Reveal index={5}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline", marginTop: 26, marginBottom: 12 }}>
             <DisplayText style={{ color: colors.foreground, fontSize: 22 }}>{query ? `${featured.length} ${t.results}` : t.featured}</DisplayText>
             <PressableScale onPress={() => router.push("/(tabs)/animals" as never)} accessibilityRole="button" accessibilityLabel={t.all} haptic={false}>

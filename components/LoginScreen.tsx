@@ -5,6 +5,9 @@
  */
 import { useState } from "react";
 import { PRIVACY_POLICY_URL } from "@/shared/version";
+import { Reveal } from "@/components/motion";
+import { HorizonGlow } from "@/components/orbit-effects";
+import { AuroraText, Meteors, Panel, Starfield } from "@/components/orbita";
 import { ActivityIndicator, KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, View } from "react-native";
 import { Image } from "react-native";
 import { Text, TextInput } from "@/components/T";
@@ -86,11 +89,22 @@ export function LoginScreen() {
   return (
     <ScreenContainer edges={["top", "left", "right", "bottom"]}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
+        {/* Hero do Órbita: céu, estrelas cadentes e o horizonte âmbar do Pantanal */}
+        <View pointerEvents="none" style={{ position: "absolute", left: 0, right: 0, top: 0, height: 420, overflow: "hidden" }}>
+          <Starfield count={60} height={380} />
+          <Meteors count={4} height={300} />
+          <HorizonGlow height={420} style={{ top: 30 }} />
+        </View>
         <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24 }} keyboardShouldPersistTaps="handled">
-          <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 112, height: 112, borderRadius: 30, alignSelf: "center", marginBottom: 14, borderWidth: 3, borderColor: colors.primary }} />
-          <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 34, fontWeight: "900", textAlign: "center" }}>Pantanal<Text style={{ color: colors.primary }}>Dex</Text></Text>
-          <Text style={{ color: colors.muted, textAlign: "center", marginTop: 6, marginBottom: 28 }}>{t.tagline}</Text>
-
+          <Reveal index={0}>
+            <Image source={require("@/assets/images/app-mark.png")} accessibilityIgnoresInvertColors style={{ width: 84, height: 84, borderRadius: 24, marginBottom: 18 }} />
+            <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "800", letterSpacing: 2.5 }}>PANTANALDEX · GUIA DE CAMPO</Text>
+            <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 46, lineHeight: 48, fontFamily: "Fraunces_700Bold", letterSpacing: -1.5, marginTop: 8 }}>O Pantanal</Text>
+            <AuroraText text="no seu bolso." width={340} height={56} fontSize={46} accessibilityLabel="no seu bolso." />
+            <Text style={{ color: colors.muted, marginTop: 10, marginBottom: 24, lineHeight: 21, maxWidth: 320 }}>{t.tagline}</Text>
+          </Reveal>
+          <Reveal index={1}>
+          <Panel strong style={{ padding: 18 }}>
           <View style={{ gap: 12 }}>
             {mode === "signUp" && input({ value: name, onChangeText: setName, placeholder: t.name, accessibilityLabel: t.name, autoCapitalize: "words", textContentType: "name", maxLength: 40 })}
             {input({ value: email, onChangeText: setEmail, placeholder: t.email, accessibilityLabel: t.email, autoCapitalize: "none", autoCorrect: false, keyboardType: "email-address", textContentType: "emailAddress", autoComplete: "email" })}
@@ -123,6 +137,8 @@ export function LoginScreen() {
           <Pressable onPress={() => { setMode(mode === "signIn" ? "signUp" : "signIn"); setError(null); setInfo(null); }} accessibilityRole="button" style={{ paddingVertical: 16 }}>
             <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "700" }}>{mode === "signIn" ? t.toSignUp : t.toSignIn}</Text>
           </Pressable>
+          </Panel>
+          </Reveal>
 
           <Text style={{ color: colors.muted, textAlign: "center", fontSize: 12, lineHeight: 18 }}>{t.offlineHint}</Text>
         </ScrollView>

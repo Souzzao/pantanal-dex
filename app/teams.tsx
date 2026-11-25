@@ -14,7 +14,8 @@ import { Text, TextInput } from "@/components/T";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTeams } from "@/contexts/TeamsContext";
 import { useColors } from "@/hooks/use-colors";
-import { Orbit } from "@/components/orbit-effects";
+import { NumberTicker, Orbit } from "@/components/orbit-effects";
+import { BeamFlow, MetricCard } from "@/components/orbita";
 import { findSpeciesById } from "@/shared/catalog";
 import {
   computeTeamProgress, formatTeamCode, isValidTeamCode, normalizeTeamCode, TEAM_MAX_MEMBERS, teamAchievements, validateTeamName,
@@ -174,16 +175,18 @@ export default function TeamsScreen() {
               </Pressable>}
             </>)}
 
-            {card(<>
-              <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "800" }}>PROGRESSO DA EQUIPE</Text>
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
-                {stat(progress.speciesIds.length, "espécies")}
-                {stat(progress.sightings, "avistamentos")}
-                {stat(progress.zones.length, "zonas")}
-                {stat(`${progress.activeMembers}/${progress.members}`, "em campo")}
-              </View>
-              {me && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 10 }}>Sua parte: {me.speciesIds.length} espécies e {me.sightingsCount} avistamentos{teams.lastSyncedAt ? ` · enviado ${new Date(teams.lastSyncedAt).toLocaleString("pt-BR")}` : ""}.</Text>}
-            </>)}
+            <View style={{ marginTop: 14 }}>
+              <BeamFlow steps={[{ icon: "📒", label: "Seus avistamentos" }, { icon: "👥", label: "Equipe" }, { icon: "🗺️", label: "Zonas" }, { icon: "🏆", label: "Conquistas" }]} />
+            </View>
+            <View style={{ flexDirection: "row", gap: 10, marginTop: 6 }}>
+              <MetricCard label="Espécies" value={<NumberTicker value={progress.speciesIds.length} style={{ color: "#FBF7EF", fontSize: 28, fontFamily: "Fraunces_700Bold" }} />} percent={Math.min(100, (progress.speciesIds.length / 300) * 100)} />
+              <MetricCard label="Avistamentos" value={<NumberTicker value={progress.sightings} style={{ color: "#FBF7EF", fontSize: 28, fontFamily: "Fraunces_700Bold" }} />} percent={Math.min(100, (progress.sightings / 500) * 100)} />
+            </View>
+            <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
+              <MetricCard label="Zonas de ~11 km" value={<NumberTicker value={progress.zones.length} style={{ color: "#FBF7EF", fontSize: 28, fontFamily: "Fraunces_700Bold" }} />} percent={Math.min(100, (progress.zones.length / 50) * 100)} accent="#7CFFD0" />
+              <MetricCard label="Em campo" value={`${progress.activeMembers}/${progress.members}`} unit="pessoas" percent={progress.members ? (progress.activeMembers / progress.members) * 100 : 0} accent="#A1EAFF" />
+            </View>
+            {me && <Text style={{ color: colors.muted, fontSize: 12, marginTop: 8 }}>Sua parte: {me.speciesIds.length} espécies e {me.sightingsCount} avistamentos{teams.lastSyncedAt ? ` · enviado ${new Date(teams.lastSyncedAt).toLocaleString("pt-BR")}` : ""}.</Text>}
 
             {card(<>
               <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "800" }}>CONQUISTAS DA EQUIPE</Text>

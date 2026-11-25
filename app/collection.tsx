@@ -6,6 +6,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, View, useWindowDimensions } from "react-native";
 import { Text } from "@/components/T";
+import { GradientFill, MagicCard } from "@/components/orbita";
+import { GrowBar, NumberTicker } from "@/components/orbit-effects";
+import { gradientFor, gradients, groupIcon } from "@/constants/design";
 import { router } from "expo-router";
 
 import { RemoteImage } from "@/components/RemoteImage";
@@ -138,19 +141,20 @@ export default function CollectionScreen() {
       <Text style={{ color: colors.muted, fontSize: 15, marginTop: 4 }}>{t.subtitle}</Text>
 
       <View accessible accessibilityLabel={`${summary.discoveredSpecies} / ${summary.totalSpecies} ${t.discovered}, ${summary.percent}%. ${t.level} ${summary.level}.`}
-        style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 18, padding: 16, marginTop: 18 }}>
+        style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 24, padding: 18, marginTop: 18, overflow: "hidden" }}>
+        <GradientFill g={gradients.ocaso} glowAt={{ x: "85%", y: "0%" }} />
         <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between" }}>
           <View>
-            <Text style={{ color: colors.primary, fontSize: 40, fontWeight: "900" }}>{summary.percent}%</Text>
+            <View style={{ flexDirection: "row", alignItems: "baseline" }}><NumberTicker value={summary.percent} style={{ color: "#FFF3D6", fontSize: 48, fontFamily: "Fraunces_700Bold" }} /><Text style={{ color: "#FFF3D6", fontSize: 26, fontFamily: "Fraunces_700Bold" }}>%</Text></View>
             <Text style={{ color: colors.muted, fontWeight: "700" }}>{summary.discoveredSpecies} / {summary.totalSpecies} {t.discovered}</Text>
           </View>
           <View style={{ alignItems: "flex-end" }}>
             <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700", letterSpacing: 1 }}>{t.level.toUpperCase()}</Text>
-            <Text style={{ color: colors.foreground, fontSize: 34, fontWeight: "900" }}>{summary.level}</Text>
+            <Text style={{ color: "#FFF3D6", fontSize: 38, fontFamily: "Fraunces_700Bold" }}>{summary.level}</Text>
           </View>
         </View>
-        <View style={{ marginTop: 12 }}><ProgressBar percent={summary.percent} color={colors.primary} track={colors.border} height={10} /></View>
-        <View style={{ marginTop: 12 }}><ProgressBar percent={(summary.levelXp / XP_PER_LEVEL) * 100} color={colors.warning} track={colors.border} height={6} /></View>
+        <View style={{ marginTop: 12 }}><GrowBar percent={summary.percent} color={colors.primary} track="rgba(0,0,0,0.35)" height={10} /></View>
+        <View style={{ marginTop: 10 }}><GrowBar percent={(summary.levelXp / XP_PER_LEVEL) * 100} color="#FFF3D6" track="rgba(0,0,0,0.35)" height={5} delay={500} /></View>
         <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>{summary.xp} {t.xp} · {t.toNext(XP_PER_LEVEL - summary.levelXp)}</Text>
         <View style={{ flexDirection: "row", marginTop: 16, borderTopWidth: 1, borderTopColor: colors.border, paddingTop: 14 }}>
           {stat(summary.totalSightings, t.sightings)}
@@ -161,16 +165,28 @@ export default function CollectionScreen() {
       </View>
 
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800", marginTop: 24, marginBottom: 10 }}>{t.byGroup}</Text>
-      {summary.groups.map((item) => (
-        <Pressable key={item.group} onPress={() => setGroup(group === item.group ? "all" : item.group)} accessibilityRole="button" accessibilityState={{ selected: group === item.group }}
-          accessibilityLabel={`${GROUP_LABELS[item.group][lang]}: ${item.discovered} / ${item.total}, ${item.percent}%`} style={({ pressed }) => [{ marginBottom: 12 }, pressed && { opacity: 0.8 }]}>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 5 }}>
-            <Text style={{ color: group === item.group ? colors.primary : colors.foreground, fontWeight: "700" }}>{GROUP_LABELS[item.group][lang]}</Text>
-            <Text style={{ color: colors.muted, fontWeight: "700" }}>{item.discovered}/{item.total} · {item.percent}%</Text>
-          </View>
-          <ProgressBar percent={item.percent} color={item.discovered === item.total ? colors.success : colors.primary} track={colors.border} />
-        </Pressable>
-      ))}
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10, marginBottom: 12 }}>
+      {summary.groups.map((item) => {
+        const g = gradientFor(item.group);
+        const selected = group === item.group;
+        return (
+          <MagicCard key={item.group} glow={g.glow} onPress={() => setGroup(selected ? "all" : item.group)} accessibilityRole="button" accessibilityState={{ selected }}
+            accessibilityLabel={`${GROUP_LABELS[item.group][lang]}: ${item.discovered} / ${item.total}, ${item.percent}%`}
+            style={{ width: "48%", minHeight: 108, borderRadius: 20, padding: 12, borderWidth: selected ? 2 : 0, borderColor: colors.primary, justifyContent: "space-between" }}>
+            <GradientFill g={g} />
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <Text style={{ fontSize: 22 }}>{groupIcon[item.group]}</Text>
+              <Text style={{ color: g.ink, fontWeight: "900" }}>{item.percent}%</Text>
+            </View>
+            <View>
+              <Text style={{ color: g.ink, fontWeight: "900" }}>{GROUP_LABELS[item.group][lang]}</Text>
+              <Text style={{ color: g.ink, opacity: 0.8, fontSize: 12, marginBottom: 6 }}>{item.discovered}/{item.total}</Text>
+              <GrowBar percent={item.percent} color={g.ink} track="rgba(0,0,0,0.3)" height={4} />
+            </View>
+          </MagicCard>
+        );
+      })}
+      </View>
 
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800", marginTop: 14, marginBottom: 10 }}>{t.badges}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20 }} contentContainerStyle={{ gap: 10, paddingHorizontal: 20 }}>
