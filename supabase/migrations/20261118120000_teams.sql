@@ -49,11 +49,15 @@ language plpgsql volatile set search_path = public as $$
 declare
   alphabet constant text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   out_code text;
+  bytes bytea;
+  i int;
 begin
   loop
+    -- aleatoriedade segura (gen_random_uuid usa pg_strong_random); ver 20261125000000_team_code_strong_random.sql
+    bytes := uuid_send(gen_random_uuid());
     out_code := '';
-    for i in 1..8 loop
-      out_code := out_code || substr(alphabet, 1 + floor(random() * length(alphabet))::int, 1);
+    foreach i in array array[0, 1, 2, 3, 4, 5, 9, 10] loop
+      out_code := out_code || substr(alphabet, 1 + (get_byte(bytes, i) % 32), 1);
     end loop;
     exit when not exists (select 1 from public.teams where code = out_code);
   end loop;
