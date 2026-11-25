@@ -88,6 +88,8 @@
   "pnpm": {
     "overrides": {
       "@babel/core@7": "^7.29.6",
+      "@react-navigation/core": "7.25.0",
+      "metro>image-size": "2.0.3",
       "@humanfs/node@~0.16": "~0.16.8",
       "@isaacs/brace-expansion@5": "^5.0.1",
       "@xmldom/xmldom@~0.8": "~0.8.15",

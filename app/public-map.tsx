@@ -129,6 +129,7 @@ export default function PublicMapScreen() {
   // "streets" = mapa de ruas (internet); "offline" = mapa de contornos (sempre funciona).
   const [mapKind, setMapKind] = useState<"streets" | "offline">("streets");
   const [noTiles, setNoTiles] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
   const [fitKey, setFitKey] = useState(1);
 
   // Onde a pessoa está: o mapa abre ali, sem precisar procurar.
@@ -171,6 +172,8 @@ export default function PublicMapScreen() {
 
   // A área selecionada é refeita a partir dos registros filtrados atuais, para não mostrar dados desatualizados.
   const selectedRecords = useMemo(() => records.filter((record) => selectedIds.includes(record.id)), [records, selectedIds]);
+  const panelRecords = listOpen ? records : selectedRecords;
+  const listLabel = spotLang === "en" ? "List records" : spotLang === "es" ? "Ver lista" : "Listar registros";
   const selectedHigh = selectedRecords.length >= HIGH_INCIDENCE_MIN;
   const areaCount = useMemo(() => new Set(records.map((item) => `${item.latitude}:${item.longitude}`)).size, [records]);
 
@@ -295,6 +298,7 @@ export default function PublicMapScreen() {
                   {chip(x.streets, mapKind === "streets", () => { if (mapKind !== "streets") { setMapKind("streets"); setNoTiles(false); } })}
                   {chip(x.offlineMap, mapKind === "offline", () => setMapKind("offline"))}
                   {chip(x.fitAll, false, () => setFitKey((k) => k + 1))}
+                  {chip(listLabel, listOpen, () => { setListOpen(!listOpen); setSpotId(null); setFiltersOpen(false); })}
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 14 }}>
                   <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FFC400" }} /><Text style={{ color: colors.muted, fontSize: 12 }}>{t.legendNormal}</Text></View>
@@ -321,14 +325,15 @@ export default function PublicMapScreen() {
           {spot && <SpotCard spot={spot} visits={visits} onVisits={setVisits} onClose={() => setSpotId(null)} />}
 
           {/* Painel da área selecionada, por cima da parte de baixo do mapa */}
-          {selectedRecords.length > 0 && (
+          {(listOpen || selectedRecords.length > 0) && (
             <View style={{ position: "absolute", left: 8, right: 8, bottom: 8, maxHeight: "45%", backgroundColor: colors.surface, borderColor: selectedHigh ? "#C2410C" : colors.primary, borderWidth: 2, borderRadius: 16, padding: 12, elevation: 6, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 2 } }} accessibilityLiveRegion="polite">
               <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 15, flex: 1 }}>{t.area}: {t.count(selectedRecords.length)} · {t.species(new Set(selectedRecords.map((item) => item.speciesId)).size)}{selectedHigh ? ` · ${x.high}` : ""}</Text>
-                <Pressable onPress={clearSelection} accessibilityRole="button" accessibilityLabel={x.close} hitSlop={10}><Icon name="close" color={colors.primary} /></Pressable>
+                <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 15, flex: 1 }}>{listOpen ? listLabel : t.area}: {t.count(panelRecords.length)} · {t.species(new Set(panelRecords.map((item) => item.speciesId)).size)}{!listOpen && selectedHigh ? ` · ${x.high}` : ""}</Text>
+                <Pressable onPress={() => { if (listOpen) setListOpen(false); else clearSelection(); }} accessibilityRole="button" accessibilityLabel={x.close} hitSlop={10}><Icon name="close" color={colors.primary} /></Pressable>
               </View>
               <ScrollView style={{ marginTop: 4 }}>
-                {selectedRecords.slice(0, 50).map((record) => (
+                {panelRecords.length === 0 && <Text style={{ color: colors.muted }}>{t.empty}</Text>}
+                {panelRecords.slice(0, 50).map((record) => (
                   <Pressable key={record.id} onPress={() => names.has(record.speciesId) && router.push({ pathname: "/species/[id]", params: { id: record.speciesId } } as any)} accessibilityRole={names.has(record.speciesId) ? "button" : undefined}
                     style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", minHeight: 44, borderTopWidth: 1, borderTopColor: colors.border }}>
                     <Text style={{ color: colors.foreground, flex: 1 }}>{names.get(record.speciesId) ?? t.unknown}</Text>

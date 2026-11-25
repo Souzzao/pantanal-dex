@@ -6,7 +6,7 @@ name: APK Android
 # (Settings → Secrets and variables → Actions); sem eles o app sai sem login (modo local).
 on:
   push:
-    branches: [main, claude/v2]
+    branches: [main, claude/v2, claude/v310-interacao]
     paths-ignore: ["**.md", "docs/**"]
   workflow_dispatch:
     inputs:
@@ -15,7 +15,7 @@ on:
         type: boolean
         default: false
 
-# Permissão mínima: o build só lê o código; só o job de release (push na main) pode publicar.
+# Permissão mínima: o build só lê o código; só o job de release disparado manualmente pode publicar.
 # Nenhum segredo chega a PRs de forks.
 permissions:
   contents: read
@@ -76,6 +76,37 @@ jobs:
         run: |
           NAME=$([ "$APP_VARIANT" = demo ] && echo PantanalDex-Demo || echo PantanalDex)
           cp android/app/build/outputs/apk/release/app-release.apk "$NAME.apk"
+      - name: Assinar APK Final para distribuição
+        if: matrix.variant == 'production'
+        env:
+          DEX_KEYSTORE_B64: ${{ secrets.DEX_ANDROID_KEYSTORE_B64 }}
+          DEX_STORE_PASSWORD: ${{ secrets.DEX_ANDROID_STORE_PASSWORD }}
+          DEX_KEY_ALIAS: ${{ secrets.DEX_ANDROID_KEY_ALIAS }}
+          DEX_KEY_PASSWORD: ${{ secrets.DEX_ANDROID_KEY_PASSWORD }}
+          DEX_CERT_SHA256: ${{ vars.DEX_ANDROID_CERT_SHA256 }}
+          PUBLICAR: ${{ github.event_name == 'workflow_dispatch' && inputs.publicar }}
+        run: |
+          if [ -z "$DEX_KEYSTORE_B64" ] || [ -z "$DEX_STORE_PASSWORD" ] || [ -z "$DEX_KEY_ALIAS" ] || [ -z "$DEX_KEY_PASSWORD" ] || [ -z "$DEX_CERT_SHA256" ]; then
+            if [ "$PUBLICAR" = true ]; then
+              echo "::error::Publicação exige a chave de distribuição e a impressão digital do certificado."
+              exit 1
+            fi
+            echo "::warning::APK Final de validação usa assinatura de debug; artefato não publicado."
+            exit 0
+          fi
+          umask 077
+          KEYSTORE="$(mktemp)"
+          trap 'rm -f "$KEYSTORE"' EXIT
+          printf '%s' "$DEX_KEYSTORE_B64" | base64 --decode > "$KEYSTORE"
+          APK_SIGNER="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          "$APK_SIGNER" sign --ks "$KEYSTORE" --ks-key-alias "$DEX_KEY_ALIAS" \
+            --ks-pass env:DEX_STORE_PASSWORD --key-pass env:DEX_KEY_PASSWORD \
+            --out PantanalDex-distribuicao.apk PantanalDex.apk
+          CERT="$("$APK_SIGNER" verify --print-certs PantanalDex-distribuicao.apk | awk '/^Signer #1 certificate SHA-256 digest:/ {print $NF}')"
+          test "$(printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]')" = "$(printf '%s' "$DEX_CERT_SHA256" | tr -d ':' | tr '[:upper:]' '[:lower:]')"
+          mv PantanalDex-distribuicao.apk PantanalDex.apk
+          rm -f PantanalDex-distribuicao.apk.idsig
+
       - uses: actions/upload-artifact@v4
         with:
           name: APK-${{ matrix.variant }}
@@ -84,10 +115,10 @@ jobs:
 
   release:
     # Publica o APK Final numa "release" pública: o link de download não exige conta no GitHub
-    # (usado pelo QR code). Roda em push na main ou quando o dono dispara manualmente com "publicar";
+    # (usado pelo QR code). Roda quando o dono dispara manualmente com "publicar";
     # nunca em PR.
     needs: apk
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.publicar)
+    if: github.event_name == 'workflow_dispatch' && inputs.publicar
     runs-on: ubuntu-latest
     permissions:
       contents: write
