@@ -5,6 +5,7 @@
  */
 import "@/global.css";
 import { Stack } from "expo-router";
+import Head from "expo-router/head";
 import { StatusBar } from "expo-status-bar";
 import React, { useMemo, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -66,6 +67,7 @@ export default function RootLayout() {
 
   const content = (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {Platform.OS === "web" && <Head><title>PantanalDex</title></Head>}
       {/* Cabeçalhos nativos ficam ocultos: cada tela desenha o próprio título. */}
           <AuthGate>
             <PublicationsProvider>
