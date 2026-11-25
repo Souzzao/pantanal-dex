@@ -176,8 +176,8 @@ export default function CollectionScreen() {
             <Text style={{ color: "#FFF3D6", fontSize: 38, fontFamily: "Fraunces_700Bold" }}>{summary.level}</Text>
           </View>
         </View>
-        <View style={{ marginTop: 12 }}><GrowBar percent={summary.percent} color={colors.primary} track="rgba(0,0,0,0.35)" height={10} /></View>
-        <View style={{ marginTop: 10 }}><GrowBar percent={(summary.levelXp / XP_PER_LEVEL) * 100} color="#FFF3D6" track="rgba(0,0,0,0.35)" height={5} delay={500} /></View>
+        <View style={{ marginTop: 12 }}><GrowBar label={t.discovered} percent={summary.percent} color={colors.primary} track="rgba(0,0,0,0.35)" height={10} /></View>
+        <View style={{ marginTop: 10 }}><GrowBar label={t.xp} percent={(summary.levelXp / XP_PER_LEVEL) * 100} color="#FFF3D6" track="rgba(0,0,0,0.35)" height={5} delay={500} /></View>
         <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>{summary.xp} {t.xp} · {t.toNext(XP_PER_LEVEL - summary.levelXp)}</Text>
         <View style={{ flexDirection: "row", marginTop: 16, borderTopWidth: 1, borderTopColor: colors.border, paddingTop: 14 }}>
           {stat(summary.totalSightings, t.sightings)}
@@ -204,7 +204,7 @@ export default function CollectionScreen() {
             <View>
               <Text style={{ color: g.ink, fontWeight: "900" }}>{GROUP_LABELS[item.group][lang]}</Text>
               <Text style={{ color: g.ink, opacity: 0.8, fontSize: 12, marginBottom: 6 }}>{item.discovered}/{item.total}</Text>
-              <GrowBar percent={item.percent} color={g.ink} track="rgba(0,0,0,0.3)" height={4} />
+              <GrowBar label={GROUP_LABELS[item.group][lang]} percent={item.percent} color={g.ink} track="rgba(0,0,0,0.3)" height={4} />
             </View>
           </MagicCard>
         );
@@ -212,7 +212,7 @@ export default function CollectionScreen() {
       </View>
 
       <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 20, fontWeight: "800", marginTop: 14, marginBottom: 10 }}>{t.badges}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20 }} contentContainerStyle={{ gap: 10, paddingHorizontal: 20 }}>
+      <ScrollView horizontal tabIndex={0} accessibilityLabel={t.badges} showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20 }} contentContainerStyle={{ gap: 10, paddingHorizontal: 20 }}>
         {summary.badges.map((badge) => {
           const [title, description] = BADGES[badge.id][lang];
           return (

@@ -137,14 +137,14 @@ export function PulseDot({ color = "#4ADE80", size = 8 }: { color?: string; size
 }
 
 /** Barra de progresso que se preenche ao aparecer. `percent` de 0 a 100. */
-export function GrowBar({ percent, color = "#FFC400", track = "#2F2B25", height = 6, delay = 250 }: { percent: number; color?: string; track?: string; height?: number; delay?: number }) {
+export function GrowBar({ percent, label, color = "#FFC400", track = "#2F2B25", height = 6, delay = 250 }: { percent: number; label: string; color?: string; track?: string; height?: number; delay?: number }) {
   const reduced = useReducedMotion();
   const target = Math.max(0, Math.min(100, percent));
   const value = useSharedValue(reduced ? target : 0);
   useEffect(() => { value.value = reduced ? target : withDelay(delay, withTiming(target, { duration: 900, easing: Easing.out(Easing.cubic) })); }, [target, reduced, delay, value]);
   const fill = useAnimatedStyle(() => ({ width: `${value.value}%` }));
   return (
-    <View style={{ height, borderRadius: height / 2, backgroundColor: track, overflow: "hidden" }} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: 100, now: Math.round(target) }}>
+    <View style={{ height, borderRadius: height / 2, backgroundColor: track, overflow: "hidden" }} accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: Math.round(target) }}>
       <Animated.View style={[{ height, borderRadius: height / 2, backgroundColor: color }, fill]} />
     </View>
   );

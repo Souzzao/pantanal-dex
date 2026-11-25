@@ -129,7 +129,7 @@ export default function HomeScreen() {
                     <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "900" }}>{t.level} {collection.level}</Text>
                   </View>
                   <NumberTicker value={collection.discoveredSpecies} style={{ color: colors.foreground, fontSize: 30, marginTop: 4, fontFamily: "Fraunces_700Bold" }} />
-                  <View style={{ marginTop: 6 }}><GrowBar percent={Math.max(collection.percent, 2)} color={colors.primary} track={colors.border} height={5} /></View>
+                  <View style={{ marginTop: 6 }}><GrowBar label="Progresso da coleção" percent={collection.percent} color={colors.primary} track={colors.border} height={5} /></View>
                 </MagicCard>
               </View>
             </View>

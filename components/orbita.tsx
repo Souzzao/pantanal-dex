@@ -226,7 +226,7 @@ export function MetricCard({ label, value, unit, percent, accent = "#FFC400", st
         {typeof value === "string" || typeof value === "number" ? <Text style={{ color: "#FBF7EF", fontSize: 28, fontFamily: "Fraunces_700Bold", fontVariant: ["tabular-nums"] }}>{value}</Text> : value}
         {unit ? <Text style={{ color: "#B8B0A2", fontSize: 13 }}>{unit}</Text> : null}
       </View>
-      {percent !== undefined && <View style={{ marginTop: 8 }}><GrowBar percent={percent} color={accent} track="#2F2B25" height={5} /></View>}
+      {percent !== undefined && <View style={{ marginTop: 8 }}><GrowBar label={label} percent={percent} color={accent} track="#2F2B25" height={5} /></View>}
     </Panel>
   );
 }

@@ -13,7 +13,7 @@
 import { CameraView, useCameraPermissions, type CameraType } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useRef, useState } from "react";
-import { AccessibilityInfo, ActivityIndicator, Image, Platform, Pressable, ScrollView, StatusBar, View, useWindowDimensions } from "react-native";
+import { AccessibilityInfo, ActivityIndicator, BackHandler, Image, Platform, Pressable, ScrollView, StatusBar, View, useWindowDimensions } from "react-native";
 import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSequence, withSpring, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -31,7 +31,8 @@ type Props = {
   onContinue: () => void;
   onClose: () => void;
   /** Abre direto na revisão (vindo dos detalhes ao tocar numa foto). */
-  startInReview?: boolean;
+  initialReviewIndex?: number;
+  confirmDiscard: boolean;
 };
 
 const YELLOW = "#FFC400";
@@ -50,7 +51,7 @@ function GlassButton({ icon, label, onPress, testID, active }: { icon: React.Com
   );
 }
 
-export function CaptureHud({ photos, onChange, onContinue, onClose, startInReview }: Props) {
+export function CaptureHud({ photos, onChange, onContinue, onClose, initialReviewIndex, confirmDiscard }: Props) {
   const insets = useSafeAreaInsets();
   const { width, height } = useWindowDimensions();
   const [permission, requestPermission] = useCameraPermissions();
@@ -66,8 +67,8 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
   const [cameraError, setCameraError] = useState<string>();
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string>();
-  const [review, setReview] = useState(!!startInReview && photos.length > 0);
-  const [reviewIndex, setReviewIndex] = useState(0);
+  const [review, setReview] = useState(initialReviewIndex !== undefined && photos.length > 0);
+  const [reviewIndex, setReviewIndex] = useState(initialReviewIndex ?? 0);
   const [confirmClose, setConfirmClose] = useState(false);
   const asked = useRef(false);
   const count = photos.length;
@@ -151,7 +152,19 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
     else setReviewIndex((i) => Math.min(i, next.length - 1));
   };
 
-  const close = () => (count ? setConfirmClose(true) : onClose());
+  const close = () => (confirmDiscard ? setConfirmClose(true) : onClose());
+
+  useEffect(() => {
+    if (Platform.OS === "web") return;
+    const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (confirmClose) setConfirmClose(false);
+      else if (review) setReview(false);
+      else if (confirmDiscard) setConfirmClose(true);
+      else onClose();
+      return true;
+    });
+    return () => subscription.remove();
+  }, [confirmClose, confirmDiscard, onClose, review]);
 
   const granted = permission?.granted === true;
   const blocked = permission && !permission.granted && (!permission.canAskAgain || asked.current) && permission.status === "denied";
@@ -169,7 +182,7 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, startInRevie
 
       {/* Topo: Fechar sempre à esquerda; flash e troca de câmera só quando existem. */}
       <View style={{ position: "absolute", top: insets.top + 10, left: 16, right: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <GlassButton icon="close" label={count ? "Fechar câmera (pede para confirmar o descarte)" : "Fechar câmera"} onPress={close} testID="camera-close" />
+        <GlassButton icon="close" label={confirmDiscard ? "Fechar câmera (pede para confirmar o descarte)" : "Fechar câmera"} onPress={close} testID="camera-close" />
         {granted && !cameraError && (
           <View style={{ flexDirection: "row", gap: 10 }}>
             {Platform.OS !== "web" && <GlassButton icon={flash ? "flash" : "flash-off"} label={flash ? "Desligar flash" : "Ligar flash"} onPress={() => setFlash((v) => !v)} active={flash} />}

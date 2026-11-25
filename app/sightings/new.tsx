@@ -50,7 +50,8 @@ export default function NewSightingScreen() {
   const [photos, setPhotos] = useState<DraftPhoto[]>(() => (existing ? toDraft(photosOf(existing)) : []));
   // Novo registro começa na câmera; edição começa nos detalhes.
   const [stage, setStage] = useState<"capture" | "details">(id ? "details" : "capture");
-  const [hudReview, setHudReview] = useState(false);
+  const [hudReviewIndex, setHudReviewIndex] = useState<number>();
+  const hudSnapshot = useRef<DraftPhoto[]>([]);
   const { teams, available: teamsAvailable, shareRecord } = useTeams();
   const [shareTeamId, setShareTeamId] = useState<string | null>(null);
   const [notebookId, setNotebookId] = useState<string>(existing ? notebookOf(existing) : activeNotebookId);
@@ -168,18 +169,18 @@ export default function NewSightingScreen() {
 
   if (stage === "capture") {
     return (
-      <CaptureHud photos={photos} onChange={setPhotos} startInReview={hudReview}
-        onContinue={() => { setHudReview(false); continueToDetails(); }}
-        onClose={() => { setHudReview(false); if (existing) setStage("details"); else router.back(); }} />
+      <CaptureHud photos={photos} onChange={setPhotos} initialReviewIndex={hudReviewIndex} confirmDiscard={existing ? photos !== hudSnapshot.current : photos.length > 0}
+        onContinue={() => { setHudReviewIndex(undefined); continueToDetails(); }}
+        onClose={() => { setHudReviewIndex(undefined); if (existing) { setPhotos(hudSnapshot.current); setStage("details"); } else if (router.canGoBack()) router.back(); else router.replace("/(tabs)/sightings"); }} />
     );
   }
 
-  const openHud = (review: boolean) => { setHudReview(review); setStage("capture"); };
+  const openHud = (reviewIndex?: number) => { hudSnapshot.current = photos; setHudReviewIndex(reviewIndex); setStage("capture"); };
 
   return (
     <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5">
       <ScrollView contentContainerStyle={{ paddingBottom: 35 }} keyboardShouldPersistTaps="handled">
-        <Pressable onPress={() => (existing ? router.back() : openHud(false))} accessibilityRole="button" accessibilityLabel={existing ? "Voltar" : "Voltar para a câmera"}
+        <Pressable onPress={() => (existing ? router.back() : openHud())} accessibilityRole="button" accessibilityLabel={existing ? "Voltar" : "Voltar para a câmera"}
           style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingVertical: 14 }}>
           <Icon name="arrow-left" size={18} color={colors.primary} mono />
           <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700" }}>{existing ? "Voltar" : "Câmera"}</Text>
@@ -189,13 +190,13 @@ export default function NewSightingScreen() {
         <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
             {photos.map((photo, index) => (
-              <Pressable key={photo.id} onPress={() => openHud(true)} accessibilityRole="button" accessibilityLabel={`Foto ${index + 1} de ${photos.length}. Abrir revisão`}
+              <Pressable key={photo.id} onPress={() => openHud(index)} accessibilityRole="button" accessibilityLabel={`Foto ${index + 1} de ${photos.length}. Abrir revisão`}
                 style={{ width: 84, height: 84, borderRadius: 16, overflow: "hidden", borderWidth: index === 0 ? 2 : 1, borderColor: index === 0 ? colors.primary : colors.border }}>
                 <Image source={{ uri: photo.uri }} style={{ width: "100%", height: "100%" }} />
                 {index === 0 && <Text style={{ position: "absolute", left: 6, bottom: 5, color: colors.background, backgroundColor: colors.primary, fontSize: 10, fontWeight: "900", paddingHorizontal: 6, borderRadius: 6, overflow: "hidden" }}>CAPA</Text>}
               </Pressable>
             ))}
-            <Pressable onPress={() => openHud(false)} accessibilityRole="button" accessibilityLabel={photos.length ? "Adicionar mais fotos pela câmera ou galeria" : "Adicionar fotos"}
+            <Pressable onPress={() => openHud()} accessibilityRole="button" accessibilityLabel={photos.length ? "Adicionar mais fotos pela câmera ou galeria" : "Adicionar fotos"}
               style={{ width: 84, height: 84, borderRadius: 16, borderWidth: 1.5, borderStyle: "dashed", borderColor: colors.primary, alignItems: "center", justifyContent: "center", gap: 4 }}>
               <Icon name="camera" size={24} color={colors.primary} />
               <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "800" }}>{photos.length ? "Mais fotos" : "Fotos"}</Text>
