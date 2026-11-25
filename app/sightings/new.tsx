@@ -1,5 +1,10 @@
 /**
- * PantanalDex — Novo avistamento (UC05): abre a câmera na hora, lê o GPS, valida o ponto no Pantanal e salva no caderno.
+ * PantanalDex — Novo avistamento (UC05), "câmera primeiro" (pacote Auditoria UX):
+ *  1. Novo registro abre o HUD da câmera (components/CaptureHud). Ali a pessoa tira e importa fotos,
+ *     revisa e só então toca em Continuar.
+ *  2. Os detalhes (espécie, data, local, observações, caderno e equipe) aparecem depois de Continuar,
+ *     com as fotos já anexadas. Voltar para a câmera restaura o mesmo lote.
+ *  3. Salvar grava no caderno; se uma equipe foi escolhida, o registro também vai para a coleção dela.
  *
  * @author Felipe de Souza Aquino
  */
@@ -7,7 +12,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Image, Platform, Pressable, ScrollView, View } from "react-native";
 import { Text, TextInput } from "@/components/T";
 import { router, useLocalSearchParams } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
 import { ScreenContainer } from "@/components/screen-container";
@@ -15,13 +19,18 @@ import { getLocalTodayISODate, UNKNOWN_SPECIES_ID, type Sighting, type Visibilit
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import { getNativePermissionCopy, type NativeLanguage } from "@/shared/native-permissions";
 import { useApp } from "@/contexts/AppContext";
-import { NOTEBOOK_ICON } from "@/components/NotebookBar";
 import { MAIN_NOTEBOOK_ID, notebookOf } from "@/shared/notebooks";
 import { useColors } from "@/hooks/use-colors";
 import { countSightingCreations, validateSightingOperation } from "@/shared/sighting-rules";
 import { isInsidePantanal } from "@/shared/pantanal-boundary";
-import { persistSightingPhoto, SightingPhotoError, MAX_SIGHTING_PHOTO_BYTES, type SightingPhotoInput } from "@/lib/sighting-photos";
+import { persistSightingPhoto, SightingPhotoError } from "@/lib/sighting-photos";
 import { SightingLocationModal } from "@/components/SightingLocationModal";
+import { CaptureHud, type DraftPhoto } from "@/components/CaptureHud";
+import { ArtIcon } from "@/components/ArtIcon";
+import { Icon } from "@/components/Icon";
+import { NOTEBOOK_ART } from "@/components/NotebookBar";
+import { photosOf } from "@/shared/photo-gallery";
+import { useTeams } from "@/contexts/TeamsContext";
 
 export default function NewSightingScreen() {
   const colors = useColors();
@@ -37,9 +46,14 @@ export default function NewSightingScreen() {
   const [locationLabel, setLocationLabel] = useState(existing?.locationLabel ?? "");
   const [notes, setNotes] = useState(existing?.notes ?? "");
   const [quantity, setQuantity] = useState(existing?.quantity ? String(existing.quantity) : "");
-  const [photoUri, setPhotoUri] = useState<string | undefined>(existing?.photoUri);
+  const toDraft = (list: string[]): DraftPhoto[] => list.map((uri, i) => ({ id: `salva-${i}-${uri.slice(-12)}`, uri, source: "saved" as const }));
+  const [photos, setPhotos] = useState<DraftPhoto[]>(() => (existing ? toDraft(photosOf(existing)) : []));
+  // Novo registro começa na câmera; edição começa nos detalhes.
+  const [stage, setStage] = useState<"capture" | "details">(id ? "details" : "capture");
+  const [hudReview, setHudReview] = useState(false);
+  const { teams, available: teamsAvailable, shareRecord } = useTeams();
+  const [shareTeamId, setShareTeamId] = useState<string | null>(null);
   const [notebookId, setNotebookId] = useState<string>(existing ? notebookOf(existing) : activeNotebookId);
-  const [photoInput, setPhotoInput] = useState<SightingPhotoInput>();
   const [pickingLocation, setPickingLocation] = useState(false);
   const [visibility, setVisibility] = useState<Visibility>(existing?.visibility ?? "private");
   const [isSaving, setIsSaving] = useState(false);
@@ -57,7 +71,7 @@ export default function NewSightingScreen() {
     setLocationLabel(existing.locationLabel ?? "");
     setNotes(existing.notes ?? "");
     setQuantity(existing.quantity ? String(existing.quantity) : "");
-    setPhotoUri(existing.photoUri);
+    setPhotos(toDraft(photosOf(existing)));
     setNotebookId(notebookOf(existing));
     setVisibility(existing.visibility);
     setCoords(
@@ -65,6 +79,7 @@ export default function NewSightingScreen() {
         ? { latitude: existing.latitude, longitude: existing.longitude }
         : undefined,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existing]);
 
   const visibleSpecies = useMemo(() => {
@@ -72,80 +87,11 @@ export default function NewSightingScreen() {
     return filterSpeciesCatalog({ query: normalized });
   }, [speciesQuery]);
 
-  useEffect(() => {
-    let active = true;
-    ImagePicker.getPendingResultAsync().then((result) => {
-      if (active && result && "canceled" in result && !result.canceled) applyPickerResult(result);
-    }).catch(() => undefined);
-    return () => { active = false; };
-  }, []);
-
-  const applyPickerResult = (result: ImagePicker.ImagePickerResult) => {
-    if (result.canceled || !result.assets[0]?.uri) return;
-    const asset = result.assets[0];
-    if (asset.fileSize && asset.fileSize > MAX_SIGHTING_PHOTO_BYTES) {
-      Alert.alert("Fotografia muito grande", "Escolha uma imagem com até 10 MB.");
-      return;
-    }
-    const uri = Platform.OS === "web" && asset.base64 ? `data:${asset.mimeType || "image/jpeg"};base64,${asset.base64}` : asset.uri;
-    setPhotoUri(uri);
-    setPhotoInput({ ...asset, uri });
+  // Continuar: sai da câmera para os detalhes; o local é pedido aqui, no contexto, se ainda faltar.
+  const continueToDetails = () => {
+    setStage("details");
+    if (!coords && !existing) void fillLocationFromDevice();
   };
-
-  const pickPhoto = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images"],
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 0.8,
-        base64: Platform.OS === "web",
-      });
-      applyPickerResult(result);
-    } catch {
-      Alert.alert("Não foi possível abrir a galeria", "Tente novamente ou use a câmera do aparelho.");
-    }
-  };
-
-  const takePhoto = async (automatic = false) => {
-    try {
-      const permission = await ImagePicker.requestCameraPermissionsAsync();
-      if (permission.status !== "granted") {
-        const copy = getNativePermissionCopy(nativeLanguage, "camera", "denied");
-        // Sem câmera: oferece a galeria na hora, para o registro não travar.
-        Alert.alert(copy.title, copy.detail, [
-          { text: nativeLanguage === "English" ? "Pick from gallery" : nativeLanguage === "Español" ? "Elegir de la galería" : "Escolher da galeria", onPress: () => void pickPhoto() },
-          { text: "OK", style: "cancel" },
-        ]);
-        return;
-      }
-      const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ["images"],
-        allowsEditing: !automatic,
-        aspect: [4, 3],
-        quality: 0.8,
-        base64: Platform.OS === "web",
-      });
-      applyPickerResult(result);
-      // Foto tirada na abertura: já pega a localização junto (o formulário pede as duas).
-      if (automatic && !result.canceled && !coords) void fillLocationFromDevice();
-    } catch {
-      if (automatic) return; // aparelho sem câmera (emulador): segue para o formulário
-      const copy = getNativePermissionCopy(nativeLanguage, "camera", "error");
-      Alert.alert(copy.title, copy.detail);
-    }
-  };
-
-  // Novo avistamento abre direto na câmera (uma vez). Ao voltar dela, o formulário já tem a foto;
-  // quem preferir a galeria ou não quiser foto usa os botões normais.
-  const openedCamera = useRef(false);
-  useEffect(() => {
-    if (id || existing || photoUri || openedCamera.current || Platform.OS === "web") return;
-    openedCamera.current = true;
-    const timer = setTimeout(() => void takePhoto(true), 350);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [existing]);
 
   const fillLocationFromDevice = async () => {
     try {
@@ -182,7 +128,7 @@ export default function NewSightingScreen() {
     const sighting: Sighting = {
       id: existing?.id ?? newId,
       speciesId: selected,
-      photoUri,
+      photoUri: photos[0]?.uri,
       date: date.trim(),
       time: time.trim() || undefined,
       locationLabel: locationLabel.trim() || undefined,
@@ -202,12 +148,16 @@ export default function NewSightingScreen() {
         Alert.alert("Confira o registro", validation.errors[0].message);
         return;
       }
-      const durableUri = Platform.OS === "web" ? photoUri! : await persistSightingPhoto(photoInput ?? photoUri!);
-      sighting.photoUri = durableUri;
-      setPhotoUri(durableUri);
-      setPhotoInput(undefined);
+      // Cada foto do lote vai para a pasta permanente do app (na web ficam como data: URI).
+      const durable: string[] = [];
+      for (const photo of photos) durable.push(Platform.OS === "web" ? photo.uri : await persistSightingPhoto(photo.input ?? photo.uri));
+      sighting.photoUri = durable[0];
+      sighting.extraPhotoUris = durable.length > 1 ? durable.slice(1) : undefined;
+      setPhotos(durable.map((uri, i) => ({ ...photos[i], uri, input: undefined, source: "saved" as const })));
       if (existing) await updateSighting(sighting);
       else await addSighting(sighting);
+      // Equipe escolhida explicitamente: o registro também entra na coleção da equipe (com fila offline).
+      if (shareTeamId) void shareRecord(shareTeamId, sighting);
       router.replace({ pathname: "/sightings/[id]", params: { id: sighting.id } } as any);
     } catch (error) {
       Alert.alert(error instanceof SightingPhotoError ? "Confira a fotografia" : "Não foi possível salvar", error instanceof Error ? error.message : "O registro continua nesta tela. Verifique o armazenamento e tente novamente.");
@@ -216,14 +166,42 @@ export default function NewSightingScreen() {
     }
   };
 
+  if (stage === "capture") {
+    return (
+      <CaptureHud photos={photos} onChange={setPhotos} startInReview={hudReview}
+        onContinue={() => { setHudReview(false); continueToDetails(); }}
+        onClose={() => { setHudReview(false); if (existing) setStage("details"); else router.back(); }} />
+    );
+  }
+
+  const openHud = (review: boolean) => { setHudReview(review); setStage("capture"); };
+
   return (
     <ScreenContainer edges={["top", "left", "right", "bottom"]} className="px-5">
       <ScrollView contentContainerStyle={{ paddingBottom: 35 }} keyboardShouldPersistTaps="handled">
-        <Pressable onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Voltar">
-          <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700", paddingVertical: 14 }}>‹ Voltar</Text>
+        <Pressable onPress={() => (existing ? router.back() : openHud(false))} accessibilityRole="button" accessibilityLabel={existing ? "Voltar" : "Voltar para a câmera"}
+          style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingVertical: 14 }}>
+          <Icon name="arrow-left" size={18} color={colors.primary} mono />
+          <Text style={{ color: colors.primary, fontSize: 16, fontWeight: "700" }}>{existing ? "Voltar" : "Câmera"}</Text>
         </Pressable>
         <Text style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{existing ? "Editar avistamento" : "Novo avistamento"}</Text>
         <Text style={{ color: colors.muted, marginTop: 4, marginBottom: 20 }}>{existing ? "Atualize os detalhes do registro" : "Registre os detalhes do encontro"}</Text>
+        <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+            {photos.map((photo, index) => (
+              <Pressable key={photo.id} onPress={() => openHud(true)} accessibilityRole="button" accessibilityLabel={`Foto ${index + 1} de ${photos.length}. Abrir revisão`}
+                style={{ width: 84, height: 84, borderRadius: 16, overflow: "hidden", borderWidth: index === 0 ? 2 : 1, borderColor: index === 0 ? colors.primary : colors.border }}>
+                <Image source={{ uri: photo.uri }} style={{ width: "100%", height: "100%" }} />
+                {index === 0 && <Text style={{ position: "absolute", left: 6, bottom: 5, color: colors.background, backgroundColor: colors.primary, fontSize: 10, fontWeight: "900", paddingHorizontal: 6, borderRadius: 6, overflow: "hidden" }}>CAPA</Text>}
+              </Pressable>
+            ))}
+            <Pressable onPress={() => openHud(false)} accessibilityRole="button" accessibilityLabel={photos.length ? "Adicionar mais fotos pela câmera ou galeria" : "Adicionar fotos"}
+              style={{ width: 84, height: 84, borderRadius: 16, borderWidth: 1.5, borderStyle: "dashed", borderColor: colors.primary, alignItems: "center", justifyContent: "center", gap: 4 }}>
+              <Icon name="camera" size={24} color={colors.primary} />
+              <Text style={{ color: colors.primary, fontSize: 11, fontWeight: "800" }}>{photos.length ? "Mais fotos" : "Fotos"}</Text>
+            </Pressable>
+          </ScrollView>
+        </View>
         <Text style={{ color: colors.muted, marginBottom: 16 }}>Foto e localização são obrigatórias. {ready && canWriteSightings ? `${countSightingCreations(creationLedger, new Date())}/30 novos registros hoje neste aparelho.` : "Carregando o caderno…"}</Text>
 
         <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Caderno</Text>
@@ -231,7 +209,7 @@ export default function NewSightingScreen() {
           {notebooks.map((item) => (
             <Pressable key={item.id} onPress={() => setNotebookId(item.id)} accessibilityRole="radio" accessibilityState={{ selected: notebookId === item.id }} accessibilityLabel={`Salvar no caderno ${item.name}`}
               style={{ backgroundColor: notebookId === item.id ? colors.primary : colors.surface, borderColor: notebookId === item.id ? colors.primary : colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 8, marginRight: 8 }}>
-              <Text style={{ color: notebookId === item.id ? colors.background : colors.foreground, fontWeight: "800", fontSize: 12 }}>{NOTEBOOK_ICON[item.kind]} {item.name}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}><ArtIcon name={NOTEBOOK_ART[item.kind]} size={16} /><Text style={{ color: notebookId === item.id ? colors.background : colors.foreground, fontWeight: "800", fontSize: 12 }}>{item.name}</Text></View>
             </Pressable>
           ))}
         </ScrollView>
@@ -267,17 +245,6 @@ export default function NewSightingScreen() {
           </View>
         ))}
 
-        <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Fotografia * · até 10 MB</Text>
-        <View style={{ flexDirection: "row", gap: 8, marginBottom: 14 }}>
-          <Pressable onPress={pickPhoto} accessibilityRole="button" style={{ flex: 1, borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14 }}>
-            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{photoUri ? "Trocar da galeria" : "Galeria"}</Text>
-          </Pressable>
-          <Pressable onPress={() => void takePhoto()} accessibilityRole="button" style={{ flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 13, padding: 14 }}>
-            <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>Tirar foto</Text>
-          </Pressable>
-        </View>
-        {!!photoUri && <View style={{ marginBottom: 14 }}><Image source={{ uri: photoUri }} accessibilityLabel="Fotografia selecionada para o avistamento" style={{ width: "100%", height: 160, borderRadius: 12, marginBottom: 8 }} /><Text style={{ color: colors.success, fontWeight: "700" }}>Fotografia pronta para salvar.</Text><Pressable onPress={() => { setPhotoUri(undefined); setPhotoInput(undefined); }} accessibilityRole="button" accessibilityLabel="Remover fotografia" style={{ marginTop: 8 }}><Text style={{ color: colors.error, fontWeight: "800" }}>Remover fotografia</Text></Pressable></View>}
-
         <Pressable onPress={fillLocationFromDevice} accessibilityRole="button" style={{ borderColor: colors.border, borderWidth: 1, borderRadius: 13, padding: 14, marginBottom: 14 }}>
           <Text style={{ color: colors.primary, fontWeight: "800", textAlign: "center" }}>{coords ? "Atualizar localização do aparelho" : "Usar localização do aparelho"}</Text>
         </Pressable>
@@ -292,6 +259,25 @@ export default function NewSightingScreen() {
             </Pressable>
           ))}
         </View>
+        {!existing && teamsAvailable && teams.length > 0 && (
+          <View style={{ marginBottom: 16 }}>
+            <Text style={{ color: colors.foreground, fontWeight: "800", marginBottom: 8 }}>Coleção da equipe</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+              {[{ id: null as string | null, name: "Só no meu caderno" }, ...teams.map((t) => ({ id: t.id as string | null, name: t.name }))].map((option) => {
+                const active = shareTeamId === option.id;
+                return (
+                  <Pressable key={option.id ?? "pessoal"} onPress={() => setShareTeamId(option.id)} accessibilityRole="radio" accessibilityState={{ selected: active }}
+                    accessibilityLabel={option.id ? `Também enviar para a equipe ${option.name}` : "Manter só no meu caderno"}
+                    style={{ flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: active ? colors.primary : colors.surface, borderColor: active ? colors.primary : colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 8 }}>
+                    <ArtIcon name={option.id ? "equipe" : "caderno"} size={16} />
+                    <Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "800", fontSize: 12 }}>{option.name}</Text>
+                  </Pressable>
+                );
+              })}
+            </ScrollView>
+            <Text style={{ color: colors.muted, fontSize: 12, marginTop: 6 }}>{shareTeamId ? "A equipe vê as fotos, a descrição, a data e a zona de ~11 km, com o seu nome. O ponto exato continua só no seu aparelho." : "O registro fica só no seu caderno. Dá para enviar a uma equipe depois, na ficha do registro."}</Text>
+          </View>
+        )}
         <Text style={{ color: colors.muted, fontSize: 12, marginBottom: 14 }}>O ponto exato fica no caderno pessoal. Registros compartilháveis usam uma localização aproximada de 0,1° (cerca de 11 km).</Text>
         <Pressable disabled={isSaving} onPress={save} accessibilityRole="button" accessibilityState={{ busy: isSaving, disabled: isSaving }} style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 16, padding: 16, opacity: isSaving ? 0.65 : 1 }, pressed && !isSaving && { opacity: 0.82, transform: [{ scale: 0.98 }] }]}>
           <Text style={{ color: "#fff", fontWeight: "800", textAlign: "center", fontSize: 16 }}>{isSaving ? "Salvando…" : existing ? "Salvar alterações" : "Salvar avistamento"}</Text>

@@ -8,18 +8,20 @@ import { router } from "expo-router";
 import { useMemo } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 
+import { ArtIcon, type ArtName } from "@/components/ArtIcon";
 import { Text } from "@/components/T";
 import { useApp } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
 import { countByNotebook, TEST_NOTEBOOK_ID, type NotebookKind } from "@/shared/notebooks";
 
-export const NOTEBOOK_ICON: Record<NotebookKind, string> = { main: "📔", test: "🧪", custom: "📒", imported: "📥" };
+/** Figura de cada tipo de caderno (antes eram emojis). */
+export const NOTEBOOK_ART: Record<NotebookKind, ArtName> = { main: "caderno", test: "frasco", custom: "caderno-lapis", imported: "importar" };
 
 export function NotebookBar({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
   const colors = useColors();
   const { notebooks, sightings, activeNotebookId } = useApp();
   const counts = useMemo(() => countByNotebook(sightings), [sightings]);
-  const chip = (id: string, label: string, count: number, active: boolean) => (
+  const chip = (id: string, label: string, count: number, active: boolean, art?: ArtName) => (
     <Pressable
       key={id}
       onPress={() => onSelect(id)}
@@ -28,6 +30,7 @@ export function NotebookBar({ selected, onSelect }: { selected: string; onSelect
       accessibilityLabel={`${label}, ${count} registros`}
       style={{ flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: active ? colors.primary : colors.surface, borderColor: active ? colors.primary : colors.border, borderWidth: 1, borderRadius: 18, paddingHorizontal: 12, paddingVertical: 8, marginRight: 8 }}
     >
+      {art && <ArtIcon name={art} size={16} />}
       <Text style={{ color: active ? colors.background : colors.foreground, fontWeight: "800", fontSize: 12 }}>{label}</Text>
       <View style={{ backgroundColor: active ? colors.background : colors.border, borderRadius: 9, paddingHorizontal: 6, minWidth: 18, alignItems: "center" }}>
         <Text style={{ color: active ? colors.primary : colors.foreground, fontWeight: "800", fontSize: 11 }}>{count}</Text>
@@ -44,11 +47,11 @@ export function NotebookBar({ selected, onSelect }: { selected: string; onSelect
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {chip("all", "Todos", sightings.length - (counts[TEST_NOTEBOOK_ID] ?? 0), selected === "all")}
-        {notebooks.filter((item) => item.id !== TEST_NOTEBOOK_ID).map((item) => chip(item.id, `${NOTEBOOK_ICON[item.kind]} ${item.name}${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id))}
+        {notebooks.filter((item) => item.id !== TEST_NOTEBOOK_ID).map((item) => chip(item.id, `${item.name}${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id, NOTEBOOK_ART[item.kind]))}
         {notebooks.filter((item) => item.id === TEST_NOTEBOOK_ID).map((item) => (
           <View key={item.id} style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ width: 1, height: 26, backgroundColor: colors.border, marginRight: 8 }} />
-            {chip(item.id, `${NOTEBOOK_ICON[item.kind]} ${item.name} (à parte)${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id)}
+            {chip(item.id, `${item.name} (à parte)${item.id === activeNotebookId ? " •" : ""}`, counts[item.id] ?? 0, selected === item.id, NOTEBOOK_ART[item.kind])}
           </View>
         ))}
       </ScrollView>

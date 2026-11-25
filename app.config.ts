@@ -84,6 +84,14 @@ const config: ExpoConfig = {
       },
     ],
     [
+      "expo-camera",
+      {
+        cameraPermission: "Permita que o PantanalDex use a câmera para registrar avistamentos.",
+        microphonePermission: false,
+        recordAudioAndroid: false,
+      },
+    ],
+    [
       "expo-splash-screen",
       {
         image: "./assets/images/splash-icon.png",

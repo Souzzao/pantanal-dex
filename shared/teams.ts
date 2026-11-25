@@ -13,6 +13,8 @@
 import { roundToPublicLocationGrid } from "./location";
 import { UNKNOWN_SPECIES_ID, type Sighting } from "./pantanal";
 
+import type { Avatar } from "./team-records";
+
 export const TEAM_MAX_MEMBERS = 100;
 export const TEAMS_PER_PERSON = 5;
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // sem I, O, 0 e 1 (não confundem no campo)
@@ -27,6 +29,8 @@ export type TeamInfo = { id: string; name: string; code: string; myRole: TeamRol
 export type TeamMember = {
   userId: string; displayName: string; role: TeamRole; joinedAt: string;
   speciesIds: string[]; sightingsCount: number; zones: TeamZone[]; updatedAt: string | null;
+  /** Personagem escolhido no perfil (ver shared/team-records.ts). */
+  avatar?: Avatar;
 };
 
 /** Deixa o código digitado no formato do servidor: maiúsculas, sem espaços e traços. */

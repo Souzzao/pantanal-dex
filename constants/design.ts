@@ -4,8 +4,8 @@
  * Adaptado do kit Órbita UI: mesmos papéis (fundo quase preto, painel com degradê, contorno fino,
  * raio de 18 px, curva de movimento suave e quatro gradientes assinatura), com a paleta do Pantanal.
  * Os quatro gradientes do kit viram paisagens do bioma:
- *   Aurora → "Aurora"  (água verde-azulada do amanhecer)     · Eclipse → "Ocaso"  (pôr do sol âmbar)
- *   Plasma → "Ipê"     (flor do ipê, rosa e roxo)             · Íon     → "Rio"    (azul das baías)
+ *   Aurora = "Aurora"  (água verde-azulada do amanhecer)     · Eclipse = "Ocaso"  (pôr do sol âmbar)
+ *   Plasma = "Ipê"     (flor do ipê, rosa e roxo)             · Íon     = "Rio"    (azul das baías)
  * e cada grupo de animais ganha o seu (usado em cartões, coleção e filtros).
  *
  * @author Felipe de Souza Aquino
@@ -38,8 +38,7 @@ export const groupGradient: Record<string, Gradient> = {
   Invertebrados: gradients.terra,
 };
 
-export const groupIcon: Record<string, string> = {
-  Mamíferos: "🐆", Aves: "🦜", Répteis: "🐊", Anfíbios: "🐸", Peixes: "🐟", Invertebrados: "🦋",
-};
+/** Ícone de cada grupo (figuras em assets/icons, ver shared/art-names.ts; antes eram emojis). */
+export { GROUP_ART as groupIcon } from "@/shared/art-names";
 
 export const gradientFor = (group: string): Gradient => groupGradient[group] ?? gradients.ocaso;

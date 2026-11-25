@@ -3,6 +3,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { Icon } from "@/components/Icon";
 import { useState } from "react";
 import { PRIVACY_POLICY_URL } from "@/shared/version";
 import { Reveal } from "@/components/motion";
@@ -120,7 +121,7 @@ export function LoginScreen() {
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginTop: 14 }}>
               <Pressable onPress={() => setAccepted((v) => !v)} accessibilityRole="checkbox" accessibilityState={{ checked: accepted }} accessibilityLabel={`${t.terms}${t.policy}`} hitSlop={8}
                 style={{ width: 26, height: 26, borderRadius: 6, borderWidth: 2, borderColor: colors.primary, backgroundColor: accepted ? colors.primary : "transparent", alignItems: "center", justifyContent: "center" }}>
-                {accepted && <Text style={{ color: colors.background, fontWeight: "900" }}>✓</Text>}
+                {accepted && <Icon name="check" size={16} color={colors.background} mono strokeWidth={3} />}
               </Pressable>
               <Text style={{ color: colors.foreground, flex: 1, flexWrap: "wrap" }}>{t.terms}<Text onPress={() => void Linking.openURL(PRIVACY_POLICY_URL)} accessibilityRole="link" style={{ color: colors.primary, fontWeight: "700", textDecorationLine: "underline" }}>{t.policy}</Text></Text>
             </View>
