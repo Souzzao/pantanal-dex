@@ -9,6 +9,11 @@ on:
     branches: [main, claude/v2]
     paths-ignore: ["**.md", "docs/**"]
   workflow_dispatch:
+    inputs:
+      publicar:
+        description: "Publicar os APKs como release pública (link do QR code)"
+        type: boolean
+        default: false
 
 # Permissão mínima: o build só lê o código; só o job de release (push na main) pode publicar.
 # Nenhum segredo chega a PRs de forks.
@@ -79,9 +84,10 @@ jobs:
 
   release:
     # Publica os dois APKs numa "release" pública: o link de download não exige conta no GitHub
-    # (usado pelo QR code). Só roda em push na main, nunca em PR.
+    # (usado pelo QR code). Roda em push na main ou quando o dono dispara manualmente com "publicar";
+    # nunca em PR.
     needs: apk
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.publicar)
     runs-on: ubuntu-latest
     permissions:
       contents: write
