@@ -157,7 +157,7 @@ export default function HomeScreen() {
                   <MagicCard key={group} glow={g.glow} onPress={() => router.push({ pathname: "/(tabs)/animals", params: { group } } as never)} accessibilityRole="button" accessibilityLabel={`${group}: ${count} ${t.species}`}
                     style={{ width: groupTileWidth, height: 104, borderRadius: 20, padding: 12, justifyContent: "space-between" }}>
                     <GradientFill g={g} />
-                    <Text style={{ fontSize: 24 }}>{groupIcon[group]}</Text>
+                    <ArtIcon name={groupIcon[group]} size={36} />
                     <View>
                       <Text style={{ color: g.ink, fontWeight: "900", fontSize: 14 }} numberOfLines={1}>{group}</Text>
                       <Text style={{ color: g.ink, opacity: 0.8, fontSize: 11, fontWeight: "700" }}>{count} {t.species}</Text>

@@ -45,7 +45,13 @@ type ErrorKey = keyof (typeof TEXT)["pt"]["errors"];
 export function LoginScreen() {
   const colors = useColors();
   const { settings } = useApp();
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, signInWithGoogle } = useAuth();
+  const [googleBusy, setGoogleBusy] = useState(false);
+  const [googleError, setGoogleError] = useState<string | null>(null);
+  const google = async () => {
+    setError(null); setInfo(null); setGoogleError(null); setGoogleBusy(true);
+    try { const result = await signInWithGoogle(); if (result.error) setGoogleError(result.error); } finally { setGoogleBusy(false); }
+  };
   const t = TEXT[settings.defaultLanguage === "English" ? "en" : settings.defaultLanguage === "Español" ? "es" : "pt"];
   const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
   const [name, setName] = useState("");
@@ -134,6 +140,21 @@ export function LoginScreen() {
             style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 14, paddingVertical: 15, marginTop: 18, alignItems: "center" }, (pressed || busy) && { opacity: 0.8 }]}>
             {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "800", fontSize: 16 }}>{mode === "signIn" ? t.signIn : t.signUp}</Text>}
           </Pressable>
+
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginTop: 16 }}>
+            <View style={{ flex: 1, height: 1, backgroundColor: colors.border }} />
+            <Text style={{ color: colors.muted, fontSize: 12, fontWeight: "700" }}>ou</Text>
+            <View style={{ flex: 1, height: 1, backgroundColor: colors.border }} />
+          </View>
+          <Pressable onPress={() => void google()} disabled={googleBusy || busy} accessibilityRole="button" accessibilityLabel="Continuar com o Google" accessibilityState={{ disabled: googleBusy || busy, busy: googleBusy }} testID="login-google"
+            style={({ pressed }) => [{ flexDirection: "row", gap: 10, backgroundColor: "#FBF7EF", borderRadius: 14, paddingVertical: 14, marginTop: 14, alignItems: "center", justifyContent: "center" }, (pressed || googleBusy) && { opacity: 0.8 }]}>
+            {googleBusy ? <ActivityIndicator color="#0E0D0B" /> : <>
+              <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: "#0E0D0B", alignItems: "center", justifyContent: "center" }}><Text style={{ color: "#FBF7EF", fontWeight: "900", fontSize: 13 }}>G</Text></View>
+              <Text style={{ color: "#0E0D0B", fontWeight: "800", fontSize: 16 }}>Continuar com o Google</Text>
+            </>}
+          </Pressable>
+          <Text style={{ color: colors.muted, fontSize: 11, marginTop: 6, textAlign: "center" }}>Ao continuar com o Google, você aceita a política de privacidade do PantanalDex.</Text>
+          {googleError && <Text accessibilityLiveRegion="assertive" style={{ color: colors.error, marginTop: 8, fontWeight: "600", textAlign: "center" }}>{googleError}</Text>}
 
           <Pressable onPress={() => { setMode(mode === "signIn" ? "signUp" : "signIn"); setError(null); setInfo(null); }} accessibilityRole="button" style={{ paddingVertical: 16 }}>
             <Text style={{ color: colors.primary, textAlign: "center", fontWeight: "700" }}>{mode === "signIn" ? t.toSignUp : t.toSignIn}</Text>

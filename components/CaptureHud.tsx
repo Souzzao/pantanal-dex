@@ -17,6 +17,7 @@ import { AccessibilityInfo, ActivityIndicator, BackHandler, Image, Platform, Pre
 import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSequence, withSpring, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { ArtIcon } from "@/components/ArtIcon";
 import { Icon } from "@/components/Icon";
 import { PressableScale, tapFeedback } from "@/components/motion";
 import { Text } from "@/components/T";
@@ -243,7 +244,16 @@ export function CaptureHud({ photos, onChange, onContinue, onClose, initialRevie
                   </View>
                 </Pressable>
               </Animated.View>
-            ) : unavailable ? null : <View style={{ width: 58 }} />}
+            ) : unavailable ? null : (
+              // Quadradinho da galeria desde o início (como na câmera do celular): quem não quer tirar foto importa daqui.
+              <Pressable onPress={() => void importFromGallery()} disabled={busy} accessibilityRole="button" accessibilityLabel="Escolher fotos da galeria em vez de tirar" testID="camera-gallery"
+                style={{ alignItems: "center", gap: 4 }}>
+                <View style={{ width: 58, height: 58, borderRadius: 16, borderWidth: 2, borderColor: CREAM, backgroundColor: "rgba(14,13,11,0.62)", alignItems: "center", justifyContent: "center" }}>
+                  <ArtIcon name="fotos" size={34} />
+                </View>
+                <Text style={{ color: CREAM, fontSize: 11, fontWeight: "800" }}>Galeria</Text>
+              </Pressable>
+            )}
           </View>
 
           {granted && !cameraError ? (
