@@ -11,7 +11,7 @@ Telas: login, início, animais, ficha da espécie, avistamentos, coleção, cade
 | V03 | 9 telas | Larguras 320, 390 e 768 px: rolagem horizontal indevida da página | PASSOU (após correção) | 1ª rodada: login a 768 px rolava (brilho do horizonte) → corrigido com `overflow: hidden`; 2ª rodada: 0 ocorrências |
 | F01 | Início, coleção | Atalhos levam ao destino certo: "Explore por grupo" abre Animais já filtrado (ex.: Aves → 479 espécies) | PASSOU | navegação por URL `/animals?group=Aves` |
 | F02 | Avistamentos, equipes | Estados vazio (caderno vazio, sem equipe → órbita com convite) e sem internet (equipes mostram o cache) | PASSOU (vazio) · NÃO TESTADO (erro de rede no navegador) | o estado offline é coberto por `tests/teams.test.ts` |
-| F03 | Criar conta | Envio sem aceitar a política mostra erro; campos guardam o que foi digitado | PASSOU | teste manual na build com servidor |
+| F03 | Criar conta | Envio sem aceitar a política mostra erro; campos guardam o que foi digitado | PASSOU | Playwright na build com servidor: mensagem "Marque que leu e aceita a Política de Privacidade." exibida e e-mail mantido; o envio é barrado antes do servidor (nenhuma conta criada) |
 | F04 | Modal "Sair da equipe" | Abrir, cancelar e confirmar só com o nome certo | NÃO TESTADO no navegador | depende de conta com equipe; regra coberta por código (botão desabilitado até o nome bater) |
 | A01 | Todas | Todos os controles têm nome acessível (rótulo, texto ou dica) | PASSOU (após correção) | 1ª rodada: interruptor de "remover repetidos" sem nome → rótulo adicionado |
 | A02 | Todas | Contraste WCAG: texto 18,2:1; texto secundário 8,2–9,0:1; amarelo 12,2:1; tinta sobre os 6 gradientes 7,2–9,4:1 (mínimo 4,5:1) | PASSOU | cálculo pela fórmula WCAG 2.2 |
