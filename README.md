@@ -25,8 +25,8 @@ Gratuito · sem anúncios · funciona sem internet
   <img src="docs/img/home.jpg" width="19%" alt="Início com a espécie do dia" />
   <img src="docs/img/animais.jpg" width="19%" alt="Catálogo de animais" />
   <img src="docs/img/ficha.jpg" width="19%" alt="Ficha da onça-pintada" />
-  <img src="docs/img/novo.jpg" width="19%" alt="Novo avistamento" />
-  <img src="docs/img/cadernos.jpg" width="19%" alt="Cadernos de avistamentos" />
+  <img src="docs/img/colecao.jpg" width="19%" alt="Coleção com gradientes por grupo" />
+  <img src="docs/img/login.jpg" width="19%" alt="Login com o hero do Órbita" />
 </p>
 
 ---
@@ -123,6 +123,7 @@ docs/           Documentação técnica
 | [Dados do catálogo](docs/DADOS.md) · [Pipeline](docs/PIPELINE-CATALOGO.md) | Origem e montagem das 1.003 espécies |
 | [Privacidade](docs/PRIVACIDADE.md) · [Google Play](docs/GOOGLE-PLAY.md) | Política (LGPD) e roteiro de publicação na loja |
 | [Licenças de terceiros](docs/LICENCAS-TERCEIROS.md) | Bibliotecas, fontes e referências de interface |
+| [Checklist de interface](docs/CHECKLIST-INTERFACE.md) | Revisão visual e de acessibilidade com evidências (kit Órbita UI) |
 | [Licenças e créditos](docs/LICENCAS-E-CREDITOS.md) | Regras de licença das imagens e fontes |
 | [Mapa público](docs/MAPA-PUBLICO.md) | Como os registros viram áreas aproximadas |
 | [Testes](docs/TESTES.md) | Estratégia de verificação e validação |
