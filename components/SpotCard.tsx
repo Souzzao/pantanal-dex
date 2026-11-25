@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 /**
  * PantanalDex — Cartão de ponto turístico com texto em 4 idiomas e check-in por GPS (UC09).
  *
@@ -5,6 +6,7 @@
  */
 import { useState } from "react";
 import { ActivityIndicator, Linking, Pressable, View } from "react-native";
+import { isSafeExternalUrl } from "@/shared/safe-url";
 import * as Location from "expo-location";
 import { Text } from "@/components/T";
 import { useColors } from "@/hooks/use-colors";
@@ -46,20 +48,20 @@ export function SpotCard({ spot, visits, onVisits, onClose }: { spot: TouristSpo
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
         <Text style={{ fontSize: 30 }}>{spot.icon}</Text>
         <Text accessibilityRole="header" style={{ color: colors.foreground, fontWeight: "800", fontSize: 17, flex: 1 }}>{spot.name[lang] ?? spot.name.pt}</Text>
-        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={t.close} hitSlop={10}><Text style={{ color: colors.primary, fontWeight: "800", fontSize: 18 }}>✕</Text></Pressable>
+        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={t.close} hitSlop={10}><Icon name="close" color={colors.primary} /></Pressable>
       </View>
       <Text style={{ color: colors.foreground, fontSize: 14, lineHeight: 20 }}>{spot.about[lang] ?? spot.about.pt}</Text>
       {visitedAt ? (
-        <Text style={{ color: colors.primary, fontWeight: "800" }}>🏅 {t.visited(new Date(visitedAt).toLocaleDateString())}</Text>
+        <Text style={{ color: colors.primary, fontWeight: "800" }}>{t.visited(new Date(visitedAt).toLocaleDateString())}</Text>
       ) : (
         <Pressable onPress={doCheckIn} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ backgroundColor: colors.primary, borderRadius: 12, minHeight: 48, alignItems: "center", justifyContent: "center" }, pressed && { opacity: 0.85 }]}>
-          {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>📍 {t.checkIn}</Text>}
+          {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>{t.checkIn}</Text>}
         </Pressable>
       )}
       {message && <Text style={{ color: message === t.got ? colors.success : colors.muted, fontSize: 13 }}>{message}</Text>}
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
         <Text style={{ color: colors.muted, fontSize: 12 }}>{progress.tier ? progress.tier.icon + " " : ""}{t.progress(progress.visited, progress.total)}</Text>
-        <Pressable onPress={() => void Linking.openURL(spot.source)} accessibilityRole="link" hitSlop={8}><Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{t.source}</Text></Pressable>
+        <Pressable onPress={() => { if (isSafeExternalUrl(spot.source)) void Linking.openURL(spot.source).catch(() => undefined); }} accessibilityRole="link" hitSlop={8}><Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{t.source}</Text></Pressable>
       </View>
     </View>
   );

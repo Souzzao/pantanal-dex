@@ -18,9 +18,16 @@ describe("espécies sem foto não derrubam as telas", () => {
     expect(blocked).toEqual([]);
   });
 
-  it("toda espécie do app tem pelo menos 5 fotos (as raras demais saem do catálogo)", () => {
-    const low = filterSpeciesCatalog().filter((item) => item.images.length < 5).map((item) => item.id);
-    expect(low).toEqual([]);
+  it("toda espécie do app tem pelo menos 1 foto de uso livre (sem nenhuma, ela sai do catálogo)", () => {
+    const all = filterSpeciesCatalog();
+    expect(all.filter((item) => item.images.length === 0).map((item) => item.id)).toEqual([]);
+    // A grande maioria tem 5 ou mais; as poucas com menos são espécies raras mantidas pela relevância.
+    expect(all.filter((item) => item.images.length >= 5).length).toBeGreaterThan(all.length * 0.9);
+  });
+
+  it("espécies relevantes com poucas fotos continuam no app", () => {
+    const sci = new Set(filterSpeciesCatalog().map((item) => item.scientificName));
+    for (const name of ["Megaleporinus macrocephalus", "Micrurus tricolor", "Austrolebias ephemerus"]) expect(sci.has(name)).toBe(true);
   });
 
   it("nenhum nome popular se repete no catálogo", () => {
@@ -49,9 +56,9 @@ describe("espécies sem foto não derrubam as telas", () => {
 });
 
 describe("espécies raras demais saem do catálogo sem perder avistamentos", () => {
-  it("nenhuma espécie gerada no catálogo tem menos de 5 fotos", async () => {
+  it("nenhuma espécie gerada no catálogo fica sem foto", async () => {
     const { generatedSpecies, retiredSpecies } = await import("../shared/catalog/generated");
-    expect(generatedSpecies.every((item) => item.images.length >= 5)).toBe(true);
+    expect(generatedSpecies.every((item) => item.images.length >= 1)).toBe(true);
     const ids = new Set(filterSpeciesCatalog().map((item) => item.id));
     expect(retiredSpecies.every((item) => !ids.has(item.id))).toBe(true);
   });

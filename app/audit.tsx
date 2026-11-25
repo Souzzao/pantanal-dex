@@ -1,3 +1,4 @@
+import { ArtIcon } from "@/components/ArtIcon";
 /**
  * PantanalDex — Auditoria (UC12): fila de registros públicos pendentes e histórico; o auditor aprova, corrige a espécie ou recusa.
  *
@@ -18,12 +19,13 @@ import { canAudit } from "@/shared/auth";
 import { normalizeAuditRow, REJECT_REASONS, type AuditItem, type LogItem, normalizeLogRow } from "@/shared/audit";
 import { filterSpeciesCatalog } from "@/shared/catalog";
 import type { StreetMapState } from "@/shared/street-map";
+import { IS_DEMO } from "@/shared/variant";
 import { AUDIT_PROCESS, createDemoQueue, demoScenario, DEMO_PREFIX, simulatePublication, type PublishSimulation } from "@/shared/audit-demo";
 
 const TEXT = {
   pt: {
     back: "‹ Voltar", title: "Auditoria", queue: (n: number) => `${n} ${n === 1 ? "registro" : "registros"} na pilha`, history: "Histórico", stack: "Pilha",
-    empty: "Nada para verificar agora. 🎉", emptyHint: "Novos registros públicos aparecem aqui como pendentes.", offline: "Sem internet: a auditoria precisa de conexão.", denied: "Esta área é só para auditores.", retry: "Tentar de novo",
+    empty: "Nada para verificar agora.", emptyHint: "Novos registros públicos aparecem aqui como pendentes.", offline: "Sem internet: a auditoria precisa de conexão.", denied: "Esta área é só para auditores.", retry: "Tentar de novo",
     by: (name: string) => `Enviado por ${name}`, noPhoto: "Sem foto", reference: "Foto do catálogo", sent: "Foto enviada", species: "Espécie", change: "Trocar espécie", notes: "Observação", none: "—", unknownSpecies: "Espécie não identificada",
     approve: "Aprovar", reject: "Reprovar", swipe: "Arraste para a direita para aprovar ou para a esquerda para reprovar.",
     rejectTitle: "Por que reprovar?", rejectPlaceholder: "Explique em poucas palavras (a pessoa vai ler)", confirmReject: "Reprovar", cancel: "Cancelar",
@@ -32,7 +34,7 @@ const TEXT = {
   },
   en: {
     back: "‹ Back", title: "Review", queue: (n: number) => `${n} ${n === 1 ? "record" : "records"} in the stack`, history: "History", stack: "Stack",
-    empty: "Nothing to review right now. 🎉", emptyHint: "New public records show up here as pending.", offline: "Offline: reviewing needs a connection.", denied: "This area is for reviewers only.", retry: "Try again",
+    empty: "Nothing to review right now.", emptyHint: "New public records show up here as pending.", offline: "Offline: reviewing needs a connection.", denied: "This area is for reviewers only.", retry: "Try again",
     by: (name: string) => `Sent by ${name}`, noPhoto: "No photo", reference: "Catalog photo", sent: "Submitted photo", species: "Species", change: "Change species", notes: "Notes", none: "—", unknownSpecies: "Unidentified species",
     approve: "Approve", reject: "Reject", swipe: "Swipe right to approve or left to reject.",
     rejectTitle: "Why reject?", rejectPlaceholder: "Explain briefly (the person will read it)", confirmReject: "Reject", cancel: "Cancel",
@@ -41,7 +43,7 @@ const TEXT = {
   },
   es: {
     back: "‹ Volver", title: "Auditoría", queue: (n: number) => `${n} ${n === 1 ? "registro" : "registros"} en la pila`, history: "Historial", stack: "Pila",
-    empty: "Nada para revisar ahora. 🎉", emptyHint: "Los nuevos registros públicos aparecen aquí como pendientes.", offline: "Sin internet: la auditoría necesita conexión.", denied: "Esta área es solo para auditores.", retry: "Intentar de nuevo",
+    empty: "Nada para revisar ahora.", emptyHint: "Los nuevos registros públicos aparecen aquí como pendientes.", offline: "Sin internet: la auditoría necesita conexión.", denied: "Esta área es solo para auditores.", retry: "Intentar de nuevo",
     by: (name: string) => `Enviado por ${name}`, noPhoto: "Sin foto", reference: "Foto del catálogo", sent: "Foto enviada", species: "Especie", change: "Cambiar especie", notes: "Observación", none: "—", unknownSpecies: "Especie no identificada",
     approve: "Aprobar", reject: "Rechazar", swipe: "Desliza a la derecha para aprobar o a la izquierda para rechazar.",
     rejectTitle: "¿Por qué rechazar?", rejectPlaceholder: "Explica en pocas palabras (la persona lo leerá)", confirmReject: "Rechazar", cancel: "Cancelar",
@@ -75,7 +77,8 @@ export default function AuditScreen() {
   const [rejectOpen, setRejectOpen] = useState(false);
   const [reason, setReason] = useState("");
   // Modo demonstração: pilha e decisões simuladas, sem servidor.
-  const [demo, setDemo] = useState(!supabase);
+  // Modo demonstração só existe na versão Demo; na final a auditoria é sempre a real.
+  const [demo, setDemo] = useState(IS_DEMO && !supabase);
   const [sim, setSim] = useState<PublishSimulation | null>(null);
   const [simStep, setSimStep] = useState(0);
   const simSeq = useRef(0);
@@ -206,12 +209,12 @@ export default function AuditScreen() {
     <View style={{ paddingHorizontal: 16 }}>
       <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as never))} accessibilityRole="button"><Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 10 }}>{t.back}</Text></Pressable>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontWeight: "800" }}>{t.title}</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 26, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{t.title}</Text>
         <View style={{ flexDirection: "row", gap: 6 }}>
-          <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
+          {IS_DEMO && <Pressable onPress={() => { setDemo((value) => !value); setTab("stack"); }} accessibilityRole="switch" accessibilityState={{ checked: demo }} accessibilityLabel="Modo demonstração"
             style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.warning, backgroundColor: demo ? colors.warning : colors.surface }}>
             <Text style={{ color: demo ? colors.background : colors.warning, fontWeight: "800", fontSize: 13 }}>Demo</Text>
-          </Pressable>
+          </Pressable>}
           {(["stack", "history"] as const).map((key) => (
             <Pressable key={key} onPress={() => setTab(key)} accessibilityRole="button" accessibilityState={{ selected: tab === key }}
               style={{ paddingHorizontal: 12, minHeight: 44, justifyContent: "center", borderRadius: 999, borderWidth: 1, borderColor: colors.primary, backgroundColor: tab === key ? colors.primary : colors.surface }}>
@@ -228,7 +231,7 @@ export default function AuditScreen() {
             {AUDIT_PROCESS.map((step, index) => (
               <View key={step.title} style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={{ width: 150, backgroundColor: colors.background, borderRadius: 10, padding: 8 }}>
-                  <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 12 }}>{step.icon} {index + 1}. {step.title}</Text>
+                  <Text style={{ color: colors.foreground, fontWeight: "800", fontSize: 12 }}>{index + 1}. {step.title}</Text><ArtIcon name={step.art} size={20} />
                   <Text style={{ color: colors.muted, fontSize: 11, marginTop: 2 }}>{step.text}</Text>
                 </View>
                 {index < AUDIT_PROCESS.length - 1 && <Text style={{ color: colors.primary, fontWeight: "900", marginHorizontal: 4 }}>→</Text>}
@@ -320,10 +323,10 @@ export default function AuditScreen() {
           {error && <Text style={{ color: colors.error, textAlign: "center", marginBottom: 6 }}>{error}</Text>}
           <View style={{ flexDirection: "row", gap: 12 }}>
             <Pressable onPress={() => setRejectOpen(true)} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ flex: 1, borderColor: colors.error, borderWidth: 2, borderRadius: 16, paddingVertical: 14, alignItems: "center" }, pressed && { opacity: 0.8 }]}>
-              <Text style={{ color: colors.error, fontWeight: "900", fontSize: 16 }}>✕ {t.reject}</Text>
+              <Text style={{ color: colors.error, fontWeight: "900", fontSize: 16 }}>{t.reject}</Text>
             </Pressable>
             <Pressable onPress={() => void decide("approved")} disabled={busy} accessibilityRole="button" style={({ pressed }) => [{ flex: 1, backgroundColor: colors.primary, borderRadius: 16, paddingVertical: 14, alignItems: "center" }, (pressed || busy) && { opacity: 0.8 }]}>
-              {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>✓ {t.approve}</Text>}
+              {busy ? <ActivityIndicator color={colors.background} /> : <Text style={{ color: colors.background, fontWeight: "900", fontSize: 16 }}>{t.approve}</Text>}
             </Pressable>
           </View>
           <Text style={{ color: colors.muted, fontSize: 11, textAlign: "center", marginTop: 6 }}>{t.swipe}</Text>
@@ -338,7 +341,7 @@ export default function AuditScreen() {
             <Text style={{ color: colors.muted, marginTop: 2, marginBottom: 10 }}>{sim?.item ? nameOf(sim.item.speciesId) : "Registro de teste"} · o servidor confere cada regra</Text>
             {sim?.checks.map((check, index) => (
               <View key={check.label} style={{ flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7, opacity: index < simStep ? 1 : 0.25 }}>
-                <Text style={{ fontSize: 18, width: 24, textAlign: "center", color: index < simStep ? (check.ok ? colors.success : colors.error) : colors.muted }}>{index < simStep ? (check.ok ? "✓" : "✕") : "…"}</Text>
+                <Text style={{ fontSize: 18, width: 24, textAlign: "center", color: index < simStep ? (check.ok ? colors.success : colors.error) : colors.muted }}>{index < simStep ? (check.ok ? "OK" : "×") : "…"}</Text>
                 <View style={{ flex: 1 }}>
                   <Text style={{ color: colors.foreground, fontWeight: "800" }}>{check.label}</Text>
                   <Text style={{ color: colors.muted, fontSize: 12 }}>{check.detail}</Text>

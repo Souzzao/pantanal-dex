@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 /**
  * PantanalDex — Mapa público: agrupa registros por área e exibe os rótulos traduzidos.
  *
@@ -67,10 +68,10 @@ export function PublicMap({ records, selectedKey, onSelectCluster, labels, heigh
     setCenter(next.center);
     setZoom(next.zoom);
   };
-  const control = (text: string, label: string, action: () => void) => (
+  const control = (text: string, label: string, action: () => void, direction?: "arrow-left" | "arrow-right" | "chevron-up" | "chevron-down") => (
     <Pressable key={label} onPress={action} accessibilityRole="button" accessibilityLabel={label}
       style={({ pressed }) => [{ minWidth: 44, minHeight: 44, paddingHorizontal: 10, borderRadius: 12, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface, alignItems: "center", justifyContent: "center" }, pressed && { opacity: 0.7 }]}>
-      <Text style={{ color: colors.foreground, fontWeight: "800" }}>{text}</Text>
+      {direction ? <Icon name={direction} color={colors.foreground} /> : <Text style={{ color: colors.foreground, fontWeight: "800" }}>{text}</Text>}
     </Pressable>
   );
 
@@ -111,10 +112,10 @@ export function PublicMap({ records, selectedKey, onSelectCluster, labels, heigh
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
         {control("+", labels.zoomIn, () => setZoom((value) => Math.min(MAX_WORLD_ZOOM, value * 2)))}
         {control("−", labels.zoomOut, () => setZoom((value) => Math.max(1, value / 2)))}
-        {control("←", labels.west, () => move(-0.3, 0))}
-        {control("↑", labels.north, () => move(0, 0.3))}
-        {control("↓", labels.south, () => move(0, -0.3))}
-        {control("→", labels.east, () => move(0.3, 0))}
+        {control("←", labels.west, () => move(-0.3, 0), "arrow-left")}
+        {control("↑", labels.north, () => move(0, 0.3), "chevron-up")}
+        {control("↓", labels.south, () => move(0, -0.3), "chevron-down")}
+        {control("→", labels.east, () => move(0.3, 0), "arrow-right")}
         {control(labels.fit, labels.fit, fit)}
         {control(labels.world, labels.world, () => { setCenter({ latitude: 0, longitude: center.longitude }); setZoom(1); })}
       </View>

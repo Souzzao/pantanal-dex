@@ -4,6 +4,7 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { isImportSizeOk } from "@/shared/safe-url";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import { router } from "expo-router";
@@ -11,8 +12,10 @@ import * as Sharing from "expo-sharing";
 import { useMemo, useState } from "react";
 import { ActivityIndicator, Alert, Pressable, ScrollView, Switch, View } from "react-native";
 
-import { NOTEBOOK_ICON } from "@/components/NotebookBar";
+import { NOTEBOOK_ART } from "@/components/NotebookBar";
+import { ArtIcon } from "@/components/ArtIcon";
 import { ScreenContainer } from "@/components/screen-container";
+import { Icon } from "@/components/Icon";
 import { Text, TextInput } from "@/components/T";
 import { useApp, type NotebookImportMode } from "@/contexts/AppContext";
 import { useColors } from "@/hooks/use-colors";
@@ -66,6 +69,7 @@ export default function NotebooksScreen() {
     const pick = await DocumentPicker.getDocumentAsync({ type: ["application/json", "application/geo+json", "text/csv", "text/plain", "*/*"], copyToCacheDirectory: true });
     if (pick.canceled) return;
     const asset = pick.assets[0];
+    if (!isImportSizeOk(asset.size)) { Alert.alert("Arquivo grande demais", "O limite é 5 MB. Exporte cadernos menores e importe um por vez."); return; }
     const parsed = parseNotebookFile(await FileSystem.readAsStringAsync(asset.uri));
     if (!parsed.sightings.length) { Alert.alert("Nada para importar", "O arquivo não tem registros válidos."); return; }
     const options: { text: string; mode: NotebookImportMode }[] = [{ text: "Criar caderno novo", mode: "new" }];
@@ -89,9 +93,10 @@ export default function NotebooksScreen() {
     Alert.alert(`Apagar "${notebook.name}"?`, n ? "Escolha o que fazer com os registros. Apagar registros não tem volta." : "O caderno está vazio.", buttons);
   };
 
-  const button = (label: string, onPress: () => void, variant: "solid" | "outline" | "danger" = "outline", disabled = false) => (
+  const button = (label: string, onPress: () => void, variant: "solid" | "outline" | "danger" = "outline", disabled = false, art?: "pasta") => (
     <Pressable key={label} onPress={onPress} disabled={disabled || busy} accessibilityRole="button" accessibilityLabel={label}
-      style={({ pressed }) => ({ borderRadius: 12, paddingHorizontal: 12, minHeight: 40, justifyContent: "center", borderWidth: 1, borderColor: variant === "danger" ? colors.error : colors.primary, backgroundColor: variant === "solid" ? colors.primary : "transparent", opacity: disabled ? 0.45 : pressed ? 0.8 : 1 })}>
+      style={({ pressed }) => ({ borderRadius: 12, paddingHorizontal: 12, minHeight: 40, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, borderWidth: 1, borderColor: variant === "danger" ? colors.error : colors.primary, backgroundColor: variant === "solid" ? colors.primary : "transparent", opacity: disabled ? 0.45 : pressed ? 0.8 : 1 })}>
+      {art && <ArtIcon name={art} size={20} />}
       <Text style={{ color: variant === "solid" ? colors.background : variant === "danger" ? colors.error : colors.primary, fontWeight: "800", fontSize: 13 }}>{label}</Text>
     </Pressable>
   );
@@ -109,7 +114,7 @@ export default function NotebooksScreen() {
     return (
       <View key={notebook.id} style={{ backgroundColor: colors.surface, borderColor: active ? colors.primary : colors.border, borderWidth: active ? 2 : 1, borderRadius: 16, padding: 14, marginBottom: 10 }}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-          <Text style={{ fontSize: 26 }}>{NOTEBOOK_ICON[notebook.kind]}</Text>
+          <ArtIcon name={NOTEBOOK_ART[notebook.kind]} size={30} />
           <View style={{ flex: 1 }}>
             {isRenaming ? (
               <TextInput value={renaming.name} onChangeText={(name) => setRenaming({ id: notebook.id, name })} autoFocus maxLength={40}
@@ -150,7 +155,7 @@ export default function NotebooksScreen() {
         <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/sightings" as never))} accessibilityRole="button">
           <Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 10 }}>‹ Voltar</Text>
         </Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontWeight: "800" }}>Cadernos</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 30, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>Cadernos</Text>
         <Text style={{ color: colors.muted, marginTop: 4 }}>Separe seus avistamentos por viagem, projeto ou turma. Tudo funciona offline e viaja em JSON, CSV ou GeoJSON.</Text>
         {!ready ? <ActivityIndicator style={{ marginTop: 30 }} color={colors.primary} /> : null}
         {busy ? <ActivityIndicator style={{ marginTop: 12 }} color={colors.primary} /> : null}
@@ -165,7 +170,7 @@ export default function NotebooksScreen() {
 
         {section("Cadernos importados", "Arquivos do PantanalDex que você trouxe de outro aparelho ou pessoa.")}
         {imported.length ? imported.map(card) : <Text style={{ color: colors.muted }}>Nenhum caderno importado ainda.</Text>}
-        <View style={{ marginTop: 10 }}>{button("📂 Importar arquivo (JSON, CSV ou GeoJSON)", importFile, "solid")}</View>
+        <View style={{ marginTop: 10 }}>{button("Importar arquivo (JSON, CSV ou GeoJSON)", importFile, "solid", false, "pasta")}</View>
 
         {section("Juntar cadernos", "Marque os cadernos de origem e escolha o destino. Os registros são movidos para o destino.")}
         <View style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: 1, borderRadius: 16, padding: 14 }}>
@@ -177,9 +182,9 @@ export default function NotebooksScreen() {
               <Pressable key={item.id} disabled={disabled} onPress={() => setMergeSources((list) => (checked ? list.filter((id) => id !== item.id) : [...list, item.id]))}
                 accessibilityRole="checkbox" accessibilityState={{ checked, disabled }} style={{ flexDirection: "row", alignItems: "center", paddingVertical: 7, opacity: disabled ? 0.4 : 1 }}>
                 <View style={{ width: 22, height: 22, borderRadius: 6, borderWidth: 2, borderColor: colors.primary, backgroundColor: checked && !disabled ? colors.primary : "transparent", marginRight: 10, alignItems: "center", justifyContent: "center" }}>
-                  {checked && !disabled ? <Text style={{ color: colors.background, fontWeight: "900", fontSize: 13 }}>✓</Text> : null}
+                  {checked && !disabled ? <Icon name="check" size={14} color={colors.background} mono strokeWidth={3} /> : null}
                 </View>
-                <Text style={{ color: colors.foreground, flex: 1 }}>{NOTEBOOK_ICON[item.kind]} {item.name}</Text>
+                <ArtIcon name={NOTEBOOK_ART[item.kind]} size={18} style={{ marginRight: 8 }} /><Text style={{ color: colors.foreground, flex: 1 }}>{item.name}</Text>
                 <Text style={{ color: colors.muted }}>{counts[item.id] ?? 0}</Text>
               </Pressable>
             );
@@ -195,7 +200,7 @@ export default function NotebooksScreen() {
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12 }}>
             <Text style={{ color: colors.foreground, flex: 1 }}>Remover registros repetidos (mesmo animal, data, hora e local)</Text>
-            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} />
+            <Switch value={removeDuplicates} onValueChange={setRemoveDuplicates} trackColor={{ true: colors.primary, false: colors.border }} accessibilityLabel="Remover registros repetidos ao juntar" />
           </View>
           <View style={{ marginTop: 12 }}>
             {button(toMove ? `Juntar ${toMove} registro(s) em "${notebooks.find((n) => n.id === mergeTarget)?.name ?? ""}"` : "Escolha cadernos de origem com registros", () => void run(async () => {

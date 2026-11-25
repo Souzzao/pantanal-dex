@@ -18,9 +18,10 @@ import { createSightingCreationLedger, recordSightingCreation, validateSightingO
 import {
   addNotebook, assignNotebook, createTestSightings, MAIN_NOTEBOOK_ID, mergeNotebooks as mergeNotebookSightings, recordExport,
   removeNotebook, renameNotebook as renameNotebookIn, restoreNotebookStore, serializeNotebookStore, setActiveNotebook as setActiveIn,
-  TEST_NOTEBOOK_ID, uniqueNotebookName, type ExportRecord, type Notebook, type NotebookFileFormat, type NotebookStore,
+  stripTestNotebook, TEST_NOTEBOOK_ID, uniqueNotebookName, type ExportRecord, type Notebook, type NotebookFileFormat, type NotebookStore,
 } from "@/shared/notebooks";
 import type { ParsedNotebookFile } from "@/shared/notebook-files";
+import { IS_DEMO } from "@/shared/variant";
 
 export { createExportCsv, createExportJson } from "@/shared/exports";
 
@@ -74,7 +75,10 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
   const writable = useRef(false);
   const writeQueue = useRef<Promise<unknown>>(Promise.resolve());
   const notebooksKey = notebooksKeyFor(storageNamespace);
-  const [notebookStore, setNotebookStore] = useState<NotebookStore>(() => restoreNotebookStore(null).store);
+  const [notebookStore, setNotebookStore] = useState<NotebookStore>(() => {
+    const initial = restoreNotebookStore(null).store;
+    return IS_DEMO ? initial : stripTestNotebook(initial, []).store;
+  });
   const currentStore = useRef<NotebookStore>(notebookStore);
 
   useEffect(() => {
@@ -116,9 +120,24 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
       const rawStore = await readRaw(notebooksKey);
       const restoredStore = restoreNotebookStore(rawStore.value);
       if (!mounted) return;
+      // Versão final: sem caderno Teste. Exemplos somem; o que a pessoa pôs lá volta para o Principal.
+      if (!IS_DEMO) {
+        const stripped = stripTestNotebook(restoredStore.store, currentSightings.current);
+        restoredStore.store = stripped.store;
+        if (stripped.changed && rawStore.value !== null && !rawStore.failed && writable.current) {
+          try {
+            await AsyncStorage.setItem(notebookKey, serializeNotebook(stripped.sightings, currentLedger.current));
+            await AsyncStorage.setItem(notebooksKey, serializeNotebookStore(stripped.store));
+            currentSightings.current = stripped.sightings;
+            setSightings(stripped.sightings);
+          } catch {
+            // Se não conseguir gravar, tenta de novo na próxima abertura.
+          }
+        }
+      }
       currentStore.current = restoredStore.store;
       setNotebookStore(restoredStore.store);
-      if (restoredStore.status === "empty" && !rawStore.failed && writable.current) {
+      if (IS_DEMO && restoredStore.status === "empty" && !rawStore.failed && writable.current) {
         try {
           const seeded = mergeSightings(currentSightings.current, createTestSightings()).sightings;
           await AsyncStorage.setItem(notebookKey, serializeNotebook(seeded, currentLedger.current));
@@ -265,6 +284,7 @@ export function AppProvider({ children, storageNamespace }: { children: React.Re
     }),
     recordNotebookExport: (notebookIds, format, count) => enqueue(() => persistStore(recordExport(currentStore.current, notebookIds, format, count))),
     resetTestNotebook: () => enqueue(async () => {
+      if (!IS_DEMO) return 0; // o caderno Teste só existe na versão Demo
       let store = currentStore.current;
       if (!store.notebooks.some((item) => item.id === TEST_NOTEBOOK_ID)) {
         const at = new Date().toISOString();

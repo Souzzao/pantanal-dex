@@ -3,8 +3,10 @@
  *
  * @author Felipe de Souza Aquino
  */
+import { LanguageContext } from "@/components/T";
 import "@/global.css";
 import { Stack } from "expo-router";
+import Head from "expo-router/head";
 import { StatusBar } from "expo-status-bar";
 import React, { useMemo, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -16,6 +18,7 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import { AppProvider, useApp } from "@/contexts/AppContext";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { LoginScreen } from "@/components/LoginScreen";
+import { TeamsProvider } from "@/contexts/TeamsContext";
 import { DiscoveryToast } from "@/components/DiscoveryToast";
 import { PublicationsProvider } from "@/contexts/PublicationsContext";
 import {
@@ -27,6 +30,7 @@ import {
 import type { EdgeInsets, Rect } from "react-native-safe-area-context";
 
 import { installAlertTranslation } from "@/lib/translate-alerts";
+import { useFonts, Fraunces_700Bold, Fraunces_600SemiBold_Italic } from "@expo-google-fonts/fraunces";
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
 const DEFAULT_WEB_FRAME: Rect = { x: 0, y: 0, width: 0, height: 0 };
@@ -38,6 +42,8 @@ export const unstable_settings = {
 installAlertTranslation();
 
 export default function RootLayout() {
+  // Fonte de destaque dos títulos (Fraunces, licença OFL). Até carregar, os títulos usam a fonte do sistema.
+  useFonts({ Fraunces_700Bold, Fraunces_600SemiBold_Italic });
   const initialInsets = initialWindowMetrics?.insets ?? DEFAULT_WEB_INSETS;
   const initialFrame = initialWindowMetrics?.frame ?? DEFAULT_WEB_FRAME;
 
@@ -62,6 +68,7 @@ export default function RootLayout() {
 
   const content = (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {Platform.OS === "web" && <Head><title>PantanalDex</title></Head>}
       {/* Cabeçalhos nativos ficam ocultos: cada tela desenha o próprio título. */}
           <AuthGate>
             <PublicationsProvider>
@@ -114,13 +121,16 @@ export default function RootLayout() {
 function AccountScopedApp({ children }: { children: React.ReactNode }) {
   const { account } = useAuth();
   const namespace = account?.id;
-  return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}>{children}</AppProvider>;
+  return <AppProvider key={namespace ?? "local"} storageNamespace={namespace}><TeamsProvider>{children}</TeamsProvider></AppProvider>;
 }
 
-/** Trocar o idioma remonta as telas, para que todos os textos e fichas saiam no idioma novo. */
+/**
+ * Trocar o idioma redesenha os textos (LanguageContext) sem remontar a navegação. Antes a árvore inteira
+ * era remontada com uma chave nova, e isso fechava o app ao trocar o idioma dentro da ficha de um animal.
+ */
 function LanguageScope({ children }: { children: React.ReactNode }) {
   const { settings } = useApp();
-  return <React.Fragment key={settings.defaultLanguage}>{children}</React.Fragment>;
+  return <LanguageContext.Provider value={settings.defaultLanguage}>{children}</LanguageContext.Provider>;
 }
 
 /** Login obrigatório: sem conta aberta, mostra a tela de entrar. */

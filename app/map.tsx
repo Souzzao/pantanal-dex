@@ -123,7 +123,7 @@ export default function MapScreen() {
         </Text>
       </Pressable>
       <Text
-        style={{ color: colors.foreground, fontSize: 28, fontWeight: "800" }}
+        style={{ color: colors.foreground, fontSize: 28, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}
       >
         {labels.title}
       </Text>

@@ -14,7 +14,7 @@ import { buildImageFallbackPlan } from "@/shared/image-fallback";
 import { displayImageUri } from "@/shared/image-url";
 import { speciesCovers } from "@/shared/species-covers";
 
-type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string };
+type RemoteImageProps = { source: ImageProps["source"]; fallbackSources?: ImageProps["source"][]; label: string; style?: StyleProp<ImageStyle>; accessibilityLabel?: string; cachePolicy?: React.ComponentProps<typeof ExpoImage>["cachePolicy"] };
 
 const alternativesByUri = new Map<string, { uri: string }[]>();
 const bundledCoversByUri = new Map<string, number>(); // no web o require vira objeto; serve igual para o Image
@@ -39,7 +39,7 @@ export function RemoteImage(props: RemoteImageProps) {
   return <ImageAttempts key={plan.current.key} {...props} candidates={plan.current.candidates} />;
 }
 
-function ImageAttempts({ label, style, accessibilityLabel, candidates }: RemoteImageProps & { candidates: unknown[] }) {
+function ImageAttempts({ label, style, accessibilityLabel, cachePolicy = "disk", candidates }: RemoteImageProps & { candidates: unknown[] }) {
   const colors = useColors();
   const [attempt, setAttempt] = useState(0);
   const activeAttempt = useRef(0);
@@ -49,7 +49,7 @@ function ImageAttempts({ label, style, accessibilityLabel, candidates }: RemoteI
 
   return (
     <View style={[style, { backgroundColor: colors.surface, overflow: "hidden" }]}>
-      {hasSource && status !== "error" && <ExpoImage key={attempt} source={candidates[attempt] as ImageProps["source"]} accessibilityLabel={accessibilityLabel ?? label} cachePolicy="disk" contentFit="cover" transition={200} onLoad={() => { if (activeAttempt.current === attempt) setStatus("ready"); }} onError={() => {
+      {hasSource && status !== "error" && <ExpoImage key={attempt} source={candidates[attempt] as ImageProps["source"]} accessibilityLabel={accessibilityLabel ?? label} cachePolicy={cachePolicy} contentFit="cover" transition={200} onLoad={() => { if (activeAttempt.current === attempt) setStatus("ready"); }} onError={() => {
         if (activeAttempt.current !== attempt) return;
         if (attempt + 1 < candidates.length) { activeAttempt.current = attempt + 1; setAttempt(attempt + 1); setStatus("loading"); }
         else setStatus("error");

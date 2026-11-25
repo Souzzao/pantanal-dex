@@ -15,6 +15,8 @@ import { filterSpeciesCatalog, findSpeciesById } from "@/shared/catalog";
 import { useApp } from "@/contexts/AppContext";
 import { NotebookBar } from "@/components/NotebookBar";
 import { sightingsIn } from "@/shared/notebooks";
+import { MetricCard } from "@/components/orbita";
+import { NumberTicker } from "@/components/orbit-effects";
 import { useColors } from "@/hooks/use-colors";
 
 export default function SightingsScreen() {
@@ -178,7 +180,7 @@ export default function SightingsScreen() {
             style={{
               color: colors.foreground,
               fontSize: 30,
-              fontWeight: "800",
+              fontFamily: "Fraunces_700Bold", letterSpacing: -0.5,
             }}
           >
             Avistamentos
@@ -209,57 +211,9 @@ export default function SightingsScreen() {
         style={{ flexDirection: "row", gap: 8, marginTop: 12, marginBottom: 2 }}
         accessibilityRole="summary"
       >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.surface,
-            borderColor: colors.border,
-            borderWidth: 1,
-            borderRadius: 12,
-            padding: 10,
-          }}
-        >
-          <Text
-            style={{ color: colors.primary, fontSize: 20, fontWeight: "800" }}
-          >
-            {sightings.length}
-          </Text>
-          <Text style={{ color: colors.muted, fontSize: 11 }}>registros</Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.surface,
-            borderColor: colors.border,
-            borderWidth: 1,
-            borderRadius: 12,
-            padding: 10,
-          }}
-        >
-          <Text
-            style={{ color: colors.primary, fontSize: 20, fontWeight: "800" }}
-          >
-            {summary.photos}
-          </Text>
-          <Text style={{ color: colors.muted, fontSize: 11 }}>com foto</Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.surface,
-            borderColor: colors.border,
-            borderWidth: 1,
-            borderRadius: 12,
-            padding: 10,
-          }}
-        >
-          <Text
-            style={{ color: colors.primary, fontSize: 20, fontWeight: "800" }}
-          >
-            {summary.located}
-          </Text>
-          <Text style={{ color: colors.muted, fontSize: 11 }}>no mapa</Text>
-        </View>
+        <MetricCard label="registros" value={<NumberTicker value={sightings.length} style={{ color: "#FBF7EF", fontSize: 24, fontFamily: "Fraunces_700Bold" }} />} style={{ padding: 12 }} />
+        <MetricCard label="com foto" value={<NumberTicker value={summary.photos} style={{ color: "#FBF7EF", fontSize: 24, fontFamily: "Fraunces_700Bold" }} />} percent={sightings.length ? (summary.photos / sightings.length) * 100 : 0} style={{ padding: 12 }} />
+        <MetricCard label="no mapa" value={<NumberTicker value={summary.located} style={{ color: "#FBF7EF", fontSize: 24, fontFamily: "Fraunces_700Bold" }} />} percent={sightings.length ? (summary.located / sightings.length) * 100 : 0} accent="#7CFFD0" style={{ padding: 12 }} />
       </View>
       <TextInput
         accessibilityLabel="Buscar espécie, local ou observação"
@@ -334,10 +288,12 @@ export default function SightingsScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 2 }}
+        // Altura mínima explícita: no Android (Fabric) a lista horizontal encolhia e cortava o texto dos chips.
+        style={{ flexGrow: 0, minHeight: 48 }}
+        contentContainerStyle={{ paddingBottom: 2, alignItems: "center", minHeight: 48 }}
       >
         {["", ...groups].map((item) => (
-          <View key={item || "all-groups"}>
+          <View key={item || "all-groups"} style={{ flexShrink: 0 }}>
             {renderChip(item || "Todos", groupFilter === item, () =>
               setGroupFilter(item),
             )}
@@ -357,10 +313,12 @@ export default function SightingsScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 2 }}
+        // Altura mínima explícita: no Android (Fabric) a lista horizontal encolhia e cortava o texto dos chips.
+        style={{ flexGrow: 0, minHeight: 48 }}
+        contentContainerStyle={{ paddingBottom: 2, alignItems: "center", minHeight: 48 }}
       >
         {["", ...environments].map((item) => (
-          <View key={item || "all-environments"}>
+          <View key={item || "all-environments"} style={{ flexShrink: 0 }}>
             {renderChip(item || "Todos", environmentFilter === item, () =>
               setEnvironmentFilter(item),
             )}
@@ -423,7 +381,7 @@ export default function SightingsScreen() {
       <FlatList
         data={ready ? visible : []}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 30, flexGrow: 1 }}
+        contentContainerStyle={{ paddingBottom: 120, flexGrow: 1 }}
         ListEmptyComponent={
           ready ? (
             <View

@@ -1,18 +1,24 @@
 name: APK Android
 
-# Gera o APK (release, assinado com a chave de debug do prebuild) a cada push na main ou na claude/v2
-# ou manualmente. O endereço e a chave pública do Supabase vêm dos segredos do repositório
+# Gera os dois APKs — PantanalDex (versão final) e PantanalDex Demo (com caderno Teste e auditoria
+# simulada) — a cada push na main ou na claude/v2, ou manualmente. Assinados com a chave de debug do
+# prebuild: servem para instalar direto. Para a Google Play o arquivo é o AAB do EAS (docs/GOOGLE-PLAY.md). O endereço e a chave pública do Supabase vêm dos segredos do repositório
 # (Settings → Secrets and variables → Actions); sem eles o app sai sem login (modo local).
 on:
   push:
-    branches: [main, claude/v2]
+    branches: [main, claude/v2, claude/v310-interacao]
     paths-ignore: ["**.md", "docs/**"]
   workflow_dispatch:
+    inputs:
+      publicar:
+        description: "Publicar somente o APK Final como release pública"
+        type: boolean
+        default: false
 
-# Permissão mínima: lê o código e, só no push da main, publica a release do APK.
+# Permissão mínima: o build só lê o código; só o job de release disparado manualmente pode publicar.
 # Nenhum segredo chega a PRs de forks.
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: apk-${{ github.ref }}
@@ -20,9 +26,15 @@ concurrency:
 
 jobs:
   apk:
+    name: APK ${{ matrix.variant }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [production, demo]
     env:
+      APP_VARIANT: ${{ matrix.variant }}
       EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL || vars.EXPO_PUBLIC_SUPABASE_URL }}
       EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY || vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
       NODE_OPTIONS: --max-old-space-size=6144
@@ -39,6 +51,9 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - run: pnpm install --frozen-lockfile
+      - name: Verificar dependências antes da distribuição
+        if: github.event_name == 'workflow_dispatch' && inputs.publicar && matrix.variant == 'production'
+        run: pnpm audit --prod --audit-level high
       - name: Login configurado?
         run: |
           if [ -n "$EXPO_PUBLIC_SUPABASE_URL" ] && [ -n "$EXPO_PUBLIC_SUPABASE_ANON_KEY" ]; then echo "Supabase: sim (login ativo)"; else echo "::warning::Sem segredos do Supabase: APK sai sem login"; fi
@@ -62,22 +77,70 @@ jobs:
           exit 1
       - name: Renomeia
         run: |
-          cp android/app/build/outputs/apk/release/app-release.apk "PantanalDex-3.8.0-${GITHUB_SHA::7}.apk"
+          NAME=$([ "$APP_VARIANT" = demo ] && echo PantanalDex-Demo || echo PantanalDex)
+          cp android/app/build/outputs/apk/release/app-release.apk "$NAME.apk"
+      - name: Assinar APK Final para distribuição
+        if: matrix.variant == 'production'
+        env:
+          DEX_KEYSTORE_B64: ${{ secrets.DEX_ANDROID_KEYSTORE_B64 }}
+          DEX_STORE_PASSWORD: ${{ secrets.DEX_ANDROID_STORE_PASSWORD }}
+          DEX_KEY_ALIAS: ${{ secrets.DEX_ANDROID_KEY_ALIAS }}
+          DEX_KEY_PASSWORD: ${{ secrets.DEX_ANDROID_KEY_PASSWORD }}
+          DEX_CERT_SHA256: ${{ vars.DEX_ANDROID_CERT_SHA256 }}
+          PUBLICAR: ${{ github.event_name == 'workflow_dispatch' && inputs.publicar }}
+        run: |
+          if [ -z "$DEX_KEYSTORE_B64" ] || [ -z "$DEX_STORE_PASSWORD" ] || [ -z "$DEX_KEY_ALIAS" ] || [ -z "$DEX_KEY_PASSWORD" ] || [ -z "$DEX_CERT_SHA256" ]; then
+            if [ "$PUBLICAR" = true ]; then
+              echo "::error::Publicação exige a chave de distribuição e a impressão digital do certificado."
+              exit 1
+            fi
+            echo "::warning::APK Final de validação usa assinatura de debug; artefato não publicado."
+            exit 0
+          fi
+          umask 077
+          KEYSTORE="$(mktemp)"
+          trap 'rm -f "$KEYSTORE"' EXIT
+          printf '%s' "$DEX_KEYSTORE_B64" | base64 --decode > "$KEYSTORE"
+          APK_SIGNER="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          "$APK_SIGNER" sign --ks "$KEYSTORE" --ks-key-alias "$DEX_KEY_ALIAS" \
+            --ks-pass env:DEX_STORE_PASSWORD --key-pass env:DEX_KEY_PASSWORD \
+            --out PantanalDex-distribuicao.apk PantanalDex.apk
+          VERIFICATION="$("$APK_SIGNER" verify --print-certs PantanalDex-distribuicao.apk)"
+          if printf '%s\n' "$VERIFICATION" | grep -qi 'certificate DN:.*CN=Android Debug'; then
+            echo "::error::A assinatura de depuração não pode assinar a versão pública."
+            exit 1
+          fi
+          CERT="$(printf '%s\n' "$VERIFICATION" | awk '/^Signer #1 certificate SHA-256 digest:/ {print $NF}')"
+          test "$(printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]')" = "$(printf '%s' "$DEX_CERT_SHA256" | tr -d ':' | tr '[:upper:]' '[:lower:]')"
+          mv PantanalDex-distribuicao.apk PantanalDex.apk
+          rm -f PantanalDex-distribuicao.apk.idsig
+
       - uses: actions/upload-artifact@v4
         with:
-          name: PantanalDex-APK
-          path: PantanalDex-*.apk
+          name: APK-${{ matrix.variant }}
+          path: PantanalDex*.apk
           retention-days: 30
-      # Publica o APK como "release" pública: o link de download não exige conta no GitHub
-      # (usado pelo QR code da apresentação). Só roda em push na main, nunca em PR.
+
+  release:
+    # Publica o APK Final numa "release" pública: o link de download não exige conta no GitHub
+    # (usado pelo QR code). Roda quando o dono dispara manualmente com "publicar";
+    # nunca em PR.
+    needs: apk
+    if: github.event_name == 'workflow_dispatch' && inputs.publicar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: APK-production
       - name: Publicar release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          cp PantanalDex-*.apk PantanalDex.apk
-          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk \
+          gh release create "v${VERSION}-${GITHUB_RUN_NUMBER}" PantanalDex.apk --target "$GITHUB_SHA" \
             --title "PantanalDex ${VERSION}" \
-            --notes "APK gerado automaticamente a partir de ${GITHUB_SHA::7}. Instale no Android (permita apps de fontes desconhecidas)." \
+            --notes "PantanalDex.apk = versão final. O APK Demo para teste fica nos artefatos da execução. Gerado de ${GITHUB_SHA::7}. No Android, permita instalar apps desta fonte." \
             --latest

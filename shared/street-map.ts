@@ -1,3 +1,5 @@
+import boundary from "./geography/pantanal-ibge-2025.json";
+import { SPOT_ART } from "./street-map-art";
 /**
  * Mapa de ruas (OpenStreetMap) desenhado com Leaflet dentro de uma WebView (Android/iOS) ou de um
  * iframe (web). Sem chave de API. Precisa de internet para baixar os "azulejos" (tiles) do mapa;
@@ -136,21 +138,34 @@ const PAGE_SCRIPT = String.raw`
   var map = L.map("map", { zoomControl: false, worldCopyJump: true, minZoom: 2, maxZoom: 17, attributionControl: true }).setView([-17.5, -57.0], 6);
   L.control.zoom({ position: "bottomright" }).addTo(map);
 
-  var base = {}, overlays = {};
-  LAYERS.forEach(function (layer) {
-    var tiles = L.tileLayer(layer.url, { maxZoom: layer.maxZoom, maxNativeZoom: layer.maxNativeZoom, attribution: layer.attribution });
-    if (layer.overlay) overlays[layer.name] = tiles; else base[layer.name] = tiles;
-    tiles.addTo(map);
+  var satellite = L.tileLayer(LAYERS[0].url, LAYERS[0]);
+  var names = L.tileLayer(LAYERS[1].url, LAYERS[1]);
+  var offline = L.geoJSON(BOUNDARY, {
+    attribution: "Contorno do Pantanal · IBGE 2025",
+    interactive: false,
+    style: { color: "#537957", weight: 2, fillColor: "#729b68", fillOpacity: 0.35 }
   });
-  L.control.layers(base, overlays, { position: "bottomright" }).addTo(map);
+  L.control.layers({ "Satélite": satellite, "Contorno offline": offline }, { "Nomes e divisas": names }, { position: "bottomright" }).addTo(map);
 
-  // Avisa o app se os azulejos não carregam (sem internet), para ele oferecer o mapa offline.
-  var loaded = 0, failed = 0, reported = null;
-  map.on("baselayerchange", function () { loaded = 0; failed = 0; reported = null; });
-  Object.keys(base).forEach(function (name) {
-    base[name].on("tileload", function () { loaded++; if (reported !== true) { reported = true; send({ type: "tiles", ok: true }); } });
-    base[name].on("tileerror", function () { failed++; if (loaded === 0 && failed >= 4 && reported !== false) { reported = false; send({ type: "tiles", ok: false }); } });
+  var loaded = 0, failed = 0;
+  satellite.on("loading", function () { loaded = 0; failed = 0; });
+  satellite.on("tileload", function () {
+    if (map.hasLayer(satellite) && loaded++ === 0) send({ type: "tiles", ok: true });
   });
+  satellite.on("tileerror", function () { failed++; });
+  satellite.on("load", function () {
+    // Leaflet still uses the layer after firing "load". Switch after that callback unwinds.
+    if (!map.hasLayer(satellite) || failed === 0 || loaded !== 0) return;
+    setTimeout(function () {
+      if (!map.hasLayer(satellite) || failed === 0 || loaded !== 0) return;
+      map.removeLayer(satellite);
+      map.removeLayer(names);
+      offline.addTo(map);
+      send({ type: "tiles", ok: false });
+    }, 0);
+  });
+  satellite.addTo(map);
+  names.addTo(map);
 
   var state = null, lastFit = null, overlay = L.layerGroup().addTo(map), pickMarker = null;
 
@@ -240,7 +255,8 @@ const PAGE_SCRIPT = String.raw`
   // Pontos turísticos: losango amarelo (já visitado fica preenchido, com o ícone do lugar).
   function drawSpots() {
     (state.spots || []).forEach(function (s) {
-      var html = '<div class="stop' + (s.visited ? " done" : "") + (s.city ? " city" : "") + '"><span>' + esc(s.icon) + "</span></div>";
+      var art = Object.prototype.hasOwnProperty.call(SPOT_ART, s.icon) ? SPOT_ART[s.icon] : SPOT_ART.cidade;
+      var html = '<div class="stop' + (s.visited ? " done" : "") + (s.city ? " city" : "") + '"><img alt="" src="data:image/png;base64,' + art + '"></div>';
       L.marker([s.lat, s.lon], { icon: L.divIcon({ html: html, className: "", iconSize: [40, 40], iconAnchor: [20, 20] }), title: s.name, keyboard: true, zIndexOffset: 500 })
         .bindTooltip(esc(s.name), { permanent: map.getZoom() >= 9 || (s.city && map.getZoom() >= 7), direction: "bottom", offset: [0, 16], className: "spot-label" + (s.city ? " city" : "") })
         .on("click", function () { send({ type: "spot", id: s.id }); }).addTo(overlay);
@@ -290,6 +306,7 @@ const PAGE_SCRIPT = String.raw`
     render();
   };
   window.addEventListener("message", function (event) {
+    if (event.source !== window.parent) return;
     var data = event.data;
     try { if (typeof data === "string") data = JSON.parse(data); } catch (e) { return; }
     if (data && data.target === SOURCE && data.state) window.__pantanalSetState(data.state);
@@ -311,17 +328,17 @@ html,body,#map{margin:0;padding:0;height:100%;width:100%;background:#0b1d2a;font
 .bubble.pending{border-style:dashed;opacity:.85}
 .bubble.sel{border-color:#FACC15;border-width:4px}
 .stop{width:34px;height:34px;margin:3px;transform:rotate(45deg);border-radius:8px;background:#0B0B0B;border:3px solid #FFC400;box-shadow:0 0 0 3px rgba(255,196,0,.35),0 2px 8px rgba(0,0,0,.5);box-sizing:border-box;display:flex;align-items:center;justify-content:center}
-.stop span{transform:rotate(-45deg);font-size:16px;line-height:1}
-.stop.done{background:#FFC400;border-color:#fff}
+.stop img{width:22px;height:22px;transform:rotate(-45deg);object-fit:contain}
+.stop.done{background:#2b2812;border-color:#fff}
 .stop.city{border-radius:50%;transform:none;width:30px;height:30px;margin:5px}
-.stop.city span{transform:none;font-size:14px}
+.stop.city img{transform:none;width:19px;height:19px}
 .spot-label{background:rgba(11,11,11,.85);color:#FFC400;border:1px solid #FFC400;border-radius:8px;font-weight:800;font-size:11px;padding:2px 6px;box-shadow:none}
 .spot-label.city{color:#fff;border-color:#fff}
 .spot-label:before{display:none}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:#ca6137;border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);box-sizing:border-box}
 #hint{position:absolute;z-index:1000;left:12px;right:120px;top:12px;background:rgba(11,11,11,.92);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;display:none;pointer-events:none;text-align:center}
 .leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#0B0B0B;font-weight:800;font-size:13px;text-decoration:none}
-.leaflet-control-layers-toggle::after{content:"Nomes"}
+.leaflet-control-layers-toggle::after{content:"Camadas"}
 .leaflet-control-layers label{font-size:15px;padding:4px 2px}
 .leaflet-control-attribution{font-size:9px;line-height:1.25;max-width:100%;background:rgba(255,255,255,.75)!important}
 .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px;font-size:20px}
@@ -334,7 +351,7 @@ export function buildStreetMapHtml(leaflet: { js: string; css: string }): string
 <style>${leaflet.css}</style><style>${PAGE_CSS}</style></head>
 <body><div id="map"></div><div id="hint"></div>
 <script>${leaflet.js}</script>
-<script>var LAYERS = ${JSON.stringify(TILE_LAYERS)};</script>
+<script>var LAYERS = ${JSON.stringify(TILE_LAYERS)}, BOUNDARY = ${JSON.stringify(boundary)}, SPOT_ART = ${JSON.stringify(SPOT_ART)};</script>
 <script>${PAGE_SCRIPT}</script>
 </body></html>`;
 }

@@ -53,9 +53,9 @@ MAX_PHOTOS = 6  # fotos por espécie (galeria da ficha)
 # O app é vendido: só entram fotos que permitem uso comercial (CC0, CC BY, CC BY-SA).
 # Fotos CC BY-NC / BY-ND ficam de fora mesmo que sejam as únicas da espécie.
 COMMERCIAL_ONLY = True
-# Espécies com menos fotos de uso livre que isso são raras demais para o app: saem do catálogo e da
+# Espécies sem nenhuma foto de uso livre ficam fora do app: saem do catálogo e da
 # busca ("retired"), mas continuam no arquivo para abrir avistamentos antigos delas.
-MIN_PHOTOS = 5
+MIN_PHOTOS = 1
 
 # Mesma espécie com nome científico antigo/de outra região: fica só a versão do Pantanal.
 # (o id que sai é redirecionado em shared/species-aliases.ts)

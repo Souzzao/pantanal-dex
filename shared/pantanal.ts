@@ -45,6 +45,8 @@ export type Sighting = {
   id: string;
   speciesId: string;
   photoUri?: string;
+  /** Fotos além da capa, na ordem do lote da câmera (até 7; a capa é photoUri). */
+  extraPhotoUris?: string[];
   date: string;
   time?: string;
   locationLabel?: string;
@@ -450,7 +452,8 @@ export function sanitizeStoredSightings(value: unknown): Sighting[] {
       ["exact", "approximate", "municipality", "none"].includes(sighting.locationPrecision ?? "") &&
       ["private", "shareable"].includes(sighting.visibility ?? "") &&
       timeIsValid && isValidCoordinatePair(sighting.latitude, sighting.longitude) && quantityIsValid &&
-      (sighting.notebookId === undefined || (typeof sighting.notebookId === "string" && sighting.notebookId.length <= 80));
+      (sighting.notebookId === undefined || (typeof sighting.notebookId === "string" && sighting.notebookId.length <= 80)) &&
+      (sighting.extraPhotoUris === undefined || (Array.isArray(sighting.extraPhotoUris) && sighting.extraPhotoUris.length <= 7 && sighting.extraPhotoUris.every((uri) => typeof uri === "string" && uri.length > 0 && uri.length <= 2048)));
   });
 }
 

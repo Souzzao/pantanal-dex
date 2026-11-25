@@ -101,7 +101,7 @@ export default function DevAreaScreen() {
     <ScreenContainer className="px-5">
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }} keyboardShouldPersistTaps="handled">
         <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)" as never))} accessibilityRole="button"><Text style={{ color: colors.primary, fontWeight: "700", paddingVertical: 12 }}>{t.back}</Text></Pressable>
-        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontWeight: "800" }}>{t.title}</Text>
+        <Text accessibilityRole="header" style={{ color: colors.foreground, fontSize: 28, fontFamily: "Fraunces_700Bold", letterSpacing: -0.5 }}>{t.title}</Text>
         <Text style={{ color: colors.muted, marginTop: 4 }}>{t.subtitle}</Text>
 
         {loading ? <ActivityIndicator style={{ marginTop: 30 }} color={colors.primary} /> : failed ? (

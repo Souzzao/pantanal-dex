@@ -41,6 +41,8 @@ export function StreetMap({ state, onEvent, style, accessibilityLabel }: StreetM
       onEvent(parsed);
     };
     window.addEventListener("message", listener);
+    // Static web pages may already have loaded the iframe before React hydrates.
+    push(latest.current);
     return () => window.removeEventListener("message", listener);
   }, [onEvent, push]);
 
@@ -49,6 +51,7 @@ export function StreetMap({ state, onEvent, style, accessibilityLabel }: StreetM
       {createElement("iframe", {
         ref: frame,
         srcDoc: pageHtml(),
+        onLoad: () => push(latest.current),
         title: accessibilityLabel ?? "Mapa",
         sandbox: "allow-scripts allow-popups",
         style: { border: 0, width: "100%", height: "100%", flex: 1 },

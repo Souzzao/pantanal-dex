@@ -7,7 +7,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { Session } from "@supabase/supabase-js";
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
+
 import { supabase } from "@/lib/supabase";
+import { oauthErrorMessage, parseOAuthCallback } from "@/shared/oauth";
 import { ACCOUNT_CACHE_KEY, authErrorKey, isRole, restoreAccount, type Account } from "@/shared/auth";
 
 /**
@@ -28,6 +32,8 @@ type AuthContextValue = {
   offline: boolean;
   signIn: (email: string, password: string) => Promise<{ error: ReturnType<typeof authErrorKey> | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: ReturnType<typeof authErrorKey> | null; needsConfirmation: boolean }>;
+  /** Entrar ou criar conta com o Google (OAuth pelo Supabase). Devolve mensagem de erro amigável ou null. */
+  signInWithGoogle: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   /** Apaga a conta no servidor (fotos, publicações e perfil) e sai. Os avistamentos do aparelho ficam. */
   deleteAccount: () => Promise<{ error: string | null }>;
@@ -169,6 +175,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  const signInWithGoogle = useCallback(async () => {
+    if (!supabase) return { error: oauthErrorMessage("unknown") };
+    try {
+      const redirectTo = Linking.createURL("auth-callback");
+      const { data, error } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo, skipBrowserRedirect: true, queryParams: { prompt: "select_account" } } });
+      if (error || !data?.url) return { error: oauthErrorMessage(error?.message) };
+      const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
+      if (result.type !== "success") return { error: result.type === "cancel" || result.type === "dismiss" ? null : oauthErrorMessage(result.type) };
+      const back = parseOAuthCallback(result.url);
+      if (back.kind === "error") return { error: oauthErrorMessage(back.message) };
+      if (back.kind === "code") {
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(back.code);
+        return { error: exchangeError ? oauthErrorMessage(exchangeError.message) : null };
+      }
+      if (back.kind === "tokens") {
+        const { error: sessionError } = await supabase.auth.setSession({ access_token: back.accessToken, refresh_token: back.refreshToken });
+        return { error: sessionError ? oauthErrorMessage(sessionError.message) : null };
+      }
+      return { error: oauthErrorMessage(undefined) };
+    } catch (error) {
+      return { error: oauthErrorMessage((error as Error).message || "network") };
+    }
+  }, []);
+
   const signOut = useCallback(async () => {
     if (!supabase) return;
     // scope "local": sai deste aparelho mesmo sem internet.
@@ -215,8 +245,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo<AuthContextValue>(() => ({
-    status, account, accessToken: session?.access_token ?? null, offline, signIn, signUp, signOut, deleteAccount, refreshAccount, getAccessToken,
-  }), [status, account, session, offline, signIn, signUp, signOut, deleteAccount, refreshAccount, getAccessToken]);
+    status, account, accessToken: session?.access_token ?? null, offline, signIn, signUp, signInWithGoogle, signOut, deleteAccount, refreshAccount, getAccessToken,
+  }), [status, account, session, offline, signIn, signUp, signInWithGoogle, signOut, deleteAccount, refreshAccount, getAccessToken]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

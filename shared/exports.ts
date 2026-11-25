@@ -36,6 +36,7 @@ export function createExportJson(sightings: Sighting[]) {
  * @throws Error se o arquivo for inválido.
  */
 export function parseExportJson(value: string): Sighting[] {
+  if (value.length > 5 * 1024 * 1024) return []; // mesmo limite de MAX_IMPORT_BYTES (shared/safe-url)
   try {
     const parsed = JSON.parse(value) as { version?: unknown; sightings?: unknown };
     if (parsed.version !== EXPORT_VERSION || !Array.isArray(parsed.sightings)) return [];
