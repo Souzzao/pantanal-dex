@@ -6,9 +6,8 @@ Tudo o que o Play Console pede, já preenchido para copiar e colar. Estado em 18
 
 | Item | Situação |
 |---|---|
-| **Mapa de satélite comercial** | ⛔ A imagem atual (EOxCloudless) é **CC BY-NC-SA**: proibida em app pago. Trocar antes de publicar a versão paga (veja "Mapa" abaixo). A Demo pode continuar com ela (não é vendida). |
+| **Modelo** | ✅ **Gratuito, sem anúncios** (decidido em 25/11/2026). Por isso o mapa de satélite EOxCloudless (CC BY-NC-SA, uso não comercial) pode ser usado, com o crédito visível. Se um dia o app for pago ou tiver anúncios, trocar o mapa (veja "Mapa" abaixo). |
 | Conta de desenvolvedor Google Play | ⬜ Taxa única de US$ 25. Conta pessoal nova: **teste fechado com 12 testadores por 14 dias seguidos** antes de liberar a produção. |
-| Perfil de pagamentos (app pago) | ⬜ Play Console → Configurar → Perfil de pagamentos. Sem ele não dá para cobrar. |
 | E-mail de contato | ⬜ Criar um e-mail para o app (aparece na loja e na política de privacidade). |
 | Conta de teste para a revisão do Google | ⬜ O app exige login: criar uma conta só para a revisão e informar em "Acesso ao app". |
 
@@ -114,15 +113,14 @@ como coleta.
 
 ## 5. Ordem sugerida
 
-1. Resolver o mapa comercial e o e-mail de contato.
-2. `eas build --profile production` → criar o app no Play Console (pago, Brasil) → enviar o AAB no
+1. Criar o e-mail de contato.
+2. `eas build --profile production` → criar o app no Play Console (gratuito, Brasil) → enviar o AAB no
    **Teste fechado**.
-3. Convidar 12+ testadores (Google Grupos ou lista de e-mails; em app pago, cadastrá-los como
-   **testadores de licença** para instalarem sem pagar). Manter 14 dias.
+3. Convidar 12+ testadores (Google Grupos ou lista de e-mails). Manter 14 dias.
 4. Preencher página da loja, Segurança dos dados, classificação, público-alvo, acesso ao app.
 5. Pedir acesso à produção → enviar para revisão.
 
-## Mapa — opções para a versão paga
+## Mapa — se um dia o app virar pago ou tiver anúncios
 
 | Opção | Custo | Observação |
 |---|---|---|
